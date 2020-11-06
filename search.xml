@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
-    <url>/2020/11/04/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
+    <title>讲讲JS中的类、继承和单例</title>
+    <url>/2020/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
     <content><![CDATA[<blockquote>
 <p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
 </blockquote>
 <h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
 <p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">    &#x2F;&#x2F; 构造函数里面的方法和属性</span><br><span class="line">    this.name &#x3D; name;</span><br><span class="line">    this.age &#x3D; age;</span><br><span class="line">    this.run &#x3D; function() &#123;</span><br><span class="line">        console.log(&#96;$&#123;this.name&#125; - $&#123;this.age&#125;&#96;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex &#x3D; &#39;男&#39;;</span><br><span class="line">Person.prototype.work &#x3D; function() &#123;</span><br><span class="line">    console.log(&#96;$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;&#96;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 静态方法</span><br><span class="line">Person.setName &#x3D; function() &#123;</span><br><span class="line">   console.log(&#39;静态方法&#39;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 实例方法是通过实例化来调用的</span><br><span class="line">var p &#x3D; new Person(&#39;zhangsan&#39;, &#39;20&#39;);</span><br><span class="line">p.run()</span><br><span class="line">p.work()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 静态方法是通过类名直接调用</span><br><span class="line">Person.setName()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -32,10 +32,10 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">    static getInstance() &#123; &#x2F;&#x2F; 单例</span><br><span class="line">        if (!DB.instance) &#123;</span><br><span class="line">            DB.instance &#x3D; new DB()</span><br><span class="line">        &#125;</span><br><span class="line">        return DB.instance</span><br><span class="line">    &#125;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        console.log(&#39;实例化会触发构造函数&#39;)</span><br><span class="line">        this.connect()</span><br><span class="line">    &#125;</span><br><span class="line">    connect() &#123;</span><br><span class="line">        console.log(&#39;连接数据库&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">    find() &#123;</span><br><span class="line">        console.log(&#39;查询数据库&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var myDb1 &#x3D; new DB()</span><br><span class="line">var myDb2 &#x3D; new DB() &#x2F;&#x2F; 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line"></span><br><span class="line">var myDb3 &#x3D; DB.getInstance() &#x2F;&#x2F; 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find()</span><br><span class="line">var myDb4 &#x3D; DB.getInstance()</span><br><span class="line">myDb4.find()</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
-    <title></title>
-    <url>/2020/11/03/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3/</url>
+    <title>前端模块化详解</title>
+    <url>/2020/11/06/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<p>在JavaScript发展初期就是为了实现简单的页面交互逻辑，寥寥数语即可；如今CPU、浏览器性能得到了极大的提升，很多页面逻辑迁移到了客户端（表单验证等），随着web2.0时代的到来，Ajax技术得到广泛应用，jQuery等前端库层出不穷，前端代码日益膨胀，此时在JS方面就会考虑使用模块化规范去管理。<br>本文内容主要有理解模块化，为什么要模块化，模块化的优缺点以及模块化规范,并且介绍下开发中最流行的CommonJS, AMD, ES6、CMD规范。本文试图站在小白的角度，用通俗易懂的笔调介绍这些枯燥无味的概念，希望诸君阅读后，对模块化编程有个全新的认识和理解！<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/11/1101.png"></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--more--&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 
 <h1 id="一、模块化的理解"><a href="#一、模块化的理解" class="headerlink" title="一、模块化的理解"></a>一、模块化的理解</h1><ol>
 <li>什么是模块?</li>
@@ -252,12 +252,6 @@
 <blockquote>
 <p>原文链接：<a href="https://github.com/ljianshu/Blog/issues/48">https://github.com/ljianshu/Blog/issues/48</a></p>
 </blockquote>
-]]></content>
-  </entry>
-  <entry>
-    <title>测试df</title>
-    <url>/2020/11/06/%E6%B5%8B%E8%AF%95/</url>
-    <content><![CDATA[<p>发打发斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬上的服阿斯蒂芬sda84123948123094801238402384123840123840123840123480912384091238409123840912384091283409</p>
 ]]></content>
   </entry>
 </search>
