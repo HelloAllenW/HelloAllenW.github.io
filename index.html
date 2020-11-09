@@ -218,9 +218,17 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
@@ -262,7 +270,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/06/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E4%BB%8E%E7%AC%AC%E4%B8%80%E4%BB%A3-iPhone-%E7%BB%86%E6%95%B0%E5%88%B0-iPhone-12%EF%BC%8CiPhone-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%BF%9B%E5%8C%96%E5%8E%86%E7%A8%8B%E8%83%8C%E5%90%8E%E7%9A%84-app-%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -276,7 +284,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/06/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">前端模块化详解</a>
+            <a href="/2020/11/09/%E4%BB%8E%E7%AC%AC%E4%B8%80%E4%BB%A3-iPhone-%E7%BB%86%E6%95%B0%E5%88%B0-iPhone-12%EF%BC%8CiPhone-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%BF%9B%E5%8C%96%E5%8E%86%E7%A8%8B%E8%83%8C%E5%90%8E%E7%9A%84-app-%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/" class="post-title-link" itemprop="url">从第一代 iPhone 细数到 iPhone 12，iPhone 屏幕尺寸进化历程背后的 app 设计哲学</a>
         </h2>
 
         <div class="post-meta-container">
@@ -288,7 +296,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-06 22:28:15 / 修改时间：22:29:56" itemprop="dateCreated datePublished" datetime="2020-11-06T22:28:15+08:00">2020-11-06</time>
+      <time title="创建时间：2020-11-09 23:18:59 / 修改时间：23:51:24" itemprop="dateCreated datePublished" datetime="2020-11-09T23:18:59+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
     </span>
 
   
@@ -301,10 +318,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在JavaScript发展初期就是为了实现简单的页面交互逻辑，寥寥数语即可；如今CPU、浏览器性能得到了极大的提升，很多页面逻辑迁移到了客户端（表单验证等），随着web2.0时代的到来，Ajax技术得到广泛应用，jQuery等前端库层出不穷，前端代码日益膨胀，此时在JS方面就会考虑使用模块化规范去管理。<br>本文内容主要有理解模块化，为什么要模块化，模块化的优缺点以及模块化规范,并且介绍下开发中最流行的CommonJS, AMD, ES6、CMD规范。本文试图站在小白的角度，用通俗易懂的笔调介绍这些枯燥无味的概念，希望诸君阅读后，对模块化编程有个全新的认识和理解！<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/11/1101.png"></p>
+          <blockquote>
+<p>相关概念：</p>
+</blockquote>
+<ol>
+<li><strong>像素（px）</strong>：是画面中最小的点（单位色块）。</li>
+<li><strong>分辨率</strong>：画面水平方向的像素值 * 画面垂直方向的像素值。</li>
+<li><strong>位色</strong>：色彩位数以二进制的位(bit)为单位，用位的多少表示色彩数的多少。在颜色中的三原色RGB各自分为256级灰度，组合出来的256×256×256=16700万色，也就是通常说的24位或24bit色(2的24次方)。256种颜色要用8位二进制数表示，即2的8次方，因此我们把256色图形叫做8位图。同理，能显示65536种颜色的话，就是16位图，也就是2的16次方。总之色彩位数越高，就可以得到更大的色彩动态范围。也就是说，对颜色的区分能够更加细腻。</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/06/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3/#more" rel="contents">
+              <a class="btn" href="/2020/11/09/%E4%BB%8E%E7%AC%AC%E4%B8%80%E4%BB%A3-iPhone-%E7%BB%86%E6%95%B0%E5%88%B0-iPhone-12%EF%BC%8CiPhone-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%BF%9B%E5%8C%96%E5%8E%86%E7%A8%8B%E8%83%8C%E5%90%8E%E7%9A%84-app-%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -335,7 +359,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -349,7 +373,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/" class="post-title-link" itemprop="url">讲讲JS中的类、继承和单例</a>
+            <a href="/2020/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-title-link" itemprop="url">Nodejs 操作 MongoDb 数据库</a>
         </h2>
 
         <div class="post-meta-container">
@@ -361,7 +385,16 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2020-11-06 22:27:41 / 修改时间：22:29:19" itemprop="dateCreated datePublished" datetime="2020-11-06T22:27:41+08:00">2020-11-06</time>
+      <time title="创建时间：2020-11-09 23:18:30 / 修改时间：23:50:38" itemprop="dateCreated datePublished" datetime="2020-11-09T23:18:30+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJs/" itemprop="url" rel="index"><span itemprop="name">NodeJs</span></a>
+        </span>
     </span>
 
   
@@ -374,14 +407,689 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
-</blockquote>
-<h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
-<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
+          <h1 id="在-Nodejs-中使用-MongoDB"><a href="#在-Nodejs-中使用-MongoDB" class="headerlink" title="在 Nodejs 中使用 MongoDB"></a>在 Nodejs 中使用 MongoDB</h1><p>需要引包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongodb --save-dev</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/#more" rel="contents">
+              <a class="btn" href="/2020/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">MongoDB数据库的基本应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:18:19 / 修改时间：23:50:01" itemprop="dateCreated datePublished" datetime="2020-11-09T23:18:19+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="数据库使用"><a href="#数据库使用" class="headerlink" title="数据库使用"></a>数据库使用</h1><p>1、开启 mongodb 服务：要管理数据库，必须先开启服务，开启服务使用 <code>mongod --dbpath c:\mongodb</code><br><img src="https://img-blog.csdnimg.cn/img_convert/ad68308a4921cdf7e5987c5553109f80.png"></p>
+<p>2、管理 mongodb 数据库：mongo (一定要在新的 cmd 中输入)<br><img src="https://img-blog.csdnimg.cn/img_convert/d2a3691bb5bb4d2002ac800e9c84117d.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">算法中的时间复杂度和空间复杂度</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:18:07 / 修改时间：23:49:05" itemprop="dateCreated datePublished" datetime="2020-11-09T23:18:07+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="算法基本概念"><a href="#算法基本概念" class="headerlink" title="算法基本概念"></a>算法基本概念</h1><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有效序列，并且每条指令表示一个或多个操作。</p>
+<p>算法具有五个基本特性：输入、输出、有穷性、确定性和可行性。</p>
+<p>算法设计的要求：<br>正确性、可读性、健壮性、时间效率高和存储量低。</p>
+<p>算法效率的度量方法：</p>
+<ol>
+<li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
+<li>事前分析估算方法</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%AA%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%AA%E8%AE%BA/" class="post-title-link" itemprop="url">数据结构绪论</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:17:55 / 修改时间：23:48:22" itemprop="dateCreated datePublished" datetime="2020-11-09T23:17:55+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="基本概念和术语"><a href="#基本概念和术语" class="headerlink" title="基本概念和术语"></a>基本概念和术语</h1><h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>数据是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。<br>数据不仅仅包括整型、实型等数值类型，还包括字符及声音、图像、视频等非数值类型。</p>
+<h2 id="数据元素"><a href="#数据元素" class="headerlink" title="数据元素"></a>数据元素</h2><p>数据元素是组成数据的、有一定意义的基本单位，在计算机中通常作为整体处理。也被称为记录。<br>比如，在人类中，人就是数据元素。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%AA%E8%AE%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%80%EF%BC%88%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-express-%E5%BA%94%E7%94%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%80%EF%BC%88%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-express-%E5%BA%94%E7%94%A8%EF%BC%89/" class="post-title-link" itemprop="url">Nodejs实战之一（一个最简单的 express 应用）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:17:44 / 修改时间：23:47:39" itemprop="dateCreated datePublished" datetime="2020-11-09T23:17:44+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJs/" itemprop="url" rel="index"><span itemprop="name">NodeJs</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 Hello World。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%80%EF%BC%88%E4%B8%80%E4%B8%AA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-express-%E5%BA%94%E7%94%A8%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/" class="post-title-link" itemprop="url">Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:17:33 / 修改时间：23:47:04" itemprop="dateCreated datePublished" datetime="2020-11-09T23:17:33+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJs/" itemprop="url" rel="index"><span itemprop="name">NodeJs</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson2 项目，在其中编写代码。</p>
+<p>当在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 CNode(<a target="_blank" rel="noopener" href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有帖子标题和链接，以 json 的形式。</p>
+<p>输出示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;541ed2d05e28155f24676a12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;54207e2efffeb6de3d61f68f&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%89%EF%BC%88%E4%BD%BF%E7%94%A8-eventproxy-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%89%EF%BC%88%E4%BD%BF%E7%94%A8-eventproxy-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/" class="post-title-link" itemprop="url">Nodejs实战之三（使用 eventproxy 控制并发）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:17:19 / 修改时间：23:46:24" itemprop="dateCreated datePublished" datetime="2020-11-09T23:17:19+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJs/" itemprop="url" rel="index"><span itemprop="name">NodeJs</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson3 项目，在其中编写代码。</p>
+<p>代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(<a target="_blank" rel="noopener" href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。</p>
+<p>输出示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;541ed2d05e28155f24676a12&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;呵呵呵呵&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;54207e2efffeb6de3d61f68f&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;沙发！&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%89%EF%BC%88%E4%BD%BF%E7%94%A8-eventproxy-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/" class="post-title-link" itemprop="url">Nodejs实战之四（使用 async 控制并发）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:17:07 / 修改时间：23:45:43" itemprop="dateCreated datePublished" datetime="2020-11-09T23:17:07+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/NodeJs/" itemprop="url" rel="index"><span itemprop="name">NodeJs</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson4 项目，在其中编写代码。</p>
+<p>代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(<a target="_blank" rel="noopener" href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。</p>
+<p>注意：与上节课不同，并发连接数需要控制在 5 个。</p>
+<p>输出示例：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/09/%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86/" class="post-title-link" itemprop="url">学习正则表达式，看我就够了</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:16:54 / 修改时间：23:45:00" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:54+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文旨在用最通俗的语言讲述最枯燥的基本知识。</p>
+<blockquote>
+<p>文章提纲：<br>1、元字符<br>2、重复限定符<br>3、分组<br>4、转义<br>5、条件或<br>6、区间<br>7、零宽断言<br>8、捕获和非捕获<br>9、反向引用<br>10、贪婪和非贪婪<br>11、反义</p>
+</blockquote>
+<p>正则表达式在几乎所有语言中都可以使用，无论是前端的 JavaScript、还是后端的 Java、c#。他们都提供相应的接口 / 函数支持正则表达式。<br>但很神奇的是：无论你大学选择哪一门计算机语言，都没有关于正则表达式的课程给你修，在你学会正则之前，你只能看着那些正则大师们，写了一串外星文似的字符串，替代了你用一大篇幅的 if else 代码来做一些数据校验。<br>既然喜欢，那就动手学呗，可当你百度出一一堆相关资料时，你发现无一不例外的枯燥至极，难以学习（实话说，当年不理君也是这样的心态）。<br>下面，不理君尝试用一种比较通俗点的方式讲一下正则，让你能在读完之后，能自己写出一些简单的正则，再不济，能看懂别人写的正则，那也不错了。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/11/09/%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -406,6 +1114,9 @@
 
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 

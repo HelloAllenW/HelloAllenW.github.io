@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/icon.jpg">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+  </script>
+
+  <meta name="description" content="ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。  这是一种新的基础数据类型（primitive type）Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。通常情况下，我们可以通过调用Symbol()函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="理解和使用ES6中的Symbol">
+<meta property="og:url" content="http://example.com/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/index.html">
+<meta property="og:site_name" content="阿伦的个人博客">
+<meta property="og:description" content="ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。  这是一种新的基础数据类型（primitive type）Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。通常情况下，我们可以通过调用Symbol()函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-09T15:16:40.000Z">
+<meta property="article:modified_time" content="2020-11-09T15:44:03.097Z">
+<meta property="article:author" content="Allen">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>理解和使用ES6中的Symbol | 阿伦的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">阿伦的个人博客</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">绿衣捧砚催题卷，红袖添香伴读书</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>收藏</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E4%B8%80%E7%A7%8D%E6%96%B0%E7%9A%84%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%88primitive-type%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">这是一种新的基础数据类型（primitive type）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF1%EF%BC%9A%E4%BD%BF%E7%94%A8Symbol%E6%9D%A5%E4%BD%9C%E4%B8%BA%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%90%8D-key"><span class="nav-number">2.</span> <span class="nav-text">应用场景1：使用Symbol来作为对象属性名(key)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF2%EF%BC%9A%E4%BD%BF%E7%94%A8Symbol%E6%9D%A5%E6%9B%BF%E4%BB%A3%E5%B8%B8%E9%87%8F"><span class="nav-number">3.</span> <span class="nav-text">应用场景2：使用Symbol来替代常量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF3%EF%BC%9A%E4%BD%BF%E7%94%A8Symbol%E5%AE%9A%E4%B9%89%E7%B1%BB%E7%9A%84%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">应用场景3：使用Symbol定义类的私有属性&#x2F;方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E5%86%8C%E5%92%8C%E8%8E%B7%E5%8F%96%E5%85%A8%E5%B1%80Symbol"><span class="nav-number">5.</span> <span class="nav-text">注册和获取全局Symbol</span></a></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Allen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/HelloAllenW" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Allen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿伦的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          理解和使用ES6中的Symbol
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-11-09 23:16:40 / 修改时间：23:44:03" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:40+08:00">2020-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <blockquote>
+<p>ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。</p>
+</blockquote>
+<h1 id="这是一种新的基础数据类型（primitive-type）"><a href="#这是一种新的基础数据类型（primitive-type）" class="headerlink" title="这是一种新的基础数据类型（primitive type）"></a>这是一种新的基础数据类型（primitive type）</h1><p>Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。通常情况下，我们可以通过调用Symbol()函数来创建一个Symbol实例：</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let s1 &#x3D; Symbol()</span><br></pre></td></tr></table></figure>
+<p>或者，你也可以在调用Symbol()函数时传入一个可选的字符串参数，相当于给你创建的Symbol实例一个描述信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let s2 &#x3D; Symbol(&#39;another symbol&#39;)</span><br></pre></td></tr></table></figure>
+<p>如果用当下比较流行的TypeScript的方式来描述这个Symbol()函数的话，可以表示成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @param  &#123;any&#125; description 描述信息。可以是任何可以被转型成字符串的值，如：字符串、数字、对象、数组等</span><br><span class="line"> *&#x2F;</span><br><span class="line">function Symbol(description?: any): symbol</span><br></pre></td></tr></table></figure>
+<p>由于Symbol是一种基础数据类型，所以当我们使用typeof去检查它的类型的时候，它会返回一个属于自己的类型symbol，而不是什么string、object之类的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typeof s1  &#x2F;&#x2F; &#39;symbol&#39;</span><br></pre></td></tr></table></figure>
+<p>另外，我们需要重点记住的一点是：每个Symbol实例都是唯一的。因此，当你比较两个Symbol实例的时候，将总会返回false：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let s1 &#x3D; Symbol()</span><br><span class="line">let s2 &#x3D; Symbol(&#39;another symbol&#39;)</span><br><span class="line">let s3 &#x3D; Symbol(&#39;another symbol&#39;)</span><br><span class="line"></span><br><span class="line">s1 &#x3D;&#x3D;&#x3D; s2 &#x2F;&#x2F; false</span><br><span class="line">s2 &#x3D;&#x3D;&#x3D; s3 &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure>
+<h1 id="应用场景1：使用Symbol来作为对象属性名-key"><a href="#应用场景1：使用Symbol来作为对象属性名-key" class="headerlink" title="应用场景1：使用Symbol来作为对象属性名(key)"></a>应用场景1：使用Symbol来作为对象属性名(key)</h1><p>在这之前，我们通常定义或访问对象的属性时都是使用字符串，比如下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let obj &#x3D; &#123;</span><br><span class="line">  abc: 123,</span><br><span class="line">  &quot;hello&quot;: &quot;world&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj[&quot;abc&quot;] &#x2F;&#x2F; 123</span><br><span class="line">obj[&quot;hello&quot;] &#x2F;&#x2F; &#39;world&#39;</span><br></pre></td></tr></table></figure>
+<p>而现在，Symbol可同样用于对象属性的定义和访问：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const PROP_NAME &#x3D; Symbol()</span><br><span class="line">const PROP_AGE &#x3D; Symbol()</span><br><span class="line"></span><br><span class="line">let obj &#x3D; &#123;</span><br><span class="line">  [PROP_NAME]: &quot;一斤代码&quot;</span><br><span class="line">&#125;</span><br><span class="line">obj[PROP_AGE] &#x3D; 18</span><br><span class="line"></span><br><span class="line">obj[PROP_NAME] &#x2F;&#x2F; &#39;一斤代码&#39;</span><br><span class="line">obj[PROP_AGE] &#x2F;&#x2F; 18</span><br></pre></td></tr></table></figure>
+<p>随之而来的是另一个非常值得注意的问题：就是当使用了Symbol作为对象的属性key后，在对该对象进行key的枚举时，会有什么不同？在实际应用中，我们经常会需要使用Object.keys()或者for…in来枚举对象的属性名，那在这方面，Symbol类型的key表现的会有什么不同之处呢？来看以下示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let obj &#x3D; &#123;</span><br><span class="line">   [Symbol(&#39;name&#39;)]: &#39;一斤代码&#39;,</span><br><span class="line">   age: 18,</span><br><span class="line">   title: &#39;Engineer&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Object.keys(obj)   &#x2F;&#x2F; [&#39;age&#39;, &#39;title&#39;]</span><br><span class="line"></span><br><span class="line">for (let p in obj) &#123;</span><br><span class="line">   console.log(p)   &#x2F;&#x2F; 分别会输出：&#39;age&#39; 和 &#39;title&#39;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Object.getOwnPropertyNames(obj)   &#x2F;&#x2F; [&#39;age&#39;, &#39;title&#39;]</span><br></pre></td></tr></table></figure>
+<p>由上代码可知，Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含在对象自身的属性名集合(property names)之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。</p>
+<p>也正因为这样一个特性，当使用JSON.stringify()将对象转换成JSON字符串的时候，Symbol属性也会被排除在输出内容之外：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.stringify(obj)  &#x2F;&#x2F; &#123;&quot;age&quot;:18,&quot;title&quot;:&quot;Engineer&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以利用这一特点来更好的设计我们的数据对象，让“对内操作”和“对外选择性输出”变得更加优雅。</p>
+<p>然而，这样的话，我们就没办法获取以Symbol方式定义的对象属性了么？非也。还是会有一些专门针对Symbol的API，比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 使用Object的API</span><br><span class="line">Object.getOwnPropertySymbols(obj) &#x2F;&#x2F; [Symbol(name)]</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 使用新增的反射API</span><br><span class="line">Reflect.ownKeys(obj) &#x2F;&#x2F; [Symbol(name), &#39;age&#39;, &#39;title&#39;]</span><br></pre></td></tr></table></figure>
+<h1 id="应用场景2：使用Symbol来替代常量"><a href="#应用场景2：使用Symbol来替代常量" class="headerlink" title="应用场景2：使用Symbol来替代常量"></a>应用场景2：使用Symbol来替代常量</h1><p>先来看一下下面的代码，是不是在你的代码里经常会出现？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const TYPE_AUDIO &#x3D; &#39;AUDIO&#39;</span><br><span class="line">const TYPE_VIDEO &#x3D; &#39;VIDEO&#39;</span><br><span class="line">const TYPE_IMAGE &#x3D; &#39;IMAGE&#39;</span><br><span class="line"></span><br><span class="line">function handleFileResource(resource) &#123;</span><br><span class="line">  switch(resource.type) &#123;</span><br><span class="line">    case TYPE_AUDIO:</span><br><span class="line">      playAudio(resource)</span><br><span class="line">      break</span><br><span class="line">    case TYPE_VIDEO:</span><br><span class="line">      playVideo(resource)</span><br><span class="line">      break</span><br><span class="line">    case TYPE_IMAGE:</span><br><span class="line">      previewImage(resource)</span><br><span class="line">      break</span><br><span class="line">    default:</span><br><span class="line">      throw new Error(&#39;Unknown type of resource&#39;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如上面的代码中那样，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，为了保证这一点，我们需要为常量赋一个唯一的值（比如这里的’AUDIO’、’VIDEO’、 ‘IMAGE’），常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字。</p>
+<p>现在有了Symbol，我们大可不必这么麻烦了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const TYPE_AUDIO &#x3D; Symbol()</span><br><span class="line">const TYPE_VIDEO &#x3D; Symbol()</span><br><span class="line">const TYPE_IMAGE &#x3D; Symbol()</span><br></pre></td></tr></table></figure>
+<p>这样定义，直接就保证了三个常量的值是唯一的了！是不是挺方便的呢。</p>
+<h1 id="应用场景3：使用Symbol定义类的私有属性-方法"><a href="#应用场景3：使用Symbol定义类的私有属性-方法" class="headerlink" title="应用场景3：使用Symbol定义类的私有属性/方法"></a>应用场景3：使用Symbol定义类的私有属性/方法</h1><p>我们知道在JavaScript中，是没有如Java等面向对象语言的访问控制关键字private的，类上所有定义的属性或方法都是可公开访问的。因此这对我们进行API的设计时造成了一些困扰。</p>
+<p>而有了Symbol以及模块化机制，类的私有属性和方法才变成可能。例如：</p>
+<ul>
+<li>在文件 a.js中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const PASSWORD &#x3D; Symbol()</span><br><span class="line"></span><br><span class="line">class Login &#123;</span><br><span class="line">  constructor(username, password) &#123;</span><br><span class="line">    this.username &#x3D; username</span><br><span class="line">    this[PASSWORD] &#x3D; password</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  checkPassword(pwd) &#123;</span><br><span class="line">      return this[PASSWORD] &#x3D;&#x3D;&#x3D; pwd</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Login</span><br></pre></td></tr></table></figure></li>
+<li>在文件 b.js 中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import Login from &#39;.&#x2F;a&#39;</span><br><span class="line"></span><br><span class="line">const login &#x3D; new Login(&#39;admin&#39;, &#39;123456&#39;)</span><br><span class="line"></span><br><span class="line">login.checkPassword(&#39;123456&#39;)  &#x2F;&#x2F; true</span><br><span class="line"></span><br><span class="line">login.PASSWORD  &#x2F;&#x2F; oh!no!</span><br><span class="line">login[PASSWORD] &#x2F;&#x2F; oh!no!</span><br><span class="line">login[&quot;PASSWORD&quot;] &#x2F;&#x2F; oh!no!</span><br></pre></td></tr></table></figure>
+由于Symbol常量PASSWORD被定义在a.js所在的模块中，外面的模块获取不到这个Symbol，也不可能再创建一个一模一样的Symbol出来（因为Symbol是唯一的），因此这个PASSWORD的Symbol只能被限制在a.js内部使用，所以使用它来定义的类属性是没有办法被模块外访问到的，达到了一个私有化的效果。<h1 id="注册和获取全局Symbol"><a href="#注册和获取全局Symbol" class="headerlink" title="注册和获取全局Symbol"></a>注册和获取全局Symbol</h1></li>
+</ul>
+<p>通常情况下，我们在一个浏览器窗口中（window），使用Symbol()函数来定义和Symbol实例就足够了。但是，如果你的应用涉及到多个window（最典型的就是页面中使用了<code>&lt;iframe&gt;</code>），并需要这些window中使用的某些Symbol是同一个，那就不能使用Symbol()函数了，因为用它在不同window中创建的Symbol实例总是唯一的，而我们需要的是在所有这些window环境下保持一个共享的Symbol。这种情况下，我们就需要使用另一个API来创建或获取Symbol，那就是Symbol.for()，它可以注册或获取一个window间全局的Symbol实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let gs1 &#x3D; Symbol.for(&#39;global_symbol_1&#39;)  &#x2F;&#x2F;注册一个全局Symbol</span><br><span class="line">let gs2 &#x3D; Symbol.for(&#39;global_symbol_1&#39;)  &#x2F;&#x2F;获取全局Symbol</span><br><span class="line"></span><br><span class="line">gs1 &#x3D;&#x3D;&#x3D; gs2  &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<p>这样一个Symbol不光在单个window中是唯一的，在多个相关window间也是唯一的了。</p>
+<p>好了，通过以上这些例子，你现在是不是开始对ES6的这个Symbol功能有点了解了呢？Symbol在JS内部也有很多应用，比如迭代器(Iterator)等，大家可以以此为出发点，发掘出更多相关知识点，深入的理解Symbol的用法和使用场景。</p>
+<blockquote>
+<p>作者：一斤代码<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f40a77bbd74e">https://www.jianshu.com/p/f40a77bbd74e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/" rel="prev" title="通过JS将图片File转为base64并压缩">
+                  <i class="fa fa-chevron-left"></i> 通过JS将图片File转为base64并压缩
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/11/09/%E5%AD%A6%E4%B9%A0%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%8C%E7%9C%8B%E6%88%91%E5%B0%B1%E5%A4%9F%E4%BA%86/" rel="next" title="学习正则表达式，看我就够了">
+                  学习正则表达式，看我就够了 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen</span>
+</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv" style='display:none'>
+    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    <span class="post-meta-divider">|</span>
+</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
+</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
