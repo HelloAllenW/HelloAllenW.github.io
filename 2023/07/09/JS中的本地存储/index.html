@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>JS中的本地存储 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JS中的本地存储</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">七月 9, 2023&nbsp;&nbsp;23:13:43</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/JavaScript/">JavaScript</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h5 id="HTML-本地存储"><a href="#HTML-本地存储" class="headerlink" title="HTML 本地存储"></a>HTML 本地存储</h5><p>HTML5 本地存储提供了两个在客户端存储数据的对象</p>
+<ul>
+<li>window.localStorage - 存储没有截至日期的数据（永久性本地存储）</li>
+<li>window.sessionStorage - 针对一个session来存储数据（会话级别本地存储）</li>
+</ul>
+<p>在使用本地存储时，请检测 localStorage 和 sessionStorage 的浏览器支持：</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (typeof(Storage) !&#x3D;&#x3D; &quot;undefined&quot;) &#123;</span><br><span class="line">    &#x2F;&#x2F; 针对 localStorage&#x2F;sessionStorage 的代码</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    &#x2F;&#x2F; 抱歉！不支持 Web Storage ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>1、localStorage 对象<br>localStorage 对象存储的是没有截至日期的数据。当浏览器被关闭时数据不会被删除，在下一天、周或年中，都是可用的。H5标准要求浏览器至少支持到4MB</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 存储</span><br><span class="line">localStorage.setItem(&quot;lastname&quot;, &quot;Gates&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname &#x3D; Gates</span><br><span class="line">&#x2F;&#x2F; 取回</span><br><span class="line">localStorage.getItem(&quot;lastname&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除</span><br><span class="line">localStorage.removeItem(&quot;lastname&quot;)</span><br></pre></td></tr></table></figure>
+<p>2、sessionStorage 对象<br>sessionStorage 对象等同 localStorage 对象，不同之处在于只对一个 session 存储数据。如果用户关闭具体的浏览器标签页，数据也会被删除。</p>
+<p>3、本地数据库<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fly_dragon/p/3946012.html">逆天了的本地数据库</a></p>
+<h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><p>html4时代只能通过Cookie处理浏览器端的存储问题，有如下限制：</p>
+<ul>
+<li>大多数浏览器支持最大为4096字节的Cookie</li>
+<li>浏览器还限制站点可以在用户计算机上存储的 Cookie 的数量。大多数浏览器只允许每个站点存储 20 个 Cookie；如果试图存储更多 Cookie，则最旧的 Cookie 便会被丢弃。</li>
+<li>有些浏览器还会对它们将接受的来自所有站点的 Cookie 总数作出绝对限制，通常为 300 个。</li>
+<li>Cookie默认情况都会随着Http请求发送到后台服务器，但并不是所有请求都需要Cookie的，比如：js、css、图片等请求则不需要cookie。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Allen</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2023/07/09/JS%E4%B8%AD%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/">http://example.com/2023/07/09/JS%E4%B8%AD%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%BA%8C%EF%BC%88promise%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8%EF%BC%89/">Promise 从入门到自定义 系列二（promise的理解和使用）</a>
+            
+            
+            <a class="next" rel="next" href="/2023/06/09/%E5%88%A9%E7%94%A8jsDelivr%E7%99%BD%E5%AB%96%E5%85%A8%E7%90%83%E8%B6%85%E9%AB%98%E9%80%9F%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%EF%BC%81/">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

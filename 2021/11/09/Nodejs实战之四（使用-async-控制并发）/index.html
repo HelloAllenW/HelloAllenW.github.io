@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Nodejs实战之四（使用 async 控制并发） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Nodejs实战之四（使用 async 控制并发）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 9, 2021&nbsp;&nbsp;23:17:07</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/NodeJs/">NodeJs</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson4 项目，在其中编写代码。</p>
+<p>代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(<a target="_blank" rel="noopener" href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。</p>
+<p>注意：与上节课不同，并发连接数需要控制在 5 个。</p>
+<p>输出示例：</p>
+<a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;541ed2d05e28155f24676a12&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;呵呵呵呵&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http:&#x2F;&#x2F;cnodejs.org&#x2F;topic&#x2F;54207e2efffeb6de3d61f68f&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;沙发！&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、学习 async(<a target="_blank" rel="noopener" href="https://github.com/caolan/async">https://github.com/caolan/async</a> ) 的使用。这里有个详细的 async demo 演示：<a target="_blank" rel="noopener" href="https://github.com/alsotang/async_demo">https://github.com/alsotang/async_demo</a></p>
+<p>2、学习使用 async 来控制并发连接数。</p>
+<h1 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h1><p>lesson3 的代码其实是不完美的。为什么这么说，是因为在 lesso3 中，我们一次性发了 40 个并发请求出去，要知道，除去 CNode 的话，别的网站有可能会因为你发出的并发连接数太多而当你是在恶意请求，把你的 IP 封掉。</p>
+<p>我们在写爬虫的时候，如果有 1000 个链接要去爬，那么不可能同时发出 1000 个并发链接出去对不对？我们需要控制一下并发的数量，比如并发 10 个就好，然后慢慢抓完这 1000 个链接。</p>
+<p>用 async 来做这件事很简单。</p>
+<p>这次我们要介绍的是 async 的 mapLimit(arr, limit, iterator, callback) 接口。另外，还有个常用的控制并发连接数的接口是 queue(worker, concurrency)，大家可以去 <a target="_blank" rel="noopener" href="https://github.com/caolan/async#queueworker-concurrency">https://github.com/caolan/async#queueworker-concurrency</a> 看看说明。</p>
+<p>这回我就不带大家爬网站了，我们来专注知识点：并发连接数控制。</p>
+<p>对了，还有个问题是，什么时候用 eventproxy，什么时候使用 async 呢？它们不都是用来做异步流程控制的吗？</p>
+<p>我的答案是：</p>
+<p>当你需要去多个源(一般是小于 10 个)汇总数据的时候，用 eventproxy 方便；当你需要用到队列，需要控制并发数，或者你喜欢函数式编程思维时，使用 async。大部分场景是前者，所以我个人大部分时间是用 eventproxy 的。</p>
+<p>正题开始。</p>
+<p>首先，我们伪造一个 fetchUrl(url, callback) 函数，这个函数的作用就是，当你通过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fetchUrl(&#39;http:&#x2F;&#x2F;www.baidu.com&#39;, function (err, content) &#123;</span><br><span class="line">  &#x2F;&#x2F; do something with &#96;content&#96;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>调用它时，它会返回 <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a> 的页面内容回来。</p>
+<p>当然，我们这里的返回内容是假的，返回延时是随机的。并且在它被调用时，会告诉你它现在一共被多少个地方并发调用着。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 并发连接数的计数器</span><br><span class="line">var concurrencyCount &#x3D; 0;</span><br><span class="line">var fetchUrl &#x3D; function (url, callback) &#123;</span><br><span class="line">  &#x2F;&#x2F; delay 的值在 2000 以内，是个随机的整数</span><br><span class="line">  var delay &#x3D; parseInt((Math.random() * 10000000) % 2000, 10);</span><br><span class="line">  concurrencyCount++;</span><br><span class="line">  console.log(&#39;现在的并发数是&#39;, concurrencyCount, &#39;，正在抓取的是&#39;, url, &#39;，耗时&#39; + delay + &#39;毫秒&#39;);</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    concurrencyCount--;</span><br><span class="line">    callback(null, url + &#39; html content&#39;);</span><br><span class="line">  &#125;, delay);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我们接着来伪造一组链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var urls &#x3D; [];</span><br><span class="line">for(var i &#x3D; 0; i &lt; 30; i++) &#123;</span><br><span class="line">  urls.push(&#39;http:&#x2F;&#x2F;datasource_&#39; + i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着，我们使用 async.mapLimit 来并发抓取，并获取结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async.mapLimit(urls, 5, function (url, callback) &#123;</span><br><span class="line">  fetchUrl(url, callback);</span><br><span class="line">&#125;, function (err, result) &#123;</span><br><span class="line">  console.log(&#39;final:&#39;);</span><br><span class="line">  console.log(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，一开始，并发链接数是从 1 开始增长的，增长到 5 时，就不再增加。当其中有任务完成时，再继续抓取。并发连接数始终控制在 5 个。</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>app.js 完整代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var async &#x3D; require(&#39;async&#39;);</span><br><span class="line"></span><br><span class="line">var concurrencyCount &#x3D; 0;</span><br><span class="line">var fetchUrl &#x3D; function (url, callback) &#123;</span><br><span class="line">  var delay &#x3D; parseInt((Math.random() * 10000000) % 2000, 10);</span><br><span class="line">  concurrencyCount++;</span><br><span class="line">  console.log(&#39;现在的并发数是&#39;, concurrencyCount, &#39;，正在抓取的是&#39;, url, &#39;，耗时&#39; + delay + &#39;毫秒&#39;);</span><br><span class="line">  setTimeout(function () &#123;</span><br><span class="line">    concurrencyCount--;</span><br><span class="line">    callback(null, url + &#39; html content&#39;);</span><br><span class="line">  &#125;, delay);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var urls &#x3D; [];</span><br><span class="line">for(var i &#x3D; 0; i &lt; 30; i++) &#123;</span><br><span class="line">  urls.push(&#39;http:&#x2F;&#x2F;datasource_&#39; + i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async.mapLimit(urls, 5, function (url, callback) &#123;</span><br><span class="line">  fetchUrl(url, callback);</span><br><span class="line">&#125;, function (err, result) &#123;</span><br><span class="line">  console.log(&#39;final:&#39;);</span><br><span class="line">  console.log(result);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Allen</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/">http://example.com/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/NodeJs/"># NodeJs</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%89%EF%BC%88%E4%BD%BF%E7%94%A8-eventproxy-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/">Nodejs实战之三（使用 eventproxy 控制并发）</a>
+            
+            
+            <a class="next" rel="next" href="/2021/11/09/%E8%B0%88%E8%B0%88Webpack/">谈谈Webpack</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

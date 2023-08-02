@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Promise 从入门到自定义 系列二（promise的理解和使用） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Promise 从入门到自定义 系列二（promise的理解和使用）</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">七月 9, 2023&nbsp;&nbsp;23:14:34</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/ES6/">ES6</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Promise是什么？"><a href="#Promise是什么？" class="headerlink" title="Promise是什么？"></a>Promise是什么？</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>抽象表达：Promise是JS中进行异步编程的新的解决方案（旧的是谁？纯回调）<br>具体表达：从语法上讲，Promise是一个构造函数（通过创建实例来使用）；从功能上说，Promise对象用来封装一个异步操作并可以获取其结果。</p>
+<h2 id="promise的状态改变"><a href="#promise的状态改变" class="headerlink" title="promise的状态改变"></a>promise的状态改变</h2><ol>
+<li>pending变为resolved</li>
+</ol>
+<ol start="2">
+<li>pending变为rejected</li>
+</ol>
+<p>说明：只有这两种，且一个promise对象只能改变一次；无论变为成功还是失败，都会有一个结果数据；成功的结果数据一般称为value，失败的结果数据一般称为reason。</p>
+<a id="more"></a>
+
+<h2 id="promise的基本流程"><a href="#promise的基本流程" class="headerlink" title="promise的基本流程"></a>promise的基本流程</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hlbGxvYWxsZW4uY24vdXBsb2FkLzIwMjAvMDYvcHJvbWlzZS1lYWMzMTE5ZmI3MjU0MDdjYTdmOGEwNTQzMjg1ZWFhZS5wbmc?x-oss-process=image/format,png" alt="promise.png"></p>
+<h2 id="promise的基本使用"><a href="#promise的基本使用" class="headerlink" title="promise的基本使用"></a>promise的基本使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 创建一个新的promise对象</span><br><span class="line">const p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123; &#x2F;&#x2F; 执行器函数</span><br><span class="line">	&#x2F;&#x2F; 2. 执行异步操作任务</span><br><span class="line">	setTimeout(() &#x3D;&gt; &#123;</span><br><span class="line">		&#x2F;&#x2F; 3.1 如果成功了，调用resolve(value)</span><br><span class="line">		if (time%2&#x3D;&#x3D;0) &#123;</span><br><span class="line">			resolve(&#39;成功的数据，time&#x3D;&#39;, + time)</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			&#x2F;&#x2F; 3.2 如果失败了，调用reject(reason)</span><br><span class="line">			reject(&#39;失败的数据, time&#x3D;&#39;, + time)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p.then(</span><br><span class="line">	value &#x3D;&gt; &#123; &#x2F;&#x2F; 接收得到成功的value数据 onResolved</span><br><span class="line">		console.log(&#39;成功的回调&#39;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason &#x3D;&gt; &#123; &#x2F;&#x2F; 接收得到失败的reason数据 onRejected</span><br><span class="line">		console.log(&#39;失败的回调&#39;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h1 id="为什么要用Promsie？"><a href="#为什么要用Promsie？" class="headerlink" title="为什么要用Promsie？"></a>为什么要用Promsie？</h1><h2 id="指定回调函数的方式更加灵活"><a href="#指定回调函数的方式更加灵活" class="headerlink" title="指定回调函数的方式更加灵活"></a>指定回调函数的方式更加灵活</h2><p>旧的：必须在启动异步任务前指定<br>promise：启动异步任务-&gt;返回promise对象-&gt;给promise对象绑定回调函数（甚至可以在异步任务后指定）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 以下为伪代码不能执行，说明了旧的回调方式回调函数必须在异步任务前指定，而promise指定回调函数更加灵活</span><br><span class="line">function successCallback(resule) &#123;</span><br><span class="line">	console.log(&#39;声音文件创建成功:&#39;+resule)</span><br><span class="line">&#125;</span><br><span class="line">function failureCallback(error) &#123;</span><br><span class="line">	console.log(&#39;声音文件创建失败:&#39;+error)</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 1. 使用纯回调函数</span><br><span class="line">createAudioFileAsync(audioSettings, successCallback, failureCallback)</span><br><span class="line">&#x2F;&#x2F; 2. 使用promise</span><br><span class="line">const promise &#x3D; createAudioFileAsync(audioSettings)</span><br><span class="line">setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">	promise.then(successCallback,failureCallback)</span><br><span class="line">&#125;,3000)</span><br></pre></td></tr></table></figure>
+
+<h2 id="支持链式调用，可以解决回调地狱问题"><a href="#支持链式调用，可以解决回调地狱问题" class="headerlink" title="支持链式调用，可以解决回调地狱问题"></a>支持链式调用，可以解决回调地狱问题</h2><p>什么是回调地狱？回调函数嵌套调用，外部回调函数异步执行的结果是嵌套的回调函数执行的条件。<br>回调地狱的缺点？不便于阅读、不便于异步处理<br>解决方案？promise链式调用<br>终极解决方案？async/await</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1. 回调地狱</span><br><span class="line">doSomething(function(result)&#123;</span><br><span class="line">	doSomethingElse(result, function(newResult)&#123;</span><br><span class="line">		doThirdThing(newResult, function(finalResult)&#123;</span><br><span class="line">			console.log(&#39;Got the final result:&#39; + finalResult)</span><br><span class="line">		&#125;, failureCallback)</span><br><span class="line">	&#125;, failureCallback)</span><br><span class="line">&#125;, failureCallback)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 2. 使用promise的链式调用解决回调地狱</span><br><span class="line">doSomething().then(function(result)&#123;</span><br><span class="line">	return doSomethingElse(result)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(newResult) &#123;</span><br><span class="line">	return doThirdThing(newResult)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(finalResult)&#123;</span><br><span class="line">	console.log(&#39;Got the final result:&#39;+finalResult)</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 3. async&#x2F;await：回调地狱的终极解决方案</span><br><span class="line">async function request() &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		const result&#x3D;await doSomething()</span><br><span class="line">		const newResult&#x3D;await doSomethingElse(result)</span><br><span class="line">		const finalResult&#x3D;await soThirdThing(newResult)</span><br><span class="line">		console.log(&#39;Got the final result&#39;+finalResult)</span><br><span class="line">	&#125; catch(error) &#123;</span><br><span class="line">		failureCallback(error)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何使用Promise？"><a href="#如何使用Promise？" class="headerlink" title="如何使用Promise？"></a>如何使用Promise？</h1><blockquote>
+<p>主要讲解Promise的API</p>
+</blockquote>
+<p>1、Promise构造函数：Promise(excutor){}<br>excutor函数：同步执行 (resolve, reject)=&gt;{}<br>resolve函数：内部定义成功时我们调用的函数 value=&gt;{}<br>reject函数：内部定义失败时我们调用的函数 reason=&gt;{}<br>说明：excutor会在Promise内部立即同步回调，异步操作在执行器中执行</p>
+<p>2、Promise.prototype.then方法：(onResolved, onRejected)=&gt;{}<br>onResolved函数：成功的回调函数 (value)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：指定用于得到成功value的成功回调和用于得到失败reason的失败回调，返回一个新的promise对象</p>
+<p>3、Promise.prototype.catch方法：(onRejected)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：then()的语法糖，相当于：then(undefined, onRejected)</p>
+<p>4、Promise.resolve方法：(value)=&gt;{}<br>value: 成功的数据或promise对象<br>说明：返回一个成功/失败的promise对象</p>
+<p>5、Promise.reject方法：(reason)=&gt;{}<br>reason：失败的原因<br>说明：返回一个失败的promise对象</p>
+<p>6、Promise.all方法：(promises)=&gt;{}<br>promises：包含n个promise的数组<br>说明：返回一个新的promise，只有所有的promise都成功才成功，只要有一个失败了就直接失败</p>
+<p>7、Promise.race方法：(promises)=&gt;{}<br>promises: 包含n个promise数组<br>说明：返回一个新的promise，第一个完成的promise的结果状态就是最终的结果状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve, reject)&#x3D;&gt;&#123;</span><br><span class="line">	setTimeout(()&#x3D;&gt;&#123; &#x2F;&#x2F; 模拟异步</span><br><span class="line">		resolve(&#39;成功的数据&#39;)</span><br><span class="line">		&#x2F;&#x2F; reject(&#39;失败的数据&#39;)</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;).then(</span><br><span class="line">	value&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&#39;onResolved()&#39;, value)</span><br><span class="line">	&#125;</span><br><span class="line">).catch(</span><br><span class="line">	reason&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&#39;onRejected()&#39;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 产生一个成功值为1的promise对象</span><br><span class="line">const p1&#x3D;new Promise((resolve, reject)&#x3D;&gt;&#123;</span><br><span class="line">	resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">&#x2F;&#x2F; 产生一个成功值为2的promise对象</span><br><span class="line">const p2&#x3D;Promise.resolve(2)  &#x2F;&#x2F; 语法糖</span><br><span class="line">const p3&#x3D;Promise.reject(3)</span><br><span class="line"></span><br><span class="line">p1.then(value&#x3D;&gt;&#123;console.log(value)&#125;) &#x2F;&#x2F;1</span><br><span class="line">p2.then(value&#x3D;&gt;&#123;console.log(value)&#125;) &#x2F;&#x2F;2</span><br><span class="line">p3.catch(reason&#x3D;&gt;&#123;console.log(reason)&#125;) &#x2F;&#x2F;3</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 一个失败的话返回失败的数据，成功的话返回成功的数组</span><br><span class="line">const pAll &#x3D; Promise.all([p1,p2,p3])</span><br><span class="line">pAll.then(</span><br><span class="line">	values&#x3D;&gt;&#123;&#125;,</span><br><span class="line">	reason&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&#39;all onRejected()&#39;, reason) &#x2F;&#x2F; 3</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const pRace &#x3D; Promise.race([p1,p2,p3])</span><br><span class="line">pRace.then(</span><br><span class="line">	value&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&#39;race onResolved()&#39;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason&#x3D;&gt;&#123;</span><br><span class="line">		console.log(&#39;race onRejected()&#39;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Allen</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%BA%8C%EF%BC%88promise%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8%EF%BC%89/">http://example.com/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%BA%8C%EF%BC%88promise%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8%EF%BC%89/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/ES6/"># ES6</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/">Promise 从入门到自定义 系列一（准备阶段）</a>
+            
+            
+            <a class="next" rel="next" href="/2023/07/09/JS%E4%B8%AD%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8/">JS中的本地存储</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

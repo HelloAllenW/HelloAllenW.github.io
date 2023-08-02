@@ -1,1216 +1,192 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Allen">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/icon.jpg">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
-
-<script class="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"always","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
-  </script>
-
-  <meta property="og:type" content="website">
-<meta property="og:title" content="阿伦的个人博客">
-<meta property="og:url" content="http://example.com/page/2/index.html">
-<meta property="og:site_name" content="阿伦的个人博客">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="Allen">
-<meta name="twitter:card" content="summary">
-
-
-<link rel="canonical" href="http://example.com/page/2/">
-
-
-<script class="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>阿伦的个人博客</title>
-  
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
 
 
 
 
-
-
-  <noscript>
-  <style>
-  body { margin-top: 2rem; }
-
-  .use-motion .menu-item,
-  .use-motion .sidebar,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header {
-    visibility: visible;
-  }
-
-  .use-motion .header,
-  .use-motion .site-brand-container .toggle,
-  .use-motion .footer { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle,
-  .use-motion .custom-logo-image {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line {
-    transform: scaleX(1);
-  }
-
-  .search-pop-overlay, .sidebar-nav { display: none; }
-  .sidebar-panel { display: block; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <h1 class="site-title">阿伦的个人博客</h1>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">绿衣捧砚催题卷，红袖添香伴读书</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
+<title>阿伦的个人博客</title>
 
 
 
-<nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>收藏</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
+    <link rel="icon" href="/favicon.ico">
 
 
 
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
 
-    </div>
-  </div>
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
 
-</div>
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
         
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-overview-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <section class="post-toc-wrap sidebar-panel">
-        </section>
-        <!--/noindex-->
-
-        <section class="site-overview-wrap sidebar-panel">
-          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Allen</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap site-overview-item animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">34</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">12</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-        </section>
-      </div>
-    </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-  <a href="https://github.com/HelloAllenW" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-    <div class="main-inner index posts-expand">
-      
-
-      
     
 
 
-<div class="post-block">
-  
-  
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/">
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/" class="post-title-link" itemprop="url">理解和使用ES6中的Symbol</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:16:40 / 修改时间：23:44:03" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:40+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。</p>
-</blockquote>
-<h1 id="这是一种新的基础数据类型（primitive-type）"><a href="#这是一种新的基础数据类型（primitive-type）" class="headerlink" title="这是一种新的基础数据类型（primitive type）"></a>这是一种新的基础数据类型（primitive type）</h1><p>Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。通常情况下，我们可以通过调用Symbol()函数来创建一个Symbol实例：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8ES6%E4%B8%AD%E7%9A%84Symbol/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/" class="post-title-link" itemprop="url">通过JS将图片File转为base64并压缩</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:16:26 / 修改时间：23:43:18" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:26+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
         </div>
-      </header>
+    </nav>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>后端为了方便需要直接将图片存储为base64，但图片过大时转出的base64过长，因此前端需要对转后的base64进行压缩</p>
-</blockquote>
-<p>话不多说，直接上代码</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E8%B0%88%E8%B0%88Webpack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E8%B0%88%E8%B0%88Webpack/" class="post-title-link" itemprop="url">谈谈Webpack</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:16:12 / 修改时间：23:42:47" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:12+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
         </div>
-      </header>
+    </nav>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 一个常见的&#96;webpack&#96;配置文件</span><br><span class="line">const webpack &#x3D; require(&#39;webpack&#39;);</span><br><span class="line">const HtmlWebpackPlugin &#x3D; require(&#39;html-webpack-plugin&#39;);</span><br><span class="line">const ExtractTextPlugin &#x3D; require(&#39;extract-text-webpack-plugin&#39;);</span><br><span class="line"></span><br><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">        entry: __dirname + &quot;&#x2F;app&#x2F;main.js&quot;, &#x2F;&#x2F;已多次提及的唯一入口文件</span><br><span class="line">        output: &#123;</span><br><span class="line">            path: __dirname + &quot;&#x2F;build&quot;,</span><br><span class="line">            filename: &quot;bundle-[hash].js&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        devtool: &#39;none&#39;,</span><br><span class="line">        devServer: &#123;</span><br><span class="line">            contentBase: &quot;.&#x2F;public&quot;, &#x2F;&#x2F;本地服务器所加载的页面所在的目录</span><br><span class="line">            historyApiFallback: true, &#x2F;&#x2F;不跳转</span><br><span class="line">            inline: true,</span><br><span class="line">            hot: true</span><br><span class="line">        &#125;,</span><br><span class="line">        module: &#123;</span><br><span class="line">            rules: [&#123;</span><br><span class="line">                    test: &#x2F;(\.jsx|\.js)$&#x2F;,</span><br><span class="line">                    use: &#123;</span><br><span class="line">                        loader: &quot;babel-loader&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    exclude: &#x2F;node_modules&#x2F;</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    test: &#x2F;\.css$&#x2F;,</span><br><span class="line">                    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">                        fallback: &quot;style-loader&quot;,</span><br><span class="line">                        use: [&#123;</span><br><span class="line">                            loader: &quot;css-loader&quot;,</span><br><span class="line">                            options: &#123;</span><br><span class="line">                                modules: true,</span><br><span class="line">                                localIdentName: &#39;[name]__[local]--[hash:base64:5]&#39;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;, &#123;</span><br><span class="line">                            loader: &quot;postcss-loader&quot;</span><br><span class="line">                        &#125;],</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new webpack.BannerPlugin(&#39;版权所有，翻版必究&#39;),</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: __dirname + &quot;&#x2F;app&#x2F;index.tmpl.html&quot; &#x2F;&#x2F;new 一个这个插件的实例，并传入相关的参数</span><br><span class="line">        &#125;),</span><br><span class="line">        new webpack.optimize.OccurrenceOrderPlugin(),</span><br><span class="line">        new webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">        new ExtractTextPlugin(&quot;style.css&quot;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E8%B0%88%E8%B0%88Webpack/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%88%A9%E7%94%A8jsDelivr%E7%99%BD%E5%AB%96%E5%85%A8%E7%90%83%E8%B6%85%E9%AB%98%E9%80%9F%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%EF%BC%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E5%88%A9%E7%94%A8jsDelivr%E7%99%BD%E5%AB%96%E5%85%A8%E7%90%83%E8%B6%85%E9%AB%98%E9%80%9F%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%EF%BC%81/" class="post-title-link" itemprop="url">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:16:01 / 修改时间：23:41:49" itemprop="dateCreated datePublished" datetime="2020-11-09T23:16:01+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>不希望将大量的图片等静态资源放在自己部署了项目的云服务器上，放在其他服务器上又希望能做到CDN加速。于是找到了<strong>jsDelivr</strong>来解决这个需求。以下文章转载自<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv4297993">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>自己有稍微的修改。<br>因为服务器在国外&amp;服务器带宽小，导致静态资源请求速度慢，最终导致全站访问速度被拖慢，是站长们要面对的问题。最常用的解决方案是使用国内IDC厂商提供的对象存储(镜像回源)+CDN来提升静态资源访问速度，但这难免会产生费用。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E5%88%A9%E7%94%A8jsDelivr%E7%99%BD%E5%AB%96%E5%85%A8%E7%90%83%E8%B6%85%E9%AB%98%E9%80%9F%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%EF%BC%81/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%A4%E7%A7%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%A4%E7%A7%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Vue项目中两种文件下载方式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:15:49 / 修改时间：23:40:52" itemprop="dateCreated datePublished" datetime="2020-11-09T23:15:49+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/VUE/" itemprop="url" rel="index"><span itemprop="name">VUE</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>以下载（导出）Excel文件为例</p>
-</blockquote>
-<h1 id="不需要携带token"><a href="#不需要携带token" class="headerlink" title="不需要携带token"></a>不需要携带token</h1><p>直接调用后台接口，携带需要传递的参数，具体实现代码如下：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%A4%E7%A7%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">HTTP协议的 Request Payload 和 Form Data 的区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:15:35 / 修改时间：23:40:07" itemprop="dateCreated datePublished" datetime="2020-11-09T23:15:35+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在一个前后端分离的新项目中，前端执行post请求，后端springMVC的 @RequestMapping 接收不到对应的请求参数。开始以为是前端webpack的proxy（将请求跨域代理到后台服务）配置问题。然而，并不是这样…</p>
-<p><strong>proxy配置如下</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">	&quot;api&quot;: &#123;</span><br><span class="line">		&quot;target&quot;: &quot;http:&#x2F;&#x2F;localhost:7000&#x2F;&quot;,</span><br><span class="line">		&quot;changeOrigin&quot;: true,</span><br><span class="line">		&quot;pathRewrite&quot;: &#123; &quot;^&#x2F;api&#x2F;v1&quot;: &quot;&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/" class="post-title-link" itemprop="url">关于前端请求的那些事</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:15:23 / 修改时间：23:39:17" itemprop="dateCreated datePublished" datetime="2020-11-09T23:15:23+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>前端是一个快速发展的领域，而在前端的技术栈当中，前端请求又是最见的一个领域，通过请求接口数据，才能将一个静态的页面动态化。本文将以前端发展的时间轴来逐一分析前端请求的技术演变及其优劣，针对这一课题，作者查阅了相关资料加以自己的理解，如有错误，烦请指出。</p>
-<h1 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest"></a>XMLHttpRequest</h1><p>AJAX：Asynchronous JavaScript and XML，意思是用JavaScript执行异步网络请求。<br>现代浏览器上，ajax的实现主要依靠 XMLHttpRequest 对象，该对象用于和服务器交换数据。有了XMLHttpRequest，开发者终于可以在不重新加载页面的情况下更新网页，可以在页面加载后请求接受以及发送数据。而所有浏览器均可以获取XMLHttpRequest对象：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%89%8D%E7%AB%AF%E7%A5%9E%E5%99%A8%EF%BC%9ABrowserSync-live-server/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E5%89%8D%E7%AB%AF%E7%A5%9E%E5%99%A8%EF%BC%9ABrowserSync-live-server/" class="post-title-link" itemprop="url">前端神器：BrowserSync & live-server</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:15:11 / 修改时间：23:38:26" itemprop="dateCreated datePublished" datetime="2020-11-09T23:15:11+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">Web前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>本文介绍博主使用过的两种web小型开发服务器，可以用来热加载HTML / JavaScript / CSS文件。</p>
-</blockquote>
-<h1 id="browserSync"><a href="#browserSync" class="headerlink" title="browserSync"></a>browserSync</h1><p><a target="_blank" rel="noopener" href="http://www.browsersync.cn/">browsersync</a>：浏览器同步测试工具，简单来说就是当你保存文件的同时浏览器会自动刷新网页。省去了手动刷新网页的环节，大大的节省了开发时间，这个工具是基于nodejs的，可以通过npm安装。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在开始菜单找到<strong>node.js command prompt</strong>打开，输入安装命令：<br><code>npm install -g browser-sync</code></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E5%89%8D%E7%AB%AF%E7%A5%9E%E5%99%A8%EF%BC%9ABrowserSync-live-server/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%9B%BD%E9%99%85%E5%8C%96%E6%8F%92%E4%BB%B6i18n%E5%92%8Cvuex%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E5%9B%BD%E9%99%85%E5%8C%96%E6%8F%92%E4%BB%B6i18n%E5%92%8Cvuex%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">国际化插件i18n和vuex的混合使用</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:14:59 / 修改时间：23:37:34" itemprop="dateCreated datePublished" datetime="2020-11-09T23:14:59+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/VUE/" itemprop="url" rel="index"><span itemprop="name">VUE</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>前段时间测试对于项目切换中英文后页面会闪一下标为bug，想了想肯定是前任开发者在切换中英文后对页面进行了强制刷新。查看源码发现果不其然，并且前任仅将中英文状态存储在cookie中，然后在需要的组件中通过cookie获取中英文状态。发现接口都是同时有返回中英文，这样完全可以通过vuex全局状态管理中英文状态，达到在一处修改了中英文后全局自动修改。</p>
-<blockquote>
-<p>本文以 vue+ElementUI 并且以和vue组合的 vue-i18n 为例</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/%E5%9B%BD%E9%99%85%E5%8C%96%E6%8F%92%E4%BB%B6i18n%E5%92%8Cvuex%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Allen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿伦的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/" class="post-title-link" itemprop="url">Promise 从入门到自定义 系列一（准备阶段）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-11-09 23:14:46 / 修改时间：23:36:45" itemprop="dateCreated datePublished" datetime="2020-11-09T23:14:46+08:00">2020-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/ES6/" itemprop="url" rel="index"><span itemprop="name">ES6</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="区别实例对象和函数对象"><a href="#区别实例对象和函数对象" class="headerlink" title="区别实例对象和函数对象"></a>区别实例对象和函数对象</h1><ul>
-<li>函数对象：将函数作为对象使用时，简称为函数对象</li>
-<li>实例对象：new 函数产生的对象，简称为对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Fn() &#123; &#x2F;&#x2F; Fn函数</span><br><span class="line">&#125;</span><br><span class="line">const fn &#x3D; new Fn() &#x2F;&#x2F; Fn是构造函数，fn是实例对象（简称对象）</span><br><span class="line">console.log(Fn.prototype) &#x2F;&#x2F; Fn是函数对象</span><br><span class="line">Fn.bind(&#123;&#125;) &#x2F;&#x2F; 调用Fn函数对象的bind方法</span><br><span class="line"></span><br><span class="line">$(&#39;#test&#39;) &#x2F;&#x2F; jquery函数</span><br><span class="line">$.get(&#39;&#x2F;test&#39;) &#x2F;&#x2F; 调用jquery函数对象的get方法</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/11/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-      
-
+</header>
 <script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
     }
-    if (activeClass) {
-      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      const commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
 </script>
-
+            <div class="main">
+                
+    <div class="container profile-container">
+    <div class="intro">
+        <div class="avatar">
+            <a href="/archives"><img src="/image/avatar.jpeg"></a>
+        </div>
+        <div class="nickname">阿伦的技术博客</div>
+        <div class="description"><p>绿衣捧砚催题卷，红袖添香伴读书</p>
+</div>
+        <div class="links">
+            
+                
+                    <a class="link-item" title="Blog" href="/archives">
+                        
+                        
+                            <i class="iconfont icon-blog"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="ZhiHu" target="_blank" rel="noopener" href="https://www.zhihu.com/people/wang-a-lun-90">
+                        
+                        
+                            <i class="iconfont icon-zhihu"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="Instagram" href="">
+                        
+                        
+                            <i class="iconfont icon-instagram"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="Reddit" href="">
+                        
+                        
+                            <i class="iconfont icon-reddit"></i>
+                        
+                    </a>
+                
+                    <a class="link-item" title="Github" target="_blank" rel="noopener" href="https://github.com/HelloAllenW">
+                        
+                        
+                            <i class="iconfont icon-github"></i>
+                        
+                    </a>
+                
+            
+        </div>
     </div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      
-
-      
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Allen</span>
 </div>
 
-<div>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<span id="busuanzi_container_site_pv" style='display:none'>
-    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    <span class="post-meta-divider">|</span>
-</span>
-<span id="busuanzi_container_site_uv" style='display:none'>
-    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
-</span>
-</div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
-  </div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
 
     </div>
-  </footer>
-
-  
-  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
-
-  
-
-
-
-
-  <script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-  
-
 </body>
+
 </html>
