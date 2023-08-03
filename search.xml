@@ -900,10 +900,10 @@
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经速度测试，访问速度非常快，有效提升整体速度，还能省下一大笔费用，实属优质白嫖~</p>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>博客</category>
       </categories>
       <tags>
-        <tag>工具</tag>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -1990,7 +1990,7 @@
 <p>在第一代 iPhone 到 iPhone 3GS 的非 Retina 屏幕上，一个点就等于一像素，可以表示为 @1x；而在 iPhone 4 到 iPhone 4s 的 Retina 屏幕上，一个点等于两个像素，可以表示为 @2x。而日后发布的一些设备（如 iPhone 6 Plus、iPhone X）还会出现一个点等于三个像素的情况，可以表示为 @3x，这种 @1x、@2x、@3x 可以称之为「比例因子」。</p>
 <p>从下面的图示可以看出，在物理尺寸相同时，从 @1x 到 @3x 图像清晰度依次递增。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/1d74670901daeefeca41452c3f633ae3.png"></p>
-<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#99;&#97;&#x6d;&#101;&#x72;&#97;&#x40;&#x31;&#x78;&#x2e;&#112;&#110;&#103;">&#99;&#97;&#x6d;&#101;&#x72;&#97;&#x40;&#x31;&#x78;&#x2e;&#112;&#110;&#103;</a>」和「<a href="mailto:&#x63;&#x61;&#x6d;&#x65;&#114;&#x61;&#64;&#x32;&#120;&#x2e;&#112;&#110;&#103;">&#x63;&#x61;&#x6d;&#x65;&#114;&#x61;&#64;&#x32;&#120;&#x2e;&#112;&#110;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
+<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#97;&#109;&#101;&#x72;&#x61;&#64;&#x31;&#x78;&#46;&#112;&#x6e;&#x67;">&#x63;&#97;&#109;&#101;&#x72;&#x61;&#64;&#x31;&#x78;&#46;&#112;&#x6e;&#x67;</a>」和「<a href="mailto:&#99;&#x61;&#109;&#x65;&#114;&#97;&#64;&#50;&#x78;&#46;&#112;&#110;&#x67;">&#99;&#x61;&#109;&#x65;&#114;&#97;&#64;&#50;&#x78;&#46;&#112;&#110;&#x67;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
 <p>用与像素密度无关的单位「point 点」来表示设计内容的尺寸的优势在日后 iPhone 的屏幕尺寸变得更加复杂之后会更加凸显。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/414393edef51cdfab6b1bcebad5789b7.png"></p>
 <p>进一步，第一代 iPhone 到 iPhone 3GS 的屏幕分辨率可以表示为 320pt × 480pt @1x，iPhone 4、iPhone 4s 的屏幕分辨率可以表示为 320pt × 480pt @2x。而使用「point 点」这个单位表示的分辨率我们可以称之为「逻辑分辨率」，而使用「px 像素」这个单位表示的分辨率我们可以称之为「渲染分辨率」。</p>
@@ -2218,6 +2218,129 @@
       </categories>
       <tags>
         <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>手把手教你用 VuePress + GitHub Pages 搭建个人博客！</title>
+    <url>/2023/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在阅读<a href="https://juejin.cn/user/712139234359182">冴羽</a>老师的文章时，对VuePress搭建个人博客很感兴趣，于是试着自己搭建了一遍，写了这篇文章记录一下搭建的基本流程，希望对大家有所帮助。</p>
+<h2 id="1-本地搭建"><a href="#1-本地搭建" class="headerlink" title="1. 本地搭建"></a>1. 本地搭建</h2><ol>
+<li>创建并进入一个新目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir vuepress-starter</span><br><span class="line"><span class="built_in">cd</span> vuepress-starter</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用你喜欢的包管理器进行初始化</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">npm <span class="keyword">init</span> -y</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>将 VuePress 安装为本地依赖</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -D vuepress</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>创建你的第一篇文档</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir docs</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;# Hello VuePress&#x27;</span> &gt; docs/README.md</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在 <code>package.json</code> 中添加一些 <code>scripts</code></li>
+</ol>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;docs:dev&quot;: &quot;vuepress dev docs&quot;,</span><br><span class="line">  &quot;docs:build&quot;: &quot;vuepress build docs&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在本地启动服务器</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">npm <span class="built_in">run</span> docs:dev</span><br></pre></td></tr></table></figure>
+
+<p>VuePress 会在 <a href="https://link.juejin.cn/?target=http://localhost:8080/">http://localhost:8080</a> 启动一个热重载的开发服务器</p>
+<p>这时可能会出现文字乱码情况，需要把 <code>README.md</code> 的编码格式改为 <code>UTF-8</code></p>
+<h2 id="2-基础配置"><a href="#2-基础配置" class="headerlink" title="2. 基础配置"></a>2. 基础配置</h2><p>在 <code>docs</code> 文件夹下添加 <code>.vuepress</code> 目录，所有 VuePress 相关的文件都会被放在这里。在 <code>.vuepress</code> 文件夹下添加 <code>config.js</code>，配置网站的标题和描述，方便 SEO，此时你的目录结构可能是这样：</p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">|<span class="comment">-- docs&#x27;,</span></span><br><span class="line">    |<span class="comment">-- README.md&#x27;,</span></span><br><span class="line">    |<span class="comment">-- .vuepress&#x27;,</span></span><br><span class="line">        |<span class="comment">-- config.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>config.js</code> 文件的内容如下(标题和描述自定义)：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  title: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  description: <span class="string">&#x27;XXX&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-添加导航栏"><a href="#3-添加导航栏" class="headerlink" title="3. 添加导航栏"></a>3. 添加导航栏</h2><p>我们现在在首页的右上角添加导航栏，修改 <code>config.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  title: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  description: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    nav: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&quot;首页&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;/&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        text: <span class="string">&quot;codinglin 的博客&quot;</span>,</span><br><span class="line">        items: [</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;掘金&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://juejin.cn/user/726107228492253&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;Github&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://github.com/coding-lin&quot;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时界面如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9093f90054b543818a79ebf79007a7b8~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_15-48-31.png"></p>
+<h2 id="4-添加侧边栏"><a href="#4-添加侧边栏" class="headerlink" title="4. 添加侧边栏"></a>4. 添加侧边栏</h2><p>现在我们添加一些 <code>md</code> 文档，内容自行添加，文档的目录结构如下：</p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">|<span class="comment">-- docs&#x27;,</span></span><br><span class="line">    |<span class="comment">-- README.md&#x27;,</span></span><br><span class="line">    |<span class="comment">-- .vuepress&#x27;,</span></span><br><span class="line">        |<span class="comment">-- config.js&#x27;</span></span><br><span class="line">    |<span class="comment">-- handbook</span></span><br><span class="line">        |<span class="comment">-- 1.md </span></span><br><span class="line">        |<span class="comment">-- 2.md</span></span><br></pre></td></tr></table></figure>
+
+<p>我们在 <code>config.js</code> 添加如下配置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  title: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  description: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    nav: [...],</span><br><span class="line">    sidebar: [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&quot;欢迎学习&quot;</span>,</span><br><span class="line">        path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">        collapsable: <span class="literal">false</span>,  <span class="comment">// 是否折叠</span></span><br><span class="line">        children: [&#123; <span class="attr">title</span>: <span class="string">&quot;博客简介&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/&quot;</span> &#125;],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&quot;基础篇&quot;</span>,</span><br><span class="line">        path: <span class="string">&quot;/handbook/1&quot;</span>,</span><br><span class="line">        collapsable: <span class="literal">true</span>,</span><br><span class="line">        children: [</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第一篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第二篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/2&quot;</span> &#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125; </span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时页面如下：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6f064f8564d4668acca028cc96882e5~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-12-41.png"></p>
+<h2 id="5-更换主题"><a href="#5-更换主题" class="headerlink" title="5. 更换主题"></a>5. 更换主题</h2><p>现在基本的目录和导航功能已经实现，如果还想要 <code>loading</code>效果、切换动画、模式切换（暗黑模式）、返回顶部、评论等功能呢，为了简化开发成本，我们可以直接使用主题，我使用的主题是 <a href="https://link.juejin.cn/?target=https://vuepress-theme-reco.recoluan.com/">vuepress-theme-reco</a>：</p>
+<p>现在我们安装 vuepress-theme-reco：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">npm</span> <span class="selector-tag">install</span> <span class="selector-tag">vuepress-theme-reco</span> <span class="selector-tag">--save-dev</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>config.js</code> 中引用该主题：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  theme: <span class="string">&#x27;reco&#x27;</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>配置好之后，可以看到自己的博客网站新增了一些功能，例如模式切换：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1e1b44540b64bbe83ad69962e0c7756~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-24-40.png"></p>
+<h2 id="6-添加文章信息"><a href="#6-添加文章信息" class="headerlink" title="6. 添加文章信息"></a>6. 添加文章信息</h2><p>我们会发现，一篇文章竟然出现了两遍标题，这是因为这个主题自动提取了第一个大标题作为本文的标题，我们可以在每篇文章的 <code>md</code> 文件中添加一些信息修改：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">VuePress</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">codinglin</span></span><br><span class="line"><span class="attr">date:</span> <span class="string">&#x27;2022-8-28&#x27;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8383425aefc24e4bb9f8aef159229858~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-43-22.png"></p>
+<h2 id="7-设置语言"><a href="#7-设置语言" class="headerlink" title="7. 设置语言"></a>7. 设置语言</h2><p>文章时间，我们写入的格式为 <code>2022-8-28</code> ，但是显示的是 <code>8/28/2022</code>，这是因为 VuePress 默认的 lang 为 <code>en-US</code>，我们修改一下 <code>config.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  locales: &#123;</span><br><span class="line">    <span class="string">&#x27;/&#x27;</span>: &#123;</span><br><span class="line">      lang: <span class="string">&#x27;zh-CN&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>可以发现时间格式发生了变化：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a82d5143082473a9c2a74825eaa6467~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-46-43.png"></p>
+<h2 id="8-开启目录结构"><a href="#8-开启目录结构" class="headerlink" title="8. 开启目录结构"></a>8. 开启目录结构</h2><p>在原本的主题里，我们发现每篇文章的目录结构在左侧，而 vuepress-theme-reco 将原有的侧边栏的中的多级标题移出，生成子侧边栏，放在了页面的右侧，如果你要全局开启，可在 <code>config.js</code> 中设置开启：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    subSidebar: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-修改主题颜色"><a href="#9-修改主题颜色" class="headerlink" title="9. 修改主题颜色"></a>9. 修改主题颜色</h2><p>VuePress 基于 Vue，所以主题色用的是 Vue 的绿色，你也可以将主题颜色修改为你自己喜欢的颜色，你可以创建一个 <code>.vuepress/styles/palette.styl</code> 文件，文件代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$accentColor</span> = <span class="comment">#3178c6</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b0265b5ec3342c0af574571817d59a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-59-47.png"></p>
+<p>更多颜色的修改请参考 <a href="https://link.juejin.cn/?target=https://vuepress.vuejs.org/zh/config/%23palette-styl">palette.styl</a></p>
+<h2 id="10-自定义修改样式"><a href="#10-自定义修改样式" class="headerlink" title="10. 自定义修改样式"></a>10. 自定义修改样式</h2><p>我们发现用作强调的文字颜色比较暗淡，在暗黑模式下看不清楚，如何修改这个文字的颜色和背景色呢？</p>
+<p>你可以创建一个 <code>.vuepress/styles/index.styl</code> 文件，文件代码如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.dark</span> <span class="selector-class">.content__default</span> <span class="selector-tag">code</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">58</span>,<span class="number">58</span>,<span class="number">92</span>,<span class="number">0.7</span>);</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要隐藏每篇文章的标题、作者、时间呢，其实也是类似的方式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.page</span> <span class="selector-class">.page-title</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ddb5ee1a9804012ba138b9d10c09306~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-22-15.png"></p>
+<h2 id="11-部署"><a href="#11-部署" class="headerlink" title="11. 部署"></a>11. 部署</h2><p>到这里，我们的博客网站基本搭建好了，接下来我们将它部署到 Github Pages 上。我们首先在 Github 上新建一个仓库，这里我取名为：<code>interview</code>。</p>
+<p>相应地，我们需要在 <code>config.js</code> 添加一个 <code>base</code> 路径配置：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 和仓库名相同</span></span><br><span class="line">  base: <span class="string">&#x27;/interview/&#x27;</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终的 <code>config.js</code> 的内容为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  title: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  description: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  theme: <span class="string">&#x27;reco&#x27;</span>,</span><br><span class="line">  base: <span class="string">&#x27;/interview/&#x27;</span>,</span><br><span class="line">  locales: &#123;</span><br><span class="line">    <span class="string">&#x27;/&#x27;</span>: &#123;</span><br><span class="line">      lang: <span class="string">&#x27;zh-CN&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  themeConfig: &#123;</span><br><span class="line">    subSidebar: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">    nav: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&quot;首页&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;/&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        text: <span class="string">&quot;codinglin 的博客&quot;</span>,</span><br><span class="line">        items: [</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;掘金&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://juejin.cn/user/726107228492253&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;Github&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://github.com/coding-lin&quot;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    sidebar: [</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&quot;欢迎学习&quot;</span>,</span><br><span class="line">        path: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">        collapsable: <span class="literal">false</span>,  <span class="comment">// 是否折叠</span></span><br><span class="line">        children: [&#123; <span class="attr">title</span>: <span class="string">&quot;博客简介&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/&quot;</span> &#125;],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        title: <span class="string">&quot;基础篇&quot;</span>,</span><br><span class="line">        path: <span class="string">&quot;/handbook/1&quot;</span>,</span><br><span class="line">        collapsable: <span class="literal">true</span>,</span><br><span class="line">        children: [</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第一篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第二篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/2&quot;</span> &#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125; </span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在项目 <code>vuepress-starter</code> 目录下创建一个脚本文件 <code>deploy.sh</code>，注意修改一下对应的<strong>用户名</strong>和<strong>仓库名</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保脚本抛出遇到的错误</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">npm run docs:build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入生成的文件夹</span></span><br><span class="line"><span class="built_in">cd</span> docs/.vuepress/dist</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&#x27;deploy&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</span></span><br><span class="line">git push -f git@github.com:XXX/XXX.git master:gh-pages</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> -</span><br></pre></td></tr></table></figure>
+
+<p>新建一个终端，选择 <code>Git Bash</code>，进入主目录，并执行 <code>sh deploy.sh</code></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2bfd8ba7bc4c456dba5711a05ff5eb01~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-47-59.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> vuepress-starter</span><br><span class="line">sh deploy.sh</span><br></pre></td></tr></table></figure>
+
+<p>项目就会开始构建，然后上传到远程仓库上。</p>
+<p>我们可以在仓库的 <code>Settings -&gt; Pages</code> 中看到最后的地址：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e60bed72bed94a67b15fc9216b67ef1f~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-43-12.png"></p>
+<p>最后生成的地址：<a href="https://link.juejin.cn/?target=https://coding-lin.github.io/interview/">coding-lin.github.io/interview/</a></p>
+<p>至此，我们完成了 VuePress 和 Github Pages 的部署。</p>
+<p>如果大家想要丰富自己的个人博客的话，可以去安装一些插件，地址如下：<a href="https://link.juejin.cn/?target=https://github.com/mqyqingfeng/Blog/issues/261">搭建 VuePress 博客，你可能会用到的一些插件</a></p>
+<p>更新之后的博客：<a href="https://link.juejin.cn/?target=https://coding-lin.github.io/blog/">coding-lin.github.io/blog/</a> ，博客代码已上传到 <a href="https://link.juejin.cn/?target=https://github.com/coding-lin/blog/tree/main">github</a>，欢迎大家 star！</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>以上就是使用 VuePress + GitHub Pages 搭建个人博客的大致流程，如果觉得这篇文章对你有帮助的话，不要忘了点赞哟~</p>
+<p>原文链接：<a href="https://link.juejin.cn/?target=https://github.com/mqyqingfeng/Blog/issues/235">一篇带你用 VuePress + Github Pages 搭建博客</a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
 </search>
