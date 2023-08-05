@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -225,12 +226,12 @@
         <div class="post-content">
             <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
 <h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1、tabs组件代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tabs v-model&#x3D;&quot;activeTab&quot; type&#x3D;&quot;card&quot; :before-leave&#x3D;&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label&#x3D;&quot;用户信息&quot; name&#x3D;&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;&#x2F;el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if&#x3D;&quot;code&quot; label&#x3D;&quot;用户角色&quot; name&#x3D;&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;&#x2F;el-tab-pane&gt;</span><br><span class="line">&lt;&#x2F;el-tabs&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot; :before-leave=&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label=&quot;用户信息&quot; name=&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if=&quot;code&quot; label=&quot;用户角色&quot; name=&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure>
 
-<a id="more"></a>
+<span id="more"></span>
 
 <p>2、beforeLeave()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;</span><br><span class="line">    this.$confirm(&#39;离开将不保存本页修改&#39;, &#39;提示&#39;, &#123;</span><br><span class="line">        confirmButtonText: &#39;确定&#39;,</span><br><span class="line">        cancelButtonText: &#39;取消&#39;,</span><br><span class="line">        type: &#39;warning&#39;</span><br><span class="line">    &#125;).then(() &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    this.$confirm(&#x27;离开将不保存本页修改&#x27;, &#x27;提示&#x27;, &#123;</span><br><span class="line">        confirmButtonText: &#x27;确定&#x27;,</span><br><span class="line">        cancelButtonText: &#x27;取消&#x27;,</span><br><span class="line">        type: &#x27;warning&#x27;</span><br><span class="line">    &#125;).then(() =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
 
         

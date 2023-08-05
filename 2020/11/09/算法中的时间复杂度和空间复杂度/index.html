@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -231,7 +232,7 @@
 <li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
 <li>事前分析估算方法</li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="算法事前分析估算方法"><a href="#算法事前分析估算方法" class="headerlink" title="算法事前分析估算方法"></a>算法事前分析估算方法</h1><h2 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h2><p>假设两个算法的输入规模都是n，算法A要做2n+3次操作，算法B要做3n+1次操作。你觉得谁更快呢？<br>准确来说，答案是不一定的。<br>当n=1时，算法A效率不如B；当n=2时，两者效率相同；当n&gt;2时，算法A开始优于B，随着n的增加，算法A比B越来越好。于是我们得出结论，算法A总体上要好过算法B。<br>此时我们给出这样定义，输入规模n在没有限制的情况下，只要超出一个数值N，这个函数总是大于另一个函数，我们称函数是渐进增长的。</p>
 <p>再举一些有指数的例子，我们观察发现，最高次项的指数大的，函数随着n的增长，结果也会变得增长特别快。于是我们得到这样一个结论，判断一个算法的效率时，函数中的常数和其他次要项常常可以忽略，而更应该关注主项（最高阶项）的阶数。</p>

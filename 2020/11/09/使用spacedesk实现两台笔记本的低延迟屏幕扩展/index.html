@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -159,7 +160,7 @@
 
         <div class="post-content">
             <p><strong>需求：</strong><br>有两台笔记本电脑，想要将其中一台作为扩展屏幕使用<br><strong>准备：</strong><br>两台有网线接口的笔记本电脑、一根双绞线、spacedesk软件<br><strong>软件下载地址：</strong><br>官网：<a target="_blank" rel="noopener" href="https://www.spacedesk.net/#downloads">https://www.spacedesk.net/#downloads</a><br>网盘下载：链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ">https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ</a><br>提取码：agdh </p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p><strong>详细操作步骤：</strong><br>1、安装完软件后 主机端 就有它的图标了，里面有个按钮选ON就能开启服务了。<br>（这个时候如果扩展屏机和主机在同在一局域网内的话，应该也可以进行连接了，但是这样并不能达到理想稳定传输效果，所以还得接下去继续设置）<br><img src="https://img-blog.csdnimg.cn/20190713122049957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxOTAyNzA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>2、分别把网线的两端接入笔记本的网卡接口，将两台设备连接起来。（一般接上后网线口处亮灯就可以了）<br><img src="https://img-blog.csdnimg.cn/20190713122745682.png" alt="在这里插入图片描述"><br>3、修改两台设备的网卡IP地址，如图所示。（这里设置成B类地址是为了避免与路由器冲突。）<br>主机为： 地址172.16.0.1 掩码255.255.255.0 网关172.16.0.1<br>扩展屏机：地址172.16.0.2 掩码255.255.255.0 网关172.16.0.1<br>修改ip地址方法：<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/046a7b3e95caf3f9c37fa971.html">https://jingyan.baidu.com/article/046a7b3e95caf3f9c37fa971.html</a><br><img src="https://img-blog.csdnimg.cn/20190713122956652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxOTAyNzA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>4、关闭 扩展屏机（接收端） 的防火墙，完成后可使用命令提示符（cmd） ping 172.16.0.2 验证两台设备间的连通性。两台设备间能 ping 通的话那就行了。<br>快速关闭防火墙的cmd命令：netsh advfirewall set publicprofile state off<br>检查设备连通性cmd命令：ping 172.16.0.2<br>关闭防火墙方法：<br><a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/ff42efa9cc80efc19e2202b7.html">https://jingyan.baidu.com/article/ff42efa9cc80efc19e2202b7.html</a><br>5、进到接收端软件里面，点172.16.0.1的选项就可以通过网线连接扩展屏幕画面的。</p>
 <ul>

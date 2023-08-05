@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -229,11 +230,11 @@
 <li>window.sessionStorage - 针对一个session来存储数据（会话级别本地存储）</li>
 </ul>
 <p>在使用本地存储时，请检测 localStorage 和 sessionStorage 的浏览器支持：</p>
-<a id="more"></a>
+<span id="more"></span>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (typeof(Storage) !&#x3D;&#x3D; &quot;undefined&quot;) &#123;</span><br><span class="line">    &#x2F;&#x2F; 针对 localStorage&#x2F;sessionStorage 的代码</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    &#x2F;&#x2F; 抱歉！不支持 Web Storage ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (typeof(Storage) !== &quot;undefined&quot;) &#123;</span><br><span class="line">    // 针对 localStorage/sessionStorage 的代码</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    // 抱歉！不支持 Web Storage ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>1、localStorage 对象<br>localStorage 对象存储的是没有截至日期的数据。当浏览器被关闭时数据不会被删除，在下一天、周或年中，都是可用的。H5标准要求浏览器至少支持到4MB</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 存储</span><br><span class="line">localStorage.setItem(&quot;lastname&quot;, &quot;Gates&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname &#x3D; Gates</span><br><span class="line">&#x2F;&#x2F; 取回</span><br><span class="line">localStorage.getItem(&quot;lastname&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 删除</span><br><span class="line">localStorage.removeItem(&quot;lastname&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 存储</span><br><span class="line">localStorage.setItem(&quot;lastname&quot;, &quot;Gates&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname = Gates</span><br><span class="line">// 取回</span><br><span class="line">localStorage.getItem(&quot;lastname&quot;)</span><br><span class="line">或</span><br><span class="line">localStorage.lastname</span><br><span class="line"></span><br><span class="line">// 删除</span><br><span class="line">localStorage.removeItem(&quot;lastname&quot;)</span><br></pre></td></tr></table></figure>
 <p>2、sessionStorage 对象<br>sessionStorage 对象等同 localStorage 对象，不同之处在于只对一个 session 存储数据。如果用户关闭具体的浏览器标签页，数据也会被删除。</p>
 <p>3、本地数据库<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fly_dragon/p/3946012.html">逆天了的本地数据库</a></p>
 <h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><p>html4时代只能通过Cookie处理浏览器端的存储问题，有如下限制：</p>

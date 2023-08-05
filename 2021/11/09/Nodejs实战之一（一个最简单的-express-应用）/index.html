@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -224,12 +225,12 @@
 
         <div class="post-content">
             <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson1 项目，在其中编写代码。当在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 Hello World。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、安装nvm工具以用其安装指定版本的node</p>
 <ul>
 <li>安装nvm（ <a target="_blank" rel="noopener" href="https://github.com/creationix/nvm%EF%BC%89">https://github.com/creationix/nvm）</a></li>
-<li>安装Node<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 安装v0.12版本的node</span><br><span class="line">$ nvm install 0.12</span><br><span class="line">&#x2F;&#x2F; 安装完成后查看一下</span><br><span class="line">$ nvm ls</span><br><span class="line">&#x2F;&#x2F; 这时候可以看到自己安装的所有Node版本，前面有绿色小箭头的表示当前正在使用的版本，如果安装了多个版本需要进行切换使用命令：</span><br><span class="line">$ nvm use 0.12</span><br><span class="line">&#x2F;&#x2F; 查看是否安装成功</span><br><span class="line">$ node</span><br></pre></td></tr></table></figure>
+<li>安装Node<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 安装v0.12版本的node</span><br><span class="line">$ nvm install 0.12</span><br><span class="line">// 安装完成后查看一下</span><br><span class="line">$ nvm ls</span><br><span class="line">// 这时候可以看到自己安装的所有Node版本，前面有绿色小箭头的表示当前正在使用的版本，如果安装了多个版本需要进行切换使用命令：</span><br><span class="line">$ nvm use 0.12</span><br><span class="line">// 查看是否安装成功</span><br><span class="line">$ node</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -242,19 +243,19 @@
 <p>本实例假设大家都是在 Linux 或者 Mac 下面</p>
 </blockquote>
 <p>1、新建一个文件夹叫lesson1，进去里面安装express</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir lesson1 &amp;&amp; cd lesson1</span><br><span class="line"># 这里没有从官方 npm 安装，而是使用了大淘宝的 npm 镜像</span><br><span class="line">$ npm install express --registry&#x3D;https:&#x2F;&#x2F;registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir lesson1 &amp;&amp; cd lesson1</span><br><span class="line"># 这里没有从官方 npm 安装，而是使用了大淘宝的 npm 镜像</span><br><span class="line">$ npm install express --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
 <p>安装完成后，我们的 lesson1 目录下应该会出现一个 node_modules 文件夹，ls 看看</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls node_modules</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ls node_modules</span><br></pre></td></tr></table></figure>
 <p>里面如果出现 express 文件夹则说明安装成功。</p>
 <p>或者 npm命令提供更清晰直观的显示:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm list</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm list</span><br></pre></td></tr></table></figure>
 <p>我们继续应用程序的编写。</p>
 <p>新建一个 app.js 文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch app.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ touch app.js</span><br></pre></td></tr></table></figure>
 <p>copy 进去这些代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 这句的意思就是引入 &#96;express&#96; 模块，并将它赋予 &#96;express&#96; 这个变量等待使用。</span><br><span class="line">var express &#x3D; require(&#39;express&#39;);</span><br><span class="line">&#x2F;&#x2F; 调用 express 实例，它是一个函数，不带参数调用时，会返回一个 express 实例，将这个变量赋予 app 变量。</span><br><span class="line">var app &#x3D; express();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; app 本身有很多方法，其中包括最常用的 get、post、put&#x2F;patch、delete，在这里我们调用其中的 get 方法，为我们的 &#96;&#x2F;&#96; 路径指定一个 handler 函数。</span><br><span class="line">&#x2F;&#x2F; 这个 handler 函数会接收 req 和 res 两个对象，他们分别是请求的 request 和 response。</span><br><span class="line">&#x2F;&#x2F; request 中包含了浏览器传来的各种信息，比如 query 啊，body 啊，headers 啊之类的，都可以通过 req 对象访问到。</span><br><span class="line">&#x2F;&#x2F; res 对象，我们一般不从里面取信息，而是通过它来定制我们向浏览器输出的信息，比如 header 信息，比如想要向浏览器输出的内容。这里我们调用了它的 #send 方法，向浏览器输出一个字符串。</span><br><span class="line">app.get(&#39;&#x2F;&#39;, function (req, res) &#123;</span><br><span class="line">  res.send(&#39;Hello World&#39;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 定义好我们 app 的行为之后，让它监听本地的 3000 端口。这里的第二个函数是个回调函数，会在 listen 动作成功后执行，我们这里执行了一个命令行输出操作，告诉我们监听动作已完成。</span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#39;app is listening at port 3000&#39;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 这句的意思就是引入 `express` 模块，并将它赋予 `express` 这个变量等待使用。</span><br><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">// 调用 express 实例，它是一个函数，不带参数调用时，会返回一个 express 实例，将这个变量赋予 app 变量。</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">// app 本身有很多方法，其中包括最常用的 get、post、put/patch、delete，在这里我们调用其中的 get 方法，为我们的 `/` 路径指定一个 handler 函数。</span><br><span class="line">// 这个 handler 函数会接收 req 和 res 两个对象，他们分别是请求的 request 和 response。</span><br><span class="line">// request 中包含了浏览器传来的各种信息，比如 query 啊，body 啊，headers 啊之类的，都可以通过 req 对象访问到。</span><br><span class="line">// res 对象，我们一般不从里面取信息，而是通过它来定制我们向浏览器输出的信息，比如 header 信息，比如想要向浏览器输出的内容。这里我们调用了它的 #send 方法，向浏览器输出一个字符串。</span><br><span class="line">app.get(&#x27;/&#x27;, function (req, res) &#123;</span><br><span class="line">  res.send(&#x27;Hello World&#x27;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 定义好我们 app 的行为之后，让它监听本地的 3000 端口。这里的第二个函数是个回调函数，会在 listen 动作成功后执行，我们这里执行了一个命令行输出操作，告诉我们监听动作已完成。</span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#x27;app is listening at port 3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node app.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node app.js</span><br></pre></td></tr></table></figure>
 <p>这时候我们的 app 就跑起来了，终端中会输出 app is listening at port 3000。这时我们打开浏览器，访问 <a target="_blank" rel="noopener" href="http://localhost:3000/%EF%BC%8C%E4%BC%9A%E5%87%BA%E7%8E%B0">http://localhost:3000/，会出现</a> Hello World。如果没有出现的话，肯定是上述哪一步弄错了，自己调试一下。</p>
 
         </div>

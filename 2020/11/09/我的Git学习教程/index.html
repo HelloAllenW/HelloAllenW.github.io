@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -226,7 +227,7 @@
             <h1 id="一、Git常用命令汇总"><a href="#一、Git常用命令汇总" class="headerlink" title="一、Git常用命令汇总"></a>一、Git常用命令汇总</h1><p>1、提交<br>git add .<br>git commit -m “”<br>git push [origin远程主机名][本地分支名] [远程分支名]</p>
 <p>2、删除<br>（1）删除本地分支：<br>切换到其他分支后，执行git branch -D [分支名]<br>（2）删除远程分支：<br>git push origin –delete [需要删除的分支名称]</p>
 <p>3、拉取<br>（1）本地clone远程项目<br>不指定分支：git clone [项目地址]<br>指定分支：git clone -b [线上分支][项目地址]<br>（2）将本地更新为远程分支<br>git pull [远程主机名][远程分支]:[本地分支]</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>4、操作分支：<br>（1）切换分支：git checkout [分支名]<br>（2）创建并切换分支：git checkout -b [分支名]</p>
 <p>5、tag：默认操作当前分支<br>（1）添加tag：git tag [tag名称]<br>（2）将添加好的tag推到线上：git push [远程主机名origin] [tag名称]<br>（3）删除本地tag：git tag -d [tag名称]<br>（4）删除线上tag例如V1.2：git push [远程主机名origin] :refs/tags/V1.2<br>（5）获取远程版本：git fetch origin tag V1.2</p>
@@ -244,13 +245,13 @@
 </ul>
 <h1 id="三、使用-Git-中的问题及解决方案汇总"><a href="#三、使用-Git-中的问题及解决方案汇总" class="headerlink" title="三、使用 Git 中的问题及解决方案汇总"></a>三、使用 Git 中的问题及解决方案汇总</h1><h2 id="1、解决本地项目绑定远程库时报错"><a href="#1、解决本地项目绑定远程库时报错" class="headerlink" title="1、解决本地项目绑定远程库时报错"></a>1、解决本地项目绑定远程库时报错</h2><p>fatal: repository ‘<a target="_blank" rel="noopener" href="https://github.com/XXX/&#39;">https://github.com/XXX/&#39;</a> not found<br>问题分析：远程库绑定错误<br>1、查看远程库：git remote -v<br>2、删除远程库：git remote remove origin<br>3、添加远程库：git remote add origin [远程地址]<br>其他：<br>1、查看当前用户：git config user.name<br>2、查看当前邮箱：git config user.email<br>3、修改用户：git config –global user.name [用户名]、<br>4、修改邮箱：git config –global user.email [邮箱]</p>
 <h2 id="2、如何将本地项目上传到-GitLab"><a href="#2、如何将本地项目上传到-GitLab" class="headerlink" title="2、如何将本地项目上传到 GitLab"></a>2、如何将本地项目上传到 GitLab</h2><p>在 GitLab 中 New project 后，填写项目名称、权限等，生成空项目。根据提示完成文件上传，参考如下：<br>注意：在上传之前应检查Git库的当前用户和邮箱，是否与自己要上传库相对应。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. git init  #把这个目录变成Git可以管理的仓库</span><br><span class="line">2. git add README.md  #本地README.md文件添加到远程仓库</span><br><span class="line">3. git add .  #不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了，注意空格</span><br><span class="line">4. git commit -m &quot;注释&quot;  #把文件提交到仓库</span><br><span class="line">5. git remote add origin git@github.com:heimu24&#x2F;blog-backup.git  #本地关联远程仓库</span><br><span class="line">6. git push -u origin master  #把本地仓库的所有内容推送到远程库上（第一次需要加-u，后面就不用加了）</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. git init  #把这个目录变成Git可以管理的仓库</span><br><span class="line">2. git add README.md  #本地README.md文件添加到远程仓库</span><br><span class="line">3. git add .  #不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了，注意空格</span><br><span class="line">4. git commit -m &quot;注释&quot;  #把文件提交到仓库</span><br><span class="line">5. git remote add origin git@github.com:heimu24/blog-backup.git  #本地关联远程仓库</span><br><span class="line">6. git push -u origin master  #把本地仓库的所有内容推送到远程库上（第一次需要加-u，后面就不用加了）</span><br></pre></td></tr></table></figure>
 
-<h2 id="3、git-push-u-origin-master-命令报错"><a href="#3、git-push-u-origin-master-命令报错" class="headerlink" title="3、git push -u origin master 命令报错"></a>3、git push -u origin master 命令报错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: Could not read from remote repository.Please make sure you have the correct access rights and the repository exists.（）</span><br></pre></td></tr></table></figure>
+<h2 id="3、git-push-u-origin-master-命令报错"><a href="#3、git-push-u-origin-master-命令报错" class="headerlink" title="3、git push -u origin master 命令报错"></a>3、git push -u origin master 命令报错</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: Could not read from remote repository.Please make sure you have the correct access rights and the repository exists.（）</span><br></pre></td></tr></table></figure>
 <p>问题原因是在git上没有创建SSH Key<br>解决方法：创建SSH<br>在终端中输入<br>ssh-keygen -t rsa -C “username” (注：username为你git上的用户名)<br>None<br>三次回车，如有看到The key’s randomart image is，代表你的SSH Key生成成功了。<br>cat ~/.ssh/id_rsa.pub</p>
 <p><strong><em>或者</em></strong></p>
 <p><img src="https://img-blog.csdnimg.cn/20181231165219613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxOTAyNzA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="4、删除远程仓库项目"><a href="#4、删除远程仓库项目" class="headerlink" title="4、删除远程仓库项目"></a>4、删除远程仓库项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 拉取远程的Repo到本地（如果已经在本地，可以略过）</span><br><span class="line">git clone xxx</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件</span><br><span class="line">git rm 我的文件</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件夹</span><br><span class="line">git rm -r 我的文件夹&#x2F;</span><br><span class="line">此处-r表示递归所有子目录，如果你要删除的是空的文件夹，此处可以不用带-r</span><br><span class="line"></span><br><span class="line"># 提交代码</span><br><span class="line">git commit -m &quot;我的修改&quot;</span><br><span class="line"></span><br><span class="line"># 推送到远程仓库</span><br><span class="line">git push origin xxx</span><br></pre></td></tr></table></figure>
+<h2 id="4、删除远程仓库项目"><a href="#4、删除远程仓库项目" class="headerlink" title="4、删除远程仓库项目"></a>4、删除远程仓库项目</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 拉取远程的Repo到本地（如果已经在本地，可以略过）</span><br><span class="line">git clone xxx</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件</span><br><span class="line">git rm 我的文件</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件夹</span><br><span class="line">git rm -r 我的文件夹/</span><br><span class="line">此处-r表示递归所有子目录，如果你要删除的是空的文件夹，此处可以不用带-r</span><br><span class="line"></span><br><span class="line"># 提交代码</span><br><span class="line">git commit -m &quot;我的修改&quot;</span><br><span class="line"></span><br><span class="line"># 推送到远程仓库</span><br><span class="line">git push origin xxx</span><br></pre></td></tr></table></figure>
 
 <h2 id="5、删除Git仓库"><a href="#5、删除Git仓库" class="headerlink" title="5、删除Git仓库"></a>5、删除Git仓库</h2><p>在本地仓库的目录下调用命令行删除根目录下的.git文件夹，输入<br>find . -name “.git” | xargs rm -Rf<br>这样本地仓库就清除了，像下面这样，master不见了。<br><img src="https://img-blog.csdnimg.cn/2019041813505843.png" alt="在这里插入图片描述"></p>
 

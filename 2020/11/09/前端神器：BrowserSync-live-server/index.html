@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -228,18 +229,18 @@
 </blockquote>
 <h1 id="browserSync"><a href="#browserSync" class="headerlink" title="browserSync"></a>browserSync</h1><p><a target="_blank" rel="noopener" href="http://www.browsersync.cn/">browsersync</a>：浏览器同步测试工具，简单来说就是当你保存文件的同时浏览器会自动刷新网页。省去了手动刷新网页的环节，大大的节省了开发时间，这个工具是基于nodejs的，可以通过npm安装。</p>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>在开始菜单找到<strong>node.js command prompt</strong>打开，输入安装命令：<br><code>npm install -g browser-sync</code></p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>通过命令行工具，进入到项目根目录下，输入如下命令：<br>1、如果是纯静态站点（也就是仅仅一些.html文件的情况）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;表示监听整个项目</span><br><span class="line">browser-sync strat --server --files &quot;***.html, ***&quot; </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//表示监听整个项目</span><br><span class="line">browser-sync strat --server --files &quot;***.html, ***&quot; </span><br></pre></td></tr></table></figure>
 <p>BrowserSync会自动提供一个新地址（如未被占用的话，默认<a href="http://localhost:3000）用于访问。">http://localhost:3000）用于访问。</a></p>
 <p>2、如果是动态站点（使用代理模式）：<br>例如PHP站点，已经建立了一个本地服务器如<a href="http://localhost:8080，此时输入如下命令：">http://localhost:8080，此时输入如下命令：</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browser-sync start --proxy &quot;localhost:8080&quot; --files &quot;css&#x2F;*.css&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browser-sync start --proxy &quot;localhost:8080&quot; --files &quot;css/*.css&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>1、注意事项<br>项目根目录下必须要有一个index.html文件，不然会报错：Cannot GET /<br>另外也可以通过gulp使用这个工具，Gulp是现在流行的自动化工具。参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Tom-yi/p/8036730.html">gulp新手入门教程</a></p>
 <p>2、修改配置文件<br>在命令行工具中输入：<strong>browser-sync</strong>，你会看到起完整的控制台命令指南。其中有一个：<strong>browser-sync init</strong>。 运行它，将在当前目录生成一个配置文件<strong>bs-config.js</strong>。参考官方文档修改这个文件，然后运行：</p>
-<figure class="highlight plain"><figcaption><span>start --config bs-config.js```就将以其完整配置信息运行BrowserSync。使用**ctrl+c**可以终止当前目录，清空用**cls**命令</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># live-server</span><br><span class="line">live-server是一个具有实时重载功能的小型开发服务器。用它来热加载HTML &#x2F; JavaScript &#x2F; CSS文件，但不能用于部署最终的网站系统。</span><br><span class="line">## 安装</span><br><span class="line">1、前提条件需要node.js和npm的依赖（可以自己先搞定，不难）；</span><br><span class="line"></span><br><span class="line">2、使用npm全局安装：&#96;&#96;&#96;npm install -g live-server&#96;&#96;&#96;</span><br><span class="line"></span><br><span class="line">## 使用</span><br><span class="line">在所在项目目录下，打开命令行工具，输入 **live-server**，回车就可以了（注意这里默认打开的是**index.html**）。接着就会看到打开了一个**127.0.0.1:8080**的网页。退出该服务器，在命令行使用：**ctrl+c**</span><br><span class="line"></span><br><span class="line">## 配置</span><br><span class="line">1、默认端口号为8080，如果想修改，最简单的方式是启动的时候添加启动参数：&#96;&#96;&#96;live-server --port&#x3D;8081&#96;&#96;&#96;即可</span><br><span class="line"></span><br><span class="line">2、在**package.json**中进行配置</span><br><span class="line"></span><br><span class="line">（1）初始化项目**npm init**，之后会自动生成一个管理第三方依赖包的package.json</span><br><span class="line"></span><br><span class="line">（2）修改package.json中scripts部分</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>start --config bs-config.js```就将以其完整配置信息运行BrowserSync。使用**ctrl+c**可以终止当前目录，清空用**cls**命令</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># live-server</span><br><span class="line">live-server是一个具有实时重载功能的小型开发服务器。用它来热加载HTML / JavaScript / CSS文件，但不能用于部署最终的网站系统。</span><br><span class="line">## 安装</span><br><span class="line">1、前提条件需要node.js和npm的依赖（可以自己先搞定，不难）；</span><br><span class="line"></span><br><span class="line">2、使用npm全局安装：```npm install -g live-server```</span><br><span class="line"></span><br><span class="line">## 使用</span><br><span class="line">在所在项目目录下，打开命令行工具，输入 **live-server**，回车就可以了（注意这里默认打开的是**index.html**）。接着就会看到打开了一个**127.0.0.1:8080**的网页。退出该服务器，在命令行使用：**ctrl+c**</span><br><span class="line"></span><br><span class="line">## 配置</span><br><span class="line">1、默认端口号为8080，如果想修改，最简单的方式是启动的时候添加启动参数：```live-server --port=8081```即可</span><br><span class="line"></span><br><span class="line">2、在**package.json**中进行配置</span><br><span class="line"></span><br><span class="line">（1）初始化项目**npm init**，之后会自动生成一个管理第三方依赖包的package.json</span><br><span class="line"></span><br><span class="line">（2）修改package.json中scripts部分</span><br></pre></td></tr></table></figure>
 <p>“scripts”: {<br>    “server”: “live-server ./ –port=8081”<br> }</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">或者</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">或者</span><br></pre></td></tr></table></figure>
 <p>“scripts”: {<br>    “server”: “live-server 某个目录”<br>}</p>
 <p>```</p>
 <p>（3）通过<code>npm run server</code>启动</p>

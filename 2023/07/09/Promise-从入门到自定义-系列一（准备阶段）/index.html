@@ -6,6 +6,7 @@
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
 
     <meta name="author" content="Allen">
 
@@ -46,7 +47,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.2.0"></head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 <body>
     <script>
@@ -225,14 +226,14 @@
         <div class="post-content">
             <h1 id="区别实例对象和函数对象"><a href="#区别实例对象和函数对象" class="headerlink" title="区别实例对象和函数对象"></a>区别实例对象和函数对象</h1><ul>
 <li>函数对象：将函数作为对象使用时，简称为函数对象</li>
-<li>实例对象：new 函数产生的对象，简称为对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Fn() &#123; &#x2F;&#x2F; Fn函数</span><br><span class="line">&#125;</span><br><span class="line">const fn &#x3D; new Fn() &#x2F;&#x2F; Fn是构造函数，fn是实例对象（简称对象）</span><br><span class="line">console.log(Fn.prototype) &#x2F;&#x2F; Fn是函数对象</span><br><span class="line">Fn.bind(&#123;&#125;) &#x2F;&#x2F; 调用Fn函数对象的bind方法</span><br><span class="line"></span><br><span class="line">$(&#39;#test&#39;) &#x2F;&#x2F; jquery函数</span><br><span class="line">$.get(&#39;&#x2F;test&#39;) &#x2F;&#x2F; 调用jquery函数对象的get方法</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
+<li>实例对象：new 函数产生的对象，简称为对象<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function Fn() &#123; // Fn函数</span><br><span class="line">&#125;</span><br><span class="line">const fn = new Fn() // Fn是构造函数，fn是实例对象（简称对象）</span><br><span class="line">console.log(Fn.prototype) // Fn是函数对象</span><br><span class="line">Fn.bind(&#123;&#125;) // 调用Fn函数对象的bind方法</span><br><span class="line"></span><br><span class="line">$(&#x27;#test&#x27;) // jquery函数</span><br><span class="line">$.get(&#x27;/test&#x27;) // 调用jquery函数对象的get方法</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 
 </li>
 </ul>
 <h1 id="两种类型的回调函数"><a href="#两种类型的回调函数" class="headerlink" title="两种类型的回调函数"></a>两种类型的回调函数</h1><ul>
-<li>同步回调<br>理解：立即执行，完全执行完成后才结束，不会放到回调队列中<br>例子：数组遍历相关的回调函数、Promise的excutor函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const arr&#x3D;[1,3,5]</span><br><span class="line">arr.forEach(item &#x3D;&gt; &#123;</span><br><span class="line">	console.log(item) &#x2F;&#x2F; 先执行</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&#39;forEach()后面&#39;) &#x2F;&#x2F; 后执行</span><br></pre></td></tr></table></figure></li>
-<li>异步回调<br>理解：不会立即执行，会放入回调队列中将来执行<br>例子：定时器、ajax回调、Promise的成功或失败的回调<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">	console.log(&#39;timeout callback()&#39;) &#x2F;&#x2F; 后执行</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(&#39;setTimeout()后面&#39;) &#x2F;&#x2F; 先执行</span><br></pre></td></tr></table></figure>
+<li>同步回调<br>理解：立即执行，完全执行完成后才结束，不会放到回调队列中<br>例子：数组遍历相关的回调函数、Promise的excutor函数<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const arr=[1,3,5]</span><br><span class="line">arr.forEach(item =&gt; &#123;</span><br><span class="line">	console.log(item) // 先执行</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&#x27;forEach()后面&#x27;) // 后执行</span><br></pre></td></tr></table></figure></li>
+<li>异步回调<br>理解：不会立即执行，会放入回调队列中将来执行<br>例子：定时器、ajax回调、Promise的成功或失败的回调<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">	console.log(&#x27;timeout callback()&#x27;) // 后执行</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(&#x27;setTimeout()后面&#x27;) // 先执行</span><br></pre></td></tr></table></figure>
 <h1 id="JS的error处理"><a href="#JS的error处理" class="headerlink" title="JS的error处理"></a>JS的error处理</h1></li>
 <li>错误的类型</li>
 </ul>
@@ -242,22 +243,22 @@
 <li><p>ReferenceError: 引用的变量不存在</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(a) &#x2F;&#x2F; Uncaught ReferenceError: a is not defined</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(a) // Uncaught ReferenceError: a is not defined</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>TypeError: 数据类型不正确的错误</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let b&#x3D;null</span><br><span class="line">&#x2F;&#x2F; Uncaught TypeError: Cannot read property &#39;xx&#39; of null</span><br><span class="line">console.log(b.xx)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let b=null</span><br><span class="line">// Uncaught TypeError: Cannot read property &#x27;xx&#x27; of null</span><br><span class="line">console.log(b.xx)</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>RangeError: 数据值不在其所允许的范围内</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Uncaught RangeError: Maximum call stack size exceeded</span><br><span class="line">function fn()&#123;</span><br><span class="line">	fn()</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Uncaught RangeError: Maximum call stack size exceeded</span><br><span class="line">function fn()&#123;</span><br><span class="line">	fn()</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
 <li>SyntaxError: 语法错误</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const c&#x3D;&quot;&quot;&quot;&quot; &#x2F;&#x2F; Uncaught SyntaxError: Unexpected string</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const c=&quot;&quot;&quot;&quot; // Uncaught SyntaxError: Unexpected string</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>错误处理</li>
@@ -265,12 +266,12 @@
 <ol>
 <li>捕获错误： try…catch<br>如果没有捕获错误，则错误之后的代码不会执行</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	let d</span><br><span class="line">	console.log(d.xxx)</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error.message)</span><br><span class="line">	console.log(error.stack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	let d</span><br><span class="line">	console.log(d.xxx)</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error.message)</span><br><span class="line">	console.log(error.stack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>抛出错误：throw error</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function something() &#123;</span><br><span class="line">	if (Date.now()%2&#x3D;&#x3D;&#x3D;1) &#123;</span><br><span class="line">		console.log(&#39;当时间为奇数时，可执行任务&#39;)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		&#x2F;&#x2F; 抛出异常</span><br><span class="line">		throw new Error(&#39;当前时间为偶数无法执行任务&#39;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F; 捕获异常</span><br><span class="line">try &#123;</span><br><span class="line">	something()</span><br><span class="line">&#125; catch(error) &#123;</span><br><span class="line">	alert(error.message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function something() &#123;</span><br><span class="line">	if (Date.now()%2===1) &#123;</span><br><span class="line">		console.log(&#x27;当时间为奇数时，可执行任务&#x27;)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		// 抛出异常</span><br><span class="line">		throw new Error(&#x27;当前时间为偶数无法执行任务&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 捕获异常</span><br><span class="line">try &#123;</span><br><span class="line">	something()</span><br><span class="line">&#125; catch(error) &#123;</span><br><span class="line">	alert(error.message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>错误对象</li>
