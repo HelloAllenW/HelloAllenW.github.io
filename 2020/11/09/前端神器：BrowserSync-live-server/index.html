@@ -31,12 +31,25 @@
     
 
 
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
 
     <!-- scripts list from _config.yml -->
     
     <script src="/js/script.js"></script>
     
     <script src="/js/tocbot.min.js"></script>
+    
+    <script src="/js/Valine.min.js"></script>
     
 
 
@@ -47,7 +60,8 @@
     
 
 
-<meta name="generator" content="Hexo 5.4.2"></head>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
 
 <body>
     <script>
@@ -203,21 +217,50 @@
             
                 <div class="post-meta">
                     
+                    <!-- 
                         Author: <a itemprop="author" rel="author" href="/">Allen</a>
-                    
+                     -->
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十一月 9, 2020&nbsp;&nbsp;23:15:11</a>
+                        
+                        <!-- Date: <a href="#">十一月 9, 2020&nbsp;&nbsp;23:15:11</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 9, 2020
                         </span>
                     
+                    &nbsp;  &nbsp;
                     
                         <span class="post-category">
-                    Category:
+                            <span class="iconfont icon-icon-goodscategory"></span>
                             
                                 <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
                             
                         </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">721 Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">2 min</span>
+    </span>
+  </span>
+</div>
+
                     
                 </div>
             
@@ -247,6 +290,30 @@
 
         </div>
 
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style>
+              <div class="valine_comment"></div>
+<!--载入js，在</body>之前插入即可-->
+<!--Leancloud 操作库:-->
+<script src="https://allens-blog-server-3cf8v7elr-allens-projects-0f2bc202.vercel.app/"></script>
+<script>
+  new Valine({
+      el: '.valine_comment',
+      app_id: 'eArjpCelRgi4pn7hRUe7fhIo-MdYXbMMI',
+      app_key: 'y8PwoYdXjsFB3bQBC0fyKX4i',
+      placeholder: '说点什么',
+      notify: 'true',
+      verify: 'true',
+    });
+</script>
+            </section>
+        
+
         
             <section class="post-copyright">
                 
@@ -273,12 +340,21 @@
                 <a href="/">home</a>
             </div>
         </section>
-        <section class="post-nav">
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
             
                 <a class="prev" rel="prev" href="/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/">HTTP协议的 Request Payload 和 Form Data 的区别</a>
             
             
             <a class="next" rel="next" href="/2020/11/09/%E5%9B%BD%E9%99%85%E5%8C%96%E6%8F%92%E4%BB%B6i18n%E5%92%8Cvuex%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/">国际化插件i18n和vuex的混合使用</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2020/11/09/%E5%9B%BD%E9%99%85%E5%8C%96%E6%8F%92%E4%BB%B6i18n%E5%92%8Cvuex%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/"> Next &raquo; </a>
             
         </section>
 
@@ -288,10 +364,56 @@
 
             </div>
             <footer id="footer" class="footer">
-    <div class="copyright">
-        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2023  
+        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
     </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
 </footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
 
     </div>
 </body>
