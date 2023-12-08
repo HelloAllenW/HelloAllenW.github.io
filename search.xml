@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>HTTP协议的 Request Payload 和 Form Data 的区别</title>
-    <url>/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在一个前后端分离的新项目中，前端执行post请求，后端springMVC的 @RequestMapping 接收不到对应的请求参数。开始以为是前端webpack的proxy（将请求跨域代理到后台服务）配置问题。然而，并不是这样…</p>
-<p><strong>proxy配置如下</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">	&quot;api&quot;: &#123;</span><br><span class="line">		&quot;target&quot;: &quot;http://localhost:7000/&quot;,</span><br><span class="line">		&quot;changeOrigin&quot;: true,</span><br><span class="line">		&quot;pathRewrite&quot;: &#123; &quot;^/api/v1&quot;: &quot;&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p><strong>前端post请求：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">case &#x27;post&#x27;:</span><br><span class="line">	return axios.post(url, data) // data = &#123;name: &#x27;xiaoming&#x27;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>后端接收参数：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SysAccount: private String name;</span><br><span class="line">@PostMapping(&quot;/accounts&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt;createAccount(SysAccount account) &#123;</span><br><span class="line">	&quot;dahuang&quot;.equsls(account.getName()); // false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看了前端发起的请求，请求正文并不是熟悉的Form Data，而是Request Payload。</p>
-<h1 id="区别？"><a href="#区别？" class="headerlink" title="区别？"></a>区别？</h1><h2 id="Request-Payload"><a href="#Request-Payload" class="headerlink" title="Request Payload"></a>Request Payload</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzQucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Request Payload的HTTP请求报文格式大概如下，请求头部Content-Type: application/json，并且请求正文是一个json格式的字符串。（适用于一些复杂的数据对象，例如对象里面再嵌套数组）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123; &quot;foo&quot; : &quot;bar&quot;, &quot;name&quot; : &quot;John&quot; &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Form-Data"><a href="#Form-Data" class="headerlink" title="Form Data"></a>Form Data</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzUucG5n?x-oss-process=image/format,png" alt="Form Data"><br>Form Data 大概格式如下，请求头部的 Content-Type: application/x-www-form-urlencoded，并且请求正文是类似 get 请求 url 的请求参数。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">foo=bar&amp;name=John</span><br></pre></td></tr></table></figure>
-
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>对于 Request Payload 请求， 必须加 @RequestBody 才能将请求正文解析到对应的 bean 中，通过 request.getReader() 来获取请求正文内容（一说可以使用getRequestPayload方法来获取）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzgucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Form Data请求，springmvc 会自动使用 MessageConverter 将请求参数解析到对应的 bean，且通过 request.getParameter(…) 能获取请求参数。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzkucG5n?x-oss-process=image/format,png" alt="Form Data"></p>
-<h2 id="前端处理"><a href="#前端处理" class="headerlink" title="前端处理"></a>前端处理</h2><p>在前端使用Form Data的方式来发起请求，使用qs库将json对象转化为字符串。<br>(如 { name: ‘dahuang’,age: 11 } 转化为 name=dahuang&amp;age=11)<br>所以，通过下面的方法来解决:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 将</span><br><span class="line">axios.post(url, cloneData)</span><br><span class="line">// 改写为</span><br><span class="line">axios.post(url, qs.stringify(cloneData))</span><br><span class="line">// 或者</span><br><span class="line">axios.post(url, &#123;data: &#123;&#125;,</span><br><span class="line">	headers: &#123;</span><br><span class="line">		content-type: &#x27;application/x-www-form-unlencoded&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>当请求头的Content-Type为application/json时浏览器认为该请求为复杂请求，这时浏览器会先进行一次预请求,执行一次OPTIONS 请求，向服务器求证该请求是否合法，如果服务器没有给出正确回应浏览器会报跨域请求导致请求失败。<br>一般这三种方式会导致这种现象:</p>
-<ol>
-<li>请求的方法不是GET/HEAD/POST</li>
-<li>POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain</li>
-<li>请求设置了自定义的header字段<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="传统的Form表单提交"><a href="#传统的Form表单提交" class="headerlink" title="传统的Form表单提交"></a>传统的Form表单提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;password&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-如果我这里点击提交按钮，就会触发浏览器的提交功能，那结果是什么样呢？<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzExLnBuZw?x-oss-process=image/format,png"><br>可以看到Content-Type为application/x-www-form-urlencoded。值得形式是以key1=value1&amp;key2=value2的形式提交的。<h2 id="传统的Ajax提交"><a href="#传统的Ajax提交" class="headerlink" title="传统的Ajax提交"></a>传统的Ajax提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit2() &#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.timeout = 3000;</span><br><span class="line">    var obj = &#123;a: 1, b: 2&#125;;</span><br><span class="line">    xhr.open(&#x27;POST&#x27;, &#x27;/&#x27;);</span><br><span class="line">    xhr.send(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-首先我们构造一个简单的函数，然后触发它：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEyLnBuZw?x-oss-process=image/format,png"></li>
-<li>默认的Content-Type为text/plain。</li>
-<li>Request Payload会对非字符串做字符串转换。</li>
-<li>通过xhr.send(JSON.stringify(obj));可修正要发的内容<h2 id="axios方式提交"><a href="#axios方式提交" class="headerlink" title="axios方式提交"></a>axios方式提交</h2>由于axios已经是vue、react的准标配请求方式了，所以这里探究一下它。<br>首先我门看axios的文档，当post提交时候可以传递什么类型参数：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEzLnBuZw?x-oss-process=image/format,png"><br>注意这个类型，我们分别构造两个场景。对应它。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit3() &#123;</span><br><span class="line">    var sence1 = &#x27;name=123&amp;val=456&#x27;;</span><br><span class="line">    var sence2 = &#123;name: 123, val: 456&#125;;</span><br><span class="line">    axios.post(&#x27;/&#x27;, sence1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-分别传递字符串与对象，提交post请求，然后观察结果:<br>场景1 — 传递字符串时候的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE0LnBuZw?x-oss-process=image/format,png"><br>场景2 — 传递对象的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE1LnBuZw?x-oss-process=image/format,png"><br>当我们传递字符串的时候，Content-Type自动转为xxx-form-xxx的形式。当为对象的时候，自动转化为xxx/json。字符串的时候以key1=val1&amp;key2=val2的形式体现，对象以JSON字符串形式体现。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>Web前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>GMT时间、UTC时间、CST时间</title>
     <url>/2020/11/09/GMT%E6%97%B6%E9%97%B4%E3%80%81UTC%E6%97%B6%E9%97%B4%E3%80%81CST%E6%97%B6%E9%97%B4/</url>
     <content><![CDATA[<h5 id="1-UTC时间-世界标准时间-与-GMT时间-格林威治时间"><a href="#1-UTC时间-世界标准时间-与-GMT时间-格林威治时间" class="headerlink" title="1.UTC时间(世界标准时间) 与 GMT时间(格林威治时间"></a>1.UTC时间(世界标准时间) 与 GMT时间(格林威治时间</h5><p>我们可以认为格林威治时间就是世界协调时间（GMT=UTC），格林威治时间和UTC时间均用秒数来计算的。<br>世界标准时间 (UTC, Coordinated Universal Time) 是当今民用时间的基础。它使用一天 24 小时时间制，并结合了地球的自转时间与原子钟的高精度度量。<br>UTC是一个标准，而不是一个时区。UTC 是一个全球通用的时间标准。全球各地都同意将各自的时间进行同步协调 (coordinated)，这也是 UTC 名字的来源：Universal Coordinated Time。</p>
@@ -134,6 +88,77 @@
       </categories>
       <tags>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP协议的 Request Payload 和 Form Data 的区别</title>
+    <url>/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在一个前后端分离的新项目中，前端执行post请求，后端springMVC的 @RequestMapping 接收不到对应的请求参数。开始以为是前端webpack的proxy（将请求跨域代理到后台服务）配置问题。然而，并不是这样…</p>
+<p><strong>proxy配置如下</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">	&quot;api&quot;: &#123;</span><br><span class="line">		&quot;target&quot;: &quot;http://localhost:7000/&quot;,</span><br><span class="line">		&quot;changeOrigin&quot;: true,</span><br><span class="line">		&quot;pathRewrite&quot;: &#123; &quot;^/api/v1&quot;: &quot;&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p><strong>前端post请求：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">case &#x27;post&#x27;:</span><br><span class="line">	return axios.post(url, data) // data = &#123;name: &#x27;xiaoming&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>后端接收参数：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SysAccount: private String name;</span><br><span class="line">@PostMapping(&quot;/accounts&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt;createAccount(SysAccount account) &#123;</span><br><span class="line">	&quot;dahuang&quot;.equsls(account.getName()); // false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看了前端发起的请求，请求正文并不是熟悉的Form Data，而是Request Payload。</p>
+<h1 id="区别？"><a href="#区别？" class="headerlink" title="区别？"></a>区别？</h1><h2 id="Request-Payload"><a href="#Request-Payload" class="headerlink" title="Request Payload"></a>Request Payload</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzQucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Request Payload的HTTP请求报文格式大概如下，请求头部Content-Type: application/json，并且请求正文是一个json格式的字符串。（适用于一些复杂的数据对象，例如对象里面再嵌套数组）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123; &quot;foo&quot; : &quot;bar&quot;, &quot;name&quot; : &quot;John&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Form-Data"><a href="#Form-Data" class="headerlink" title="Form Data"></a>Form Data</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzUucG5n?x-oss-process=image/format,png" alt="Form Data"><br>Form Data 大概格式如下，请求头部的 Content-Type: application/x-www-form-urlencoded，并且请求正文是类似 get 请求 url 的请求参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">foo=bar&amp;name=John</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>对于 Request Payload 请求， 必须加 @RequestBody 才能将请求正文解析到对应的 bean 中，通过 request.getReader() 来获取请求正文内容（一说可以使用getRequestPayload方法来获取）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzgucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Form Data请求，springmvc 会自动使用 MessageConverter 将请求参数解析到对应的 bean，且通过 request.getParameter(…) 能获取请求参数。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzkucG5n?x-oss-process=image/format,png" alt="Form Data"></p>
+<h2 id="前端处理"><a href="#前端处理" class="headerlink" title="前端处理"></a>前端处理</h2><p>在前端使用Form Data的方式来发起请求，使用qs库将json对象转化为字符串。<br>(如 { name: ‘dahuang’,age: 11 } 转化为 name=dahuang&amp;age=11)<br>所以，通过下面的方法来解决:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 将</span><br><span class="line">axios.post(url, cloneData)</span><br><span class="line">// 改写为</span><br><span class="line">axios.post(url, qs.stringify(cloneData))</span><br><span class="line">// 或者</span><br><span class="line">axios.post(url, &#123;data: &#123;&#125;,</span><br><span class="line">	headers: &#123;</span><br><span class="line">		content-type: &#x27;application/x-www-form-unlencoded&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>当请求头的Content-Type为application/json时浏览器认为该请求为复杂请求，这时浏览器会先进行一次预请求,执行一次OPTIONS 请求，向服务器求证该请求是否合法，如果服务器没有给出正确回应浏览器会报跨域请求导致请求失败。<br>一般这三种方式会导致这种现象:</p>
+<ol>
+<li>请求的方法不是GET/HEAD/POST</li>
+<li>POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain</li>
+<li>请求设置了自定义的header字段<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="传统的Form表单提交"><a href="#传统的Form表单提交" class="headerlink" title="传统的Form表单提交"></a>传统的Form表单提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;password&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+如果我这里点击提交按钮，就会触发浏览器的提交功能，那结果是什么样呢？<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzExLnBuZw?x-oss-process=image/format,png"><br>可以看到Content-Type为application/x-www-form-urlencoded。值得形式是以key1=value1&amp;key2=value2的形式提交的。<h2 id="传统的Ajax提交"><a href="#传统的Ajax提交" class="headerlink" title="传统的Ajax提交"></a>传统的Ajax提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit2() &#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.timeout = 3000;</span><br><span class="line">    var obj = &#123;a: 1, b: 2&#125;;</span><br><span class="line">    xhr.open(&#x27;POST&#x27;, &#x27;/&#x27;);</span><br><span class="line">    xhr.send(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+首先我们构造一个简单的函数，然后触发它：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEyLnBuZw?x-oss-process=image/format,png"></li>
+<li>默认的Content-Type为text/plain。</li>
+<li>Request Payload会对非字符串做字符串转换。</li>
+<li>通过xhr.send(JSON.stringify(obj));可修正要发的内容<h2 id="axios方式提交"><a href="#axios方式提交" class="headerlink" title="axios方式提交"></a>axios方式提交</h2>由于axios已经是vue、react的准标配请求方式了，所以这里探究一下它。<br>首先我门看axios的文档，当post提交时候可以传递什么类型参数：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEzLnBuZw?x-oss-process=image/format,png"><br>注意这个类型，我们分别构造两个场景。对应它。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit3() &#123;</span><br><span class="line">    var sence1 = &#x27;name=123&amp;val=456&#x27;;</span><br><span class="line">    var sence2 = &#123;name: 123, val: 456&#125;;</span><br><span class="line">    axios.post(&#x27;/&#x27;, sence1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+分别传递字符串与对象，提交post请求，然后观察结果:<br>场景1 — 传递字符串时候的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE0LnBuZw?x-oss-process=image/format,png"><br>场景2 — 传递对象的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE1LnBuZw?x-oss-process=image/format,png"><br>当我们传递字符串的时候，Content-Type自动转为xxx-form-xxx的形式。当为对象的时候，自动转化为xxx/json。字符串的时候以key1=val1&amp;key2=val2的形式体现，对象以JSON字符串形式体现。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>Web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS判断当前设备</title>
+    <url>/2020/11/09/JS%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%AE%BE%E5%A4%87/</url>
+    <content><![CDATA[<h6 id="根据User-Agent判断打开设备为PC-手机"><a href="#根据User-Agent判断打开设备为PC-手机" class="headerlink" title="根据User-Agent判断打开设备为PC/手机"></a>根据User-Agent判断打开设备为PC/手机</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) &#123;</span><br><span class="line">    alert(&#x27;您正在通过手机访问&#x27;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    alert(&quot;您在PC端访问&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h6 id="判断客户端是否是iOS或者Android手机移动端："><a href="#判断客户端是否是iOS或者Android手机移动端：" class="headerlink" title="判断客户端是否是iOS或者Android手机移动端："></a>判断客户端是否是iOS或者Android手机移动端：</h6><p>通过判断浏览器的 userAgent，用正则来判断手机是否是ios和Android客户端。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var u = navigator.userAgent;</span><br><span class="line">    var isAndroid = u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Adr&#x27;) &gt; -1; //android终端</span><br><span class="line">    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端</span><br><span class="line">    alert(&#x27;是否是Android：&#x27;+isAndroid);</span><br><span class="line">    alert(&#x27;是否是iOS：&#x27;+isiOS);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。"><a href="#下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。" class="headerlink" title="下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。"></a>下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。</h6><p>第一种：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    //判断访问终端</span><br><span class="line">    var browser=&#123;</span><br><span class="line">        versions:function()&#123;</span><br><span class="line">            var u = navigator.userAgent, app = navigator.appVersion;</span><br><span class="line">            return &#123;</span><br><span class="line">                trident: u.indexOf(&#x27;Trident&#x27;) &gt; -1, //IE内核</span><br><span class="line">                presto: u.indexOf(&#x27;Presto&#x27;) &gt; -1, //opera内核</span><br><span class="line">                webKit: u.indexOf(&#x27;AppleWebKit&#x27;) &gt; -1, //苹果、谷歌内核</span><br><span class="line">                gecko: u.indexOf(&#x27;Gecko&#x27;) &gt; -1 &amp;&amp; u.indexOf(&#x27;KHTML&#x27;) == -1,//火狐内核</span><br><span class="line">                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端</span><br><span class="line">                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端</span><br><span class="line">                android: u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Adr&#x27;) &gt; -1, //android终端</span><br><span class="line">                iPhone: u.indexOf(&#x27;iPhone&#x27;) &gt; -1 , //是否为iPhone或者QQHD浏览器</span><br><span class="line">                iPad: u.indexOf(&#x27;iPad&#x27;) &gt; -1, //是否iPad</span><br><span class="line">                webApp: u.indexOf(&#x27;Safari&#x27;) == -1, //是否web应该程序，没有头部与底部</span><br><span class="line">                weixin: u.indexOf(&#x27;MicroMessenger&#x27;) &gt; -1, //是否微信 （2015-01-22新增）</span><br><span class="line">                qq: u.match(/\sQQ/i) == &quot; qq&quot; //是否QQ</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;(),</span><br><span class="line">        language:(navigator.browserLanguage || navigator.language).toLowerCase()</span><br><span class="line">    &#125;</span><br><span class="line">    //使用方法：</span><br><span class="line">    //判断是否IE内核</span><br><span class="line">    if(browser.versions.trident)&#123; alert(&quot;is IE&quot;); &#125;</span><br><span class="line">    //判断是否webKit内核</span><br><span class="line">    if(browser.versions.webKit)&#123; alert(&quot;is webKit&quot;); &#125;</span><br><span class="line">    //判断是否移动端</span><br><span class="line">    if(browser.versions.mobile||browser.versions.android||browser.versions.ios)&#123;</span><br><span class="line">        alert(&quot;移动端&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>检测浏览器语言</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">currentLang = navigator.language;   //判断除IE外其他浏览器使用语言</span><br><span class="line">if(!currentLang)&#123;//判断IE浏览器使用语言</span><br><span class="line">    currentLang = navigator.browserLanguage;</span><br><span class="line">&#125;</span><br><span class="line">alert(currentLang);</span><br></pre></td></tr></table></figure>
+<p>第二种：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) &#123;</span><br><span class="line">    //alert(navigator.userAgent);  </span><br><span class="line">    window.location.href =&quot;iPhone.html&quot;;</span><br><span class="line">&#125; else if (/(Android)/i.test(navigator.userAgent)) &#123;</span><br><span class="line">    //alert(navigator.userAgent); </span><br><span class="line">    window.location.href =&quot;Android.html&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    window.location.href =&quot;pc.html&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>也可以通过这样来适配，然后直接转跳到移动端页面：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function mobile_device_detect(url)&#123;</span><br><span class="line">  var thisOS=navigator.platform;</span><br><span class="line">  var os=new Array(&quot;iPhone&quot;,&quot;iPod&quot;,&quot;iPad&quot;,&quot;android&quot;,&quot;Nokia&quot;,&quot;SymbianOS&quot;,&quot;Symbian&quot;,&quot;Windows Phone&quot;,&quot;Phone&quot;,&quot;Linux armv71&quot;,&quot;MAUI&quot;,&quot;UNTRUSTED/1.0&quot;,&quot;Windows CE&quot;,&quot;BlackBerry&quot;,&quot;IEMobile&quot;);</span><br><span class="line">  for(var i=0;i&lt;os.length;i++)&#123;</span><br><span class="line">    if(thisOS.match(os[i]))&#123;</span><br><span class="line">      window.location.href=url;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if(navigator.platform.indexOf(&#x27;iPad&#x27;) != -1)&#123;</span><br><span class="line">    window.location.href=url;</span><br><span class="line">  &#125;</span><br><span class="line">  var check = navigator.appVersion;</span><br><span class="line">  if( check.match(/linux/i) )&#123;</span><br><span class="line">    if(check.match(/mobile/i) || check.match(/X11/i))&#123;</span><br><span class="line">      window.location.href=url;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.w3h5.com/post/70.html">参考地址</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -274,28 +299,27 @@
       </tags>
   </entry>
   <entry>
-    <title>JS判断当前设备</title>
-    <url>/2020/11/09/JS%E5%88%A4%E6%96%AD%E5%BD%93%E5%89%8D%E8%AE%BE%E5%A4%87/</url>
-    <content><![CDATA[<h6 id="根据User-Agent判断打开设备为PC-手机"><a href="#根据User-Agent判断打开设备为PC-手机" class="headerlink" title="根据User-Agent判断打开设备为PC/手机"></a>根据User-Agent判断打开设备为PC/手机</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) &#123;</span><br><span class="line">    alert(&#x27;您正在通过手机访问&#x27;);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    alert(&quot;您在PC端访问&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>Nodejs 操作 MongoDb 数据库</title>
+    <url>/2021/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="在-Nodejs-中使用-MongoDB"><a href="#在-Nodejs-中使用-MongoDB" class="headerlink" title="在 Nodejs 中使用 MongoDB"></a>在 Nodejs 中使用 MongoDB</h1><p>需要引包：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install mongodb --save-dev</span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<h6 id="判断客户端是否是iOS或者Android手机移动端："><a href="#判断客户端是否是iOS或者Android手机移动端：" class="headerlink" title="判断客户端是否是iOS或者Android手机移动端："></a>判断客户端是否是iOS或者Android手机移动端：</h6><p>通过判断浏览器的 userAgent，用正则来判断手机是否是ios和Android客户端。代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var u = navigator.userAgent;</span><br><span class="line">    var isAndroid = u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Adr&#x27;) &gt; -1; //android终端</span><br><span class="line">    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端</span><br><span class="line">    alert(&#x27;是否是Android：&#x27;+isAndroid);</span><br><span class="line">    alert(&#x27;是否是iOS：&#x27;+isiOS);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h6 id="下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。"><a href="#下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。" class="headerlink" title="下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。"></a>下面一个比较全面的浏览器检查函数，提供更多的检查内容，你可以检查是否是移动端（Mobile）、ipad、iphone、微信、QQ等。</h6><p>第一种：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    //判断访问终端</span><br><span class="line">    var browser=&#123;</span><br><span class="line">        versions:function()&#123;</span><br><span class="line">            var u = navigator.userAgent, app = navigator.appVersion;</span><br><span class="line">            return &#123;</span><br><span class="line">                trident: u.indexOf(&#x27;Trident&#x27;) &gt; -1, //IE内核</span><br><span class="line">                presto: u.indexOf(&#x27;Presto&#x27;) &gt; -1, //opera内核</span><br><span class="line">                webKit: u.indexOf(&#x27;AppleWebKit&#x27;) &gt; -1, //苹果、谷歌内核</span><br><span class="line">                gecko: u.indexOf(&#x27;Gecko&#x27;) &gt; -1 &amp;&amp; u.indexOf(&#x27;KHTML&#x27;) == -1,//火狐内核</span><br><span class="line">                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端</span><br><span class="line">                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端</span><br><span class="line">                android: u.indexOf(&#x27;Android&#x27;) &gt; -1 || u.indexOf(&#x27;Adr&#x27;) &gt; -1, //android终端</span><br><span class="line">                iPhone: u.indexOf(&#x27;iPhone&#x27;) &gt; -1 , //是否为iPhone或者QQHD浏览器</span><br><span class="line">                iPad: u.indexOf(&#x27;iPad&#x27;) &gt; -1, //是否iPad</span><br><span class="line">                webApp: u.indexOf(&#x27;Safari&#x27;) == -1, //是否web应该程序，没有头部与底部</span><br><span class="line">                weixin: u.indexOf(&#x27;MicroMessenger&#x27;) &gt; -1, //是否微信 （2015-01-22新增）</span><br><span class="line">                qq: u.match(/\sQQ/i) == &quot; qq&quot; //是否QQ</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;(),</span><br><span class="line">        language:(navigator.browserLanguage || navigator.language).toLowerCase()</span><br><span class="line">    &#125;</span><br><span class="line">    //使用方法：</span><br><span class="line">    //判断是否IE内核</span><br><span class="line">    if(browser.versions.trident)&#123; alert(&quot;is IE&quot;); &#125;</span><br><span class="line">    //判断是否webKit内核</span><br><span class="line">    if(browser.versions.webKit)&#123; alert(&quot;is webKit&quot;); &#125;</span><br><span class="line">    //判断是否移动端</span><br><span class="line">    if(browser.versions.mobile||browser.versions.android||browser.versions.ios)&#123;</span><br><span class="line">        alert(&quot;移动端&quot;); </span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>检测浏览器语言</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">currentLang = navigator.language;   //判断除IE外其他浏览器使用语言</span><br><span class="line">if(!currentLang)&#123;//判断IE浏览器使用语言</span><br><span class="line">    currentLang = navigator.browserLanguage;</span><br><span class="line">&#125;</span><br><span class="line">alert(currentLang);</span><br></pre></td></tr></table></figure>
-<p>第二种：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) &#123;</span><br><span class="line">    //alert(navigator.userAgent);  </span><br><span class="line">    window.location.href =&quot;iPhone.html&quot;;</span><br><span class="line">&#125; else if (/(Android)/i.test(navigator.userAgent)) &#123;</span><br><span class="line">    //alert(navigator.userAgent); </span><br><span class="line">    window.location.href =&quot;Android.html&quot;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    window.location.href =&quot;pc.html&quot;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>也可以通过这样来适配，然后直接转跳到移动端页面：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function mobile_device_detect(url)&#123;</span><br><span class="line">  var thisOS=navigator.platform;</span><br><span class="line">  var os=new Array(&quot;iPhone&quot;,&quot;iPod&quot;,&quot;iPad&quot;,&quot;android&quot;,&quot;Nokia&quot;,&quot;SymbianOS&quot;,&quot;Symbian&quot;,&quot;Windows Phone&quot;,&quot;Phone&quot;,&quot;Linux armv71&quot;,&quot;MAUI&quot;,&quot;UNTRUSTED/1.0&quot;,&quot;Windows CE&quot;,&quot;BlackBerry&quot;,&quot;IEMobile&quot;);</span><br><span class="line">  for(var i=0;i&lt;os.length;i++)&#123;</span><br><span class="line">    if(thisOS.match(os[i]))&#123;</span><br><span class="line">      window.location.href=url;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  if(navigator.platform.indexOf(&#x27;iPad&#x27;) != -1)&#123;</span><br><span class="line">    window.location.href=url;</span><br><span class="line">  &#125;</span><br><span class="line">  var check = navigator.appVersion;</span><br><span class="line">  if( check.match(/linux/i) )&#123;</span><br><span class="line">    if(check.match(/mobile/i) || check.match(/X11/i))&#123;</span><br><span class="line">      window.location.href=url;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://www.w3h5.com/post/70.html">参考地址</a></p>
-]]></content>
+<h1 id="Nodejs-连接-MongoDB-数据库"><a href="#Nodejs-连接-MongoDB-数据库" class="headerlink" title="Nodejs 连接 MongoDB 数据库"></a>Nodejs 连接 MongoDB 数据库</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">//数据库引用</span><br><span class="line">var MongoClient = require(&#x27;mongodb&#x27;).MongoClient;</span><br><span class="line">var app = express();</span><br><span class="line">//数据库连接的地址，最后的斜杠表示数据库名字</span><br><span class="line">var shujukuURL = &#x27;mongodb://localhost:27017/news&#x27;;</span><br><span class="line">app.get(&quot;/&quot;,</span><br><span class="line">function(req, res) &#123;</span><br><span class="line">    //连接数据库，这是一个异步的操作</span><br><span class="line">    MongoClient.connect(shujukuURL,</span><br><span class="line">    function(err, db) &#123;</span><br><span class="line">        res.writeHead(200, &#123;</span><br><span class="line">            &quot;Content-Type&quot;: &quot;text/html;charset=UTF8&quot;</span><br><span class="line">        &#125;);</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            res.send(&quot;数据库连接失败&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        res.write(&quot;恭喜，数据库已经成功连接 \n&quot;);</span><br><span class="line">        db.collection(&quot;user&quot;).insertOne(&#123;</span><br><span class="line">            &quot;name&quot;: &quot;哈哈&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        function(err, result) &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                res.send(&quot;数据库写入失败&quot;);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            res.write(&quot;恭喜，数据已经成功插入&quot;);</span><br><span class="line">            res.end();</span><br><span class="line">            //关闭数据库</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(8020);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nodejs-查找-MongoDB-数据库集合"><a href="#Nodejs-查找-MongoDB-数据库集合" class="headerlink" title="Nodejs 查找 MongoDB 数据库集合"></a>Nodejs 查找 MongoDB 数据库集合</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        /*数据库连接失败*/</span><br><span class="line">        console.log(&#x27;数据库连接失败&#x27;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    var result = [];</span><br><span class="line">    var userRel = db.collection(&#x27;user&#x27;).find();</span><br><span class="line">    //res.send(userRel);</span><br><span class="line">    userRel.each(function(err, doc) &#123;</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            res.write(&quot;游标遍历错误&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (doc != null) &#123;</span><br><span class="line">            result.push(doc);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            console.log(result);</span><br><span class="line">            //遍历完毕</span><br><span class="line">            db.close();</span><br><span class="line">            res.render(&quot;index&quot;, &#123;</span><br><span class="line">                &quot;result&quot;: result</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nodejs-给-MongoDB-增加数据"><a href="#Nodejs-给-MongoDB-增加数据" class="headerlink" title="Nodejs 给 MongoDB 增加数据"></a>Nodejs 给 MongoDB 增加数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).insertOne(&#123;</span><br><span class="line">        &quot;name&quot;: name,</span><br><span class="line">        &quot;age&quot;: age,</span><br><span class="line">        &quot;score&quot;: &#123;</span><br><span class="line">            &quot;shuxue&quot;: shuxuechengji,</span><br><span class="line">            &quot;yuwen&quot;: yuwenchengji</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    function(err, result) &#123;</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            console.log(&#x27;写入数据失败&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        //关闭数据库</span><br><span class="line">        db.close();</span><br><span class="line">        //res.redirect(&#x27;/add&#x27;);</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">        res.end();</span><br><span class="line">        ////res.location(&#x27;/add&#x27;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nodejs-修改-MongoDB-数据"><a href="#Nodejs-修改-MongoDB-数据" class="headerlink" title="Nodejs 修改 MongoDB 数据"></a>Nodejs 修改 MongoDB 数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        console.log(&#x27;数据库连接错误&#x27;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).updateOne(&#123;</span><br><span class="line">        &quot;_id&quot;: ObjectID(id)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;name&quot;: name,</span><br><span class="line">        &quot;age&quot;: age,</span><br><span class="line">        &quot;score&quot;: &#123;</span><br><span class="line">            &quot;shuxue&quot;: shuxue,</span><br><span class="line">            &quot;yuwen&quot;: yuwen</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    function(err, results) &#123;</span><br><span class="line">        console.log(results);</span><br><span class="line">        db.close();</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">        res.end(&#x27;end&#x27;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Nodejs-删除-MongoDB-数据"><a href="#Nodejs-删除-MongoDB-数据" class="headerlink" title="Nodejs 删除 MongoDB 数据"></a>Nodejs 删除 MongoDB 数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        throw new Error(&quot;数据库连接失败&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).deleteOne(&#123;</span><br><span class="line">        &quot;_id&quot;: ObjectID(id)</span><br><span class="line">    &#125;,</span><br><span class="line">    function(error, result) &#123;</span><br><span class="line">        if (error) &#123;</span><br><span class="line">            throw new Error(&#x27;删除数据失败&#x27;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        db.close();</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>NodeJs</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
+        <tag>NodeJs</tag>
       </tags>
   </entry>
   <entry>
@@ -343,22 +367,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Nodejs 操作 MongoDb 数据库</title>
-    <url>/2021/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/</url>
-    <content><![CDATA[<h1 id="在-Nodejs-中使用-MongoDB"><a href="#在-Nodejs-中使用-MongoDB" class="headerlink" title="在 Nodejs 中使用 MongoDB"></a>在 Nodejs 中使用 MongoDB</h1><p>需要引包：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install mongodb --save-dev</span><br></pre></td></tr></table></figure>
+    <title>Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</title>
+    <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson2 项目，在其中编写代码。</p>
+<p>当在浏览器中访问 <a href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 CNode(<a href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有帖子标题和链接，以 json 的形式。</p>
+<p>输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/541ed2d05e28155f24676a12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/54207e2efffeb6de3d61f68f&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<h1 id="Nodejs-连接-MongoDB-数据库"><a href="#Nodejs-连接-MongoDB-数据库" class="headerlink" title="Nodejs 连接 MongoDB 数据库"></a>Nodejs 连接 MongoDB 数据库</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">//数据库引用</span><br><span class="line">var MongoClient = require(&#x27;mongodb&#x27;).MongoClient;</span><br><span class="line">var app = express();</span><br><span class="line">//数据库连接的地址，最后的斜杠表示数据库名字</span><br><span class="line">var shujukuURL = &#x27;mongodb://localhost:27017/news&#x27;;</span><br><span class="line">app.get(&quot;/&quot;,</span><br><span class="line">function(req, res) &#123;</span><br><span class="line">    //连接数据库，这是一个异步的操作</span><br><span class="line">    MongoClient.connect(shujukuURL,</span><br><span class="line">    function(err, db) &#123;</span><br><span class="line">        res.writeHead(200, &#123;</span><br><span class="line">            &quot;Content-Type&quot;: &quot;text/html;charset=UTF8&quot;</span><br><span class="line">        &#125;);</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            res.send(&quot;数据库连接失败&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        res.write(&quot;恭喜，数据库已经成功连接 \n&quot;);</span><br><span class="line">        db.collection(&quot;user&quot;).insertOne(&#123;</span><br><span class="line">            &quot;name&quot;: &quot;哈哈&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        function(err, result) &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                res.send(&quot;数据库写入失败&quot;);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">            res.write(&quot;恭喜，数据已经成功插入&quot;);</span><br><span class="line">            res.end();</span><br><span class="line">            //关闭数据库</span><br><span class="line">            db.close();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(8020);</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nodejs-查找-MongoDB-数据库集合"><a href="#Nodejs-查找-MongoDB-数据库集合" class="headerlink" title="Nodejs 查找 MongoDB 数据库集合"></a>Nodejs 查找 MongoDB 数据库集合</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        /*数据库连接失败*/</span><br><span class="line">        console.log(&#x27;数据库连接失败&#x27;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    var result = [];</span><br><span class="line">    var userRel = db.collection(&#x27;user&#x27;).find();</span><br><span class="line">    //res.send(userRel);</span><br><span class="line">    userRel.each(function(err, doc) &#123;</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            res.write(&quot;游标遍历错误&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (doc != null) &#123;</span><br><span class="line">            result.push(doc);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            console.log(result);</span><br><span class="line">            //遍历完毕</span><br><span class="line">            db.close();</span><br><span class="line">            res.render(&quot;index&quot;, &#123;</span><br><span class="line">                &quot;result&quot;: result</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nodejs-给-MongoDB-增加数据"><a href="#Nodejs-给-MongoDB-增加数据" class="headerlink" title="Nodejs 给 MongoDB 增加数据"></a>Nodejs 给 MongoDB 增加数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        return</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).insertOne(&#123;</span><br><span class="line">        &quot;name&quot;: name,</span><br><span class="line">        &quot;age&quot;: age,</span><br><span class="line">        &quot;score&quot;: &#123;</span><br><span class="line">            &quot;shuxue&quot;: shuxuechengji,</span><br><span class="line">            &quot;yuwen&quot;: yuwenchengji</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    function(err, result) &#123;</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            console.log(&#x27;写入数据失败&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">        //关闭数据库</span><br><span class="line">        db.close();</span><br><span class="line">        //res.redirect(&#x27;/add&#x27;);</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">        res.end();</span><br><span class="line">        ////res.location(&#x27;/add&#x27;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nodejs-修改-MongoDB-数据"><a href="#Nodejs-修改-MongoDB-数据" class="headerlink" title="Nodejs 修改 MongoDB 数据"></a>Nodejs 修改 MongoDB 数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        console.log(&#x27;数据库连接错误&#x27;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).updateOne(&#123;</span><br><span class="line">        &quot;_id&quot;: ObjectID(id)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;name&quot;: name,</span><br><span class="line">        &quot;age&quot;: age,</span><br><span class="line">        &quot;score&quot;: &#123;</span><br><span class="line">            &quot;shuxue&quot;: shuxue,</span><br><span class="line">            &quot;yuwen&quot;: yuwen</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    function(err, results) &#123;</span><br><span class="line">        console.log(results);</span><br><span class="line">        db.close();</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">        res.end(&#x27;end&#x27;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="Nodejs-删除-MongoDB-数据"><a href="#Nodejs-删除-MongoDB-数据" class="headerlink" title="Nodejs 删除 MongoDB 数据"></a>Nodejs 删除 MongoDB 数据</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MongoClient.connect(dbUrl,</span><br><span class="line">function(err, db) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">        throw new Error(&quot;数据库连接失败&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    db.collection(&#x27;user&#x27;).deleteOne(&#123;</span><br><span class="line">        &quot;_id&quot;: ObjectID(id)</span><br><span class="line">    &#125;,</span><br><span class="line">    function(error, result) &#123;</span><br><span class="line">        if (error) &#123;</span><br><span class="line">            throw new Error(&#x27;删除数据失败&#x27;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        db.close();</span><br><span class="line">        res.redirect(&#x27;/&#x27;);</span><br><span class="line">        /*路由跳转*/</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>]]></content>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、学习使用 superagent 抓取网页</p>
+<p><a href="http://visionmedia.github.io/superagent/">superagent</a> 是个 http 方面的库，可以发起 get 或 post 请求。</p>
+<p>2、学习使用 cheerio 分析网页</p>
+<p><a href="https://github.com/cheeriojs/cheerio">cheerio</a> 大家可以理解成一个 Node.js 版的 jquery，用来从网页中以 css selector 取数据，使用方式跟 jquery 一样一样的。</p>
+<h1 id="实现内容"><a href="#实现内容" class="headerlink" title="实现内容"></a>实现内容</h1><p>1、新建一个文件夹，进去之后 npm init<br>2、安装依赖 npm install –save PACKAGE_NAME，此处需要三个包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;cheerio&quot;: &quot;^0.17.0&quot;,</span><br><span class="line">&quot;express&quot;: &quot;^4.9.5&quot;,</span><br><span class="line">&quot;superagent&quot;: &quot;^0.20.0&quot;</span><br></pre></td></tr></table></figure>
+<p>3、新建app.js并写应用逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.get(&#x27;/&#x27;, function (req, res, next) &#123;</span><br><span class="line">  // 用 superagent 去抓取 https://cnodejs.org/ 的内容</span><br><span class="line">  superagent.get(&#x27;https://cnodejs.org/&#x27;)</span><br><span class="line">    .end(function (err, sres) &#123;</span><br><span class="line">      // 常规的错误处理</span><br><span class="line">      if (err) &#123;</span><br><span class="line">        return next(err);</span><br><span class="line">      &#125;</span><br><span class="line">      // sres.text 里面存储着网页的 html 内容，将它传给 cheerio.load 之后</span><br><span class="line">      // 就可以得到一个实现了 jquery 接口的变量，我们习惯性地将它命名为 `$`</span><br><span class="line">      // 剩下就都是 jquery 的内容了</span><br><span class="line">      var $ = cheerio.load(sres.text);</span><br><span class="line">      var items = [];</span><br><span class="line">      $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">        var $element = $(element);</span><br><span class="line">        items.push(&#123;</span><br><span class="line">          title: $element.attr(&#x27;title&#x27;),</span><br><span class="line">          href: $element.attr(&#x27;href&#x27;)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      res.send(items);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#x27;app is listening at port 3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>4、在lesson2文件夹下执行node app.js<br>5、浏览器输入<a href="http://localhost:3000/%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">http://localhost:3000/进行验证</a></p>
+<p>OK，一个简单的爬虫就是这么简单。这里我们还没有利用到 Node.js 的异步并发特性。不过下两章内容(Nodejs实战之三、四)都是关于异步控制的。</p>
+]]></content>
       <categories>
         <category>NodeJs</category>
       </categories>
@@ -421,101 +449,6 @@
       </categories>
       <tags>
         <tag>NodeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</title>
-    <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson2 项目，在其中编写代码。</p>
-<p>当在浏览器中访问 <a href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 CNode(<a href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有帖子标题和链接，以 json 的形式。</p>
-<p>输出示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/541ed2d05e28155f24676a12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/54207e2efffeb6de3d61f68f&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、学习使用 superagent 抓取网页</p>
-<p><a href="http://visionmedia.github.io/superagent/">superagent</a> 是个 http 方面的库，可以发起 get 或 post 请求。</p>
-<p>2、学习使用 cheerio 分析网页</p>
-<p><a href="https://github.com/cheeriojs/cheerio">cheerio</a> 大家可以理解成一个 Node.js 版的 jquery，用来从网页中以 css selector 取数据，使用方式跟 jquery 一样一样的。</p>
-<h1 id="实现内容"><a href="#实现内容" class="headerlink" title="实现内容"></a>实现内容</h1><p>1、新建一个文件夹，进去之后 npm init<br>2、安装依赖 npm install –save PACKAGE_NAME，此处需要三个包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;cheerio&quot;: &quot;^0.17.0&quot;,</span><br><span class="line">&quot;express&quot;: &quot;^4.9.5&quot;,</span><br><span class="line">&quot;superagent&quot;: &quot;^0.20.0&quot;</span><br></pre></td></tr></table></figure>
-<p>3、新建app.js并写应用逻辑</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.get(&#x27;/&#x27;, function (req, res, next) &#123;</span><br><span class="line">  // 用 superagent 去抓取 https://cnodejs.org/ 的内容</span><br><span class="line">  superagent.get(&#x27;https://cnodejs.org/&#x27;)</span><br><span class="line">    .end(function (err, sres) &#123;</span><br><span class="line">      // 常规的错误处理</span><br><span class="line">      if (err) &#123;</span><br><span class="line">        return next(err);</span><br><span class="line">      &#125;</span><br><span class="line">      // sres.text 里面存储着网页的 html 内容，将它传给 cheerio.load 之后</span><br><span class="line">      // 就可以得到一个实现了 jquery 接口的变量，我们习惯性地将它命名为 `$`</span><br><span class="line">      // 剩下就都是 jquery 的内容了</span><br><span class="line">      var $ = cheerio.load(sres.text);</span><br><span class="line">      var items = [];</span><br><span class="line">      $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">        var $element = $(element);</span><br><span class="line">        items.push(&#123;</span><br><span class="line">          title: $element.attr(&#x27;title&#x27;),</span><br><span class="line">          href: $element.attr(&#x27;href&#x27;)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      res.send(items);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#x27;app is listening at port 3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>4、在lesson2文件夹下执行node app.js<br>5、浏览器输入<a href="http://localhost:3000/%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">http://localhost:3000/进行验证</a></p>
-<p>OK，一个简单的爬虫就是这么简单。这里我们还没有利用到 Node.js 的异步并发特性。不过下两章内容(Nodejs实战之三、四)都是关于异步控制的。</p>
-]]></content>
-      <categories>
-        <category>NodeJs</category>
-      </categories>
-      <tags>
-        <tag>NodeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Promise 从入门到自定义 系列一（准备阶段）</title>
-    <url>/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="区别实例对象和函数对象"><a href="#区别实例对象和函数对象" class="headerlink" title="区别实例对象和函数对象"></a>区别实例对象和函数对象</h1><ul>
-<li>函数对象：将函数作为对象使用时，简称为函数对象</li>
-<li>实例对象：new 函数产生的对象，简称为对象<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Fn() &#123; // Fn函数</span><br><span class="line">&#125;</span><br><span class="line">const fn = new Fn() // Fn是构造函数，fn是实例对象（简称对象）</span><br><span class="line">console.log(Fn.prototype) // Fn是函数对象</span><br><span class="line">Fn.bind(&#123;&#125;) // 调用Fn函数对象的bind方法</span><br><span class="line"></span><br><span class="line">$(&#x27;#test&#x27;) // jquery函数</span><br><span class="line">$.get(&#x27;/test&#x27;) // 调用jquery函数对象的get方法</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-
-</li>
-</ul>
-<h1 id="两种类型的回调函数"><a href="#两种类型的回调函数" class="headerlink" title="两种类型的回调函数"></a>两种类型的回调函数</h1><ul>
-<li>同步回调<br>理解：立即执行，完全执行完成后才结束，不会放到回调队列中<br>例子：数组遍历相关的回调函数、Promise的excutor函数<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const arr=[1,3,5]</span><br><span class="line">arr.forEach(item =&gt; &#123;</span><br><span class="line">	console.log(item) // 先执行</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&#x27;forEach()后面&#x27;) // 后执行</span><br></pre></td></tr></table></figure></li>
-<li>异步回调<br>理解：不会立即执行，会放入回调队列中将来执行<br>例子：定时器、ajax回调、Promise的成功或失败的回调<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">	console.log(&#x27;timeout callback()&#x27;) // 后执行</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(&#x27;setTimeout()后面&#x27;) // 先执行</span><br></pre></td></tr></table></figure>
-<h1 id="JS的error处理"><a href="#JS的error处理" class="headerlink" title="JS的error处理"></a>JS的error处理</h1></li>
-<li>错误的类型</li>
-</ul>
-<ol>
-<li><p>Error: 所有错误的父类型</p>
-</li>
-<li><p>ReferenceError: 引用的变量不存在</p>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(a) // Uncaught ReferenceError: a is not defined</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>TypeError: 数据类型不正确的错误</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let b=null</span><br><span class="line">// Uncaught TypeError: Cannot read property &#x27;xx&#x27; of null</span><br><span class="line">console.log(b.xx)</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>RangeError: 数据值不在其所允许的范围内</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Uncaught RangeError: Maximum call stack size exceeded</span><br><span class="line">function fn()&#123;</span><br><span class="line">	fn()</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>SyntaxError: 语法错误</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const c=&quot;&quot;&quot;&quot; // Uncaught SyntaxError: Unexpected string</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>错误处理</li>
-</ul>
-<ol>
-<li>捕获错误： try…catch<br>如果没有捕获错误，则错误之后的代码不会执行</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	let d</span><br><span class="line">	console.log(d.xxx)</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error.message)</span><br><span class="line">	console.log(error.stack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>抛出错误：throw error</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function something() &#123;</span><br><span class="line">	if (Date.now()%2===1) &#123;</span><br><span class="line">		console.log(&#x27;当时间为奇数时，可执行任务&#x27;)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		// 抛出异常</span><br><span class="line">		throw new Error(&#x27;当前时间为偶数无法执行任务&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 捕获异常</span><br><span class="line">try &#123;</span><br><span class="line">	something()</span><br><span class="line">&#125; catch(error) &#123;</span><br><span class="line">	alert(error.message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>错误对象</li>
-</ul>
-<ol>
-<li>message属性：错误相关信息</li>
-<li>stack属性：函数调用栈记录信息</li>
-</ol>
-]]></content>
-      <categories>
-        <category>ES6</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -600,6 +533,73 @@
       </tags>
   </entry>
   <entry>
+    <title>Promise 从入门到自定义 系列一（准备阶段）</title>
+    <url>/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%B8%80%EF%BC%88%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="区别实例对象和函数对象"><a href="#区别实例对象和函数对象" class="headerlink" title="区别实例对象和函数对象"></a>区别实例对象和函数对象</h1><ul>
+<li>函数对象：将函数作为对象使用时，简称为函数对象</li>
+<li>实例对象：new 函数产生的对象，简称为对象<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Fn() &#123; // Fn函数</span><br><span class="line">&#125;</span><br><span class="line">const fn = new Fn() // Fn是构造函数，fn是实例对象（简称对象）</span><br><span class="line">console.log(Fn.prototype) // Fn是函数对象</span><br><span class="line">Fn.bind(&#123;&#125;) // 调用Fn函数对象的bind方法</span><br><span class="line"></span><br><span class="line">$(&#x27;#test&#x27;) // jquery函数</span><br><span class="line">$.get(&#x27;/test&#x27;) // 调用jquery函数对象的get方法</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+</li>
+</ul>
+<h1 id="两种类型的回调函数"><a href="#两种类型的回调函数" class="headerlink" title="两种类型的回调函数"></a>两种类型的回调函数</h1><ul>
+<li>同步回调<br>理解：立即执行，完全执行完成后才结束，不会放到回调队列中<br>例子：数组遍历相关的回调函数、Promise的excutor函数<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const arr=[1,3,5]</span><br><span class="line">arr.forEach(item =&gt; &#123;</span><br><span class="line">	console.log(item) // 先执行</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&#x27;forEach()后面&#x27;) // 后执行</span><br></pre></td></tr></table></figure></li>
+<li>异步回调<br>理解：不会立即执行，会放入回调队列中将来执行<br>例子：定时器、ajax回调、Promise的成功或失败的回调<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">	console.log(&#x27;timeout callback()&#x27;) // 后执行</span><br><span class="line">&#125;,0)</span><br><span class="line">console.log(&#x27;setTimeout()后面&#x27;) // 先执行</span><br></pre></td></tr></table></figure>
+<h1 id="JS的error处理"><a href="#JS的error处理" class="headerlink" title="JS的error处理"></a>JS的error处理</h1></li>
+<li>错误的类型</li>
+</ul>
+<ol>
+<li><p>Error: 所有错误的父类型</p>
+</li>
+<li><p>ReferenceError: 引用的变量不存在</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(a) // Uncaught ReferenceError: a is not defined</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>TypeError: 数据类型不正确的错误</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">let b=null</span><br><span class="line">// Uncaught TypeError: Cannot read property &#x27;xx&#x27; of null</span><br><span class="line">console.log(b.xx)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>RangeError: 数据值不在其所允许的范围内</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Uncaught RangeError: Maximum call stack size exceeded</span><br><span class="line">function fn()&#123;</span><br><span class="line">	fn()</span><br><span class="line">&#125;</span><br><span class="line">fn()</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>SyntaxError: 语法错误</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const c=&quot;&quot;&quot;&quot; // Uncaught SyntaxError: Unexpected string</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>错误处理</li>
+</ul>
+<ol>
+<li>捕获错误： try…catch<br>如果没有捕获错误，则错误之后的代码不会执行</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">	let d</span><br><span class="line">	console.log(d.xxx)</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error.message)</span><br><span class="line">	console.log(error.stack)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>抛出错误：throw error</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function something() &#123;</span><br><span class="line">	if (Date.now()%2===1) &#123;</span><br><span class="line">		console.log(&#x27;当时间为奇数时，可执行任务&#x27;)</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		// 抛出异常</span><br><span class="line">		throw new Error(&#x27;当前时间为偶数无法执行任务&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">// 捕获异常</span><br><span class="line">try &#123;</span><br><span class="line">	something()</span><br><span class="line">&#125; catch(error) &#123;</span><br><span class="line">	alert(error.message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>错误对象</li>
+</ul>
+<ol>
+<li>message属性：错误相关信息</li>
+<li>stack属性：函数调用栈记录信息</li>
+</ol>
+]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue项目中两种文件下载方式</title>
     <url>/2021/11/09/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%A4%E7%A7%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<blockquote>
@@ -672,7 +672,7 @@
 <p>在第一代 iPhone 到 iPhone 3GS 的非 Retina 屏幕上，一个点就等于一像素，可以表示为 @1x；而在 iPhone 4 到 iPhone 4s 的 Retina 屏幕上，一个点等于两个像素，可以表示为 @2x。而日后发布的一些设备（如 iPhone 6 Plus、iPhone X）还会出现一个点等于三个像素的情况，可以表示为 @3x，这种 @1x、@2x、@3x 可以称之为「比例因子」。</p>
 <p>从下面的图示可以看出，在物理尺寸相同时，从 @1x 到 @3x 图像清晰度依次递增。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/1d74670901daeefeca41452c3f633ae3.png"></p>
-<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#x61;&#109;&#101;&#114;&#x61;&#x40;&#x31;&#120;&#46;&#x70;&#110;&#103;">&#x63;&#x61;&#109;&#101;&#114;&#x61;&#x40;&#x31;&#120;&#46;&#x70;&#110;&#103;</a>」和「<a href="mailto:&#99;&#97;&#109;&#101;&#114;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#110;&#x67;">&#99;&#97;&#109;&#101;&#114;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#110;&#x67;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
+<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#x61;&#x6d;&#101;&#114;&#97;&#64;&#x31;&#120;&#x2e;&#112;&#110;&#x67;">&#x63;&#x61;&#x6d;&#101;&#114;&#97;&#64;&#x31;&#120;&#x2e;&#112;&#110;&#x67;</a>」和「<a href="mailto:&#x63;&#97;&#109;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#x70;&#x6e;&#103;">&#x63;&#97;&#109;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#x70;&#x6e;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
 <p>用与像素密度无关的单位「point 点」来表示设计内容的尺寸的优势在日后 iPhone 的屏幕尺寸变得更加复杂之后会更加凸显。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/414393edef51cdfab6b1bcebad5789b7.png"></p>
 <p>进一步，第一代 iPhone 到 iPhone 3GS 的屏幕分辨率可以表示为 320pt × 480pt @1x，iPhone 4、iPhone 4s 的屏幕分辨率可以表示为 320pt × 480pt @2x。而使用「point 点」这个单位表示的分辨率我们可以称之为「逻辑分辨率」，而使用「px 像素」这个单位表示的分辨率我们可以称之为「渲染分辨率」。</p>
@@ -903,74 +903,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
-    <url>/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
-<li>安装 Node.js</li>
-<li>安装 Git</li>
-<li>Github 账户</li>
-</ul>
-<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
-</blockquote>
-<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
-<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
-</li>
-<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
-</li>
-<li><p>在 Hexo 文件夹下执行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
-<p>需要执行以下命令再安装一次：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
-</li>
-<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
-</li>
-</ol>
-<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
-<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
-<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-
-<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
-<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
-<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
-<p>现在访问你的博客就可以看见写好的文章啦！</p>
-<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
-<blockquote>
-<p>感谢原创：<a href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Halo搭建个人博客</title>
     <url>/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
@@ -1062,6 +994,74 @@
       </tags>
   </entry>
   <entry>
+    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
+    <url>/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
+<li>安装 Node.js</li>
+<li>安装 Git</li>
+<li>Github 账户</li>
+</ul>
+<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
+</blockquote>
+<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
+<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
+</li>
+<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
+</li>
+<li><p>在 Hexo 文件夹下执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+<p>需要执行以下命令再安装一次：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
+</li>
+<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
+</li>
+</ol>
+<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
+<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
+<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
+<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
+<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+<p>现在访问你的博客就可以看见写好的文章啦！</p>
+<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
+<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
+<p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
+<blockquote>
+<p>感谢原创：<a href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用spacedesk实现两台笔记本的低延迟屏幕扩展</title>
     <url>/2020/11/09/%E4%BD%BF%E7%94%A8spacedesk%E5%AE%9E%E7%8E%B0%E4%B8%A4%E5%8F%B0%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%B1%8F%E5%B9%95%E6%89%A9%E5%B1%95/</url>
     <content><![CDATA[<p><strong>需求：</strong><br>有两台笔记本电脑，想要将其中一台作为扩展屏幕使用<br><strong>准备：</strong><br>两台有网线接口的笔记本电脑、一根双绞线、spacedesk软件<br><strong>软件下载地址：</strong><br>官网：<a href="https://www.spacedesk.net/#downloads">https://www.spacedesk.net/#downloads</a><br>网盘下载：链接：<a href="https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ">https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ</a><br>提取码：agdh </p>
@@ -1079,25 +1079,6 @@
       </categories>
       <tags>
         <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于AJAX</title>
-    <url>/2020/11/09/%E5%85%B3%E4%BA%8EAJAX/</url>
-    <content><![CDATA[<p>AJAX：Asynchronous JavaScript and XML，意思是用JavaScript执行异步网络请求。<br>现代浏览器上，ajax的实现主要依靠XMLHttpRequest 对象，该对象用于和服务器交换数据</p>
-<h6 id="1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。"><a href="#1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。" class="headerlink" title="1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。"></a>1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。</h6><p>  （1）对于get请求可以通过向URL添加唯一的ID，来避免首先获取缓存结果。<br>  （2）对于post请求：使用setRequestHeader()添加HTTP头，然后在send()方法中规定发送数据:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo_post2.php&quot;,true);</span><br><span class="line">  xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">  xmlhttp.send(&quot;fname=Henry&amp;lname=Ford&quot;);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h6 id="2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。"><a href="#2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。" class="headerlink" title="2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。"></a>2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。</h6><h6 id="3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态"><a href="#3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态" class="headerlink" title="3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态"></a>3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;AJAX&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;myDiv&quot;&gt;&lt;h2&gt;使用AJAX修改文本内容&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">  &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;修改内容&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function loadXMLDoc() &#123;</span><br><span class="line">    var xmlhttp;</span><br><span class="line">    if (window.XMLHttpRequest) &#123;</span><br><span class="line">      // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行</span><br><span class="line">      xmlhttp = new XMLHttpRequest();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // IE6, IE5 浏览器执行代码</span><br><span class="line">      xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.onreadystatechange = function() &#123;</span><br><span class="line">      if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) &#123;</span><br><span class="line">        document.getElementById(&quot;myDiv&quot;).innerHTML = xmlhttp.responseText;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.open(&quot;GET&quot;,&quot;/try/demo_get.php?t=&quot; + Math.random(), true);</span><br><span class="line">    xmlhttp.send();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
-<p>参考：<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000">廖雪峰官网AJAX</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1153,6 +1134,25 @@
       </categories>
       <tags>
         <tag>Web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于AJAX</title>
+    <url>/2020/11/09/%E5%85%B3%E4%BA%8EAJAX/</url>
+    <content><![CDATA[<p>AJAX：Asynchronous JavaScript and XML，意思是用JavaScript执行异步网络请求。<br>现代浏览器上，ajax的实现主要依靠XMLHttpRequest 对象，该对象用于和服务器交换数据</p>
+<h6 id="1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。"><a href="#1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。" class="headerlink" title="1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。"></a>1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。</h6><p>  （1）对于get请求可以通过向URL添加唯一的ID，来避免首先获取缓存结果。<br>  （2）对于post请求：使用setRequestHeader()添加HTTP头，然后在send()方法中规定发送数据:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo_post2.php&quot;,true);</span><br><span class="line">  xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">  xmlhttp.send(&quot;fname=Henry&amp;lname=Ford&quot;);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h6 id="2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。"><a href="#2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。" class="headerlink" title="2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。"></a>2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。</h6><h6 id="3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态"><a href="#3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态" class="headerlink" title="3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态"></a>3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;AJAX&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;myDiv&quot;&gt;&lt;h2&gt;使用AJAX修改文本内容&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">  &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;修改内容&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function loadXMLDoc() &#123;</span><br><span class="line">    var xmlhttp;</span><br><span class="line">    if (window.XMLHttpRequest) &#123;</span><br><span class="line">      // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行</span><br><span class="line">      xmlhttp = new XMLHttpRequest();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // IE6, IE5 浏览器执行代码</span><br><span class="line">      xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.onreadystatechange = function() &#123;</span><br><span class="line">      if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) &#123;</span><br><span class="line">        document.getElementById(&quot;myDiv&quot;).innerHTML = xmlhttp.responseText;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.open(&quot;GET&quot;,&quot;/try/demo_get.php?t=&quot; + Math.random(), true);</span><br><span class="line">    xmlhttp.send();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000">廖雪峰官网AJAX</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2104,24 +2104,6 @@
       </tags>
   </entry>
   <entry>
-    <title>拦截Element-UI中el-tabs组件的切换</title>
-    <url>/2020/11/09/%E6%8B%A6%E6%88%AAElement-UI%E4%B8%ADel-tabs%E7%BB%84%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2/</url>
-    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1、tabs组件代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot; :before-leave=&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label=&quot;用户信息&quot; name=&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if=&quot;code&quot; label=&quot;用户角色&quot; name=&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>2、beforeLeave()</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    this.$confirm(&#x27;离开将不保存本页修改&#x27;, &#x27;提示&#x27;, &#123;</span><br><span class="line">        confirmButtonText: &#x27;确定&#x27;,</span><br><span class="line">        cancelButtonText: &#x27;取消&#x27;,</span><br><span class="line">        type: &#x27;warning&#x27;</span><br><span class="line">    &#125;).then(() =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>VUE</category>
-      </categories>
-      <tags>
-        <tag>VUE</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>手把手教你用 VuePress + GitHub Pages 搭建个人博客！</title>
     <url>/2023/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在阅读<a href="https://juejin.cn/user/712139234359182">冴羽</a>老师的文章时，对VuePress搭建个人博客很感兴趣，于是试着自己搭建了一遍，写了这篇文章记录一下搭建的基本流程，希望对大家有所帮助。</p>
@@ -2242,6 +2224,24 @@
       </categories>
       <tags>
         <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>拦截Element-UI中el-tabs组件的切换</title>
+    <url>/2020/11/09/%E6%8B%A6%E6%88%AAElement-UI%E4%B8%ADel-tabs%E7%BB%84%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1、tabs组件代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot; :before-leave=&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label=&quot;用户信息&quot; name=&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if=&quot;code&quot; label=&quot;用户角色&quot; name=&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>2、beforeLeave()</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    this.$confirm(&#x27;离开将不保存本页修改&#x27;, &#x27;提示&#x27;, &#123;</span><br><span class="line">        confirmButtonText: &#x27;确定&#x27;,</span><br><span class="line">        cancelButtonText: &#x27;取消&#x27;,</span><br><span class="line">        type: &#x27;warning&#x27;</span><br><span class="line">    &#125;).then(() =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>VUE</category>
+      </categories>
+      <tags>
+        <tag>VUE</tag>
       </tags>
   </entry>
   <entry>
@@ -2405,23 +2405,6 @@
       </tags>
   </entry>
   <entry>
-    <title>通过JS将图片File转为base64并压缩</title>
-    <url>/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/</url>
-    <content><![CDATA[<blockquote>
-<p>后端为了方便需要直接将图片存储为base64，但图片过大时转出的base64过长，因此前端需要对转后的base64进行压缩</p>
-</blockquote>
-<p>话不多说，直接上代码</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> * @param &#123;需要转换的图片file&#125; file </span><br><span class="line"> * @param &#123;是否返回压缩后的base64&#125; isCompression </span><br><span class="line"> * @param &#123;转换成功后通过回调函数将结果返回&#125; callback </span><br><span class="line"> */</span><br><span class="line">export function imageToBase64(file, isCompression, callback) &#123;</span><br><span class="line">	// 判断图片类型</span><br><span class="line">	if (file.type == &#x27;image/jpeg&#x27; || file.type == &#x27;image/png&#x27; || file.type == &#x27;image/jpg&#x27;) &#123;</span><br><span class="line">		var isJpg = true</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		jsJpg = false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 判断图片大小</span><br><span class="line">	const isLt2M = file.size / 1024 / 1024 &lt; 2</span><br><span class="line">	if (!isJpg) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片只能是jpg/png/jepg格式&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">	if (!isLt2M) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片大小不能超过2M&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 创建一个HTML5的FileReader对象</span><br><span class="line">	var reader = new FileReader()</span><br><span class="line">	// 创建一个img对象</span><br><span class="line">	var img = new Image()</span><br><span class="line">	// let filename = file.filename</span><br><span class="line">	if (file) &#123;</span><br><span class="line">		reader.readAsDataURL(file)</span><br><span class="line">	&#125;</span><br><span class="line">	if (isJpg &amp;&amp; isLt2M) &#123;</span><br><span class="line">		reader.onload=(e)=&gt;&#123;</span><br><span class="line">			// let base64Str = reader.result.split[&#x27;,&#x27;][1]</span><br><span class="line">			img.src = e.target.result</span><br><span class="line">			// base64地址图片加载完毕后执行</span><br><span class="line">			img.onload = function() &#123;</span><br><span class="line">				// 缩放图片需要canvas（也可以在DOM中直接定义canvas标签，这样就能把压缩完的图片不转base64也能直接显示出来）</span><br><span class="line">				var canvas = document.createElement(&#x27;canvas&#x27;)</span><br><span class="line">				var context = canvas.getContext(&#x27;2d&#x27;)</span><br><span class="line">				// 图片原始尺寸</span><br><span class="line">				var originWidth = this.width</span><br><span class="line">				var originHeight = this.height</span><br><span class="line">				// 最大尺寸限制，可通过设置宽高来实现图片压缩程度</span><br><span class="line">				var maxWidth = 300,</span><br><span class="line">					maxHeight = 300</span><br><span class="line">				// 目标尺寸</span><br><span class="line">				var targetWidth = originWidth</span><br><span class="line">					targetHeight = originHeight</span><br><span class="line">				// 图片尺寸超过最大尺寸限制</span><br><span class="line">				if(originWidth &gt; maxWidth || originHeight &gt; maxHeight) &#123;</span><br><span class="line">					if (originWidth / originHeight &gt; maxWidth / maxHeight) &#123;</span><br><span class="line">						// 更改宽度，按照宽度限定尺寸</span><br><span class="line">						targetWidth = maxWidth</span><br><span class="line">						targetHeight = Math.round(maxWidth*(originHeight/originWidth))</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						targetHeight = maxHeight</span><br><span class="line">						targetWidth = Math.round(maxHeight*(originWidth/originHeight))</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 对图片进行缩放</span><br><span class="line">				canvas.width = targetWidth</span><br><span class="line">				canvas.height = targetHeight</span><br><span class="line">				// 清除画布</span><br><span class="line">				context.clearRect(0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 图片压缩</span><br><span class="line">				 * 第一个参数是创建的img对象</span><br><span class="line">				 * 第二三个参数是左上角坐标</span><br><span class="line">				 * 后两个参数是画布区域宽高</span><br><span class="line">				 */</span><br><span class="line">				context.drawImage(img, 0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 压缩后的base64文件</span><br><span class="line">				 * 第一个参数可以为image/jpeg或image/webp类型的图片</span><br><span class="line">				 * 第二个参数设置图片质量取值0-1，超出则以默认值0.92替代</span><br><span class="line">				 */</span><br><span class="line">				var newUrl = canvas.toDataURL(&#x27;image/jpeg&#x27;, 0.02)</span><br><span class="line">				if (isCompression) &#123; // 返回压缩后的base64</span><br><span class="line">					callback(newUrl)</span><br><span class="line">				&#125; else &#123; // 返回不压缩的base64</span><br><span class="line">					callback(e.target.result)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈Webpack</title>
     <url>/2021/11/09/%E8%B0%88%E8%B0%88Webpack/</url>
     <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 一个常见的`webpack`配置文件</span><br><span class="line">const webpack = require(&#x27;webpack&#x27;);</span><br><span class="line">const HtmlWebpackPlugin = require(&#x27;html-webpack-plugin&#x27;);</span><br><span class="line">const ExtractTextPlugin = require(&#x27;extract-text-webpack-plugin&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">        entry: __dirname + &quot;/app/main.js&quot;, //已多次提及的唯一入口文件</span><br><span class="line">        output: &#123;</span><br><span class="line">            path: __dirname + &quot;/build&quot;,</span><br><span class="line">            filename: &quot;bundle-[hash].js&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        devtool: &#x27;none&#x27;,</span><br><span class="line">        devServer: &#123;</span><br><span class="line">            contentBase: &quot;./public&quot;, //本地服务器所加载的页面所在的目录</span><br><span class="line">            historyApiFallback: true, //不跳转</span><br><span class="line">            inline: true,</span><br><span class="line">            hot: true</span><br><span class="line">        &#125;,</span><br><span class="line">        module: &#123;</span><br><span class="line">            rules: [&#123;</span><br><span class="line">                    test: /(\.jsx|\.js)$/,</span><br><span class="line">                    use: &#123;</span><br><span class="line">                        loader: &quot;babel-loader&quot;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    exclude: /node_modules/</span><br><span class="line">                &#125;, &#123;</span><br><span class="line">                    test: /\.css$/,</span><br><span class="line">                    use: ExtractTextPlugin.extract(&#123;</span><br><span class="line">                        fallback: &quot;style-loader&quot;,</span><br><span class="line">                        use: [&#123;</span><br><span class="line">                            loader: &quot;css-loader&quot;,</span><br><span class="line">                            options: &#123;</span><br><span class="line">                                modules: true,</span><br><span class="line">                                localIdentName: &#x27;[name]__[local]--[hash:base64:5]&#x27;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;, &#123;</span><br><span class="line">                            loader: &quot;postcss-loader&quot;</span><br><span class="line">                        &#125;],</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    plugins: [</span><br><span class="line">        new webpack.BannerPlugin(&#x27;版权所有，翻版必究&#x27;),</span><br><span class="line">        new HtmlWebpackPlugin(&#123;</span><br><span class="line">            template: __dirname + &quot;/app/index.tmpl.html&quot; //new 一个这个插件的实例，并传入相关的参数</span><br><span class="line">        &#125;),</span><br><span class="line">        new webpack.optimize.OccurrenceOrderPlugin(),</span><br><span class="line">        new webpack.optimize.UglifyJsPlugin(),</span><br><span class="line">        new ExtractTextPlugin(&quot;style.css&quot;)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -2499,6 +2482,23 @@
       </categories>
       <tags>
         <tag>Web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过JS将图片File转为base64并压缩</title>
+    <url>/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/</url>
+    <content><![CDATA[<blockquote>
+<p>后端为了方便需要直接将图片存储为base64，但图片过大时转出的base64过长，因此前端需要对转后的base64进行压缩</p>
+</blockquote>
+<p>话不多说，直接上代码</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> * @param &#123;需要转换的图片file&#125; file </span><br><span class="line"> * @param &#123;是否返回压缩后的base64&#125; isCompression </span><br><span class="line"> * @param &#123;转换成功后通过回调函数将结果返回&#125; callback </span><br><span class="line"> */</span><br><span class="line">export function imageToBase64(file, isCompression, callback) &#123;</span><br><span class="line">	// 判断图片类型</span><br><span class="line">	if (file.type == &#x27;image/jpeg&#x27; || file.type == &#x27;image/png&#x27; || file.type == &#x27;image/jpg&#x27;) &#123;</span><br><span class="line">		var isJpg = true</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		jsJpg = false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 判断图片大小</span><br><span class="line">	const isLt2M = file.size / 1024 / 1024 &lt; 2</span><br><span class="line">	if (!isJpg) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片只能是jpg/png/jepg格式&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">	if (!isLt2M) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片大小不能超过2M&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 创建一个HTML5的FileReader对象</span><br><span class="line">	var reader = new FileReader()</span><br><span class="line">	// 创建一个img对象</span><br><span class="line">	var img = new Image()</span><br><span class="line">	// let filename = file.filename</span><br><span class="line">	if (file) &#123;</span><br><span class="line">		reader.readAsDataURL(file)</span><br><span class="line">	&#125;</span><br><span class="line">	if (isJpg &amp;&amp; isLt2M) &#123;</span><br><span class="line">		reader.onload=(e)=&gt;&#123;</span><br><span class="line">			// let base64Str = reader.result.split[&#x27;,&#x27;][1]</span><br><span class="line">			img.src = e.target.result</span><br><span class="line">			// base64地址图片加载完毕后执行</span><br><span class="line">			img.onload = function() &#123;</span><br><span class="line">				// 缩放图片需要canvas（也可以在DOM中直接定义canvas标签，这样就能把压缩完的图片不转base64也能直接显示出来）</span><br><span class="line">				var canvas = document.createElement(&#x27;canvas&#x27;)</span><br><span class="line">				var context = canvas.getContext(&#x27;2d&#x27;)</span><br><span class="line">				// 图片原始尺寸</span><br><span class="line">				var originWidth = this.width</span><br><span class="line">				var originHeight = this.height</span><br><span class="line">				// 最大尺寸限制，可通过设置宽高来实现图片压缩程度</span><br><span class="line">				var maxWidth = 300,</span><br><span class="line">					maxHeight = 300</span><br><span class="line">				// 目标尺寸</span><br><span class="line">				var targetWidth = originWidth</span><br><span class="line">					targetHeight = originHeight</span><br><span class="line">				// 图片尺寸超过最大尺寸限制</span><br><span class="line">				if(originWidth &gt; maxWidth || originHeight &gt; maxHeight) &#123;</span><br><span class="line">					if (originWidth / originHeight &gt; maxWidth / maxHeight) &#123;</span><br><span class="line">						// 更改宽度，按照宽度限定尺寸</span><br><span class="line">						targetWidth = maxWidth</span><br><span class="line">						targetHeight = Math.round(maxWidth*(originHeight/originWidth))</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						targetHeight = maxHeight</span><br><span class="line">						targetWidth = Math.round(maxHeight*(originWidth/originHeight))</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 对图片进行缩放</span><br><span class="line">				canvas.width = targetWidth</span><br><span class="line">				canvas.height = targetHeight</span><br><span class="line">				// 清除画布</span><br><span class="line">				context.clearRect(0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 图片压缩</span><br><span class="line">				 * 第一个参数是创建的img对象</span><br><span class="line">				 * 第二三个参数是左上角坐标</span><br><span class="line">				 * 后两个参数是画布区域宽高</span><br><span class="line">				 */</span><br><span class="line">				context.drawImage(img, 0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 压缩后的base64文件</span><br><span class="line">				 * 第一个参数可以为image/jpeg或image/webp类型的图片</span><br><span class="line">				 * 第二个参数设置图片质量取值0-1，超出则以默认值0.92替代</span><br><span class="line">				 */</span><br><span class="line">				var newUrl = canvas.toDataURL(&#x27;image/jpeg&#x27;, 0.02)</span><br><span class="line">				if (isCompression) &#123; // 返回压缩后的base64</span><br><span class="line">					callback(newUrl)</span><br><span class="line">				&#125; else &#123; // 返回不压缩的base64</span><br><span class="line">					callback(e.target.result)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
 </search>
