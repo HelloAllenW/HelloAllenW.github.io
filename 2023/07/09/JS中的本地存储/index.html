@@ -49,8 +49,6 @@
     
     <script src="/js/tocbot.min.js"></script>
     
-    <script src="/js/Valine.min.js"></script>
-    
 
 
 
@@ -293,23 +291,18 @@
         <!-- 评论系统 -->
         
             <section id="comments" class="comments">
+              <!-- 可以添加样式
               <style>
                 .comments{margin:30px;padding:10px;background:#fff}
                 @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-              </style>
+              </style> -->
               <div class="valine_comment"></div>
-<!--载入js，在</body>之前插入即可-->
-<!--Leancloud 操作库:-->
-<script src="https://allens-blog-server-3cf8v7elr-allens-projects-0f2bc202.vercel.app/"></script>
-<script>
-  new Valine({
-      el: '.valine_comment',
-      app_id: 'eArjpCelRgi4pn7hRUe7fhIo-MdYXbMMI',
-      app_key: 'y8PwoYdXjsFB3bQBC0fyKX4i',
-      placeholder: '说点什么',
-      notify: 'true',
-      verify: 'true',
-    });
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allens-blog-server-3cf8v7elr-allens-projects-0f2bc202.vercel.app',
+  });
 </script>
             </section>
         

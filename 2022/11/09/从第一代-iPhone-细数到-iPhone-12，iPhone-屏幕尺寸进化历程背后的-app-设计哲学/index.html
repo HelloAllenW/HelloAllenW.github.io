@@ -49,8 +49,6 @@
     
     <script src="/js/tocbot.min.js"></script>
     
-    <script src="/js/Valine.min.js"></script>
-    
 
 
 
@@ -308,7 +306,7 @@
 <p>在第一代 iPhone 到 iPhone 3GS 的非 Retina 屏幕上，一个点就等于一像素，可以表示为 @1x；而在 iPhone 4 到 iPhone 4s 的 Retina 屏幕上，一个点等于两个像素，可以表示为 @2x。而日后发布的一些设备（如 iPhone 6 Plus、iPhone X）还会出现一个点等于三个像素的情况，可以表示为 @3x，这种 @1x、@2x、@3x 可以称之为「比例因子」。</p>
 <p>从下面的图示可以看出，在物理尺寸相同时，从 @1x 到 @3x 图像清晰度依次递增。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/1d74670901daeefeca41452c3f633ae3.png"></p>
-<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#x61;&#109;&#x65;&#114;&#97;&#64;&#49;&#120;&#x2e;&#112;&#110;&#x67;">&#x63;&#x61;&#109;&#x65;&#114;&#97;&#64;&#49;&#120;&#x2e;&#112;&#110;&#x67;</a>」和「<a href="mailto:&#x63;&#97;&#109;&#x65;&#114;&#x61;&#x40;&#50;&#120;&#x2e;&#112;&#x6e;&#103;">&#x63;&#97;&#109;&#x65;&#114;&#x61;&#x40;&#50;&#120;&#x2e;&#112;&#x6e;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
+<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#x61;&#109;&#101;&#114;&#x61;&#x40;&#x31;&#120;&#46;&#x70;&#110;&#103;">&#x63;&#x61;&#109;&#101;&#114;&#x61;&#x40;&#x31;&#120;&#46;&#x70;&#110;&#103;</a>」和「<a href="mailto:&#99;&#97;&#109;&#101;&#114;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#110;&#x67;">&#99;&#97;&#109;&#101;&#114;&#97;&#x40;&#x32;&#x78;&#46;&#x70;&#110;&#x67;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
 <p>用与像素密度无关的单位「point 点」来表示设计内容的尺寸的优势在日后 iPhone 的屏幕尺寸变得更加复杂之后会更加凸显。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/414393edef51cdfab6b1bcebad5789b7.png"></p>
 <p>进一步，第一代 iPhone 到 iPhone 3GS 的屏幕分辨率可以表示为 320pt × 480pt @1x，iPhone 4、iPhone 4s 的屏幕分辨率可以表示为 320pt × 480pt @2x。而使用「point 点」这个单位表示的分辨率我们可以称之为「逻辑分辨率」，而使用「px 像素」这个单位表示的分辨率我们可以称之为「渲染分辨率」。</p>
@@ -536,23 +534,18 @@
         <!-- 评论系统 -->
         
             <section id="comments" class="comments">
+              <!-- 可以添加样式
               <style>
                 .comments{margin:30px;padding:10px;background:#fff}
                 @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
-              </style>
+              </style> -->
               <div class="valine_comment"></div>
-<!--载入js，在</body>之前插入即可-->
-<!--Leancloud 操作库:-->
-<script src="https://allens-blog-server-3cf8v7elr-allens-projects-0f2bc202.vercel.app/"></script>
-<script>
-  new Valine({
-      el: '.valine_comment',
-      app_id: 'eArjpCelRgi4pn7hRUe7fhIo-MdYXbMMI',
-      app_key: 'y8PwoYdXjsFB3bQBC0fyKX4i',
-      placeholder: '说点什么',
-      notify: 'true',
-      verify: 'true',
-    });
+<script type="module">
+  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allens-blog-server-3cf8v7elr-allens-projects-0f2bc202.vercel.app',
+  });
 </script>
             </section>
         
