@@ -21,6 +21,84 @@
       </tags>
   </entry>
   <entry>
+    <title>Github + jsDelivr + PicGo 打造稳定快速、高效免费的图床!</title>
+    <url>/2023/12/12/Github%20+%20jsDelivr%20+%20PicGo%20%E6%89%93%E9%80%A0%E7%A8%B3%E5%AE%9A%E5%BF%AB%E9%80%9F%E3%80%81%E9%AB%98%E6%95%88%E5%85%8D%E8%B4%B9%E7%9A%84%E5%9B%BE%E5%BA%8A!/</url>
+    <content><![CDATA[<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>不希望将大量的图片等静态资源放在自己部署了项目的云服务器上，又不希望增加成本去专门购置一台静态资源服务器，<br>放在其他免费服务器上又希望能做到CDN加速。于是找到了<strong>Github + jsDelivr + PicGo</strong>来解决这个需求。以下文章部分转载自<a href="https://www.bilibili.com/read/cv4297993">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>。</p>
+<h1 id="jsDelivr是什么"><a href="#jsDelivr是什么" class="headerlink" title="jsDelivr是什么"></a>jsDelivr是什么</h1><p>jsDelivr由ProspectOne维护的公共库，使用的融合CDN技术，由Cloudflare、Fastly、StackPath、QUANTIL等CDN供应商提供了<strong>全球超过750个CDN节点</strong>。<br>最重要的是，jsDelivr在<strong>中国大陆</strong>也拥有超过数百个节点，因为jsDelivr拥有<strong>正规的ICP备案</strong>，解决了中国大陆的访问速度优化，实现真正的<strong>全球极速低延迟</strong>体验。<br>jsDelivr是<strong>免费</strong>的、<strong>不限制带宽</strong>的，可以加速<strong>NPM</strong>、<strong>Github</strong>内的文件。<br>本文采用的方法就是将静态文件资源放到Github的仓库内，再使用jsDelivr进行加速访问，最后通过PicGo上传管理资源，打造一个高速访问的图床！<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci01LndlYnA?x-oss-process=image/format,png" alt="全球节点分布地图"></p>
+<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>在Github新建一个公开仓库，用于存放我们的静态文件资源。这里不再过多赘述，下面的链接是我的<a href="https://github.com/HelloAllenW/BlogAssets">静态文件资源仓库</a>。</p>
+<h1 id="使用jsDelivr访问资源"><a href="#使用jsDelivr访问资源" class="headerlink" title="使用jsDelivr访问资源"></a>使用jsDelivr访问资源</h1><p>根据<a href="https://www.jsdelivr.com/">jsdelivr官方文档</a>，有很多种访问资源的方式，这里主要介绍三种。</p>
+<h2 id="通过releases访问"><a href="#通过releases访问" class="headerlink" title="通过releases访问"></a>通过releases访问</h2><p>在仓库首页找到releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0xLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>创建new releases，如果之前创建过则选择Draft a new releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0yLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>标题输入版本号，根据你的需求即可，比如我这里是v1.0<br>输入完毕后点击下方绿色按钮。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0zLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>跳转到以下页面代表创建成功<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci00LnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo@version/file">https://cdn.jsdelivr.net/gh/user/repo@version/file</a><br>以我的为例，访问仓库目录下的jsdelivr-1.png文件，为以下链接：<br><a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png</a><br>可以正常访问，成功~<br>这种方案的优点是，可以区分版本，就算以后删掉了一些文件也可以通过旧的releases访问，而且可以及时更新缓存。<br>美中不足的是，每次仓库里更新资源后，需要发布个releases才能获取更新文件，并不是很方便，所以适合于存放基本不需要更新修改添加的静态文件。需要频繁修改或上传的文件不建议放到这里面来。</p>
+<h2 id="直接访问"><a href="#直接访问" class="headerlink" title="直接访问"></a>直接访问</h2><p>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo/file">https://cdn.jsdelivr.net/gh/user/repo/file</a><br>以我的为例：<br><a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png</a><br>不推荐使用这种方法，暂未摸清如何更新缓存。</p>
+<h2 id="访问最新文件"><a href="#访问最新文件" class="headerlink" title="访问最新文件"></a>访问最新文件</h2><p>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo@latest/file">https://cdn.jsdelivr.net/gh/user/repo@latest/file</a><br>以我的为例：<a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png</a><br>这种方案不需要发布releases，可以直接从repo读取文件，而且实时更新缓存。<br>但是官方并不推荐使用这种方法，因为修改repo的文件后，如果没有修改网站的旧链接，可能会出问题。根据你自己的情况决定吧。</p>
+<h1 id="访问统计"><a href="#访问统计" class="headerlink" title="访问统计"></a>访问统计</h1><p>jsDelivr还提供了文件列表和文件访问统计页面：<br>文件列表：<a href="https://cdn.jsdelivr.net/gh/user/repo/">https://cdn.jsdelivr.net/gh/user/repo/</a><br>比如我的：<a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/</a></p>
+<p>访问统计：<a href="https://www.jsdelivr.com/package/gh/user/repo">https://www.jsdelivr.com/package/gh/user/repo</a><br>比如我的：<a href="https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets">https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets</a></p>
+<h1 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a>代码压缩</h1><p>jsDelivr还提供了代码压缩服务，比如将JS/CSS的代码压缩，优化访问速度。<br>只是前几次访问会执行压缩操作，速度比较慢。后面就会将文件缓存，速度不会再慢了。<br>直接将访问链接的文件后缀改成.min.js即可，比如：<br><a href="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js">https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js</a></p>
+<h1 id="在GitHub中生成一个Token"><a href="#在GitHub中生成一个Token" class="headerlink" title="在GitHub中生成一个Token"></a>在GitHub中生成一个Token</h1><p>在主页依次选择【Settings】-【Developer settings】-【Personal access tokens】-【Tokens(classic)】-【Generate new token】- 【Generate new token(classic)】，填写好描述，勾选【repo】，然后点击【Generate token】生成一个Token，注意这个Token只会显示一次，自己先保存下来，或者等后面配置好PicGo后再关闭此网页。<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112349137.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352386.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352936.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352049.png"></p>
+<h1 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h1><p>前往<a href="https://molunerfinn.com/PicGo/">下载PicGo</a>，如果官方下载速度过慢，请使用<a href="https://mirrors.sdu.edu.cn/github-release/1702304660/github-release/Molunerfinn_PicGo/">山东大学镜像</a>进行下载。安装好后开始配置图床。<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png"></p>
+<ul>
+<li>设定仓库名：按照【用户名 / 图床仓库名】的格式填写</li>
+<li>设定分支名：【master】 【main】(github 更新后默认为 main)</li>
+<li>设定Token：粘贴之前生成的【Token】</li>
+<li>指定存储路径：填写想要储存的路径，如【images/】，这样就会在仓库下创建一个名为 images 的文件夹，图片将会储存在此文件夹中</li>
+<li>设定自定义域名：它的作用是，在图片上传后，PicGo会按照【自定义域名+储存路径+上传的图片名】的方式生成访问链接，放到粘贴板上，因为我们要使用 jsDelivr 加速访问，所以可以设置为【<a href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E5%90%8D">https://cdn.jsdelivr.net/gh/用户名/图床仓库名</a> 】，上传完毕后，我们就可以通过【<a href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E5%90%8D/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84">https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径</a> 】加速访问我们的图片了，比如：<a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png</a></li>
+</ul>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA0L2pzZGVsaXZyLWRpdmlzaW9uLnBuZw?x-oss-process=image/format,png" alt="分割线"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经速度测试，访问速度非常快，有效提升整体速度，还能省下一大笔费用，实属优质白嫖~<br>并且配置好PicGo后，我们可以直接将图片拖拽到上传区（选择URL格式），将会自动上传并复制访问链接，将链接粘贴到博文中就行了，此外PicGo还有相册功能，可以对已上传的图片进行删除，修改链接等快捷操作，PicGo还可以生成不同格式的链接、支持批量上传、快捷键上传、自定义链接格式、上传前重命名等，更多功能自己去探索吧！</p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP协议的 Request Payload 和 Form Data 的区别</title>
+    <url>/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在一个前后端分离的新项目中，前端执行post请求，后端springMVC的 @RequestMapping 接收不到对应的请求参数。开始以为是前端webpack的proxy（将请求跨域代理到后台服务）配置问题。然而，并不是这样…</p>
+<p><strong>proxy配置如下</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">	&quot;api&quot;: &#123;</span><br><span class="line">		&quot;target&quot;: &quot;http://localhost:7000/&quot;,</span><br><span class="line">		&quot;changeOrigin&quot;: true,</span><br><span class="line">		&quot;pathRewrite&quot;: &#123; &quot;^/api/v1&quot;: &quot;&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p><strong>前端post请求：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">case &#x27;post&#x27;:</span><br><span class="line">	return axios.post(url, data) // data = &#123;name: &#x27;xiaoming&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>后端接收参数：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SysAccount: private String name;</span><br><span class="line">@PostMapping(&quot;/accounts&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt;createAccount(SysAccount account) &#123;</span><br><span class="line">	&quot;dahuang&quot;.equsls(account.getName()); // false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看了前端发起的请求，请求正文并不是熟悉的Form Data，而是Request Payload。</p>
+<h1 id="区别？"><a href="#区别？" class="headerlink" title="区别？"></a>区别？</h1><h2 id="Request-Payload"><a href="#Request-Payload" class="headerlink" title="Request Payload"></a>Request Payload</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzQucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Request Payload的HTTP请求报文格式大概如下，请求头部Content-Type: application/json，并且请求正文是一个json格式的字符串。（适用于一些复杂的数据对象，例如对象里面再嵌套数组）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123; &quot;foo&quot; : &quot;bar&quot;, &quot;name&quot; : &quot;John&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Form-Data"><a href="#Form-Data" class="headerlink" title="Form Data"></a>Form Data</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzUucG5n?x-oss-process=image/format,png" alt="Form Data"><br>Form Data 大概格式如下，请求头部的 Content-Type: application/x-www-form-urlencoded，并且请求正文是类似 get 请求 url 的请求参数。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">foo=bar&amp;name=John</span><br></pre></td></tr></table></figure>
+
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>对于 Request Payload 请求， 必须加 @RequestBody 才能将请求正文解析到对应的 bean 中，通过 request.getReader() 来获取请求正文内容（一说可以使用getRequestPayload方法来获取）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzgucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Form Data请求，springmvc 会自动使用 MessageConverter 将请求参数解析到对应的 bean，且通过 request.getParameter(…) 能获取请求参数。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzkucG5n?x-oss-process=image/format,png" alt="Form Data"></p>
+<h2 id="前端处理"><a href="#前端处理" class="headerlink" title="前端处理"></a>前端处理</h2><p>在前端使用Form Data的方式来发起请求，使用qs库将json对象转化为字符串。<br>(如 { name: ‘dahuang’,age: 11 } 转化为 name=dahuang&amp;age=11)<br>所以，通过下面的方法来解决:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 将</span><br><span class="line">axios.post(url, cloneData)</span><br><span class="line">// 改写为</span><br><span class="line">axios.post(url, qs.stringify(cloneData))</span><br><span class="line">// 或者</span><br><span class="line">axios.post(url, &#123;data: &#123;&#125;,</span><br><span class="line">	headers: &#123;</span><br><span class="line">		content-type: &#x27;application/x-www-form-unlencoded&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>当请求头的Content-Type为application/json时浏览器认为该请求为复杂请求，这时浏览器会先进行一次预请求,执行一次OPTIONS 请求，向服务器求证该请求是否合法，如果服务器没有给出正确回应浏览器会报跨域请求导致请求失败。<br>一般这三种方式会导致这种现象:</p>
+<ol>
+<li>请求的方法不是GET/HEAD/POST</li>
+<li>POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain</li>
+<li>请求设置了自定义的header字段<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="传统的Form表单提交"><a href="#传统的Form表单提交" class="headerlink" title="传统的Form表单提交"></a>传统的Form表单提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;password&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+如果我这里点击提交按钮，就会触发浏览器的提交功能，那结果是什么样呢？<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzExLnBuZw?x-oss-process=image/format,png"><br>可以看到Content-Type为application/x-www-form-urlencoded。值得形式是以key1=value1&amp;key2=value2的形式提交的。<h2 id="传统的Ajax提交"><a href="#传统的Ajax提交" class="headerlink" title="传统的Ajax提交"></a>传统的Ajax提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit2() &#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.timeout = 3000;</span><br><span class="line">    var obj = &#123;a: 1, b: 2&#125;;</span><br><span class="line">    xhr.open(&#x27;POST&#x27;, &#x27;/&#x27;);</span><br><span class="line">    xhr.send(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+首先我们构造一个简单的函数，然后触发它：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEyLnBuZw?x-oss-process=image/format,png"></li>
+<li>默认的Content-Type为text/plain。</li>
+<li>Request Payload会对非字符串做字符串转换。</li>
+<li>通过xhr.send(JSON.stringify(obj));可修正要发的内容<h2 id="axios方式提交"><a href="#axios方式提交" class="headerlink" title="axios方式提交"></a>axios方式提交</h2>由于axios已经是vue、react的准标配请求方式了，所以这里探究一下它。<br>首先我门看axios的文档，当post提交时候可以传递什么类型参数：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEzLnBuZw?x-oss-process=image/format,png"><br>注意这个类型，我们分别构造两个场景。对应它。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit3() &#123;</span><br><span class="line">    var sence1 = &#x27;name=123&amp;val=456&#x27;;</span><br><span class="line">    var sence2 = &#123;name: 123, val: 456&#125;;</span><br><span class="line">    axios.post(&#x27;/&#x27;, sence1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+分别传递字符串与对象，提交post请求，然后观察结果:<br>场景1 — 传递字符串时候的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE0LnBuZw?x-oss-process=image/format,png"><br>场景2 — 传递对象的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE1LnBuZw?x-oss-process=image/format,png"><br>当我们传递字符串的时候，Content-Type自动转为xxx-form-xxx的形式。当为对象的时候，自动转化为xxx/json。字符串的时候以key1=val1&amp;key2=val2的形式体现，对象以JSON字符串形式体现。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>Web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hexo 博客的 Next 主题配置</title>
     <url>/2020/11/06/Hexo%20%E5%8D%9A%E5%AE%A2%E7%9A%84%20Next%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>经过一番不懈的努力，我们终于按照 <a href="http://blog.helloallen.cn/archives/%E4%BD%BF%E7%94%A8githubpages%E5%92%8Chexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F">使用 Github Pages 和 Hexo 快速搭建博客系统</a> 搭建好了一个属于自己的博客，并且还安装了一个Next主题，但是我们的博客一开始还是很简陋的，我们需要把她装修一下。</p>
@@ -88,52 +166,6 @@
       </categories>
       <tags>
         <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HTTP协议的 Request Payload 和 Form Data 的区别</title>
-    <url>/2020/11/09/HTTP%E5%8D%8F%E8%AE%AE%E7%9A%84-Request-Payload-%E5%92%8C-Form-Data-%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在一个前后端分离的新项目中，前端执行post请求，后端springMVC的 @RequestMapping 接收不到对应的请求参数。开始以为是前端webpack的proxy（将请求跨域代理到后台服务）配置问题。然而，并不是这样…</p>
-<p><strong>proxy配置如下</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;proxy&quot;: &#123;</span><br><span class="line">	&quot;api&quot;: &#123;</span><br><span class="line">		&quot;target&quot;: &quot;http://localhost:7000/&quot;,</span><br><span class="line">		&quot;changeOrigin&quot;: true,</span><br><span class="line">		&quot;pathRewrite&quot;: &#123; &quot;^/api/v1&quot;: &quot;&quot; &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p><strong>前端post请求：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">case &#x27;post&#x27;:</span><br><span class="line">	return axios.post(url, data) // data = &#123;name: &#x27;xiaoming&#x27;&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>后端接收参数：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// SysAccount: private String name;</span><br><span class="line">@PostMapping(&quot;/accounts&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt;createAccount(SysAccount account) &#123;</span><br><span class="line">	&quot;dahuang&quot;.equsls(account.getName()); // false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看了前端发起的请求，请求正文并不是熟悉的Form Data，而是Request Payload。</p>
-<h1 id="区别？"><a href="#区别？" class="headerlink" title="区别？"></a>区别？</h1><h2 id="Request-Payload"><a href="#Request-Payload" class="headerlink" title="Request Payload"></a>Request Payload</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzQucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Request Payload的HTTP请求报文格式大概如下，请求头部Content-Type: application/json，并且请求正文是一个json格式的字符串。（适用于一些复杂的数据对象，例如对象里面再嵌套数组）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/json</span><br><span class="line"></span><br><span class="line">&#123; &quot;foo&quot; : &quot;bar&quot;, &quot;name&quot; : &quot;John&quot; &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Form-Data"><a href="#Form-Data" class="headerlink" title="Form Data"></a>Form Data</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzUucG5n?x-oss-process=image/format,png" alt="Form Data"><br>Form Data 大概格式如下，请求头部的 Content-Type: application/x-www-form-urlencoded，并且请求正文是类似 get 请求 url 的请求参数。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">POST /some-path HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line"></span><br><span class="line">foo=bar&amp;name=John</span><br></pre></td></tr></table></figure>
-
-<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="后端处理"><a href="#后端处理" class="headerlink" title="后端处理"></a>后端处理</h2><p>对于 Request Payload 请求， 必须加 @RequestBody 才能将请求正文解析到对应的 bean 中，通过 request.getReader() 来获取请求正文内容（一说可以使用getRequestPayload方法来获取）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzgucG5n?x-oss-process=image/format,png" alt="Request Payload"><br>对于Form Data请求，springmvc 会自动使用 MessageConverter 将请求参数解析到对应的 bean，且通过 request.getParameter(…) 能获取请求参数。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzkucG5n?x-oss-process=image/format,png" alt="Form Data"></p>
-<h2 id="前端处理"><a href="#前端处理" class="headerlink" title="前端处理"></a>前端处理</h2><p>在前端使用Form Data的方式来发起请求，使用qs库将json对象转化为字符串。<br>(如 { name: ‘dahuang’,age: 11 } 转化为 name=dahuang&amp;age=11)<br>所以，通过下面的方法来解决:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 将</span><br><span class="line">axios.post(url, cloneData)</span><br><span class="line">// 改写为</span><br><span class="line">axios.post(url, qs.stringify(cloneData))</span><br><span class="line">// 或者</span><br><span class="line">axios.post(url, &#123;data: &#123;&#125;,</span><br><span class="line">	headers: &#123;</span><br><span class="line">		content-type: &#x27;application/x-www-form-unlencoded&#x27;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>当请求头的Content-Type为application/json时浏览器认为该请求为复杂请求，这时浏览器会先进行一次预请求,执行一次OPTIONS 请求，向服务器求证该请求是否合法，如果服务器没有给出正确回应浏览器会报跨域请求导致请求失败。<br>一般这三种方式会导致这种现象:</p>
-<ol>
-<li>请求的方法不是GET/HEAD/POST</li>
-<li>POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain</li>
-<li>请求设置了自定义的header字段<h1 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h1><h2 id="传统的Form表单提交"><a href="#传统的Form表单提交" class="headerlink" title="传统的Form表单提交"></a>传统的Form表单提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;name&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;input name=&quot;password&quot; type=&quot;text&quot;&gt;</span><br><span class="line">    &lt;button&gt;提交&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-如果我这里点击提交按钮，就会触发浏览器的提交功能，那结果是什么样呢？<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzExLnBuZw?x-oss-process=image/format,png"><br>可以看到Content-Type为application/x-www-form-urlencoded。值得形式是以key1=value1&amp;key2=value2的形式提交的。<h2 id="传统的Ajax提交"><a href="#传统的Ajax提交" class="headerlink" title="传统的Ajax提交"></a>传统的Ajax提交</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit2() &#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.timeout = 3000;</span><br><span class="line">    var obj = &#123;a: 1, b: 2&#125;;</span><br><span class="line">    xhr.open(&#x27;POST&#x27;, &#x27;/&#x27;);</span><br><span class="line">    xhr.send(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-首先我们构造一个简单的函数，然后触发它：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEyLnBuZw?x-oss-process=image/format,png"></li>
-<li>默认的Content-Type为text/plain。</li>
-<li>Request Payload会对非字符串做字符串转换。</li>
-<li>通过xhr.send(JSON.stringify(obj));可修正要发的内容<h2 id="axios方式提交"><a href="#axios方式提交" class="headerlink" title="axios方式提交"></a>axios方式提交</h2>由于axios已经是vue、react的准标配请求方式了，所以这里探究一下它。<br>首先我门看axios的文档，当post提交时候可以传递什么类型参数：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzEzLnBuZw?x-oss-process=image/format,png"><br>注意这个类型，我们分别构造两个场景。对应它。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function submit3() &#123;</span><br><span class="line">    var sence1 = &#x27;name=123&amp;val=456&#x27;;</span><br><span class="line">    var sence2 = &#123;name: 123, val: 456&#125;;</span><br><span class="line">    axios.post(&#x27;/&#x27;, sence1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-分别传递字符串与对象，提交post请求，然后观察结果:<br>场景1 — 传递字符串时候的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE0LnBuZw?x-oss-process=image/format,png"><br>场景2 — 传递对象的结果：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA1LzE1LnBuZw?x-oss-process=image/format,png"><br>当我们传递字符串的时候，Content-Type自动转为xxx-form-xxx的形式。当为对象的时候，自动转化为xxx/json。字符串的时候以key1=val1&amp;key2=val2的形式体现，对象以JSON字符串形式体现。</li>
-</ol>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>Web前端</tag>
       </tags>
   </entry>
   <entry>
@@ -367,34 +399,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</title>
-    <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson2 项目，在其中编写代码。</p>
-<p>当在浏览器中访问 <a href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 CNode(<a href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有帖子标题和链接，以 json 的形式。</p>
-<p>输出示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/541ed2d05e28155f24676a12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/54207e2efffeb6de3d61f68f&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、学习使用 superagent 抓取网页</p>
-<p><a href="http://visionmedia.github.io/superagent/">superagent</a> 是个 http 方面的库，可以发起 get 或 post 请求。</p>
-<p>2、学习使用 cheerio 分析网页</p>
-<p><a href="https://github.com/cheeriojs/cheerio">cheerio</a> 大家可以理解成一个 Node.js 版的 jquery，用来从网页中以 css selector 取数据，使用方式跟 jquery 一样一样的。</p>
-<h1 id="实现内容"><a href="#实现内容" class="headerlink" title="实现内容"></a>实现内容</h1><p>1、新建一个文件夹，进去之后 npm init<br>2、安装依赖 npm install –save PACKAGE_NAME，此处需要三个包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;cheerio&quot;: &quot;^0.17.0&quot;,</span><br><span class="line">&quot;express&quot;: &quot;^4.9.5&quot;,</span><br><span class="line">&quot;superagent&quot;: &quot;^0.20.0&quot;</span><br></pre></td></tr></table></figure>
-<p>3、新建app.js并写应用逻辑</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.get(&#x27;/&#x27;, function (req, res, next) &#123;</span><br><span class="line">  // 用 superagent 去抓取 https://cnodejs.org/ 的内容</span><br><span class="line">  superagent.get(&#x27;https://cnodejs.org/&#x27;)</span><br><span class="line">    .end(function (err, sres) &#123;</span><br><span class="line">      // 常规的错误处理</span><br><span class="line">      if (err) &#123;</span><br><span class="line">        return next(err);</span><br><span class="line">      &#125;</span><br><span class="line">      // sres.text 里面存储着网页的 html 内容，将它传给 cheerio.load 之后</span><br><span class="line">      // 就可以得到一个实现了 jquery 接口的变量，我们习惯性地将它命名为 `$`</span><br><span class="line">      // 剩下就都是 jquery 的内容了</span><br><span class="line">      var $ = cheerio.load(sres.text);</span><br><span class="line">      var items = [];</span><br><span class="line">      $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">        var $element = $(element);</span><br><span class="line">        items.push(&#123;</span><br><span class="line">          title: $element.attr(&#x27;title&#x27;),</span><br><span class="line">          href: $element.attr(&#x27;href&#x27;)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      res.send(items);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#x27;app is listening at port 3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>4、在lesson2文件夹下执行node app.js<br>5、浏览器输入<a href="http://localhost:3000/%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">http://localhost:3000/进行验证</a></p>
-<p>OK，一个简单的爬虫就是这么简单。这里我们还没有利用到 Node.js 的异步并发特性。不过下两章内容(Nodejs实战之三、四)都是关于异步控制的。</p>
-]]></content>
-      <categories>
-        <category>NodeJs</category>
-      </categories>
-      <tags>
-        <tag>NodeJs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Nodejs实战之三（使用 eventproxy 控制并发）</title>
     <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%B8%89%EF%BC%88%E4%BD%BF%E7%94%A8-eventproxy-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson3 项目，在其中编写代码。</p>
@@ -452,6 +456,34 @@
       </tags>
   </entry>
   <entry>
+    <title>Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</title>
+    <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E4%BA%8C%EF%BC%88%E4%BD%BF%E7%94%A8-superagent-%E4%B8%8E-cheerio-%E5%AE%8C%E6%88%90%E7%AE%80%E5%8D%95%E7%88%AC%E8%99%AB%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson2 项目，在其中编写代码。</p>
+<p>当在浏览器中访问 <a href="http://localhost:3000/">http://localhost:3000/</a> 时，输出 CNode(<a href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有帖子标题和链接，以 json 的形式。</p>
+<p>输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/541ed2d05e28155f24676a12&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/54207e2efffeb6de3d61f68f&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、学习使用 superagent 抓取网页</p>
+<p><a href="http://visionmedia.github.io/superagent/">superagent</a> 是个 http 方面的库，可以发起 get 或 post 请求。</p>
+<p>2、学习使用 cheerio 分析网页</p>
+<p><a href="https://github.com/cheeriojs/cheerio">cheerio</a> 大家可以理解成一个 Node.js 版的 jquery，用来从网页中以 css selector 取数据，使用方式跟 jquery 一样一样的。</p>
+<h1 id="实现内容"><a href="#实现内容" class="headerlink" title="实现内容"></a>实现内容</h1><p>1、新建一个文件夹，进去之后 npm init<br>2、安装依赖 npm install –save PACKAGE_NAME，此处需要三个包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&quot;cheerio&quot;: &quot;^0.17.0&quot;,</span><br><span class="line">&quot;express&quot;: &quot;^4.9.5&quot;,</span><br><span class="line">&quot;superagent&quot;: &quot;^0.20.0&quot;</span><br></pre></td></tr></table></figure>
+<p>3、新建app.js并写应用逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var express = require(&#x27;express&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line"></span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">app.get(&#x27;/&#x27;, function (req, res, next) &#123;</span><br><span class="line">  // 用 superagent 去抓取 https://cnodejs.org/ 的内容</span><br><span class="line">  superagent.get(&#x27;https://cnodejs.org/&#x27;)</span><br><span class="line">    .end(function (err, sres) &#123;</span><br><span class="line">      // 常规的错误处理</span><br><span class="line">      if (err) &#123;</span><br><span class="line">        return next(err);</span><br><span class="line">      &#125;</span><br><span class="line">      // sres.text 里面存储着网页的 html 内容，将它传给 cheerio.load 之后</span><br><span class="line">      // 就可以得到一个实现了 jquery 接口的变量，我们习惯性地将它命名为 `$`</span><br><span class="line">      // 剩下就都是 jquery 的内容了</span><br><span class="line">      var $ = cheerio.load(sres.text);</span><br><span class="line">      var items = [];</span><br><span class="line">      $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">        var $element = $(element);</span><br><span class="line">        items.push(&#123;</span><br><span class="line">          title: $element.attr(&#x27;title&#x27;),</span><br><span class="line">          href: $element.attr(&#x27;href&#x27;)</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      res.send(items);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000, function () &#123;</span><br><span class="line">  console.log(&#x27;app is listening at port 3000&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>4、在lesson2文件夹下执行node app.js<br>5、浏览器输入<a href="http://localhost:3000/%E8%BF%9B%E8%A1%8C%E9%AA%8C%E8%AF%81">http://localhost:3000/进行验证</a></p>
+<p>OK，一个简单的爬虫就是这么简单。这里我们还没有利用到 Node.js 的异步并发特性。不过下两章内容(Nodejs实战之三、四)都是关于异步控制的。</p>
+]]></content>
+      <categories>
+        <category>NodeJs</category>
+      </categories>
+      <tags>
+        <tag>NodeJs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Nodejs实战之四（使用 async 控制并发）</title>
     <url>/2021/11/09/Nodejs%E5%AE%9E%E6%88%98%E4%B9%8B%E5%9B%9B%EF%BC%88%E4%BD%BF%E7%94%A8-async-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91%EF%BC%89/</url>
     <content><![CDATA[<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson4 项目，在其中编写代码。</p>
@@ -490,46 +522,6 @@
       </categories>
       <tags>
         <tag>NodeJs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Promise 从入门到自定义 系列二（promise的理解和使用）</title>
-    <url>/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%BA%8C%EF%BC%88promise%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="Promise是什么？"><a href="#Promise是什么？" class="headerlink" title="Promise是什么？"></a>Promise是什么？</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>抽象表达：Promise是JS中进行异步编程的新的解决方案（旧的是谁？纯回调）<br>具体表达：从语法上讲，Promise是一个构造函数（通过创建实例来使用）；从功能上说，Promise对象用来封装一个异步操作并可以获取其结果。</p>
-<h2 id="promise的状态改变"><a href="#promise的状态改变" class="headerlink" title="promise的状态改变"></a>promise的状态改变</h2><ol>
-<li>pending变为resolved</li>
-</ol>
-<ol start="2">
-<li>pending变为rejected</li>
-</ol>
-<p>说明：只有这两种，且一个promise对象只能改变一次；无论变为成功还是失败，都会有一个结果数据；成功的结果数据一般称为value，失败的结果数据一般称为reason。</p>
-<span id="more"></span>
-
-<h2 id="promise的基本流程"><a href="#promise的基本流程" class="headerlink" title="promise的基本流程"></a>promise的基本流程</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hlbGxvYWxsZW4uY24vdXBsb2FkLzIwMjAvMDYvcHJvbWlzZS1lYWMzMTE5ZmI3MjU0MDdjYTdmOGEwNTQzMjg1ZWFhZS5wbmc?x-oss-process=image/format,png" alt="promise.png"></p>
-<h2 id="promise的基本使用"><a href="#promise的基本使用" class="headerlink" title="promise的基本使用"></a>promise的基本使用</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 创建一个新的promise对象</span><br><span class="line">const p = new Promise((resolve, reject) =&gt; &#123; // 执行器函数</span><br><span class="line">	// 2. 执行异步操作任务</span><br><span class="line">	setTimeout(() =&gt; &#123;</span><br><span class="line">		// 3.1 如果成功了，调用resolve(value)</span><br><span class="line">		if (time%2==0) &#123;</span><br><span class="line">			resolve(&#x27;成功的数据，time=&#x27;, + time)</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 3.2 如果失败了，调用reject(reason)</span><br><span class="line">			reject(&#x27;失败的数据, time=&#x27;, + time)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p.then(</span><br><span class="line">	value =&gt; &#123; // 接收得到成功的value数据 onResolved</span><br><span class="line">		console.log(&#x27;成功的回调&#x27;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason =&gt; &#123; // 接收得到失败的reason数据 onRejected</span><br><span class="line">		console.log(&#x27;失败的回调&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h1 id="为什么要用Promsie？"><a href="#为什么要用Promsie？" class="headerlink" title="为什么要用Promsie？"></a>为什么要用Promsie？</h1><h2 id="指定回调函数的方式更加灵活"><a href="#指定回调函数的方式更加灵活" class="headerlink" title="指定回调函数的方式更加灵活"></a>指定回调函数的方式更加灵活</h2><p>旧的：必须在启动异步任务前指定<br>promise：启动异步任务-&gt;返回promise对象-&gt;给promise对象绑定回调函数（甚至可以在异步任务后指定）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 以下为伪代码不能执行，说明了旧的回调方式回调函数必须在异步任务前指定，而promise指定回调函数更加灵活</span><br><span class="line">function successCallback(resule) &#123;</span><br><span class="line">	console.log(&#x27;声音文件创建成功:&#x27;+resule)</span><br><span class="line">&#125;</span><br><span class="line">function failureCallback(error) &#123;</span><br><span class="line">	console.log(&#x27;声音文件创建失败:&#x27;+error)</span><br><span class="line">&#125;</span><br><span class="line">// 1. 使用纯回调函数</span><br><span class="line">createAudioFileAsync(audioSettings, successCallback, failureCallback)</span><br><span class="line">// 2. 使用promise</span><br><span class="line">const promise = createAudioFileAsync(audioSettings)</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">	promise.then(successCallback,failureCallback)</span><br><span class="line">&#125;,3000)</span><br></pre></td></tr></table></figure>
-
-<h2 id="支持链式调用，可以解决回调地狱问题"><a href="#支持链式调用，可以解决回调地狱问题" class="headerlink" title="支持链式调用，可以解决回调地狱问题"></a>支持链式调用，可以解决回调地狱问题</h2><p>什么是回调地狱？回调函数嵌套调用，外部回调函数异步执行的结果是嵌套的回调函数执行的条件。<br>回调地狱的缺点？不便于阅读、不便于异步处理<br>解决方案？promise链式调用<br>终极解决方案？async/await</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 回调地狱</span><br><span class="line">doSomething(function(result)&#123;</span><br><span class="line">	doSomethingElse(result, function(newResult)&#123;</span><br><span class="line">		doThirdThing(newResult, function(finalResult)&#123;</span><br><span class="line">			console.log(&#x27;Got the final result:&#x27; + finalResult)</span><br><span class="line">		&#125;, failureCallback)</span><br><span class="line">	&#125;, failureCallback)</span><br><span class="line">&#125;, failureCallback)</span><br><span class="line"></span><br><span class="line">// 2. 使用promise的链式调用解决回调地狱</span><br><span class="line">doSomething().then(function(result)&#123;</span><br><span class="line">	return doSomethingElse(result)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(newResult) &#123;</span><br><span class="line">	return doThirdThing(newResult)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(finalResult)&#123;</span><br><span class="line">	console.log(&#x27;Got the final result:&#x27;+finalResult)</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback)</span><br><span class="line"></span><br><span class="line">// 3. async/await：回调地狱的终极解决方案</span><br><span class="line">async function request() &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		const result=await doSomething()</span><br><span class="line">		const newResult=await doSomethingElse(result)</span><br><span class="line">		const finalResult=await soThirdThing(newResult)</span><br><span class="line">		console.log(&#x27;Got the final result&#x27;+finalResult)</span><br><span class="line">	&#125; catch(error) &#123;</span><br><span class="line">		failureCallback(error)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="如何使用Promise？"><a href="#如何使用Promise？" class="headerlink" title="如何使用Promise？"></a>如何使用Promise？</h1><blockquote>
-<p>主要讲解Promise的API</p>
-</blockquote>
-<p>1、Promise构造函数：Promise(excutor){}<br>excutor函数：同步执行 (resolve, reject)=&gt;{}<br>resolve函数：内部定义成功时我们调用的函数 value=&gt;{}<br>reject函数：内部定义失败时我们调用的函数 reason=&gt;{}<br>说明：excutor会在Promise内部立即同步回调，异步操作在执行器中执行</p>
-<p>2、Promise.prototype.then方法：(onResolved, onRejected)=&gt;{}<br>onResolved函数：成功的回调函数 (value)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：指定用于得到成功value的成功回调和用于得到失败reason的失败回调，返回一个新的promise对象</p>
-<p>3、Promise.prototype.catch方法：(onRejected)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：then()的语法糖，相当于：then(undefined, onRejected)</p>
-<p>4、Promise.resolve方法：(value)=&gt;{}<br>value: 成功的数据或promise对象<br>说明：返回一个成功/失败的promise对象</p>
-<p>5、Promise.reject方法：(reason)=&gt;{}<br>reason：失败的原因<br>说明：返回一个失败的promise对象</p>
-<p>6、Promise.all方法：(promises)=&gt;{}<br>promises：包含n个promise的数组<br>说明：返回一个新的promise，只有所有的promise都成功才成功，只要有一个失败了就直接失败</p>
-<p>7、Promise.race方法：(promises)=&gt;{}<br>promises: 包含n个promise数组<br>说明：返回一个新的promise，第一个完成的promise的结果状态就是最终的结果状态</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">	setTimeout(()=&gt;&#123; // 模拟异步</span><br><span class="line">		resolve(&#x27;成功的数据&#x27;)</span><br><span class="line">		// reject(&#x27;失败的数据&#x27;)</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;).then(</span><br><span class="line">	value=&gt;&#123;</span><br><span class="line">		console.log(&#x27;onResolved()&#x27;, value)</span><br><span class="line">	&#125;</span><br><span class="line">).catch(</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;onRejected()&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// 产生一个成功值为1的promise对象</span><br><span class="line">const p1=new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">	resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">// 产生一个成功值为2的promise对象</span><br><span class="line">const p2=Promise.resolve(2)  // 语法糖</span><br><span class="line">const p3=Promise.reject(3)</span><br><span class="line"></span><br><span class="line">p1.then(value=&gt;&#123;console.log(value)&#125;) //1</span><br><span class="line">p2.then(value=&gt;&#123;console.log(value)&#125;) //2</span><br><span class="line">p3.catch(reason=&gt;&#123;console.log(reason)&#125;) //3</span><br><span class="line"></span><br><span class="line">// 一个失败的话返回失败的数据，成功的话返回成功的数组</span><br><span class="line">const pAll = Promise.all([p1,p2,p3])</span><br><span class="line">pAll.then(</span><br><span class="line">	values=&gt;&#123;&#125;,</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;all onRejected()&#x27;, reason) // 3</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const pRace = Promise.race([p1,p2,p3])</span><br><span class="line">pRace.then(</span><br><span class="line">	value=&gt;&#123;</span><br><span class="line">		console.log(&#x27;race onResolved()&#x27;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;race onRejected()&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>ES6</category>
-      </categories>
-      <tags>
-        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -600,6 +592,46 @@
       </tags>
   </entry>
   <entry>
+    <title>Promise 从入门到自定义 系列二（promise的理解和使用）</title>
+    <url>/2023/07/09/Promise-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E8%87%AA%E5%AE%9A%E4%B9%89-%E7%B3%BB%E5%88%97%E4%BA%8C%EF%BC%88promise%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Promise是什么？"><a href="#Promise是什么？" class="headerlink" title="Promise是什么？"></a>Promise是什么？</h1><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><p>抽象表达：Promise是JS中进行异步编程的新的解决方案（旧的是谁？纯回调）<br>具体表达：从语法上讲，Promise是一个构造函数（通过创建实例来使用）；从功能上说，Promise对象用来封装一个异步操作并可以获取其结果。</p>
+<h2 id="promise的状态改变"><a href="#promise的状态改变" class="headerlink" title="promise的状态改变"></a>promise的状态改变</h2><ol>
+<li>pending变为resolved</li>
+</ol>
+<ol start="2">
+<li>pending变为rejected</li>
+</ol>
+<p>说明：只有这两种，且一个promise对象只能改变一次；无论变为成功还是失败，都会有一个结果数据；成功的结果数据一般称为value，失败的结果数据一般称为reason。</p>
+<span id="more"></span>
+
+<h2 id="promise的基本流程"><a href="#promise的基本流程" class="headerlink" title="promise的基本流程"></a>promise的基本流程</h2><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2hlbGxvYWxsZW4uY24vdXBsb2FkLzIwMjAvMDYvcHJvbWlzZS1lYWMzMTE5ZmI3MjU0MDdjYTdmOGEwNTQzMjg1ZWFhZS5wbmc?x-oss-process=image/format,png" alt="promise.png"></p>
+<h2 id="promise的基本使用"><a href="#promise的基本使用" class="headerlink" title="promise的基本使用"></a>promise的基本使用</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 创建一个新的promise对象</span><br><span class="line">const p = new Promise((resolve, reject) =&gt; &#123; // 执行器函数</span><br><span class="line">	// 2. 执行异步操作任务</span><br><span class="line">	setTimeout(() =&gt; &#123;</span><br><span class="line">		// 3.1 如果成功了，调用resolve(value)</span><br><span class="line">		if (time%2==0) &#123;</span><br><span class="line">			resolve(&#x27;成功的数据，time=&#x27;, + time)</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			// 3.2 如果失败了，调用reject(reason)</span><br><span class="line">			reject(&#x27;失败的数据, time=&#x27;, + time)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">p.then(</span><br><span class="line">	value =&gt; &#123; // 接收得到成功的value数据 onResolved</span><br><span class="line">		console.log(&#x27;成功的回调&#x27;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason =&gt; &#123; // 接收得到失败的reason数据 onRejected</span><br><span class="line">		console.log(&#x27;失败的回调&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h1 id="为什么要用Promsie？"><a href="#为什么要用Promsie？" class="headerlink" title="为什么要用Promsie？"></a>为什么要用Promsie？</h1><h2 id="指定回调函数的方式更加灵活"><a href="#指定回调函数的方式更加灵活" class="headerlink" title="指定回调函数的方式更加灵活"></a>指定回调函数的方式更加灵活</h2><p>旧的：必须在启动异步任务前指定<br>promise：启动异步任务-&gt;返回promise对象-&gt;给promise对象绑定回调函数（甚至可以在异步任务后指定）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 以下为伪代码不能执行，说明了旧的回调方式回调函数必须在异步任务前指定，而promise指定回调函数更加灵活</span><br><span class="line">function successCallback(resule) &#123;</span><br><span class="line">	console.log(&#x27;声音文件创建成功:&#x27;+resule)</span><br><span class="line">&#125;</span><br><span class="line">function failureCallback(error) &#123;</span><br><span class="line">	console.log(&#x27;声音文件创建失败:&#x27;+error)</span><br><span class="line">&#125;</span><br><span class="line">// 1. 使用纯回调函数</span><br><span class="line">createAudioFileAsync(audioSettings, successCallback, failureCallback)</span><br><span class="line">// 2. 使用promise</span><br><span class="line">const promise = createAudioFileAsync(audioSettings)</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">	promise.then(successCallback,failureCallback)</span><br><span class="line">&#125;,3000)</span><br></pre></td></tr></table></figure>
+
+<h2 id="支持链式调用，可以解决回调地狱问题"><a href="#支持链式调用，可以解决回调地狱问题" class="headerlink" title="支持链式调用，可以解决回调地狱问题"></a>支持链式调用，可以解决回调地狱问题</h2><p>什么是回调地狱？回调函数嵌套调用，外部回调函数异步执行的结果是嵌套的回调函数执行的条件。<br>回调地狱的缺点？不便于阅读、不便于异步处理<br>解决方案？promise链式调用<br>终极解决方案？async/await</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 回调地狱</span><br><span class="line">doSomething(function(result)&#123;</span><br><span class="line">	doSomethingElse(result, function(newResult)&#123;</span><br><span class="line">		doThirdThing(newResult, function(finalResult)&#123;</span><br><span class="line">			console.log(&#x27;Got the final result:&#x27; + finalResult)</span><br><span class="line">		&#125;, failureCallback)</span><br><span class="line">	&#125;, failureCallback)</span><br><span class="line">&#125;, failureCallback)</span><br><span class="line"></span><br><span class="line">// 2. 使用promise的链式调用解决回调地狱</span><br><span class="line">doSomething().then(function(result)&#123;</span><br><span class="line">	return doSomethingElse(result)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(newResult) &#123;</span><br><span class="line">	return doThirdThing(newResult)</span><br><span class="line">&#125;)</span><br><span class="line">.then(function(finalResult)&#123;</span><br><span class="line">	console.log(&#x27;Got the final result:&#x27;+finalResult)</span><br><span class="line">&#125;)</span><br><span class="line">.catch(failureCallback)</span><br><span class="line"></span><br><span class="line">// 3. async/await：回调地狱的终极解决方案</span><br><span class="line">async function request() &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		const result=await doSomething()</span><br><span class="line">		const newResult=await doSomethingElse(result)</span><br><span class="line">		const finalResult=await soThirdThing(newResult)</span><br><span class="line">		console.log(&#x27;Got the final result&#x27;+finalResult)</span><br><span class="line">	&#125; catch(error) &#123;</span><br><span class="line">		failureCallback(error)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何使用Promise？"><a href="#如何使用Promise？" class="headerlink" title="如何使用Promise？"></a>如何使用Promise？</h1><blockquote>
+<p>主要讲解Promise的API</p>
+</blockquote>
+<p>1、Promise构造函数：Promise(excutor){}<br>excutor函数：同步执行 (resolve, reject)=&gt;{}<br>resolve函数：内部定义成功时我们调用的函数 value=&gt;{}<br>reject函数：内部定义失败时我们调用的函数 reason=&gt;{}<br>说明：excutor会在Promise内部立即同步回调，异步操作在执行器中执行</p>
+<p>2、Promise.prototype.then方法：(onResolved, onRejected)=&gt;{}<br>onResolved函数：成功的回调函数 (value)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：指定用于得到成功value的成功回调和用于得到失败reason的失败回调，返回一个新的promise对象</p>
+<p>3、Promise.prototype.catch方法：(onRejected)=&gt;{}<br>onRejected函数：失败的回调函数 (reason)=&gt;{}<br>说明：then()的语法糖，相当于：then(undefined, onRejected)</p>
+<p>4、Promise.resolve方法：(value)=&gt;{}<br>value: 成功的数据或promise对象<br>说明：返回一个成功/失败的promise对象</p>
+<p>5、Promise.reject方法：(reason)=&gt;{}<br>reason：失败的原因<br>说明：返回一个失败的promise对象</p>
+<p>6、Promise.all方法：(promises)=&gt;{}<br>promises：包含n个promise的数组<br>说明：返回一个新的promise，只有所有的promise都成功才成功，只要有一个失败了就直接失败</p>
+<p>7、Promise.race方法：(promises)=&gt;{}<br>promises: 包含n个promise数组<br>说明：返回一个新的promise，第一个完成的promise的结果状态就是最终的结果状态</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">	setTimeout(()=&gt;&#123; // 模拟异步</span><br><span class="line">		resolve(&#x27;成功的数据&#x27;)</span><br><span class="line">		// reject(&#x27;失败的数据&#x27;)</span><br><span class="line">	&#125;, 1000)</span><br><span class="line">&#125;).then(</span><br><span class="line">	value=&gt;&#123;</span><br><span class="line">		console.log(&#x27;onResolved()&#x27;, value)</span><br><span class="line">	&#125;</span><br><span class="line">).catch(</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;onRejected()&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">// 产生一个成功值为1的promise对象</span><br><span class="line">const p1=new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">	resolve(1)</span><br><span class="line">&#125;)</span><br><span class="line">// 产生一个成功值为2的promise对象</span><br><span class="line">const p2=Promise.resolve(2)  // 语法糖</span><br><span class="line">const p3=Promise.reject(3)</span><br><span class="line"></span><br><span class="line">p1.then(value=&gt;&#123;console.log(value)&#125;) //1</span><br><span class="line">p2.then(value=&gt;&#123;console.log(value)&#125;) //2</span><br><span class="line">p3.catch(reason=&gt;&#123;console.log(reason)&#125;) //3</span><br><span class="line"></span><br><span class="line">// 一个失败的话返回失败的数据，成功的话返回成功的数组</span><br><span class="line">const pAll = Promise.all([p1,p2,p3])</span><br><span class="line">pAll.then(</span><br><span class="line">	values=&gt;&#123;&#125;,</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;all onRejected()&#x27;, reason) // 3</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const pRace = Promise.race([p1,p2,p3])</span><br><span class="line">pRace.then(</span><br><span class="line">	value=&gt;&#123;</span><br><span class="line">		console.log(&#x27;race onResolved()&#x27;, value)</span><br><span class="line">	&#125;,</span><br><span class="line">	reason=&gt;&#123;</span><br><span class="line">		console.log(&#x27;race onRejected()&#x27;, reason)</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>ES6</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue项目中两种文件下载方式</title>
     <url>/2021/11/09/Vue%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%B8%A4%E7%A7%8D%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<blockquote>
@@ -626,6 +658,165 @@
       </categories>
       <tags>
         <tag>VUE</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
+    <url>/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
+<li>安装 Node.js</li>
+<li>安装 Git</li>
+<li>Github 账户</li>
+</ul>
+<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
+</blockquote>
+<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
+<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
+</li>
+<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
+</li>
+<li><p>在 Hexo 文件夹下执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+<p>需要执行以下命令再安装一次：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
+</li>
+<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
+</li>
+</ol>
+<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
+<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
+<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
+<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
+<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+<p>现在访问你的博客就可以看见写好的文章啦！</p>
+<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
+<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
+<p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
+<blockquote>
+<p>感谢原创：<a href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Halo搭建个人博客</title>
+    <url>/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>项目名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>halo</td>
+<td>提供整个系统的服务，采用 Spring Boot 开发</td>
+</tr>
+<tr>
+<td>halo-admin</td>
+<td>负责后台管理的渲染，采用 Vue 开发，已集成在 Halo 运行包内，无需独立部署</td>
+</tr>
+<tr>
+<td>halo-comment</td>
+<td>评论插件，采用 Vue 开发，在主题中运行方式引入构建好的 Javascript 文件即可</td>
+</tr>
+<tr>
+<td>halo-theme-*</td>
+<td>主题项目集，采用 Freemarker 模板引擎编写，需要包含一些特殊的配置才能够被 halo 所使用</td>
+</tr>
+</tbody></table>
+<h1 id="在Linux服务器上部署Halo"><a href="#在Linux服务器上部署Halo" class="headerlink" title="在Linux服务器上部署Halo"></a>在Linux服务器上部署Halo</h1><h2 id="安装-Java-运行环境"><a href="#安装-Java-运行环境" class="headerlink" title="安装 Java 运行环境"></a>安装 Java 运行环境</h2><blockquote>
+<p> 若已经存在 Java 运行环境的可略过这一步。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装 OpenJRE</span><br><span class="line">sudo yum install java-1.8.0-openjdk -y</span><br><span class="line"></span><br><span class="line"># 检测是否安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-Halo"><a href="#安装-Halo" class="headerlink" title="安装 Halo"></a>安装 Halo</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p>考虑到部分用户的需要，可能需要自定义比如端口等设置项，我们提供了公共的配置文件，并且该配置文件是完全独立于安装包的。当然，你也可以使用安装包内的默认配置文件，但是安装包内的配置文件是不可修改的。请注意：配置文件的路径为 ~/.halo/application.yaml。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载配置文件到 ~/.halo 目录</span><br><span class="line">curl -o ~/.halo/application.yaml --create-dirs https://dl.halo.run/config/application-template.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>完成上一步操作，我们就可以自己配置 Halo 的运行端口，以及数据库相关的配置了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 Vim 工具修改配置文件</span><br><span class="line">vim ~/.halo/application.yaml</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 服务端口号</span><br><span class="line">  port: 8090</span><br><span class="line"></span><br><span class="line">  # Response data gzip.</span><br><span class="line">  compression:</span><br><span class="line">    enabled: false</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    # 默认使用的是 H2 Database 数据库，这是一种嵌入式的数据库</span><br><span class="line">    # H2 database configuration.</span><br><span class="line">    driver-class-name: org.h2.Driver</span><br><span class="line">    url: jdbc:h2:file:~/.halo/db/halo</span><br><span class="line">    username: admin</span><br><span class="line">    password: 123456</span><br><span class="line"></span><br><span class="line">    # MySQL database configuration.</span><br><span class="line">  #    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  #    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span><br><span class="line">  #    username: root</span><br><span class="line">  #    password: 123456</span><br><span class="line"></span><br><span class="line">  # H2 database console configuration.</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      settings:</span><br><span class="line">        web-allow-others: false</span><br><span class="line">      path: /h2-console</span><br><span class="line">      enabled: false</span><br><span class="line"></span><br><span class="line">halo:</span><br><span class="line">  # Your admin client path is https://your-domain/&#123;admin-path&#125;</span><br><span class="line">  admin-path: admin</span><br><span class="line"></span><br><span class="line">  # memory or level</span><br><span class="line">  cache: memory</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行Halo"><a href="#运行Halo" class="headerlink" title="运行Halo"></a>运行Halo</h2><p>Halo 的整个应用程序只有一个 Jar 包，且不包含用户的任何配置，它放在任何目录都是可行的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 启动测试</span><br><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
+<p>如看到以下日志输出，则代表启动成功.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：当jar包下载失败或下载的不能成功运行时，请前往：<a href="https://halo.run/archives/download.html">https://halo.run/archives/download.html</a> 进行下载</p>
+</blockquote>
+<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
+<p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 halo.service</span><br><span class="line">sudo vim /etc/systemd/system/halo.service</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Halo Service</span><br><span class="line">Documentation=https://halo.run</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=halo</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line">StandOutput=syslog</span><br><span class="line"></span><br><span class="line">StandError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>参数：</p>
+<ul>
+<li>-Xms256m：为 JVM 启动时分配的内存，请按照服务器的内存做适当调整，512 M 内存的服务器推荐设置为 128，1G 内存的服务器推荐设置为 256，默认为 256。</li>
+<li>-Xmx256m：为 JVM 运行过程中分配的最大内存，配置同上。</li>
+<li>YOUR_JAR_PATH：Halo 安装包的绝对路径，例如 /www/wwwroot/halo-latest.jar。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 service 文件之后需要刷新 Systemd</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 使 Halo 开机自启</span><br><span class="line">sudo systemctl enable halo</span><br><span class="line"></span><br><span class="line"># 启动 Halo</span><br><span class="line">sudo service halo start</span><br><span class="line"></span><br><span class="line"># 重启 Halo</span><br><span class="line">sudo service halo restart</span><br><span class="line"></span><br><span class="line"># 停止 Halo</span><br><span class="line">sudo service halo stop</span><br><span class="line"></span><br><span class="line"># 查看 Halo 的运行状态</span><br><span class="line">sudo service halo status</span><br></pre></td></tr></table></figure>
+
+<p>完成以上操作即可通过 IP:端口 访问了。不过在此之前，最好先完成后续操作，我们还需要让域名也可以访问到 Halo，请继续看 配置域名访问。</p>
+<h2 id="更新-Halo"><a href="#更新-Halo" class="headerlink" title="更新 Halo"></a>更新 Halo</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 备份数据</span><br><span class="line">cp -r ~/.halo ~/.halo.bak</span><br><span class="line"></span><br><span class="line"># 备份旧的安装包</span><br><span class="line">mv halo-latest.jar halo-latest.jar.bak</span><br><span class="line"></span><br><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 测试是否能够正常启动</span><br><span class="line">java -jar halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 重启应用</span><br><span class="line">service halo restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><h2 id="使用Nginx进行反向代理"><a href="#使用Nginx进行反向代理" class="headerlink" title="使用Nginx进行反向代理"></a>使用Nginx进行反向代理</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加 Nginx 源</span><br><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装 Nginx</span><br><span class="line">sudo yum install -y nginx</span><br><span class="line"></span><br><span class="line"># 启动 Nginx</span><br><span class="line">sudo systemctl start nginx.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启 Nginx</span><br><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
+<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 Nginx 配置模板</span><br><span class="line">curl -o /etc/nginx/conf.d/halo.conf --create-dirs https://dl.halo.run/config/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 vim 编辑 halo.conf</span><br><span class="line">vim /etc/nginx/conf.d/halo.conf</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://127.0.0.1:8090/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：请把 example.com 改为自己的域名。</p>
+</blockquote>
+<p>修改完成之后</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多配置详情见halo官网：<a href="https://halo.run/">https://halo.run/</a> <br/><br>halo社区：<a href="https://bbs.halo.run/">https://bbs.halo.run/</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -672,7 +863,7 @@
 <p>在第一代 iPhone 到 iPhone 3GS 的非 Retina 屏幕上，一个点就等于一像素，可以表示为 @1x；而在 iPhone 4 到 iPhone 4s 的 Retina 屏幕上，一个点等于两个像素，可以表示为 @2x。而日后发布的一些设备（如 iPhone 6 Plus、iPhone X）还会出现一个点等于三个像素的情况，可以表示为 @3x，这种 @1x、@2x、@3x 可以称之为「比例因子」。</p>
 <p>从下面的图示可以看出，在物理尺寸相同时，从 @1x 到 @3x 图像清晰度依次递增。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/1d74670901daeefeca41452c3f633ae3.png"></p>
-<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#x61;&#x6d;&#101;&#114;&#97;&#64;&#x31;&#120;&#x2e;&#112;&#110;&#x67;">&#x63;&#x61;&#x6d;&#101;&#114;&#97;&#64;&#x31;&#120;&#x2e;&#112;&#110;&#x67;</a>」和「<a href="mailto:&#x63;&#97;&#109;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#x70;&#x6e;&#103;">&#x63;&#97;&#109;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#x70;&#x6e;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
+<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#99;&#x61;&#x6d;&#x65;&#114;&#97;&#x40;&#49;&#120;&#x2e;&#112;&#x6e;&#x67;">&#99;&#x61;&#x6d;&#x65;&#114;&#97;&#x40;&#49;&#120;&#x2e;&#112;&#x6e;&#x67;</a>」和「<a href="mailto:&#x63;&#x61;&#x6d;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#112;&#x6e;&#103;">&#x63;&#x61;&#x6d;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#112;&#x6e;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
 <p>用与像素密度无关的单位「point 点」来表示设计内容的尺寸的优势在日后 iPhone 的屏幕尺寸变得更加复杂之后会更加凸显。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/414393edef51cdfab6b1bcebad5789b7.png"></p>
 <p>进一步，第一代 iPhone 到 iPhone 3GS 的屏幕分辨率可以表示为 320pt × 480pt @1x，iPhone 4、iPhone 4s 的屏幕分辨率可以表示为 320pt × 480pt @2x。而使用「point 点」这个单位表示的分辨率我们可以称之为「逻辑分辨率」，而使用「px 像素」这个单位表示的分辨率我们可以称之为「渲染分辨率」。</p>
@@ -903,165 +1094,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用Halo搭建个人博客</title>
-    <url>/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
-<span id="more"></span>
-
-<table>
-<thead>
-<tr>
-<th>项目名称</th>
-<th>简介</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>halo</td>
-<td>提供整个系统的服务，采用 Spring Boot 开发</td>
-</tr>
-<tr>
-<td>halo-admin</td>
-<td>负责后台管理的渲染，采用 Vue 开发，已集成在 Halo 运行包内，无需独立部署</td>
-</tr>
-<tr>
-<td>halo-comment</td>
-<td>评论插件，采用 Vue 开发，在主题中运行方式引入构建好的 Javascript 文件即可</td>
-</tr>
-<tr>
-<td>halo-theme-*</td>
-<td>主题项目集，采用 Freemarker 模板引擎编写，需要包含一些特殊的配置才能够被 halo 所使用</td>
-</tr>
-</tbody></table>
-<h1 id="在Linux服务器上部署Halo"><a href="#在Linux服务器上部署Halo" class="headerlink" title="在Linux服务器上部署Halo"></a>在Linux服务器上部署Halo</h1><h2 id="安装-Java-运行环境"><a href="#安装-Java-运行环境" class="headerlink" title="安装 Java 运行环境"></a>安装 Java 运行环境</h2><blockquote>
-<p> 若已经存在 Java 运行环境的可略过这一步。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装 OpenJRE</span><br><span class="line">sudo yum install java-1.8.0-openjdk -y</span><br><span class="line"></span><br><span class="line"># 检测是否安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装-Halo"><a href="#安装-Halo" class="headerlink" title="安装 Halo"></a>安装 Halo</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p>考虑到部分用户的需要，可能需要自定义比如端口等设置项，我们提供了公共的配置文件，并且该配置文件是完全独立于安装包的。当然，你也可以使用安装包内的默认配置文件，但是安装包内的配置文件是不可修改的。请注意：配置文件的路径为 ~/.halo/application.yaml。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载配置文件到 ~/.halo 目录</span><br><span class="line">curl -o ~/.halo/application.yaml --create-dirs https://dl.halo.run/config/application-template.yaml</span><br></pre></td></tr></table></figure>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>完成上一步操作，我们就可以自己配置 Halo 的运行端口，以及数据库相关的配置了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 Vim 工具修改配置文件</span><br><span class="line">vim ~/.halo/application.yaml</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 服务端口号</span><br><span class="line">  port: 8090</span><br><span class="line"></span><br><span class="line">  # Response data gzip.</span><br><span class="line">  compression:</span><br><span class="line">    enabled: false</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    # 默认使用的是 H2 Database 数据库，这是一种嵌入式的数据库</span><br><span class="line">    # H2 database configuration.</span><br><span class="line">    driver-class-name: org.h2.Driver</span><br><span class="line">    url: jdbc:h2:file:~/.halo/db/halo</span><br><span class="line">    username: admin</span><br><span class="line">    password: 123456</span><br><span class="line"></span><br><span class="line">    # MySQL database configuration.</span><br><span class="line">  #    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  #    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span><br><span class="line">  #    username: root</span><br><span class="line">  #    password: 123456</span><br><span class="line"></span><br><span class="line">  # H2 database console configuration.</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      settings:</span><br><span class="line">        web-allow-others: false</span><br><span class="line">      path: /h2-console</span><br><span class="line">      enabled: false</span><br><span class="line"></span><br><span class="line">halo:</span><br><span class="line">  # Your admin client path is https://your-domain/&#123;admin-path&#125;</span><br><span class="line">  admin-path: admin</span><br><span class="line"></span><br><span class="line">  # memory or level</span><br><span class="line">  cache: memory</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行Halo"><a href="#运行Halo" class="headerlink" title="运行Halo"></a>运行Halo</h2><p>Halo 的整个应用程序只有一个 Jar 包，且不包含用户的任何配置，它放在任何目录都是可行的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 启动测试</span><br><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
-<p>如看到以下日志输出，则代表启动成功.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：当jar包下载失败或下载的不能成功运行时，请前往：<a href="https://halo.run/archives/download.html">https://halo.run/archives/download.html</a> 进行下载</p>
-</blockquote>
-<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
-<p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
-<p>下载完成之后，我们还需要对其进行修改。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 halo.service</span><br><span class="line">sudo vim /etc/systemd/system/halo.service</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Halo Service</span><br><span class="line">Documentation=https://halo.run</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=halo</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line">StandOutput=syslog</span><br><span class="line"></span><br><span class="line">StandError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<p>参数：</p>
-<ul>
-<li>-Xms256m：为 JVM 启动时分配的内存，请按照服务器的内存做适当调整，512 M 内存的服务器推荐设置为 128，1G 内存的服务器推荐设置为 256，默认为 256。</li>
-<li>-Xmx256m：为 JVM 运行过程中分配的最大内存，配置同上。</li>
-<li>YOUR_JAR_PATH：Halo 安装包的绝对路径，例如 /www/wwwroot/halo-latest.jar。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 service 文件之后需要刷新 Systemd</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 使 Halo 开机自启</span><br><span class="line">sudo systemctl enable halo</span><br><span class="line"></span><br><span class="line"># 启动 Halo</span><br><span class="line">sudo service halo start</span><br><span class="line"></span><br><span class="line"># 重启 Halo</span><br><span class="line">sudo service halo restart</span><br><span class="line"></span><br><span class="line"># 停止 Halo</span><br><span class="line">sudo service halo stop</span><br><span class="line"></span><br><span class="line"># 查看 Halo 的运行状态</span><br><span class="line">sudo service halo status</span><br></pre></td></tr></table></figure>
-
-<p>完成以上操作即可通过 IP:端口 访问了。不过在此之前，最好先完成后续操作，我们还需要让域名也可以访问到 Halo，请继续看 配置域名访问。</p>
-<h2 id="更新-Halo"><a href="#更新-Halo" class="headerlink" title="更新 Halo"></a>更新 Halo</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 备份数据</span><br><span class="line">cp -r ~/.halo ~/.halo.bak</span><br><span class="line"></span><br><span class="line"># 备份旧的安装包</span><br><span class="line">mv halo-latest.jar halo-latest.jar.bak</span><br><span class="line"></span><br><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 测试是否能够正常启动</span><br><span class="line">java -jar halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 重启应用</span><br><span class="line">service halo restart</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><h2 id="使用Nginx进行反向代理"><a href="#使用Nginx进行反向代理" class="headerlink" title="使用Nginx进行反向代理"></a>使用Nginx进行反向代理</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加 Nginx 源</span><br><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装 Nginx</span><br><span class="line">sudo yum install -y nginx</span><br><span class="line"></span><br><span class="line"># 启动 Nginx</span><br><span class="line">sudo systemctl start nginx.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启 Nginx</span><br><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
-<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 Nginx 配置模板</span><br><span class="line">curl -o /etc/nginx/conf.d/halo.conf --create-dirs https://dl.halo.run/config/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>下载完成之后，我们还需要对其进行修改</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 vim 编辑 halo.conf</span><br><span class="line">vim /etc/nginx/conf.d/halo.conf</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://127.0.0.1:8090/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：请把 example.com 改为自己的域名。</p>
-</blockquote>
-<p>修改完成之后</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>更多配置详情见halo官网：<a href="https://halo.run/">https://halo.run/</a> <br/><br>halo社区：<a href="https://bbs.halo.run/">https://bbs.halo.run/</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
-    <url>/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
-<li>安装 Node.js</li>
-<li>安装 Git</li>
-<li>Github 账户</li>
-</ul>
-<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
-</blockquote>
-<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
-<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
-</li>
-<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
-</li>
-<li><p>在 Hexo 文件夹下执行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
-<p>需要执行以下命令再安装一次：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
-</li>
-<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
-</li>
-</ol>
-<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
-<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
-<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-
-<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
-<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
-<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
-<p>现在访问你的博客就可以看见写好的文章啦！</p>
-<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
-<blockquote>
-<p>感谢原创：<a href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用spacedesk实现两台笔记本的低延迟屏幕扩展</title>
     <url>/2020/11/09/%E4%BD%BF%E7%94%A8spacedesk%E5%AE%9E%E7%8E%B0%E4%B8%A4%E5%8F%B0%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%9A%84%E4%BD%8E%E5%BB%B6%E8%BF%9F%E5%B1%8F%E5%B9%95%E6%89%A9%E5%B1%95/</url>
     <content><![CDATA[<p><strong>需求：</strong><br>有两台笔记本电脑，想要将其中一台作为扩展屏幕使用<br><strong>准备：</strong><br>两台有网线接口的笔记本电脑、一根双绞线、spacedesk软件<br><strong>软件下载地址：</strong><br>官网：<a href="https://www.spacedesk.net/#downloads">https://www.spacedesk.net/#downloads</a><br>网盘下载：链接：<a href="https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ">https://pan.baidu.com/s/1e2Y0BT1KKvMQF5RPIe2BQQ</a><br>提取码：agdh </p>
@@ -1079,6 +1111,25 @@
       </categories>
       <tags>
         <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于AJAX</title>
+    <url>/2020/11/09/%E5%85%B3%E4%BA%8EAJAX/</url>
+    <content><![CDATA[<p>AJAX：Asynchronous JavaScript and XML，意思是用JavaScript执行异步网络请求。<br>现代浏览器上，ajax的实现主要依靠XMLHttpRequest 对象，该对象用于和服务器交换数据</p>
+<h6 id="1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。"><a href="#1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。" class="headerlink" title="1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。"></a>1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。</h6><p>  （1）对于get请求可以通过向URL添加唯一的ID，来避免首先获取缓存结果。<br>  （2）对于post请求：使用setRequestHeader()添加HTTP头，然后在send()方法中规定发送数据:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo_post2.php&quot;,true);</span><br><span class="line">  xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">  xmlhttp.send(&quot;fname=Henry&amp;lname=Ford&quot;);</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h6 id="2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。"><a href="#2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。" class="headerlink" title="2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。"></a>2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。</h6><h6 id="3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态"><a href="#3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态" class="headerlink" title="3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态"></a>3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;AJAX&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;myDiv&quot;&gt;&lt;h2&gt;使用AJAX修改文本内容&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">  &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;修改内容&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function loadXMLDoc() &#123;</span><br><span class="line">    var xmlhttp;</span><br><span class="line">    if (window.XMLHttpRequest) &#123;</span><br><span class="line">      // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行</span><br><span class="line">      xmlhttp = new XMLHttpRequest();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // IE6, IE5 浏览器执行代码</span><br><span class="line">      xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.onreadystatechange = function() &#123;</span><br><span class="line">      if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) &#123;</span><br><span class="line">        document.getElementById(&quot;myDiv&quot;).innerHTML = xmlhttp.responseText;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.open(&quot;GET&quot;,&quot;/try/demo_get.php?t=&quot; + Math.random(), true);</span><br><span class="line">    xmlhttp.send();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000">廖雪峰官网AJAX</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1134,50 +1185,6 @@
       </categories>
       <tags>
         <tag>Web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于AJAX</title>
-    <url>/2020/11/09/%E5%85%B3%E4%BA%8EAJAX/</url>
-    <content><![CDATA[<p>AJAX：Asynchronous JavaScript and XML，意思是用JavaScript执行异步网络请求。<br>现代浏览器上，ajax的实现主要依靠XMLHttpRequest 对象，该对象用于和服务器交换数据</p>
-<h6 id="1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。"><a href="#1、XMLHttpRequest对象有-open-“请求类型”-“请求文件在服务器上的位置”-是否异步-和-send-方法。" class="headerlink" title="1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。"></a>1、XMLHttpRequest对象有 open(“请求类型”, “请求文件在服务器上的位置”,是否异步) 和 send() 方法。</h6><p>  （1）对于get请求可以通过向URL添加唯一的ID，来避免首先获取缓存结果。<br>  （2）对于post请求：使用setRequestHeader()添加HTTP头，然后在send()方法中规定发送数据:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">xmlhttp.open(&quot;POST&quot;,&quot;/try/ajax/demo_post2.php&quot;,true);</span><br><span class="line">  xmlhttp.setRequestHeader(&quot;Content-type&quot;,&quot;application/x-www-form-urlencoded&quot;);</span><br><span class="line">  xmlhttp.send(&quot;fname=Henry&amp;lname=Ford&quot;);</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h6 id="2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。"><a href="#2、XMLHttpRequest对象的-responseText-和-responseXML-属性来处理响应数据。" class="headerlink" title="2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。"></a>2、XMLHttpRequest对象的 responseText 和 responseXML 属性来处理响应数据。</h6><h6 id="3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态"><a href="#3、XMLHttpRequest-提供-onreadystatechange-方法、readyState-属性、status-属性来监听响应状态" class="headerlink" title="3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态"></a>3、XMLHttpRequest 提供 onreadystatechange() 方法、readyState 属性、status 属性来监听响应状态</h6><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;</span><br><span class="line">  &lt;title&gt;AJAX&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;myDiv&quot;&gt;&lt;h2&gt;使用AJAX修改文本内容&lt;/h2&gt;&lt;/div&gt;</span><br><span class="line">  &lt;button type=&quot;button&quot; onclick=&quot;loadXMLDoc()&quot;&gt;修改内容&lt;/button&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  function loadXMLDoc() &#123;</span><br><span class="line">    var xmlhttp;</span><br><span class="line">    if (window.XMLHttpRequest) &#123;</span><br><span class="line">      // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行</span><br><span class="line">      xmlhttp = new XMLHttpRequest();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      // IE6, IE5 浏览器执行代码</span><br><span class="line">      xmlhttp = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.onreadystatechange = function() &#123;</span><br><span class="line">      if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) &#123;</span><br><span class="line">        document.getElementById(&quot;myDiv&quot;).innerHTML = xmlhttp.responseText;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    xmlhttp.open(&quot;GET&quot;,&quot;/try/demo_get.php?t=&quot; + Math.random(), true);</span><br><span class="line">    xmlhttp.send();</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">&lt;script&gt;</span><br></pre></td></tr></table></figure>
-<p>参考：<a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000">廖雪峰官网AJAX</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>利用jsDelivr白嫖全球超高速静态资源访问服务！</title>
-    <url>/2023/06/09/%E5%88%A9%E7%94%A8jsDelivr%E7%99%BD%E5%AB%96%E5%85%A8%E7%90%83%E8%B6%85%E9%AB%98%E9%80%9F%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%9C%8D%E5%8A%A1%EF%BC%81/</url>
-    <content><![CDATA[<h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>不希望将大量的图片等静态资源放在自己部署了项目的云服务器上，放在其他服务器上又希望能做到CDN加速。于是找到了<strong>jsDelivr</strong>来解决这个需求。以下文章转载自<a href="https://www.bilibili.com/read/cv4297993">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>自己有稍微的修改。<br>因为服务器在国外&amp;服务器带宽小，导致静态资源请求速度慢，最终导致全站访问速度被拖慢，是站长们要面对的问题。最常用的解决方案是使用国内IDC厂商提供的对象存储(镜像回源)+CDN来提升静态资源访问速度，但这难免会产生费用。</p>
-<span id="more"></span>
-
-<h1 id="jsDelivr是什么"><a href="#jsDelivr是什么" class="headerlink" title="jsDelivr是什么"></a>jsDelivr是什么</h1><p>jsDelivr由ProspectOne维护的公共库，使用的融合CDN技术，由Cloudflare、Fastly、StackPath、QUANTIL等CDN供应商提供了<strong>全球超过750个CDN节点</strong>。<br>最重要的是，jsDelivr在<strong>中国大陆</strong>也拥有超过数百个节点，因为jsDelivr拥有<strong>正规的ICP备案</strong>，解决了中国大陆的访问速度优化，实现真正的<strong>全球极速低延迟</strong>体验。<br>jsDelivr是<strong>免费</strong>的、<strong>不限制带宽</strong>的，可以加速<strong>NPM</strong>、<strong>Github</strong>内的文件。<br>本文采用的方法就是将静态文件资源放到Github的仓库内，再使用jsDelivr进行加速访问，达到完全零成本优化访问速度。相当于一个高速访问的图床！<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci01LndlYnA?x-oss-process=image/format,png" alt="全球节点分布地图"></p>
-<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>在Github新建一个公开仓库，用于存放我们的静态文件资源。这里不再过多赘述，下面的链接是我的<a href="https://github.com/HelloAllenW/BlogAssets">静态文件资源仓库</a>。</p>
-<h1 id="使用jsDelivr访问资源"><a href="#使用jsDelivr访问资源" class="headerlink" title="使用jsDelivr访问资源"></a>使用jsDelivr访问资源</h1><p>根据<a href="%5Bjsdelivr%5D(https://www.jsdelivr.com/)">jsdelivr官方文档</a>，有很多种访问资源的方式，这里主要介绍三种。</p>
-<h2 id="通过releases访问"><a href="#通过releases访问" class="headerlink" title="通过releases访问"></a>通过releases访问</h2><p>在仓库首页找到releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0xLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>创建new releases，如果之前创建过则选择Draft a new releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0yLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>标题输入版本号，根据你的需求即可，比如我这里是v1.0<br>输入完毕后点击下方绿色按钮。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0zLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>跳转到以下页面代表创建成功<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci00LnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo@version/file">https://cdn.jsdelivr.net/gh/user/repo@version/file</a><br>以我的为例，访问仓库目录下的jsdelivr-1.png文件，为以下链接：<br><a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png</a><br>可以正常访问，成功~<br>这种方案的优点是，可以区分版本，就算以后删掉了一些文件也可以通过旧的releases访问，而且可以及时更新缓存。<br>美中不足的是，每次仓库里更新资源后，需要发布个releases才能获取更新文件，并不是很方便，所以适合于存放基本不需要更新修改添加的静态文件。需要频繁修改或上传的文件不建议放到这里面来。</p>
-<h2 id="直接访问"><a href="#直接访问" class="headerlink" title="直接访问"></a>直接访问</h2><p>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo/file">https://cdn.jsdelivr.net/gh/user/repo/file</a><br>以我的为例：<br><a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png</a><br>不推荐使用这种方法，暂未摸清如何更新缓存。</p>
-<h2 id="访问最新文件"><a href="#访问最新文件" class="headerlink" title="访问最新文件"></a>访问最新文件</h2><p>根据jsDelivr的要求，文件路径为：<a href="https://cdn.jsdelivr.net/gh/user/repo@latest/file">https://cdn.jsdelivr.net/gh/user/repo@latest/file</a><br>以我的为例：<a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png</a><br>这种方案不需要发布releases，可以直接从repo读取文件，而且实时更新缓存。<br>但是官方并不推荐使用这种方法，因为修改repo的文件后，如果没有修改网站的旧链接，可能会出问题。根据你自己的情况决定吧。</p>
-<h1 id="访问统计"><a href="#访问统计" class="headerlink" title="访问统计"></a>访问统计</h1><p>jsDelivr还提供了文件列表和文件访问统计页面：<br>文件列表：<a href="https://cdn.jsdelivr.net/gh/user/repo/">https://cdn.jsdelivr.net/gh/user/repo/</a><br>比如我的：<a href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/</a></p>
-<p>访问统计：<a href="https://www.jsdelivr.com/package/gh/user/repo">https://www.jsdelivr.com/package/gh/user/repo</a><br>比如我的：<a href="https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets">https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets</a></p>
-<h1 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a>代码压缩</h1><p>jsDelivr还提供了代码压缩服务，比如将JS/CSS的代码压缩，优化访问速度。<br>只是前几次访问会执行压缩操作，速度比较慢。后面就会将文件缓存，速度不会再慢了。<br>直接将访问链接的文件后缀改成.min.js即可，比如：<br><a href="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js">https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js</a></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA0L2pzZGVsaXZyLWRpdmlzaW9uLnBuZw?x-oss-process=image/format,png" alt="分割线"></p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经速度测试，访问速度非常快，有效提升整体速度，还能省下一大笔费用，实属优质白嫖~</p>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -2063,47 +2070,6 @@
       </tags>
   </entry>
   <entry>
-    <title>我的Git学习教程</title>
-    <url>/2020/11/09/%E6%88%91%E7%9A%84Git%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="一、Git常用命令汇总"><a href="#一、Git常用命令汇总" class="headerlink" title="一、Git常用命令汇总"></a>一、Git常用命令汇总</h1><p>1、提交<br>git add .<br>git commit -m “”<br>git push [origin远程主机名][本地分支名] [远程分支名]</p>
-<p>2、删除<br>（1）删除本地分支：<br>切换到其他分支后，执行git branch -D [分支名]<br>（2）删除远程分支：<br>git push origin –delete [需要删除的分支名称]</p>
-<p>3、拉取<br>（1）本地clone远程项目<br>不指定分支：git clone [项目地址]<br>指定分支：git clone -b [线上分支][项目地址]<br>（2）将本地更新为远程分支<br>git pull [远程主机名][远程分支]:[本地分支]</p>
-<span id="more"></span>
-
-<p>4、操作分支：<br>（1）切换分支：git checkout [分支名]<br>（2）创建并切换分支：git checkout -b [分支名]</p>
-<p>5、tag：默认操作当前分支<br>（1）添加tag：git tag [tag名称]<br>（2）将添加好的tag推到线上：git push [远程主机名origin] [tag名称]<br>（3）删除本地tag：git tag -d [tag名称]<br>（4）删除线上tag例如V1.2：git push [远程主机名origin] :refs/tags/V1.2<br>（5）获取远程版本：git fetch origin tag V1.2</p>
-<p>6、版本回退：<br>（1）git reflog 查看版本号commit id<br>（2）git reset –hard 版本号(head^为上一个版本)<br>（3）git push -f origin [当前分支]</p>
-<p>7、其他：<br>放弃本地修改：git checkout .<br>查看文件改动明细：git diff [路径/文件名]<br>合并分支：将dev合并到master上<br>（1）先切换回master分支：git checkout master<br>（2）将dev分支的工作成功合并到master分支上：git merge dev<br>（3）提交合并：git push origin [当前分支]<br>更新远程分支列表：git remote update [主机名origin ] –prune</p>
-<p>8、Git 切换远程仓库地址<br>[git remote set-url origin URL] 更换远程仓库地址，URL为新地址</p>
-<h1 id="二、Git-学习资料与-GitHub-的使用"><a href="#二、Git-学习资料与-GitHub-的使用" class="headerlink" title="二、Git 学习资料与 GitHub 的使用"></a>二、Git 学习资料与 GitHub 的使用</h1><ul>
-<li>1、<a href="https://www.runoob.com/w3cnote/git-guide.html">5分钟学会使用 Git</a></li>
-<li>2、<a href="https://blog.csdn.net/iabbg/article/details/80002260">手把手教你用Git</a></li>
-<li>3、<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">我的Git系统学习教程</a></li>
-<li>4、<a href="https://www.yiibai.com/git/git_pull.html">Git命令查询</a></li>
-<li>5、<a href="http://www.mamicode.com/info-detail-2331816.html">GitLab使用简明教程</a></li>
-<li>6、<a href="https://blog.csdn.net/xc_zhou/article/details/80637759">GitHub使用指南</a></li>
-<li>7、<a href="https://blog.csdn.net/heimu24/article/details/81171422">上传本地文件到GitHub</a></li>
-</ul>
-<h1 id="三、使用-Git-中的问题及解决方案汇总"><a href="#三、使用-Git-中的问题及解决方案汇总" class="headerlink" title="三、使用 Git 中的问题及解决方案汇总"></a>三、使用 Git 中的问题及解决方案汇总</h1><h2 id="1、解决本地项目绑定远程库时报错"><a href="#1、解决本地项目绑定远程库时报错" class="headerlink" title="1、解决本地项目绑定远程库时报错"></a>1、解决本地项目绑定远程库时报错</h2><p>fatal: repository ‘<a href="https://github.com/XXX/&#39;">https://github.com/XXX/&#39;</a> not found<br>问题分析：远程库绑定错误<br>1、查看远程库：git remote -v<br>2、删除远程库：git remote remove origin<br>3、添加远程库：git remote add origin [远程地址]<br>其他：<br>1、查看当前用户：git config user.name<br>2、查看当前邮箱：git config user.email<br>3、修改用户：git config –global user.name [用户名]、<br>4、修改邮箱：git config –global user.email [邮箱]</p>
-<h2 id="2、如何将本地项目上传到-GitLab"><a href="#2、如何将本地项目上传到-GitLab" class="headerlink" title="2、如何将本地项目上传到 GitLab"></a>2、如何将本地项目上传到 GitLab</h2><p>在 GitLab 中 New project 后，填写项目名称、权限等，生成空项目。根据提示完成文件上传，参考如下：<br>注意：在上传之前应检查Git库的当前用户和邮箱，是否与自己要上传库相对应。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. git init  #把这个目录变成Git可以管理的仓库</span><br><span class="line">2. git add README.md  #本地README.md文件添加到远程仓库</span><br><span class="line">3. git add .  #不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了，注意空格</span><br><span class="line">4. git commit -m &quot;注释&quot;  #把文件提交到仓库</span><br><span class="line">5. git remote add origin git@github.com:heimu24/blog-backup.git  #本地关联远程仓库</span><br><span class="line">6. git push -u origin master  #把本地仓库的所有内容推送到远程库上（第一次需要加-u，后面就不用加了）</span><br></pre></td></tr></table></figure>
-
-<h2 id="3、git-push-u-origin-master-命令报错"><a href="#3、git-push-u-origin-master-命令报错" class="headerlink" title="3、git push -u origin master 命令报错"></a>3、git push -u origin master 命令报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: Could not read from remote repository.Please make sure you have the correct access rights and the repository exists.（）</span><br></pre></td></tr></table></figure>
-<p>问题原因是在git上没有创建SSH Key<br>解决方法：创建SSH<br>在终端中输入<br>ssh-keygen -t rsa -C “username” (注：username为你git上的用户名)<br>None<br>三次回车，如有看到The key’s randomart image is，代表你的SSH Key生成成功了。<br>cat ~/.ssh/id_rsa.pub</p>
-<p><strong><em>或者</em></strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20181231165219613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxOTAyNzA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="4、删除远程仓库项目"><a href="#4、删除远程仓库项目" class="headerlink" title="4、删除远程仓库项目"></a>4、删除远程仓库项目</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 拉取远程的Repo到本地（如果已经在本地，可以略过）</span><br><span class="line">git clone xxx</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件</span><br><span class="line">git rm 我的文件</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件夹</span><br><span class="line">git rm -r 我的文件夹/</span><br><span class="line">此处-r表示递归所有子目录，如果你要删除的是空的文件夹，此处可以不用带-r</span><br><span class="line"></span><br><span class="line"># 提交代码</span><br><span class="line">git commit -m &quot;我的修改&quot;</span><br><span class="line"></span><br><span class="line"># 推送到远程仓库</span><br><span class="line">git push origin xxx</span><br></pre></td></tr></table></figure>
-
-<h2 id="5、删除Git仓库"><a href="#5、删除Git仓库" class="headerlink" title="5、删除Git仓库"></a>5、删除Git仓库</h2><p>在本地仓库的目录下调用命令行删除根目录下的.git文件夹，输入<br>find . -name “.git” | xargs rm -Rf<br>这样本地仓库就清除了，像下面这样，master不见了。<br><img src="https://img-blog.csdnimg.cn/2019041813505843.png" alt="在这里插入图片描述"></p>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>手把手教你用 VuePress + GitHub Pages 搭建个人博客！</title>
     <url>/2023/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在阅读<a href="https://juejin.cn/user/712139234359182">冴羽</a>老师的文章时，对VuePress搭建个人博客很感兴趣，于是试着自己搭建了一遍，写了这篇文章记录一下搭建的基本流程，希望对大家有所帮助。</p>
@@ -2227,6 +2193,47 @@
       </tags>
   </entry>
   <entry>
+    <title>我的Git学习教程</title>
+    <url>/2020/11/09/%E6%88%91%E7%9A%84Git%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="一、Git常用命令汇总"><a href="#一、Git常用命令汇总" class="headerlink" title="一、Git常用命令汇总"></a>一、Git常用命令汇总</h1><p>1、提交<br>git add .<br>git commit -m “”<br>git push [origin远程主机名][本地分支名] [远程分支名]</p>
+<p>2、删除<br>（1）删除本地分支：<br>切换到其他分支后，执行git branch -D [分支名]<br>（2）删除远程分支：<br>git push origin –delete [需要删除的分支名称]</p>
+<p>3、拉取<br>（1）本地clone远程项目<br>不指定分支：git clone [项目地址]<br>指定分支：git clone -b [线上分支][项目地址]<br>（2）将本地更新为远程分支<br>git pull [远程主机名][远程分支]:[本地分支]</p>
+<span id="more"></span>
+
+<p>4、操作分支：<br>（1）切换分支：git checkout [分支名]<br>（2）创建并切换分支：git checkout -b [分支名]</p>
+<p>5、tag：默认操作当前分支<br>（1）添加tag：git tag [tag名称]<br>（2）将添加好的tag推到线上：git push [远程主机名origin] [tag名称]<br>（3）删除本地tag：git tag -d [tag名称]<br>（4）删除线上tag例如V1.2：git push [远程主机名origin] :refs/tags/V1.2<br>（5）获取远程版本：git fetch origin tag V1.2</p>
+<p>6、版本回退：<br>（1）git reflog 查看版本号commit id<br>（2）git reset –hard 版本号(head^为上一个版本)<br>（3）git push -f origin [当前分支]</p>
+<p>7、其他：<br>放弃本地修改：git checkout .<br>查看文件改动明细：git diff [路径/文件名]<br>合并分支：将dev合并到master上<br>（1）先切换回master分支：git checkout master<br>（2）将dev分支的工作成功合并到master分支上：git merge dev<br>（3）提交合并：git push origin [当前分支]<br>更新远程分支列表：git remote update [主机名origin ] –prune</p>
+<p>8、Git 切换远程仓库地址<br>[git remote set-url origin URL] 更换远程仓库地址，URL为新地址</p>
+<h1 id="二、Git-学习资料与-GitHub-的使用"><a href="#二、Git-学习资料与-GitHub-的使用" class="headerlink" title="二、Git 学习资料与 GitHub 的使用"></a>二、Git 学习资料与 GitHub 的使用</h1><ul>
+<li>1、<a href="https://www.runoob.com/w3cnote/git-guide.html">5分钟学会使用 Git</a></li>
+<li>2、<a href="https://blog.csdn.net/iabbg/article/details/80002260">手把手教你用Git</a></li>
+<li>3、<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">我的Git系统学习教程</a></li>
+<li>4、<a href="https://www.yiibai.com/git/git_pull.html">Git命令查询</a></li>
+<li>5、<a href="http://www.mamicode.com/info-detail-2331816.html">GitLab使用简明教程</a></li>
+<li>6、<a href="https://blog.csdn.net/xc_zhou/article/details/80637759">GitHub使用指南</a></li>
+<li>7、<a href="https://blog.csdn.net/heimu24/article/details/81171422">上传本地文件到GitHub</a></li>
+</ul>
+<h1 id="三、使用-Git-中的问题及解决方案汇总"><a href="#三、使用-Git-中的问题及解决方案汇总" class="headerlink" title="三、使用 Git 中的问题及解决方案汇总"></a>三、使用 Git 中的问题及解决方案汇总</h1><h2 id="1、解决本地项目绑定远程库时报错"><a href="#1、解决本地项目绑定远程库时报错" class="headerlink" title="1、解决本地项目绑定远程库时报错"></a>1、解决本地项目绑定远程库时报错</h2><p>fatal: repository ‘<a href="https://github.com/XXX/&#39;">https://github.com/XXX/&#39;</a> not found<br>问题分析：远程库绑定错误<br>1、查看远程库：git remote -v<br>2、删除远程库：git remote remove origin<br>3、添加远程库：git remote add origin [远程地址]<br>其他：<br>1、查看当前用户：git config user.name<br>2、查看当前邮箱：git config user.email<br>3、修改用户：git config –global user.name [用户名]、<br>4、修改邮箱：git config –global user.email [邮箱]</p>
+<h2 id="2、如何将本地项目上传到-GitLab"><a href="#2、如何将本地项目上传到-GitLab" class="headerlink" title="2、如何将本地项目上传到 GitLab"></a>2、如何将本地项目上传到 GitLab</h2><p>在 GitLab 中 New project 后，填写项目名称、权限等，生成空项目。根据提示完成文件上传，参考如下：<br>注意：在上传之前应检查Git库的当前用户和邮箱，是否与自己要上传库相对应。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. git init  #把这个目录变成Git可以管理的仓库</span><br><span class="line">2. git add README.md  #本地README.md文件添加到远程仓库</span><br><span class="line">3. git add .  #不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了，注意空格</span><br><span class="line">4. git commit -m &quot;注释&quot;  #把文件提交到仓库</span><br><span class="line">5. git remote add origin git@github.com:heimu24/blog-backup.git  #本地关联远程仓库</span><br><span class="line">6. git push -u origin master  #把本地仓库的所有内容推送到远程库上（第一次需要加-u，后面就不用加了）</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、git-push-u-origin-master-命令报错"><a href="#3、git-push-u-origin-master-命令报错" class="headerlink" title="3、git push -u origin master 命令报错"></a>3、git push -u origin master 命令报错</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fatal: Could not read from remote repository.Please make sure you have the correct access rights and the repository exists.（）</span><br></pre></td></tr></table></figure>
+<p>问题原因是在git上没有创建SSH Key<br>解决方法：创建SSH<br>在终端中输入<br>ssh-keygen -t rsa -C “username” (注：username为你git上的用户名)<br>None<br>三次回车，如有看到The key’s randomart image is，代表你的SSH Key生成成功了。<br>cat ~/.ssh/id_rsa.pub</p>
+<p><strong><em>或者</em></strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20181231165219613.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NpbmF0XzIxOTAyNzA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="4、删除远程仓库项目"><a href="#4、删除远程仓库项目" class="headerlink" title="4、删除远程仓库项目"></a>4、删除远程仓库项目</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 拉取远程的Repo到本地（如果已经在本地，可以略过）</span><br><span class="line">git clone xxx</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件</span><br><span class="line">git rm 我的文件</span><br><span class="line"></span><br><span class="line"># 在本地仓库删除文件夹</span><br><span class="line">git rm -r 我的文件夹/</span><br><span class="line">此处-r表示递归所有子目录，如果你要删除的是空的文件夹，此处可以不用带-r</span><br><span class="line"></span><br><span class="line"># 提交代码</span><br><span class="line">git commit -m &quot;我的修改&quot;</span><br><span class="line"></span><br><span class="line"># 推送到远程仓库</span><br><span class="line">git push origin xxx</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、删除Git仓库"><a href="#5、删除Git仓库" class="headerlink" title="5、删除Git仓库"></a>5、删除Git仓库</h2><p>在本地仓库的目录下调用命令行删除根目录下的.git文件夹，输入<br>find . -name “.git” | xargs rm -Rf<br>这样本地仓库就清除了，像下面这样，master不见了。<br><img src="https://img-blog.csdnimg.cn/2019041813505843.png" alt="在这里插入图片描述"></p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>拦截Element-UI中el-tabs组件的切换</title>
     <url>/2020/11/09/%E6%8B%A6%E6%88%AAElement-UI%E4%B8%ADel-tabs%E7%BB%84%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2/</url>
     <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
@@ -2270,6 +2277,38 @@
 </ol>
 <h1 id="抽象数据类型"><a href="#抽象数据类型" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h1><p>数据类型：是指一组性质相同的值的集合及定义在此集合上的一些操作的总称。<br>抽象数据类型（Abstract Data Type, ADT）: 是指一个数学模型及定义在该模型上的一组操作。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ADT 抽象数据类型名</span><br><span class="line">Data</span><br><span class="line">    数据元素之间逻辑关系的定义</span><br><span class="line">Operation</span><br><span class="line">    操作1</span><br><span class="line">	初始条件</span><br><span class="line">	操作结构描述</span><br><span class="line">    操作2</span><br><span class="line">	...</span><br><span class="line">endADT</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法中的时间复杂度和空间复杂度</title>
+    <url>/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</url>
+    <content><![CDATA[<h1 id="算法基本概念"><a href="#算法基本概念" class="headerlink" title="算法基本概念"></a>算法基本概念</h1><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有效序列，并且每条指令表示一个或多个操作。</p>
+<p>算法具有五个基本特性：输入、输出、有穷性、确定性和可行性。</p>
+<p>算法设计的要求：<br>正确性、可读性、健壮性、时间效率高和存储量低。</p>
+<p>算法效率的度量方法：</p>
+<ol>
+<li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
+<li>事前分析估算方法</li>
+</ol>
+<span id="more"></span>
+
+<h1 id="算法事前分析估算方法"><a href="#算法事前分析估算方法" class="headerlink" title="算法事前分析估算方法"></a>算法事前分析估算方法</h1><h2 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h2><p>假设两个算法的输入规模都是n，算法A要做2n+3次操作，算法B要做3n+1次操作。你觉得谁更快呢？<br>准确来说，答案是不一定的。<br>当n=1时，算法A效率不如B；当n=2时，两者效率相同；当n&gt;2时，算法A开始优于B，随着n的增加，算法A比B越来越好。于是我们得出结论，算法A总体上要好过算法B。<br>此时我们给出这样定义，输入规模n在没有限制的情况下，只要超出一个数值N，这个函数总是大于另一个函数，我们称函数是渐进增长的。</p>
+<p>再举一些有指数的例子，我们观察发现，最高次项的指数大的，函数随着n的增长，结果也会变得增长特别快。于是我们得到这样一个结论，判断一个算法的效率时，函数中的常数和其他次要项常常可以忽略，而更应该关注主项（最高阶项）的阶数。</p>
+<h2 id="算法时间复杂度"><a href="#算法时间复杂度" class="headerlink" title="算法时间复杂度"></a>算法时间复杂度</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级。<br>算法的时间复杂度，也就是算法的时间量度，记作：T(n) = O(f(n))。它表示随着问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进时间复杂度，简称为时间复杂度。其中f(n)是问题规模n的某个函数。</p>
+<h3 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h3><ol>
+<li>用常数1取代运行时间中的所有加法常数。</li>
+<li>在修改后的运行次数函数中，只保留最高阶项。</li>
+<li>如果最高阶项存在且不是1，则去除与这个项相乘的常数。<br>得到的结果就是大O阶。</li>
+</ol>
+<h3 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/5c2dda54325252290426ba0ac05b550d.png"><br>常用的时间复杂度所耗费的时间从小到大依次是：<br><img src="https://img-blog.csdnimg.cn/img_convert/33239657a65c54ea0ded891c63de812e.png"></p>
+<h3 id="最坏情况与平均情况"><a href="#最坏情况与平均情况" class="headerlink" title="最坏情况与平均情况"></a>最坏情况与平均情况</h3><p>一般没有特殊说明的情况下，都是指最坏时间复杂度。</p>
+<h2 id="算法空间复杂度"><a href="#算法空间复杂度" class="headerlink" title="算法空间复杂度"></a>算法空间复杂度</h2><p>算法的空间复杂度通过算法所需的存储空间实现，算法空间复杂度的计算公式记作：S(n)=O(f(n))，其中，n为问题的规模，f(n)为语句关于n所占存储空间的函数。</p>
+]]></content>
       <categories>
         <category>数据结构与算法</category>
       </categories>
@@ -2333,75 +2372,6 @@
       </categories>
       <tags>
         <tag>ES6</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>算法中的时间复杂度和空间复杂度</title>
-    <url>/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</url>
-    <content><![CDATA[<h1 id="算法基本概念"><a href="#算法基本概念" class="headerlink" title="算法基本概念"></a>算法基本概念</h1><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有效序列，并且每条指令表示一个或多个操作。</p>
-<p>算法具有五个基本特性：输入、输出、有穷性、确定性和可行性。</p>
-<p>算法设计的要求：<br>正确性、可读性、健壮性、时间效率高和存储量低。</p>
-<p>算法效率的度量方法：</p>
-<ol>
-<li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
-<li>事前分析估算方法</li>
-</ol>
-<span id="more"></span>
-
-<h1 id="算法事前分析估算方法"><a href="#算法事前分析估算方法" class="headerlink" title="算法事前分析估算方法"></a>算法事前分析估算方法</h1><h2 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h2><p>假设两个算法的输入规模都是n，算法A要做2n+3次操作，算法B要做3n+1次操作。你觉得谁更快呢？<br>准确来说，答案是不一定的。<br>当n=1时，算法A效率不如B；当n=2时，两者效率相同；当n&gt;2时，算法A开始优于B，随着n的增加，算法A比B越来越好。于是我们得出结论，算法A总体上要好过算法B。<br>此时我们给出这样定义，输入规模n在没有限制的情况下，只要超出一个数值N，这个函数总是大于另一个函数，我们称函数是渐进增长的。</p>
-<p>再举一些有指数的例子，我们观察发现，最高次项的指数大的，函数随着n的增长，结果也会变得增长特别快。于是我们得到这样一个结论，判断一个算法的效率时，函数中的常数和其他次要项常常可以忽略，而更应该关注主项（最高阶项）的阶数。</p>
-<h2 id="算法时间复杂度"><a href="#算法时间复杂度" class="headerlink" title="算法时间复杂度"></a>算法时间复杂度</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级。<br>算法的时间复杂度，也就是算法的时间量度，记作：T(n) = O(f(n))。它表示随着问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进时间复杂度，简称为时间复杂度。其中f(n)是问题规模n的某个函数。</p>
-<h3 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h3><ol>
-<li>用常数1取代运行时间中的所有加法常数。</li>
-<li>在修改后的运行次数函数中，只保留最高阶项。</li>
-<li>如果最高阶项存在且不是1，则去除与这个项相乘的常数。<br>得到的结果就是大O阶。</li>
-</ol>
-<h3 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/5c2dda54325252290426ba0ac05b550d.png"><br>常用的时间复杂度所耗费的时间从小到大依次是：<br><img src="https://img-blog.csdnimg.cn/img_convert/33239657a65c54ea0ded891c63de812e.png"></p>
-<h3 id="最坏情况与平均情况"><a href="#最坏情况与平均情况" class="headerlink" title="最坏情况与平均情况"></a>最坏情况与平均情况</h3><p>一般没有特殊说明的情况下，都是指最坏时间复杂度。</p>
-<h2 id="算法空间复杂度"><a href="#算法空间复杂度" class="headerlink" title="算法空间复杂度"></a>算法空间复杂度</h2><p>算法的空间复杂度通过算法所需的存储空间实现，算法空间复杂度的计算公式记作：S(n)=O(f(n))，其中，n为问题的规模，f(n)为语句关于n所占存储空间的函数。</p>
-]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>讲讲JS中的类、继承和单例</title>
-    <url>/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
-    <content><![CDATA[<blockquote>
-<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
-</blockquote>
-<h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
-<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">    // 构造函数里面的方法和属性</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(`$&#123;this.name&#125; - $&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex = &#x27;男&#x27;;</span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(`$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;`)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 静态方法</span><br><span class="line">Person.setName = function() &#123;</span><br><span class="line">   console.log(&#x27;静态方法&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例方法是通过实例化来调用的</span><br><span class="line">var p = new Person(&#x27;zhangsan&#x27;, &#x27;20&#x27;);</span><br><span class="line">p.run()</span><br><span class="line">p.work()</span><br><span class="line"></span><br><span class="line">// 静态方法是通过类名直接调用</span><br><span class="line">Person.setName()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="ES5-继承"><a href="#ES5-继承" class="headerlink" title="ES5 继承"></a>ES5 继承</h1><p>原型链继承和对象冒充继承：</p>
-<ul>
-<li>对象冒充继承：可以实现将参数传递到父类，但是没法继承原型链上的属性和方法</li>
-<li>原型链继承：可以继承构造函数里面以及原型链上面的属性和方法，但是实例化子类的时候没法给父类传参</li>
-</ul>
-<p>所以平时都是两者结合起来实现继承</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(this.name + &#x27;-&#x27; + this.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(&#x27;work&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Web(name, age) &#123;</span><br><span class="line">    // 通过 call()，能够使用属于另一个对象的方法。</span><br><span class="line">    // 此处相当于 Web 函数去调用Person类，并传值name,age</span><br><span class="line">    Person.call(this, name, age) // 对象冒充实现继承，可以实现将参数传递到父类</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Web.prototype = new Person() // 原型链继承，但是原型链继承在实例化时没法将参数传递到父类里面</span><br><span class="line">var w = new Web(&#x27;李四&#x27;, 20)</span><br><span class="line">w.run() // 测试调用构造函数里面的方法</span><br><span class="line">w.work() // 测试调用原型链上的方法</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-类"><a href="#ES6-类" class="headerlink" title="ES6 类"></a>ES6 类</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123; // 类的构造方法，实例化的时候执行，new的时候执行</span><br><span class="line">        this._name = name;</span><br><span class="line">        this._age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义方法，注意：es6里面方法之间没有逗号(,)</span><br><span class="line">    getName() &#123;</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    setName() &#123;</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p = new Person(&#x27;张三&#x27;, &#x27;20&#x27;)</span><br><span class="line">p.setName(&#x27;李四&#x27;)</span><br><span class="line">p.getName()</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123;</span><br><span class="line">        this.name = name</span><br><span class="line">        this.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    getInfo() &#123;</span><br><span class="line">        console.log(`姓名：$&#123;this.name&#125; - 年龄：$&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123;</span><br><span class="line">        console.log(&#x27;run&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Person &#123;</span><br><span class="line">    constructor(name, age ,sex) &#123;</span><br><span class="line">        super(name, age) // 实例化子类的时候把子类的数据传给父类</span><br><span class="line">        this.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    print() &#123;</span><br><span class="line">        console.log(this.sex)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var w = new Web(&#x27;张三&#x27;, &#x27;30&#x27;, &#x27;男&#x27;)</span><br><span class="line">w.print() // 调用自己的方法</span><br><span class="line">w.getInfo() // 调用父类方法</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-静态方法"><a href="#ES6-静态方法" class="headerlink" title="ES6 静态方法"></a>ES6 静态方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name) &#123; // 属性</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123; // 实例方法</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    static work() &#123; // 静态方法</span><br><span class="line">        console.log(&#x27;这是es6中的静态方法&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者通过这种方式定义类的静态方法</span><br><span class="line">Person.instance = &#x27;这是一个静态方法的属性&#x27;</span><br><span class="line"></span><br><span class="line">var p = new Person(&#x27;张三&#x27;)</span><br><span class="line">p.run()</span><br><span class="line">Person.work() // 通过类名来调用静态方法</span><br><span class="line">console.log(Person.instance)</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-单例"><a href="#ES6-单例" class="headerlink" title="ES6 单例"></a>ES6 单例</h1><blockquote>
-<p>使用场景：nodejs连接mongodb数据库，只连接成功一次，然后之后每次操作数据库都使用本次连接后的实例，不用每次都重新连接</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">    static getInstance() &#123; // 单例</span><br><span class="line">        if (!DB.instance) &#123;</span><br><span class="line">            DB.instance = new DB()</span><br><span class="line">        &#125;</span><br><span class="line">        return DB.instance</span><br><span class="line">    &#125;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        console.log(&#x27;实例化会触发构造函数&#x27;)</span><br><span class="line">        this.connect()</span><br><span class="line">    &#125;</span><br><span class="line">    connect() &#123;</span><br><span class="line">        console.log(&#x27;连接数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    find() &#123;</span><br><span class="line">        console.log(&#x27;查询数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var myDb1 = new DB()</span><br><span class="line">var myDb2 = new DB() // 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line"></span><br><span class="line">var myDb3 = DB.getInstance() // 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find()</span><br><span class="line">var myDb4 = DB.getInstance()</span><br><span class="line">myDb4.find()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2482,6 +2452,43 @@
       </categories>
       <tags>
         <tag>Web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>讲讲JS中的类、继承和单例</title>
+    <url>/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
+</blockquote>
+<h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
+<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">    // 构造函数里面的方法和属性</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(`$&#123;this.name&#125; - $&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex = &#x27;男&#x27;;</span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(`$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;`)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 静态方法</span><br><span class="line">Person.setName = function() &#123;</span><br><span class="line">   console.log(&#x27;静态方法&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例方法是通过实例化来调用的</span><br><span class="line">var p = new Person(&#x27;zhangsan&#x27;, &#x27;20&#x27;);</span><br><span class="line">p.run()</span><br><span class="line">p.work()</span><br><span class="line"></span><br><span class="line">// 静态方法是通过类名直接调用</span><br><span class="line">Person.setName()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="ES5-继承"><a href="#ES5-继承" class="headerlink" title="ES5 继承"></a>ES5 继承</h1><p>原型链继承和对象冒充继承：</p>
+<ul>
+<li>对象冒充继承：可以实现将参数传递到父类，但是没法继承原型链上的属性和方法</li>
+<li>原型链继承：可以继承构造函数里面以及原型链上面的属性和方法，但是实例化子类的时候没法给父类传参</li>
+</ul>
+<p>所以平时都是两者结合起来实现继承</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(this.name + &#x27;-&#x27; + this.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(&#x27;work&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Web(name, age) &#123;</span><br><span class="line">    // 通过 call()，能够使用属于另一个对象的方法。</span><br><span class="line">    // 此处相当于 Web 函数去调用Person类，并传值name,age</span><br><span class="line">    Person.call(this, name, age) // 对象冒充实现继承，可以实现将参数传递到父类</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Web.prototype = new Person() // 原型链继承，但是原型链继承在实例化时没法将参数传递到父类里面</span><br><span class="line">var w = new Web(&#x27;李四&#x27;, 20)</span><br><span class="line">w.run() // 测试调用构造函数里面的方法</span><br><span class="line">w.work() // 测试调用原型链上的方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-类"><a href="#ES6-类" class="headerlink" title="ES6 类"></a>ES6 类</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123; // 类的构造方法，实例化的时候执行，new的时候执行</span><br><span class="line">        this._name = name;</span><br><span class="line">        this._age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义方法，注意：es6里面方法之间没有逗号(,)</span><br><span class="line">    getName() &#123;</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    setName() &#123;</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p = new Person(&#x27;张三&#x27;, &#x27;20&#x27;)</span><br><span class="line">p.setName(&#x27;李四&#x27;)</span><br><span class="line">p.getName()</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123;</span><br><span class="line">        this.name = name</span><br><span class="line">        this.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    getInfo() &#123;</span><br><span class="line">        console.log(`姓名：$&#123;this.name&#125; - 年龄：$&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123;</span><br><span class="line">        console.log(&#x27;run&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Person &#123;</span><br><span class="line">    constructor(name, age ,sex) &#123;</span><br><span class="line">        super(name, age) // 实例化子类的时候把子类的数据传给父类</span><br><span class="line">        this.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    print() &#123;</span><br><span class="line">        console.log(this.sex)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var w = new Web(&#x27;张三&#x27;, &#x27;30&#x27;, &#x27;男&#x27;)</span><br><span class="line">w.print() // 调用自己的方法</span><br><span class="line">w.getInfo() // 调用父类方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-静态方法"><a href="#ES6-静态方法" class="headerlink" title="ES6 静态方法"></a>ES6 静态方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name) &#123; // 属性</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123; // 实例方法</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    static work() &#123; // 静态方法</span><br><span class="line">        console.log(&#x27;这是es6中的静态方法&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者通过这种方式定义类的静态方法</span><br><span class="line">Person.instance = &#x27;这是一个静态方法的属性&#x27;</span><br><span class="line"></span><br><span class="line">var p = new Person(&#x27;张三&#x27;)</span><br><span class="line">p.run()</span><br><span class="line">Person.work() // 通过类名来调用静态方法</span><br><span class="line">console.log(Person.instance)</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-单例"><a href="#ES6-单例" class="headerlink" title="ES6 单例"></a>ES6 单例</h1><blockquote>
+<p>使用场景：nodejs连接mongodb数据库，只连接成功一次，然后之后每次操作数据库都使用本次连接后的实例，不用每次都重新连接</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">    static getInstance() &#123; // 单例</span><br><span class="line">        if (!DB.instance) &#123;</span><br><span class="line">            DB.instance = new DB()</span><br><span class="line">        &#125;</span><br><span class="line">        return DB.instance</span><br><span class="line">    &#125;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        console.log(&#x27;实例化会触发构造函数&#x27;)</span><br><span class="line">        this.connect()</span><br><span class="line">    &#125;</span><br><span class="line">    connect() &#123;</span><br><span class="line">        console.log(&#x27;连接数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    find() &#123;</span><br><span class="line">        console.log(&#x27;查询数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var myDb1 = new DB()</span><br><span class="line">var myDb2 = new DB() // 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line"></span><br><span class="line">var myDb3 = DB.getInstance() // 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find()</span><br><span class="line">var myDb4 = DB.getInstance()</span><br><span class="line">myDb4.find()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
