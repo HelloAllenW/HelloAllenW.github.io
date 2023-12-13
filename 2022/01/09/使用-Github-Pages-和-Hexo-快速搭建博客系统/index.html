@@ -70,12 +70,12 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
             }
         })();
     </script>
@@ -222,9 +222,9 @@
                     
                         <span class="post-time">
                         
-                        <!-- Date: <a href="#">十一月 9, 2020&nbsp;&nbsp;23:11:02</a> -->
+                        <!-- Date: <a href="#">一月 9, 2022&nbsp;&nbsp;23:11:02</a> -->
                         <span class="iconfont icon-date1"></span>
-                        十一月 9, 2020
+                        一月 9, 2022
                         </span>
                     
                     &nbsp;  &nbsp;
@@ -245,7 +245,7 @@
     <span class="post-meta-item-icon">
       <span class="iconfont icon-post"></span>
       <!-- <span class="post-meta-item-text">  Count: </span> -->
-      <span class="post-count">989 Words</span>
+      <span class="post-count">977 Words</span>
     </span>
   </span>
   <!-- &nbsp; | &nbsp; -->
@@ -317,11 +317,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
 <p>现在访问你的博客就可以看见写好的文章啦！</p>
 <h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
-<blockquote>
-<p>感谢原创：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
-</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
 
         </div>
 
@@ -335,7 +331,7 @@
               </style> -->
               <div class="valine_comment"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  import { init } from '/js/waline.mjs';
   init({
     el: '.valine_comment',
     serverURL: 'https://allen-blog-vercel.vercel.app',
@@ -373,18 +369,18 @@
         <!-- 另一种的上一篇下一篇 -->
         <!-- <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">使用Halo搭建个人博客</a>
+                <a class="prev" rel="prev" href="/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/">讲讲JS中的类、继承和单例</a>
             
             
-            <a class="next" rel="next" href="/2020/11/06/Hexo%20%E5%8D%9A%E5%AE%A2%E7%9A%84%20Next%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/">Hexo 博客的 Next 主题配置</a>
+            <a class="next" rel="next" href="/2021/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/">Nodejs 操作 MongoDb 数据库</a>
             
         </section> -->
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> &laquo; Prev </a>
+                <a class="prev" rel="prev" href="/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/"> &laquo; Prev </a>
             
             
-                <a class="next" rel="next" href="/2020/11/06/Hexo%20%E5%8D%9A%E5%AE%A2%E7%9A%84%20Next%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"> Next &raquo; </a>
+                <a class="next" rel="next" href="/2021/11/09/Nodejs-%E6%93%8D%E4%BD%9C-MongoDb-%E6%95%B0%E6%8D%AE%E5%BA%93/"> Next &raquo; </a>
             
         </section>
 
@@ -399,7 +395,7 @@
             Allen © 
                 2015 - 
                 2023  
-        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
     <i class="iconfont icon-peoplecopy3"></i>

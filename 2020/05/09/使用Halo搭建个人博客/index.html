@@ -70,12 +70,12 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
             }
         })();
     </script>
@@ -222,9 +222,9 @@
                     
                         <span class="post-time">
                         
-                        <!-- Date: <a href="#">十一月 9, 2020&nbsp;&nbsp;23:11:40</a> -->
+                        <!-- Date: <a href="#">五月 9, 2020&nbsp;&nbsp;23:11:40</a> -->
                         <span class="iconfont icon-date1"></span>
-                        十一月 9, 2020
+                        五月 9, 2020
                         </span>
                     
                     &nbsp;  &nbsp;
@@ -309,9 +309,6 @@
 <p>如看到以下日志输出，则代表启动成功.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>注意：当jar包下载失败或下载的不能成功运行时，请前往：<a target="_blank" rel="noopener" href="https://halo.run/archives/download.html">https://halo.run/archives/download.html</a> 进行下载</p>
-</blockquote>
 <h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
 <p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
@@ -343,7 +340,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>更多配置详情见halo官网：<a target="_blank" rel="noopener" href="https://halo.run/">https://halo.run/</a> <br/><br>halo社区：<a target="_blank" rel="noopener" href="https://bbs.halo.run/">https://bbs.halo.run/</a></p>
+<p>更多配置详情请查看：<a target="_blank" rel="noopener" href="https://halo.run/">halo官网</a>、<a target="_blank" rel="noopener" href="https://bbs.halo.run/">halo社区</a></p>
 </blockquote>
 
         </div>
@@ -358,7 +355,7 @@
               </style> -->
               <div class="valine_comment"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  import { init } from '/js/waline.mjs';
   init({
     el: '.valine_comment',
     serverURL: 'https://allen-blog-vercel.vercel.app',
@@ -399,15 +396,11 @@
                 <a class="prev" rel="prev" href="/2020/11/09/%E6%88%91%E7%9A%84Git%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">我的Git学习教程</a>
             
             
-            <a class="next" rel="next" href="/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">使用 Github Pages 和 Hexo 快速搭建博客系统</a>
-            
         </section> -->
         <section class="post-nav">
             
                 <a class="prev" rel="prev" href="/2020/11/09/%E6%88%91%E7%9A%84Git%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/"> &laquo; Prev </a>
             
-            
-                <a class="next" rel="next" href="/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"> Next &raquo; </a>
             
         </section>
 
@@ -422,7 +415,7 @@
             Allen © 
                 2015 - 
                 2023  
-        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
     <i class="iconfont icon-peoplecopy3"></i>

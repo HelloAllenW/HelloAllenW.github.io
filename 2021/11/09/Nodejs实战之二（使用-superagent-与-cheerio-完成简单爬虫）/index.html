@@ -70,12 +70,12 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
             }
         })();
     </script>
@@ -295,7 +295,7 @@
               </style> -->
               <div class="valine_comment"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  import { init } from '/js/waline.mjs';
   init({
     el: '.valine_comment',
     serverURL: 'https://allen-blog-vercel.vercel.app',
@@ -359,7 +359,7 @@
             Allen © 
                 2015 - 
                 2023  
-        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
     <i class="iconfont icon-peoplecopy3"></i>

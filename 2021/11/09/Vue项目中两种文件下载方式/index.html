@@ -70,12 +70,12 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
             }
         })();
     </script>
@@ -296,7 +296,7 @@
               </style> -->
               <div class="valine_comment"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  import { init } from '/js/waline.mjs';
   init({
     el: '.valine_comment',
     serverURL: 'https://allen-blog-vercel.vercel.app',
@@ -337,7 +337,7 @@
                 <a class="prev" rel="prev" href="/2021/11/09/%E8%B0%88%E8%B0%88Webpack/">谈谈Webpack</a>
             
             
-            <a class="next" rel="next" href="/2020/11/09/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/">MongoDB数据库的基本应用</a>
+            <a class="next" rel="next" href="/2021/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">手把手教你用 VuePress + GitHub Pages 搭建个人博客！</a>
             
         </section> -->
         <section class="post-nav">
@@ -345,7 +345,7 @@
                 <a class="prev" rel="prev" href="/2021/11/09/%E8%B0%88%E8%B0%88Webpack/"> &laquo; Prev </a>
             
             
-                <a class="next" rel="next" href="/2020/11/09/MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%BA%94%E7%94%A8/"> Next &raquo; </a>
+                <a class="next" rel="next" href="/2021/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"> Next &raquo; </a>
             
         </section>
 
@@ -360,7 +360,7 @@
             Allen © 
                 2015 - 
                 2023  
-        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
     <i class="iconfont icon-peoplecopy3"></i>

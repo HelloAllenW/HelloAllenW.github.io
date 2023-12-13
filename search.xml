@@ -100,8 +100,8 @@
   </entry>
   <entry>
     <title>Hexo 博客的 Next 主题配置</title>
-    <url>/2020/11/06/Hexo%20%E5%8D%9A%E5%AE%A2%E7%9A%84%20Next%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>经过一番不懈的努力，我们终于按照 <a href="http://blog.helloallen.cn/archives/%E4%BD%BF%E7%94%A8githubpages%E5%92%8Chexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F">使用 Github Pages 和 Hexo 快速搭建博客系统</a> 搭建好了一个属于自己的博客，并且还安装了一个Next主题，但是我们的博客一开始还是很简陋的，我们需要把她装修一下。</p>
+    <url>/2022/11/06/Hexo%20%E5%8D%9A%E5%AE%A2%E7%9A%84%20Next%20%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>经过一番不懈的努力，我们终于按照 <a href="https://helloallenw.github.io/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">使用 Github Pages 和 Hexo 快速搭建博客系统</a> 搭建好了一个属于自己的博客，并且还安装了一个Next主题，但是我们的博客一开始还是很简陋的，我们需要把她装修一下。</p>
 <blockquote>
 <p>在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。<br>为了描述方便，在以下说明中，将前者称为站点配置文件， 后者称为主题配置文件。<br>以下所有终端执行的命令都在你的Hexo根目录下</p>
 </blockquote>
@@ -661,165 +661,6 @@
       </tags>
   </entry>
   <entry>
-    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
-    <url>/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
-<li>安装 Node.js</li>
-<li>安装 Git</li>
-<li>Github 账户</li>
-</ul>
-<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
-</blockquote>
-<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
-<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
-</li>
-<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
-</li>
-<li><p>在 Hexo 文件夹下执行命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
-<p>需要执行以下命令再安装一次：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
-</li>
-<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
-</li>
-</ol>
-<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
-<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
-<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
-
-<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
-<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
-<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
-<p>现在访问你的博客就可以看见写好的文章啦！</p>
-<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a></p>
-<p><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
-<blockquote>
-<p>感谢原创：<a href="https://blog.csdn.net/qq_36759224/article/details/82121420">https://blog.csdn.net/qq_36759224/article/details/82121420</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Halo搭建个人博客</title>
-    <url>/2020/11/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
-<span id="more"></span>
-
-<table>
-<thead>
-<tr>
-<th>项目名称</th>
-<th>简介</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>halo</td>
-<td>提供整个系统的服务，采用 Spring Boot 开发</td>
-</tr>
-<tr>
-<td>halo-admin</td>
-<td>负责后台管理的渲染，采用 Vue 开发，已集成在 Halo 运行包内，无需独立部署</td>
-</tr>
-<tr>
-<td>halo-comment</td>
-<td>评论插件，采用 Vue 开发，在主题中运行方式引入构建好的 Javascript 文件即可</td>
-</tr>
-<tr>
-<td>halo-theme-*</td>
-<td>主题项目集，采用 Freemarker 模板引擎编写，需要包含一些特殊的配置才能够被 halo 所使用</td>
-</tr>
-</tbody></table>
-<h1 id="在Linux服务器上部署Halo"><a href="#在Linux服务器上部署Halo" class="headerlink" title="在Linux服务器上部署Halo"></a>在Linux服务器上部署Halo</h1><h2 id="安装-Java-运行环境"><a href="#安装-Java-运行环境" class="headerlink" title="安装 Java 运行环境"></a>安装 Java 运行环境</h2><blockquote>
-<p> 若已经存在 Java 运行环境的可略过这一步。</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装 OpenJRE</span><br><span class="line">sudo yum install java-1.8.0-openjdk -y</span><br><span class="line"></span><br><span class="line"># 检测是否安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装-Halo"><a href="#安装-Halo" class="headerlink" title="安装 Halo"></a>安装 Halo</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p>考虑到部分用户的需要，可能需要自定义比如端口等设置项，我们提供了公共的配置文件，并且该配置文件是完全独立于安装包的。当然，你也可以使用安装包内的默认配置文件，但是安装包内的配置文件是不可修改的。请注意：配置文件的路径为 ~/.halo/application.yaml。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载配置文件到 ~/.halo 目录</span><br><span class="line">curl -o ~/.halo/application.yaml --create-dirs https://dl.halo.run/config/application-template.yaml</span><br></pre></td></tr></table></figure>
-<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>完成上一步操作，我们就可以自己配置 Halo 的运行端口，以及数据库相关的配置了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 Vim 工具修改配置文件</span><br><span class="line">vim ~/.halo/application.yaml</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 服务端口号</span><br><span class="line">  port: 8090</span><br><span class="line"></span><br><span class="line">  # Response data gzip.</span><br><span class="line">  compression:</span><br><span class="line">    enabled: false</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    # 默认使用的是 H2 Database 数据库，这是一种嵌入式的数据库</span><br><span class="line">    # H2 database configuration.</span><br><span class="line">    driver-class-name: org.h2.Driver</span><br><span class="line">    url: jdbc:h2:file:~/.halo/db/halo</span><br><span class="line">    username: admin</span><br><span class="line">    password: 123456</span><br><span class="line"></span><br><span class="line">    # MySQL database configuration.</span><br><span class="line">  #    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  #    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span><br><span class="line">  #    username: root</span><br><span class="line">  #    password: 123456</span><br><span class="line"></span><br><span class="line">  # H2 database console configuration.</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      settings:</span><br><span class="line">        web-allow-others: false</span><br><span class="line">      path: /h2-console</span><br><span class="line">      enabled: false</span><br><span class="line"></span><br><span class="line">halo:</span><br><span class="line">  # Your admin client path is https://your-domain/&#123;admin-path&#125;</span><br><span class="line">  admin-path: admin</span><br><span class="line"></span><br><span class="line">  # memory or level</span><br><span class="line">  cache: memory</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行Halo"><a href="#运行Halo" class="headerlink" title="运行Halo"></a>运行Halo</h2><p>Halo 的整个应用程序只有一个 Jar 包，且不包含用户的任何配置，它放在任何目录都是可行的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 启动测试</span><br><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
-<p>如看到以下日志输出，则代表启动成功.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：当jar包下载失败或下载的不能成功运行时，请前往：<a href="https://halo.run/archives/download.html">https://halo.run/archives/download.html</a> 进行下载</p>
-</blockquote>
-<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
-<p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
-<p>下载完成之后，我们还需要对其进行修改。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 halo.service</span><br><span class="line">sudo vim /etc/systemd/system/halo.service</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Halo Service</span><br><span class="line">Documentation=https://halo.run</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=halo</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line">StandOutput=syslog</span><br><span class="line"></span><br><span class="line">StandError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
-<p>参数：</p>
-<ul>
-<li>-Xms256m：为 JVM 启动时分配的内存，请按照服务器的内存做适当调整，512 M 内存的服务器推荐设置为 128，1G 内存的服务器推荐设置为 256，默认为 256。</li>
-<li>-Xmx256m：为 JVM 运行过程中分配的最大内存，配置同上。</li>
-<li>YOUR_JAR_PATH：Halo 安装包的绝对路径，例如 /www/wwwroot/halo-latest.jar。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 service 文件之后需要刷新 Systemd</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 使 Halo 开机自启</span><br><span class="line">sudo systemctl enable halo</span><br><span class="line"></span><br><span class="line"># 启动 Halo</span><br><span class="line">sudo service halo start</span><br><span class="line"></span><br><span class="line"># 重启 Halo</span><br><span class="line">sudo service halo restart</span><br><span class="line"></span><br><span class="line"># 停止 Halo</span><br><span class="line">sudo service halo stop</span><br><span class="line"></span><br><span class="line"># 查看 Halo 的运行状态</span><br><span class="line">sudo service halo status</span><br></pre></td></tr></table></figure>
-
-<p>完成以上操作即可通过 IP:端口 访问了。不过在此之前，最好先完成后续操作，我们还需要让域名也可以访问到 Halo，请继续看 配置域名访问。</p>
-<h2 id="更新-Halo"><a href="#更新-Halo" class="headerlink" title="更新 Halo"></a>更新 Halo</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 备份数据</span><br><span class="line">cp -r ~/.halo ~/.halo.bak</span><br><span class="line"></span><br><span class="line"># 备份旧的安装包</span><br><span class="line">mv halo-latest.jar halo-latest.jar.bak</span><br><span class="line"></span><br><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 测试是否能够正常启动</span><br><span class="line">java -jar halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 重启应用</span><br><span class="line">service halo restart</span><br></pre></td></tr></table></figure>
-
-<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><h2 id="使用Nginx进行反向代理"><a href="#使用Nginx进行反向代理" class="headerlink" title="使用Nginx进行反向代理"></a>使用Nginx进行反向代理</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加 Nginx 源</span><br><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装 Nginx</span><br><span class="line">sudo yum install -y nginx</span><br><span class="line"></span><br><span class="line"># 启动 Nginx</span><br><span class="line">sudo systemctl start nginx.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启 Nginx</span><br><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
-<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 Nginx 配置模板</span><br><span class="line">curl -o /etc/nginx/conf.d/halo.conf --create-dirs https://dl.halo.run/config/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>下载完成之后，我们还需要对其进行修改</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 vim 编辑 halo.conf</span><br><span class="line">vim /etc/nginx/conf.d/halo.conf</span><br></pre></td></tr></table></figure>
-<p>打开之后我们可以看到</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://127.0.0.1:8090/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注意：请把 example.com 改为自己的域名。</p>
-</blockquote>
-<p>修改完成之后</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>更多配置详情见halo官网：<a href="https://halo.run/">https://halo.run/</a> <br/><br>halo社区：<a href="https://bbs.halo.run/">https://bbs.halo.run/</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>博客</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>从第一代 iPhone 细数到 iPhone 12，iPhone 屏幕尺寸进化历程背后的 app 设计哲学</title>
     <url>/2022/11/09/%E4%BB%8E%E7%AC%AC%E4%B8%80%E4%BB%A3-iPhone-%E7%BB%86%E6%95%B0%E5%88%B0-iPhone-12%EF%BC%8CiPhone-%E5%B1%8F%E5%B9%95%E5%B0%BA%E5%AF%B8%E8%BF%9B%E5%8C%96%E5%8E%86%E7%A8%8B%E8%83%8C%E5%90%8E%E7%9A%84-app-%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6/</url>
     <content><![CDATA[<blockquote>
@@ -863,7 +704,7 @@
 <p>在第一代 iPhone 到 iPhone 3GS 的非 Retina 屏幕上，一个点就等于一像素，可以表示为 @1x；而在 iPhone 4 到 iPhone 4s 的 Retina 屏幕上，一个点等于两个像素，可以表示为 @2x。而日后发布的一些设备（如 iPhone 6 Plus、iPhone X）还会出现一个点等于三个像素的情况，可以表示为 @3x，这种 @1x、@2x、@3x 可以称之为「比例因子」。</p>
 <p>从下面的图示可以看出，在物理尺寸相同时，从 @1x 到 @3x 图像清晰度依次递增。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/1d74670901daeefeca41452c3f633ae3.png"></p>
-<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#99;&#x61;&#x6d;&#x65;&#114;&#97;&#x40;&#49;&#120;&#x2e;&#112;&#x6e;&#x67;">&#99;&#x61;&#x6d;&#x65;&#114;&#97;&#x40;&#49;&#120;&#x2e;&#112;&#x6e;&#x67;</a>」和「<a href="mailto:&#x63;&#x61;&#x6d;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#112;&#x6e;&#103;">&#x63;&#x61;&#x6d;&#x65;&#x72;&#97;&#64;&#50;&#120;&#x2e;&#112;&#x6e;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
+<p>回到上一部分提到的照相机的图片，它的高度就可以直接统一表示成 44pt，不再需要提及是什么设备、什么样的屏幕，这样极大地减少了沟通成本，剔除了设计时无关的干扰因素。设计师在进行设计时可以直接按照 44pt 的高度进行设计，设计好的图像对应导出「<a href="mailto:&#x63;&#97;&#x6d;&#x65;&#x72;&#x61;&#64;&#49;&#x78;&#46;&#x70;&#110;&#103;">&#x63;&#97;&#x6d;&#x65;&#x72;&#x61;&#64;&#49;&#x78;&#46;&#x70;&#110;&#103;</a>」和「<a href="mailto:&#x63;&#x61;&#x6d;&#101;&#x72;&#x61;&#x40;&#50;&#x78;&#x2e;&#112;&#110;&#103;">&#x63;&#x61;&#x6d;&#101;&#x72;&#x61;&#x40;&#50;&#x78;&#x2e;&#112;&#110;&#103;</a>」两张图片，非 Retina 屏幕的 iPhone 在显示时会自动调用第一张图片，Retina 屏幕的 iPhone 在显示时会自动调用第二张图片。</p>
 <p>用与像素密度无关的单位「point 点」来表示设计内容的尺寸的优势在日后 iPhone 的屏幕尺寸变得更加复杂之后会更加凸显。</p>
 <p><img src="https://img-blog.csdnimg.cn/img_convert/414393edef51cdfab6b1bcebad5789b7.png"></p>
 <p>进一步，第一代 iPhone 到 iPhone 3GS 的屏幕分辨率可以表示为 320pt × 480pt @1x，iPhone 4、iPhone 4s 的屏幕分辨率可以表示为 320pt × 480pt @2x。而使用「point 点」这个单位表示的分辨率我们可以称之为「逻辑分辨率」，而使用「px 像素」这个单位表示的分辨率我们可以称之为「渲染分辨率」。</p>
@@ -1091,6 +932,158 @@
       </categories>
       <tags>
         <tag>iOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Github Pages 和 Hexo 快速搭建博客系统</title>
+    <url>/2022/01/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h1 id="环境准备工作"><a href="#环境准备工作" class="headerlink" title="环境准备工作"></a>环境准备工作</h1><ul>
+<li>安装 Node.js</li>
+<li>安装 Git</li>
+<li>Github 账户</li>
+</ul>
+<p>安装方法自己网上找，通过以下三条命令检测上述是否安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git --version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h1 id="安装-Hexo-及部署到-GitHub-Pages-上"><a href="#安装-Hexo-及部署到-GitHub-Pages-上" class="headerlink" title="安装 Hexo 及部署到 GitHub Pages 上"></a>安装 Hexo 及部署到 GitHub Pages 上</h1><h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>选择一个磁盘，新建一个文件夹，自己重命名文件夹（如：我的文件夹为：Ｅ\My_Blog），博客相关文件将储存在此文件夹下，在该文件夹下右键鼠标，点击 Git Bash Here，输入以下 npm 命令即可安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 安装 hexo</span><br><span class="line">$ npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">// 表示安装 hexo 部署到 git page 的 deployer</span><br><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo-初始化配置"><a href="#Hexo-初始化配置" class="headerlink" title="Hexo 初始化配置"></a>Hexo 初始化配置</h2><p>在刚才新建的文件夹里面再次新建一个 Hexo 文件夹（如：我的文件夹为：E\My_Blog\Hexo）,进入该 Hexo 文件夹右键鼠标，点击 Git Bash Here，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：此命令如果长时间卡主，很可能是因为默认主题下载不下来，直接ctrl+c 退出即可，继续下一步。因为我们后面会选择主题进行安装。</p>
+</blockquote>
+<h2 id="本地查看效果"><a href="#本地查看效果" class="headerlink" title="本地查看效果"></a>本地查看效果</h2><p>执行以下命令，执行完即可登录 <a href="http://localhost:4000/">http://localhost:4000/</a> 查看效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<h2 id="将博客部署到-Github-Pages-上"><a href="#将博客部署到-Github-Pages-上" class="headerlink" title="将博客部署到 Github Pages 上"></a>将博客部署到 Github Pages 上</h2><ol>
+<li><p>登录Github账户后，创建一个名称为：xxx.github.io 格式的代码库。</p>
+</li>
+<li><p>打开你创建的 Hexo 文件夹。用记事本打开该文件夹下的 _config.yml 文件，并进行如下修改：<br> <img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/10/103001.png"></p>
+</li>
+<li><p>在 Hexo 文件夹下执行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+<p>如果执行完成报以下错误，说明你的 deployer 没有安装成功</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure>
+<p>需要执行以下命令再安装一次：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>再执行<code>hexo g -d</code>，你的博客就会部署到 Github 上了</p>
+</li>
+<li><p>访问博客：https://你的用户名.github.io，通过此链接就可以访问你的博客了</p>
+</li>
+</ol>
+<h1 id="选择博客主题"><a href="#选择博客主题" class="headerlink" title="选择博客主题"></a>选择博客主题</h1><h2 id="下载主题"><a href="#下载主题" class="headerlink" title="下载主题"></a>下载主题</h2><p><a href="https://hexo.io/themes/">点此此处</a>进入 Hexo 官网的主题专栏，我们可以看见有许多主题供我们选择。选中自己喜欢的主题去github上download下来（这种方式有时比git clone快很多）</p>
+<h2 id="设置默认主题"><a href="#设置默认主题" class="headerlink" title="设置默认主题"></a>设置默认主题</h2><p>等待下载完成后将其放在 themes 目录下（如：\themes\hexo-theme-aero-dual），然后打开 Hexo 文件夹下的配置文件 _config.yml ，找到关键字 theme，修改参数为：theme：hexo-theme-aero-dual （其他主题修改成相应名称即可），再次注意冒号后面有一个空格！</p>
+<h2 id="部署主题"><a href="#部署主题" class="headerlink" title="部署主题"></a>部署主题</h2><p>返回 Hexo 目录，右键 Git Bash Here ，输入以下命令开始部署主题：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+<p>此时打开浏览器，访问 <a href="http://localhost:4000/">http://localhost:4000/</a> 就可看见我们的主题已经更换了，如果感觉效果满意，我们就可以把它部署到Github上了。<br>打开 Hexo 文件夹，右键 Git Bash Here ，输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean  </span><br><span class="line">//该命令的作用是清除缓存，若不输入此命令，服务器有可能更新不了主题</span><br><span class="line">$ hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h1><h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>新建一个空文章，输入以下命令，会在项目 \Hexo\source_posts 中生成 文章标题.md 文件，文章标题根据需要命名：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo n &quot;文章标题&quot;</span><br></pre></td></tr></table></figure>
+<p>也可以直接在 \Hexo\source_posts 目录下右键鼠标新建文本文档，改后缀为 .md 即可，这种方法比较方便</p>
+<h2 id="推送到github服务器"><a href="#推送到github服务器" class="headerlink" title="推送到github服务器"></a>推送到github服务器</h2><p>当我们用编辑器写好文章后，可以使用以下命令将其推送到服务器上</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+<p>现在访问你的博客就可以看见写好的文章啦！</p>
+<h1 id="博客美化和使用功能的添加"><a href="#博客美化和使用功能的添加" class="headerlink" title="博客美化和使用功能的添加"></a>博客美化和使用功能的添加</h1><p>有关博客后期的美化、实用功能的添加，可以参考网上的两篇文章（感谢原创作者）：</p>
+<p><a href="https://blog.csdn.net/qq_36759224/article/details/85010191">Hexo 博客优化之实用功能添加系列</a><br><a href="https://blog.csdn.net/qq_36759224/article/details/85420403">Hexo 博客优化之博客美化系列</a></p>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Halo搭建个人博客</title>
+    <url>/2020/05/09/%E4%BD%BF%E7%94%A8Halo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>项目名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>halo</td>
+<td>提供整个系统的服务，采用 Spring Boot 开发</td>
+</tr>
+<tr>
+<td>halo-admin</td>
+<td>负责后台管理的渲染，采用 Vue 开发，已集成在 Halo 运行包内，无需独立部署</td>
+</tr>
+<tr>
+<td>halo-comment</td>
+<td>评论插件，采用 Vue 开发，在主题中运行方式引入构建好的 Javascript 文件即可</td>
+</tr>
+<tr>
+<td>halo-theme-*</td>
+<td>主题项目集，采用 Freemarker 模板引擎编写，需要包含一些特殊的配置才能够被 halo 所使用</td>
+</tr>
+</tbody></table>
+<h1 id="在Linux服务器上部署Halo"><a href="#在Linux服务器上部署Halo" class="headerlink" title="在Linux服务器上部署Halo"></a>在Linux服务器上部署Halo</h1><h2 id="安装-Java-运行环境"><a href="#安装-Java-运行环境" class="headerlink" title="安装 Java 运行环境"></a>安装 Java 运行环境</h2><blockquote>
+<p> 若已经存在 Java 运行环境的可略过这一步。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 安装 OpenJRE</span><br><span class="line">sudo yum install java-1.8.0-openjdk -y</span><br><span class="line"></span><br><span class="line"># 检测是否安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-Halo"><a href="#安装-Halo" class="headerlink" title="安装 Halo"></a>安装 Halo</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p>考虑到部分用户的需要，可能需要自定义比如端口等设置项，我们提供了公共的配置文件，并且该配置文件是完全独立于安装包的。当然，你也可以使用安装包内的默认配置文件，但是安装包内的配置文件是不可修改的。请注意：配置文件的路径为 ~/.halo/application.yaml。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载配置文件到 ~/.halo 目录</span><br><span class="line">curl -o ~/.halo/application.yaml --create-dirs https://dl.halo.run/config/application-template.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>完成上一步操作，我们就可以自己配置 Halo 的运行端口，以及数据库相关的配置了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 Vim 工具修改配置文件</span><br><span class="line">vim ~/.halo/application.yaml</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 服务端口号</span><br><span class="line">  port: 8090</span><br><span class="line"></span><br><span class="line">  # Response data gzip.</span><br><span class="line">  compression:</span><br><span class="line">    enabled: false</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    # 默认使用的是 H2 Database 数据库，这是一种嵌入式的数据库</span><br><span class="line">    # H2 database configuration.</span><br><span class="line">    driver-class-name: org.h2.Driver</span><br><span class="line">    url: jdbc:h2:file:~/.halo/db/halo</span><br><span class="line">    username: admin</span><br><span class="line">    password: 123456</span><br><span class="line"></span><br><span class="line">    # MySQL database configuration.</span><br><span class="line">  #    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  #    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span><br><span class="line">  #    username: root</span><br><span class="line">  #    password: 123456</span><br><span class="line"></span><br><span class="line">  # H2 database console configuration.</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      settings:</span><br><span class="line">        web-allow-others: false</span><br><span class="line">      path: /h2-console</span><br><span class="line">      enabled: false</span><br><span class="line"></span><br><span class="line">halo:</span><br><span class="line">  # Your admin client path is https://your-domain/&#123;admin-path&#125;</span><br><span class="line">  admin-path: admin</span><br><span class="line"></span><br><span class="line">  # memory or level</span><br><span class="line">  cache: memory</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行Halo"><a href="#运行Halo" class="headerlink" title="运行Halo"></a>运行Halo</h2><p>Halo 的整个应用程序只有一个 Jar 包，且不包含用户的任何配置，它放在任何目录都是可行的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 启动测试</span><br><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
+<p>如看到以下日志输出，则代表启动成功.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
+<p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 halo.service</span><br><span class="line">sudo vim /etc/systemd/system/halo.service</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Halo Service</span><br><span class="line">Documentation=https://halo.run</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=halo</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line">StandOutput=syslog</span><br><span class="line"></span><br><span class="line">StandError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>参数：</p>
+<ul>
+<li>-Xms256m：为 JVM 启动时分配的内存，请按照服务器的内存做适当调整，512 M 内存的服务器推荐设置为 128，1G 内存的服务器推荐设置为 256，默认为 256。</li>
+<li>-Xmx256m：为 JVM 运行过程中分配的最大内存，配置同上。</li>
+<li>YOUR_JAR_PATH：Halo 安装包的绝对路径，例如 /www/wwwroot/halo-latest.jar。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 修改 service 文件之后需要刷新 Systemd</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 使 Halo 开机自启</span><br><span class="line">sudo systemctl enable halo</span><br><span class="line"></span><br><span class="line"># 启动 Halo</span><br><span class="line">sudo service halo start</span><br><span class="line"></span><br><span class="line"># 重启 Halo</span><br><span class="line">sudo service halo restart</span><br><span class="line"></span><br><span class="line"># 停止 Halo</span><br><span class="line">sudo service halo stop</span><br><span class="line"></span><br><span class="line"># 查看 Halo 的运行状态</span><br><span class="line">sudo service halo status</span><br></pre></td></tr></table></figure>
+
+<p>完成以上操作即可通过 IP:端口 访问了。不过在此之前，最好先完成后续操作，我们还需要让域名也可以访问到 Halo，请继续看 配置域名访问。</p>
+<h2 id="更新-Halo"><a href="#更新-Halo" class="headerlink" title="更新 Halo"></a>更新 Halo</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 备份数据</span><br><span class="line">cp -r ~/.halo ~/.halo.bak</span><br><span class="line"></span><br><span class="line"># 备份旧的安装包</span><br><span class="line">mv halo-latest.jar halo-latest.jar.bak</span><br><span class="line"></span><br><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 测试是否能够正常启动</span><br><span class="line">java -jar halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 重启应用</span><br><span class="line">service halo restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><h2 id="使用Nginx进行反向代理"><a href="#使用Nginx进行反向代理" class="headerlink" title="使用Nginx进行反向代理"></a>使用Nginx进行反向代理</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加 Nginx 源</span><br><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装 Nginx</span><br><span class="line">sudo yum install -y nginx</span><br><span class="line"></span><br><span class="line"># 启动 Nginx</span><br><span class="line">sudo systemctl start nginx.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启 Nginx</span><br><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
+<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 下载 Halo 官方的 Nginx 配置模板</span><br><span class="line">curl -o /etc/nginx/conf.d/halo.conf --create-dirs https://dl.halo.run/config/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 使用 vim 编辑 halo.conf</span><br><span class="line">vim /etc/nginx/conf.d/halo.conf</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://127.0.0.1:8090/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：请把 example.com 改为自己的域名。</p>
+</blockquote>
+<p>修改完成之后</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多配置详情请查看：<a href="https://halo.run/">halo官网</a>、<a href="https://bbs.halo.run/">halo社区</a></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
       </tags>
   </entry>
   <entry>
@@ -2071,7 +2064,7 @@
   </entry>
   <entry>
     <title>手把手教你用 VuePress + GitHub Pages 搭建个人博客！</title>
-    <url>/2023/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/2021/08/03/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E7%94%A8%20VuePress%20+%20GitHub%20Pages%20%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在阅读<a href="https://juejin.cn/user/712139234359182">冴羽</a>老师的文章时，对VuePress搭建个人博客很感兴趣，于是试着自己搭建了一遍，写了这篇文章记录一下搭建的基本流程，希望对大家有所帮助。</p>
 <h2 id="1-本地搭建"><a href="#1-本地搭建" class="headerlink" title="1. 本地搭建"></a>1. 本地搭建</h2><ol>
 <li>创建并进入一个新目录</li>
@@ -2193,6 +2186,24 @@
       </tags>
   </entry>
   <entry>
+    <title>拦截Element-UI中el-tabs组件的切换</title>
+    <url>/2020/11/09/%E6%8B%A6%E6%88%AAElement-UI%E4%B8%ADel-tabs%E7%BB%84%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2/</url>
+    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1、tabs组件代码</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot; :before-leave=&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label=&quot;用户信息&quot; name=&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if=&quot;code&quot; label=&quot;用户角色&quot; name=&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>2、beforeLeave()</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    this.$confirm(&#x27;离开将不保存本页修改&#x27;, &#x27;提示&#x27;, &#123;</span><br><span class="line">        confirmButtonText: &#x27;确定&#x27;,</span><br><span class="line">        cancelButtonText: &#x27;取消&#x27;,</span><br><span class="line">        type: &#x27;warning&#x27;</span><br><span class="line">    &#125;).then(() =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>VUE</category>
+      </categories>
+      <tags>
+        <tag>VUE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的Git学习教程</title>
     <url>/2020/11/09/%E6%88%91%E7%9A%84Git%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="一、Git常用命令汇总"><a href="#一、Git常用命令汇总" class="headerlink" title="一、Git常用命令汇总"></a>一、Git常用命令汇总</h1><p>1、提交<br>git add .<br>git commit -m “”<br>git push [origin远程主机名][本地分支名] [远程分支名]</p>
@@ -2234,24 +2245,6 @@
       </tags>
   </entry>
   <entry>
-    <title>拦截Element-UI中el-tabs组件的切换</title>
-    <url>/2020/11/09/%E6%8B%A6%E6%88%AAElement-UI%E4%B8%ADel-tabs%E7%BB%84%E4%BB%B6%E7%9A%84%E5%88%87%E6%8D%A2/</url>
-    <content><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>在切换tabs时，如果当前页面内容没有保存，则拦截切换并提示：“离开将不保存本页修改”的弹框</p>
-<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>1、tabs组件代码</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;el-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot; :before-leave=&quot;beforeLeave&quot;&gt;</span><br><span class="line"> 	&lt;el-tab-pane label=&quot;用户信息&quot; name=&quot;basicInfo&quot;&gt;</span><br><span class="line">  		用户信息表单</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line"> 	&lt;el-tab-pane v-if=&quot;code&quot; label=&quot;用户角色&quot; name=&quot;userRole&quot;&gt;</span><br><span class="line">  		用户角色列表</span><br><span class="line"> 	&lt;/el-tab-pane&gt;</span><br><span class="line">&lt;/el-tabs&gt;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>2、beforeLeave()</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeLeave(item) &#123;</span><br><span class="line">    var p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    this.$confirm(&#x27;离开将不保存本页修改&#x27;, &#x27;提示&#x27;, &#123;</span><br><span class="line">        confirmButtonText: &#x27;确定&#x27;,</span><br><span class="line">        cancelButtonText: &#x27;取消&#x27;,</span><br><span class="line">        type: &#x27;warning&#x27;</span><br><span class="line">    &#125;).then(() =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        resolve()</span><br><span class="line">    &#125;).catch(err =&gt; &#123;</span><br><span class="line">        // 你可以在这儿做些操作</span><br><span class="line">        reject(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    return p</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>VUE</category>
-      </categories>
-      <tags>
-        <tag>VUE</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>数据结构绪论</title>
     <url>/2020/11/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%BB%AA%E8%AE%BA/</url>
     <content><![CDATA[<h1 id="基本概念和术语"><a href="#基本概念和术语" class="headerlink" title="基本概念和术语"></a>基本概念和术语</h1><h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>数据是描述客观事物的符号，是计算机中可以操作的对象，是能被计算机识别，并输入给计算机处理的符号集合。<br>数据不仅仅包括整型、实型等数值类型，还包括字符及声音、图像、视频等非数值类型。</p>
@@ -2277,38 +2270,6 @@
 </ol>
 <h1 id="抽象数据类型"><a href="#抽象数据类型" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h1><p>数据类型：是指一组性质相同的值的集合及定义在此集合上的一些操作的总称。<br>抽象数据类型（Abstract Data Type, ADT）: 是指一个数学模型及定义在该模型上的一组操作。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ADT 抽象数据类型名</span><br><span class="line">Data</span><br><span class="line">    数据元素之间逻辑关系的定义</span><br><span class="line">Operation</span><br><span class="line">    操作1</span><br><span class="line">	初始条件</span><br><span class="line">	操作结构描述</span><br><span class="line">    操作2</span><br><span class="line">	...</span><br><span class="line">endADT</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>算法中的时间复杂度和空间复杂度</title>
-    <url>/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</url>
-    <content><![CDATA[<h1 id="算法基本概念"><a href="#算法基本概念" class="headerlink" title="算法基本概念"></a>算法基本概念</h1><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有效序列，并且每条指令表示一个或多个操作。</p>
-<p>算法具有五个基本特性：输入、输出、有穷性、确定性和可行性。</p>
-<p>算法设计的要求：<br>正确性、可读性、健壮性、时间效率高和存储量低。</p>
-<p>算法效率的度量方法：</p>
-<ol>
-<li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
-<li>事前分析估算方法</li>
-</ol>
-<span id="more"></span>
-
-<h1 id="算法事前分析估算方法"><a href="#算法事前分析估算方法" class="headerlink" title="算法事前分析估算方法"></a>算法事前分析估算方法</h1><h2 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h2><p>假设两个算法的输入规模都是n，算法A要做2n+3次操作，算法B要做3n+1次操作。你觉得谁更快呢？<br>准确来说，答案是不一定的。<br>当n=1时，算法A效率不如B；当n=2时，两者效率相同；当n&gt;2时，算法A开始优于B，随着n的增加，算法A比B越来越好。于是我们得出结论，算法A总体上要好过算法B。<br>此时我们给出这样定义，输入规模n在没有限制的情况下，只要超出一个数值N，这个函数总是大于另一个函数，我们称函数是渐进增长的。</p>
-<p>再举一些有指数的例子，我们观察发现，最高次项的指数大的，函数随着n的增长，结果也会变得增长特别快。于是我们得到这样一个结论，判断一个算法的效率时，函数中的常数和其他次要项常常可以忽略，而更应该关注主项（最高阶项）的阶数。</p>
-<h2 id="算法时间复杂度"><a href="#算法时间复杂度" class="headerlink" title="算法时间复杂度"></a>算法时间复杂度</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级。<br>算法的时间复杂度，也就是算法的时间量度，记作：T(n) = O(f(n))。它表示随着问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进时间复杂度，简称为时间复杂度。其中f(n)是问题规模n的某个函数。</p>
-<h3 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h3><ol>
-<li>用常数1取代运行时间中的所有加法常数。</li>
-<li>在修改后的运行次数函数中，只保留最高阶项。</li>
-<li>如果最高阶项存在且不是1，则去除与这个项相乘的常数。<br>得到的结果就是大O阶。</li>
-</ol>
-<h3 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/5c2dda54325252290426ba0ac05b550d.png"><br>常用的时间复杂度所耗费的时间从小到大依次是：<br><img src="https://img-blog.csdnimg.cn/img_convert/33239657a65c54ea0ded891c63de812e.png"></p>
-<h3 id="最坏情况与平均情况"><a href="#最坏情况与平均情况" class="headerlink" title="最坏情况与平均情况"></a>最坏情况与平均情况</h3><p>一般没有特殊说明的情况下，都是指最坏时间复杂度。</p>
-<h2 id="算法空间复杂度"><a href="#算法空间复杂度" class="headerlink" title="算法空间复杂度"></a>算法空间复杂度</h2><p>算法的空间复杂度通过算法所需的存储空间实现，算法空间复杂度的计算公式记作：S(n)=O(f(n))，其中，n为问题的规模，f(n)为语句关于n所占存储空间的函数。</p>
-]]></content>
       <categories>
         <category>数据结构与算法</category>
       </categories>
@@ -2372,6 +2333,92 @@
       </categories>
       <tags>
         <tag>ES6</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>算法中的时间复杂度和空间复杂度</title>
+    <url>/2020/11/09/%E7%AE%97%E6%B3%95%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%92%8C%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</url>
+    <content><![CDATA[<h1 id="算法基本概念"><a href="#算法基本概念" class="headerlink" title="算法基本概念"></a>算法基本概念</h1><p>算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有效序列，并且每条指令表示一个或多个操作。</p>
+<p>算法具有五个基本特性：输入、输出、有穷性、确定性和可行性。</p>
+<p>算法设计的要求：<br>正确性、可读性、健壮性、时间效率高和存储量低。</p>
+<p>算法效率的度量方法：</p>
+<ol>
+<li>事后统计方法：<br>这种方法主要是通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序的运行时间进行比较，从而确定算法效率的高低。<br>但是这种方法显然有很大缺陷，例如比较依赖计算机硬件和软件等环境因素。</li>
+<li>事前分析估算方法</li>
+</ol>
+<span id="more"></span>
+
+<h1 id="算法事前分析估算方法"><a href="#算法事前分析估算方法" class="headerlink" title="算法事前分析估算方法"></a>算法事前分析估算方法</h1><h2 id="函数的渐进增长"><a href="#函数的渐进增长" class="headerlink" title="函数的渐进增长"></a>函数的渐进增长</h2><p>假设两个算法的输入规模都是n，算法A要做2n+3次操作，算法B要做3n+1次操作。你觉得谁更快呢？<br>准确来说，答案是不一定的。<br>当n=1时，算法A效率不如B；当n=2时，两者效率相同；当n&gt;2时，算法A开始优于B，随着n的增加，算法A比B越来越好。于是我们得出结论，算法A总体上要好过算法B。<br>此时我们给出这样定义，输入规模n在没有限制的情况下，只要超出一个数值N，这个函数总是大于另一个函数，我们称函数是渐进增长的。</p>
+<p>再举一些有指数的例子，我们观察发现，最高次项的指数大的，函数随着n的增长，结果也会变得增长特别快。于是我们得到这样一个结论，判断一个算法的效率时，函数中的常数和其他次要项常常可以忽略，而更应该关注主项（最高阶项）的阶数。</p>
+<h2 id="算法时间复杂度"><a href="#算法时间复杂度" class="headerlink" title="算法时间复杂度"></a>算法时间复杂度</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>在进行算法分析时，语句总的执行次数T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级。<br>算法的时间复杂度，也就是算法的时间量度，记作：T(n) = O(f(n))。它表示随着问题规模n的增大，算法执行时间的增长率和f(n)的增长率相同，称作算法的渐进时间复杂度，简称为时间复杂度。其中f(n)是问题规模n的某个函数。</p>
+<h3 id="推导大O阶方法"><a href="#推导大O阶方法" class="headerlink" title="推导大O阶方法"></a>推导大O阶方法</h3><ol>
+<li>用常数1取代运行时间中的所有加法常数。</li>
+<li>在修改后的运行次数函数中，只保留最高阶项。</li>
+<li>如果最高阶项存在且不是1，则去除与这个项相乘的常数。<br>得到的结果就是大O阶。</li>
+</ol>
+<h3 id="常见的时间复杂度"><a href="#常见的时间复杂度" class="headerlink" title="常见的时间复杂度"></a>常见的时间复杂度</h3><p><img src="https://img-blog.csdnimg.cn/img_convert/5c2dda54325252290426ba0ac05b550d.png"><br>常用的时间复杂度所耗费的时间从小到大依次是：<br><img src="https://img-blog.csdnimg.cn/img_convert/33239657a65c54ea0ded891c63de812e.png"></p>
+<h3 id="最坏情况与平均情况"><a href="#最坏情况与平均情况" class="headerlink" title="最坏情况与平均情况"></a>最坏情况与平均情况</h3><p>一般没有特殊说明的情况下，都是指最坏时间复杂度。</p>
+<h2 id="算法空间复杂度"><a href="#算法空间复杂度" class="headerlink" title="算法空间复杂度"></a>算法空间复杂度</h2><p>算法的空间复杂度通过算法所需的存储空间实现，算法空间复杂度的计算公式记作：S(n)=O(f(n))，其中，n为问题的规模，f(n)为语句关于n所占存储空间的函数。</p>
+]]></content>
+      <categories>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>讲讲JS中的类、继承和单例</title>
+    <url>/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
+</blockquote>
+<h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
+<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">    // 构造函数里面的方法和属性</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(`$&#123;this.name&#125; - $&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex = &#x27;男&#x27;;</span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(`$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;`)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 静态方法</span><br><span class="line">Person.setName = function() &#123;</span><br><span class="line">   console.log(&#x27;静态方法&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例方法是通过实例化来调用的</span><br><span class="line">var p = new Person(&#x27;zhangsan&#x27;, &#x27;20&#x27;);</span><br><span class="line">p.run()</span><br><span class="line">p.work()</span><br><span class="line"></span><br><span class="line">// 静态方法是通过类名直接调用</span><br><span class="line">Person.setName()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="ES5-继承"><a href="#ES5-继承" class="headerlink" title="ES5 继承"></a>ES5 继承</h1><p>原型链继承和对象冒充继承：</p>
+<ul>
+<li>对象冒充继承：可以实现将参数传递到父类，但是没法继承原型链上的属性和方法</li>
+<li>原型链继承：可以继承构造函数里面以及原型链上面的属性和方法，但是实例化子类的时候没法给父类传参</li>
+</ul>
+<p>所以平时都是两者结合起来实现继承</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(this.name + &#x27;-&#x27; + this.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(&#x27;work&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Web(name, age) &#123;</span><br><span class="line">    // 通过 call()，能够使用属于另一个对象的方法。</span><br><span class="line">    // 此处相当于 Web 函数去调用Person类，并传值name,age</span><br><span class="line">    Person.call(this, name, age) // 对象冒充实现继承，可以实现将参数传递到父类</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Web.prototype = new Person() // 原型链继承，但是原型链继承在实例化时没法将参数传递到父类里面</span><br><span class="line">var w = new Web(&#x27;李四&#x27;, 20)</span><br><span class="line">w.run() // 测试调用构造函数里面的方法</span><br><span class="line">w.work() // 测试调用原型链上的方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-类"><a href="#ES6-类" class="headerlink" title="ES6 类"></a>ES6 类</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123; // 类的构造方法，实例化的时候执行，new的时候执行</span><br><span class="line">        this._name = name;</span><br><span class="line">        this._age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义方法，注意：es6里面方法之间没有逗号(,)</span><br><span class="line">    getName() &#123;</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    setName() &#123;</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p = new Person(&#x27;张三&#x27;, &#x27;20&#x27;)</span><br><span class="line">p.setName(&#x27;李四&#x27;)</span><br><span class="line">p.getName()</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123;</span><br><span class="line">        this.name = name</span><br><span class="line">        this.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    getInfo() &#123;</span><br><span class="line">        console.log(`姓名：$&#123;this.name&#125; - 年龄：$&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123;</span><br><span class="line">        console.log(&#x27;run&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Person &#123;</span><br><span class="line">    constructor(name, age ,sex) &#123;</span><br><span class="line">        super(name, age) // 实例化子类的时候把子类的数据传给父类</span><br><span class="line">        this.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    print() &#123;</span><br><span class="line">        console.log(this.sex)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var w = new Web(&#x27;张三&#x27;, &#x27;30&#x27;, &#x27;男&#x27;)</span><br><span class="line">w.print() // 调用自己的方法</span><br><span class="line">w.getInfo() // 调用父类方法</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-静态方法"><a href="#ES6-静态方法" class="headerlink" title="ES6 静态方法"></a>ES6 静态方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name) &#123; // 属性</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123; // 实例方法</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    static work() &#123; // 静态方法</span><br><span class="line">        console.log(&#x27;这是es6中的静态方法&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者通过这种方式定义类的静态方法</span><br><span class="line">Person.instance = &#x27;这是一个静态方法的属性&#x27;</span><br><span class="line"></span><br><span class="line">var p = new Person(&#x27;张三&#x27;)</span><br><span class="line">p.run()</span><br><span class="line">Person.work() // 通过类名来调用静态方法</span><br><span class="line">console.log(Person.instance)</span><br></pre></td></tr></table></figure>
+
+<h1 id="ES6-单例"><a href="#ES6-单例" class="headerlink" title="ES6 单例"></a>ES6 单例</h1><blockquote>
+<p>使用场景：nodejs连接mongodb数据库，只连接成功一次，然后之后每次操作数据库都使用本次连接后的实例，不用每次都重新连接</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">    static getInstance() &#123; // 单例</span><br><span class="line">        if (!DB.instance) &#123;</span><br><span class="line">            DB.instance = new DB()</span><br><span class="line">        &#125;</span><br><span class="line">        return DB.instance</span><br><span class="line">    &#125;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        console.log(&#x27;实例化会触发构造函数&#x27;)</span><br><span class="line">        this.connect()</span><br><span class="line">    &#125;</span><br><span class="line">    connect() &#123;</span><br><span class="line">        console.log(&#x27;连接数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    find() &#123;</span><br><span class="line">        console.log(&#x27;查询数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var myDb1 = new DB()</span><br><span class="line">var myDb2 = new DB() // 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line"></span><br><span class="line">var myDb3 = DB.getInstance() // 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find()</span><br><span class="line">var myDb4 = DB.getInstance()</span><br><span class="line">myDb4.find()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>通过JS将图片File转为base64并压缩</title>
+    <url>/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/</url>
+    <content><![CDATA[<blockquote>
+<p>后端为了方便需要直接将图片存储为base64，但图片过大时转出的base64过长，因此前端需要对转后的base64进行压缩</p>
+</blockquote>
+<p>话不多说，直接上代码</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> * @param &#123;需要转换的图片file&#125; file </span><br><span class="line"> * @param &#123;是否返回压缩后的base64&#125; isCompression </span><br><span class="line"> * @param &#123;转换成功后通过回调函数将结果返回&#125; callback </span><br><span class="line"> */</span><br><span class="line">export function imageToBase64(file, isCompression, callback) &#123;</span><br><span class="line">	// 判断图片类型</span><br><span class="line">	if (file.type == &#x27;image/jpeg&#x27; || file.type == &#x27;image/png&#x27; || file.type == &#x27;image/jpg&#x27;) &#123;</span><br><span class="line">		var isJpg = true</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		jsJpg = false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 判断图片大小</span><br><span class="line">	const isLt2M = file.size / 1024 / 1024 &lt; 2</span><br><span class="line">	if (!isJpg) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片只能是jpg/png/jepg格式&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">	if (!isLt2M) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片大小不能超过2M&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 创建一个HTML5的FileReader对象</span><br><span class="line">	var reader = new FileReader()</span><br><span class="line">	// 创建一个img对象</span><br><span class="line">	var img = new Image()</span><br><span class="line">	// let filename = file.filename</span><br><span class="line">	if (file) &#123;</span><br><span class="line">		reader.readAsDataURL(file)</span><br><span class="line">	&#125;</span><br><span class="line">	if (isJpg &amp;&amp; isLt2M) &#123;</span><br><span class="line">		reader.onload=(e)=&gt;&#123;</span><br><span class="line">			// let base64Str = reader.result.split[&#x27;,&#x27;][1]</span><br><span class="line">			img.src = e.target.result</span><br><span class="line">			// base64地址图片加载完毕后执行</span><br><span class="line">			img.onload = function() &#123;</span><br><span class="line">				// 缩放图片需要canvas（也可以在DOM中直接定义canvas标签，这样就能把压缩完的图片不转base64也能直接显示出来）</span><br><span class="line">				var canvas = document.createElement(&#x27;canvas&#x27;)</span><br><span class="line">				var context = canvas.getContext(&#x27;2d&#x27;)</span><br><span class="line">				// 图片原始尺寸</span><br><span class="line">				var originWidth = this.width</span><br><span class="line">				var originHeight = this.height</span><br><span class="line">				// 最大尺寸限制，可通过设置宽高来实现图片压缩程度</span><br><span class="line">				var maxWidth = 300,</span><br><span class="line">					maxHeight = 300</span><br><span class="line">				// 目标尺寸</span><br><span class="line">				var targetWidth = originWidth</span><br><span class="line">					targetHeight = originHeight</span><br><span class="line">				// 图片尺寸超过最大尺寸限制</span><br><span class="line">				if(originWidth &gt; maxWidth || originHeight &gt; maxHeight) &#123;</span><br><span class="line">					if (originWidth / originHeight &gt; maxWidth / maxHeight) &#123;</span><br><span class="line">						// 更改宽度，按照宽度限定尺寸</span><br><span class="line">						targetWidth = maxWidth</span><br><span class="line">						targetHeight = Math.round(maxWidth*(originHeight/originWidth))</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						targetHeight = maxHeight</span><br><span class="line">						targetWidth = Math.round(maxHeight*(originWidth/originHeight))</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 对图片进行缩放</span><br><span class="line">				canvas.width = targetWidth</span><br><span class="line">				canvas.height = targetHeight</span><br><span class="line">				// 清除画布</span><br><span class="line">				context.clearRect(0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 图片压缩</span><br><span class="line">				 * 第一个参数是创建的img对象</span><br><span class="line">				 * 第二三个参数是左上角坐标</span><br><span class="line">				 * 后两个参数是画布区域宽高</span><br><span class="line">				 */</span><br><span class="line">				context.drawImage(img, 0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 压缩后的base64文件</span><br><span class="line">				 * 第一个参数可以为image/jpeg或image/webp类型的图片</span><br><span class="line">				 * 第二个参数设置图片质量取值0-1，超出则以默认值0.92替代</span><br><span class="line">				 */</span><br><span class="line">				var newUrl = canvas.toDataURL(&#x27;image/jpeg&#x27;, 0.02)</span><br><span class="line">				if (isCompression) &#123; // 返回压缩后的base64</span><br><span class="line">					callback(newUrl)</span><br><span class="line">				&#125; else &#123; // 返回不压缩的base64</span><br><span class="line">					callback(e.target.result)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2452,60 +2499,6 @@
       </categories>
       <tags>
         <tag>Web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>讲讲JS中的类、继承和单例</title>
-    <url>/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/</url>
-    <content><![CDATA[<blockquote>
-<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
-</blockquote>
-<h1 id="ES5-类和静态方法"><a href="#ES5-类和静态方法" class="headerlink" title="ES5 类和静态方法"></a>ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
-<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">    // 构造函数里面的方法和属性</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(`$&#123;this.name&#125; - $&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex = &#x27;男&#x27;;</span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(`$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;`)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 静态方法</span><br><span class="line">Person.setName = function() &#123;</span><br><span class="line">   console.log(&#x27;静态方法&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例方法是通过实例化来调用的</span><br><span class="line">var p = new Person(&#x27;zhangsan&#x27;, &#x27;20&#x27;);</span><br><span class="line">p.run()</span><br><span class="line">p.work()</span><br><span class="line"></span><br><span class="line">// 静态方法是通过类名直接调用</span><br><span class="line">Person.setName()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="ES5-继承"><a href="#ES5-继承" class="headerlink" title="ES5 继承"></a>ES5 继承</h1><p>原型链继承和对象冒充继承：</p>
-<ul>
-<li>对象冒充继承：可以实现将参数传递到父类，但是没法继承原型链上的属性和方法</li>
-<li>原型链继承：可以继承构造函数里面以及原型链上面的属性和方法，但是实例化子类的时候没法给父类传参</li>
-</ul>
-<p>所以平时都是两者结合起来实现继承</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.run = function() &#123;</span><br><span class="line">        console.log(this.name + &#x27;-&#x27; + this.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.work = function() &#123;</span><br><span class="line">    console.log(&#x27;work&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Web(name, age) &#123;</span><br><span class="line">    // 通过 call()，能够使用属于另一个对象的方法。</span><br><span class="line">    // 此处相当于 Web 函数去调用Person类，并传值name,age</span><br><span class="line">    Person.call(this, name, age) // 对象冒充实现继承，可以实现将参数传递到父类</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Web.prototype = new Person() // 原型链继承，但是原型链继承在实例化时没法将参数传递到父类里面</span><br><span class="line">var w = new Web(&#x27;李四&#x27;, 20)</span><br><span class="line">w.run() // 测试调用构造函数里面的方法</span><br><span class="line">w.work() // 测试调用原型链上的方法</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-类"><a href="#ES6-类" class="headerlink" title="ES6 类"></a>ES6 类</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123; // 类的构造方法，实例化的时候执行，new的时候执行</span><br><span class="line">        this._name = name;</span><br><span class="line">        this._age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义方法，注意：es6里面方法之间没有逗号(,)</span><br><span class="line">    getName() &#123;</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    setName() &#123;</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var p = new Person(&#x27;张三&#x27;, &#x27;20&#x27;)</span><br><span class="line">p.setName(&#x27;李四&#x27;)</span><br><span class="line">p.getName()</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-继承"><a href="#ES6-继承" class="headerlink" title="ES6 继承"></a>ES6 继承</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name, age) &#123;</span><br><span class="line">        this.name = name</span><br><span class="line">        this.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    getInfo() &#123;</span><br><span class="line">        console.log(`姓名：$&#123;this.name&#125; - 年龄：$&#123;this.age&#125;`)</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123;</span><br><span class="line">        console.log(&#x27;run&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Person &#123;</span><br><span class="line">    constructor(name, age ,sex) &#123;</span><br><span class="line">        super(name, age) // 实例化子类的时候把子类的数据传给父类</span><br><span class="line">        this.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    print() &#123;</span><br><span class="line">        console.log(this.sex)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var w = new Web(&#x27;张三&#x27;, &#x27;30&#x27;, &#x27;男&#x27;)</span><br><span class="line">w.print() // 调用自己的方法</span><br><span class="line">w.getInfo() // 调用父类方法</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-静态方法"><a href="#ES6-静态方法" class="headerlink" title="ES6 静态方法"></a>ES6 静态方法</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">    constructor(name) &#123; // 属性</span><br><span class="line">        this._name = name</span><br><span class="line">    &#125;</span><br><span class="line">    run() &#123; // 实例方法</span><br><span class="line">        console.log(this._name)</span><br><span class="line">    &#125;</span><br><span class="line">    static work() &#123; // 静态方法</span><br><span class="line">        console.log(&#x27;这是es6中的静态方法&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者通过这种方式定义类的静态方法</span><br><span class="line">Person.instance = &#x27;这是一个静态方法的属性&#x27;</span><br><span class="line"></span><br><span class="line">var p = new Person(&#x27;张三&#x27;)</span><br><span class="line">p.run()</span><br><span class="line">Person.work() // 通过类名来调用静态方法</span><br><span class="line">console.log(Person.instance)</span><br></pre></td></tr></table></figure>
-
-<h1 id="ES6-单例"><a href="#ES6-单例" class="headerlink" title="ES6 单例"></a>ES6 单例</h1><blockquote>
-<p>使用场景：nodejs连接mongodb数据库，只连接成功一次，然后之后每次操作数据库都使用本次连接后的实例，不用每次都重新连接</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">    static getInstance() &#123; // 单例</span><br><span class="line">        if (!DB.instance) &#123;</span><br><span class="line">            DB.instance = new DB()</span><br><span class="line">        &#125;</span><br><span class="line">        return DB.instance</span><br><span class="line">    &#125;</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        console.log(&#x27;实例化会触发构造函数&#x27;)</span><br><span class="line">        this.connect()</span><br><span class="line">    &#125;</span><br><span class="line">    connect() &#123;</span><br><span class="line">        console.log(&#x27;连接数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    find() &#123;</span><br><span class="line">        console.log(&#x27;查询数据库&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var myDb1 = new DB()</span><br><span class="line">var myDb2 = new DB() // 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line"></span><br><span class="line">var myDb3 = DB.getInstance() // 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find()</span><br><span class="line">var myDb4 = DB.getInstance()</span><br><span class="line">myDb4.find()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过JS将图片File转为base64并压缩</title>
-    <url>/2020/11/09/%E9%80%9A%E8%BF%87JS%E5%B0%86%E5%9B%BE%E7%89%87File%E8%BD%AC%E4%B8%BAbase64%E5%B9%B6%E5%8E%8B%E7%BC%A9/</url>
-    <content><![CDATA[<blockquote>
-<p>后端为了方便需要直接将图片存储为base64，但图片过大时转出的base64过长，因此前端需要对转后的base64进行压缩</p>
-</blockquote>
-<p>话不多说，直接上代码</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> * @param &#123;需要转换的图片file&#125; file </span><br><span class="line"> * @param &#123;是否返回压缩后的base64&#125; isCompression </span><br><span class="line"> * @param &#123;转换成功后通过回调函数将结果返回&#125; callback </span><br><span class="line"> */</span><br><span class="line">export function imageToBase64(file, isCompression, callback) &#123;</span><br><span class="line">	// 判断图片类型</span><br><span class="line">	if (file.type == &#x27;image/jpeg&#x27; || file.type == &#x27;image/png&#x27; || file.type == &#x27;image/jpg&#x27;) &#123;</span><br><span class="line">		var isJpg = true</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		jsJpg = false</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 判断图片大小</span><br><span class="line">	const isLt2M = file.size / 1024 / 1024 &lt; 2</span><br><span class="line">	if (!isJpg) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片只能是jpg/png/jepg格式&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line">	if (!isLt2M) &#123;</span><br><span class="line">		this.$message.error(&#x27;上传图片大小不能超过2M&#x27;)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	// 创建一个HTML5的FileReader对象</span><br><span class="line">	var reader = new FileReader()</span><br><span class="line">	// 创建一个img对象</span><br><span class="line">	var img = new Image()</span><br><span class="line">	// let filename = file.filename</span><br><span class="line">	if (file) &#123;</span><br><span class="line">		reader.readAsDataURL(file)</span><br><span class="line">	&#125;</span><br><span class="line">	if (isJpg &amp;&amp; isLt2M) &#123;</span><br><span class="line">		reader.onload=(e)=&gt;&#123;</span><br><span class="line">			// let base64Str = reader.result.split[&#x27;,&#x27;][1]</span><br><span class="line">			img.src = e.target.result</span><br><span class="line">			// base64地址图片加载完毕后执行</span><br><span class="line">			img.onload = function() &#123;</span><br><span class="line">				// 缩放图片需要canvas（也可以在DOM中直接定义canvas标签，这样就能把压缩完的图片不转base64也能直接显示出来）</span><br><span class="line">				var canvas = document.createElement(&#x27;canvas&#x27;)</span><br><span class="line">				var context = canvas.getContext(&#x27;2d&#x27;)</span><br><span class="line">				// 图片原始尺寸</span><br><span class="line">				var originWidth = this.width</span><br><span class="line">				var originHeight = this.height</span><br><span class="line">				// 最大尺寸限制，可通过设置宽高来实现图片压缩程度</span><br><span class="line">				var maxWidth = 300,</span><br><span class="line">					maxHeight = 300</span><br><span class="line">				// 目标尺寸</span><br><span class="line">				var targetWidth = originWidth</span><br><span class="line">					targetHeight = originHeight</span><br><span class="line">				// 图片尺寸超过最大尺寸限制</span><br><span class="line">				if(originWidth &gt; maxWidth || originHeight &gt; maxHeight) &#123;</span><br><span class="line">					if (originWidth / originHeight &gt; maxWidth / maxHeight) &#123;</span><br><span class="line">						// 更改宽度，按照宽度限定尺寸</span><br><span class="line">						targetWidth = maxWidth</span><br><span class="line">						targetHeight = Math.round(maxWidth*(originHeight/originWidth))</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						targetHeight = maxHeight</span><br><span class="line">						targetWidth = Math.round(maxHeight*(originWidth/originHeight))</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				// 对图片进行缩放</span><br><span class="line">				canvas.width = targetWidth</span><br><span class="line">				canvas.height = targetHeight</span><br><span class="line">				// 清除画布</span><br><span class="line">				context.clearRect(0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 图片压缩</span><br><span class="line">				 * 第一个参数是创建的img对象</span><br><span class="line">				 * 第二三个参数是左上角坐标</span><br><span class="line">				 * 后两个参数是画布区域宽高</span><br><span class="line">				 */</span><br><span class="line">				context.drawImage(img, 0, 0, targetWidth, targetHeight)</span><br><span class="line">				/** 压缩后的base64文件</span><br><span class="line">				 * 第一个参数可以为image/jpeg或image/webp类型的图片</span><br><span class="line">				 * 第二个参数设置图片质量取值0-1，超出则以默认值0.92替代</span><br><span class="line">				 */</span><br><span class="line">				var newUrl = canvas.toDataURL(&#x27;image/jpeg&#x27;, 0.02)</span><br><span class="line">				if (isCompression) &#123; // 返回压缩后的base64</span><br><span class="line">					callback(newUrl)</span><br><span class="line">				&#125; else &#123; // 返回不压缩的base64</span><br><span class="line">					callback(e.target.result)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
 </search>

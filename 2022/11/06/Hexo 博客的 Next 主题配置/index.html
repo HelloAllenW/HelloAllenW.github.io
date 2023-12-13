@@ -70,12 +70,12 @@
             const pagebody = document.getElementsByTagName('body')[0]
             if (isDark) {
                 pagebody.classList.add('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
                 pagebody.classList.remove('dark-theme');
-                // mobile
-                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
             }
         })();
     </script>
@@ -222,9 +222,9 @@
                     
                         <span class="post-time">
                         
-                        <!-- Date: <a href="#">十一月 6, 2020&nbsp;&nbsp;22:28:15</a> -->
+                        <!-- Date: <a href="#">十一月 6, 2022&nbsp;&nbsp;22:28:15</a> -->
                         <span class="iconfont icon-date1"></span>
-                        十一月 6, 2020
+                        十一月 6, 2022
                         </span>
                     
                     &nbsp;  &nbsp;
@@ -265,7 +265,7 @@
         </header>
 
         <div class="post-content">
-            <p>经过一番不懈的努力，我们终于按照 <a target="_blank" rel="noopener" href="http://blog.helloallen.cn/archives/%E4%BD%BF%E7%94%A8githubpages%E5%92%8Chexo%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F">使用 Github Pages 和 Hexo 快速搭建博客系统</a> 搭建好了一个属于自己的博客，并且还安装了一个Next主题，但是我们的博客一开始还是很简陋的，我们需要把她装修一下。</p>
+            <p>经过一番不懈的努力，我们终于按照 <a href="https://helloallenw.github.io/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">使用 Github Pages 和 Hexo 快速搭建博客系统</a> 搭建好了一个属于自己的博客，并且还安装了一个Next主题，但是我们的博客一开始还是很简陋的，我们需要把她装修一下。</p>
 <blockquote>
 <p>在 Hexo 中有两份主要的配置文件，其名称都是 _config.yml。 其中，一份位于站点根目录下，主要包含 Hexo 本身的配置；另一份位于主题目录下，这份配置由主题作者提供，主要用于配置主题相关的选项。<br>为了描述方便，在以下说明中，将前者称为站点配置文件， 后者称为主题配置文件。<br>以下所有终端执行的命令都在你的Hexo根目录下</p>
 </blockquote>
@@ -337,7 +337,7 @@
               </style> -->
               <div class="valine_comment"></div>
 <script type="module">
-  import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+  import { init } from '/js/waline.mjs';
   init({
     el: '.valine_comment',
     serverURL: 'https://allen-blog-vercel.vercel.app',
@@ -375,14 +375,18 @@
         <!-- 另一种的上一篇下一篇 -->
         <!-- <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/">使用 Github Pages 和 Hexo 快速搭建博客系统</a>
+                <a class="prev" rel="prev" href="/2022/11/09/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/">关于前端请求的那些事</a>
             
+            
+            <a class="next" rel="next" href="/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/">讲讲JS中的类、继承和单例</a>
             
         </section> -->
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2020/11/09/%E4%BD%BF%E7%94%A8-Github-Pages-%E5%92%8C-Hexo-%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/"> &laquo; Prev </a>
+                <a class="prev" rel="prev" href="/2022/11/09/%E5%85%B3%E4%BA%8E%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/"> &laquo; Prev </a>
             
+            
+                <a class="next" rel="next" href="/2022/11/06/%E8%AE%B2%E8%AE%B2JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8D%95%E4%BE%8B/"> Next &raquo; </a>
             
         </section>
 
@@ -397,7 +401,7 @@
             Allen © 
                 2015 - 
                 2023  
-        </span> |   <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
 
 <span class="site-uv">
     <i class="iconfont icon-peoplecopy3"></i>
