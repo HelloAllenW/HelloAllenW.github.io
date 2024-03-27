@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Java 泛型 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Java 泛型</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 19, 2024&nbsp;&nbsp;14:07:23</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 19, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">22 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。</p>
+<p>泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。</p>
+<h2 id="为什么需要泛型？"><a href="#为什么需要泛型？" class="headerlink" title="为什么需要泛型？"></a>为什么需要泛型？</h2><h3 id="1-适用于多种数据类型执行相同的代码"><a href="#1-适用于多种数据类型执行相同的代码" class="headerlink" title="1. 适用于多种数据类型执行相同的代码"></a>1. 适用于多种数据类型执行相同的代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">private static int add(int a, int b) &#123;</span><br><span class="line">    System.out.println(a + &quot;+&quot; + b + &quot;=&quot; + (a + b));</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static float add(float a, float b) &#123;</span><br><span class="line">    System.out.println(a + &quot;+&quot; + b + &quot;=&quot; + (a + b));</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static double add(double a, double b) &#123;</span><br><span class="line">    System.out.println(a + &quot;+&quot; + b + &quot;=&quot; + (a + b));</span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果没有泛型，要实现不同类型的加法，每种类型都需要重载一个add方法；通过泛型，我们可以复用为一个方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private static &lt;T extends Number&gt; double add(T a, T b) &#123;</span><br><span class="line">    System.out.println(a + &quot;+&quot; + b + &quot;=&quot; + (a.doubleValue() + b.doubleValue()));</span><br><span class="line">    return a.doubleValue() + b.doubleValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）"><a href="#2-泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）" class="headerlink" title="2. 泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）"></a>2. 泛型中的类型在使用时指定，不需要强制类型转换（类型安全，编译器会检查类型）</h3><p>看下这个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List list = new ArrayList();</span><br><span class="line">list.add(&quot;xxString&quot;);</span><br><span class="line">list.add(100d);</span><br><span class="line">list.add(new Person()); </span><br></pre></td></tr></table></figure>
+
+<p>我们在使用上述list中，list中的元素都是Object类型（无法约束其中的类型），所以在取出集合元素时需要人为的强制类型转化到具体的目标类型，且很容易出现<code>java.lang.ClassCastException</code>异常。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 获取到Object，必须强制转型为String:</span><br><span class="line">String first = (String) list.get(0);</span><br><span class="line"></span><br><span class="line">// 很容易出现ClassCastException，因为容易“误转型”：</span><br><span class="line">list.add(new Integer(123));</span><br><span class="line">// ERROR: ClassCastException:</span><br><span class="line">String second = (String) list.get(1);</span><br></pre></td></tr></table></figure>
+
+<p>引入泛型，它将提供类型的约束，提供编译前的检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 保证了list中只能放String, 不能放其它类型的元素</span><br><span class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用泛型"><a href="#使用泛型" class="headerlink" title="使用泛型"></a>使用泛型</h2><h3 id="1-从-ArrayList-lt-T-gt-看泛型类的使用"><a href="#1-从-ArrayList-lt-T-gt-看泛型类的使用" class="headerlink" title="1.  从 ArrayList&lt;T&gt; 看泛型类的使用"></a>1.  从 <code>ArrayList&lt;T&gt;</code> 看泛型类的使用</h3><p>Java标准库提供的<code>ArrayList</code>内部可以看做就是一个<code>Object[]</code>数组，配合存储一个当前分配的长度，就可以充当“可变数组”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class ArrayList&lt;T&gt; &#123;</span><br><span class="line">    private T[] array;</span><br><span class="line">    private int size;</span><br><span class="line">    public void add(T e) &#123;...&#125;</span><br><span class="line">    public void remove(int index) &#123;...&#125;</span><br><span class="line">    public T get(int index) &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>ArrayList</code>时，如果不定义泛型类型时，泛型类型实际上就是<code>Object</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 编译器警告:</span><br><span class="line">List list = new ArrayList();</span><br><span class="line">list.add(&quot;Hello&quot;);</span><br><span class="line">list.add(&quot;World&quot;);</span><br><span class="line">String first = (String) list.get(0);</span><br><span class="line">String second = (String) list.get(1);</span><br></pre></td></tr></table></figure>
+
+<p>此时，只能把<code>&lt;T&gt;</code>当作<code>Object</code>使用，没有发挥泛型的优势。</p>
+<p>当我们定义泛型类型<code>&lt;String&gt;</code>后，<code>List&lt;T&gt;</code>的泛型接口变为强类型<code>List&lt;String&gt;</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 无编译器警告:</span><br><span class="line">List&lt;String&gt; list = new ArrayList&lt;String&gt;();</span><br><span class="line">list.add(&quot;Hello&quot;);</span><br><span class="line">list.add(&quot;World&quot;);</span><br><span class="line">// 无强制转型:</span><br><span class="line">String first = list.get(0);</span><br><span class="line">String second = list.get(1);</span><br></pre></td></tr></table></figure>
+
+<p>当我们定义泛型类型<code>&lt;Number&gt;</code>后，<code>List&lt;T&gt;</code>的泛型接口变为强类型<code>List&lt;Number&gt;</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Number&gt; list = new ArrayList&lt;Number&gt;();</span><br><span class="line">list.add(new Integer(123));</span><br><span class="line">list.add(new Double(12.34));</span><br><span class="line">Number first = list.get(0);</span><br><span class="line">Number second = list.get(1);</span><br></pre></td></tr></table></figure>
+
+<p>编译器如果能自动推断出泛型类型，就可以省略后面的泛型类型。例如，对于下面的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Number&gt; list = new ArrayList&lt;Number&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>编译器看到泛型类型<code>List&lt;Number&gt;</code>就可以自动推断出后面的<code>ArrayList&lt;T&gt;</code>的泛型类型必须是<code>ArrayList&lt;Number&gt;</code>，因此，可以把代码简写为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 可以省略后面的Number，编译器可以自动推断泛型类型：</span><br><span class="line">List&lt;Number&gt; list = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-从-Comparable-lt-T-gt-看泛型接口的使用"><a href="#2-从-Comparable-lt-T-gt-看泛型接口的使用" class="headerlink" title="2. 从 Comparable&lt;T&gt;看泛型接口的使用"></a>2. 从 <code>Comparable&lt;T&gt;</code>看泛型接口的使用</h3><p>除了<code>ArrayList&lt;T&gt;</code>使用了泛型，有些接口也使用泛型。例如，<code>Arrays.sort(Object[])</code>可以对任意数组进行排序，但待排序的元素必须实现<code>Comparable&lt;T&gt;</code>这个泛型接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public interface Comparable&lt;T&gt; &#123;</span><br><span class="line">    /**</span><br><span class="line">     * 返回负数: 当前实例比参数o小</span><br><span class="line">     * 返回0: 当前实例与参数o相等</span><br><span class="line">     * 返回正数: 当前实例比参数o大</span><br><span class="line">     */</span><br><span class="line">    int compareTo(T o);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以直接对<code>String</code>数组进行排序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// sort</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">	    String[] ss = new String[] &#123; &quot;Orange&quot;, &quot;Apple&quot;, &quot;Pear&quot; &#125;;</span><br><span class="line">        Arrays.sort(ss);</span><br><span class="line">        System.out.println(Arrays.toString(ss));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为<code>String</code>本身已经实现了<code>Comparable&lt;String&gt;</code>接口。如果换成我们自定义的<code>Person</code>类型试试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// sort</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Person[] ps = new Person[] &#123;</span><br><span class="line">            new Person(&quot;Bob&quot;, 61),</span><br><span class="line">            new Person(&quot;Alice&quot;, 88),</span><br><span class="line">            new Person(&quot;Lily&quot;, 75),</span><br><span class="line">        &#125;;</span><br><span class="line">        Arrays.sort(ps);</span><br><span class="line">        System.out.println(Arrays.toString(ps));</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Person &#123;</span><br><span class="line">    String name;</span><br><span class="line">    int score;</span><br><span class="line">    Person(String name, int score) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return this.name + &quot;,&quot; + this.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行程序，我们会得到<code>ClassCastException</code>，即无法将<code>Person</code>转型为<code>Comparable</code>。我们修改代码，让<code>Person</code>实现<code>Comparable&lt;T&gt;</code>接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// sort</span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Person[] ps = new Person[] &#123;</span><br><span class="line">            new Person(&quot;Bob&quot;, 61),</span><br><span class="line">            new Person(&quot;Alice&quot;, 88),</span><br><span class="line">            new Person(&quot;Lily&quot;, 75),</span><br><span class="line">        &#125;;</span><br><span class="line">        Arrays.sort(ps);</span><br><span class="line">        System.out.println(Arrays.toString(ps));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Person implements Comparable&lt;Person&gt; &#123;</span><br><span class="line">    String name;</span><br><span class="line">    int score;</span><br><span class="line">    Person(String name, int score) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.score = score;</span><br><span class="line">    &#125;</span><br><span class="line">    public int compareTo(Person other) &#123;</span><br><span class="line">        return this.name.compareTo(other.name);</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return this.name + &quot;,&quot; + this.score;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行上述代码，可以正确实现按<code>name</code>进行排序。也可以修改比较逻辑，例如，按<code>score</code>从高到低排序。</p>
+<h2 id="编写泛型"><a href="#编写泛型" class="headerlink" title="编写泛型"></a>编写泛型</h2><h3 id="1-泛型类如何定义使用？"><a href="#1-泛型类如何定义使用？" class="headerlink" title="1. 泛型类如何定义使用？"></a>1. 泛型类如何定义使用？</h3><p>（1）一个简单的泛型类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Point&lt;T&gt;&#123;         // 此处可以随便写标识符号，T是type的简称  </span><br><span class="line">    private T var ;     // var的类型由T指定，即：由外部指定  </span><br><span class="line">    public T getVar()&#123;  // 返回值的类型由外部决定  </span><br><span class="line">        return var ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public void setVar(T var)&#123;  // 设置的类型也由外部决定  </span><br><span class="line">        this.var = var ;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">public class GenericsDemo06&#123;  </span><br><span class="line">    public static void main(String args[])&#123;  </span><br><span class="line">        Point&lt;String&gt; p = new Point&lt;String&gt;() ;     // 里面的var类型为String类型  </span><br><span class="line">        p.setVar(&quot;it&quot;) ;                            // 设置字符串  </span><br><span class="line">        System.out.println(p.getVar().length()) ;   // 取得字符串的长度  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）多元泛型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Notepad&lt;K,V&gt;&#123;       // 此处指定了两个泛型类型  </span><br><span class="line">    private K key ;     // 此变量的类型由外部决定  </span><br><span class="line">    private V value ;   // 此变量的类型由外部决定  </span><br><span class="line">    public K getKey()&#123;  </span><br><span class="line">        return this.key ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public V getValue()&#123;  </span><br><span class="line">        return this.value ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public void setKey(K key)&#123;  </span><br><span class="line">        this.key = key ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public void setValue(V value)&#123;  </span><br><span class="line">        this.value = value ;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line">public class GenericsDemo09&#123;  </span><br><span class="line">    public static void main(String args[])&#123;  </span><br><span class="line">        Notepad&lt;String,Integer&gt; t = null ;        // 定义两个泛型类型的对象  </span><br><span class="line">        t = new Notepad&lt;String,Integer&gt;() ;       // 里面的key为String，value为Integer  </span><br><span class="line">        t.setKey(&quot;汤姆&quot;) ;        // 设置第一个内容  </span><br><span class="line">        t.setValue(20) ;            // 设置第二个内容  </span><br><span class="line">        System.out.print(&quot;姓名；&quot; + t.getKey()) ;      // 取得信息  </span><br><span class="line">        System.out.print(&quot;，年龄；&quot; + t.getValue()) ;       // 取得信息  </span><br><span class="line">  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-泛型接口如何定义使用？"><a href="#2-泛型接口如何定义使用？" class="headerlink" title="2. 泛型接口如何定义使用？"></a>2. 泛型接口如何定义使用？</h3><p>简单的泛型接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">interface Info&lt;T&gt;&#123;        // 在接口上定义泛型  </span><br><span class="line">    public T getVar() ; // 定义抽象方法，抽象方法的返回值就是泛型类型  </span><br><span class="line">&#125;  </span><br><span class="line">class InfoImpl&lt;T&gt; implements Info&lt;T&gt;&#123;   // 定义泛型接口的子类  </span><br><span class="line">    private T var ;             // 定义属性  </span><br><span class="line">    public InfoImpl(T var)&#123;     // 通过构造方法设置属性内容  </span><br><span class="line">        this.setVar(var) ;    </span><br><span class="line">    &#125;  </span><br><span class="line">    public void setVar(T var)&#123;  </span><br><span class="line">        this.var = var ;  </span><br><span class="line">    &#125;  </span><br><span class="line">    public T getVar()&#123;  </span><br><span class="line">        return this.var ;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125; </span><br><span class="line">public class GenericsDemo24&#123;  </span><br><span class="line">    public static void main(String arsg[])&#123;  </span><br><span class="line">        Info&lt;String&gt; i = null;        // 声明接口对象  </span><br><span class="line">        i = new InfoImpl&lt;String&gt;(&quot;汤姆&quot;) ;  // 通过子类实例化对象  </span><br><span class="line">        System.out.println(&quot;内容：&quot; + i.getVar()) ;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-泛型方法如何定义使用？"><a href="#3-泛型方法如何定义使用？" class="headerlink" title="3. 泛型方法如何定义使用？"></a>3. 泛型方法如何定义使用？</h3><p>泛型方法，是在调用方法的时候指明泛型的具体类型。</p>
+<ul>
+<li>定义泛型方法语法格式</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403191428666.png"></p>
+<ul>
+<li>调用泛型方法语法格式</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403191429317.png"></p>
+<p>说明一下，定义泛型方法时，必须在返回值前边加一个<code>&lt;T&gt;</code>，来声明这是一个泛型方法，持有一个泛型<code>T</code>，然后才可以用泛型T作为方法的返回值。</p>
+<p><code>Class&lt;T&gt;</code>的作用就是指明泛型的具体类型，而<code>Class&lt;T&gt;</code>类型的变量c，可以用来创建泛型类的对象。</p>
+<p>为什么要用变量c来创建对象呢？既然是泛型方法，就代表着我们不知道具体的类型是什么，也不知道构造方法如何，因此没有办法去new一个对象，但可以利用变量c的newInstance方法去创建对象，也就是利用反射创建对象。</p>
+<p>泛型方法要求的参数是<code>Class&lt;T&gt;</code>类型，而<code>Class.forName()</code>方法的返回值也是<code>Class&lt;T&gt;</code>，因此可以用<code>Class.forName()</code>作为参数。其中，<code>forName()</code>方法中的参数是何种类型，返回的<code>Class&lt;T&gt;</code>就是何种类型。在本例中，<code>forName()</code>方法中传入的是User类的完整路径，因此返回的是<code>Class&lt;User&gt;</code>类型的对象，因此调用泛型方法时，变量c的类型就是<code>Class&lt;User&gt;</code>，因此泛型方法中的泛型T就被指明为User，因此变量obj的类型为User。</p>
+<p>当然，泛型方法不是仅仅可以有一个参数<code>Class&lt;T&gt;</code>，可以根据需要添加其他参数。</p>
+<p><strong>为什么要使用泛型方法呢</strong>？因为泛型类要在实例化的时候就指明类型，如果想换一种类型，不得不重新new一次，可能不够灵活；而泛型方法可以在调用的时候指明类型，更加灵活。</p>
+<p><strong>java 中泛型标记符：</strong></p>
+<ul>
+<li><strong>E</strong> - Element (在集合中使用，因为集合中存放的是元素)</li>
+<li><strong>T</strong> - Type（Java 类）</li>
+<li><strong>K</strong> - Key（键）</li>
+<li><strong>V</strong> - Value（值）</li>
+<li><strong>N</strong> - Number（数值类型）</li>
+<li><strong>？</strong> - 表示不确定的 java 类型</li>
+</ul>
+<h2 id="有界的类型参数"><a href="#有界的类型参数" class="headerlink" title="有界的类型参数"></a>有界的类型参数</h2><p>可能有时候，你会想限制那些被允许传递到一个类型参数的类型种类范围。例如，一个操作数字的方法可能只希望接受Number或者Number子类的实例。这就是有界类型参数的目的。</p>
+<p>要声明一个有界的类型参数，首先列出类型参数的名称，后跟extends关键字，最后紧跟它的上界。</p>
+<h3 id="1-上限"><a href="#1-上限" class="headerlink" title="1. 上限"></a>1. 上限</h3><p>为传入的泛型类型实参进行上边界的限制，如：类型实参只准传入某种类型的父类或某种类型的子类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Info&lt;T extends Number&gt;&#123;    // 此处泛型只能是数字类型</span><br><span class="line">    private T var ;        // 定义泛型变量</span><br><span class="line">    public void setVar(T var)&#123;</span><br><span class="line">        this.var = var ;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getVar()&#123;</span><br><span class="line">        return this.var ;</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString()&#123;    // 直接打印</span><br><span class="line">        return this.var.toString() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class demo1&#123;</span><br><span class="line">    public static void main(String args[])&#123;</span><br><span class="line">        Info&lt;Integer&gt; i1 = new Info&lt;Integer&gt;() ;        // 声明Integer的泛型对象</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-下限"><a href="#2-下限" class="headerlink" title="2. 下限"></a>2. 下限</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Info&lt;T&gt;&#123;</span><br><span class="line">    private T var ;        // 定义泛型变量</span><br><span class="line">    public void setVar(T var)&#123;</span><br><span class="line">        this.var = var ;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getVar()&#123;</span><br><span class="line">        return this.var ;</span><br><span class="line">    &#125;</span><br><span class="line">    public String toString()&#123;    // 直接打印</span><br><span class="line">        return this.var.toString() ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class GenericsDemo21&#123;</span><br><span class="line">    public static void main(String args[])&#123;</span><br><span class="line">        Info&lt;String&gt; i1 = new Info&lt;String&gt;() ;        // 声明String的泛型对象</span><br><span class="line">        Info&lt;Object&gt; i2 = new Info&lt;Object&gt;() ;        // 声明Object的泛型对象</span><br><span class="line">        i1.setVar(&quot;hello&quot;) ;</span><br><span class="line">        i2.setVar(new Object()) ;</span><br><span class="line">        fun(i1) ;</span><br><span class="line">        fun(i2) ;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void fun(Info&lt;? super String&gt; temp)&#123;    // 只能接收String或Object类型的泛型，String类的父类只有Object类</span><br><span class="line">        System.out.print(temp + &quot;, &quot;) ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-类型通配符"><a href="#3-类型通配符" class="headerlink" title="3. 类型通配符"></a>3. 类型通配符</h3><p>（1）类型通配符一般是使用 ? 代替具体的类型参数。例如 <code>List&lt;?&gt;</code> 在逻辑上是 <code>List&lt;String</code>、<code>List&lt;Integer&gt;</code> 等所有 List&lt;具体类型实参&gt; 的父类。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class GenericTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;String&gt; name = new ArrayList&lt;String&gt;();</span><br><span class="line">        List&lt;Integer&gt; age = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;Number&gt; number = new ArrayList&lt;Number&gt;();</span><br><span class="line">        </span><br><span class="line">        name.add(&quot;icon&quot;);</span><br><span class="line">        age.add(18);</span><br><span class="line">        number.add(314);</span><br><span class="line"> </span><br><span class="line">        getData(name);</span><br><span class="line">        getData(age);</span><br><span class="line">        getData(number);</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public static void getData(List&lt;?&gt; data) &#123;</span><br><span class="line">      System.out.println(&quot;data :&quot; + data.get(0));</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data :icon</span><br><span class="line">data :18</span><br><span class="line">data :314</span><br></pre></td></tr></table></figure>
+
+<p><strong>解析：</strong> 因为 <code>getData()</code> 方法的参数是 <code>List&lt;?&gt;</code> 类型的，所以 <code>name</code>，<code>age</code>，<code>number</code> 都可以作为这个方法的实参，这就是通配符的作用。</p>
+<p>（2）类型通配符上限通过形如List来定义，如此定义就是通配符泛型值接受Number及其下层子类类型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class GenericTest &#123;</span><br><span class="line">     </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        List&lt;String&gt; name = new ArrayList&lt;String&gt;();</span><br><span class="line">        List&lt;Integer&gt; age = new ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;Number&gt; number = new ArrayList&lt;Number&gt;();</span><br><span class="line">        </span><br><span class="line">        name.add(&quot;icon&quot;);</span><br><span class="line">        age.add(18);</span><br><span class="line">        number.add(314);</span><br><span class="line"> </span><br><span class="line">        //getUperNumber(name);//1</span><br><span class="line">        getUperNumber(age);//2</span><br><span class="line">        getUperNumber(number);//3</span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   public static void getData(List&lt;?&gt; data) &#123;</span><br><span class="line">      System.out.println(&quot;data :&quot; + data.get(0));</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   public static void getUperNumber(List&lt;? extends Number&gt; data) &#123;</span><br><span class="line">          System.out.println(&quot;data :&quot; + data.get(0));</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data :18</span><br><span class="line">data :314</span><br></pre></td></tr></table></figure>
+
+<p><strong>解析：</strong> 在 //1 处会出现错误，因为 <code>getUperNumber()</code> 方法中的参数已经限定了参数泛型上限为 <code>Number</code>，所以泛型为 <code>String</code> 是不在这个范围之内，所以会报错。</p>
+<p>（3）类型通配符下限通过形如 <code>List&lt;? super Number&gt;</code> 来定义，表示类型只能接受 <code>Number</code> 及其上层父类类型，如 <code>Object</code> 类型的实例。</p>
+<h2 id="Java泛型的本质：擦拭法"><a href="#Java泛型的本质：擦拭法" class="headerlink" title="Java泛型的本质：擦拭法"></a>Java泛型的本质：擦拭法</h2><h3 id="1-擦拭法"><a href="#1-擦拭法" class="headerlink" title="1. 擦拭法"></a>1. 擦拭法</h3><p>泛型是一种类似”模板代码“的技术，不同语言的泛型实现方式不一定相同。Java语言的泛型实现方式是擦拭法（Type Erasure）。Java泛型擦拭法这个特性是从JDK 1.5才开始加入的，因此为了兼容之前的版本，Java泛型的实现采取了“伪泛型”的策略，即Java在语法上支持泛型，但是在编译阶段会进行所谓的“类型擦除”（Type Erasure），将所有的泛型表示（尖括号中的内容）都替换为具体的类型（其对应的原生态类型），就像完全没有泛型一样。</p>
+<p>例如，我们编写了一个泛型类<code>Pair&lt;T&gt;</code>，这是编译器看到的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    private T first;</span><br><span class="line">    private T last;</span><br><span class="line">    public Pair(T first, T last) &#123;</span><br><span class="line">        this.first = first;</span><br><span class="line">        this.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getFirst() &#123;</span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getLast() &#123;</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而虚拟机根本不知道泛型。这是虚拟机执行的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Pair &#123;</span><br><span class="line">    private Object first;</span><br><span class="line">    private Object last;</span><br><span class="line">    public Pair(Object first, Object last) &#123;</span><br><span class="line">        this.first = first;</span><br><span class="line">        this.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    public Object getFirst() &#123;</span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">    public Object getLast() &#123;</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此，Java使用擦拭法实现泛型，导致了：</p>
+<ul>
+<li>编译器把类型<code>&lt;T&gt;</code>视为<code>Object</code>；</li>
+<li>编译器根据<code>&lt;T&gt;</code>实现安全的强制转型。</li>
+</ul>
+<p>使用泛型的时候，我们编写的代码也是编译器看到的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;String&gt; p = new Pair&lt;&gt;(&quot;Hello&quot;, &quot;world&quot;);</span><br><span class="line">String first = p.getFirst();</span><br><span class="line">String last = p.getLast();</span><br></pre></td></tr></table></figure>
+
+<p>而虚拟机执行的代码并没有泛型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair p = new Pair(&quot;Hello&quot;, &quot;world&quot;);</span><br><span class="line">String first = (String) p.getFirst();</span><br><span class="line">String last = (String) p.getLast();</span><br></pre></td></tr></table></figure>
+
+<p>所以，Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型<code>T</code>视为<code>Object</code>处理，但是，在需要转型的时候，编译器会根据<code>T</code>的类型自动为我们实行安全地强制转型。</p>
+<p>了解了Java泛型的实现方式——擦拭法，我们就知道了Java泛型的局限：</p>
+<h3 id="2-局限一：-lt-T-gt-不能是基本类型"><a href="#2-局限一：-lt-T-gt-不能是基本类型" class="headerlink" title="2. 局限一：&lt;T&gt;不能是基本类型"></a>2. 局限一：<code>&lt;T&gt;</code>不能是基本类型</h3><p>例如<code>int</code>，因为实际类型是<code>Object</code>，<code>Object</code>类型无法持有基本类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;int&gt; p = new Pair&lt;&gt;(1, 2); // compile error!</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-局限二：无法取得带泛型的Class"><a href="#3-局限二：无法取得带泛型的Class" class="headerlink" title="3. 局限二：无法取得带泛型的Class"></a>3. 局限二：无法取得带泛型的<code>Class</code></h3><p>观察以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">     	Pair&lt;String&gt; p1 = new Pair&lt;&gt;(&quot;Hello&quot;, &quot;world&quot;);</span><br><span class="line">        Pair&lt;Integer&gt; p2 = new Pair&lt;&gt;(123, 456);</span><br><span class="line">        Class c1 = p1.getClass();</span><br><span class="line">        Class c2 = p2.getClass();</span><br><span class="line">        System.out.println(c1==c2); // true</span><br><span class="line">        System.out.println(c1==Pair.class); // true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Pair&lt;T&gt; &#123;</span><br><span class="line">    private T first;</span><br><span class="line">    private T last;</span><br><span class="line">    public Pair(T first, T last) &#123;</span><br><span class="line">        this.first = first;</span><br><span class="line">        this.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getFirst() &#123;</span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getLast() &#123;</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为<code>T</code>是<code>Object</code>，我们对<code>Pair&lt;String&gt;</code>和<code>Pair&lt;Integer&gt;</code>类型获取<code>Class</code>时，获取到的是同一个<code>Class</code>，也就是<code>Pair</code>类的<code>Class</code>。</p>
+<p>换句话说，所有泛型实例，无论<code>T</code>的类型是什么，<code>getClass()</code>返回同一个<code>Class</code>实例，因为编译后它们全部都是<code>Pair&lt;Object&gt;</code>。</p>
+<h3 id="4-局限三：无法判断带泛型的类型"><a href="#4-局限三：无法判断带泛型的类型" class="headerlink" title="4. 局限三：无法判断带泛型的类型"></a>4. 局限三：无法判断带泛型的类型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;Integer&gt; p = new Pair&lt;&gt;(123, 456);</span><br><span class="line">// Compile error:</span><br><span class="line">if (p instanceof Pair&lt;String&gt;) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原因和前面一样，并不存在<code>Pair&lt;String&gt;.class</code>，而是只有唯一的<code>Pair.class</code>。</p>
+<h3 id="5-局限四：不能实例化T类型"><a href="#5-局限四：不能实例化T类型" class="headerlink" title="5. 局限四：不能实例化T类型"></a>5. 局限四：不能实例化<code>T</code>类型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    private T first;</span><br><span class="line">    private T last;</span><br><span class="line">    public Pair() &#123;</span><br><span class="line">        // Compile error:</span><br><span class="line">        first = new T();</span><br><span class="line">        last = new T();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码无法通过编译，因为构造方法的两行语句：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">first = new T();</span><br><span class="line">last = new T();</span><br></pre></td></tr></table></figure>
+
+<p>擦拭后实际上变成了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">first = new Object();</span><br><span class="line">last = new Object();</span><br></pre></td></tr></table></figure>
+
+<p>这样一来，创建<code>new Pair&lt;String&gt;()</code>和创建<code>new Pair&lt;Integer&gt;()</code>就全部成了<code>Object</code>，显然编译器要阻止这种类型不对的代码。</p>
+<p>要实例化<code>T</code>类型，我们必须借助额外的<code>Class&lt;T&gt;</code>参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    private T first;</span><br><span class="line">    private T last;</span><br><span class="line">    public Pair(Class&lt;T&gt; clazz) &#123;</span><br><span class="line">        first = clazz.newInstance();</span><br><span class="line">        last = clazz.newInstance();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码借助<code>Class&lt;T&gt;</code>参数并通过反射来实例化<code>T</code>类型，使用的时候，也必须传入<code>Class&lt;T&gt;</code>。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;String&gt; pair = new Pair&lt;&gt;(String.class);</span><br></pre></td></tr></table></figure>
+
+<p>因为传入了<code>Class&lt;String&gt;</code>的实例，所以我们借助<code>String.class</code>就可以实例化<code>String</code>类型。</p>
+<h2 id="补充：泛型继承相关的问题"><a href="#补充：泛型继承相关的问题" class="headerlink" title="补充：泛型继承相关的问题"></a>补充：泛型继承相关的问题</h2><h3 id="1-不恰当的覆写方法"><a href="#1-不恰当的覆写方法" class="headerlink" title="1. 不恰当的覆写方法"></a>1. 不恰当的覆写方法</h3><p>有些时候，一个看似正确定义的方法会无法通过编译。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean equals(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为，定义的<code>equals(T t)</code>方法实际上会被擦拭成<code>equals(Object t)</code>，而这个方法是继承自<code>Object</code>的，编译器会阻止一个实际上会变成覆写的泛型方法定义。</p>
+<p>换个方法名，避开与<code>Object.equals(Object)</code>的冲突就可以成功编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Pair&lt;T&gt; &#123;</span><br><span class="line">    public boolean same(T t) &#123;</span><br><span class="line">        return this == t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-获取父类的泛型类型"><a href="#2-获取父类的泛型类型" class="headerlink" title="2. 获取父类的泛型类型"></a>2. 获取父类的泛型类型</h3><p>一个类可以继承自一个泛型类。例如：父类的类型是<code>Pair&lt;Integer&gt;</code>，子类的类型是<code>IntPair</code>，可以这么继承：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class IntPair extends Pair&lt;Integer&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候，因为子类<code>IntPair</code>并没有泛型类型，所以，正常使用即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IntPair ip = new IntPair(1, 2);</span><br></pre></td></tr></table></figure>
+
+<p>前面讲了，我们无法获取<code>Pair&lt;T&gt;</code>的<code>T</code>类型，即给定一个变量<code>Pair&lt;Integer&gt; p</code>，无法从<code>p</code>中获取到<code>Integer</code>类型。</p>
+<p>但是，在父类是泛型类型的情况下，编译器就必须把类型<code>T</code>（对<code>IntPair</code>来说，也就是<code>Integer</code>类型）保存到子类的class文件中，不然编译器就不知道<code>IntPair</code>只能存取<code>Integer</code>这种类型。</p>
+<p>在继承了泛型类型的情况下，子类可以获取父类的泛型类型。例如：<code>IntPair</code>可以获取到父类的泛型类型<code>Integer</code>。获取父类的泛型类型代码比较复杂：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.reflect.ParameterizedType;</span><br><span class="line">import java.lang.reflect.Type;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">    	Class&lt;IntPair&gt; clazz = IntPair.class;</span><br><span class="line">        Type t = clazz.getGenericSuperclass();</span><br><span class="line">        if (t instanceof ParameterizedType) &#123;</span><br><span class="line">            ParameterizedType pt = (ParameterizedType) t;</span><br><span class="line">            Type[] types = pt.getActualTypeArguments(); // 可能有多个泛型类型</span><br><span class="line">            Type firstType = types[0]; // 取第一个泛型类型</span><br><span class="line">            Class&lt;?&gt; typeClass = (Class&lt;?&gt;) firstType;</span><br><span class="line">            System.out.println(typeClass); // Integer</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Pair&lt;T&gt; &#123;</span><br><span class="line">    private T first;</span><br><span class="line">    private T last;</span><br><span class="line">    public Pair(T first, T last) &#123;</span><br><span class="line">        this.first = first;</span><br><span class="line">        this.last = last;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getFirst() &#123;</span><br><span class="line">        return first;</span><br><span class="line">    &#125;</span><br><span class="line">    public T getLast() &#123;</span><br><span class="line">        return last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class IntPair extends Pair&lt;Integer&gt; &#123;</span><br><span class="line">    public IntPair(Integer first, Integer last) &#123;</span><br><span class="line">        super(first, last);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/19/CSS%E4%B8%AD%E7%9A%84%E5%AD%97%E4%BD%93/">CSS中的字体</a>
+            
+            
+            <a class="next" rel="next" href="/2024/03/05/%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E4%B8%8D%E5%BD%BB%E5%BA%95%E7%9A%84%E6%90%9E%E6%87%82Java-String%E5%AD%97%E7%AC%A6%E4%B8%B2/">一文带你不彻底的搞懂Java String字符串</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/19/CSS%E4%B8%AD%E7%9A%84%E5%AD%97%E4%BD%93/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2024/03/05/%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E4%B8%8D%E5%BD%BB%E5%BA%95%E7%9A%84%E6%90%9E%E6%87%82Java-String%E5%AD%97%E7%AC%A6%E4%B8%B2/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Git流程规范配置 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Git流程规范配置</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 14, 2023&nbsp;&nbsp;11:46:03</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 14, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Git相关依赖介绍"><a href="#Git相关依赖介绍" class="headerlink" title="Git相关依赖介绍"></a>Git相关依赖介绍</h1><table>
+<thead>
+<tr>
+<th>依赖</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>husky</td>
+<td>操作 git 钩子的工具（在 git xx 之前执行某些命令）</td>
+</tr>
+<tr>
+<td>lint-staged</td>
+<td>在提交之前进行 eslint 校验，并使用 prettier 格式化本地暂存区的代码</td>
+</tr>
+<tr>
+<td>@commitlint/cli</td>
+<td>校验 git commit 信息是否符合规范，保证团队的一致性</td>
+</tr>
+<tr>
+<td>@commitlint/config-conventional</td>
+<td>Anglar 的提交规范</td>
+</tr>
+<tr>
+<td>commitizen</td>
+<td>基于 Node.js 的 git commit 命令行工具，生成标准化的 commit message</td>
+</tr>
+<tr>
+<td>cz-git</td>
+<td>一款工程性更强，轻量级，高度自定义，标准输出格式的 commitize 适配器</td>
+</tr>
+</tbody></table>
+<h1 id="commit拦截（husky-lint-staged）"><a href="#commit拦截（husky-lint-staged）" class="headerlink" title="commit拦截（husky + lint-staged）"></a>commit拦截（husky + lint-staged）</h1><p>我们的目的是在 git commit 之前，先强制执行prettier格式化（防止某些成员开发期间不开启编辑器格式化）、再检查代码规范，如果检查不通过、阻止提交。</p>
+<h2 id="1-新建-eslintignore-prettierignore"><a href="#1-新建-eslintignore-prettierignore" class="headerlink" title="1.      新建 .eslintignore + .prettierignore"></a>1.      新建 .eslintignore + .prettierignore</h2><p><code>.eslintignore</code>、<code>.prettierignore</code>，内容参考如下：（没使用eslint和prettier可跳过）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">node_modules</span><br><span class="line">dist</span><br><span class="line">.gitignore</span><br><span class="line">.eslintignore</span><br><span class="line">.prettierignore</span><br><span class="line">LICENSE</span><br><span class="line">README.md</span><br><span class="line">yarn.lock</span><br><span class="line"></span><br><span class="line"># local env files</span><br><span class="line">.env.local</span><br><span class="line">.env.*.local</span><br><span class="line"></span><br><span class="line"># Log files</span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line"></span><br><span class="line"># Editor directories and files</span><br><span class="line">.idea</span><br><span class="line">.vscode</span><br><span class="line">*.suo</span><br><span class="line">*.ntvs*</span><br><span class="line">*.njsproj</span><br><span class="line">*.sln</span><br><span class="line">*.sw?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-husky：操作git钩子的工具"><a href="#2-husky：操作git钩子的工具" class="headerlink" title="2.      husky：操作git钩子的工具"></a>2.      husky：操作git钩子的工具</h2><p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install husky -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）使用（为了添加<code>.husky</code> 文件夹）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1、打开package.json文件，在scripts中添加</span><br><span class="line">&quot;prepare&quot;: &quot;husky install&quot;</span><br><span class="line"></span><br><span class="line">// 2、添加完成之后，执行如下命令</span><br><span class="line">npm run prepare</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-lint-staged：本地暂存代码检查工具"><a href="#3-lint-staged：本地暂存代码检查工具" class="headerlink" title="3.      lint-staged：本地暂存代码检查工具"></a>3.      lint-staged：本地暂存代码检查工具</h2><p>git commit 之前，会自动使用 prettier 格式化 ignore 之外的代码。格式化后，自动检查所有文件，是否全部符合 eslint 规范。存在不符合规范的代码，git commit 将被终止。</p>
+<p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install lint-staged -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）</p>
+<p>执行以下命令，在husky文件夹下会自动生成pre-commit文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx husky add .husky/pre-commit &quot;npm run lint:lint-staged&quot;</span><br></pre></td></tr></table></figure>
+
+<p>作用是通过钩子函数，判断提交的代码是否符合规范，并使用 prettier 格式化代码</p>
+<p>（3）项目根目录下手动新增 <code>lint-staged.config.js</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	&quot;*.&#123;js,jsx,ts,tsx&#125;&quot;: [&quot;eslint --fix&quot;, &quot;prettier --write&quot;],</span><br><span class="line">	&quot;&#123;!(package)*.json,*.code-snippets,.!(browserslist)*rc&#125;&quot;: [&quot;prettier --write--parser json&quot;],</span><br><span class="line">	&quot;package.json&quot;: [&quot;prettier --write&quot;],</span><br><span class="line">	&quot;*.vue&quot;: [&quot;eslint --fix&quot;, &quot;prettier --write&quot;, &quot;stylelint --fix&quot;],</span><br><span class="line">	&quot;*.&#123;scss,less,styl,html&#125;&quot;: [&quot;stylelint --fix&quot;, &quot;prettier --write&quot;],</span><br><span class="line">	&quot;*.md&quot;: [&quot;prettier --write&quot;]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="规范commit内容（husky-commit-msg）"><a href="#规范commit内容（husky-commit-msg）" class="headerlink" title="规范commit内容（husky + commit-msg）"></a>规范commit内容（husky + commit-msg）</h1><p>commitlint是一个开源的msg的提交规范库，使用 commitlint 可以规范我们每一次的 commit，我们也可以用来自动生成 changeLog 等文件，方便代码管理。</p>
+<h2 id="1-commitlint-制定提交规范"><a href="#1-commitlint-制定提交规范" class="headerlink" title="1. commitlint:  制定提交规范"></a>1. commitlint:  制定提交规范</h2><p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @commitlint/cli @commitlint/config-conventional -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）配置命令（在.husky 文件夹下自动生成 commit-msg 文件，执行如下代码自动生成）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx husky add .husky/commit-msg &#x27;npx --no-install commitlint --edit &quot;$1&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-commitizen：基于-Node-js-的-git-commit-命令行工具，生成标准化的-message"><a href="#2-commitizen：基于-Node-js-的-git-commit-命令行工具，生成标准化的-message" class="headerlink" title="2.      commitizen：基于 Node.js 的 git commit 命令行工具，生成标准化的 message"></a>2.      commitizen：基于 Node.js 的 git commit 命令行工具，生成标准化的 message</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。</span><br><span class="line">npm install commitizen -D</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-cz-git"><a href="#3-cz-git" class="headerlink" title="3.      cz-git"></a>3.      cz-git</h2><p>（1）指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cz-git -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）配置 package.json：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;config&quot;: &#123;</span><br><span class="line">  &quot;commitizen&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;node_modules/cz-git&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）新建 <code>commitlint.config.js</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">// @see: https://cz-git.qbenben.com/zh/guide</span><br><span class="line">/** @type &#123;import(&#x27;cz-git&#x27;).UserConfig&#125; */</span><br><span class="line">/**</span><br><span class="line">* feature：新功能</span><br><span class="line">* update：更新某功能</span><br><span class="line">* fixbug：修补某功能的bug</span><br><span class="line">* refactor：重构某个功能</span><br><span class="line">* optimize: 优化构建工具或运行时性能</span><br><span class="line">* style：仅样式改动</span><br><span class="line">* docs：仅文档新增/改动</span><br><span class="line">* chore：构建过程或辅助工具的变动</span><br><span class="line">*/</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	ignores: [commit =&gt; commit === &quot;init&quot;],</span><br><span class="line">    // commitlint 推荐我们使用 config-conventional 配置去写 commit</span><br><span class="line">	extends: [&quot;@commitlint/config-conventional&quot;],</span><br><span class="line">	rules: &#123;</span><br><span class="line">		// @see: https://commitlint.js.org/#/reference-rules</span><br><span class="line">		&quot;body-leading-blank&quot;: [2, &quot;always&quot;],</span><br><span class="line">		&quot;footer-leading-blank&quot;: [1, &quot;always&quot;],</span><br><span class="line">		&quot;header-max-length&quot;: [2, &quot;always&quot;, 108],</span><br><span class="line">		&quot;subject-empty&quot;: [2, &quot;never&quot;],</span><br><span class="line">		&quot;type-empty&quot;: [2, &quot;never&quot;],</span><br><span class="line">		&quot;subject-case&quot;: [0],</span><br><span class="line">		&quot;type-enum&quot;: [</span><br><span class="line">			2,</span><br><span class="line">			&quot;always&quot;,</span><br><span class="line">			[</span><br><span class="line">				&quot;feat&quot;,</span><br><span class="line">				&quot;fix&quot;,</span><br><span class="line">				&quot;docs&quot;,</span><br><span class="line">				&quot;style&quot;,</span><br><span class="line">				&quot;refactor&quot;,</span><br><span class="line">				&quot;perf&quot;,</span><br><span class="line">				&quot;test&quot;,</span><br><span class="line">				&quot;build&quot;,</span><br><span class="line">				&quot;ci&quot;,</span><br><span class="line">				&quot;chore&quot;,</span><br><span class="line">				&quot;revert&quot;,</span><br><span class="line">				&quot;wip&quot;,</span><br><span class="line">				&quot;workflow&quot;,</span><br><span class="line">				&quot;types&quot;,</span><br><span class="line">				&quot;release&quot;</span><br><span class="line">			]</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	prompt: &#123;</span><br><span class="line">		messages: &#123;</span><br><span class="line">			type: &quot;选择你要提交的类型 :&quot;,</span><br><span class="line">			scope: &quot;选择一个提交范围（可选）:&quot;,</span><br><span class="line">			customScope: &quot;请输入自定义的提交范围 :&quot;,</span><br><span class="line">			subject: &quot;填写简短精炼的变更描述 :\n&quot;,</span><br><span class="line">			body: &#x27;填写更加详细的变更描述（可选）。使用 &quot;|&quot; 换行 :\n&#x27;,</span><br><span class="line">			breaking: &#x27;列举非兼容性重大的变更（可选）。使用 &quot;|&quot; 换行 :\n&#x27;,</span><br><span class="line">			footerPrefixsSelect: &quot;选择关联issue前缀（可选）:&quot;,</span><br><span class="line">			customFooterPrefixs: &quot;输入自定义issue前缀 :&quot;,</span><br><span class="line">			footer: &quot;列举关联issue (可选) 例如: #31, #I3244 :\n&quot;,</span><br><span class="line">			confirmCommit: &quot;是否提交或修改commit ?&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		types: [</span><br><span class="line">			&#123; value: &quot;feat: 特性&quot;, name: &quot;特性:   🚀  新增功能&quot;, emoji: &quot;🚀&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;fix: 修复&quot;, name: &quot;修复:   🧩  修复缺陷&quot;, emoji: &quot;🧩&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;docs: 文档&quot;, name: &quot;文档:   📚  文档变更&quot;, emoji: &quot;📚&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;style: 格式&quot;, name: &quot;格式:   🎨  代码格式（不影响功能，例如空格、分号等格式修正）&quot;, emoji: &quot;🎨&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;refactor: 重构&quot;, name: &quot;重构:   ♻️  代码重构（不包括 bug 修复、功能新增）&quot;, emoji: &quot;♻️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;perf: 性能&quot;, name: &quot;性能:   ⚡️  性能优化&quot;, emoji: &quot;⚡️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;test: 测试&quot;, name: &quot;测试:   ✅  添加疏漏测试或已有测试改动&quot;, emoji: &quot;✅&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;chore: 构建&quot;, name: &quot;构建:   📦️  构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）&quot;, emoji: &quot;📦️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;ci: 集成&quot;, name: &quot;集成:   🎡  修改 CI 配置、脚本&quot;, emoji: &quot;🎡&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;revert: 回退&quot;, name: &quot;回退:   ⏪️  回滚 commit&quot;, emoji: &quot;⏪️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;build: 打包&quot;, name: &quot;打包:   🔨  项目打包发布&quot;, emoji: &quot;🔨&quot; &#125;</span><br><span class="line">		],</span><br><span class="line">		useEmoji: true,</span><br><span class="line">		themeColorCode: &quot;&quot;,</span><br><span class="line">		scopes: [],</span><br><span class="line">		allowCustomScopes: true,</span><br><span class="line">		allowEmptyScopes: true,</span><br><span class="line">		customScopesAlign: &quot;bottom&quot;,</span><br><span class="line">		customScopesAlias: &quot;custom&quot;,</span><br><span class="line">		emptyScopesAlias: &quot;empty&quot;,</span><br><span class="line">		upperCaseSubject: false,</span><br><span class="line">		allowBreakingChanges: [&quot;feat&quot;, &quot;fix&quot;],</span><br><span class="line">		breaklineNumber: 100,</span><br><span class="line">		breaklineChar: &quot;|&quot;,</span><br><span class="line">		skipQuestions: [],</span><br><span class="line">		issuePrefixs: [&#123; value: &quot;closed&quot;, name: &quot;closed:   ISSUES has been processed&quot; &#125;],</span><br><span class="line">		customIssuePrefixsAlign: &quot;top&quot;,</span><br><span class="line">		emptyIssuePrefixsAlias: &quot;skip&quot;,</span><br><span class="line">		customIssuePrefixsAlias: &quot;custom&quot;,</span><br><span class="line">		allowCustomIssuePrefixs: true,</span><br><span class="line">		allowEmptyIssuePrefixs: true,</span><br><span class="line">		confirmColorize: true,</span><br><span class="line">		maxHeaderLength: Infinity,</span><br><span class="line">		maxSubjectLength: Infinity,</span><br><span class="line">		minSubjectLength: 0,</span><br><span class="line">		scopeOverrides: undefined,</span><br><span class="line">		defaultBody: &quot;&quot;,</span><br><span class="line">		defaultIssues: &quot;&quot;,</span><br><span class="line">		defaultScope: &quot;&quot;,</span><br><span class="line">		defaultSubject: &quot;&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><h2 id="1-配置package-json命令"><a href="#1-配置package-json命令" class="headerlink" title="1.      配置package.json命令"></a>1.      配置package.json命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;scripts&quot;: &#123;</span><br><span class="line">		&quot;dev&quot;: &quot;vite&quot;,</span><br><span class="line">		&quot;serve&quot;: &quot;vite&quot;,</span><br><span class="line">		&quot;build:dev&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode development&quot;,</span><br><span class="line">		&quot;build:test&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode test&quot;,</span><br><span class="line">		&quot;build:pro&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode production&quot;,</span><br><span class="line">		&quot;preview&quot;: &quot;vite preview&quot;,</span><br><span class="line">		// 以下为必配置</span><br><span class="line">		&quot;lint:eslint&quot;: &quot;eslint --fix --ext .js,.ts,.vue ./src&quot;,</span><br><span class="line">		&quot;lint:prettier&quot;: &quot;prettier --write --loglevel warn \&quot;src/**/*.&#123;js,ts,json,tsx,css,less,scss,vue,html,md&#125;\&quot;&quot;,</span><br><span class="line">		&quot;lint:stylelint&quot;: &quot;stylelint --cache --fix \&quot;**/*.&#123;vue,less,postcss,css,scss&#125;\&quot; --cache --cache-location node_modules/.cache/stylelint/&quot;,</span><br><span class="line">		&quot;lint:lint-staged&quot;: &quot;lint-staged&quot;,</span><br><span class="line">		&quot;prepare&quot;: &quot;husky install&quot;,</span><br><span class="line">		&quot;release&quot;: &quot;standard-version&quot;,</span><br><span class="line">		&quot;commit&quot;: &quot;git pull &amp;&amp; git add -A &amp;&amp; git-cz &amp;&amp; git push&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-配置完成，提交代码"><a href="#2-配置完成，提交代码" class="headerlink" title="2.      配置完成，提交代码"></a>2.      配置完成，提交代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run commit</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-效果如下"><a href="#3-效果如下" class="headerlink" title="3.      效果如下"></a>3.      效果如下</h2><p><img src="data:image/png;base64,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" alt="img"></p>
+<p><img src="data:image/png;base64,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" alt="img"></p>
+<h1 id="根据-commit-message-自动生成-changelog"><a href="#根据-commit-message-自动生成-changelog" class="headerlink" title="根据 commit message 自动生成 changelog"></a>根据 commit message 自动生成 changelog</h1><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141156857.png" alt="img"></p>
+<p>使用参考 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog">conventional-changelog</a></p>
+<h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1.      安装依赖"></a>1.      安装依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install conventional-changelog conventional-changelog-cli --save-dev</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-添加脚本"><a href="#2-添加脚本" class="headerlink" title="2.      添加脚本"></a>2.      添加脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;changelog&quot;: &quot;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-生成CHANGELOG-md文件"><a href="#3-生成CHANGELOG-md文件" class="headerlink" title="3.      生成CHANGELOG.md文件"></a>3.      生成CHANGELOG.md文件</h2><p>直接运行下面的命令即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run changelog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141158345.png" alt="img"></p>
+<p>如果type为feat、fix、perf、revert，则该 commit 将肯定出现在 Change log 之中。其他情况（docs、chore、style、refactor、test）由你决定，要不要放入 Change log，建议是不要。</p>
+<p>注意：版本的log使用 npm version 才会生成新的log，手动修改 package.json version 不会有新的版本log。</p>
+<p>npm version [ | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]</p>
+<p>参考<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v8/commands/npm-version">npm version</a></p>
+<p>npm version 命令用于更新和设置包的版本号，并可以自动创建并提交Git标签以及更新package.json文件。该命令的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version [&lt;newversion&gt; | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]</span><br></pre></td></tr></table></figure>
+
+<p>每个参数的含义如下：</p>
+<p><code>&lt;newversion&gt;</code>：这是一个可选的参数，表示你要将包的版本号更新为的具体版本号。可以是任何有效的版本号，如1.2.3。如果提供了这个参数，它将直接设置包的版本号为指定的值。</p>
+<p>major：这是一个可选的参数，表示要执行主版本号升级。执行此命令后，包的主版本号将加1，次版本号和修订号将重置为0。</p>
+<p>minor：这是一个可选的参数，表示要执行次版本号升级。执行此命令后，包的次版本号将加1，修订号将重置为0。</p>
+<p>patch：这是一个可选的参数，表示要执行修订号升级。执行此命令后，包的修订号将加1。</p>
+<p>premajor：这是一个可选的参数，表示要执行主版本号升级，并在版本号后添加一个预发布标签（如-alpha.1）。</p>
+<p>preminor：这是一个可选的参数，表示要执行次版本号升级，并在版本号后添加一个预发布标签。</p>
+<p>prepatch：这是一个可选的参数，表示要执行修订号升级，并在版本号后添加一个预发布标签。</p>
+<p>prerelease：这是一个可选的参数，表示要在当前版本号的基础上添加一个预发布标签。</p>
+<p>from-git：这是一个可选的参数，用于根据最新的Git提交信息自动确定新版本号。这可以用于生成一个语义版本号，根据Git提交历史中的特性和修复来决定。</p>
+<p>npm version 命令通常用于升级包的版本号，并且在升级后，它会自动创建一个Git标签，以及在package.json中更新新的版本号。你可以根据项目需求选择不同的参数来执行不同类型的版本升级和预发布标签。</p>
+<p>通过使用npm 钩子，可以做一些自动化的东西，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;preversion&quot;: &quot;npm test&quot;,</span><br><span class="line">    &quot;version&quot;: &quot;npm run build &amp;&amp; git add -A dist&quot;,</span><br><span class="line">    &quot;postversion&quot;: &quot;git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-自定义conventional-changelog"><a href="#4-自定义conventional-changelog" class="headerlink" title="4.      自定义conventional-changelog"></a>4.      自定义conventional-changelog</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">const compareFunc = require(&#x27;compare-func&#x27;)</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  writerOpts: &#123;</span><br><span class="line">    transform: (commit, context) =&gt; &#123;</span><br><span class="line">      let discard = true</span><br><span class="line">      const issues = []</span><br><span class="line"></span><br><span class="line">      commit.notes.forEach(note =&gt; &#123;</span><br><span class="line">        note.title = &#x27;BREAKING CHANGES&#x27;</span><br><span class="line">        discard = false</span><br><span class="line">      &#125;)</span><br><span class="line">      if (commit.type === &#x27;feat&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;✨ Features | 新功能&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;fix&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🐛 Bug Fixes | Bug 修复&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;perf&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;⚡ Performance Improvements | 性能优化&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;revert&#x27; || commit.revert) &#123;</span><br><span class="line">        commit.type = &#x27;⏪ Reverts | 回退&#x27;</span><br><span class="line">      &#125; else if (discard) &#123;</span><br><span class="line">        return</span><br><span class="line">      &#125; else if (commit.type === &#x27;docs&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;📝 Documentation | 文档&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;style&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;💄 Styles | 风格&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;refactor&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;♻ Code Refactoring | 代码重构&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;test&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;✅ Tests | 测试&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;build&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;👷‍ Build System | 构建&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;ci&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🔧 Continuous Integration | CI 配置&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;chore&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🎫 Chores | 其他更新&#x27;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      if (commit.scope === &#x27;*&#x27;) &#123;</span><br><span class="line">        commit.scope = &#x27;&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">      if (typeof commit.hash === &#x27;string&#x27;) &#123;</span><br><span class="line">        commit.hash = commit.hash.substring(0, 7)</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      if (typeof commit.subject === &#x27;string&#x27;) &#123;</span><br><span class="line">        let url = context.repository</span><br><span class="line">          ? `$&#123;context.host&#125;/$&#123;context.owner&#125;/$&#123;context.repository&#125;`</span><br><span class="line">          : context.repoUrl</span><br><span class="line">        if (url) &#123;</span><br><span class="line">          url = `$&#123;url&#125;/issues/`</span><br><span class="line">          // Issue URLs.</span><br><span class="line">          commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) =&gt; &#123;</span><br><span class="line">            issues.push(issue)</span><br><span class="line">            return `[#$&#123;issue&#125;]($&#123;url&#125;$&#123;issue&#125;)`</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        if (context.host) &#123;</span><br><span class="line">          // User URLs.</span><br><span class="line">          commit.subject = commit.subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/])&#123;0,38&#125;)/g, (_, username) =&gt; &#123;</span><br><span class="line">            if (username.includes(&#x27;/&#x27;)) &#123;</span><br><span class="line">              return `@$&#123;username&#125;`</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return `[@$&#123;username&#125;]($&#123;context.host&#125;/$&#123;username&#125;)`</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // remove references that already appear in the subject</span><br><span class="line">      commit.references = commit.references.filter(reference =&gt; &#123;</span><br><span class="line">        if (issues.indexOf(reference.issue) === -1) &#123;</span><br><span class="line">          return true</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false</span><br><span class="line">      &#125;)</span><br><span class="line">      return commit</span><br><span class="line">    &#125;,</span><br><span class="line">    groupBy: &#x27;type&#x27;,</span><br><span class="line">    commitGroupsSort: &#x27;title&#x27;,</span><br><span class="line">    commitsSort: [&#x27;scope&#x27;, &#x27;subject&#x27;],</span><br><span class="line">    noteGroupsSort: &#x27;title&#x27;,</span><br><span class="line">    notesSort: compareFunc</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后在 package.json 中的 scripts 添加一条语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &quot;changelog&quot;: &quot;conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0  -n ./changelog-option.js&quot;</span><br><span class="line">//在这指定配置文件位置，本人放在了根目录，也可以指定其他地方</span><br><span class="line">/*配置项说明：</span><br><span class="line">-p custom-config 指定风格 </span><br><span class="line">-i CHANGELOG.md 指定输出的文件名称</span><br><span class="line">-s -r 0 指定增量更新，不会覆盖以前的更新日志</span><br><span class="line">-n ./changelog-option.js 指定自定义配置</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>注意：本项目中用到了 custom-config，因此需要先安装 custom-config【单纯的 changelog-option.js 是不完整的配置，在此只修改了自己需要的部分，其他部分默认】，如果不加这个插件，是不生效的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i conventional-changelog-custom-config -D</span><br></pre></td></tr></table></figure>
+
+<p>最后再运行npm run changelog</p>
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/01/14/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/">前端项目构建最佳实践</a>
+            
+            
+            <a class="next" rel="next" href="/2023/01/14/%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84vue%E9%A1%B9%E7%9B%AE/">手动搭建一个完整的vue项目</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/01/14/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2023/01/14/%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84vue%E9%A1%B9%E7%9B%AE/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

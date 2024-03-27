@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Java中的异常处理 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Java中的异常处理</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 20, 2024&nbsp;&nbsp;9:43:49</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 20, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">9 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><p>Java内置了一套异常处理机制，总是使用异常来表示错误。异常是一种class，因此它本身带有类型信息。异常可以在任何地方抛出，但只需要在上层捕获，这样就和方法调用分离了。异常class的继承关系如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403201012266.png"></p>
+<p><code>Throwable</code> 是 Java 语言中所有错误与异常的超类。<code>Throwable</code>有两个体系：<code>Error</code> 和 <code>Exception</code>。</p>
+<p>（1）<strong>Error</strong> 表示严重的错误，程序对此一般无能为力，例如：</p>
+<ul>
+<li><code>OutOfMemoryError</code>：内存耗尽</li>
+<li><code>NoClassDefFoundError</code>：无法加载某个Class</li>
+<li><code>StackOverflowError</code>：栈溢出</li>
+</ul>
+<p>（2）<strong>Exception</strong> 是程序本身可以捕获并且可以处理的异常。Exception 这种异常又分为两类：运行时异常和编译时异常。</p>
+<p>运行时异常是程序逻辑编写不对造成的，应该修复程序本身。例如：</p>
+<ul>
+<li><code>NullPointerException</code>：对某个null的对象调用方法或字段</li>
+<li><code>IndexOutOfBoundsException</code>：数组索引越界</li>
+</ul>
+<p>运行时异常的特点是Java编译器不会检查它，也就是说，当程序中可能出现这类异常，即使没有用try-catch语句捕获它，也没有用throws子句声明抛出它，也会编译通过。</p>
+<p>编译时异常是应用程序逻辑处理的一部分，应该捕获并处理。例如：</p>
+<ul>
+<li><code>NumberFormatException</code>：数值类型的格式错误</li>
+<li><code>FileNotFoundException</code>：未找到文件</li>
+<li><code>SocketException</code>：读取网络失败</li>
+</ul>
+<p>（3）Java规定：</p>
+<ul>
+<li>必须捕获的异常，包括<code>Exception</code>及其子类，但不包括<code>RuntimeException</code>及其子类，这种类型的异常称为可查异常（<code>Checked Exception</code>）。</li>
+<li>不需要捕获的异常，包括<code>Error</code>及其子类，<code>RuntimeException</code>及其子类。这种类型的异常称为不可查异常。</li>
+</ul>
+<p>用一个例子来说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        byte[] bs = toGBK(&quot;中文&quot;);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static byte[] toGBK(String s) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 用指定编码转换String为byte[]:</span><br><span class="line">            return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">            // 如果系统不支持GBK编码，会捕获到UnsupportedEncodingException:</span><br><span class="line">            System.out.println(e); // 打印异常信息</span><br><span class="line">            return s.getBytes(); // 尝试使用用默认编码</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1、如果我们不捕获<code>UnsupportedEncodingException</code>，会出现编译失败的问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        byte[] bs = toGBK(&quot;中文&quot;);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static byte[] toGBK(String s) &#123;</span><br><span class="line">        return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>错误信息类似：<code>unreported exception UnsupportedEncodingException; must be caught or declared to be thrown</code>，并且准确地指出需要捕获的语句是<code>return s.getBytes(&quot;GBK&quot;);</code>。意思是说，像<code>UnsupportedEncodingException</code>这样的<code>Checked Exception</code>，必须被捕获。</p>
+<p>这是因为<code>String.getBytes(String)</code>方法定义是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public byte[] getBytes(String charsetName) throws UnsupportedEncodingException &#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在方法定义的时候，使用<code>throws xxx</code>表示该方法可能抛出的异常类型。调用方在调用的时候，必须强制捕获这些异常，否则编译器会报错。</p>
+<p>2、当然，我们也可以不捕获它，而是在方法定义处用<code>throws</code>表示<code>toGBK()</code>方法可能会抛出<code>UnsupportedEncodingException</code>，就可以让<code>toGBK()</code>方法通过编译器检查：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        byte[] bs = toGBK(&quot;中文&quot;);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static byte[] toGBK(String s) throws UnsupportedEncodingException &#123;</span><br><span class="line">        return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、上述代码仍然会得到编译错误，但这一次，编译器提示的不是调用<code>return s.getBytes(&quot;GBK&quot;);</code>的问题，而是<code>byte[] bs = toGBK(&quot;中文&quot;);</code>。因为在main()方法中，调用<code>toGBK()</code>，没有捕获它声明的可能抛出的<code>UnsupportedEncodingException</code>。修复方法是在main()方法中捕获异常并处理：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            byte[] bs = toGBK(&quot;中文&quot;);</span><br><span class="line">            System.out.println(Arrays.toString(bs));</span><br><span class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static byte[] toGBK(String s) throws UnsupportedEncodingException &#123;</span><br><span class="line">        // 用指定编码转换String为byte[]:</span><br><span class="line">        return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见，只要是方法声明的<code>Checked Exception</code>，不在调用层捕获，也必须在更高的调用层捕获。所有未捕获的异常，最终也必须在main()方法中捕获，不会出现漏写try的情况。这是由编译器保证的。main()方法也是最后捕获Exception的机会。</p>
+<p>4、如果是测试代码，上面的写法就略显麻烦。如果不想写任何try代码，可以直接把main()方法定义为<code>throws Exception</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        byte[] bs = toGBK(&quot;中文&quot;);</span><br><span class="line">        System.out.println(Arrays.toString(bs));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static byte[] toGBK(String s) throws UnsupportedEncodingException &#123;</span><br><span class="line">        // 用指定编码转换String为byte[]:</span><br><span class="line">        return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为main()方法声明了可能抛出Exception，也就声明了可能抛出所有的Exception，因此在内部就无需捕获了。代价就是一旦发生异常，程序会立刻退出。</p>
+<p>5、还有一些童鞋喜欢在<code>toGBK()</code>内部“消化”异常：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">static byte[] toGBK(String s) &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">	&#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">		// 什么也不干</span><br><span class="line">	&#125;</span><br><span class="line">	return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种捕获后不处理的方式是非常不好的，即使真的什么也做不了，也要先把异常记录下来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static byte[] toGBK(String s) &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		return s.getBytes(&quot;GBK&quot;);</span><br><span class="line">	&#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">		// 先记下来再说:</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">	return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有异常都可以调用<code>printStackTrace()</code>方法打印异常栈，这是一个简单有用的快速打印异常的方法。</p>
+<h2 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h2><p>1、多catch语句</p>
+<p>多个catch语句只有一个能被执行， 所以存在多个catch的时候，子类必须写在前面。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        System.out.println(&quot;IO error&quot;);</span><br><span class="line">    &#125; catch (UnsupportedEncodingException e) &#123; // 永远捕获不到</span><br><span class="line">        System.out.println(&quot;Bad encoding&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、finally语句</p>
+<p>finally语句块保证有无错误都会执行。</p>
+<p>某些情况下，可以没有catch，只使用<code>try ... finally</code>结构。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void process(String file) throws IOException &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125; finally &#123;</span><br><span class="line">		System.out.println(&quot;END&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为方法声明了可能抛出的异常，所以可以不写catch。</p>
+<p>3、捕获多种异常</p>
+<p>如果处理<code>IOException</code>和<code>NumberFormatException</code>的代码是相同的，那么我们可以把它两用<code>|</code>合并到一起：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        process1();</span><br><span class="line">        process2();</span><br><span class="line">        process3();</span><br><span class="line">    &#125; catch (IOException | NumberFormatException e) &#123; // IOException或NumberFormatException</span><br><span class="line">        System.out.println(&quot;Bad input&quot;);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        System.out.println(&quot;Unknown error&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h2><p>1、异常的传播</p>
+<p>当某个方法抛出了异常时，如果当前方法没有捕获异常，异常就会被抛到上层调用方法，直到遇到某个<code>try ... catch</code>被捕获为止</p>
+<p>2、抛出异常</p>
+<p>抛出异常分两步：创建某个Exception的实例；用<code>throw</code>语句抛出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static double method(int value) &#123;</span><br><span class="line">    if(value == 0) &#123;</span><br><span class="line">        throw new ArithmeticException(&quot;参数不能为0&quot;); //抛出一个运行时异常</span><br><span class="line">    &#125;</span><br><span class="line">    return 5.0 / value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果在catch中抛出异常，不会影响finally的执行。<code>JVM</code>会先执行finally，然后抛出异常。</p>
+<p>finally抛出异常后，原来在catch中准备抛出的异常就“消失”了，因为只能抛出一个异常。没有被抛出的异常称为“被屏蔽”的异常（Suppressed Exception）。</p>
+<p>在极少数的情况下，我们需要获知所有的异常。如何保存所有的异常信息？方法是先用origin变量保存原始异常，然后调用<code>Throwable.addSuppressed()</code>，把原始异常添加进来，最后在finally抛出。</p>
+<h2 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h2><p>当我们在代码中需要抛出异常时，尽量使用JDK已定义的异常类型。但在一个大型项目中，可以自定义新的异常类型，但是，保持一个合理的异常继承体系是非常重要的。</p>
+<p>一个常见的做法是自定义一个<code>BaseException</code>作为“根异常”。然后，派生出各种业务类型的异常。</p>
+<p>BaseException需要从一个适合的Exception派生，通常建议从RuntimeException派生：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public class BaseException extends RuntimeException &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其他业务类型的异常就可以从BaseException派生：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class UserNotFoundException extends BaseException &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class LoginFailedException extends BaseException &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>自定义的BaseException应该提供多个构造方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class BaseException extends RuntimeException &#123;</span><br><span class="line">    public BaseException() &#123;</span><br><span class="line">        super();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public BaseException(String message, Throwable cause) &#123;</span><br><span class="line">        super(message, cause);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public BaseException(String message) &#123;</span><br><span class="line">        super(message);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public BaseException(Throwable cause) &#123;</span><br><span class="line">        super(cause);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NullPointerException"><a href="#NullPointerException" class="headerlink" title="NullPointerException"></a>NullPointerException</h2><p>NullPointerException是Java代码常见的逻辑错误，应当早暴露，早修复；</p>
+<p>可以启用Java 14的增强异常信息来查看NullPointerException的详细错误信息。</p>
+<h2 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h2><p>断言是一种调试方式，断言失败会抛出<code>AssertionError</code>，只能在开发和测试阶段启用断言；</p>
+<p>对可恢复的错误不能使用断言，而应该抛出异常；</p>
+<p>断言很少被使用，更好的方法是编写单元测试。</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>1、JDK Logging</p>
+<p>日志是为了替代System.out.println()，可以定义格式，重定向到文件等；</p>
+<p>日志可以存档，便于追踪问题；</p>
+<p>日志记录可以按级别分类，便于打开或关闭某些级别；</p>
+<p>可以根据配置文件调整日志，无需修改代码；</p>
+<p>Java标准库提供了java.util.logging来实现日志功能。</p>
+<p>2、Commons Logging</p>
+<p>Commons Logging是使用最广泛的日志模块；</p>
+<p>Commons Logging的API非常简单；</p>
+<p>Commons Logging可以自动检测并使用其他日志模块。</p>
+<p>3、Log4j</p>
+<p>通过Commons Logging实现日志，不需要修改代码即可使用Log4j；</p>
+<p>使用Log4j只需要把log4j2.xml和相关jar放入classpath；</p>
+<p>如果要更换Log4j，只需要移除log4j2.xml和相关jar；</p>
+<p>只有扩展Log4j时，才需要引用Log4j的接口（例如，将日志加密写入数据库的功能，需要自己开发）。</p>
+<p>4、SLF4J和Logback</p>
+<p>SLF4J和Logback可以取代Commons Logging和Log4j；</p>
+<p>始终使用SLF4J的接口写入日志，使用Logback只需要配置，不需要修改代码。</p>
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%EF%BC%89/">前端面试题总结（万字长文）</a>
+            
+            
+            <a class="next" rel="next" href="/2024/03/19/CSS%E4%B8%AD%E7%9A%84%E7%89%A9%E7%90%86%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%BB%E8%BE%91%E5%B1%9E%E6%80%A7/">CSS中的物理属性和逻辑属性</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/20/%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93%EF%BC%88%E4%B8%87%E5%AD%97%E9%95%BF%E6%96%87%EF%BC%89/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2024/03/19/CSS%E4%B8%AD%E7%9A%84%E7%89%A9%E7%90%86%E5%B1%9E%E6%80%A7%E5%92%8C%E9%80%BB%E8%BE%91%E5%B1%9E%E6%80%A7/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

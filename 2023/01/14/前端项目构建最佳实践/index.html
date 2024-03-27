@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>前端项目构建最佳实践 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">前端项目构建最佳实践</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 14, 2023&nbsp;&nbsp;12:11:04</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 14, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">7.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">32 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文从通过脚手架搭建vue项目开始，到editorconfig、VSCode配置文件、jsconfig.json、Prettier、ESLint、Git提交规范（husky、lint-staged、conventional-changelog）、StyleLint、多环境配置、browserslist的使用，详细说明了前端项目构建的最佳实践。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HelloAllenW/vue2-base-project">源码</a></p>
+<h1 id="通过脚手架搭建vue项目"><a href="#通过脚手架搭建vue项目" class="headerlink" title="通过脚手架搭建vue项目"></a>通过脚手架搭建vue项目</h1><p><a target="_blank" rel="noopener" href="https://blog.helloallen.cn/2024/01/14/%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84vue%E9%A1%B9%E7%9B%AE/">手动搭建一个完整的vue项目</a></p>
+<h1 id="通过editorconfig抹平编辑器差异"><a href="#通过editorconfig抹平编辑器差异" class="headerlink" title="通过editorconfig抹平编辑器差异"></a>通过editorconfig抹平编辑器差异</h1><p>EditorConfig保证不同开发者如果使用不同的编辑器（sublime/vscode）或系统（windows/mac），能够执行统一的代码风格标准。比如：缩进是tab还是space，结尾end_of_line是lf还是crlf。</p>
+<p>简而言之，EditorConfig可以覆盖编辑器的默认配置，是为了抹平不同IDE的代码格式差异而产生的。</p>
+<h2 id="1-安装插件"><a href="#1-安装插件" class="headerlink" title="1.      安装插件"></a>1.      安装插件</h2><p>某些编辑器已经内置了EditorConfig插件，无需另外安装了，比如 WebStorm、VisualStudio、pyCharm等等。</p>
+<p>某些编辑器没有内置，需要自行安装插件，比如vscode，需要安装 EditorConfig for VS Code</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141213634.png"></p>
+<h2 id="2-添加配置文件"><a href="#2-添加配置文件" class="headerlink" title="2.      添加配置文件"></a>2.      添加配置文件</h2><p>定义格式规则，避免常见的代码格式不一致和丑陋的 diffs。</p>
+<p>通常在项目根目录下，添加<code>.editorconfig</code>配置文件，贴一份常见的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 配置项文档：https://editorconfig.org/</span><br><span class="line"></span><br><span class="line"># 告知 EditorConfig 插件，当前即是根文件</span><br><span class="line">root = true</span><br><span class="line"></span><br><span class="line"># * 表示下面的配置适用全部文件</span><br><span class="line">[*]</span><br><span class="line">## 设置字符集</span><br><span class="line">charset = utf-8</span><br><span class="line">## 缩进风格 space | tab，建议 space</span><br><span class="line">indent_style = space</span><br><span class="line">## 设置每个缩进级别的空格数（修改这里的话需要将 prettier.config.js 和 .vscode -&gt; settings.json 也同步修改）</span><br><span class="line">indent_size = 2</span><br><span class="line">## 换行符类型。可选值为lf（Unix 风格）、cr（Mac 风格）或 crlf（Windows 风格），一般都是设置为 lf</span><br><span class="line">end_of_line = lf</span><br><span class="line">## 是否在文件末尾插入空白行</span><br><span class="line">insert_final_newline = true</span><br><span class="line">## 是否删除一行中的前后空格</span><br><span class="line">trim_trailing_whitespace = true</span><br><span class="line"></span><br><span class="line"># 适用 .md 文件</span><br><span class="line">[*.md]</span><br><span class="line">insert_final_newline = false</span><br><span class="line">trim_trailing_whitespace = false</span><br></pre></td></tr></table></figure>
+
+<h1 id="VSCode配置文件（Settings-json）"><a href="#VSCode配置文件（Settings-json）" class="headerlink" title="VSCode配置文件（Settings.json）"></a>VSCode配置文件（Settings.json）</h1><p>VSCode的<code>setting.json</code>设置分为工作区和用户两个级别，其中用户区会对所有项目生效，而工作区的设置只会对当前项目生效。</p>
+<h2 id="1-用户区settings-json配置"><a href="#1-用户区settings-json配置" class="headerlink" title="1.      用户区settings.json配置"></a>1.      用户区settings.json配置</h2><p>点击VSCode左下角的设置按钮，选择Settings，选择以文本编辑形式打开settings.json，并且在setting.json中加入以下代码。配置完成之后，当我们保存某个文件时，就可以自动对当前文件进行ESLint检查，并且自动对一些错误进行修复。配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  // 每次保存的时候自动格式化</span><br><span class="line">  &quot;editor.formatOnSave&quot;: true,</span><br><span class="line">  &quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">    &quot;source.fixAll.eslint&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-工作区settings-json配置"><a href="#2-工作区settings-json配置" class="headerlink" title="2.      工作区settings.json配置"></a>2.      工作区settings.json配置</h2><p>除了配置用户区的settings.json之外，我们也可以配置工作区的settings.json，工作区的配置只会对当前项目生效。首先，我们需要在项目根目录创建<code>.vscode</code>目录，并且在该目录下创建settings.json文件。</p>
+<p>接着，在settings.json中加入以下代码，配置完成后，当我们保存该项目中某个文件时，也会自动对该文件进行ESLint检查，并且自动修复一些问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;editor.formatOnSave&quot;: true,</span><br><span class="line">  &quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">    &quot;source.fixAll.eslint&quot;: true,</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;eslint.validate&quot;: [&quot;typescript&quot;, &quot;javascript&quot;, &quot;vue&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="jsconfig-json"><a href="#jsconfig-json" class="headerlink" title="jsconfig.json"></a>jsconfig.json</h1><p>如果你的项目中有一个 jsconfig.json文件的话，这个文件的配置可以对你的文件所在目录下的所有js代码做出个性化支持。</p>
+<p>目录中存在此类文件表示该目录是JavaScript项目的根目录，否则会把打开的JavaScript文件被视为独立单元。</p>
+<p>文件本身可以选择列出属于项目的文件，要从项目中排除的文件，以及编译器选项。</p>
+<p>在工作空间中定一个jsconfig.json文件时，JavaScript体验会得到改进。</p>
+<p>在不使用typescript的时候也可以对js进行ts的类型检查（因为jsconfig.json是tsconfig.json的子集，所以检查是ts的）</p>
+<p>当我们在项目中使用了webpack的别名的时候，会发现没有办法跳转到对应文件，此时就可以在jsconfig.json中配置。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// vscode配置文件: 通过jsconfig.json来设置编译选项，可以帮助我们提高开发效率，避免一些不必要的错误。</span><br><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    // 指定要使用的默认库，值为&quot;es3&quot;,&quot;es5&quot;,&quot;es2015&quot;...</span><br><span class="line">    &quot;target&quot;: &quot;es5&quot;,</span><br><span class="line">    // 指定模块系统（生成模块代码时），可选 amd / commonJS / es2015 / es6 / esnext / none / system / umd</span><br><span class="line">    &quot;module&quot;: &quot;esnext&quot;,</span><br><span class="line">    &quot;baseUrl&quot;: &quot;./&quot;,</span><br><span class="line">    // 指定如何解析模块以进行导入，可选 node / classic</span><br><span class="line">    &quot;moduleResolution&quot;: &quot;node&quot;,</span><br><span class="line">     // 解决别名导致vscode无法跳转文件的问题</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">      &quot;@/*&quot;: [</span><br><span class="line">        &quot;src/*&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,</span><br><span class="line">    // 如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入&quot;ES2019.Array&quot;,</span><br><span class="line">    &quot;lib&quot;: [</span><br><span class="line">      &quot;esnext&quot;,</span><br><span class="line">      &quot;dom&quot;,</span><br><span class="line">      &quot;dom.iterable&quot;,</span><br><span class="line">      &quot;scripthost&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  // 与开发无关的文件(非源码)可以让 IDE 全部在编译时排除掉，以提高 IDE 性能</span><br><span class="line">  &quot;exclude&quot;: [</span><br><span class="line">    &quot;node_modules&quot;, </span><br><span class="line">    &quot;**/node_modules/*&quot;,</span><br><span class="line">    &quot;dist&quot;</span><br><span class="line">  ],</span><br><span class="line">  // 显式声明包含的文件</span><br><span class="line">  &quot;include&quot;: [</span><br><span class="line">    &quot;src/*.js&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>compilerOptions的其他配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&quot;compilerOptions&quot;: &#123;</span><br><span class="line">  &quot;incremental&quot;: true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度</span><br><span class="line">  &quot;tsBuildInfoFile&quot;: &quot;./buildFile&quot;, // 增量编译文件的存储位置</span><br><span class="line">  &quot;diagnostics&quot;: true, // 打印诊断信息 </span><br><span class="line">  &quot;target&quot;: &quot;ES5&quot;, // 目标语言的版本</span><br><span class="line">  &quot;module&quot;: &quot;CommonJS&quot;, // 生成代码的模板标准</span><br><span class="line">  &quot;outFile&quot;: &quot;./app.js&quot;, // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置&quot;module&quot;: &quot;AMD&quot;,</span><br><span class="line">  &quot;lib&quot;: [&quot;DOM&quot;, &quot;ES2015&quot;, &quot;ScriptHost&quot;, &quot;ES2019.Array&quot;], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入&quot;ES2019.Array&quot;,</span><br><span class="line">  &quot;allowJS&quot;: true, // 允许编译器编译JS，JSX文件</span><br><span class="line">  &quot;checkJs&quot;: true, // 允许在JS文件中报错，通常与allowJS一起使用</span><br><span class="line">  &quot;outDir&quot;: &quot;./dist&quot;, // 指定输出目录</span><br><span class="line">  &quot;rootDir&quot;: &quot;./&quot;, // 指定输出文件目录(用于输出)，用于控制输出目录结构</span><br><span class="line">  &quot;declaration&quot;: true, // 生成声明文件，开启后会自动生成声明文件</span><br><span class="line">  &quot;declarationDir&quot;: &quot;./file&quot;, // 指定生成声明文件存放目录</span><br><span class="line">  &quot;emitDeclarationOnly&quot;: true, // 只生成声明文件，而不会生成js文件</span><br><span class="line">  &quot;sourceMap&quot;: true, // 生成目标文件的sourceMap文件</span><br><span class="line">  &quot;inlineSourceMap&quot;: true, // 生成目标文件的inline SourceMap，inline SourceMap会包含在生成的js文件中</span><br><span class="line">  &quot;declarationMap&quot;: true, // 为声明文件生成sourceMap</span><br><span class="line">  &quot;typeRoots&quot;: [], // 声明文件目录，默认时node_modules/@types</span><br><span class="line">  &quot;types&quot;: [], // 加载的声明文件包</span><br><span class="line">  &quot;removeComments&quot;:true, // 删除注释 </span><br><span class="line">  &quot;noEmit&quot;: true, // 不输出文件,即编译后不会生成任何js文件</span><br><span class="line">  &quot;noEmitOnError&quot;: true, // 发送错误时不输出任何文件</span><br><span class="line">  &quot;noEmitHelpers&quot;: true, // 不生成helper函数，减小体积，需要额外安装，常配合importHelpers一起使用</span><br><span class="line">  &quot;importHelpers&quot;: true, // 通过tslib引入helper函数，文件必须是模块</span><br><span class="line">  &quot;downlevelIteration&quot;: true, // 降级遍历器实现，如果目标源是es3/5，那么遍历器会有降级的实现</span><br><span class="line">  &quot;strict&quot;: true, // 开启所有严格的类型检查</span><br><span class="line">  &quot;alwaysStrict&quot;: true, // 在代码中注入&#x27;use strict&#x27;</span><br><span class="line">  &quot;noImplicitAny&quot;: true, // 不允许隐式的any类型</span><br><span class="line">  &quot;strictNullChecks&quot;: true, // 不允许把null、undefined赋值给其他类型的变量</span><br><span class="line">  &quot;strictFunctionTypes&quot;: true, // 不允许函数参数双向协变</span><br><span class="line">  &quot;strictPropertyInitialization&quot;: true, // 类的实例属性必须初始化</span><br><span class="line">  &quot;strictBindCallApply&quot;: true, // 严格的bind/call/apply检查</span><br><span class="line">  &quot;noImplicitThis&quot;: true, // 不允许this有隐式的any类型</span><br><span class="line">  &quot;noUnusedLocals&quot;: true, // 检查只声明、未使用的局部变量(只提示不报错)</span><br><span class="line">  &quot;noUnusedParameters&quot;: true, // 检查未使用的函数参数(只提示不报错)</span><br><span class="line">  &quot;noFallthroughCasesInSwitch&quot;: true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)</span><br><span class="line">  &quot;noImplicitReturns&quot;: true, //每个分支都会有返回值</span><br><span class="line">  &quot;esModuleInterop&quot;: true, // 允许export=导出，由import from 导入</span><br><span class="line">  &quot;allowUmdGlobalAccess&quot;: true, // 允许在模块中全局变量的方式访问umd模块</span><br><span class="line">  &quot;moduleResolution&quot;: &quot;node&quot;, // 模块解析策略，ts默认用node的解析策略，即相对的方式导入</span><br><span class="line">  &quot;baseUrl&quot;: &quot;./&quot;, // 解析非相对模块的基地址，默认是当前目录</span><br><span class="line">  &quot;paths&quot;: &#123; // 路径映射，相对于baseUrl</span><br><span class="line">    // 如使用jq时不想使用默认版本，而需要手动指定版本，可进行如下配置</span><br><span class="line">    &quot;jquery&quot;: [&quot;node_modules/jquery/dist/jquery.min.js&quot;]</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;rootDirs&quot;: [&quot;src&quot;,&quot;out&quot;], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错</span><br><span class="line">  &quot;listEmittedFiles&quot;: true, // 打印输出文件</span><br><span class="line">  &quot;listFiles&quot;: true// 打印编译的文件(包括引用的声明文件)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="代码格式化工具（Prettier）"><a href="#代码格式化工具（Prettier）" class="headerlink" title="代码格式化工具（Prettier）"></a>代码格式化工具（Prettier）</h1><h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1.      说明"></a>1.      说明</h2><p>在保存/粘贴代码或者使用格式化快捷键时，可以自动按照我们制定的Prettier规范格式化代码。</p>
+<p>Prettier只关注代码格式，它即可单独使用，也可以配合编辑器使用，或和eslint一起使用。</p>
+<p>这里有人可能会有疑问，eslint不也关注代码格式，做格式校验吗？ 为啥还要用Prettier？这是因为一是在之前eslint不支持autoFix，二是两个的规则并不完全相同。</p>
+<p>而且，ESLint 有一个局限性，它执行 <code>eslint index.js --fix</code> 只能处理 js 文件，处理不了其他格式的文件，例如html css 文件，但是 prettier 就能处理其他类型的文件 。</p>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.      使用"></a>2.      使用</h2><h3 id="（1）下载依赖"><a href="#（1）下载依赖" class="headerlink" title="（1）下载依赖"></a>（1）下载依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prettier -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）设置配置文件"><a href="#（2）设置配置文件" class="headerlink" title="（2）设置配置文件"></a>（2）设置配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	// 每行最大字符数，超过会换行，默认80</span><br><span class="line">	printWidth: 130,</span><br><span class="line">	// 缩进字节数</span><br><span class="line">	tabWidth: 2,</span><br><span class="line">	// 使用制表符而不是空格缩进行</span><br><span class="line">	useTabs: true,</span><br><span class="line">	// 结尾不用分号(true有，false没有)</span><br><span class="line">	semi: false,</span><br><span class="line">	// 使用单引号(true单双引号，false双引号)</span><br><span class="line">	singleQuote: true,</span><br><span class="line">	// 更改引用对象属性的时间 可选值&quot;&lt;as-needed|consistent|preserve&gt;&quot;</span><br><span class="line">	quoteProps: &quot;as-needed&quot;,</span><br><span class="line">	// 在对象，数组括号与文字之间加空格 &quot;&#123; foo: bar &#125;&quot;</span><br><span class="line">	bracketSpacing: true,</span><br><span class="line">	// 是否使用尾逗号 可选值&quot;&lt;none|es5|all&gt;&quot;，默认none</span><br><span class="line">	trailingComma: &quot;none&quot;,</span><br><span class="line">	// 在JSX中使用单引号而不是双引号</span><br><span class="line">	jsxSingleQuote: true,</span><br><span class="line">	//  (x) =&gt; &#123;&#125; 箭头函数参数只有一个时是否要有小括号。avoid：省略括号 ,always：不省略括号</span><br><span class="line">	arrowParens: &quot;avoid&quot;,</span><br><span class="line">	// 如果文件顶部已经有一个 doclock，这个选项将新建一行注释，并打上@format标记。</span><br><span class="line">	insertPragma: false,</span><br><span class="line">	// 指定要使用的解析器，不需要写文件开头的 @prettier</span><br><span class="line">	requirePragma: false,</span><br><span class="line">	// 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行</span><br><span class="line">	proseWrap: &quot;preserve&quot;,</span><br><span class="line">	// 在html中空格是否是敏感的 &quot;css&quot; - 遵守CSS显示属性的默认值， &quot;strict&quot; - 空格被认为是敏感的 ，&quot;ignore&quot; - 空格被认为是不敏感的</span><br><span class="line">	htmlWhitespaceSensitivity: &quot;css&quot;,</span><br><span class="line">	// 换行符使用 lf 结尾是 可选值&quot;&lt;auto|lf|crlf|cr&gt;&quot;</span><br><span class="line">	endOfLine: &quot;auto&quot;,</span><br><span class="line">	// 这两个选项可用于格式化以给定字符偏移量（分别包括和不包括）开始和结束的代码</span><br><span class="line">	rangeStart: 0,</span><br><span class="line">	rangeEnd: Infinity,</span><br><span class="line">	// Vue文件脚本和样式标签缩进</span><br><span class="line">	vueIndentScriptAndStyle: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录下手动创建一个 <code>.prettierrc.js</code> ，进行如上配置。或者也可以在VSCode的settings.json中进行配置。配置完成后我们就可以手动通过命令行来格式化某个文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx prettier main.js --write</span><br></pre></td></tr></table></figure>
+
+<p>prettier 先会去项目文件中找是否有 .prettierrc.js 或 .prettierrc 的文件，如果有就使用 .prettierrc.js 或 .prettierrc 文件中的格式化规则，如果没有则查找是否有.editorconfig，还是没有就使用 settings.json 的规则。</p>
+<h3 id="（3）安装VSCode插件"><a href="#（3）安装VSCode插件" class="headerlink" title="（3）安装VSCode插件"></a>（3）安装VSCode插件</h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141218003.png" alt="img"></p>
+<p>安装插件后，调出系统设置 settings.json 并将 prettier 设置为默认格式化工具，可以为所有语言或特定语言设置此项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  // 所有语言</span><br><span class="line">  &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,</span><br><span class="line">  // 特定语言</span><br><span class="line">  &quot;[html]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[javascript]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[vue]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[css]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，我们就可以使用shift + Alt + F（VSCode默认快捷键）来格式化代码。还可以通过修改VSCode设置，实现保存即格式化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.formatOnSave&quot;: true</span><br></pre></td></tr></table></figure>
+
+<p>更多Prettier的使用，请移步 <a target="_blank" rel="noopener" href="https://prettier.io/">Prettier官网</a></p>
+<h1 id="代码规范性工具（ESLint）"><a href="#代码规范性工具（ESLint）" class="headerlink" title="代码规范性工具（ESLint）"></a>代码规范性工具（ESLint）</h1><h2 id="1-说明-1"><a href="#1-说明-1" class="headerlink" title="1.      说明"></a>1.      说明</h2><p>eslint的关注点是代码质量和代码格式。</p>
+<p>何为代码质量？如未使用变量、三等号、全局变量声明等问题</p>
+<p>何为代码格式？如单行代码太长、tab的长度、空格、逗号，单双引号等问题</p>
+<p>对于质量和格式问题，eslint可以给出错误或警告提示，也可以自动修复，autofix eslint的原则是一切皆可配，没有什么必须要禁止，或必须要使用的规则，如果有，这些规则应该从语言本身就限制掉。</p>
+<p>灵活是有代价的，虽然每个规则都可配，但要配置那么多规则也是及其繁琐的，因此有人提供了一些preset，也就是预设规则，通常由一些最佳实践集成而来。</p>
+<h2 id="2-使用-1"><a href="#2-使用-1" class="headerlink" title="2.      使用"></a>2.      使用</h2><h3 id="（1）eslint初始化"><a href="#（1）eslint初始化" class="headerlink" title="（1）eslint初始化"></a>（1）eslint初始化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g eslint</span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录执行以下命令初始化eslint：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
+
+<p>回答几个问题后，比如配置文件格式、是否使用react，vue，是否支持typescript等，则会自动在根目录下生成对应的配置文件.eslintrc.js。</p>
+<p>用vue脚手架创建项目时，这步已经在脚手架完成。可以跳过当前步骤直接进入下一步，设置配置文件。</p>
+<h3 id="（2）设置配置文件-1"><a href="#（2）设置配置文件-1" class="headerlink" title="（2）设置配置文件"></a>（2）设置配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  // 表示当前目录即为根目录，ESLint规则被现在到该目录下</span><br><span class="line">  root: true,</span><br><span class="line">  // env 表示启用 ESLint 检查的环境</span><br><span class="line">  env: &#123;</span><br><span class="line">    // 在 node 环境下启动ESLint检测</span><br><span class="line">    node: true</span><br><span class="line">  &#125;,</span><br><span class="line">  // ESLint 中基础配置需要继承的配置，这里不知道怎么配置需要看文档</span><br><span class="line">  extends: [</span><br><span class="line">    &#x27;plugin:vue/essential&#x27;,</span><br><span class="line">    &#x27;@vue/standard&#x27;</span><br><span class="line">  ],</span><br><span class="line">  // 解析器</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    parser: &#x27;@babel/eslint-parser&#x27; // 是一个解析器，允许您使用ESLint对所有有效的Babel代码进行检查。</span><br><span class="line">  &#125;,</span><br><span class="line">  // 需要修改的启用规则及其各自的错误级别</span><br><span class="line">  /**</span><br><span class="line">   * 错误级别分为三种：</span><br><span class="line">   * &quot;off&quot; 或 0 -   关闭规则</span><br><span class="line">   * &quot;warn&quot; 或 1 -  开启规则，使用警告级别的错误：warn（不会导致程序退出）</span><br><span class="line">   * &quot;error&quot; 或 2 - 开启规则，使用错误级别的错误：error（当被触发的时候，程序会）</span><br><span class="line">   */</span><br><span class="line">  rules: &#123;</span><br><span class="line">    &#x27;no-console&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;warn&#x27; : &#x27;off&#x27;,</span><br><span class="line">    &#x27;no-debugger&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;warn&#x27; : &#x27;off&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置完成后，我们就可以使用命令<code>eslint index.js</code>来检测index.js文件，并且可以使用<code>eslint index.js --fix</code> 指令，对这个文件的错误语法进行自动修正。</p>
+<p>【注意】eslint 的 auto-fix，能够修复的规范问题比较有限。</p>
+<p>比如，ESLint 对于 console.log 是不会帮你移除的，还要就是声明的变量未使用到，同样不会帮你移除，它只会帮你添加分号与替换双引号。其他需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不能超过 80 个字符。</p>
+<h3 id="（3）下载VSCode插件"><a href="#（3）下载VSCode插件" class="headerlink" title="（3）下载VSCode插件"></a>（3）下载VSCode插件</h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141220569.png" alt="img"></p>
+<p>像上面这样每次想知道文件中是否错误都要执行一次 eslint xxx.js 指令 ，很麻烦的，如果我们想一边写代码时候就一边发现错误，就及时更改，我们就需要安装 vscode 的 ESLint 插件。安装完成 ESLint 插件后，插件会根据项目根目录下的配置文件，校验代码格式。我们就会发现 鼠标指向代码时就能看到了警告与错误提示 ，那么我们怎么做到保存时自动校验并修正代码呢，我们需要</p>
+<p>给setting.json添加如下配置项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.formatOnType&quot;: true, // 控制编辑器在键入一行后是否自动格式化该行</span><br><span class="line">&quot;editor.formatOnSave&quot;: true, // 在保存时格式化文档</span><br><span class="line">&quot;eslint.codeAction.showDocumentation&quot;: &#123;</span><br><span class="line">  &quot;enable&quot;: true</span><br><span class="line">&#125;,</span><br><span class="line">&quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">  &quot;source.fixAll.eslint&quot;: true,</span><br><span class="line">&#125;,</span><br><span class="line">&quot;eslint.validate&quot;: [ // 检测语言</span><br><span class="line">  &quot;javascript&quot;,</span><br><span class="line">  &quot;javascriptreact&quot;,</span><br><span class="line">  &quot;html&quot;,</span><br><span class="line">  &quot;vue&quot;,</span><br><span class="line">  &quot;typescript&quot;,</span><br><span class="line">  &quot;typescriptreact&quot;,</span><br><span class="line">  &quot;markdown&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>这样，对于可自动修复的格式错误，在保存文件时，eslint会自动帮我们修复。</p>
+<p>此外，如果项目对格式强制要求，还可加载husky和lint-staged在commit前对更改的代码做lint校验（前者用来给git流程添加钩子，后者用来给只更改的代码而不是整个项目做lint），lint不通过则不予commit。防止部分团队成员在eslint不通过时仍然提交代码。</p>
+<h2 id="3-ESLint其他依赖介绍"><a href="#3-ESLint其他依赖介绍" class="headerlink" title="3.      ESLint其他依赖介绍"></a>3.      ESLint其他依赖介绍</h2><table>
+<thead>
+<tr>
+<th>依赖</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>eslint</td>
+<td>ESLint 核心库</td>
+</tr>
+<tr>
+<td>eslint-config-prettier</td>
+<td>关掉所有和 Prettier 冲突的 ESLint 的配置</td>
+</tr>
+<tr>
+<td>eslint-plugin-prettier</td>
+<td>将 Prettier 的 rules 以插件的形式加入到 ESLint 里面</td>
+</tr>
+<tr>
+<td>eslint-plugin-vue</td>
+<td>为 Vue 使用 ESlint 的插件</td>
+</tr>
+<tr>
+<td>@typescript-eslint/eslint-plugin</td>
+<td>ESLint 插件，包含了各类定义好的检测 TypeScript 代码的规范</td>
+</tr>
+<tr>
+<td>@typescript-eslint/parser</td>
+<td>ESLint 的解析器，用于解析 TypeScript，从而检查和规范 TypeScript 代码</td>
+</tr>
+</tbody></table>
+<h1 id="ESLint中使用Prettier"><a href="#ESLint中使用Prettier" class="headerlink" title="ESLint中使用Prettier"></a>ESLint中使用Prettier</h1><h2 id="1-安装-eslint-prettier"><a href="#1-安装-eslint-prettier" class="headerlink" title="1.      安装 eslint + prettier"></a>1.      安装 eslint + prettier</h2><p>（如果已安装请跳过直接进入下一步）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint prettier -D</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-安装-eslint-config-prettier"><a href="#2-安装-eslint-config-prettier" class="headerlink" title="2.      安装 eslint-config-prettier"></a>2.      安装 eslint-config-prettier</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint-config-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>（1）该依赖的作用是：</p>
+<p>让所有可能会与 prettier 规则存在冲突的 eslint rule失效，并使用 prettier 的规则进行代码检查。</p>
+<p>相当于，用 prettier 的规则，覆盖掉 eslint:recommended 的部分规则。</p>
+<p>（2）使用：修改.eslintrc.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;, &quot;prettier&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-安装-eslint-plugin-prettier"><a href="#3-安装-eslint-plugin-prettier" class="headerlink" title="3.      安装 eslint-plugin-prettier"></a>3.      安装 eslint-plugin-prettier</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>（1）作用是将 prettier 的能力集成到 eslint 中。按照 prettier 的规则检查代码规范性，并进行修复。</p>
+<p>（2）使用：修改.eslintrc.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;rules&quot;:&#123;</span><br><span class="line">        &quot;prettier/prettier&quot;:&quot;error&quot; // 不符合 prettier 规则的代码，要进行错误提示（红线）</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;plugins&quot;: [&quot;prettier&quot;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者</span><br><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;,&quot;plugin:prettier/recommended&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --fix main.js</span><br></pre></td></tr></table></figure>
+
+<p>至此，eslint 会拥有和 prettier 一样的修复能力。像 prettier 一样，格式化所有不符合规范的代码。</p>
+<h1 id="Git流程规范配置"><a href="#Git流程规范配置" class="headerlink" title="Git流程规范配置"></a>Git流程规范配置</h1><p><a target="_blank" rel="noopener" href="https://blog.helloallen.cn/2024/01/14/Git%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83%E9%85%8D%E7%BD%AE/">Git流程规范配置</a></p>
+<h1 id="样式规范工具（StyleLint）"><a href="#样式规范工具（StyleLint）" class="headerlink" title="样式规范工具（StyleLint）"></a>样式规范工具（StyleLint）</h1><h2 id="1-下载-StyleLint-相关依赖"><a href="#1-下载-StyleLint-相关依赖" class="headerlink" title="1.      下载 StyleLint 相关依赖"></a>1.      下载 StyleLint 相关依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-config-recess-order postcss postcss-html stylelint-config-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141223542.png" alt="img"></p>
+<h2 id="2-安装-Vscode-插件（StyleLint）："><a href="#2-安装-Vscode-插件（StyleLint）：" class="headerlink" title="2.      安装 Vscode 插件（StyleLint）："></a>2.      安装 Vscode 插件（StyleLint）：</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141224886.png" alt="img"></p>
+<h2 id="3-在目录的-vscode-文件夹下新建-settings-json："><a href="#3-在目录的-vscode-文件夹下新建-settings-json：" class="headerlink" title="3.      在目录的 .vscode 文件夹下新建 settings.json："></a>3.      在目录的 .vscode 文件夹下新建 settings.json：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;editor.formatOnSave&quot;: true,</span><br><span class="line">	&quot;stylelint.enable&quot;: true,</span><br><span class="line">	&quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">		&quot;source.fixAll.stylelint&quot;: true</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;stylelint.validate&quot;: [</span><br><span class="line">		&quot;css&quot;,</span><br><span class="line">		&quot;less&quot;,</span><br><span class="line">		&quot;postcss&quot;,</span><br><span class="line">		&quot;scss&quot;,</span><br><span class="line">		&quot;vue&quot;,</span><br><span class="line">		&quot;sass&quot;,</span><br><span class="line">		&quot;html&quot;</span><br><span class="line">	],</span><br><span class="line">	&quot;files.eol&quot;: &quot;\n&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-配置-StyleLint（-stylelintrc-js）："><a href="#4-配置-StyleLint（-stylelintrc-js）：" class="headerlink" title="4.      配置 StyleLint（.stylelintrc.js）："></a>4.      配置 StyleLint（.stylelintrc.js）：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// @see: https://stylelint.io</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">	/* 继承某些已有的规则 */</span><br><span class="line">	extends: [</span><br><span class="line">		&quot;stylelint-config-standard&quot;, // 配置stylelint拓展插件</span><br><span class="line">		&quot;stylelint-config-html/vue&quot;, // 配置 vue 中 template 样式格式化</span><br><span class="line">		&quot;stylelint-config-standard-scss&quot;, // 配置stylelint scss插件</span><br><span class="line">		&quot;stylelint-config-recommended-vue/scss&quot;, // 配置 vue 中 scss 样式格式化</span><br><span class="line">		&quot;stylelint-config-recess-order&quot;, // 配置stylelint css属性书写顺序插件,</span><br><span class="line">		&quot;stylelint-config-prettier&quot;, // 配置stylelint和prettier兼容</span><br><span class="line">	],</span><br><span class="line">	overrides: [</span><br><span class="line">		// 扫描 .vue/html 文件中的&lt;style&gt;标签内的样式</span><br><span class="line">		&#123;</span><br><span class="line">			files: [&quot;**/*.&#123;vue,html&#125;&quot;],</span><br><span class="line">			customSyntax: &quot;postcss-html&quot;,</span><br><span class="line">		&#125;,</span><br><span class="line">	],</span><br><span class="line">	/**</span><br><span class="line">	 * null  =&gt; 关闭该规则</span><br><span class="line">	 */</span><br><span class="line">	rules: &#123;</span><br><span class="line">		&quot;value-keyword-case&quot;: null, // 在 css 中使用 v-bind，不报错</span><br><span class="line">		&quot;no-descending-specificity&quot;: null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器</span><br><span class="line">		&quot;function-url-quotes&quot;: &quot;always&quot;, // 要求或禁止 URL 的引号 &quot;always(必须加上引号)&quot;|&quot;never(没有引号)&quot;</span><br><span class="line">		&quot;string-quotes&quot;: &quot;double&quot;, // 指定字符串使用单引号或双引号</span><br><span class="line">		&quot;unit-case&quot;: null, // 指定单位的大小写 &quot;lower(全小写)&quot;|&quot;upper(全大写)&quot;</span><br><span class="line">		&quot;color-hex-case&quot;: &quot;lower&quot;, // 指定 16 进制颜色的大小写 &quot;lower(全小写)&quot;|&quot;upper(全大写)&quot;</span><br><span class="line">		&quot;color-hex-length&quot;: &quot;long&quot;, // 指定 16 进制颜色的简写或扩写 &quot;short(16进制简写)&quot;|&quot;long(16进制扩写)&quot;</span><br><span class="line">		&quot;rule-empty-line-before&quot;: &quot;never&quot;, // 要求或禁止在规则之前的空行 &quot;always(规则之前必须始终有一个空行)&quot;|&quot;never(规则前绝不能有空行)&quot;|&quot;always-multi-line(多行规则之前必须始终有一个空行)&quot;|&quot;never-multi-line(多行规则之前绝不能有空行。)&quot;</span><br><span class="line">		&quot;font-family-no-missing-generic-family-keyword&quot;: null, // 禁止在字体族名称列表中缺少通用字体族关键字</span><br><span class="line">		&quot;block-opening-brace-space-before&quot;: &quot;always&quot;, // 要求在块的开大括号之前必须有一个空格或不能有空白符 &quot;always(大括号前必须始终有一个空格)&quot;|&quot;never(左大括号之前绝不能有空格)&quot;|&quot;always-single-line(在单行块中的左大括号之前必须始终有一个空格)&quot;|&quot;never-single-line(在单行块中的左大括号之前绝不能有空格)&quot;|&quot;always-multi-line(在多行块中，左大括号之前必须始终有一个空格)&quot;|&quot;never-multi-line(多行块中的左大括号之前绝不能有空格)&quot;</span><br><span class="line">		&quot;property-no-unknown&quot;: null, // 禁止未知的属性(true 为不允许)</span><br><span class="line">		&quot;no-empty-source&quot;: null, // 禁止空源码</span><br><span class="line">		&quot;declaration-block-trailing-semicolon&quot;: null, // 要求或不允许在声明块中使用尾随分号 string：&quot;always(必须始终有一个尾随分号)&quot;|&quot;never(不得有尾随分号)&quot;</span><br><span class="line">		&quot;selector-class-pattern&quot;: null, // 强制选择器类名的格式</span><br><span class="line">		&quot;scss/at-import-partial-extension&quot;: null, // 解决不能引入scss文件</span><br><span class="line">		&quot;value-no-vendor-prefix&quot;: null, // 关闭 vendor-prefix(为了解决多行省略 -webkit-box)</span><br><span class="line">		&quot;selector-pseudo-class-no-unknown&quot;: [</span><br><span class="line">			true,</span><br><span class="line">			&#123;</span><br><span class="line">				ignorePseudoClasses: [&quot;global&quot;, &quot;v-deep&quot;, &quot;deep&quot;],</span><br><span class="line">			&#125;,</span><br><span class="line">		],</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="项目多环境配置"><a href="#项目多环境配置" class="headerlink" title="项目多环境配置"></a>项目多环境配置</h1><p>vue2项目的环境默认一共有三种：  development（开发环境）、test（测试环境）、production(生产环境)</p>
+<h2 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1.      配置文件"></a>1.      配置文件</h2><p>你可以在你的项目根目录中放置下列文件来指定环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.env                # 在所有的环境中被载入</span><br><span class="line">.env.local          # 在所有的环境中被载入，但会被 git 忽略</span><br><span class="line">.env.[mode]         # 只在指定的模式中被载入  mode: development\test\production</span><br><span class="line">.env.[mode].local   # 只在指定的模式中被载入，但会被 git 忽略</span><br></pre></td></tr></table></figure>
+
+<p>在Vue项目中，通常配置文件有：</p>
+<p>（1）env 全局默认配置文件，无论什么环境都会加载合并</p>
+<p>（2）.env.development 开发环境下的配置文件</p>
+<p>（3）.env.production 生产环境下的配置文件</p>
+<h2 id="2-属性名规则"><a href="#2-属性名规则" class="headerlink" title="2.      属性名规则"></a>2.      属性名规则</h2><p>请注意，只有 NODE_ENV，BASE_URL 和以 VUE_APP_ 开头的变量将通过 webpack.DefinePlugin 静态地嵌入到客户端侧的代码中。</p>
+<p>除了 VUE_APP_* 变量之外，在你的应用代码中始终可用的两个特殊的变量：</p>
+<p>● NODE_ENV ：会是 “development”、”production” 或 “test” 中的一个。具体的值默认取决于应用运行的模式。这也就是为什么在package.json中配置”serve”: “vue-cli-service serve”而不是”serve”: “vue-cli-service serve –mode development”，但本地npm run  serve时仍然是正确加载.env.development配置文件的原因。</p>
+<p>● BASE_URL：会和 vue.config.js 中的 publicPath 选项相同，即你的应用会部署到的基础路径。</p>
+<p>所以NODE_ENV和BASE_URL不用在.env.*中定义也可以直接通过process.env获取到，而想要定义其他变量，属性名必须以VUE_APP_开头，否则外部获取不到值。</p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3.      使用"></a>3.      使用</h2><p>直接调用process.env属性（全局属性，任何地方无论js还是vue中都可以使用）</p>
+<p><img src="data:image/png;base64,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" alt="img"></p>
+<h2 id="4-自定义配置文件"><a href="#4-自定义配置文件" class="headerlink" title="4.      自定义配置文件"></a>4.      自定义配置文件</h2><p>（1）创建文件：.env.prod</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 指定环境</span><br><span class="line">NODE_ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># 配置变量</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>（2）修改启动命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">	&quot;serve&quot;: &quot;vue-cli-service serve&quot;,</span><br><span class="line">	&quot;serve-prod&quot;: &quot;vue-cli-service serve --mode prod&quot;,</span><br><span class="line">	&quot;build&quot;: &quot;vue-cli-service build&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h1 id="browserslist"><a href="#browserslist" class="headerlink" title="browserslist"></a>browserslist</h1><p>Browserslist 帮助我们在浏览器兼容性和包大小之间保持适当的平衡。使用 Browserslist，可以做到覆盖更广泛的受众（浏览器），同时包的体积也会保持最小化。Browserslist包在安装 webpack 的时候自动下载。</p>
+<h2 id="1-配置方式"><a href="#1-配置方式" class="headerlink" title="1.      配置方式"></a>1.      配置方式</h2><p>在工程中使用 Browserslist 有两种常见方式：① 在 package.json 相应字段中增加；② 独立的 browserslistrc 文件</p>
+<p>（1）在 package.json 中声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;browserslist&quot;: [</span><br><span class="line">     &quot;&gt; 1%&quot;,</span><br><span class="line">     &quot;last 2 versions&quot;,</span><br><span class="line">     &quot;not ie &lt;= 8&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>（2）通过 browserslistrc 配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Browsers that we support</span><br><span class="line">&gt; 1%</span><br><span class="line">last 2 versions</span><br><span class="line">not ie &lt;= 8</span><br></pre></td></tr></table></figure>
+
+<p>两种方式没有差异，大家根据自己习惯或者各自团队规范进行管理即可。（我们采用的是单独文件方式）</p>
+<h2 id="2-受众浏览器选择"><a href="#2-受众浏览器选择" class="headerlink" title="2.      受众浏览器选择"></a>2.      受众浏览器选择</h2><p>如果你所负责的工程受众是固定的，或者说你们可以自由做主支撑哪些浏览器，那太幸运了，你可以跳过这节，直接根据特定浏览器配置即可。</p>
+<p>但往往我们很难决定应该支持哪些浏览器？只最新 Chrome 版本？还是要都兼容包括 IE11？<a href="https://link.zhihu.com/?target=https://github.com/ben-eb/caniuse-lite">caniuse-lite</a> 和 <a href="https://link.zhihu.com/?target=https://caniuse.com/">Can I Use</a> 可以提供相应的数据支撑，Browserslist 也是依据此数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141226823.png" alt="img"></p>
+<p>市场占用了大于 0.3% 且持续维护的具体浏览器及版本。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141227083.png" alt="img"></p>
+<p>我们可以发现了，&gt;0.3%, and not dead 的浏览器占据了整个的 89.5%。</p>
+<p>当然，你也可以根据地区来选择，如中国地区使用率大于 0.3%的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141229308.png" alt="img"></p>
+<p>由于中国移动端普及率比较高，所以整体上面的整体覆盖率只有 79.5%，剩余的有众多各种 for Android 的浏览器版本。</p>
+<h2 id="3-如何配置"><a href="#3-如何配置" class="headerlink" title="3.      如何配置"></a>3.      如何配置</h2><p>通过上述方式，我们可以圈定我们也支持哪些浏览器及版本，接下来就是如何通过 browserslist 进行配置？</p>
+<p>（1）可以通过 <a href="https://link.zhihu.com/?target=https://browsersl.ist/">https://browsersl.ist/</a> 这个网站来查看，你配置的内容具体支持的浏览器情况可以选择在全球、某个地区或某个国家/地区拥有超过或低于一定规模观众的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt; 5%&quot;:  代表着兼容全球超过5%人使用的浏览器  </span><br><span class="line">&quot;&gt;= 5% in US&quot;: 代表兼容美国使用率大于等于5% 的浏览器</span><br></pre></td></tr></table></figure>
+
+<p>（2）选择最近的浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;last 2 versions&quot;: 表示所有浏览器兼容到最后两个版本</span><br><span class="line">&quot;last 2 Chrome versions chrome&quot;: 表示兼容Chorme浏览器最新2个版本</span><br></pre></td></tr></table></figure>
+
+<p>（3）特定浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;Chrome &gt; 100 chrome&quot;: 浏览器版本大于100</span><br><span class="line">&quot;not Firefox ESR&quot;: 排除 Firefox ESR</span><br><span class="line">&quot;not ie &lt;=8&quot; : 表示兼容IE浏览器版本大于8（实则用npx browserslist 跑出来不包含IE9 ）  </span><br><span class="line">&quot;safari &gt;=7&quot;: 表示兼容safari浏览器版本大于等于7</span><br></pre></td></tr></table></figure>
+
+<p>（4）选择支持特定功能的浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;supports es6-module&quot;: 支持 es6-module 的浏览器</span><br><span class="line">&quot;supports css-grid&quot;: 支持 css-grid 的浏览器</span><br></pre></td></tr></table></figure>
+
+<p>（5）以上条件可以组合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt; 0.5%, last 2 versions&quot;: 使用率大于0.5% 或者 所有浏览器最新2个版本（等价于 &gt; 0.5% or last 2 versions）</span><br><span class="line">&quot;&gt; 0.5% and last 2 versions&quot;: 使用率大于0.5% 的浏览器最新2个版本</span><br><span class="line">&quot;defaults&quot;: 等价于 &gt; 0.5%, last 2 versions, Firefox ESR, not dead</span><br></pre></td></tr></table></figure>
+
+<p>你可以用如下查询条件来限定浏览器和 node 的版本范围（大小写不敏感）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; 5%: 基于全球使用率统计而选择的浏览器版本范围。&gt;=,&lt;,&lt;=同样适用。</span><br><span class="line">&gt; 5% in US : 同上，只是使用地区变为美国。支持两个字母的国家码来指定地区。</span><br><span class="line">&gt; 5% in alt-AS : 同上，只是使用地区变为亚洲所有国家。这里列举了所有的地区码。</span><br><span class="line">&gt; 5% in my stats : 使用定制的浏览器统计数据。</span><br><span class="line">cover 99.5% : 使用率总和为99.5%的浏览器版本，前提是浏览器提供了使用覆盖率。</span><br><span class="line">cover 99.5% in US : 同上，只是限制了地域，支持两个字母的国家码。</span><br><span class="line">cover 99.5% in my stats :使用定制的浏览器统计数据。</span><br><span class="line">maintained node versions :所有还被 node 基金会维护的 node 版本。</span><br><span class="line">node 10 and node 10.4 : 最新的 node 10.x.x 或者10.4.x 版本。</span><br><span class="line">current node :当前被 browserslist 使用的 node 版本。</span><br><span class="line">extends browserslist-config-mycompany :来自browserslist-config-mycompany包的查询设置</span><br><span class="line">ie 6-8 : 选择一个浏览器的版本范围。</span><br><span class="line">Firefox &gt; 20 : 版本高于20的所有火狐浏览器版本。&gt;=,&lt;,&lt;=同样适用。</span><br><span class="line">ios 7 :ios 7自带的浏览器。</span><br><span class="line">Firefox ESR :最新的火狐 ESR（长期支持版） 版本的浏览器。</span><br><span class="line">unreleased versions or unreleased Chrome versions : alpha 和 beta 版本。</span><br><span class="line">last 2 major versions or last 2 ios major versions :最近的两个发行版，包括所有的次版本号和补丁版本号变更的浏览器版本。</span><br><span class="line">since 2015 or last 2 years :自某个时间以来更新的版本（也可以写的更具体since 2015-03或者since 2015-03-10）</span><br><span class="line">dead :通过last 2 versions筛选的浏览器版本中，全球使用率低于0.5%并且官方声明不在维护或者事实上已经两年没有再更新的版本。目前符合条件的有 IE10,IE_Mob 10,BlackBerry 10,BlackBerry 7,OperaMobile 12.1。</span><br><span class="line">last 2 versions :每个浏览器最近的两个版本。</span><br><span class="line">last 2 Chrome versions :chrome 浏览器最近的两个版本。</span><br><span class="line">defaults :默认配置&gt; 0.5%, last 2 versions, Firefox ESR, not dead。</span><br><span class="line">not ie &lt;= 8 : 浏览器范围的取反。</span><br><span class="line">#可以添加not在任和查询条件前面，表示取反</span><br></pre></td></tr></table></figure>
+
+<p>了解了上述配置语法，配置完成后，你可以上述提到的 <a href="https://link.zhihu.com/?target=https://browsersl.ist/">https://browsersl.ist/</a> 进行实时查看。除此，你也可以通过下述工具，来检测配置是否正确和支撑的具体浏览器版本。</p>
+<h2 id="4-如何检查配置是否正确？"><a href="#4-如何检查配置是否正确？" class="headerlink" title="4.      如何检查配置是否正确？"></a>4.      如何检查配置是否正确？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npx browserslist-lint</span><br><span class="line">missedNotDead  The not dead query skipped when using last N versions query</span><br><span class="line">✖ 1 problems</span><br></pre></td></tr></table></figure>
+
+<p>需要追加 not dead，但谨慎使用，其会过滤到不再支持的浏览器，如IE11</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141233851.png" alt="img"></p>
+<h2 id="5-如何查看配置的内容，支撑哪些浏览器？"><a href="#5-如何查看配置的内容，支撑哪些浏览器？" class="headerlink" title="5.      如何查看配置的内容，支撑哪些浏览器？"></a>5.      如何查看配置的内容，支撑哪些浏览器？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ npx browserslist</span><br><span class="line"> </span><br><span class="line">and_chr 95</span><br><span class="line">chrome 95</span><br><span class="line">chrome 94</span><br><span class="line">safari 15</span><br><span class="line">safari 14.1</span><br><span class="line">samsung 15.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>至此，你就可以通过简单的几行命令，来控制要支持的浏览器情况，剩下的就交给 browserslist 即可。</p>
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/01/15/%E4%BD%9B%E5%AD%A6%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98/">佛学中的一些基本问题</a>
+            
+            
+            <a class="next" rel="next" href="/2023/01/14/Git%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83%E9%85%8D%E7%BD%AE/">Git流程规范配置</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2023/01/15/%E4%BD%9B%E5%AD%A6%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E9%97%AE%E9%A2%98/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2023/01/14/Git%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83%E9%85%8D%E7%BD%AE/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

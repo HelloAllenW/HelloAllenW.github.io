@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>一文带你不彻底的搞懂Java String字符串 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">一文带你不彻底的搞懂Java String字符串</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 5, 2024&nbsp;&nbsp;19:46:30</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 5, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="1-字符串的表示"><a href="#1-字符串的表示" class="headerlink" title="1. 字符串的表示"></a>1. 字符串的表示</h3><p>（1）在Java中，<code>String</code>是一个引用类型，它本身也是一个<code>class</code>。但是，Java编译器对<code>String</code>有特殊处理，即可以直接用<code>&quot;...&quot;</code>来表示一个字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;Hello!&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>（2）实际上字符串在<code>String</code>内部是通过一个<code>char[]</code>数组表示的，因此，按下面的写法也是可以的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s2 = new String(new char[] &#123;&#x27;H&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;, &#x27;o&#x27;, &#x27;!&#x27;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>因为<code>String</code>太常用了，所以Java提供了<code>&quot;...&quot;</code>这种字符串字面量表示方法。</p>
+<p>（3）字面量创建字符串(<code>String str1 = &quot;hello world&quot;;</code>)和构造函数创建字符串(<code>String str2 = new String(&quot;hello world&quot;);</code>)的区别：</p>
+<p>运行期间字面常量 “hello world” 被存储在运行时常量池，所以每次创建字符串时<code>JVM </code>执行引擎会先在运行时常量池查找是否存在相同的字面常量，如果存在，则直接将引用指向已经存在的字面常量；否则在运行时常量池开辟一个空间来存储该字面常量，并将引用指向该字面常量。</p>
+<p>而通过 new 关键字来生成对象是在堆区进行的，而在堆区进行对象生成的过程是不会去检测该对象是否已经存在的。因此通过 new 来创建对象，创建出的一定是不同的对象，即使字符串的内容是相同的。</p>
+<h3 id="2-字符串不可变性"><a href="#2-字符串不可变性" class="headerlink" title="2. 字符串不可变性"></a>2. 字符串不可变性</h3><p><strong>由于String类的本质是final修饰的char数组，所以String是不可变的。</strong></p>
+<p>我们来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s = &quot;Hello&quot;;</span><br><span class="line">        System.out.println(s); // Hello</span><br><span class="line">        s = s.toUpperCase();</span><br><span class="line">        System.out.println(s); // HELLO</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-字符串比较"><a href="#3-字符串比较" class="headerlink" title="3. 字符串比较"></a>3. 字符串比较</h3><p>当我们想要比较两个字符串是否相同时，要特别注意，我们实际上是想比较字符串的内容是否相同。必须使用<code>equals()</code>方法而不能用<code>==</code>，因为 <strong>== 比较的是两个对象的地址值，equals() 比较的是字面值。</strong></p>
+<p>我们看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        String s2 = &quot;hello&quot;;</span><br><span class="line">        System.out.println(s1 == s2);</span><br><span class="line">        System.out.println(s1.equals(s2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从表面上看，两个字符串用<code>==</code>和<code>equals()</code>比较都为<code>true</code>，但实际上那只是Java编译器在编译期，会自动把所有相同的字符串当作一个对象放入常量池，自然<code>s1</code>和<code>s2</code>的引用就是相同的。</p>
+<p>所以，这种<code>==</code>比较返回<code>true</code>纯属巧合。换一种写法，<code>==</code>比较就会失败：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s1 = &quot;hello&quot;;</span><br><span class="line">        String s2 = &quot;HELLO&quot;.toLowerCase();</span><br><span class="line">        System.out.println(s1 == s2);</span><br><span class="line">        System.out.println(s1.equals(s2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结论：两个字符串比较，必须总是使用<code>equals()</code>方法。</p>
+<p>要忽略大小写比较，使用<code>equalsIgnoreCase()</code>方法。</p>
+<h3 id="4-搜索、提取子串"><a href="#4-搜索、提取子串" class="headerlink" title="4. 搜索、提取子串"></a>4. 搜索、提取子串</h3><p><code>String</code>类还提供了多种方法来搜索子串、提取子串。常用的方法有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 是否包含子串:</span><br><span class="line">&quot;Hello&quot;.contains(&quot;ll&quot;); // true</span><br></pre></td></tr></table></figure>
+
+<p>注意到<code>contains()</code>方法的参数是<code>CharSequence</code>而不是<code>String</code>，因为<code>CharSequence</code>是<code>String</code>实现的一个接口。</p>
+<p>搜索子串的更多的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello&quot;.indexOf(&quot;l&quot;); // 2</span><br><span class="line">&quot;Hello&quot;.lastIndexOf(&quot;l&quot;); // 3</span><br><span class="line">&quot;Hello&quot;.startsWith(&quot;He&quot;); // true</span><br><span class="line">&quot;Hello&quot;.endsWith(&quot;lo&quot;); // true</span><br></pre></td></tr></table></figure>
+
+<p>提取子串的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;Hello&quot;.substring(2); // &quot;llo&quot;</span><br><span class="line">&quot;Hello&quot;.substring(2, 4); &quot;ll&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意索引号是从<code>0</code>开始的。</p>
+<h3 id="5-去除首尾空白字符"><a href="#5-去除首尾空白字符" class="headerlink" title="5. 去除首尾空白字符"></a>5. 去除首尾空白字符</h3><p>使用<code>trim()</code>方法可以移除字符串首尾空白字符。空白字符包括空格，<code>\t</code>，<code>\r</code>，<code>\n</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;  \tHello\r\n &quot;.trim(); // &quot;Hello&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意：<code>trim()</code>并没有改变字符串的内容，而是返回了一个新字符串。</p>
+<p>另一个<code>strip()</code>方法也可以移除字符串首尾空白字符。它和<code>trim()</code>不同的是，类似中文的空格字符<code>\u3000</code>也会被移除：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;\u3000Hello\u3000&quot;.strip(); // &quot;Hello&quot;</span><br><span class="line">&quot; Hello &quot;.stripLeading(); // &quot;Hello &quot;</span><br><span class="line">&quot; Hello &quot;.stripTrailing(); // &quot; Hello&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>String</code>还提供了<code>isEmpty()</code>和<code>isBlank()</code>来判断字符串是否为空和空白字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;.isEmpty(); // true，因为字符串长度为0</span><br><span class="line">&quot;  &quot;.isEmpty(); // false，因为字符串长度不为0</span><br><span class="line">&quot;  \n&quot;.isBlank(); // true，因为只包含空白字符</span><br><span class="line">&quot; Hello &quot;.isBlank(); // false，因为包含非空白字符</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-替换子串"><a href="#6-替换子串" class="headerlink" title="6. 替换子串"></a>6. 替换子串</h3><p>要在字符串中替换子串，有两种方法。一种是根据字符或字符串替换：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;hello&quot;;</span><br><span class="line">s.replace(&#x27;l&#x27;, &#x27;w&#x27;); // &quot;hewwo&quot;，所有字符&#x27;l&#x27;被替换为&#x27;w&#x27;</span><br><span class="line">s.replace(&quot;ll&quot;, &quot;~~&quot;); // &quot;he~~o&quot;，所有子串&quot;ll&quot;被替换为&quot;~~&quot;</span><br></pre></td></tr></table></figure>
+
+<p>另一种是通过正则表达式替换：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;A,,B;C ,D&quot;;</span><br><span class="line">s.replaceAll(&quot;[\\,\\;\\s]+&quot;, &quot;,&quot;); // &quot;A,B,C,D&quot;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码通过正则表达式，把匹配的子串统一替换为<code>&quot;,&quot;</code>。关于正则表达式的用法我们会在后面详细讲解。</p>
+<h3 id="7-分割字符串"><a href="#7-分割字符串" class="headerlink" title="7. 分割字符串"></a>7. 分割字符串</h3><p>要分割字符串，使用<code>split()</code>方法，并且传入的也是正则表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;A,B,C,D&quot;;</span><br><span class="line">String[] ss = s.split(&quot;\\,&quot;); // &#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-拼接字符串"><a href="#8-拼接字符串" class="headerlink" title="8. 拼接字符串"></a>8. 拼接字符串</h3><h4 id="（1）concat"><a href="#（1）concat" class="headerlink" title="（1）concat()"></a>（1）<code>concat()</code></h4><p>和 <code>+</code> 的区别：<code>concat</code>方法是通过复制数组再通过 char 数组进行拼接生成一个新的对象，所以地址值会有变动，而 + 号不会。</p>
+<h4 id="（2）join"><a href="#（2）join" class="headerlink" title="（2）join()"></a>（2）join()</h4><p>拼接字符串使用静态方法<code>join()</code>，它用指定的字符串连接字符串数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = &#123;&quot;A&quot;, &quot;B&quot;, &quot;C&quot;&#125;;</span><br><span class="line">String s = String.join(&quot;***&quot;, arr); // &quot;A***B***C&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（3）"><a href="#（3）" class="headerlink" title="（3）+"></a>（3）<code>+</code></h4><p>Java编译器对<code>String</code>做了特殊处理，使得我们可以直接用<code>+</code>拼接字符串。</p>
+<p>考察下面的循环代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;&quot;;</span><br><span class="line">for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">    s = s + &quot;,&quot; + i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然可以直接拼接字符串，但是，在循环中，每次循环都会创建新的字符串对象，然后扔掉旧的字符串。这样，绝大部分字符串都是临时对象，不但浪费内存，还会影响<code>GC</code>效率。</p>
+<p><strong>StringBuilder：</strong></p>
+<p>为了能高效拼接字符串，Java标准库提供了<code>StringBuilder</code>，它是一个可变对象，可以预分配缓冲区，这样，往<code>StringBuilder</code>中新增字符时，不会创建新的临时对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder sb = new StringBuilder(1024);</span><br><span class="line">for (int i = 0; i &lt; 1000; i++) &#123;</span><br><span class="line">    sb.append(&#x27;,&#x27;);</span><br><span class="line">    sb.append(i);</span><br><span class="line">&#125;</span><br><span class="line">String s = sb.toString();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>StringBuilder</code>还可以进行链式操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        var sb = new StringBuilder(1024);</span><br><span class="line">        sb.append(&quot;Mr &quot;)</span><br><span class="line">          .append(&quot;Bob&quot;)</span><br><span class="line">          .append(&quot;!&quot;)</span><br><span class="line">          .insert(0, &quot;Hello, &quot;);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：对于普通的字符串<code>+</code>操作，并不需要我们将其改写为<code>StringBuilder</code>，因为Java编译器在编译时就自动把多个连续的<code>+</code>操作编码为<code>StringConcatFactory</code>的操作。在运行期，<code>StringConcatFactory</code>会自动把字符串连接操作优化为数组复制或者<code>StringBuilder</code>操作。</p>
+<p>你可能还听说过<code>StringBuffer</code>，这是Java早期的一个<code>StringBuilder</code>的线程安全版本，它通过同步来保证多个线程操作<code>StringBuffer</code>也是安全的，但是同步会带来执行速度的下降。<code>StringBuilder</code>和<code>StringBuffer</code>接口完全相同，现在几乎没有必要使用<code>StringBuffer</code>。</p>
+<ul>
+<li><p>如果要操作少量的数据用 String ：字符串常量，字符串长度不可变。</p>
+</li>
+<li><p>单线程操作大量数据用<code>StringBuilder</code> ：字符串变量（非线程安全）。</p>
+</li>
+<li><p>多线程操作大量数据，用<code>StringBuffer</code>：字符串变量（Synchronized，即线程安全）。</p>
+</li>
+</ul>
+<h4 id="（4）StringJoiner-和-String-join"><a href="#（4）StringJoiner-和-String-join" class="headerlink" title="（4）StringJoiner  和 String.join()"></a>（4）<code>StringJoiner</code>  和 <code>String.join()</code></h4><p>我们有这样一个拼接字符串的需求，采用StringBuilder实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String[] names = &#123;&quot;Bob&quot;, &quot;Alice&quot;, &quot;Grace&quot;&#125;;</span><br><span class="line">        var sb = new StringBuilder();</span><br><span class="line">        sb.append(&quot;Hello &quot;);</span><br><span class="line">        for (String name : names) &#123;</span><br><span class="line">            sb.append(name).append(&quot;, &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        // 注意去掉最后的&quot;, &quot;:</span><br><span class="line">        sb.delete(sb.length() - 2, sb.length());</span><br><span class="line">        sb.append(&quot;!&quot;);</span><br><span class="line">        System.out.println(sb.toString()); // Hello Bob, Alice, Grace!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类似用分隔符拼接数组的需求很常见，所以Java标准库还提供了一个<code>StringJoiner</code>来干这个事：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String[] names = &#123;&quot;Bob&quot;, &quot;Alice&quot;, &quot;Grace&quot;&#125;;</span><br><span class="line">        var sj = new StringJoiner(&quot;, &quot;);</span><br><span class="line">        for (String name : names) &#123;</span><br><span class="line">            sj.add(name);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sj.toString()); // Bob, Alice, Grace</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>慢着！用<code>StringJoiner</code>的结果少了前面的<code>&quot;Hello &quot;</code>和结尾的<code>&quot;!&quot;</code>！遇到这种情况，需要给<code>StringJoiner</code>指定“开头”和“结尾”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String[] names = &#123;&quot;Bob&quot;, &quot;Alice&quot;, &quot;Grace&quot;&#125;;</span><br><span class="line">        var sj = new StringJoiner(&quot;, &quot;, &quot;Hello &quot;, &quot;!&quot;);</span><br><span class="line">        for (String name : names) &#123;</span><br><span class="line">            sj.add(name);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sj.toString()); // Hello Bob, Alice, Grace!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>String</code>还提供了一个静态方法<code>join()</code>，这个方法在内部使用了<code>StringJoiner</code>来拼接字符串，在不需要指定“开头”和“结尾”的时候，用<code>String.join()</code>更方便：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String[] names = &#123;&quot;Bob&quot;, &quot;Alice&quot;, &quot;Grace&quot;&#125;;</span><br><span class="line">var s = String.join(&quot;, &quot;, names);</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-格式化字符串"><a href="#9-格式化字符串" class="headerlink" title="9. 格式化字符串"></a>9. 格式化字符串</h3><p>字符串提供了<code>format()</code>静态方法，可以传入其他参数，替换占位符，然后生成新的字符串：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String s = &quot;Hi %s, your score is %d!&quot;;</span><br><span class="line">        System.out.println(String.format(&quot;Hi %s, your score is %.2f!&quot;, &quot;Bob&quot;, 59.5));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有几个占位符，后面就传入几个参数。参数类型要和占位符一致。我们经常用这个方法来格式化信息。常用的占位符有：</p>
+<ul>
+<li><code>%s</code>：显示字符串；</li>
+<li><code>%d</code>：显示整数；</li>
+<li><code>%x</code>：显示十六进制整数；</li>
+<li><code>%f</code>：显示浮点数。</li>
+</ul>
+<p>占位符还可以带格式，例如<code>%.2f</code>表示显示两位小数。如果你不确定用啥占位符，那就始终用<code>%s</code>，因为<code>%s</code>可以显示任何数据类型。</p>
+<h3 id="10-类型转换"><a href="#10-类型转换" class="headerlink" title="10. 类型转换"></a>10. 类型转换</h3><p>要把任意基本类型或引用类型转换为字符串，可以使用静态方法<code>valueOf()</code>。这是一个重载方法，编译器会根据参数自动选择合适的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String.valueOf(123); // &quot;123&quot;</span><br><span class="line">String.valueOf(45.67); // &quot;45.67&quot;</span><br><span class="line">String.valueOf(true); // &quot;true&quot;</span><br><span class="line">String.valueOf(new Object()); // 类似java.lang.Object@636be97c</span><br></pre></td></tr></table></figure>
+
+<p>要把字符串转换为其他类型，就需要根据情况。例如，把字符串转换为<code>int</code>类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int n1 = Integer.parseInt(&quot;123&quot;); // 123</span><br><span class="line">int n2 = Integer.parseInt(&quot;ff&quot;, 16); // 按十六进制转换，255</span><br></pre></td></tr></table></figure>
+
+<p>把字符串转换为<code>boolean</code>类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">boolean b1 = Boolean.parseBoolean(&quot;true&quot;); // true</span><br><span class="line">boolean b2 = Boolean.parseBoolean(&quot;FALSE&quot;); // false</span><br></pre></td></tr></table></figure>
+
+<p>要特别注意，<code>Integer</code>有个<code>getInteger(String)</code>方法，它不是将字符串转换为<code>int</code>，而是把该字符串对应的系统变量转换为<code>Integer</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer.getInteger(&quot;java.version&quot;); // 版本号，11</span><br></pre></td></tr></table></figure>
+
+<h3 id="11-转换为char"><a href="#11-转换为char" class="headerlink" title="11. 转换为char[]"></a>11. 转换为char[]</h3><p><code>String</code>和<code>char[]</code>类型可以互相转换，方法是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char[] cs = &quot;Hello&quot;.toCharArray(); // String -&gt; char[]</span><br><span class="line">String s = new String(cs); // char[] -&gt; String</span><br></pre></td></tr></table></figure>
+
+<p>如果修改了<code>char[]</code>数组，<code>String</code>并不会改变：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        char[] cs = &quot;Hello&quot;.toCharArray();</span><br><span class="line">        String s = new String(cs);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">        cs[0] = &#x27;X&#x27;;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是因为通过<code>new String(char[])</code>创建新的<code>String</code>实例时，它并不会直接引用传入的<code>char[]</code>数组，而是会复制一份，所以，修改外部的<code>char[]</code>数组不会影响<code>String</code>实例内部的<code>char[]</code>数组，因为这是两个不同的数组。</p>
+<p>从<code>String</code>的不变性设计可以看出，如果传入的对象有可能改变，我们需要复制而不是直接引用。</p>
+<p>例如，下面的代码设计了一个<code>Score</code>类保存一组学生的成绩：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] scores = new int[] &#123; 88, 77, 51, 66 &#125;;</span><br><span class="line">        Score s = new Score(scores);</span><br><span class="line">        s.printScores();</span><br><span class="line">        scores[2] = 99;</span><br><span class="line">        s.printScores();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Score &#123;</span><br><span class="line">    private int[] scores;</span><br><span class="line">    public Score(int[] scores) &#123;</span><br><span class="line">        this.scores = scores;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void printScores() &#123;</span><br><span class="line">        System.out.println(Arrays.toString(scores));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>观察两次输出，由于<code>Score</code>内部直接引用了外部传入的<code>int[]</code>数组，这会造成外部代码对<code>int[]</code>数组的修改，影响到<code>Score</code>类的字段。如果外部代码不可信，这就会造成安全隐患。</p>
+<h3 id="12-字符编码"><a href="#12-字符编码" class="headerlink" title="12. 字符编码"></a>12. 字符编码</h3><p>在早期的计算机系统中，为了给字符编码，美国国家标准学会（American National Standard Institute：ANSI）制定了一套英文字母、数字和常用符号的编码，它占用一个字节，编码范围从<code>0</code>到<code>127</code>，最高位始终为<code>0</code>，称为<code>ASCII</code>编码。例如，字符<code>&#39;A&#39;</code>的编码是<code>0x41</code>，字符<code>&#39;1&#39;</code>的编码是<code>0x31</code>。</p>
+<p>如果要把汉字也纳入计算机编码，很显然一个字节是不够的。<code>GB2312</code>标准使用两个字节表示一个汉字，其中第一个字节的最高位始终为<code>1</code>，以便和<code>ASCII</code>编码区分开。例如，汉字<code>&#39;中&#39;</code>的<code>GB2312</code>编码是<code>0xd6d0</code>。</p>
+<p>类似的，日文有<code>Shift_JIS</code>编码，韩文有<code>EUC-KR</code>编码，这些编码因为标准不统一，同时使用，就会产生冲突。</p>
+<p>为了统一全球所有语言的编码，全球统一码联盟发布了<code>Unicode</code>编码，它把世界上主要语言都纳入同一个编码，这样，中文、日文、韩文和其他语言就不会冲突。</p>
+<p><code>Unicode</code>编码需要两个或者更多字节表示，我们可以比较中英文字符在<code>ASCII</code>、<code>GB2312</code>和<code>Unicode</code>的编码：</p>
+<p>英文字符<code>&#39;A&#39;</code>的<code>ASCII</code>编码和<code>Unicode</code>编码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">         ┌────┐</span><br><span class="line">ASCII:   │ 41 │</span><br><span class="line">         └────┘</span><br><span class="line">         ┌────┬────┐</span><br><span class="line">Unicode: │ 00 │ 41 │</span><br><span class="line">         └────┴────┘</span><br></pre></td></tr></table></figure>
+
+<p>英文字符的<code>Unicode</code>编码就是简单地在前面添加一个<code>00</code>字节。</p>
+<p>中文字符<code>&#39;中&#39;</code>的<code>GB2312</code>编码和<code>Unicode</code>编码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">         ┌────┬────┐</span><br><span class="line">GB2312:  │ d6 │ d0 │</span><br><span class="line">         └────┴────┘</span><br><span class="line">         ┌────┬────┐</span><br><span class="line">Unicode: │ 4e │ 2d │</span><br><span class="line">         └────┴────┘</span><br></pre></td></tr></table></figure>
+
+<p>那我们经常使用的<code>UTF-8</code>又是什么编码呢？因为英文字符的<code>Unicode</code>编码高字节总是<code>00</code>，包含大量英文的文本会浪费空间，所以，出现了<code>UTF-8</code>编码，它是一种变长编码，用来把固定长度的<code>Unicode</code>编码变成1～4字节的变长编码。通过<code>UTF-8</code>编码，英文字符<code>&#39;A&#39;</code>的<code>UTF-8</code>编码变为<code>0x41</code>，正好和<code>ASCII</code>码一致，而中文<code>&#39;中&#39;</code>的<code>UTF-8</code>编码为3字节<code>0xe4b8ad</code>。</p>
+<p><code>UTF-8</code>编码的另一个好处是容错能力强。如果传输过程中某些字符出错，不会影响后续字符，因为<code>UTF-8</code>编码依靠高字节位来确定一个字符究竟是几个字节，它经常用来作为传输编码。</p>
+<p>在Java中，<code>char</code>类型实际上就是两个字节的<code>Unicode</code>编码。如果我们要手动把字符串转换成其他编码，可以这样做：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">byte[] b1 = &quot;Hello&quot;.getBytes(); // 按系统默认编码转换，不推荐</span><br><span class="line">byte[] b2 = &quot;Hello&quot;.getBytes(&quot;UTF-8&quot;); // 按UTF-8编码转换</span><br><span class="line">byte[] b2 = &quot;Hello&quot;.getBytes(&quot;GBK&quot;); // 按GBK编码转换</span><br><span class="line">byte[] b3 = &quot;Hello&quot;.getBytes(StandardCharsets.UTF_8); // 按UTF-8编码转换</span><br></pre></td></tr></table></figure>
+
+<p>注意：转换编码后，就不再是<code>char</code>类型，而是<code>byte</code>类型表示的数组。</p>
+<p>如果要把已知编码的<code>byte[]</code>转换为<code>String</code>，可以这样做：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">byte[] b = ...</span><br><span class="line">String s1 = new String(b, &quot;GBK&quot;); // 按GBK转换</span><br><span class="line">String s2 = new String(b, StandardCharsets.UTF_8); // 按UTF-8转换</span><br></pre></td></tr></table></figure>
+
+<p>始终牢记：Java的<code>String</code>和<code>char</code>在内存中总是以Unicode编码表示。</p>
+<p>对于不同版本的JDK，<code>String</code>类在内存中有不同的优化方式。具体来说，早期JDK版本的<code>String</code>总是以<code>char[]</code>存储，它的定义如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final class String &#123;</span><br><span class="line">    private final char[] value;</span><br><span class="line">    private final int offset;</span><br><span class="line">    private final int count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而较新的JDK版本的<code>String</code>则以<code>byte[]</code>存储：如果<code>String</code>仅包含ASCII字符，则每个<code>byte</code>存储一个字符，否则，每两个<code>byte</code>存储一个字符，这样做的目的是为了节省内存，因为大量的长度较短的<code>String</code>通常仅包含ASCII字符：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public final class String &#123;</span><br><span class="line">    private final byte[] value;</span><br><span class="line">    private final byte coder; // 0 = LATIN1, 1 = UTF16</span><br></pre></td></tr></table></figure>
+
+<p>对于使用者来说，<code>String</code>内部的优化不影响任何已有代码，因为它的<code>public</code>方法签名是不变的。</p>
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/19/Java-%E6%B3%9B%E5%9E%8B/">Java 泛型</a>
+            
+            
+            <a class="next" rel="next" href="/2024/03/05/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82Java%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7/">一篇文章搞懂Java的多态性</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/19/Java-%E6%B3%9B%E5%9E%8B/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2024/03/05/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82Java%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

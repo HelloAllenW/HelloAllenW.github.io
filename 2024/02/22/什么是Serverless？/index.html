@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>什么是Serverless？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">什么是Serverless？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 22, 2024&nbsp;&nbsp;20:07:48</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 22, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    
+                    
+                        <div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>今天这篇文章，我们来聊一个云计算领域的热门概念 —— Serverless。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222009685.png"></p>
+<p>到底什么是Serverless？</p>
+<p>英语好的童鞋，可能一眼就看出来了，Serverless是由Server和less两个词根组成的词。从字面上理解，就是“无服务器”。</p>
+<p>行业通常所说的Serverless，主要是指“无服务器计算（Serverless Computing）”。</p>
+<p>那么问题来了，这年头，就连小学生都知道，服务器是具有很强计算能力的计算机，是我们现在最主要的计算工具。“无服务器计算”，如果不采用服务器，那该怎么算呢？</p>
+<p>事实上，Serverless所谓的“无服务器计算”，并不是真的不需要服务器，而是说，对于用户，服务器变得“不可见”了（或者说“无感知”了）。</p>
+<p>越说越玄乎了，有木有？别急，还是让我从头开始说起吧——</p>
+<p>█ Serverless的诞生背景</p>
+<p>1946年2月，世界上第一台数字式电子计算机ENIAC诞生，标志着人类正式进入了数字计算机时代。</p>
+<p>早期的计算机都是大型机，体积庞大，价格昂贵，但是，算力却很弱。当时，这些机器只有很少的公司才能拥有，用于特定的计算目的。</p>
+<p>到了1970-80年代，为了解决单点式计算（一台大型机，独立完成全部的计算任务）算力不足的问题，专家们发明了网格计算这样的分布式计算架构，取得了不错的效果。</p>
+<p>说白了，分布式计算，就是把一个巨大的计算任务，分解为很多的小型计算任务，交给不同的计算机分工完成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222009280.png"></p>
+<p>再后来，随着芯片技术的进步，计算机的体积变得越来越小，算力也变得越来越强劲。不久后，小型化的计算机出现了，也就是我们常说的PC（Personal Computer，个人电脑）。</p>
+<p>计算机制造和使用成本的不断下降，加速自身的普及，也刺激了计算机网络的出现与发展。从局域网到广域网，再到互联网，计算机网络的规模变得越来越大。</p>
+<p>互联网的出现，彻底改变了计算机服务用户的方式。</p>
+<p>此前，一个机房服务于一所学校、一家企业、一个政府部门，现在，有了互联网，服务对象可以是全球用户，规模大大增加了。</p>
+<p>用户规模增加，意味着对算力的需求也增加了。互联网服务提供商，需要一种更强大、更便宜的算力，满足用户需求。</p>
+<p>于是乎，就有了云计算。</p>
+<p>很多人认为，云计算就是一个超大号的机房，和以前的企业机房没有区别，只不过服务器更多些。</p>
+<p>这种观点是不对的。</p>
+<p>云计算的本质，不是算力资源的简单堆砌，而是池化——它将大量的零散算力资源（廉价的算力资源）进行打包、汇聚，实现更高可靠性、更高性能、更低成本的算力。</p>
+<p>具体来说，在云计算中，CPU、GPU、内存、硬盘等计算资源被集合起来，通过软件的方式，组成一个虚拟的可无限扩展的“算力资源池”。如果用户有算力需求，“算力资源池”就会动态地进行算力资源的分配，构建一个虚拟的“计算机”。用户按需使用、付费，即可。</p>
+<p>相比于用户自购设备、自建机房、自己运维，云计算有明显的成本优势，可以节约大量资金和人力。</p>
+<p>根据提供算力资源的层级不同，云计算通常也分为IaaS（基础设施即服务）、PaaS（平台即服务）、SaaS（软件即服务）。如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222010655.png"></p>
+<p>那么，问题又来了——云计算这种“租”的方式，是不是最终极的算力资源使用方式呢？我们作为用户，使用算力，还能更简单一点吗？</p>
+<p>答案是肯定的。</p>
+<p>不管是自建机房，还是云计算，用户都需要和服务器打交道，和软硬件环境打交道。这些都是工具和过程，而我们的最终目的是什么？是得到运算结果。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222010267.png"></p>
+<p>那么，为了得到结果，我们是不是一定要关心环境的搭建过程？</p>
+<p>不一定。既然环境可以租，那何不更彻底一点，直接“租”服务呢？</p>
+<p>举例来说，如果把计算过程理解为炒菜。以前，我们为了炒菜，需要自己建个厨房，自己买锅碗瓢盆、油盐酱醋，自己亲自炒菜。后来，有了云计算，我们可以租个厨房，租工具，然后炒菜。现在，想要更简单的话，是不是可以直接叫外卖？</p>
+<p>再例如，以前，我们上班通勤，是自己买车，自己开车。然后，有了云计算，相当于租车。现在，是不是可以直接打车？</p>
+<p>说白了，我们要的是计算服务和计算结果。计算环境（硬件），我们完全可以不去操心。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222011110.png"></p>
+<p>说到这，我们的主角——Serverless，终于闪亮登场了。</p>
+<p>对于Serverless，我们可以把它理解为一种架构，一种理念，甚至是一种思想。</p>
+<p>Serverless的核心目的，就是在云计算的基础上，再向前迈进一步，彻底“包揽”所有的环境工作，直接提供计算服务。</p>
+<p>在Serverless架构下，开发者只需编写代码并上传，云平台就会自动准备好相应的计算资源，完成运算并输出结果，从而大幅简化开发运维过程。</p>
+<p>换句话说，用户完全不用关心厨房，你把食材提供给Serverless平台，它负责把菜炒好，就这么简单。</p>
+<p>█ Serverless的特点</p>
+<p>Serverless是云计算的进一步延伸，所以，它继承了云计算的最大特点——按需弹性伸缩、按需付费。</p>
+<p>现在的互联网服务，基本上都是采用微服务架构。也就是把一整套服务，拆分为多个细分服务，由不同的服务器完成运算。</p>
+<p>Serverless的特点是，这个服务足够“细小”，变成了“函数级”的颗粒度。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222011123.png"></p>
+<p>所谓函数，就是提供输入，计算输出。</p>
+<p>从层级上来看，Serverless在传统云计算SaaS的Application（应用）层级之上，又加了一层——function（函数）。它的颗粒度更细，可以更灵活地满足用户的算力需求。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222012291.png"></p>
+<p>按照CNCF对Serverless 的定义，Serverless架构是采用FaaS（函数即服务）和BaaS（后端服务）服务来解决问题的一种设计。</p>
+<p>FaaS就是Function as a service（函数即服务）。每一个函数都是一个服务，函数可以由任何语言编写，直接托管在云平台，以服务形式运行，通过事件触发。</p>
+<p>BaaS则是Backend as a service（后端即服务）。云平台提供的后端组件整合，开发者无需开发和维护后端服务，通过API/SDK的调用，便可获得例如数据存储、消息推送、账号管理等能力。</p>
+<p>Serverless = FaaS + BaaS</p>
+<p>Serverless的背后，依然是虚拟机和容器。只不过，服务器部署、runtime安装、编译等工作，都由Serverless计算平台负责完成了。对开发人员来说，只需要维护源代码和Serverless执行环境的相关配置即可。这就叫“无服务器计算”。</p>
+<p>Serverless架构的最大优势，显然就是帮助用户彻底摆脱了基础设施管理这样的“杂事”，更加专注于业务开发，从而提升了效率，降低了开发和运营成本。</p>
+<p>根据业界的统计，在商业和企业数据中心里的典型服务器，日常仅仅只提供了5%～15%的平均最大处理能力的输出。这是一种算力资源的巨大浪费。</p>
+<p>Serverless的出现，可以让用户按照实际算力使用量进行付费，属于真正的“精确计费”。</p>
+<p>换言之，用户的每一分钱，都花在了刀刃上。</p>
+<p>Serverless，FaaS 和托管服务之间的关系？</p>
+<p>Serverless 与 FaaS（函数即服务）通常被视为可以互换的术语，但这并不准确。Serverless 是一种抽象层次更高的架构模式，而“FaaS + BaaS”只是 Serverless 这种架构模式的一种实现。</p>
+<p>其中，FaaS 是一种特定类型的服务，例如 AWS Lambda，Google Cloud Functions，Azure Functions，阿里云函数计算和腾讯云云函数等等；而 BaaS（后端即服务）可以理解为其他类型的托管服务，例如数据库服务，对象存储服务和日志服务等等。</p>
+<p>█ Serverless的发展历程</p>
+<p>世界上第一个Serverless平台，是2006年发布的Zimki。这个平台提供服务端JavaScript应用，支持“按照实际调用付费”。不过，当时他们并没有使用Serverless这个名词。</p>
+<p>后来，到了2012年，Iron.io的副总裁Ken Form在文章“Why The Future of Software and Apps is Serverless”中，首次提出了Serverless，才宣告这个概念的正式诞生。</p>
+<p>2014年11月，亚马逊率先推出了真正意义上的第一款Serverless FaaS服务——Lambda。从此，各大厂商开始跟进。</p>
+<p>2017年，Serverless开始在国内落地。这一年，阿里云和腾讯云先后推出了自己的 Serverless平台。阿里云的Serverless平台，被直接命名为函数计算（FC，Function Compute）。</p>
+<p>一年后的2018年，阿里云推出Serverless容器服务ASK和Serverless应用引擎SAE。</p>
+<p>那一时期，刚好小程序开始火爆。Serverless的灵活架构，非常适合小程序的开发。于是，吸引了大量的开发者们。</p>
+<p>到了2019年，国内厂商纷纷入局Serverless。如今，Serverless已经成了各大云厂商的标配，受到整个行业的热捧。</p>
+<p>2022·云栖大会上，阿里云智能总裁张建锋表示，以云为核心的新型计算体系正在形成，软件研发范式正在发生新的变革，Serverless是其中最重要的趋势之一。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222012208.png"></p>
+<p>他认为，Serverless让云计算从一种资源真正变成一种能力，未来云将全面Serverless化，更加接近“电网”模式，按计算的调用次数付费。</p>
+<p>目前，阿里云已经拥有超过20款Serverless产品，包括函数计算FC、Serverless 应用引擎SAE、Serverless容器服务ASK、PolarDB数据库、AnalyticDB数仓等。其中函数计算日调用次数超过200亿次，整体规模位居国内首位。</p>
+<p>前面也提到，Serverless并不是没有服务器的计算，而是将算力环境和资源进行了“隐藏”，让用户不可见，无需操心。事实上，Serverless不仅需要算力资源，而且对算力资源的要求比以往更高。</p>
+<p>以阿里云为例。他们之所以能够做Serverless平台，就是因为背后有四大核心技术的支撑。这四大核心技术，分别是：神龙计算平台、袋鼠沙箱容器、盘古存储平台和洛神网络平台。</p>
+<p>在算力芯片上，阿里云2022年6月推出的一款云数据中心专用处理器 CIPU（Cloud Infrastructure Processing Unit），也非常擅长对数据中心的计算、网络和存储资源进行管理和加速，帮助进一步提升Serverless平台的性能。</p>
+<p>█ Serverless的落地案例</p>
+<p>接下来，我们不妨通过几个案例，详细看看阿里云Serverless平台究竟是如何提升算力效率的。</p>
+<p>阿里巴巴每年的双11促销，是行业公认的算力极限挑战。海量用户、高并发，对系统的处理能力有着极高的要求。</p>
+<p>2020 年天猫双 11，阿里云实现了国内首例Serverless在核心业务场景下的大规模落地，扛住了全球最大规模的流量洪峰，创造了Serverless落地应用的里程碑。</p>
+<p>之后每年双 11，阿里云Serverless支撑业务场景更多，范围更广。阿里云函数计算（FC）与集团内的运维体系全面实现标准化对接，打通了研发的最后一公里，首次实现了业务全链路“FaaS+BaaS”的Serverless体系化研发，覆盖淘特、淘系、阿里妈妈、1688、高德、飞猪等业务场景。</p>
+<p>根据数据统计，支撑场景数量同比增加2倍，峰值流量总数同比增加3倍，实现了百万QPS的突破，人效提升40%。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222013826.png"></p>
+<p>再来看看外部用户。</p>
+<p>网易云音乐，是阿里云Serverless产品的重要客户之一。</p>
+<p>他们的产品背后，有非常多的算法服务支撑，比如多种码率的音频转码、听歌识曲中应用的音频指纹生成和识别、副歌检测、小语种音译歌词等等。</p>
+<p>这些任务的资源需求和执行时间变化很大，需要使用C++、Python等多种语言实现，对算力的弹性要求非常大。</p>
+<p>早期的时候，网易自建了一个算法服务平台，进行应对。但随着业务增长，以及算法复杂度的不断增加，基础设施管理的负担越来越大，严重影响了工作效率。</p>
+<p>引入阿里云Serverless平台之后，网易的算法计算需求得到了很好的满足。网易在函数计算上高峰期一天处理超过2000万个任务，算法应用到业务10倍速的提升，稀疏调用的算法成本大幅缩减。</p>
+<p>同样的效率提升，还发生在南瓜电影、越光医疗、世纪华联、江娱互动等企业身上。他们都是阿里云Serverless平台的用户。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402222013449.png"></p>
+<p>2021年3月，阿里云函数计算凭借在产品能力、安全性、战略愿景和市场规模等方面的优势脱颖而出，在19个评估项目中，拿到了8项满分和12项最高分，进入了FaaS领导者象限（综合产品能力位列全球第一，战略愿景全球第二）。这是首次有中国云厂商进入Forrester FaaS领导者象限。</p>
+<p>█ 结语</p>
+<p>随着数字经济浪潮的蓬勃发展，以及各行各业数字化转型的不断推进，算力的价值正在持续提升。</p>
+<p>在单纯提升芯片算力方面，我们面临越来越大的挑战（摩尔定律逐渐失效）。在这种情况下，我们必须更多地考虑，该如何提升算力的使用效率。</p>
+<p>作为一种灵活轻量化的新型算力架构，Serverless毫无疑问是我们挖掘算力潜力、提升算力效率的一个重要手段。</p>
+<p>客观来说，目前的Serverless谈不上完美。在实时性等方面，还存在一些不足。但是随着时间的推移，这些问题最终都会得到解决。</p>
+<p>Serverless的免运维、弹性伸缩、按需付费、高可用等特质，将引领我们全面走向算力新时代。</p>
+<p>█ 总结</p>
+<p>Serverless是云计算的延伸。云计算的本质，不是算力资源的简单堆砌，而是池化——它将大量的零散算力资源（廉价的算力资源）进行打包、汇聚，实现更高可靠性、更高性能、更低成本的算力。根据算力资源提供的层级不同，云计算通常也分为IaaS（基础设施即服务）、PaaS（平台即服务）、SaaS（软件即服务）。Serverless的特点是，这个服务足够“细小”，变成了“函数级”的颗粒度（FaaS）。Serverless的出现，可以让用户按照实际算力使用量进行付费，属于真正的“精确计费”。例如微信小程序云开发就使用的Serverless。</p>
+
+        </div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://allen-blog-vercel.vercel.app',
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/05/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82Java%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7/">一篇文章搞懂Java的多态性</a>
+            
+            
+            <a class="next" rel="next" href="/2024/02/08/%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BRollup/">一文带你快速上手Rollup</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/03/05/%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0%E6%90%9E%E6%87%82Java%E7%9A%84%E5%A4%9A%E6%80%81%E6%80%A7/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2024/02/08/%E4%B8%80%E6%96%87%E5%B8%A6%E4%BD%A0%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BRollup/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/FoxerLee/hexo-theme-terran" target="_blank">Terran</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>
