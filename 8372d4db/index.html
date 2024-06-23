@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>思想的任务（海德格尔） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">思想的任务（海德格尔）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">九月 21, 2016&nbsp;&nbsp;22:35:59</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        九月 21, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">11.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">37 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>本文最初以法文译本（让•波弗肋等译）刊于文集《活的基尔凯郭尔》，联合国教科文组织年会（巴黎，1964年4月）会刊，1966年由伽利玛（巴黎）出版社出版。后收入海氏文集《面向思的事情》，1969年由尼迈耶（图宾根）出版社出版。中译文据1976年第二版。《面向思的事情》现被辑为海氏全集第十四卷。——<strong>孙周兴注</strong></p>
+</blockquote>
+<p><strong>沉思执著于追问。追问乃通向答案之途。如若答案毕竟可得，那它必在于一种思想的转换，而不在于一种对某个事态的陈述。</strong></p>
+<p>本文具有一个更为广泛的关联背景。自1930年以来，我一再尝试更其源始地去构成《存在与时间》的课题。而这意味着，要对《存在与时间》的问题出发点作一种内在的批判。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+         src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepNtwiaweicHKXzzQyQxh0Nca9paU4tIJy1aTCiahyyLG5DRIK38iciaUdALqhD3eChj6rRziaBoHAYN6IA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+
+
+<p>由此必得澄清，批判性的问题──即思想的事情是何种事情的问题──如何必然地和持续地归属于思想。所以，《存在与时间》这个任务的标题也将改变了。我们问：
+　 </p>
+<h2 id="一、哲学如何在现时代进入其终结了？"><a href="#一、哲学如何在现时代进入其终结了？" class="headerlink" title="一、哲学如何在现时代进入其终结了？"></a>一、哲学如何在现时代进入其终结了？</h2><p>哲学即形而上学。形而上学着眼于存在，着眼于存在中的存在者之共属一体，来思考存在者整体──世界、人类和上帝。形而上学以论证性表象的思维方式来思考存在者之为存在者。因为从哲学开端以来，并且凭借于这一开端，存在者之存在就把自身显示为根据【αρχη（本原），αιτιον（原因），Prinzip（原理）】。根据之为根据，是这样一个东西，存在者作为如此这般的存在者由于它才成为在其生成、消亡和持存中的某种可知的东西，某种被处理和被制作的东西。作为根据，存在把存在者带入其当下在场。根据显示自身为在场性（Anwesenheit）。在场性之现身当前乃在于：在场性把各具本已方式的在场者带入在场状态。依照在场性之印记，根据遂具有建基特性──它是实在的存在者状态上的原因，是使对象之对象性得以成立的先验可能性，是绝对精神运动和历史生产过程的辩证中介，是那种价值设定的强力意志。</p>
+<p>为存在者提供根据的形而上学思想的特性乃在于，形而上学从在场者出发去表象在其在场状态中的在场者，并因此从其根据而来把它展示为有根据的在场者。</p>
+<p>关于哲学之终结的谈论意味着什么？我们太容易在消极意义上把某物的终结了解为单纯的中止，理解为没有继续发展，甚或理解为颓败和无能。相反地，关于哲学之终结的谈论却意味着形而上学的完成（Vollendung）。但所谓“完成”并不是指尽善尽美，并不是说哲学在终结处已经臻至完满之最高境界了。我们不仅缺乏任何尺度，可以让我们去评价形而上学的某个阶段相对于另一个阶段的完满性。根本上，我们也没有权利作这样一种评价。柏拉图的思想并不比巴门尼德的思想更见完满。黑格尔的哲学也并不比康德的哲学更见完满。哲学的每一阶段都有其本已的必然性。我们简直只能承认，一种哲学就是它之所是。我们无权偏爱一种哲学而不要另一种哲学——有关不同的世界观可能有这种偏爱。</p>
+<p>“终结”一词的古老意义与“位置”相同：“从此一终结到彼一终结”，意思即是从此一位置到彼一位置。哲学之终结是这样一个位置，在那里哲学历史之整体把自身聚集到它的最极端的可能性中去了。作为完成的终结意味着这种聚集。</p>
+<p>纵观整个哲学史，柏拉图的思想以有所变化的形态始终起着决定性作用。形而上学就是柏拉图主义。尼采把他自己的哲学标示为颠倒了的柏拉图主义。随着这一已经由卡尔•马克思完成了的对形而上学的颠倒，哲学达到了最极端的可能性。哲学进入其终结阶段了。无论说人们现在如何努力尝试哲学思维，这种思维也只能达到一种模仿性的复兴及其变种而已。那么，难道哲学之终结不是哲学思维方式的中止吗？得出这个结论，或许还太过草率。</p>
+<p>终结作为完成乃是聚集到最极端的可能性中去。只要我们仅仅期待发展传统式的新哲学，我们就不免太过狭隘地思这种聚集。我们忘了，早在希腊哲学时代，哲学的一个决定性特征就已经显露出来了：这就是科学在由哲学开启出来的视界内的发展。科学之发展同时即科学从哲学那里分离出来和科学的独立性的建立。这一进程属于哲学之完成。这一进程的展开如今在一切存在者领域中正处于鼎盛。它看似哲学的纯粹解体，其实恰恰是哲学之完成。</p>
+<p>要说明此点，我们指出心理学、社会学和人类学（文化人类学）的独立性，指出作为符号逻辑和语义学的逻辑的作用，就绰绰有余了。哲学转变为关于人的经验科学，转变为关于一切能够成为人所能经验到的技术对象的东西的经验科学；人正是通过他的这种技术以多种多样的制作和塑造方式来加工世界，因此而把自身确立在世界中。所有这一切的实现在任何地方都是以科学对具体存在者领域的开拓为根据和尺度的。</p>
+<p>现在，自我确立的诸科学将很快被控制论这样一门新的基础科学所规定和操纵。我们并不需要什么先知先觉就能够认识到这一点。</p>
+<p>控制论这门科学是与人之被规定为行动着的社会生物这样一回事情相吻合的。因为它是关于人类活动的可能计划和设置的控制的学说。控制论把语言转换为一种信息交流。艺术逐渐成为被控制的而又起着控制作用的信息工具。</p>
+<p>哲学之发展为独立的诸科学——而诸科学之间却又愈来愈显著地相互沟通起来──乃是哲学的合法的完成。哲学在现时代正在走向终结。它已经在社会地行动着的人类的科学方式中找到了它的位置。而这种科学方式的基本特征是它的控制论的亦即技术的特性。追问现代技术的需要大概正在渐渐地熄灭，与之同步的是，技术更加明确地铸造和操纵着世界整体的现象和人在其中的地位。</p>
+<p>诸科学将根据科学规则——也即技术地——来说明一切在科学的结构中依然让我们想起出自哲学的来源的东西。任何一门科学都依赖于范畴来划分和界定它的对象领域，都在工具上把范畴理解为操作假设。这些操作假设的真理性不仅仅以它们的在研究之进步范围内所造出的效果为衡量尺度。科学的真理是与这种效果的功效相等同的。</p>
+<p>哲学在其历史进程中试图在某些地方（甚至在那里也只是不充分地）表述出来的东西，也即关于存在者之不同区域（自然、历史、法、艺术等）的存在论，现在被诸科学当作自己的任务接管过去了。诸科学的兴趣指向关于分门别类的对象领域的必要的结构概念的理论。“理论”在此意味着：对那些只被允许有一种控制论功能而被剥夺了任何存在论意义的范畴的假设。表象——计算性思维的操作特性和模式特性获得了统治地位。</p>
+<p>然而，诸科学在对其区域性范畴的无可逃避的假设中依然谈论着存在者之存在。只是它们不这样说而已。它们能够否认出自哲学的来源，但决不能摆脱这种来源。因为在诸科学的科学方式中，关于诸科学出自哲学的诞生的证物依然在说话。</p>
+<p>哲学之终结显示为一个科学技术世界以及相应于这个世界的社会秩序的可控制的设置的胜利。哲学之终结就意味着植根于西方——欧洲思维的世界文明之开端。</p>
+<p>但在哲学展开为诸科学这一意义上的哲学之终结，也必然是对哲学思维已经被置入其中的一切可能性的完全现实化吗？抑或，对思想来说，除了我们所刻画出来的最终可能性（即哲学消解于被技术化了的诸科学），还有一种第一可能性——哲学思维虽然必须由这种可能性出发，但哲学作为哲学却不能经验和接纳这种可能性了——是这样吗？</p>
+<p>如若情形真是这样，那么在哲学从开端到终结的历史上，想必还有一项任务隐而不显地留给了思想，这一任务既不是作为形而上学的哲学能够达到的，更不是起源于哲学的诸科学可以通达的。因此我们问── </p>
+<h2 id="二、哲学终结之际为思留下了何种任务？"><a href="#二、哲学终结之际为思留下了何种任务？" class="headerlink" title="二、哲学终结之际为思留下了何种任务？"></a>二、哲学终结之际为思留下了何种任务？</h2><p>对思想的这样一项任务的思考就必定格外不可思议。有一种既不能是形而上学又不能是科学的思想吗？<br>有一项在哲学开端之际（甚至是由于这一开端）就对哲学锁闭自身，从而在后继时代里不断变本加厉地隐匿自身的任务吗？<br>一项看来似乎包含着认为哲学从未能胜任思想之任务从而成了一部纯粹颓败的历史这样一个断言的思想的任务吗？<br>在这里，在这样一些断言中，难道不是含有一种企图凌驾于伟大的哲学思想家之上的傲慢自大么？</p>
+<p>这个疑问势所难免。但它很容易打消。因为任何想对我们所猜度的思之任务有所洞见的尝试，都不免依赖于对整个哲学史的回溯；不待如此，这种尝试甚至必得去思那种赋哲学以一个可能历史的东西的历史性。</p>
+<p>正因为这样，我们于此所猜度的那个思，必然不逮于哲学家的伟大。它更逊色于哲学。之所以逊色，是因为在工业时代被科学技术烙印了的公众状态中，这种思所具有的直接或间接的效果显然更逊色于哲学所具有的效果。</p>
+<p>但是我们所猜度的思之所以保持着谦逊，首先是因为它的任务只具有预备性，而不具有任何创设的特性。它满足于唤起人们对一种可能性的期待，而这种可能性的轮廓还是模糊不清的，它的到来还是不确定的。</p>
+<p>思想首先必须学会参与到为思想所保留和贮备的东西那里。在这种学会中思想为自已的转变作了预备。</p>
+<p>我们所思的是这样一种可能性：眼下刚刚发端的世界文明终有一天会克服那种作为人类之世界栖留的唯一尺度的技术-科学-工业之特性。尽管这不会出于自身和通过自身而发生，但却会借助于人对一种使命的期备──不论人们倾听与否，这种使命总是在人的尚未裁定的天命中说话了。同样不确定的乃是，世界文明是否将遭到突然的毁灭，或者它是否将长期地稳定下来，却又不是滞留于某种持久不变，一种持存，而毋宁说是把自身建立在常新的绵延不断的变化中。</p>
+<p>我们所猜度的预备性的思并不想预见将来，并且它也不能预见将来。它不过是尝试对现在有所道说，道说某种很久以前恰恰就在哲学开端之际并且为了这一开端已经被道出的而又未曾得到明确的思想的东西。就眼下而言，以适当的简洁指出这一点，想必就足够了。为此，我们求助于一个由哲学提供出来的路标。 </p>
+<p>当我们追问思的任务之际，就意味着要在哲学的视野内规定思想所关涉的东西，规定对思来说还有争议的东西， 也即争执（Str-eitfall）。这就是德语中“事情”（Sache）一词的意思。这个词道出了在眼下的情形中思想所关涉的东西，按柏拉图的说法，即事情本身（το　πραγμα　αυτο）（参阅《信札第七》341c7）。</p>
+<p>在晚近时代里，哲学主动明确地召唤思想“面向事情本身”。我们不妨指出在今天受到特别关心的两例。我们在黑格尔1807年出版的《科学的体系：第一部，精神现象学》的“前言”中听到了这种“面向事情本身”的呼声。这个前言不是“现象学”的前言，而是《科学的体系》的前言，是整个哲学体系的前言。“面向事情本身”的呼声最终──这个“最终”按事情而言意味着首先──针对“逻辑学”。</p>
+<p>在“面向事情本身”的呼声中重点强调的是“本身”。乍一听，这呼声含有拒绝的意思。与哲学之事情格格不入的那些关系被拒绝了。关于哲学之目标的空洞谈论即属于这类关系，而关于哲学思维之结论的空洞报告也在这类关系之列。两者决不是哲学之现实整体。这个整体唯在其变易中才显示出来。这种变易在事情的展开着的表现中进行。在表现（Dar-stellung）中主题与方法成为同一的。在黑格尔那里，这个同一性被称为观念。凭此观念，哲学之事情“本身”才达乎显现。但这一事情是历史地被规定的，亦即主体性。黑格尔说，有了笛卡尔的我思故我在（egocogito），哲学才首次找到了坚固的基地，在那里哲学才能有家园之感。如果说随着作为突出的基底（subiectum）的我思自我，绝对基础（fundamentumabsolutum）就被达到了，那么这就是说：主体乃是被转移到意识中的根据（υποκειμε－νον），即真实在场者，就是在传统语言中十分含糊地被叫做“实体”的那个东西。</p>
+<p>当黑格尔在那个前言（荷尔麦斯特编辑，第19页）中宣称：“（哲学的）真理不仅应被理解和表述为实体，而且同样应被理解和表述为主体”，这就意味着：存在者之存在，即在场者之在场性，只有当它在绝对理念中作为本身自为地现身当前时，才是明显的因而也才是完全的在场性。但自笛卡尔以降，理念即意谓知觉（perceptio）。存在向它本身的生成是在思辨辩证法中进行的。只有观念的运动，即方法，才是事情本身。“面向事情本身”的呼声要求的是合乎事情的哲学方法。</p>
+<p>但哲学之事情是什么，这自始就被认为是确定了的。作为形而上学的哲学之事情乃是存在者之存在，乃是以实体性和主体性为形态的存在者之在场性。</p>
+<p>一百年之后，“面向事情本身”的呼声重新在胡塞尔的论文《作为严格科学的哲学》中出现了，这篇论文发表在1910-1911年《逻各斯》杂志第一卷上（第289页以下）。这一呼声首先还是具有拒绝的意思。但在这里，拒绝的目标指向与黑格尔不同的另一方向。这种拒绝针对那种要求成为意识探究活动的真正科学方法的自然主义心理学。因为这种方法自始就阻挡着通向意向性意识的道路。但是，“面向事情本身”的呼声同时还反对历史主义，这种历史主义在关于哲学观点的讨论中和对哲学世界观类型的划分中丧失了自身。对此，胡塞尔在一段加重点号的文字中说（同上，第340页）：“研究的动力必然不是来自各种哲学而是来自事情和问题”。</p>
+<p>那么，什么是哲学研究的事情呢？对胡塞尔来说与黑格尔如出一辙，都按同一传统而来，这个事情就是意识的主体性。胡塞尔的《笛卡尔沉思》不仅是1929年2月巴黎讲演的主题，不如说，它的精神在《逻辑研究》之后自始至终伴随着胡塞尔哲学研究的充满热情的道路。在其消极的同时也是积极的意义上，“面向事情本身”的呼声决定着方法的获得和阐发，也决定着哲学的程序，通过这一程序，事情本身才成为可证明的被给予性。对胡塞尔来说：“一切原则的原则”首先不是关于内容的原则，而是一个方法原则。在1913年出版的《纯粹现象学和现象学哲学的观念》一书中，胡塞尔专门用一节（第24节）来规定“一切原则的原则”。胡塞尔说，从这一原则出发，“任何可设想的理论都不能迷惑我们”。（同上书，第44页） “一切原则的原则”是：<br>“任何原本地给予的直观都（是）认识的合法性源泉；　在‘直观’中原始地（可以说在其具体现实性中）向我们呈 现出来的一切，（是）可以直接如其给出自身那样被接受的， 但也仅仅是在它给出自身的界限之内……” </p>
+<p>“一切原则的原则”包含着方法优先的论点。这一原则决定了唯有何种事情能够符合方法。“一切原则的原则”要求绝对主体性作为哲学之事情。向这种绝对主体性的先验还原给予并保证这样一种可能性：即在主体性中并通过主体性来论证在其有效结构和组成中，也即在其构造中的一切客体的客观性（存在者之存在）。因此先验主体性表明自身为“唯一的绝对的存在者”（《形式的和先验的逻辑》1929年，第240页）。同时，作为关于存在者之存在的构造的“普遍科学”的方法，先验还原具有这一绝对存在者的存在样式，也即哲学之最本已的事情的方式。方法不仅指向哲学之事情。它并非只是象钥匙属于锁那样属于事情。毋宁说，它之属于事情乃因为它就是“事情本身”。如果有人问：“一切原则之原则”从何处获得它的不可动摇的权利？那么答案必定是：从已经被假定为哲学之事情的先验主体性那里。</p>
+<p>我们已经把对“面向事情本身”这个呼声的讨论选为我们的路标。它把我们带到通向一种对在哲学终结之际思的任务的规定的道路上去。我们已经到了哪里？我们已经获得了这样一种洞见：对“面向事情本身”这个呼声而言先行确定的乃是作为哲学之事情的哲学所关涉的东西。从黑格尔和胡塞尔的观点──而且不光是他们的观点──来看，哲学之事情就是主体性。对这个呼声来说，有争议的东西并非事情本身，而是它的表现，通过这种表现，事情本身才成为现身当前的。黑格尔的思辨辩证法是这样一个运动，在这个运动中事情本身达乎其自身，进入其自身的在场（Prasenz）了。胡塞尔的方法应将哲学之事情带向终极原本的被给予性，也即说，带向其本已的在场了。</p>
+<p>两种方法尽可能地大相径庭。但两者要表达的事情本身是同一东西，尽管是以不同的方式经验到的。</p>
+<p>然而这些发现对我们洞察思的任务的尝试又有何助益呢？只要我们仅仅空洞地讨论了一番这个呼声，而此外再无所作为，那么上述发现就是无所助益的。反之，我们必得要问：在“面向事情本身”这个呼声中始终未曾思的东西是什么？以此方式追问，则我们就能注意到：恰恰就在哲学已经把其事情带到了绝对知识和终极明证性的地方，如何隐藏着不再可能是哲学之事情的有待思的东西。</p>
+<p>但在哲学之事情及其方法中未曾思的是什么呢？思辨辩证法是一种哲学之事情如何从自身而来自为地达乎显现并因此成为现身当前（Gegenwart）的方式。这种显现必然在某种光亮中进行。唯有透过光亮，显现者才显示自身，也即才显现出来。但从光亮方面来说，光亮却又植根于某个敞开之境，某个自由之境（Freien）；后者能在这里那里，此时彼时使光亮启明出来。光亮在敞开之境（Offenen）中游戏运作，并在那里与黑暗相冲突。无论是在一个在场者遭遇另一个在场者的地方，或者一个在场者仅仅只是在另一个在场者近旁逗留的地方，即便在象黑格尔所认为的一个在场者思辩地在另一个在场者中反映自身的地方，都已有敞开性（Offenheit）在起支配作用，都已有自由的区域在游戏运作。只有这一敞开性也才允诺思辩思维的道路通达它所思的东西。</p>
+<p>我们把这一允诺某种可能的让显现（Scheinenlassen）和显示的敞开性命名为澄明。在德语语言史中，“澄明”（Lichtung）一词是对法文clairiere 的直译。它是仿照更古老的词语“森林化”（Waldung）和“田野化”（Feldung）构成起来的。</p>
+<p>在经验中，林中空地与稠密森林相区别，后者在较古老的德语中被称为Dickung。①名词“澄明”源出于动词“照亮”（lichten）。形容词“明亮的”（licht）与“轻柔的”（leicht ）是同一个词。照亮某物意谓：使某物轻柔，使某物自由，使某物敞开，例如，使森林的某处没有树木。这样形成的自由之境就是澄明。在自由之境和敞开之境意义上的明亮的东西（dasLichte），无论是在语言上还是在事实上，都与形容词“licht”毫无共同之处， 后者的意思是“光亮的”。就澄明与光的差异性而言，仍要注意这一点。但两者之间还是可能有某种事实的联系。光可以涌入澄明之中并且在澄明中让光亮与黑暗游戏运作。但决不是光才创造了澄明。光倒是以澄明为前提的。然而，澄明，敞开之境，不仅是对光亮和黑暗来说是自由的，而且对回声和余响，对声音以及声音的减弱也是自由的。澄明乃是一切在场者和不在场者的敞开之境。</p>
+<p>思想必然要对这里称为澄明的那个事情投以特别的关注。于此我们不是从空洞的词语（例如“澄明”）那里抽取出空洞的观念，尽管在表面上太容易让人有这样的感觉。毋宁说，我们必须关注唯一的事情，我们合乎实情地以“澄明”的名称来命名这种事情。在我们现在所思的关联中，“澄明”这个词所命名的东西即自由的敞开之境，用歌德的话来说，它就是“原现象”（Urphanomen）。我们不妨说：一个“原事情”（Ur-sache）。歌德写道（《箴言与沉思》第993）：“在现象背后一无所有：现象本身即是指南”。这就是说，现象本身──在眼下的情形中即澄明──把我们摆到这样一个任务面前：在追问着现象之际从现象中学习，也即让现象对我们有所道说。 </p>
+<p>因此，思想也许终有一天将无畏于这样一个问题：澄明即自由的敞开之境究竟是不是那种东西，在这种东西中，纯粹的空间和绽出的时间以及一切在时空中的在场者和不在场者才具有了聚集一切和庇护一切的位置。</p>
+<p>与思辨辩证法的思维方式相同，原始直观及其明证性也依赖于已然起着支配作用的敞开性，即澄明。明证的东西乃是能直接直观的东西。“明证”（Evidentia）一词是西塞罗对希腊文εναργεια的翻译，也就是说，西塞罗把εναργεια转换为罗马语了。这个词与argentum（银辉）一词具有相同的词根，意指在自身中从自身而来闪亮和进入光明之中的东西。在希腊语中，人们谈论的不是看的行为，不是谈论目睹（videre），而是谈论闪亮和显现的东西。但是唯当敞开性已获得允诺时它才能显现。并不是光线才首先创造澄明，即敞开性。光线只不过是穿越澄明而已。唯这种敞开性才根本上允诺一种给予和接纳活动以自由之境，才允诺一种明证性以自由之境，于是乎，在这种自由之境中，给予、接纳和明证性才能够逗留并且必须运动。</p>
+<p>所有明确地或不明确地响应“面向事情本身”这个呼声的哲学思想，都已经──根据其进程中并且借助于其方法──进入澄明的自由之境中了。但哲学对于澄明却一无所知。虽则哲学谈论理性之光，却并没有关注存在之澄明。唯有敞开之境才照亮lumennaturale，即理性之光。理性之光虽然关涉于澄明，但却极少构成澄明，以至于我们不如说，它只是为了能够照耀在澄明中的在场者才需要这种澄明。这不光是哲学之方法的真实情形，而且也是──甚至首先是──哲学之事情（即在场者之在场性）的真实情形。至于在主体性中，subiec-tum，根据（υποκειμενον），亦即在其在场状态中的在场者也如何被思了，这个问题在这里不能详尽发挥了。读者可以参看我的《尼采》第二卷（1961年）第429页以下的内容。</p>
+<p>我们现在另有关心。不论在场者是否被经验，被掌握或被表达，作为逗留入敞开之境中的在场性始终依赖于已然起着支配作用的澄明。即便不在场者，除非它在澄明之自由之境中在场着，否则也不能成其为不在场者。</p>
+<p>一切形而上学（包括它的反对者实证主义）都说着柏拉图的语言。形而上学思想的基本词语，也即形而上学对存在者之存在的表达的基本词语，就是ειδοζ即ιδεα（理念）：是存在者作为这样一个存在者在其中显示自身的那个外观（Aussehen）。而外观乃是一种在场方式。没有光就没有外观──柏拉图早已认识了这一点。但是倘没有澄明，就没有光亮。就连黑暗也少不了这种澄明。否则我们如何能够进入黑暗之中并在黑暗中迷途徘徊呢？然而在哲学中，这种在存在或在场性中起着支配作用的澄明本身依然是未曾思的，尽管哲学在开端之际也谈论过澄明。这种谈论在何处出现呢？以什么样的名称？</p>
+<p>答曰：在巴门尼德的哲理诗中。就我们所知，他的哲理诗最早专门思了存在者之存在；尽管难得注意，它至今仍在由哲学解体而来的诸科学中回响。<br>巴门尼德倾听这样一种劝说：</p>
+<p>……而你当经验这一切：<br>无蔽之不动心脏，多么圆满丰沛，<br>而凡人之意见，无能于信赖无蔽者。<br>──《残篇》第一第28行以下 </p>
+<p>这里道出了Αληθεια，即无蔽。它被称为圆满丰沛的，因为它在纯粹的圆球形轨道上旋转，在这个圆球形轨道上，开端和终结是处处同一的。在这一旋转中绝无扭曲、阻隔和锁闭的可能性。凝神冥思的人要去经验那无蔽之不动心脏。“无蔽之不动心脏”这个短语是什么意思呢？它意指着在其最本已的东西中的无蔽本身，意指一个寂静之所，这个寂静之所把首先允诺无蔽的东西聚集在自身那里。首先允诺无蔽的东西乃是敞开之境的澄明。我们问：敞开性为何？我们已经对以下事实有所思索：思想的道路──思辨的和直观的思想的道路──需要可穿越的澄明。而在这种澄明中也才有可能的显现，即在场性本身之可能的在场。</p>
+<p>先于任何别的东西而首先允诺无蔽的，乃是这样一条道路，思想就在这条道路上追踪某个东西并且颖悟（vernehmen）这个东西：οπωζ　εστιν……ειναι，即在场如何现身在场着（Dass anwest Anwesen）。澄明首先允诺通往在场性的道路之可能性，允诺在场性本身的可能在场。我们必得把Αλ－ηθεια即无蔽思为澄明，这种澄明才首先允诺存在和思想以及它们互为互与的在场。澄明的不动心脏乃是这样一个寂静之所，唯由之而来才有存在与思想也即在场性与颖悟的共属一体关系的可能性。 </p>
+<p>对思想的某种约束性的可能要求植根于上述这种亲密关系。倘没有对作为澄明的无蔽（Αληθεια）的先行经验，则一切关于有约束和无约束的思想的谈论都还是无根基的。柏拉图把在场性规定为理念（ιδεα），这种规定的约束性从何而来？亚里士多德把在场解释为现实（ενεργεια），就何而言这种解释是有约束力的呢？</p>
+<p>只要我们还没有经验到巴门尼德所必定经验过的东西，即无蔽（Αληθεια），则我们甚至不可能去追问这些十分离奇地始终在哲学中被搁置起来的问题。通往无蔽的道路与凡人的意见游荡其上的街道马路大相径庭。无蔽（Αληθεια）不是什么终有一死的东西，恰如它不是死亡本身。</p>
+<p>我固执地把Αληθεια这个名称译为无蔽，这样做却不是为了词源学的缘故，而是因为当我们合乎实情地思被命名为存在和思想的东西时我们所必须考虑的那个事情的缘故。无蔽犹如这样一个因素，在这个因素中才有存在和思想以及它们的共属一体性。虽则Αληθεια在哲学开端之际就被命名了，但在后来的时代里哲学却没有专门思这个无蔽本身。因为自亚里士多德以降，作为形而上学的哲学的事情就是在本体论神学上（ontotheologisch）思存在者之为存在者。</p>
+<p>如果情形果真如此，那么我们也就不可贸然下判断说，哲学无视某种东西，哲学把某种东西给耽搁了，并因此患有某个根本性的缺陷。我们指出在哲学中未曾思的东西，并不构成对哲学的一种批判。如若现在必需有一种批判，那么这种批判的目标毋宁说是那种自《存在与时间》以来变得愈来愈迫切的尝试，即追问在哲学终结之际思的一种可能的任务的尝试。因为现在才提出以下问题是相当迟了：为什么我们不再用通常流行的名称即“真理”一词来翻译Αληθεια？</p>
+<p>答案必然是：就人们在传统的“自然的”意义上把真理理解为在存在者那里显示出来的知识与存在者的符合一致关系而言，而同样也就真理被解释为关于存在的知识的确定性而言，我们不能把Αληθεια即澄明意义上的无蔽与真理等同起来。相反，Αληθεια，即被思为澄明的无蔽，才允诺了真理之可能性。因为真理本身就如同存在和思想，唯有在澄明的因素中才能成其所是。真理的明证性和任何程度上的确定性，真理的任何一种证实方式，都已经随着这种真理而在起支配作用的澄明的领域中运作了。</p>
+<p>Αληθεια，亦即被思为在场性之澄明的无蔽，还不是真理。那么Αληθεια更少于真理吗？或者，因为Αληθεια才允诺作为符合和确定性的真理，因为在澄明领域之外不可能有在场性和现身当前化，所以Αληθεια就更多于真理吗？</p>
+<p>我们把这个问题当作一项任务委诸于思想。思想必须考虑：当它哲学地也即在形而上学的严格意义中──这种形而上学仅仅从其在场性方面来究问在场者──思考时，它究竟是否也能提出这个问题。</p>
+<p>无论如何，有一点已变得清晰了：追问Αληθεια，即追问无蔽本身，并不是追问真理。因此把澄明意义上的Αληθεια命名为真理，这种做法是不恰当的，从而也是让人误入歧途的。②关于“存在之真理”的谈论，在黑格尔的《逻辑学》中是有其合理的意义的，因为真理在那里就意味着绝对知识的确定性。但是与胡塞尔一样，与一切形而上学一样，黑格尔也没有追问存在之为存在（Seinals Sein），亦即没有追问如何可能有在场性本身这样一个问题。唯当澄明决定性地运作之际，才有在场性本身。此澄明被命名为Αληθεια，即无蔽，但本身尚未被思及。</p>
+<p>关于真理的自然概念并不意指无蔽，就是在希腊哲学中情形亦然。人们常常正确地指出，αληθεζ这个词早在荷马那里就总是仅仅被用在verbadicendi，用在陈述句中， 因而是在正确性和可靠性的意义上被使用的，而不是在无蔽意义上。但这一提示首先仅只意味着：无论是诗人还是日常语言使用，甚或哲学，都没有设想自己面对这样一个追问任务：追问真理即陈述的正确性如何只有在在场性之澄明的因素中才被允诺而出现。</p>
+<p>在这一问题的视界内，我们必须承认，Αληθεια，即在场性之澄明意义上的无蔽，很快就仅只被人们当作ορθοτηζ即表象和陈述的正确性而来经验了。但这样一来，认为有一种真理的本质转变即从无蔽到正确性的转变的断言，也是站不住脚的了。我们倒是应该说：Αληθεια，作为在思想和言说中的在场性和现身当前化的澄明，很快就进入肖似（ομοιωσια）和符合（adaequ-atio）方面，也即达乎在表象和在场者的符合一致关系意义上的肖似方面。</p>
+<p>但这一进程必然激起另一个问题：对于人的自然经验和言说来说，何以Αληθεια即无蔽仅仅显现为正确性和可靠性？是因为人在在场之敞开性中的绽出的逗留盘桓仅只朝向在场者和在场者之现成的当前化吗？但是这除了意味着在场本身和与之相随的允诺着在场性的那个澄明始终被忽视了这样一回事情之外，还意味着别的什么呢？人们经验和思考的只不过是作为澄明的Αληθεια所允诺的东西，Αληθεια本身之所是却未被经验也未被思。</p>
+<p>这一点依然蔽而不显。这难道是偶然的吗？莫非它的发生只是人类思维的某种疏忽粗糙的结果吗？或者，它的发生是因为自身遮蔽和遮蔽状态，即Ληθη，本就属于无蔽（Α－Ληθεια），并不是一个空洞的附加，也不是仿佛阴影属于光明，相反，遮蔽乃是作为无蔽（Αληθεια）的心脏而属于无蔽──是这样吗？而且，在在场性之澄明的这一自身遮蔽中，难道不是甚至还有一种庇护和保藏──由之而来，无蔽才能被允诺，从而在场着的在场者才能显现出来──在起着支配作用吗？</p>
+<p>倘情形是这样，那么澄明就不会是在场性的单纯澄明，而是自身遮蔽着的在场性的澄明，是自身遮蔽着的庇护之澄明。</p>
+<p>倘情形是这样，那么我们以此追问才踏上哲学终结之际思之任务的道路。</p>
+<p>但这难道不是全然虚幻的神秘玄想，甚或糟糕的神话吗？难道归根到底不是一种颓败的非理性主义，一种对理性的否定吗？</p>
+<p>我反过来问：何谓理性（Ratio），奴斯（νουζ），③νοειν（思想）和Vernehmen（颖悟）？何谓根据和原则， 甚至一切原则的原则？如果我们不是以一种希腊方式把Αληθεια经验为无蔽，然后超出并越过希腊方式而把Αληθεια思为自身遮蔽之澄明，那么上面的问题能够得到充分的规定吗？只要理性和合理性的东西在其本已特性中还是可疑的，那么，就连关于非理性主义的谈论也还是虚幻无据的。支配着现时代的科学技术的理性化日复一日愈来愈惊人地用它巨大的成效来证明自身的合法性。但这种成效却丝毫没有道说允诺理性和非理性以可能性的东西。效果证明着科学的理性化的正确性。但是可证明的东西穷尽了存在者的一切可敞开性吗？对可证明之物的固守难道没有阻挡通达存在者的道路吗？</p>
+<p>也许有一种思想，它比理性化过程之势不可挡的狂乱和控制论的摄人心魄的魔力要清醒些。也许恰恰这种摄人心魄的狂乱醉态倒是最极端的非理性呢!</p>
+<p>也许有一种思想，它超出了理性与非理性的分别之外，它比科学技术更要清醒些，更清醒些因而也能作清醒的旁观，它没有什么效果，却依然有自身的必然性。当我们追问这种思的任务时，首先要置疑的不仅是这种思想，而且还有对这种思想的追问。鉴于整个哲学传统，这就意味着──我们所有的人都还需要在思想方面接受教育，并且在此之前首先还需要对何谓在思想中受过教育和未曾受过教育这回事情有所认识。在这方面，亚里士多德在《形而上学》第四章（1006a以下）中给了我们一个暗示：“……因为未曾受过教育就是不能分辨何处必需寻求证明，何处不需要寻求证明”。</p>
+<p>这话大可细细品味。因为尚未确定的是，人们应以何种方式去经验那种不需要证明就能为思想所获得的东西。是以辩证法的中介方式呢，还是以原本给予的直观方式？或者两者都不是？唯有那种要求我们先于其它一切而允许其进入的东西的特性才能决定这一点。但是在我们还没有允许它进入之前，它又如何可能让我们作出决定呢？这里我们处于何种循环──而且是不可避免的循──中了？</p>
+<p>莫非它就是ευκυκλεον　Αληθεια，即被思为澄明的那种圆满丰沛的无蔽本身吗？</p>
+<p>那么，思的任务的标题就不是“存在与时间”，而是澄明与在场性吗？</p>
+<p>但澄明从何而来？如何有澄明？在这个“有”（Es gibt）中什么在说话？④</p>
+<p>那么，思的任务就应该是：放弃以往的思想，而去规定思的事情。（放弃对以往关于思的事情的规定的思。）</p>
+<div style="color:gray;font-size:0.9em">
+注释： <br />
+①这里的“林中空地”（Waldlichtung）亦可译作“林中澄明”；“Dickung”按字面直译为“稠密化”，在日常德语中已经无此词。──译注 <br />
+②思某个事情的尝试，有时可能偏离一种决定性的洞见已经揭示出来的东西，这种情形在《存在与时间》（1927年）的一段话（第219页）中可得印证：“用‘真理’这个词来翻译Αληθεια，尤其在理论上对这个词（真理）进行概念规定，就会遮蔽希腊人先于哲学而领会到的东西的意义，希腊人在使用Αληθεια这个术语时，是‘不言自明地’把那种东西作为基础的”。──原注 <br />
+③这里的“奴斯”（nous）是希腊哲学的基本词语，亦可意译为“理智”、“精神”、“心灵”等等。──译注 <br />
+④在前面的《时间与存在》等文中，海德格尔对这里的“有”（Es gibt）作了许多讨论，显然是联系于具有“给出”（Geben）作用的“本有”（Ereignis）来讨论的。在海氏后期思想中，“无蔽”、“澄明”和“本有”等，是具有同等位值的词语，都是　　用来表示他所思的“思之事情”的。──译注
+</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/f7cc1be2/">性开放性泛滥潮流的罪魁祸首</a>
+            
+            
+            <a class="next" rel="next" href="/4875a109/">思想如何改变世界</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/f7cc1be2/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/4875a109/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

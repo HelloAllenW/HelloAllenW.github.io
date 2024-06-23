@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>行至水穷处，坐看云起时！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">行至水穷处，坐看云起时！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 9, 2022&nbsp;&nbsp;22:21:24</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 9, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/">激励与自律 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>这篇文章，衷心希望每一个看到的人，能够花三五分钟耐心看完，也望这三两点拙见，能够让看到的人有所悟、有所得。</p>
+<h2 id="择一业谋食养命，等一运扭转乾坤"><a href="#择一业谋食养命，等一运扭转乾坤" class="headerlink" title="择一业谋食养命，等一运扭转乾坤"></a>择一业谋食养命，等一运扭转乾坤</h2><p>这个“择”，便是天赋、方向，所谓天赋，是命运赋予一个人谋生、吃饭的本事，是你来到这人世间一趟，安身立命之手段。</p>
+<p>每个人都会有自己的天赋，有自己的专属领域。</p>
+<p>经云：设集千百男女智者于一隅，任其自谋营生，若干年后再往观之，必然有者为上，有者为下，有者为主，有者为附，有者为强，有者为弱，有者为富，有者为贵，有者为谋。芸芸纵生，有智愚平庸、富贵贫贱之分，有寿夭悔吝、枯荣穷通之别，悉乃圆头方趾之人焉，龙生九子，尚且各有不同，有者天资聪颖，文章盖世，有者口才一流，巧舌如簧，有者巧艺安身。何以有天壤云泥之差距？无他，命耳！</p>
+<p>一定要在人生的早期阶段，找到自己擅长之地，营造自己厉害之处，在自己的领域里面逐渐成长，终成为一代大家，要记住，天不生无用之人，地不长无名之草。我们每个人，都要在这个社会上找到自己的定位，学到一定本领，然后反哺自己。</p>
+<p>君不见一个本该在生意场上挥舞着支票谈判之人，跑到职场朝五晚九，遇时运不济之时节，便怨天尤人，大骂天公不作美。</p>
+<p>一个本该靠口舌生活，日进斗金之辈，跑去搞技术，而后面临房贷车贷，头发都熬没了。</p>
+<p>一个本该在官场混得风生水起的人，却跑去私企当个小领导等比比皆是。</p>
+<p>发挥作为一个人的主观能动性，往擅长地方去走，做擅长做的事，如此，才是符合规律，符合大道。</p>
+<p>方向找对之后，才是努力，不要把这个顺序弄反。方向＋努力不等于成功，方向＋努力＋运气才等于成功，如若只有运气和努力，没有方向，也很难做成一件事。</p>
+<p>曾国藩曰：一半人谋，一半天意。把能控制的和能做的做好，剩下的就交给天意（时运），有者浑浑噩噩大半生，尚不清楚自己的归宿及方向在何在，此种人是最可悲的。</p>
+<br />
+
+<h2 id="在正确的时间做正确的事"><a href="#在正确的时间做正确的事" class="headerlink" title="在正确的时间做正确的事"></a>在正确的时间做正确的事</h2><p>人的光景，十年一个变化，称之为大运。人的一生，是由不同的大运组成，每一步运相互作用，如此，组成人生的千奇百态。而在每一个十年中，总会有那么两三年是极好的，也会有那么两三年是极差的，好到一定程度会变差，差到一定程度会变好，这是自然规律。</p>
+<p>自然规律是物极必反、否极泰来。万事万物都在这个规律中繁衍，人的命运发展亦是如此。在人生这条路上，会面临着工作不顺心，挣不到钱的阶段，这很正常，不要妄自菲薄，不要自暴自弃，到了这种阶段，沉下心来学习精进，韬光养晦，等到了那个极点，所有的事情都会反弹。</p>
+<p>这不是什么鸡汤，而是事物的发展规律就是如此，规律不以人的意志为转移，人只能顺应规律而生，顺势而为。</p>
+<p>在以往的文章问答之中，也不止一次提到顺势而为四个字，人的核心竞争能力，就是顺应天命，顺势而为的能力。</p>
+<p>到了诸事不利的阶段，懂得养精蓄锐，在顺风顺水的阶段，把养足的精力充分迸发，不要在一个本不该有作为的阶段去胡乱作为，要在正确的时间去做正确的事。</p>
+<p>很多人一辈子，真正赚大钱的年份，也就那么几年，一个人想要翻身，也就这几年的时间，听起来长，可放眼一生，不过短短几个春秋，这几年，说白了就是走到一步好大运中把差的那几个年份熬过后的阶段。</p>
+<p>一个普通人能够做的，就是在这几个年份中，不惜一切代价，赚到足够多的钱，因为过了这个阶段，想要再赚这么多，比登天还难。</p>
+<p>如何运用好这几年，需要的智慧不是一丁半点，这个问题上，没有一个标准的解决公式，具体的事物要具体分析。但可以肯定的是，在这几个年份来临之前，你的能力，你的资源，你的人脉等等各方面，一定要做好，如此，等真正发财的阶段来了，才能更好地接住和运用这笔钱。</p>
+<p>从现实层面来说，赚钱的本质是帮助别人解决问题后给你的回报。所以，在赚不到大钱的日子里，不要琢磨怎么赚大钱，要琢磨如何能够给别人提供更好的帮助和更高价值的服务。</p>
+<p>抱利他之心，做利他之事，拥有的“隐形财富”会越来越多。睁开眼看一看这社会上，能够赚大钱的行业和方向，有哪个不是为众人提供了最好的服务</p>
+<p>多思考所做的事能不能帮助到更多的人，而不是要怎么样赚大钱。从明白这点以后，即便还没有看见实打实的收益，都已经是在开始赚钱了。</p>
+<br />
+
+<h2 id="探究事物的发展规律"><a href="#探究事物的发展规律" class="headerlink" title="探究事物的发展规律"></a>探究事物的发展规律</h2><p>西方有位集大成者说过：上帝不掷骰子。在西方哲学里称它为客观规律，在东哲里面，它被人们称之为“道”，道即是规律。</p>
+<p>大到天体运行，小到一个人的生老病死，吉凶祸福。日出日落，花开花谢，四季更替，万物生长衰退，都由那个客观规律主导着，学会认识规律，顺应规律。</p>
+<p>从唯物辩证的角度来说，事物的发展与变更，则由外因及内因而决定。外因仅是事物发展变化的条件，内因则是事物发展变化的根据。大多数时候，外因可以说是机械性的，而外因只有通过内因才能真正地起作用或带来影响。</p>
+<p>举例，张三在癸卯年中，感情不顺利，或因出轨，或因家暴。这是癸卯年中的外部原因，是他本身五行和流年干支相冲的表现形式，是条件，而非根据。</p>
+<p>而引发这种局面的根源还是其内在的矛盾性的发展，说通俗些，就是他内心的想法，内心的念，而想法则会决定他的行为，行为则决定了这个年份中他婚姻感情走向的结果。</p>
+<p>但是我们不能够一味地去唯物或者唯心，两者乃相辅相成。因为张三不可能平白无故地，内心想法观念就发生了变化，还得是需要一些外部条件的引动。</p>
+<p>一个人在不同的阶段、不同的位置、不同的年份或面对不同的事情，他的想法都会发生改变，而想法的改变才是其根据所在。</p>
+<p>老祖宗说以不变应万变，这个不变，就是在面临任何事的时候，都尽量不要被其变相迷惑，始终坚定如一，方可应对外部的万般变化。</p>
+<p>任何事物都讲求一个因果规律，当下所做之事即是起因，会带来何种结果？</p>
+<p>去学习如何能够看到果，看到这件事的本质，看见它的运行规律道，再来缘起因。</p>
+<p>物有本末，事有终始，知其先后则近道矣。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/"># 激励与自律</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a544506b/">中国古人的穿衣美学</a>
+            
+            
+            <a class="next" rel="next" href="/fe917f3d/">一口气看完伊朗史</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a544506b/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/fe917f3d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

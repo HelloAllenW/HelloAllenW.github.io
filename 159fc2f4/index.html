@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>苏格拉底的魅力 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">苏格拉底的魅力</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 1, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 1, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">11.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">39 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeqxt18CQ8uWDAcfsq5mb9uHQVJXeOLSicg3gDTKYyXHvqLgESbrGzqAxz0zgjowpT0ibjmvD5l44yLQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>内容提要：</strong></p>
+<p>苏格拉底在西方政治思想史上的地位，首先在于他开启了理性的丰富潜能，展示了辩证法在认识事物真相中的作用。他在政治生活中敢于独立判断和坚持公正原则的风格，为后人留下了一个负责任的雅典公民形象。他最终接受民主制法庭的判决，不以邪恶对邪恶，也是要以自己的行动维护法律和城邦制度的尊严。</p>
+<p>苏格拉底(Socrates，公元前469—前399年)生活在古希腊的著名城邦雅典。生前，他只是一名普通的石匠，被世人看作市场上的哲学家，在喜剧家阿里斯托芬的剧作《云》中受到嘲笑。实际上，苏格拉底被西方学术界视为政治哲学的创始人，他在哲学、伦理学方面的贡献也无人忽视。可是他自己述而不作，所有言行由学生柏拉图、色诺芬等记录下来。他在狱中演讲的形象被法国大革命时期的画家大卫摹画出来，激励民众。20世纪90年代末，中国翻译家杨绛再次重译事关他的《斐多篇》，借以平复失去亲人后的心痛和孤独。这一切，都与苏格拉底这个名字蕴含的魅力有关。</p>
+<h2 id="01-心中的理性神"><a href="#01-心中的理性神" class="headerlink" title="01 心中的理性神"></a>01 心中的理性神</h2><p>苏格拉底生逢雅典同盟在伯罗奔尼撒战争中战败、民主制从鼎盛走向衰败的历史转折。他目睹城邦执政能力与公民精神的流失，深感悲痛，慨然以拯救城邦制度为己任。他把雅典面临重重危机的根本原因归结为道德沦丧，其救治方案就是要转变人的灵魂，以道德兴邦，重塑正义。</p>
+<p>苏格拉底之前，希腊城邦之间活跃着一个以传播知识为己任、人数众多的群体——智者。智者没有固定的道德原则，其观点是：“想当演说家，完全用不着懂得什么是真正的正义，只要表现多数的意见就行了。这些多数的意见之所以被认为正当，并不是因为它们真的是好的、正确的，而只是表面上是好的、正确的”。①另外，智者相信知识的多寡胜过伦理的善恶，以为辩论术是博取权力的重要技艺。作为智者的批评者，苏格拉底提出“知识即美德”，将哲学的中心问题从人的一般感觉转向人的内心，准确讲是人的内在理性能力和道德准则。有了他的探索，以后他的学生柏拉图才提出哲学的任务是追寻善、正义及各种事物的本质或真形，创立了系统的理念论。苏格拉底对理性的论述十分详尽，试概括为以下几点：</p>
+<p><strong>其一，灵魂的本质在于理性。</strong>苏格拉底将人分成三个东西，即灵魂、肉体以及这两者结合而成的整体。他主张，人的统治原则不能是肉体，也不是二者结合而成的整体，只能是灵魂。</p>
+<p>他采用一个比喻，来说明灵魂的优异由何构成。他讲，眼睛的德性(或译美德、特长，Arete)在于瞳孔，眼睛在别人眼睛的瞳孔里看到它自己。灵魂要认识自己，也要借助灵魂的特长，这就是智慧所在的部分，即理智或理性。这里最接近神圣，只有认识理性，进而认识一切神圣的东西，才是真正认识自己。</p>
+<p>苏格拉底给年轻人转述过一个故事，说的是赫拉克勒斯走到一个岔路口，不知选择哪条路好的时候，遇到两个女子，代表两种命运，一个叫幸福，许诺他快乐和轻松，另一个叫德性(品德)，向他预言责任和苦难。在学生色诺芬的笔下，恰恰是苏格拉底“制止了许多人的犯罪行为，让他们成为出类拔萃的人。他让他们有了希望，只要谨慎行事，就可以成为高尚的人”。②</p>
+<p><strong>其二，理性来自神。</strong>苏格拉底讲，由于美好的和有用的事物很多，而且它们都各不相同，神明就赋予人以和各种事物相适应的感官，使得通过这些感官，我们能够享受各种美好的东西。</p>
+<p>神明又把推理能力(即指理性)培植在我们心里，使我们通过这种推理能力对我们的感觉对象进行推理，并把它们记在心里，从而明确地知道每一事物给我们提供些什么样的好处，并且想出许多办法享受那些美好的事物，避免那些不好的事物。神明还把表述能力(言语)赐予我们，通过这种表述能力我们可以用教导的方法，使别人也和我们一同分享所有好的事物、制定法律和管理国家。③苏格拉底便自视为神赐给雅典人的一个礼物、一个使者，其任务就是通过与人辩论和交谈，摈弃那些误导青年的谬误，接近对灵魂有益的真理和智慧。</p>
+<p><strong>其三，追求智慧的起点在于自知无知。</strong>苏格拉底主张，人只有反思自己的理智本性，首先是知道自己无知，才能发掘自己的理性能力。据柏拉图的《斐德罗篇》所载，苏格拉底以为智慧这个词太大了，它只适合于神。但爱智这个词倒适合于人；爱智是人的自然倾向。在《申辩篇》里，他批评雅典人缺乏理智的状况，那些政治家、诗人、工匠等人自以为无所不知，实际上不懂得什么是知识和智慧的本质，没有反思人的智慧本身，是最无知的。同时，从希腊世界的传统观念考察，自知包含自制(不要过分)的含义，或者说，自制来自个体对自我的知识。苏格拉底认为，自制就是不受欲望的驱使，对欲望保持一种体面的冷漠。实际上，使勇敢、自制、诚实，即真正的善得以可能的，是智慧；有无快乐、恐惧之类的感觉出现，根本就没有什么区别；建立在相对的情感价值之上的道德体系，只是一种错觉，是一种粗俗的观念，找不到任何健全的、真实的内容。智慧本身才是一种净化。可见，他是将自制、自知与理智、智慧联系起来，既指人的认识能力，也指人的伦理修养。④</p>
+<p><strong>其四，知识即绝对的存在或本质，即理念(Idea)。</strong>在慷慨赴死的前一天，苏格拉底对身边的学生讲：“我们把至真、至美等抽象的实体称作‘真正的本质’。这种本质，即绝对的相等、绝对的美、一切绝对的实体、真正的本质，是永恒不变的，绝对的本质都是单一的、独立的，所以都始终如一，不容改变”。他又说：灵魂和不变的那种东西像极了，和变化的那一种远不相像。“灵魂很像那神圣的、不朽的、智慧的、一致的、不可分解的，而且永不改变的。肉体呢，正相反，很像那凡人的、现世的、多种多样的、不明智的、可以分解的，而且变化无定的。”⑤然后，他又对学生讲灵魂是不朽的。肉体死灭后，灵魂回到天神管辖的世界，那里高贵、纯洁，人们看不见。</p>
+<p>从理念出发认识世界万物，也是苏格拉底的基本方法。他说：“一定要求助于某些理论，在探讨事物真理时使用它们。我在各种场合下首先提出被自己判定为最健全的理论，然后把与这种理论相一致的任何东西，都假定为正确，而与之不合的就视作不正确。例如，我假定绝对的美、绝对的善、绝对的大等等一类事物的存在，那么，任何美的事物之所以是美的，是因为它们分有绝对的美。这时，如果有人说某个特定的事物之所以是美的，在于它有绚丽的色彩、形状或其他属性，我都将置之不理。”⑥</p>
+<p><strong>其五，是否具有知识或智慧，与人数无关。</strong>苏格拉底说：“哲学家的灵魂和别人的不同。它(灵魂)靠哲学解放了自己，获得了自由，就不肯再让自己承受快乐和痛苦的束缚。”他引用荷马史诗中佩内洛普(Penelope)的故事，寓意人应该始终如一地追寻心中的目的，否则像佩内洛普那样，把自己织好的料子拆掉，就白费工夫了。哲学家的灵魂相信：它应当弃绝欢乐和痛苦的情感，在平静中生存，应当追随理智，永远跟着理智走。⑦</p>
+<p>苏格拉底被雅典民主制法庭判处死刑后，学生克里同多次来到狱中，劝说他抓紧时间逃走，因为大多数人不会相信他甘愿受死的理由。苏格拉底反问道：我们为什么要顾忌“大多数人”的想法呢？真正具有理性的人的想法更值得考虑，他们相信事实真相。反之，多数人既不能使人聪明，也不能使人愚蠢，他们的行为完全是随意的。苏格拉底还讲：我们应该确定一般的规则，用来判断试图决定的行为的种类，看清是正义还是不义、光荣还是可耻、善还是恶。我们应该敬重那个拥有专门知识的人，接受他的意见，而不是其他所有人加在一起。必须考虑的不是一般民众会怎样说我们，而是我们如何与行家保持一致，这位行家是权威，他实际上代表真理。⑧这一点与赫拉克利特相同，再次明确了理性、真理与爱好智慧的少数人的联系。</p>
+<p><strong>其六，理性潜藏于人对世间万物的认识之中。</strong>在苏格拉底的言行与事迹中，这种知识或智慧并不神秘，它就是城邦日常生活中的道理。他从来都是用贴近民众的方法来提出问题，探寻真理。可以从以下几方面来看：</p>
+<p>例如他的辩证法。苏格拉底的讨论方式是，先以为自己什么都不知道，于是针对对方的判断提出问题；发现对方论述中的谬误和漏洞，加以质疑和驳斥，直到对方词穷理尽；自己做出假设或提出建议，或者立刻结束谈话。他的特点恰恰在于，<strong>总是引发问题，不给结论，所以往往令交谈者很恼火</strong>。实际上，在这种反反复复的辩驳、纠错、再辩驳、再纠错的过程中，<strong>矛盾不断被揭露，认识不断接近真理，这就是辩证法</strong>。也就是说，他不光在破坏，而且更多地在建设。这种交流、促进、螺旋上升的思辨方式，正是吸引柏拉图、克里同甘心追随他的原因。</p>
+<p>又如他巧用比喻，暗藏机锋。他援引常识问道：工匠需要求师，作统治者就不必求师了吗？他也富于老年人的睿智。他说，身体好是善，但上战场牺牲不是恶吗？财富多而贪求无度是不幸，财产少但满足不是幸福吗？<strong>他总是善于在相反的因素中看出合理性来</strong>。</p>
+<p>再如他的循循善诱。雅典城内有一位胸怀大志又不愿求师的人，他大胆批评并耐心规劝。他几度找这位年轻人谈话，让他看清楚自己没什么智慧，最终甘心追随他学习。他有富于广博、精细的实际生活经验。有一次，得知一个有心从政的年轻人，他便前去询问方方面面的知识，暗示从政之前一定要耐心积累，比如，军事统帅的素质、城邦的税收、城建、人口、政治家必备的知识和才能、做人的基本道理等等，都是治理城邦需要掌握的本领，可谓无所不至。⑨</p>
+<p>要辨识苏格拉底的历史地位，可以考察他观察问题的立足点，究竟在神，还是自然、还是在人？苏格拉底与荷马不同，不以神的安排(命运)来解释人间秩序及人物命运。他也与自然哲学家不同，不屑去追问宇宙的奥秘，而是规劝人们关心人间的身边的事情。他更批评智者，声称自己是无知的，从不灌输任何学说；只用百姓的语言讲话，不会也不愿教授修辞术；一心为了城邦和公众的幸福，从不收取任何酬劳；他最反对的，是智者那种模糊不定的伦理观和技艺至上的功利观。</p>
+<p>苏格拉底声称自己承担着神授的使命，只听从心中理性的声音，不如说这里讲的神是一种比喻。它看重的是人们灵魂中的理性能力，高尚、纯粹，不似人间伪装的智慧；它的位置就像在天上，可以说是一种理性神。苏格拉底主张，理性是道德善恶与智慧真伪的判断准则，是哲学的追求——善的理念——的惟一媒介。人能有理性和理智，是因为人得到神的眷顾，被赋予了神性的一部分。灵魂的可贵，在于有了对智慧的爱和向往。</p>
+<h2 id="02-对政治的疏离和批评"><a href="#02-对政治的疏离和批评" class="headerlink" title="02 对政治的疏离和批评"></a>02 对政治的疏离和批评</h2><p>有了这种理性的准则，苏格拉底便用严格的智慧与美德衡量政治生活，从不随波逐流。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeqxt18CQ8uWDAcfsq5mb9uHFQsKkfqiaenlznREb4f7usEWTf7BjBFMvcVITPPxwC2rciaGW2VdKz1w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>先看一段故事，它显示了雅典人比较普遍的权力崇拜，是苏格拉底所反对的。伯罗奔尼撒战争进入第十六个年头，雅典人组织远征军进攻岛国弥罗斯。这个岛上的居民原为斯巴达的移民，在交战的双方之间持中立态度，为雅典所不满。开战之前，两位雅典将军进入弥罗斯岛，劝说少数行政长官和贵族长老带领城邦投降，激起辩论，两边的理由大致如下。</p>
+<p>弥罗斯人坚持认为：我们知晓两种选择的后果，或者认为正义在我们一边，不肯投降，结果是战争，或者是听从雅典的威逼，结果是被奴役；无论如何，雅典人不应该消灭那种对大家都有利益的原则，就是对于陷入危险的人有他们得到公平和正义处理的原则。</p>
+<p>雅典的将军则提出：我们还是应该考虑实际情况，经历丰富的人们都知道，正义的标准是以同等的强迫力量为基础的，强者能够做他们有权力做的一切，弱者只能接受他们必须接受的一切。将军们又说：我们相信自然界的普遍和必要的规律，就是在可能范围以内扩张统治的势力，这不是我们制造出来的规律；这个规律制造出来之后，我们也不是最早使用这个规律的人；我们发现这个规律老早就存在，我们将让它在后代永远存在。我们不过照这个规律行事，我们知道，无论是你们，或者别人，只要有了我们现有的力量，也会一模一样地行事。⑩</p>
+<p>从柏拉图的《高尔吉亚篇》里，我们也可以见到在智者影响下雅典人的权力观。对话人之一波卢斯表示，修辞学家以滔滔雄辩说服民众和法庭，僭主以权力随意杀人、夺人幸福，将最优秀的人驱除出境，他们都是城邦里最有权力的人。他以马其顿的僭主阿凯劳斯为例，认为他以邪恶的方式篡夺了权力，并且逃脱了惩罚，他就是幸福的。另一位对话者卡利克勒则以罕见的坦率表示，城邦的习俗和立法往往都是多数人或弱者采纳的，他们为自己的利益立法，目的是防止强者超过他们，夺取他们的利益。他们吓唬强者说，超过其他人是邪恶、可耻的，向他人谋求利益是不正义的。他们希望享有与他人平等的待遇，将寻求特权视为错误与可耻。但是在我看来，本性已经彰明了这一点，强者谋取弱者的利益是正确的，人越是能干，就越应得到更多的利益。所有动物、整个国家、整个人类都是这样，人们把这种权力当作君主之权和强者对弱者之权。劣者和弱者的牛，以及其它所有财产，都属于优者和强者，这是天然的正义。(11)他们两人的观点先后受到苏格拉底的讽刺与驳斥。</p>
+<p>针对上面波卢斯的观点，苏格拉底表示，修辞学家以及靠修辞学的技巧维持统治的僭主，在我们的任何城邦里都是权力最小的；行为善恶和人生幸福并不以欲望的满足而定，一切取决于人们的教育状况与合乎正义与否。作恶者在任何情况下都是不幸福的，如果他没有遇到正义和接受惩罚，他就更加不幸福，如果他付出了代价，从诸神和凡人那里受到惩罚，他就要好些，因为灵魂摆脱了邪恶。针对卡利克勒的观点，苏格拉底提出，任何人，无论是统治者或被统治者，都应该学会做他自己的主人，<strong>以节制和自制的美德控制自己的快乐和欲望</strong>。一个优秀的演说家与一位合格的政治家一样，其目的都应该使公民变得更完善，使正义在灵魂中扎根，从灵魂中消除不义。按照这个标准，雅典历史和现实中的政治家们没有几个很好地履行了自己的职责。</p>
+<p>接着，苏格拉底批评了雅典著名政治家、民主派领袖伯里克利，说他第一个向公民提供的劳役支付报酬，腐蚀了雅典人，人们变得比以前更加野蛮，到头来伯里克利本人也要吃他们的苦头；这些统帅一点儿都不注意纪律和正义，只知道为城邦提供战船、港口、城墙、船坞、税收之类的事情，用这些垃圾来喂养我们的城邦，是它变得腐败和溃烂。苏格拉底同时批评了智者，说他们自称是教人为善的教师，却经常责备学生对自己不好，或者不交学费，或者以不义对待老师，这不是荒谬吗?(12)</p>
+<p>在雅典的法庭上，苏格拉底也批评当时民主制的做法，即通过掷豆、抽签来确定城邦的治理者。他认为，这种选举方式偶然性太大，它必定容易导致那些根本不懂政治知识的庸才当政，给城邦带来严重的危害。他指出：君王和统治者并不是那些拥大权、持王笏的人，也不是那些由群众选举出来的人，也不是那些中了签的人，也不是那些用暴力或者凭借欺骗手法取得政权的人，而是那些懂得怎样统治的人。(13)他告诫民众，一个城邦如果交给那些不懂治国技艺的狂妄之徒、专营阿谀奉承之术的政客去治理，就会像一个没有必要知识的人，却被任命去驾驶一条船或带领一支军队，他只会给那些他所不愿毁灭的人带来毁灭，同时使他自己也蒙受羞辱和痛苦。</p>
+<p>面对智者学说的信奉者，苏格拉底坦然地评价说：在最有权力的人中间可以找到好人，当有权力胡作非为的时候仍然能够终生过着正义的生活，这样的人值得赞扬和尊敬，但是这种人很少，大多数掌握着权力的人是邪恶的。他还自信地宣称：“我认为我是从事真正的政治技艺的少数雅典人之一，但我不说自己是惟一的一个，现在这些人中间只有我一个人在实践政治家的才能。”(14)对于学生在人生志向上的多种选择，苏格拉底提出，那种治国齐家的本领，既有资格当领导，又能使别人和自己都得到好处，的确是最美妙的本领和最伟大的技能，这是属于帝王的，一般人称之为帝王之才。(15)在他的议论中，这些技艺包括真心向善的哲学修养、广博的从政知识、谙熟的治国之道，等等。</p>
+<p>一般将苏格拉底的政体主张认定为“哲学家的政治”，就是要由有知识的、懂得政治艺术的人进行统治。在原则上，这种人的选择要慎重，要经过相应的学习和训练。就精神气质而言，苏格拉底和赫拉克利特相似，主张以知识为基础的君主或者贵族政治。在各类政体中，苏格拉底对它们的优劣与得失也有分辨。学界一般认为，他将政体分为五种类型。第一是君主制，属于一个人掌权的好政体。它是建立在人民意志和国家法律基础之上的政权。对此种政体，苏格拉底讨论并不多，事实上此种政体与哲人政治非常相像。柏拉图的哲学王理论与此有密切联系。第二是僭主制，属于一个人掌权的坏政体。它违反民意，是建立在统治者专横意志之上的政权。这种人靠强力、欺骗获得统治权，而且治理国家时无视法治，手段专横、残暴，任意处死那些明辨是非、能干，但不合他们心意的公民。僭主本人必定在不久的将来受到惩罚，所以这种政体不会长久，是苏格拉底批评较多的政体。第三是贵族制，属于少数人掌权的好政体。进行统治的人实施法治，所以也是由良好的法律统治的完善国家，如当时的斯巴达和克里特。这种政体接近哲学家统治。第四是寡头制，属于少数人掌权的坏政体。它的原则是依据财富进行统治。与贵族制相比，此种政体缺少法治。苏格拉底比较赞同当时忒拜和麦加拉实行的温和寡头制，但是反对旧的氏族贵族(门第)或新贵族(财富)的统治。第五是民主制，依据所有人的意志进行统治，属于多数人掌权的坏政体，苏格拉底对此批评最多。民主制的主要缺陷是由抽签产生公职人员，选举方式具有极大的偶然性，被选人往往不够资格。对于母亲城邦雅典的民主政治，苏格拉底出于诚挚的爱护提出过严格的批评。他的批评集中在两点。一是它的“多数人决定”原则。公民大会决定一切国家大事，而组成公民大会的只是那些工匠、农夫、买卖人、只图贱买贵卖的市场商人。他们以自己的决定将无知的人变成统帅，实在应该感到害羞与可笑。二是公民的道德普遍堕落。苏格拉底相信：当时雅典之所以陷入混乱，就在于他的同胞们过于自信，在城邦事务和战争中粗心大意、轻举妄动、不纳忠言；专注于积聚钱财、猎取荣誉，而不在意智慧和性灵的修养。在伯罗奔尼撒战争中，雅典之所以失败的重要原因之一，就在于雅典领导人玩忽职守，没能发挥全体人员的特长和优势，不知向优秀的城邦学习。(16)</p>
+<p>既然现实政治失去常规，苏格拉底一生当中有意对政治保持距离。他说：从幼年起，就有一个声音反对我从事政治，我想反对得极好；如果我从事政治，可能早就死去了，于己于人两无益处；因为凡是真心为国家维护法纪、主持公道，和大众唱反调的人，还没有一个人能够保住生命；真心为正义而艰难奋斗的人，要想时时保全性命，非在野不可。(17)</p>
+<h2 id="03-忠诚于城邦的马虻"><a href="#03-忠诚于城邦的马虻" class="headerlink" title="03 忠诚于城邦的马虻"></a>03 忠诚于城邦的马虻</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/fS3LGgVj6OUyPGNjiadRJCFNYNZrUuw3lKsnM5VrglUfm1HtCJwTOoyU9HelyK26lOOQm9M56oJcfWuakMlSYhQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">雅典城邦</center>
+
+<p>独立的理性判断、对政治始终保持距离，表面上看，都容易导向一种个人主义的国家观念。但是苏格拉底不然，他对自己的城邦始终怀有不变的尊崇和忠诚。他不是把这种情感表现为浅显的说辞、附和、讨好等等，而是认真地履行每一项公务，见到不公正的言行就加以批评，不怕得罪自己的同胞。一句话，他对国家采取了一种真挚的负责态度。</p>
+<p>一个公民对祖国的爱可以表现为种种形式，面对政治人物和民众的错误时怎么办，更是一种考验。有些人视而不见，有些人大胆陈词，苏格拉底是后一种。在民主制的法庭上，他自称是马虻，粘在肥大而懒惰迟钝的良种马身上。他相信自己是神送给雅典的礼物，让他到处追随雅典人，整天不停地唤醒、劝告、责备他们。他这样批评雅典人的道德堕落：“雅典人啊，我敬爱你们，可是我要服从神过于服从你们。你们专注于尽量积聚钱财、猎取荣誉，而不想到智慧、真理和性灵的最高修养，你们不觉惭愧吗?”“我巡游各处，只是劝告你们：德性不出于钱财，钱财以及其他一切公共与私人的利益却出于德性。”(18)</p>
+<p>色诺芬笔下的苏格拉底还是一位卓越的政治教育家。他清醒地认识到，必须区别两种生活方式，一种是政治生活，另一种是更高的、超越政治的生活；政治事务的本质是非理性的，权力所要对付的不光有道德良善之人，还有道德并非良善的人，甚至是小人；政治生活中适用的美德是节制，它达不到最高的智慧，但应避免疯狂，应该承认那些并非真理、然而有益的意见，因为政治问题是最急迫的；要使公众服从，不可能采用说服的方式，而必须用敲打和灌输的方式。(19)</p>
+<p>监禁之中，学生克力同前来探望并力劝其逃走，雅典历史上不是没有类似的先例。苏格拉底拒绝逃离城邦，他提出：城邦给予每个公民平等的一份利益，无论是生命、给养、教育，还是应有的权利。一个人成年以后，便能够认清国家行政和法律条文。如果他们对此不满意，可以携带自己的财物去往中意的地方，或去殖民地，或移居外邦。凡是居留在城邦的人们，事实上就是和法律订立了合同，表明他们情愿服从城邦的法令。那些不服从的人便犯了三重罪，即不服从父母、不服从教养恩人、不遵守契约。(20)</p>
+<p>基于这一认识，苏格拉底对权力与法律的强制性是完全认可的，因为它们维护了国家的生存。他以为，城邦的律法是公民们一致制定的协议，规定他们应该做什么和不应该做什么，所以守法就是正义。他赞扬斯巴达的立法者吕库古最牢固地建立了守法精神，这个拥有最守法的人民的城邦，在和平时期生活得最幸福，在战争时期是不可抵抗的。在学生眼里，苏格拉底在私人生活方面，严格遵守法律并热情帮助别人；在公众生活方面，在法律所规定的一切事上他都服从首长的领导，无论是在国内或是从军远征，他都以严格遵守纪律而显著地高出于别人之上。当他做议会主席的时候，他不让群众做出违反法律的决议来，为了维护法律，他抵抗了别人无法忍受的来自群众的攻击。当三十僭主命令他做违反法律的事的时候，他曾拒绝服从他们。(21)按照这个道理，苏格拉底认为，如果一个公民被祖国和法律判处死刑，他便竭力企图毁坏、颠覆国家和法律，这种行为绝对是不正当的。因为国家是高贵、庄严、神圣的，她远远超过父母和世世代代的祖先，是神所尊重，有识者不敢侵犯的。一旦城邦做出了判决，公民就必须接受，无论是鞭打还是戴上镣铐，或者是送往战场去经历流血和死亡。(22)苏格拉底最后以服从法庭的判决、慷慨赴死，就是要以此证明法律和正义的崇高价值。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/fS3LGgVj6OUyPGNjiadRJCFNYNZrUuw3ljl6hgdhoJbP76gamAa5zx4AticVibEZueYBE8oXPW8rZhibNEa2S9AN7g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">《苏格拉底之死》</center>
+
+<p>国外有学者称这种忠诚感为公民对国家的道德责任，并认为它与苏格拉底在法庭申辩时的行为动机有所矛盾。换言之，在拒绝逃走时，苏格拉底没有解释为何不能拒不服从非正义的法律？苏格拉底提供了另一个理由：“自愿”。关于自愿，苏格拉底在另一次对话里有过明确的表述，对话者是普罗塔哥拉斯——智者的开创人。苏格拉底提出一个观点：无人自愿作恶或犯罪。他进一步说：自愿这个词在这里的真实含义是自己，例如，好人经常迫使自己去爱和赞扬。就好比当某人的父母或祖国对他不关心，他仍然要去爱他们和赞扬他们。当这些人发现自己处在这样的境况中时，如果他们接受这个事实，揭露和批判他的父母或祖国不对的地方，并从此放弃自己对他们负有的责任，不顾由此可能引起的他人的责备或批评，那么这样做是不妥当的。而好人就不一样了，他们不会犯这样的错误，反而会努力赞扬他们的父母和祖国，即使受到不公正的待遇，他们也会克制愤怒，心平气和地寻求和解，强迫自己去热爱和赞扬他们的亲友。(23)</p>
+<p>即便如此，苏格拉底的言行与人格，仍然受到当时雅典城内相当多公民的质疑和反对，他们是民主派。须知，从公元前6世纪的梭伦改革和克里斯提尼改革开始，到审判苏格拉底的二百年间，雅典城内一直存在着民主派与寡头派之间激烈的党争。而且，党争趋于极端化，因为梭伦曾经规定：每个公民必须在党争中表明自己赞同哪一派，否则取消公民权。根据历史学家修昔底德的记录，伯里克利也讲过类似的话：在雅典这个城邦里，远离政治的人不被看作热爱和平的公民，而被视为社会的无用成员。经过多次平民化立法的促动，雅典的民众已经被纵容得任意妄为，常常在情感冲动下做出重大决策。(24)</p>
+<p>不光苏格拉底自己得罪过民主派的领袖们，而且他的学生不少也是来自贵族家庭，与民主制存有情感和观念上的罅隙，如柏拉图、色诺芬、克力同等，他们或偏爱斯巴达的贵族制，或喜爱波斯的君主制。惹来最大麻烦的，是一位年轻俊美、富于才气的将领——阿尔喀比亚德。他在伯罗奔尼撒战争中既统帅过自己城邦的军队，也投靠过敌对城邦斯巴达，而且反复几次，令雅典人痛恨彻骨。民主派认为，苏格拉底应该为学生的行为负责。表面上看，控诉苏格拉底的罪名，所谓引进新神、毒害青年，与政治是不相干的。然而诡异之处在于，雅典在推翻三十僭主之后，曾于前403年颁布大赦令，规定此年夏季之前的任何行为，不得用来作为依据，以政治罪名起诉雅典公民。所以民主派的领袖们才有意回避政治动机，实际上，他们确实想置被告于死地。苏格拉底审判是个政治案件。</p>
+<p>国外有学者认定苏格拉底是寡头派的幕后策划者；他是故意在法庭上装傻；雅典城在他死后还流行其他一些法庭申辩的版本；在学生们写下的申辩演说里，有意掩盖了某些事实，树立了一个具有美德的老师形象，等等。(25)我们在这里难以回避几种纠结，特别是真相问题与价值问题。首先，哪一个苏格拉底是真实的?他是哲学家，还是政治活动家？学生是否美化了自己的老师?他们记录了一个正直的人，还是努力掩盖某些事实？如果我们看柏拉图的记录，可能控辩双方都敏感到这是一个关键问题。据施特劳斯的解读，苏格拉底在法庭辩论中首先声明，自己没有什么东西值得隐瞒，所有发言只讲事实；他说话也不讲究什么技术，所有东西都是坦白的。相反，控诉方倒是精心编制了一套说辞，并且认为苏格拉底强词夺理。针对加于头上的罪名，苏格拉底首先声明：自己从不关心天上的事情，并且时时听从神的声音。接下来，针对所谓毒害青年，他当堂指出一些在场的门生，他们都有父兄陪伴，可是其中没有一个人站出来证实这种指控，原因很简单，罪名是虚假的。苏格拉底又说：他也可以沿用惯常的做法，请求法庭宽恕，但是他不愿意这样做，因为他珍惜自己作为雅典公民的声誉，倘若影响法庭违背立下的誓言，恰恰是不公正的和不虔敬的；面对所有雅典人的眼睛，<strong>他情愿接受任何判决，以此证明和捍卫自己，戳穿不敬神的谎言</strong>。(26)</p>
+<p>另外的问题就是，苏格拉底以及他的学生们树立的这套价值观，是否值得追求？答案应该是肯定的。因为摆脱几百年来的党派之争，提升城邦的道德水准，恢复制度与法律的尊严，寻求城邦的整体幸福，惟一的答案只能是苏格拉底和柏拉图的思考结果：转变人们的灵魂，从公认的正义准则开始。</p>
+<h2 id="04-结语"><a href="#04-结语" class="headerlink" title="04 结语"></a>04 结语</h2><p>苏格拉底留给后人的启示是丰富的。他代表了一种清醒，让我们明白追求真理应当始于一种谦逊的态度，从“自知无知”出发，如此反倒可以激发人们去批判虚假和伪善，振奋不断进取的强大动力。他代表了一种人格，就是以伦理上的善德与正义为基点，去评判现实制度和人性中的是非善恶，这种理性和正义感在每个人的心中，就看我们敢不敢对抗人间的各种世俗偏见。他代表了一种博大的智慧，让我们从中西方文化的源头，发现一些相似的精神源泉，比如，苏格拉底如同孔子，信守自己的道德立场和伦理准则；他也像老子，知晓福祸相依的辩证法；他又有庄子的洒脱和旷达，蔑视权力、蛮横、苦难与死亡。阅读东西方经典，我们感叹“天涯何处无芳草”，智慧就在身边，正义就在人间。苏格拉底代表了一种可敬的生活态度。</p>
+<p>苏格拉底树立了一个独立的知识分子的形象。他生活于伯里克利治下的雅典民主制黄金盛世，身边充斥着政治技艺的传播者——智者。但是他在繁华和虚夸中看到危机，他的可贵之处，在于树立了绝对的正义准则，并敢于凭借一己之力去改变久积成弊的乱象。他深感无论民主派还是贵族派都在衰落，都在破坏正义的法律。他继承了荷马史诗的传统，以正义原则为着眼点，解释政治生活中的诸多重大问题。他的特点是侧重从行使权力的主体角度出发，把权力的行使与执政者自身的品质联系起来，从道德、知识、技艺等几个方面，强化执政者自身的严格标准。他相信城邦的公民应当忠诚并服从法律，自觉承担起法律规定的义务，如同受神的感召不容逃遁。他又敢于批评逞强违法的行为，无论这种力量来自统治者或是民众，留下一个负责任的公民应有的道德人格。这些影响到柏拉图的哲学王主张、亚里士多德推崇的才德要素，更影响到后世的城邦道德目的论，以及城邦是个教育机构的理论。</p>
+<p>苏格拉底的价值不仅于此。细细考究苏格拉底的所有言语和活动，可以说他思考的中心都是城邦的荣誉和美德。换言之，他在教导个体公民如何学会在政治共同体中生活，其底线就是抑制私人或小团体的私欲，学会按照公共人格的生存方式思考问题。这样说，不是要求个体和社会团体绝对服从国家，苏格拉底恰恰敢于发表个人的声音，肯定少数人可能掌握真理；也不是要求国家仅仅充当个人权益的工具，苏格拉底就没有在从政中攫取官职和金钱，反而将国家置于个人的幸福与生命之上。政治哲学有了这个起点，便有了以后两千多年思想发展的基本路向，即探讨与公民和国家相关的一切课题、概念、命题和理论。有了这个起点，我们才容易理解柏拉图的理想国出自防止贫富分化的初衷；霍布斯的利维坦包含了自由主义的因素；卢梭的人民主权共和国试图调和自由与服从这对矛盾；黑格尔“伦理理念的现实”综合了特殊性与普遍性。苏格拉底揭示了政治哲学的宿命，为它以后的发展开启了丰沛的源头，他的确称得上是政治哲学的创始人。</p>
+<div style="color:gray;font-size:0.9em;">
+文章原载《贵州社会科学》<br />
+注释：<br />
+①叶秀山著：《苏格拉底及其哲学思想》，北京：人民出版社1986年版，第30页。<br />
+②中国学者将Arete译为特长、优秀或出类拔萃，一般也译为德性、美德。这种译法和此处观点，参见色诺芬等著，沈默等译：《色诺芬的〈会饮〉》，北京：华夏出版社2006年版，第25页注、111页注2、116页注1。汪子嵩等著：《希腊哲学史》第2卷，北京：人民出版社1993年版，第412—414页。<br />
+③(古希腊)色诺芬著，吴永泉译：《回忆苏格拉底》，北京：商务印书馆1984年版，第155、158—159页。<br />
+④(古希腊)柏拉图著，王晓朝译：《斐多篇》，载《柏拉图全集》第2卷，北京：人民出版社2003年版，第66—67页。亦参见汪子嵩等：《希腊哲学史》第2卷，第367页。<br />
+⑤(古希腊)柏拉图著，杨绛译：《斐多：柏拉图对话录之一》，沈阳：辽宁人民出版社2000年版，第39、42页。<br />
+⑥柏拉图著，王晓朝译：《斐多篇》，《柏拉图全集》第2卷，第109页。<br />
+⑦佩内洛普的丈夫奥德修斯远征不归，许多人向她求婚。为了拒绝求婚者，她声明得织好了公公的裹尸布，再谈婚事。她白天织，每晚再拆掉，如此拖延时日。此处以拆掉织好的布料作比喻，指的是丢掉有益的东西(理性)，把时光浪费在无益的事情上，白白浪费生命。参见柏拉图著，杨绛译：《斐多：柏拉图对话录之一》，第49页。<br />
+⑧(古希腊)柏拉图著，王晓朝译：《克里托篇》，载《柏拉图全集》第1卷，北京：人民出版社2002年版，第36、40—41页。<br />
+⑨色诺芬著，吴永泉译：《回忆苏格拉底》，第146、142、105—110页。<br />
+⑩(古希腊)修昔底德著，谢德风译：《伯罗奔尼撒战争史》下册，北京：商务印书馆1997年版，第412—421页。<br />
+(11)柏拉图著，王晓朝译：《高尔吉亚篇》，《柏拉图全集》第1卷，第343、350—351、369—370页。<br />
+(12)柏拉图著，王晓朝译：《高尔吉亚篇》，《柏拉图全集》第1卷，第343、350、353、378、398、424、412—416页。亦可参见汪子嵩等著：《希腊哲学史》第2卷，第394—395页。<br />
+(13)色诺芬著，吴永泉译：《回忆苏格拉底》，第118页。<br />
+(14)柏拉图著，王晓朝译：《高尔吉亚篇》，《柏拉图全集》第1卷，第419页。<br />
+(15)色诺芬著，吴永泉译：《回忆苏格拉底》，第144页。<br />
+(16)参见色诺芬著，吴永泉译：《回忆苏格拉底》，第180—181页。由于苏格拉底述而不作，关于他的政体思想，一般认为可以从他的学生柏拉图的《理想国》与《法律篇》中探悉。参见(古希腊)柏拉图著，郭斌和、张竹明译：《理想国》，北京：商务印书馆1986年版；(古希腊)柏拉图著，张智仁、何勤华译：《法律篇》，上海：上海人民出版社2001年版。<br />
+(17)(古希腊)柏拉图著，严群译：《游叙弗伦　苏格拉底的申辩　克力同》，北京：商务印书馆1983年版，第68页。<br />
+(18)柏拉图著，严群译：《游叙弗伦　苏格拉底的申辩　克力同》，第66—68页。<br />
+(19)(美)施特劳斯：“苏格拉底问题六讲”，载刘小枫、陈少明主编：《苏格拉底问题》，北京：华夏出版社2005年版，第39—41页。<br />
+(20)柏拉图著，严群译：《游叙弗伦　苏格拉底的申辩　克力同》，第109页。<br />
+(21)色诺芬著，吴永泉译：《回忆苏格拉底》，第164—165、161页。<br />
+(22)柏拉图著，严群译：《游叙弗伦　苏格拉底的申辩　克力同》，第108页。<br />
+(23)T.Penner,“Socrates”,from The Cambridge History of Greek and Roman Political Thought, ed.　by C. Rowe and M. Schofield，Cambridge University Press，2000，pp. 185—188.同时参见：柏拉图著，王晓朝译：《普罗泰戈拉篇》，载《柏拉图全集》第1卷，第470页。<br />
+(24)利茨马著，朱雁冰译：“苏格拉底、色诺芬、维兰德”，载沈默等译：《色诺芬的〈会饮〉》，第176—177页注释3、第179页。另外参见，叶秀山：《苏格拉底及其哲学思想》，第14页注释1。<br />
+(25)雅典历史上的激烈党争以及学者的这种评论，集中见于珂娄斯特：“苏格拉底问题的政治层面”，载刘小枫、陈少明主编：《苏格拉底问题》，第88、91—95、107—129页。<br />
+(26)Leo Strauss，Studies in Platonic Political Philosophy，Chicago and London：The University of Chicago Press,1983, pp.38—39、p.48.
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5be00d72/">毕加索全集（155张高清作品）</a>
+            
+            
+            <a class="next" rel="next" href="/235f7c33/">苏格拉底的精神（威尔·杜兰特）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5be00d72/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/235f7c33/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

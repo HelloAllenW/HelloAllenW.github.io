@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>哈贝马斯对全球化政治的思考（张汝伦） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">哈贝马斯对全球化政治的思考（张汝伦）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">六月 14, 2016&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        六月 14, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTer4X9qeD6HicAXDLXxF51QN8BkA1r1dEdEOmVMSjEgcfXvB1YZsF1VOicaII3Ph4tVA1YWX67642U9Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><center><font color=red size=5>评哈贝马斯对全球化政治的思考</font></center>
+
+<center><font face="黑体"><b>张汝伦</b></font></center>
+
+<p>哈贝马斯的学术生涯从一开始，就有着强烈的政治兴趣和政治倾向。然而，哈贝马斯最近十几年的政治哲学不再是要论证西方政治制度的“合法性危机”，而是要论证它的正当性。简单说来，就是西方的政治体制是建立在具有普遍主义性质的共和主义（法治国家）和人权与民主的基本原则上，因而具有超历史、超民族、超地域的普遍性，这种先验的普遍性是它合法性的根本保证。　</p>
+<p>　　</p>
+<p>哈贝马斯的全部理论，正是建立在普遍主义的原则上。要证明他普遍主义的政治哲学，必须证明人类历史发展的普遍性。这就使得民族国家消亡的思想成为他近年政治哲学思考的一个重点。　</p>
+<p>　　</p>
+<p>如前所述，全球化必然导致民族国家过时和消亡的观点并不是哈贝马斯的发明，新自由主义者一直在鼓吹这种观点。但在出发点上，哈贝马斯与他们还是有区别的。新自由主义者鼓吹民族国家过时和消亡是为了替资本主义经济在全球的加速扩张开道；而哈贝马斯的目的和理由要更复杂一些。　</p>
+<p>　　</p>
+<p>出身批判理论的哈贝马斯清楚地认识到，飞速发展的资本主义工业化加剧了阶级对立和由此而来的社会紧张，为了转移国内矛盾，欧洲各国政府在19世纪与20世纪上半叶利用民族主义的推动力将社会冲突引向对外的帝国主义战争。但在第二次世界大战的惨剧之后，民族主义的整合力已消耗殆尽，西方各国不得不利用在社会总产值中支配的很大份额，实行有力的基础设施政策、就业政策和社会福利政策，同时促进经济的活力，保障社会一体化，化解了阶级对立，稳定了资本主义。（注：Jürgen Habermas,Die Einbeziehung des Anderen,Suhrkamp Verlag Frankfurt am Main,1996,S.201-202；哈贝马斯：《超越民族国家？》，载贝克等：《全球化与政治》，王学东、柴方国等译，中央编译出版社2000年版，第71页。）但是，在激烈竞争的全体化的经济框架中，民族国家要保持其国际竞争力，就不可能再继续福利国家的政策，而必然要“采取有害于社会团结一致，使社会的民主稳定性面临严峻考验的‘削减’政策”（注：哈贝马斯：《超越民族国家？》，第73-74页。）。在哈贝马斯看来，经济全球化破坏了一度得以实现的社会福利国家妥协的历史局面。而社会福利国家妥协即使不是解决资本主义内在问题的理想方案，至少也能够把它所造成的社会代价维持在可以容忍的限度。（注：哈贝马斯：《超越民族国家？》，第77页。）　</p>
+<p>　　</p>
+<p>问题还不仅如此。一旦放弃社会福利国家的政策，势必要造成贫富差距扩大和社会分化；而社会分化又势必破坏自由的政治文化，丧失民主的基础。哈贝马斯认为，“只有把民族国家的社会福利国家职能转让给能够在一定程度上适应跨国经济的政治共同体，才能在迄今的水平上履行这种职能。”（注：哈贝马斯：《超越民族国家？》，第78页。）再说经济全球化也必然大大削弱民族国家的能力。（注：Jürgen Habermas,Die Postnationale Konstellation,Suhrkamp Verlag Frankfurt am Main,1998,S.104.）也就是说，只有从民族国家过渡到一个超民族国家的政治共同体，才能在经济全球化的条件下继续原先由民族国家采取的社会福利措施，对抗资本无限扩张的逻辑，保障和进一步扩大社会民主。哈贝马斯对那种将资本主义的经济逻辑推崇到极致的新自由主义深为不满，认为只有坚持政治先于经济，对在全球范围内横冲直撞的资本主义加以“政治驯化”，才能使现有的制度长治久安。　</p>
+<p>哈贝马斯要超越民族国家的第二个主要考虑是：经济全球化使得地球上的人们成为风险共担的共同体，有着无法回避的集体命运。一方面，市场的扩张遇到了地球幅员的限制，资源开发也遇到了自然界的限制。“日益变小的世界已不允许人们将行为后果外化：无须担心制裁，而把代价和风险转嫁给他人，如其他社会部门、其他地区、其他文化或子孙后代的机会越来越少。这无论在重大技术的跨地区风险上，还是在富裕社会的工业所从事的危害整个地球的有害物质上，都表现得同样明显。”（注：哈贝马斯：《超越民族国家？》，第82页。）单个国家不再能靠自己的力量保护自己的公民免受全球风险。另一方面，生态环境问题、恐怖主义问题、毒品走私、跨国犯罪和军火贸易，都不是哪一个国家可以单独解决的；并且，解决这些问题必然也必须对民族国家的主权有所限制。面对上述人类共同面临的严重问题，“各个国家都必须在对内政策上鲜明地被纳入一个负有世界义务的国家共同体的有约束力的合作过程”（注：哈贝马斯：《超越民族国家？》，第82页。）　</p>
+<p>　　</p>
+<p>哈贝马斯主张超越民族国家的第三个主要理由是维护世界和平与人权。哈贝马斯认为，产生于威斯特法利亚和约，建立在国际政治体系基础上的“权力均衡”，到第二次世界大战就崩溃了。古典国际法如果没有国际法庭和跨国的审判权力机关，根本不可能像国内法庭那样得到有效的贯彻和执行。20世纪的总体战争把这种脆弱的规范框架也打破了。军备竞赛愈演愈烈，大规模杀伤性武器遍布全球，使（由独立的民族国家形成的）国家世界(Staatenwelt)处于一种危险的无政府状态。（注：参看Jürgen Habermas,Die Einbeziehung des Anderen,S.152.）这就迫切需要有超民族国家的政治体系来消除战争危险维护世界和平，国联和联合国的建立都体现了这种设想。此外，人权作为人类普遍的基本权利和法律意义上必须贯彻的权利，也应该得到普遍的维护，联合国的《世界人权宣言》就表明了这一点。这就意味着民族国家的主权必须受到限制。　</p>
+<p>　　</p>
+<p>可以看出，超越民族国家是哈贝马斯对当代人类面临的一些极为重大问题的回答，可以说，超越民族国家的思想是他这些年来政治哲学思考的主要结论之一。进一步考察他的这一思想，对于弄清哈贝马斯的政治思想，和我们自己思考这些问题，都是有益的。　应该肯定，在全球化问题上，哈贝马斯比新自由主义者头脑远为清醒。他不像他们那样，以为经济全球化将带来普遍美好的生活。相反，他一再指出，经济全球化造成大多数人，尤其是弱势群体生活水平下降，收入差距日益扩大，而“收入差距日益扩大导致贫困者和无社会保障者增多，这方面的指数确凿无疑，社会分化的趋势同样也是显而易见”（注：哈贝马斯：《超越民族国家？》，第72页。）。“不管从哪个角度看，经济全球化都破坏了一度得以实现的社会福利国家妥协的历史局面。”（注：哈贝马斯：《超越民族国家？》，第77页。）这说明哈贝马斯还未完全忘记社会主义和平等的理念。　</p>
+<p>　　</p>
+<p>根据哈贝马斯的分析，“在西方混合经济中，国家可以在社会总产值中支配很大的份额，因而拥有转移支付、补贴，乃至实行有力的基础设施政策、就业政策和社会福利政策的活动余地。国家能够对生产和分配的框架条件施加影响，以便达到增长、价格稳定和充分就业的目标。”（注：哈贝马斯：《超越民族国家？》，第71页。）可是，在经济全球化的条件下，国家不得不屈服于日益加剧的全球竞争的压力，宁要效率，不要公正，以牺牲多数人福利为代价来换取经济上的有利地位。哈贝马斯认为，这种做法后果同样严重，它不仅与民主制自由社会的根本原则相违背，而且会导致社会民主稳定性受损害。　</p>
+<p>　　</p>
+<p>哈贝马斯的解决方案，具体而言，就是“把民族国家的社会福利国家的职能转让给能够在一定程度上适应跨国经济的政治共同体”（注：詹姆斯•佩特拉斯：《全球化：一个批判性的分析》，载《批判的范式：帝国主义政治经济学》，第78页。）。这种共同体之所以“能够在一定程度上适应跨国经济”，是因为由于地理的和经济的基础扩大而在全球竞争中获得优势，加强自己相对于其他国家的地位。（注：詹姆斯•佩特拉斯：《全球化：一个批判性的分析》，载《批判的范式：帝国主义政治经济学》，第79页。）哈贝马斯心目中这样的政治共同体，显然是欧盟。但正如他自己也承认的，“它改变不了经济基地竞争的模式，也不会自动地适应跨国性世界经济体系的方针转向企图从政治上对该体系的框架条件施加影响的方针。”（注：詹姆斯•佩特拉斯：《全球化：一个批判性的分析》，载《批判的范式：帝国主义政治经济学》，第79页。）　</p>
+<p>　　</p>
+<p>所以，他也认为，仅仅将原先民族国家的调控能力转让给跨国性的政治共同体是不够的，关键是要以政治来训服“横冲直撞的资本主义”。具体做法是，“要引进世界范围内的政治意志构成因素，并保证政治决策的约束力。”（注：哈贝马斯：《超越民族国家？》，第80页。）也就是将国内的民主扩大到国际范围，借助各政治实体的市民社会和政治舆论，形成世界性的强制互助意识。（注：哈贝马斯：《超越民族国家？》，第83页。）只有公民要求大力转变对内政策形成观念压力，具有全球行动能力的行动者，包括民族国家在内的各种政治共同体的自我意识才会发生变化，才会日益把自己视为一个只能相互合作和相互兼顾利益的共同体的成员。　</p>
+<p>　　</p>
+<p>尽管哈贝马斯认为今天已无人愿意追随乌托邦，但他的这个以广泛的全球民主来驯服资本主义的想法，却不能不说是乌托邦的。既然单个民族国家的市民社会及其政治舆论都不足以使它们的政府不屈从资本的逻辑，而坚持社会民主的政策，那么怎么能指望它们（即使能）形成的世界性互助的意识能使一个超民族的政治共同体牺牲自己在全球经济中的有利地位，去实行民族国家无法继续实行的社会福利政策呢？此外，我们的时代是一个商业力量更强、更富于侵略性而且比以前面临更少有组织反抗的时代。资本的力量不仅可以将其政治权力编成法典，也可以通过影响和占有媒体来控制舆论。（注：罗伯特•W•迈克杰斯尼：“《新自由主义和全球秩序》导言”，载诺姆•乔姆斯基：《新自由主义和全球秩序》，徐海铭、季海宏译，江苏人民出版社2000年版，第3、5、185页。）在这种情况下，不利于资本主义发展的舆论永远不会成为主流，更不用说影响和改变政治的方向。　</p>
+<p>　　</p>
+<p>更有甚者，如乔姆斯基所指出的，政府是现代资本主义制度的核心。它们向那些占统治地位的经济集团提供大量的政府津贴，使其能够在众多领域中牟取更大利益。鼓吹新自由主义的国家要求政府退出经济领域，让市场自由发挥作用，但实际却是自己利用国家的力量来削弱和打垮一切可能的竞争对手，保持自己的优势地位。例如，肯尼亚的纺织工业在1994年彻底崩溃，原因就是克林顿政府通过设立配额，阻止了其他任何工业国家一直遵循的发展道路。（注：诺姆•乔姆斯基：《新自由主义和全球秩序》，第7、21页。）在新自由主义意识形态占统治地位的时代，世界公民互助只能是一个遥远的梦想。由世界公民参与的国际民主，更是如此。哈贝马斯想要以此为基础来训服资本主义，不能不是彻头彻尾的空想。　</p>
+<p>　　</p>
+<p>在今天的世界上，有许多问题，像环境生态问题、跨国有组织犯罪问题、军火交易、毒品走私、金融风险等等，的确不是任何一个国家能够单独解决的，需要各国的互助合作。这些问题必须在世界范围内加以解决，意味着国家权力要受到一定的限制。此外，我们的确生活在一个风险共担的时代，全球化也意味着灾难和风险的全球化。任何国家都不可能置身于人类的共同命运之外，而必须和别的国家一起承担起人类的共同命运和责任。个别国家的主权必须服从人类的共同利益。这都没有错。但这未必一定意味着需要超越和削弱民族国家。　</p>
+<p>　　</p>
+<p>虽然在20世纪已经出现了治理的区域性和全球性制度和机制，出现了像绿色和平运动这样的全球性跨国行动者，但即使是联合国，也在许多方面仍然软弱无力，全球治理的机制还未形成。在这种情况下，对付上述全球性问题，恰恰只能以民族国家和区域治理为单位，通过民族国家的合作来进行。事实上，在对付像使用麻醉品、管理核废料、军事安全、砍伐热带雨林、保护土著居民、使用非再生资源、管理和控制动物和人类基因工程等问题上，国家仍是最有效的执行单位，尽管这些问题本身超出了国家的边界之外。国际合作和各种政治共同体也许可以超越和限制国家权力，但还不能完全取代它。哈贝马斯自己也不得不承认这一点：“要使利益协调和普遍化的程序以及创造性地策划共同利益的程序制度化，不能靠根本不受欢迎的世界国家这一组织形式来实现，而要靠以前各主权国家的自主、自愿和独特性来实行。”（注：哈贝马斯：《超越民族国家？》，第83页。）　</p>
+<p>　　</p>
+<p>实际上，正如有的国外学者所指出的，经济全球化绝不必然等于国家权力的弱化，而只是改变了国家权力实施的条件。（注：戴维•赫尔德等：《全球大变革》，第608页。）哈贝马斯设想超国家的全球市民社会可以解决人类面临的全球问题。但且不说这种“超国家的市民社会”是否真正可能还是个问题，组成这种全球市民社会的某些非政府组织和社会运动也完全可能是代表局部利益的排斥性的、相互对立的团体。（注：杨雪冬：“全球化的文明化和民主化：一条艰难的路”（《全球大变革》译序），载《全球大变革》，第24-25页。以为只要诉诸超国家的市民社会就可以解决国家无法解决的问题，那的确是像有的论者所说的那样，“把实际问题简单化了，理所当然地把建立制度，发展公民社会组织看作是解决问题的惟一途径，没有深入探讨制度、功能以及国家与公民社会之间的关系。而且由于流于制度层面的分析，忽视了现有国际关系中的不平等”（注：杨雪冬：“全球化的文明化和民主化：一条艰难的路”（《全球大变革》译序），载《全球大变革》，第24页。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/87999f0a/">哭墙 ( 奥巴马、普京等造访灵魂寄存处 )</a>
+            
+            
+            <a class="next" rel="next" href="/d3a41432/">哈维尔：谈信仰</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/87999f0a/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d3a41432/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

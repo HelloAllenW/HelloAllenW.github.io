@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>论真理的本质（海德格尔） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">论真理的本质（海德格尔）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 11, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 11, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">13.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">46 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTeomFbHicx6PmaVCDGOc9ZK8hv42gz1COhNHD1lHseRytgibrKRXZibw0xC121EB7UJ2KiaTylWFCicUmlQ/640?wx_fmt=jpeg&wxfrom=13" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影师Suzanne Saroff（美）作品</center>
+
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+文 | 海德格尔，译 | 孙周兴
+</div>
+
+
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVRibBpoHg9B9OBso8zavibxibPjAicuDbcwIHj4S8NjcBczqxEj6WUXmQRQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p><strong>作者：马丁·海德格尔</strong>，德国哲学家，在现象学、存在主义、解构主义、诠释学、后现代主义、政治理论、心理学及神学有举足轻重的影响。著有《存在与时间》《林中路》《路标》《荷尔德林诗的阐释》等。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>这里要讲的是真理的本质。真理的本质问题并不关心真理是否向来是一种实际生活经验的真理呢，还是一种经济运算的真理，是一种技术考虑的真理呢，还是政治睿智的真理，特别地，是一种科学研究的真理呢，还是一种艺术造型的真理，甚或，是一种深入沉思的真理呢，还是一种宗教信仰的真理。这种本质之问撇开所有这一切，而观入那唯一的东西，观入那种标识出任何一般“真理”之为真理的东西。 </p>
+<p>然则凭着这个本质之问，我们难道没有遁入那窒息一切思想的普遍性之空洞中去么？此种追问的浮夸性难道不是彰明了所有哲学的无根么？而一种有根的、转向现实的思想，必须首先并且开门见山地坚决要求去建立那种在今天给予我们以尺度和标准的现实真理，以防止意见和评判的混淆。面对现实的需要，这个无视于一切现实的关于真理之本质的（“抽象的”）问题又有何用呢？这种本质之问难道不是我们所能问的最不着边际、最干巴巴的问题么？ </p>
+<p>无人能逃避上述顾虑的明显的确凿性。无人能轻易忽视这一顾虑的逼人的严肃性。但谁在这一顾虑中说话呢？是“健全的”人类理智。它固执于显而易见的利益需求而竭力反对关于存在者之本质的知识，即长期以来被称为“哲学”的那种根本知识。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVlIcf6lfmnRxsll7fmxdUkWKzia7SMIdoXa7gk1roaU1ibRIgDPZvNDSA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">海德格尔</center>
+
+<p>普通的人类理智自有其必然性；它以其特有的武器来维护它的权利。这就是诉诸于它的要求和思虑的“不言自明性”。而哲学从来就不能驳倒普通理智，因为后者对于哲学的语言置若罔闻。哲学甚至不能奢望去驳倒普通理智，因为后者对于那种被哲学置于本质洞察面前的东西熟视无睹。</p>
+<p>再者，只消我们以为自己对那些生活经验、行为、研究、造型和信仰的林林总总的“真理”感到确信，则我们本身就还持留在普通理智的明白可解性中。我们自己就助长了那种以“不言自明性”反对任何置疑要求的拒斥态度。 </p>
+<p>因此，即便我们必得追问真理，我们也需要回答这样一个问题：我们今天立身于何处？我们要知道我们今天的情形如何。我们要寻求那个应当在人的历史中并且为这种历史而为人设立起来的目标。我们要现实的“真理”。可见，还是真理！但在寻求现实的“真理”之际，我们当也已经知道真理究竟意味着什么。或者，我们只是“凭感受”并且“大体上”知道真理？不过，这种约莫含糊的“知道”和对之漠不关心的态度，难道不是比那种对真理之本质的纯粹无知更加苍白么？</p>
+<h2 id="流俗的真理概念"><a href="#流俗的真理概念" class="headerlink" title="流俗的真理概念"></a>流俗的真理概念</h2><p>人们通常所理解的真理究竟是什么呢？“真理”，这是一个崇高的、同时却已经被用滥了的、几近晦暗不明的字眼，它意指那个使 真实成其为真实的东西。什么是真实（Wahres）呢？例如，我们说：“我们一起完成这项任务，是真实的快乐”。我们意思是说：这是一种纯粹的、现实的快乐。真实就是现实（das Wirkliche）。据此，我们也谈论不同于假金的真金。假金其实并非它表面上看起来的那样。它只是一种“假象”（Schein），因而是非现实的。非现实被看作现实的反面。但假金其实也是某个现实的东西。因此，我们更明白地说：现实的金是真正的金。但两者又都是“现实的”，真正的金并不亚于流通的非真正的金。可见，真金之真实并不能由它的现实性来保证。于是，我们又要重提这样一个问题：这里何谓真正的和真实的？真正的金是那种现实的东西，其现实性符合于我们“本来”就事先并且总是以金所意指的东西。相反地，当我们以为是假金时，我们就说：“这是某种不相符的东西”。而对于“适得其所”的东西，我们就说：这是名符其实的。事情是相符的。</p>
+<p>然而，我们不仅把现实的快乐、真正的金和所有此类存在者称为真实的，而且首先也把我们关于存在者的陈述称为真实的或者虚假的，而存在者本身按其方式可以是真正的或者非真正的，在其现实性中可以是这样或者那样。当一个陈述所指所说与它所陈述的事情相符合时，该陈述便是真实的。甚至在这里，我们也说：这是名符其实的。但现在相符的不是事情（Sache），而是命题（Satz）。 </p>
+<p>真实的东西，无论是真实的事情还是真实的命题，就是相符、一致的东西。在这里，真实和真理就意味着符合（Stimmen），而且是双重意义上的符合：一方面是事情与关于事情的先行意谓的符合；另一方面则是陈述的意思与事情的符合。</p>
+<p>传统的真理定义表明了符合的这一双重特性：veritas est adaequatio rei et intellectus。这个定义的意思可以是：真理是物（事情）对知的适合。但它也可以表示：真理是知对物（事情）的适合。诚然，人们往往喜欢把上述本质界定仅仅表达为如下公式：veritas est adaequatio intellectus ad rem［真理是知与物的符合］。不过，这样被理解的真理，即命题真理，却只有在事情真理（Sachwahrheit）的基础上，亦即在adequatio rei ad intellectum［物与知的符合］的基础上，才是可能的。真理的两个本质概念始终就意指一种“以……为取向”，因此它们所思的就是作为正确性（Richtigkeit）的真理。 </p>
+<p>尽管如此，前者却并非对后者的单纯颠倒。而毋宁说，在两种情况下，intellectus［知］与res［物］是被作了不同的思考。为了认清这一点，我们必须追溯通常的真理概念的流俗公式的最切近的（中世纪的）起源。作为adaequatio rei ad intellectum［物与知的符合］的veritas［真理］并不就是指后来的、唯基于人的主体性才有可能的康德的先验思想，也即“对象符合于我们的知识”，而是指基督教神学的信仰，即认为：从物的所是和物是否存在看，物之所以存在，只是因为它们作为受造物（ens creatum）符合于在intellectus divinus即上帝之精神中预先设定的理念，因而是适合理念的（idee-gerecht）（即正确的），并且在此意义上看来是“真实的”。就连intellectus humanus［人类理智］也是一种ens creatum［受造物］。作为上帝赋予人的一种能力，它必须满足上帝的idea［理念］。但是，理智之所以是适合理念的，乃是由于它在其命题中实现所思与那个必然相应于idea［理念］的物的适合。如果一切存在者都是“受造的”，那么，人类知识之真理的可能性就基于这样一回事情：物与命题同样是适合理念的，因而根据上帝创世计划的统一性而彼此吻合。作为adaequatio rei (creandae) ad intellecctum (divinum)［物（受造物）与知（上帝）的符合］的veritas［真理］，保证了作为adaequatio intellectus(humani) ad rem (creatam)［知（人类的）与物（创造的）的符合］的veritas［真理］。在本质上，真理无非是指convenientia［协同］，也即作为受造物的存在者在自身中间与创造主的符合一致，一种根据创世秩序之规定的“符合”。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVnDGMGDzSPKZ0h3FGINdlBOQDsxqBpj5ib29je88F2x5oBCpIWQExNfw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>但是，在摆脱了创世观念之后，这种秩序同样也能一般地和不确定地作为世界秩序而被表象出来。神学上所构想的创世秩序为世界理性（Weltvernunft）对一切对象的可计划性所取代。世界理性为自身立法，从而也要求其程序（这被看作是“合逻辑的”）具有直接的明白可解性。命题真理的本质在于陈述的正确性，这一点用不着特别的论证。即便是在人们以一种引人注目的徒劳努力去解释这种正确性如何发生时，人们也是把这种正确性先行设定为真理的本质了。同样，事情真理也总是意味着现成事物与其“合理性的”本质概念的符合。这就形成一种假象：仿佛这一对真理之本质的规定是无赖于对一切存在者之存在的本质的阐释的——这种阐释总是包含着对作为intellectus［知识］的承担者和实行者的人的本质的阐释。于是，有关真理之本质的公式（veritas est adaequatio intellectus et rei［真理是知与物的符合］）就获得了它的任何人都可以立即洞明的普遍有效性。这一真理概念的不言自明性的本质根据几乎未曾得到过关注；而在这种自明性的支配下，人们也就承认下面这回事情是同样不言自明的：真理有一个反面，并且有非真理（Unwahrheit）。命题的非真理（不正确性）就是陈述与事情的不一致。事情的非真理（非真正性）就是存在者与其本质的不符合。无论如何，非真理总是被把握为不符合。此种不符合落在真理之本质之外。因此，在把捉真理的纯粹本质之际，就可以把作为真理的这样一个反面的非真理撇在一边了。 </p>
+<p>然而，归根到底，我们还需要对真理之本质作一种特殊的揭示么？真理的纯粹本质不是已经在那个不为任何理论所扰乱并且由其自明性所确保的普遍有效的概念中得到充分体现了吗？再者，如果我们把那种将命题真理归结为事情真理的做法看作它最初所显示出来的东西，看作一种神学的解释，如果我们此外还纯粹地保持哲学上的本质界定，以防止神学的混杂，并且把真理概念局限于命题真理，那么，我们立即就遇到了一种古老的——尽管不是最古老的——思想传统，依这个传统来看，真理就是陈述（λογοζ）与事情（πραγμα）的符合一致（ομοιωσιζ）。假如我们知道陈述与事情的符合一致的意思，那么，在这里，有关陈述还有什么值得我们追问的呢？我们知道这种符合一致的意思吗？  </p>
+<h2 id="符合的内在可能性"><a href="#符合的内在可能性" class="headerlink" title="符合的内在可能性"></a>符合的内在可能性</h2><p>我们在不同的意义上谈论符合。例如，看到桌子上的两个五分硬币，我们便说：它们彼此是符合一致的。两者由于外观上的一致而相符合。因此，它们有着这种共同的外观，而且就此而言，它们是相同的。进一步，譬如当我们就其中的一枚硬币说：这枚硬币是圆的，这时侯，我们也谈到了符合。这里，是陈述与物相符合。其中的关系并不是物与物之间的，而是陈述与物之间的。但物与陈述又在何处符合一致呢？从外观上看，这两个相关的东西明显是不同的嘛！硬币是由金属做成的，而陈述根本就不是质料性的。硬币是圆形的，而陈述根本就没有空间特性。人们可以用硬币购买东西，而一个关于硬币的陈述从来就不是货币。但尽管有这样那样的不同，上述陈述作为一个真实的陈述却与硬币相符合。而且，根据流俗的真理概念，这种符合乃是一种适合。完全不同的陈述如何可能与硬币适合呢？或许它必得成为硬币并且以此完全取消自己。这是陈述决不可能做到的。一旦做到这一点，则陈述也就不可能成为与物相一致的陈述了。在适合中，陈述必须保持其所是，甚至首先要成其所是。那么，陈述的全然不同于任何一物的本质何在呢？陈述如何能够通过守住其本质而与一个它者——物——适合呢？这里，适合的意思不可能是不同物之间的一种物性上的同化。毋宁说，适合的本质取决于在陈述与物之间起着作用的那种关系的特性。只消这种“关系”还是不确定的，在其本质上还是未曾得到论究的，那么，所有关于此种适合的可能性和不可能性的争执，关于此种相称的特性和程度的争执，就都会沦于空洞。但是，关于硬币的陈述把“自身”系于这一物，因为它把这一物表象（vor-stellen）出来，并且来言说这个被表象的东西，说它在其主要方面处于何种情况中。有所表象的陈述就像对一个如其所是的被表象之物那样来说其所说。这个“像……那样”（so－wie）涉及到表象及其所表象的东西。这里，在不考虑所有那些“心理学的”和“意识理论的”先入之见的情况下，表象（Vor-stellen）意味着让物对立而为对象。作为如此这般被摆置者，对立者必须横贯一个敞开的对立领域（offenes Entgegen），而同时自身又必须保持为一物并且自行显示为一个持留的东西。横贯对立领域的物的这一显现实行于一个敞开域（Offenes）中，此敞开域的敞开状态（Offenheit）首先并不是由表象创造出来的，而是一向只作为一个关联领域而为后者所关涉和接受。表象性陈述与物的关系乃是那种关系（Verhaltnis）的实行，此种关系源始地并且向来作为一种行为（Verhalten）表现出来。但一切行为的特征在于，它持留于敞开域而总是系于一个可敞开者（Offenbares）之为可敞开者。如此这般的可敞开者，而且只有在这种严格意义上的可敞开者，在早先的西方思想中被经验为“在场者”（das Anwesende），并且长期以来就被称为“存在者”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVZTgicMm5UibZ9VGjCDtStNbVSZpbCBOT8bfzzclZ90DIbOJ6jPvhibRmw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>行为向存在者保持开放。所有开放的关联都是行为。依照存在者的种类和行为的方式，人的开放状态各各不同。任何作业和动作，所有行动和筹谋，都处于一个敞开领域之中，在其中，存在者作为所是和如何是的存在者，才能够适得其所 并且成为可言说的（sagbar）。而只有当存在者本身向表象性陈述呈现自身，以至于后者服从于指令而如其所是地言说存在者之际，上述情形才会发生。由于陈述遵从这样一个指令，它才指向存在者。如此这般指引着的言说便是正确的（即真实的）。如此这般被言说的东西便是正确的东西（真实的东西）了。</p>
+<p>行为的开放状态（Offenstandigkeit）赋予陈述以正确性；因为只有通过行为的开放状态，可敞开者才能成为表象性适合的标准。开放的行为本身必须让自己来充当这种尺度。这意味着：它必须担当起对一切表象之标准的先行确定。这归于行为的开放状态。但如果只有通过行为的这种开放状态，陈述的正确性（真理）才是可能的，那么，首先使正确性得以成为可能的那个东西就必然具有更为源始的权利而被看作真理的本质了。由此，习惯上独一地把真理当作陈述的唯一本质位置而指派给它的做法，也就失效了。真理源始地并非寓居于命题之中。不过，与此同时也生发出一个问题，即开放的和先行确定标准的行为的内在可能性的根据问题，唯这种可能性才赋予命题之正确性以那种根本上实现了真理之本质的外观。  </p>
+<h2 id="正确性之可能性的根据"><a href="#正确性之可能性的根据" class="headerlink" title="正确性之可能性的根据"></a>正确性之可能性的根据</h2><p>表象性陈述从哪里获得指令，去指向对象并且依照正确性与对象符合一致？何以这种符合一致也一并决定着真理的本质？而先行确定一种定向，指示一种符合一致，诸如此类的事情是如何发生的呢？只有这样来发生，即：这种先行确定已经自行开放而入于敞开域，已经为一个由敞开域而来运作着的结合当下各种表象的可敞开者自行开放出来了。这种为结合着的定向的自行开放，只有作为向敞开域的可敞开者的自由存在（Freisein）才是可能的。此种自由存在指示着迄今未曾得到把捉的自由之本质。作为正确性之内在可能性，行为的开放状态植根于自由。真理的本质乃是自由（Das Wesen der Wahrheit ist die Freiheit）。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVsJZVD4TU44Toy1aNo8DkElmdiamcSqooqRecd5dicRbEz2PYTEoicmcYQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>然而，这个关于正确性之本质的命题不是以一种不言自明替换了另一种不言自明么？为了能够完成一个行为，由此也能够完成表象性陈述的行为，乃至与“真理”符合或不符合的行为，行为者当然必须是自由的。不过，前面那个命题实际上并不意味着，作出陈述，通报和接受陈述，是一种无拘无束的行为；相反，这个命题倒是说：自由乃是真理之本质本身。在此，“本质”（Wesen）被理解为那种首先并且一般地被当作已知的东西的内在可能性的根据。但在自由这个概念中，我们所思的却并不是真理，更不是真理的本质。所以，“真理（陈述之正确性）的本质是自由”这个命题就必然是令人诧异的。 </p>
+<p>把真理之本质设定在自由中——这难道不就是把真理委诸于人的随心所欲吗？人们把真理交付给人这个“摇摆不定的芦苇”的任意性——难道还能有比这更为彻底的对真理的葬送吗？在前面的探讨中总是一再硬充健全判断的东西，现在只是更清晰了些：真理在此被压制到人类主体的主体性那里。尽管这个主体也能获得一种客观性，但这种客观性也还与主体性一起，是人性的并且受人的支配。</p>
+<p>错误和伪装，谎言和欺骗，幻觉和假象，简言之，形形色色的非真理，人们当然把它们归咎于人。而非真理确实也是真理的反面，因此，非真理作为真理的非本质，便理所当然地被排除在真理的纯粹本质的问题范围之外了。非真理的这种人性起源，确实只是根据对立去证明那种“超出”人而起支配作用的“自在的”真理之本质。形而上学把这种真理看作不朽的和永恒的，是决不能建立在人之本质的易逝性和脆弱性之上的。那么，真理之本质如何还能在人的自由中找到其持存和根据呢？</p>
+<p>对上面这个“真理的本质是自由”的命题的拒斥态度依靠的是一些先入之见，其中最为顽冥不化的是：自由是人的一个特性。自由的本质毋需进一步的置疑，也不容进一步的置疑。人是什么，尽人皆知的嘛！  </p>
+<h2 id="自由的本质"><a href="#自由的本质" class="headerlink" title="自由的本质"></a>自由的本质</h2><p>然而，对作为正确性的真理与自由的本质联系的说明却动摇着上面所说的先入之见；当然，前提是我们准备好作一种思想的转变。关于真理与自由的本质联系的思索趋使我们去探讨人之本质的问题，着眼点是保证让我们获得对人（即此在）的被遮蔽的本质根据的经验的那个方面，并且是这样，即这种经验事先把我们置于源始地本质现身着的真理领域之中。但由此而来也显示出：自由之所以是正确性之内在可能性的根据，只是因为它是从独一无二的根本性的真理之源始本质那里获得其本己本质的。自由首先已经被规定为对于敞开域的可敞开者来说的自由了。应当如何来思自由的这一本质呢？一个正确的表象性陈述与之相称的那个可敞开者，乃是始终在开放行为中敞开的存在者。向着敞开域的可敞开者的自由让存在者成其所是。于是，自由便自行揭示为让存在者存在（das Seinlassen von Seiendem）。 </p>
+<p>通常地，譬如当我们放弃一件已经安排好的事情时，我们就会说到这种让存在（Seinlassen）。“我们听其自然吧”，意思就是：我们不再碰它，不再干预它。在这里，让某物存在含有放任、放弃、冷漠、乃至疏忽等消极意义。 </p>
+<p>但在此必不可少的“让存在者存在”一词却并没有疏忽和冷漠的意思，而倒是相反。让存在乃是让参与到存在者那里。当然，我们也不能仅仅把它理解为对当下照面的或者寻找到的存在者的单纯推动、保管、照料和安排。让存在——即让存在者成其所是——意味着：参与到敞开域及其敞开状态中，每个仿佛与之俱来的存在者就置身于这种敞开状态中。西方思想开端时就把这一敞开域把握为τα　αληθεα，即无蔽者。如果我们把αληθεια译成“无蔽”，而不是译成“真理”，那么，这种翻译不仅更加“合乎字面”，而且包含着一种指示，即要重新思考通常的正确性意义上的真理概念，并予以追思，深入到存在者之被解蔽状态和解蔽过程的那个尚未被把握的东西那里。参与到存在者之被解蔽状态中，这并不是丧失于这一状态中，而是自行展开而成为一种在存在者面前的引退，以便使这个存在者以其所是和如何是的方式公开自身，并且使表象性适合从中取得标准。作为这种让存在，它向存在者本身展开自身，并把一切行为置入敞开域中。让存在，亦即自由，本身就是展开着的（aus-setzend），是绽出的（ek-sistent）。着眼于真理的本质，自由的本质显示自身为进入存在者之被解蔽状态的展开。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVYckFGUoibNicMqQDTEfJ0aiakqfGiagYzNKFswGSU58lbE1ORyVEzJ2FdQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>自由并不是通常理智喜欢任其借此名义四处流传的东西，即那种偶而出现的在选择中或偏向于此或偏向于彼的任意。自由并不是对行为的可为和不可为不加约束。但自由也并不只是对某个必需之物和必然之物（以及如此这般无论何种存在者）的准备。先于这一切（“消极的”和“积极的”自由），自由乃是参与到存在者本身的解蔽过程中去。被解蔽状态本身被保存于绽出的参与（das ek-sistente Sich-einlassen）之中，由于这种参与，敞开域的敞开状态，即这个“此”（Da），才是其所是。 </p>
+<p>在此之在（Da-sein）中，人才具有他由之得以绽出地生存的本质根据，而这个本质根据长期以来未曾被探究过。在这里，“生存”（Existenz）并不意味着一个存在者的出现和“定在”（Dasein）（现成存在）意义上的existentia［实存］。但“生存”在此也不是“在生存状态上”意指人在身－心机制的基础上构造出来的为其自身的道德努力。绽出之生存（Ek-sistenz）植根于作为自由的真理，乃是那种进入存在者本身的被解蔽状态之中的展开。历史性的人的绽出之生存还没有得到把握，甚至还需要一种本质建基；历史性的人的绽出之生存唯开端于那样一个时刻，那时侯，最初的思想家追问着，凭着“什么是存在者”这个问题而投身到存在者之无蔽状态中。在这个问题中，无蔽状态才首次得到了经验。存在者整体自行揭示为φυσιζ，即“自然”；但“自然”在此还不是意指存在者的一个特殊领域，而是指存在者之为存在者整体，而且是在涌现着的在场（das aufgehende Anwesen）这个意义上来说的。唯当存在者本身被合乎本己地推入其无蔽状态并且被保存于其中，唯当人们从存在者之为存在者的追问出发把握了这种保存，这时侯，历史才得开始。对存在者整体的原初解蔽，对存在者之为存在者的追问，和西方历史的发端，这三者乃是一回事；它们同时在一个“时代”里出现，这个“时代”本身才无可度量地为一切尺度开启了敞开域。 </p>
+<p>然而，如果绽出的此之在——作为让存在者存在——解放了人而让人获得其“自由”，因为它才为人提供出选择的可能性（存在者），向人托出必然之物（存在者），那么，人的任性愿望就并不占有自由。人并不把自由“占有”为特性，情形恰恰相反：是自由，即绽出的、解蔽着的此之在占有人，如此源始地占有着人，以至于唯有自由才允诺给人类那种与作为存在者的存在者整体的关联，而这种关联才首先创建并标志着一切历史。唯有绽出的人才是历史性的人。“自然”是无历史的。 </p>
+<p>如此这般来理解的作为让存在者存在的自由，是存在者之解蔽意义上的真理之本质的实现和实行。“真理”并不是正确命题的标志，并不是由某个人类“主体”对一个“客体”所说出的、并且在某个地方——我们不知道在哪个领域中——“有效”的命题的标志；不如说，“真理”乃是存在者之解蔽，通过这种解蔽，一种敞开状态才成其本质。一切人类行为和姿态都在它的敞开域中展开。因此，人乃以绽出之生存的方式存在。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVhMDS6q8aJxNRjNHkAWxd9OdxqJ3QVFpdZZY53eicLicTzOYiaNibJNvJfw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>由于每一种人类行为各各以其方式保持开放，并且与它所对待的东西相协调，所以，让存在之行为状态，即自由，必然已经赋予它以一种内在指引的禀赋，即指引表象去符合于当下存在者。于是，所谓人绽出地生存（ek-sistieren）就意味着：一个历史性人类的本质可能性的历史对人来说被保存于存在者整体之解蔽中了。历史的罕见而质朴的决断就源出于真理之源始本质的现身方式中。但另一方面，由于真理在本质上乃是自由，所以历史性的人在让存在者存在中也可能让存在者不成其为它所是和如何是的存在者。这样，存在者便被遮盖和伪装了。假象（Schein）占了上风。于此，真理的非本质（Unwesen）突现出来了。不过，因为绽出的自由作为真理的本质并不是人固有的特性，倒是人只有作为这种自由的所有物才绽出地生存出来，并因而才能有历史，所以，即便真理的非本质也并不是事后来源于人的纯然无能和疏忽。而毋宁说，非真理必然源出于真理的本质。只是因为真理和非真理在本质上并不是互不相干的，而是共属一体的，一个真实的命题才能够成为一个相应地非真实的命题的对立面。于是乎，真理之本质的问题才达到了问之所问的源始领域之中，其时，基于对真理的全部本质的先行洞识，这个问题也已经把对于非真理之沉思摄入本质揭示中了。对真理之非本质的探讨并非事后补遗，而是充分地发动对真理之本质的追问的关键一步。但我们应如何来把捉真理之本质中的非本质呢？如果说陈述的正确性并没有囊括真理的本质，那么，非真理也是不能与判断的不正确性相等同的。</p>
+<h2 id="真理的本质"><a href="#真理的本质" class="headerlink" title="真理的本质"></a>真理的本质</h2><p>真理的本质揭示自身为自由。自由乃是绽出的、解蔽着的让存在者存在。任何一种开放行为皆游弋于“让存在者存在”之中，并且每每对此一或彼一存在者有所作为。作为参与到存在者整体本身的解蔽中去这样一回事情，自由乃已经使一切行为协调于存在者整体。然而，我们却不能把这种协调状态（即调谐）把捉为“体验”和“情感”，因为这样做，我们只不过是使之丧失了本质，并且从那种东西（“生命”和“灵魂”）出发对之作出解释而已——这种东西确实只能维持自己的本质权利的假象，只要它本身包含着对协调状态的伪装和误解。协调状态，也即一种入于存在者整体的绽出的展开状态（Ausgesetztheit），之所以是能够被“体验”和“感受”的，只是因为“体验的人”一向已经被嵌入一种揭示着存在者整体的协调状态中了，而并没有去猜测调谐之本质为何。历史性的人的每一种行为，无论它是否被强调，无论它是否被理解，都是被调谐了的，并且通过这种调谐而被推入存在者整体之中了。存在者整体的敞开状态并不就是我们恰好熟悉的存在者之总和。情形倒是相反：存在者不为人所熟悉的地方，存在者没有或者还只是粗略地被科学所认识的地方，存在者整体的敞开状态能够更为本质地运作；而比较而言，在熟知的和随时可知的东西成为大量的，并且由于技术无限度地推进对物的统治地位而使存在者不再能够抵抗人们的卖力的认识活动的地方，存在者整体的敞开状态倒是少见运作的。正是在这种无所不知和唯知独尊的平庸无奇中，存在者之敞开状态被敉平为表面的虚无，那种甚至不止于无关紧要而只还被遗忘的东西的虚无。调谐着的让存在者存在贯通一切于存在者中游弋的开放行为，并且先行于存在者。人的行为乃是完全由存在者整体之可敞开状态来调谐的。但在日常计算和动作的视野里来看，这一“整体”似乎是不可计算、不可把捉的。从当下可敞开的存在者那里——无论这种存在者是自然中的存在者还是历史中的存在者——我们是把捉不到这个“整体”的。尽管不断地调谐一切，但它却依然是未曾确定的东西、不可确定的东西，从而，它大抵也是最流行的东西、最不假思索的东西。不过，这个调谐者并非一无所有，而是一种对存在者整体的遮蔽。让存在总是在个别行为中让存在者存在，对存在者有所动作，并因之解蔽着存在者；正是因为这样，让存在才遮蔽着存在者整体。让存在自身本也是一种遮蔽。在此之在的绽出的自由中，发生着对存在者整体的遮蔽，存在着（ist）遮蔽状态。</p>
+<h2 id="作为遮蔽的非真理"><a href="#作为遮蔽的非真理" class="headerlink" title="作为遮蔽的非真理"></a>作为遮蔽的非真理</h2><p>遮蔽状态拒绝给αληθεια［无蔽］以解蔽，并且还不允许无蔽成为δτερησιζ（剥夺），而是为无蔽保持着它的固有的最本己的东西。于是，从作为解蔽状态的真理方面来看，遮蔽状态就是非解蔽状态（Un-entborgenheit），从而就是对真理之本质来说最本己的和根本性的非真理（Un-wahrheit）。存在者整体的遮蔽状态决不是事后才出现的，并不是由于我们对存在者始终只有零碎的知识的缘故。存在者整体之遮蔽状态，即根本性的非真理，比此一存在者或彼一存在者的任何一种可敞开状态更为古老。它也比“让存在”本身更为古老，这种“让存在”在解蔽之际已然保持遮蔽了，并且向遮蔽过程有所动作了。是什么把让存在保存于这种与遮蔽过程的关联中的呢？无非是对被遮蔽者整体的遮蔽，对存在者本身的遮蔽而已——也就是神秘（das Geheimnis）罢。并不是关于这个或那个东西的个别的神秘，而只是这一个，即归根到底统摄着人的此之在的这种神秘本身（被遮蔽者之遮蔽）。</p>
+<p>“让存在”——即让存在者整体存在——是解蔽着又遮蔽着的，其中发生着这样一回事情：遮蔽显现为首先被遮蔽者。绽出的此之在保存着最初的和最广大的非解蔽状态，即根本性的非真理。真理的根本性的非本质乃是神秘。这里，非本质还并不意味着是低于在一般之物（κοινον［共性］、γενοζ［种］）及其可能性和根据这种意义上的本质的。这里所说的非本质乃是先行成其本质的本质。但“非本质”首先大抵是指那种已经脱落了的本质的畸变。不过，在上述任何一种意义上，非本质一向以其方式保持为本质性的，从来不会成为毫不相干意义上的非本质性的东西。而如此这般来谈论非本质和非真理，已经远远违背了常识之见，看起来好像是在搬弄煞费苦心地构想出来的“佯谬”（Paradoxa）。这种印象是难以消除的，所以，我们似乎应当放弃这种矛盾的谈论；不过，它只是对于通常的意见（Doxa）来说是矛盾的。而对有识之士来说，真理的原初的非本质（即非真理）中的“非”（Un-），却指示着那尚未被经验的存在之真理（而不只是存在者之真理）的领域。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kVbDhpsU0AKvRbqxGr0SvRvdO4B55nfSmNdf2gDDbhhCpmW8fphW16Ig/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>作为“让存在者存在”，自由在自身中就是断然下了决心的姿态，即没有自行锁闭起来的姿态。一切行为都植根于此种姿态中，并且从中获得指引而去向存在者及其解蔽。但这一对于遮蔽的姿态却同时自行遮蔽，因为它一任神秘之被遗忘状态占了上风，并且消隐于这种被遗忘状态中了。尽管人不断地在其行为中对存在者有所作为，但他也往往总是对待了此一或彼一存在者及其当下可敞开状态而已。就是在最极端的情形中，他也还是固执于方便可达的和可控制的东西。而且，当他着手拓宽、改变、重新获得和确保在其所作所为的各各不同领域中的存在者之可敞开状态时，他也还是从方便可达的意图和需要范围内取得其行为的指令的。 </p>
+<p>然而，滞留于方便可达的东西，这本身就是不让那种对被遮蔽者的遮蔽运作起来。诚然，在通行的东西中也有令人困惑的、未曾解释的、未曾确定的、大可置疑的东西。但这些自身确实的问题只不过是通行之物的通行的过渡和中转站，因而不是本质性的。当存在者整体的遮蔽状态仅仅被附带地看作一个偶尔呈报出来的界限时，作为基本事件的遮蔽便沦于被遗忘状态中了。 </p>
+<p>不过，此在的被遗忘了的神秘并没有为被遗忘状态所消除；而毋宁说，这种被遗忘状态倒是赋予被遗忘者的表面上的消隐以一种本己的现身当前。神秘在被遗忘状态中并且为这种被遗忘状态而自行拒绝，由此，它便让在其通行之物中的历史性的人寓于他所作成的东西。这样一来，人类就得以根据总是最新的需要和意图来充实他的“世界”，以他的打算和计划来充满他的“世界”。于是，在遗忘存在者整体之际，人便从上述他的打算和计划中取得其尺度。他固守着这种尺度，并且不断地为自己配备以新的尺度，却还没有考虑尺度之采纳（Maβ-nahme）的根据和尺度之给出（Maβgabe）的本质。尽管向一些全新的尺度和目标前进了，但在其尺度的本质之真正性（Wesens-Echtheit）这回事情上，人却茫然出了差错。他愈是独一地把自己当作主体，当作一切存在者的尺度，他就愈加弄错了。人类猖獗的忘性固执于用那种对他而言总是方便可得的通行之物来确保他自己。这种固执在那种姿态中有它所不得而知的依靠；作为这种姿态，此在不仅绽出地生存（ek-sistiert），而且也固执地持存（in-sistiert），即顽固地守住那仿佛从自身而来自在地敞开的存在者所提供出来的东西。 </p>
+<p>绽出的此在是固执的。即便在固执的生存中，也有神秘在运作；只不过，此时神秘是作为被遗忘的、从而成为“非本质性的”真理的本质来运作的。 </p>
+<h2 id="作为迷误的非真理"><a href="#作为迷误的非真理" class="headerlink" title="作为迷误的非真理"></a>作为迷误的非真理</h2><p>人固执地孜孜于一向最切近可达的存在者。但另一方面，只有作为已经绽出的人，人才能固执，因为他确实把存在者之为存在者当作标准了。而在他采纳标准时，人类却背离了神秘。固执地朝向（insistente Zuwendung）方便可达之物，与绽出地背离（ek-sistente Wegwendung）神秘，这两者是共属一体的。它们是一而二、二而一的事情。而这种朝向和背离却又与此在中的来回往复的固有转向亦步亦趋。人离开神秘而奔向方便可达的东西，匆匆地离开一个通行之物，赶向最切近的通行之物而与神秘失之交臂——这一番折腾就是误入歧途（das Irren）。 </p>
+<p>人彷徨歧途。人并不是才刚刚误入歧途。人总是在迷误中彷徨歧途，因为他在绽出之际也固执，从而已经在迷误中了。人误入其中的迷误决不是仿佛只在人身边伸展的东西，犹如一条人偶尔失足于其中的小沟；毋宁说，迷误属于历史性的人被纳入其中的此之在的内在机制。迷误乃是那种转向的运作领域，在这种转向中，固执的绽出之生存（die in-sistente Ek-sistenz）总是随机应变地重新遗忘自己，重新出了差错。对被遮蔽的存在者整体的遮蔽支配着当下存在者的解蔽过程，此种解蔽过程作为遮蔽之遗忘状态而成为迷误。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9pAQ1DTC9GhRyQUBRtkP8kV8zoafe24RXz0iaMke0iaFia12TX3F3Kntia0TLiaqogAVFrh86s7LnYicg0w/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>迷误是原初的真理之本质的本质性的反本质（Gegenwesen）。迷误公开自身为本质性真理的每一个对立面的敞开域。迷误（Irre）乃是错误（Irrtum）的敞开之所和根据。所谓错误，并非一个个别的差错，而是那种其中错综交织了所有迷误方式的历史的领地（即统治地位）。 </p>
+<p>按其开放状态以及它与存在者整体的关联，每一种行为都各各是迷误的方式。错误的范围很广，从日常的做错、看错、算错，到本质性态度和决断中的迷失和迷路，都是错误。但通常地，甚至依照哲学的学说，人们所认为的错误，乃是判断的不正确性和知识的虚假性，它只不过是迷误的一种，而且是最为肤浅的一种迷误而已。一个历史性的人类必然误入迷误之中，从而其行程是有迷误的；这种迷误本质上是与此在的敞开状态相适合的。迷误通过使人迷失道路而彻底支配着人。但使人迷失道路的迷误同时也一道提供出一种可能性，这是一种人能够从绽出之生存中获得的可能性，那就是：人通过经验迷误本身，并且在此之在的神秘那里不出差错，人就可能不让自己误入歧途。 </p>
+<p>由于人的固执的绽出之生存行于迷误之中，由于引人误入歧途的迷误总是以某种方式咄咄逼人并且由于这种逼迫控制了神秘——而且是一种被遗忘的神秘，所以，人在其此在的绽出之生存中就尤其屈服于神秘的支配和迷误的逼迫了。他便处在受统一者和它者的强制的困境中了。完整的、包含着其最本己的非本质的真理之本质，凭这种不断的来回往复的转向，就把此在保持在困境之中了。此在就是入于困境的转向。从人的此之在而来，并且唯从人的此之在而来，才出现了对必然性的解蔽，相应地也就出现了那种入于不可回避之物中的可能的移置（Versetzung）。 </p>
+<p>对存在者之为这样一个存在者的解蔽同时也就是对存在者整体的遮蔽。在这种解蔽与遮蔽的同时中，就有迷误在运作。对被遮蔽者之遮蔽与迷误一道归属于真理的原初本质。从此在的固执的绽出之生存来理解，自由乃是（在表象之正确性意义上的）真理的本质，而这仅仅是因为自由本身源起于真理的源始本质，源起于在迷误中的神秘之运作。“让存在者存在”实行于保持开放的行为。但让作为如此这般的整体的存在者存在，这回事情却只有当它在其原初的本质中偶而被接纳时才会合乎本质地发生。于是，朝向神秘的有决心的展开（Ent-schlossenheit zum Geheimnis）便在进入迷误本身之途中了。于是，真理之本质的问题便得到了更为源始的追问。于是，真理之本质与本质之真理的交织关系的根据便显露出来了。观入那从迷误而来的神秘，这乃是一种独一无二的追问，即追问存在者之为存在者整体是什么。这种追问思考存在者之存在的问题——该问题根本上是令人误入歧途的，因而在其多义性方面是尚未得到掌握的。源起于这样一种追问的存在之思，自柏拉图以来就被理解为“哲学”，后又被冠以“形而上学”之名。</p>
+<h2 id="真理问题与哲学"><a href="#真理问题与哲学" class="headerlink" title="真理问题与哲学"></a>真理问题与哲学</h2><p>把人向着绽出之生存解放出来，这对于历史具有奠基作用。这种解放在存在之思中达乎词语；不过，词语并不只是意见的“表达”，不如说，它一向已经是存在者整体之真理的得到完好保存的构造。至于有多少人能听到这词语，乃是无关紧要的事情。而正是那些能听者决定了人在历史中的位置。但在哲学发端的同一个世界瞬间里，也就开始了普通理智的鲜明突出的统治地位（智者学派）。</p>
+<p>普通理智要求可敞开的存在者的无可置疑性，并且把任何一种运思的追问说成是对健全的人类理智的攻击，是健全的人类理智的不幸迷惑。 </p>
+<p>然而，健全的、在它自身的区域内十分正当的理智对于哲学的评判却并没有切中哲学的本质，后者唯有根据与作为存在者整体的存在者的源始真理的关联才能得到规定。但由于真理的完全本质包含着非本质，并且是首先作为遮蔽而运作的，所以，探究这种真理的哲学本身就是分裂性的。哲学之思想乃是柔和的泰然任之（Gelassenheit der Milde），它并不拒绝存在者整体的遮蔽状态。哲学之思想尤其是严格性的展开状态（Entschlossenheit der Strenge），它并不冲破遮蔽，而是把它的完好无损的本质逼入把握活动的敞开域中，从而把它逼入其本己的真理之中。 </p>
+<p>在其“让存在”——让存在者作为如此这般的存在者整体而存在——的柔和的严格性和严格的柔和性中，哲学遂成为一种追问；这种追问并不唯一地持守于存在者，但也不允许任何外部强加的命令。这种最内在的思想困境已经为康德所猜度；因为康德在谈到哲学时说：“这里，我们看到哲学实际上被置于一个糟糕的立足点上了，它应该是牢固的，虽然无论是天上还是地上都没有它赖以立足的地方。在此，哲学应当证明它的纯正性，作为它的法则的自我维持者，而不是作为那个向哲学诉说某种移植过来的意义或者谁也不知道的监护本性的人的代言人……”（《道德形而上学的基础》，《康德文集》，学院版，第四卷，第425页）。</p>
+<p>康德的著作引发了西方形而上学的最后一次转向。在他上述对哲学之本质的解说中，康德洞察到一个领域，按照他的形而上学立场，他是在主体性中，而且唯有从这个主体性而来，才能把握这个领域，并且必定要把它理解为它自身的法则的自我维护者。尽管如此，这一对哲学之规定性的本质洞见已经足以推翻任何对哲学之思想的贬损，其中最无助的一种贬损是声称：作为一种“文化”的“表达”（斯宾格勒）和一个富有创造性的人类的装饰品，哲学也还是有其价值的。 </p>
+<p>然而，哲学是否实现了它原初的决定性的本质而成为“其法则的自我维护者”，或者，哲学是否由其法则一向所属的那个东西的真理来维护本身并获得支撑，这取决于那种开端性，在这种开端性中，真理的源始本质对运思之追问来说成为本质性的。</p>
+<p>我们眼下所阐述的尝试使真理之本质的问题超越了流俗的本质概念中习惯界定的范囿，并且有助于我们去思索，真理之本质（das Wesen der Wahrheit）的问题是否同时而且首先必定是本质之真理（die Wahrheit des Wesens）的问题。但在“本质”这个概念中，哲学思考的是存在。我们把陈述之正确性的内在可能性追溯到作为其“根据”的“让存在”的绽出的自由，同时我们先行指出这个根据的本质开端就在于遮蔽和迷误之中。这一番工作意在表明，真理之本质并非某种“抽象”普遍性的空洞的“一般之物”，而是那种独一无二的历史所具有的自行遮蔽着的唯一东西；这种独一无二的历史乃是我们所谓的存在的“意义”的解蔽的历史——而长期以来，我们已习惯于仅仅把所谓存在当作存在者整体来思考。   </p>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>真理之本质的问题起于本质之真理的问题。在前一个问题中，我们首先是在“所是”（quidditas）或实在（realitas）的意义上来理解本质的，又把真理理解为知识的一个特性。而在本质之真理的问题中，“本质”一词作动词解；在这个还停留在形而上学之表象范围内的词语中，我们思的是存有（Seyn）——作为存在与存在者之间运作着的差异的那个存有。真理意味着作为存有之基本特征的有所澄明的庇护（lichtendes Bergen）。真理之本质问题的答案在于下面这个命题：真理的本质是本质的真理。依照我们的解释，人们不难看出，这个命题不只是颠倒了一下词序而已，并不是要唤起某种背谬的假象。本质之真理是这个命题的主语——倘若我们毕竟还可以使用一下主语这个糟糕的语法范畴的话。有所澄明的庇护乃是知识与存在者的符合，其中的这个“是”（ist）也就是“让……成其本质”（laβt wesen）。这个命题并不是辨证的。它根本就不是陈述意义上的命题。对真理之本质问题的回答是对存有之历史范围内的一个转向的道说（die Sage einer Kehre）。因为存有包含着有所澄明的庇护，所以存有原初地显现于遮蔽着的隐匿之光亮中。这种澄明的名称就是希腊的αληθεια［无蔽］。 </p>
+<p>按照原先的计划，“真理的本质”这个演讲还要续以第二个演讲，就是“本质的真理”。后面这个演讲由于种种原因而未能做成；眼下，我在“关于人道主义的书信”一文中已经把个中原因挑明了。意义的问题（参看拙著《存在与时间》，1927年），亦即筹划领域的问题（《存在与时间》，第151页），亦即敞开状态的问题，亦即存在之真理（而不止于存在者之真理）的问题——这乃是一个关键问题，而我们蓄意地未予展开。表面看来，我们的思想仍停留在形而上学的轨道上；但在其关键的步骤上，也就是从作为正确性的真理到绽出的自由，从绽出的自由到作为遮蔽和迷误的真理，思想在这些步骤上却实行了一个追问的转变，这个转变乃属于对形而上学的克服。我在演讲中所尝试的思想实现在那种本质性的经验中，它经验到，唯从人能够进入其中的那个此之在而来，历史性的人才得以邻近于存在之真理。于是，一切人类学和作为主体的人的主体性都被遗弃了——《存在与时间》就已经做到了这一点，存在之真理被当作一种已经转变了的历史性的基本立场的根据来寻求了；不止于此，上面这个演讲的进程就是要从这另一个根据（此之在）出发来运思。追问的过程本就是思想之道路。这种思想并不提供出观念和概念，而是作为与存在之关联的转变来经验和检验自身。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/152509b5/">论神（斯宾诺莎）</a>
+            
+            
+            <a class="next" rel="next" href="/d46ededd/">论生存的空虚（叔本华）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/152509b5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d46ededd/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

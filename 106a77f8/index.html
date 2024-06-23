@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>马斯克惯用的思考方式：第一性原理 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">马斯克惯用的思考方式：第一性原理</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 23, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 23, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">17 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTerNa3CfMmql9AefvV1zQF0X38vO4ibRsznBRibdgoCDibuUlWpwYMY2jRicbTLTJqibhoVhNJRMRA8rtJA/640?wx_fmt=jpeg&from=appmsg&wxfrom=13" alt="图片"></p>
+<p>2014年，埃隆·马斯克在南加州大学商学院的毕业演讲上，留下了一场5分钟的精彩分享，他将自己对工作和人生的思考总结为五个要点，其中一点说到了他的决策方式：</p>
+<p>“也许你听我说过，要从物理学的角度思考问题，这是第一性原理。即不要进行类比推理。你把事情细分到你可以想象的最基本元素，然后你从那里开始推理，这是确定某件事是否有意义的好方法。</p>
+<p>这种思考不容易，你可能无法对每件事都这么思考，因为这很花精力。但是如果你想创新知识，那么这是最好的思考方法。这个框架是由物理学家提出并发展的，他们因此找出了反直觉的事情，比如量子力学。所以这是非常有效、非常强大的方法。无论如何，一定尽可能这样去做。”</p>
+<p>这不是马斯克第一次在公众面前提及他极力推崇的决策框架：第一性原理。</p>
+<p>此前在TED 的采访中，马斯克对这个概念给到过更具体的解释，他说：“有一种好的思维框架，那是物理学的东西，有点儿像第一原理推理，第一这件事情，我们就也去做。这样思考决策产生的结果是只能产生细小的迭代发展。第一性原理思维的思考方式是用物理学的角度看待世界的方法，也就是说一层层剥开事物的表象，看到里面的本质，然后再从本质一层层往上走。这要消耗大量的脑力。”</p>
+<center><font color=red size=5>01</font></center>
+
+<center><font face="黑体"><b>第一性原理，</b></font></center>
+
+<center><font face="黑体"><b>回归本质思考</b></font></center>
+
+<p>具体来说，第一性原理如何在实际决策中发挥作用？</p>
+<p>以马斯克的真空胶囊高铁为例，如果用比较思维或者经验思维设计新型火车产品，多数人的想法是在现有的功能上做提升，让动力更强劲，流体力学更好。</p>
+<p>但是如果用第一性原理分析产品需求，就要回到运输工具的本质目的：将较多的货物从A点运输到B点，这才是最初制造火车等运输工具的目的，并非一定要用牵引力才能实现升级。</p>
+<p>在第一性原理的支撑下，马斯克提出采用磁悬浮加低真空的模式，打造真空胶囊高铁。</p>
+<p>马斯克在采访中还举过一个例子：特斯拉研制电动汽车期间，曾遇到一个难题：电池成本居高不下。当时储能电池的市场价格是每千瓦时600美元，这个市场价格很稳定，短期内不会有太大的变动。</p>
+<p>但是马斯克从第一性原理角度进行思考：电池组到底是由什么材料组成的？这些电池原料的市场价格是多少？如果我们购买这些原材料然后组合成电池，需要多少钱？这个答案是，每千瓦时只需要80美元。</p>
+<p>从最本质出发，研究电池都是由什么材料组成，再推算这些原材料加在一起的价格，从而得到电池的最低价格，通过这样的思维方式，马斯克让电动车的商业化成为可能。</p>
+<p>多数人考虑问题的出发点是这件事情的现有情况是既定事实，我无法改变，但是马斯克的想法是，如果这件事在物理层面行得通，那么我也能做成。</p>
+<p>著名传记作家艾萨克森在《埃隆·马斯克传》中也多次提及“第一性原理”这个概念。他在书中第一次提到，是在马斯克刚开始涉足太空探索领域时。</p>
+<p>当时他的第一个计划是要建造一个小型火箭，把老鼠送上火星。</p>
+<p>但是后来马斯克开始担心，如果我们最后目睹的只是一只小老鼠在小飞船上慢慢死去、让人哭笑不得的画面，那可就不妙了，所以他后来想到了把一个小型温室送到火星上去。温室会降落在火星上，同时把火星上绿色植物生长的照片传回地球。</p>
+<p>他认为公众会为此感到非常兴奋，以至于他们会迫不及待地希望向火星发射更多飞船，完成更多任务。这个计划被称为“火星绿洲”，马斯克估计他只需花费不到3 000 万美元就能完成这个任务。</p>
+<p>他用手头的钱就足够了，最大的挑战是造出一枚可以将小温室带到火星的廉价火箭。事实证明，有一个地方可以让他以低廉的价格搞定一枚火箭—俄罗斯。</p>
+<p>马斯克准备去一趟俄罗斯，看看是不是真能买到一些发射槽或者火箭。但这次旅程比预想中还要糟糕。其中有一次，马斯克开始谈到让人类成为多行星物种的必要性，这位俄罗斯人向他们喷了口水。</p>
+<p>2002 年年初马斯克又去一次俄罗斯。这一次，马斯克的主要目的是去买两枚第聂伯运载火箭，它是一种经过改装的老式弹道导弹。</p>
+<p>但他越跟人交涉，人家卖得越贵。最后他觉得自己已经谈下来了，为两枚第聂伯火箭支付1800万美元，但后来对方说不行，是每枚1800万美元。马斯克说：“我当时气不打一处来，但当我为此愤怒的时候，我就开始重新规划这个问题的解决方案。”</p>
+<p>在因俄罗斯人离谱的出价感到气愤时，他开始应用第一性原理进行思考，深入基础的物理学情境，一步步在头脑中构建火箭发射的模型。他因此发展出了一个概念，叫“白痴指数”，用来计算某个制成品的成本比其基本材料的成本高多少。</p>
+<p>如果一个产品的“白痴指数”很高，那么一定可以通过规划设计出更有效的制造技术来大幅降低它的成本。</p>
+<p>火箭的“白痴指数”就非常高。马斯克开始计算其中的碳纤维、金属、燃料和其他材料的成本：采用目前的制造方法，成品的成本至少比材料的成本多出 50 倍。</p>
+<p>人类如果要去火星，必须彻底改进制造火箭的技术。依靠二手火箭，特别是来自俄罗斯的二手火箭，无法推动航天技术发展。因此，在返程的飞机上，马斯克就拿出电脑，开始用电子表格拉清单，详细列出制造一枚中型火箭的所有材料和成本。</p>
+<p>无独有偶，在特斯拉的设计生产过程中，“第一性原理”也发挥着至关重要的作用。从 2017 年年初开始，马斯克和冯·霍兹豪森翻来覆去地讨论特斯拉皮卡的想法。</p>
+<p>冯·霍兹豪森从传统设计起步，以雪佛兰索罗德为参照，还把一辆索罗德放在了工作室正中间，供他们研究车型比例和零部件。</p>
+<p>马斯克说，他想做一款更令人兴奋甚至能惊艳众人的皮卡。所以他们研究了汽车史上出现过的酷炫车辆，其中最引人注目的是雪佛兰在 20 世纪 60 年代打造的复古未来主义轿跑 El Camino。</p>
+<p>冯·霍兹豪森设计了一款具有类似气质的皮卡，但当二人绕着模型走来走去时，他们一致认为它风格“太软”了。“曲线玲珑的样子，”冯·霍兹豪森说，“不像皮卡那样敦实厚重。”</p>
+<p>马斯克随后补充了另一个启发过他的设计作参考：20 世纪 70 年代末的楔形尖头的英国跑车—路特斯 Esprit。具体来说，他特别迷恋 1977 年詹姆斯·邦德系列电影《007 之海底城》中出现过的一款路特斯 Esprit。马斯克以近 100万美元的价格买下了电影拍摄时用过的那辆车，放在特斯拉的设计工作室里做展示。</p>
+<p>头脑风暴的过程很有趣，但还是没有碰撞出一个让他们激动的概念原型。为了汲取灵感，他们参观了彼得森汽车博物馆，在那里有些发现出乎他们的意料。冯·霍兹豪森说：“我们意识到，皮卡的外形和制造工艺在长达 80 年的时间里基本没有变化。”</p>
+<p>这导致马斯克把注意力转移到了更基础的问题上，他开始用“第一性原理”推导这个问题：特斯拉应该用什么材料打造卡车车身？通过对材料的反思，甚至是对车辆结构物理学的反复研究，特斯拉可以为全新设计开辟出可能性。</p>
+<p>冯·霍兹豪森说：“最初我们考虑的是铝，还考虑过钛，因为耐用性真的很重要。”但在那时，马斯克开始着迷于探索用富有光泽的不锈钢制作火箭飞船的可能性。他意识到，这种材料可能也适用于皮卡。不锈钢车身不需要喷漆，而且可以承担车辆的一些结构性负荷。这个想法真正做到了不落俗套，重新思考了车辆的可能性。</p>
+<p>经过几周的讨论，在一个周五的下午，马斯克走进来，简明扼要地宣布：“我们要用不锈钢造皮卡。”查尔斯·柯伊曼是特斯拉和 SpaceX负责材料工程的副总裁。马斯克具备的一个优势是他的几家公司可以彼此分享工程知识。柯伊曼开发了一种“冷轧”的超硬不锈钢合金，不需要做热处理，特斯拉还为此申请了专利。这种材料足够结实，也足够便宜，可以用于制造卡车和火箭。</p>
+<p>在特斯拉 Cybertruck 上使用不锈钢的决定对车辆的工程设计有重大影响。钢制车身可以作为车辆的承重结构，而过去是底盘在发挥这一作用。</p>
+<p>马斯克建议：“我们可以把强度都放在外圈，让车身成为车辆的外骨骼，然后把其他东西都搭在它里面。”用上了不锈钢，也给卡车外观引入了新的可能性。</p>
+<p>与使用冲压机器将碳纤维雕琢成曲线玲珑的车身面板相比，不锈钢更适合做直线和锐角设计。这就让设计团队有机会—某种程度上也是被逼无奈—探索出更多未来主义的、前卫的甚至是乍一看不太和谐的设计想法。</p>
+<p>马斯克对于“第一性原理”的推崇，还体现在对于成本的把控</p>
+<p>马斯克对成本控制极为关注，这不仅是因为他要花他自己的钱，更是因为把每一分钱都花在刀刃上对实现他的最终目标（殖民火星）来说至关重要。</p>
+<p>航空航天领域的零部件供应商提供的部件价格不能让他满意，他质疑这些价格，因为这些部件的价格一般要比汽车行业的类似零部件高出 10 倍。他对成本的关注，以及他天生的控制欲，让他产生了这样一种想法：尽量多在公司内部制造零部件，而不是从供应商那里购买，这是当时火箭产业和汽车行业的通行做法。</p>
+<p>穆勒回忆说，有一次 SpaceX 需要一个阀门，供应商要价25万美元。马斯克说他们心太黑了，并对穆勒说我们应该自己制造。他们在几个月内就以很低的成本完成了这项工作。</p>
+<p>另一家供应商负责提供一种能使上级发动机的喷管旋转的驱动器，报价 12 万美元。马斯克说这东西并不比车库门开关复杂多少，于是他要求手下的一名工程师以每个5000美元的成本把它造出来。为穆勒工作的年轻工程师杰里米·霍尔曼发现，洗车系统里用于混合清洗液的阀门改造后就可以与火箭燃料一起工作。</p>
+<p>还有一家供应商，交付了一批装在燃料箱顶部的铝制整流罩，随后就抬高了下一批产品的价格。“这就像油漆工给你的房子刷了一半漆后坐地起价，要你花 3 倍的价钱才肯刷完后一半，埃隆可不吃这一套。”马克·容科萨说道，他是马斯克在SpaceX 关系最亲密的同事。马斯克说这样敲诈他的人跟在莫斯科卖火箭的家伙没什么区别，他对容科萨说：“我们自己做。”</p>
+<p>于是装配设施中增加了一个新的部分来打造整流罩。几年后，SpaceX 在内部就完成了70%的火箭零部件制造工作。</p>
+<center><font color=red size=5>02</font></center>
+
+<center><font face="黑体"><b>质疑标准和要求</b></font></center>
+
+<p>当 SpaceX 开始生产第一批默林火箭发动机时，马斯克问穆勒这东西有多重，穆勒说大约1000磅。马斯克说，特斯拉 Model S 的引擎重约4000磅，制造成本约3万美元。“如果特斯拉的引擎重量是你的发动机的4倍，为什么你的发动机要花那么多钱？”</p>
+<p>其中一个原因是，火箭零部件的制造受到军方和美国国家航空航天局规定的数百种规格与要求的制约。在大型航空航天公司，工程师们严格遵守这些金科玉律，马斯克则离经叛道，他要求工程师质疑这些规格要求，这后来成为他五步工作法当中的第一步，在公司内部这一步被称为 “质疑”，这也是他开发产品时的口头禅。</p>
+<p>每当工程师把某项“要求”作为做某事的理由时，马斯克就会质问他们：谁提出的这个要求？如果工程师回答“军方要求”或“法律要求”，都不能让他满意，马斯克坚持要让他们说出提出这些要求的人员姓名。“我们讨论如何鉴别发动机的水平、如何判定燃料箱是否合格时，他会问大家：‘为什么我们必须这样做？’”</p>
+<p>蒂姆·布扎说，他曾是波音公司员工，后来成为 SpaceX 负责发射与测试任务的副总裁，“我们会说：‘军事规格标准里要求的。’他又会问：‘谁起草 的？为什么这么要求？’”</p>
+<p>马斯克时时刻刻反复叮嘱大家，所有要求都应该被当成建议，不可变更的金科玉律只有那些物理学定律约束下的条件。也就是他说的，从事物的本质出发，不被过往的经验所束缚，避免和周边的同类事物过度类比，透过重重的迷雾，看到事物的本质。</p>
+<p>以上内容来源 |《埃隆·马斯克传》 沃尔特·艾萨克森 著，孙思远，刘家琦 译</p>
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_gif/hxpibcflmC96xleefL4q3YZNianVzIOLlgg9ZVibhssJKzmlUtrT3cbqKrPjuFou6ekwIokJLp6hd35lh7onubndQ/640?wx_fmt=gif&wxfrom=5&wx_lazy=1&wx_co=1&tp=webp" alt="图片"></p>
+<center><font face="黑体"><b>附：关于第一性原理的几个方法</b></font></center>
+
+
+
+<p><strong>1. 第一性原理：演绎法的元起点</strong></p>
+<p>第一性原理：从最基本的事实或公理出发，通过逻辑推理，找到实现目标最优路径的方法。</p>
+<p><em>亚里士多德说：“任何一个系统都有自己的第一性原理，它是一个根基性命题或假设，不能被缺省，也不能被违反。”</em></p>
+<p>人类的两种逻辑思维方式：一归纳法（感性思维），二演绎法（理性思维）。而<strong>演绎推导的元起点（元前提），即为第一性原理</strong>。</p>
+<ul>
+<li>第一性原理有自己的作用范围，在某些系统内有效</li>
+<li>一个系统可能有不止一个以上的第一性原理</li>
+<li>受限于人类当前的认知水平，很难准确找到所有系统的元起点</li>
+</ul>
+<p>例：光速不变是物理学的第一性原理。</p>
+<p><strong>2. 打破认知边界，</strong></p>
+<p><strong>最直接的方法是打破第一性原理</strong></p>
+<p>基于时间和空间是绝对独立存在，牛顿建立了牛顿力学。</p>
+<p>从1687年到20世纪初，牛顿力学都相当于物理学的根基。在解释各类自然界的物理现象，及各行业应用中均取得巨大成功。此时，牛顿力学即物理学的第一性原理，而「绝对时空观」即牛顿力学的第一性原理。</p>
+<p>在多个领域均适用的牛顿力学，却在电磁领域出现逻辑失恰，和麦克斯韦的电磁理论互为相悖，物理学的根基被撼动，牛顿力学第一性原理的位置开始动摇。</p>
+<p>直到爱因斯坦打破「绝对时空观」的第一性原理，在光速不变、时间是相对的基础上推导出狭义相对论，开创了一片新的物理领域，弥补了牛顿力学的局限性。</p>
+<p><strong>除科学领域，在商业领域因打破第一性原理带来的系统重构，正是所谓颠覆式创新</strong>（破界创新）、带来第二增长曲线的关键。</p>
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/hxpibcflmC96xleefL4q3YZNianVzIOLlgUCwCBLu7a1unad9jzPk7wPKBoQPfggq07u6hgDoUDKG8ELbpVNMw9Q/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=webp" alt="图片"></p>
+<p>破界创新并不解决原有系统的极限问题，但是让原有系统的极限点问题变得无关紧要。</p>
+<p><strong>3. 打破第一性原理的根本在于打破隐含假设</strong></p>
+<p>-  “破”隐含假设 </p>
+<p>在建立新系统的第一性原理前，需先打破原有第一性原理的隐含假设。如牛顿力学作为20世纪前物理学第一性原理的前提隐含假设为 —— 绝对时间和绝对空间。</p>
+<p>- “立”基石假设</p>
+<p>爱因斯坦在打破「绝对时空观」的隐含假设后，建立了层次更深、强度更大的基石假设 —— 时间是相对的，光速是绝对的。</p>
+<p>- “见”全新系统</p>
+<p>在光速不变和相对性原理的基础上，爱因斯坦推导出了狭义相对论。</p>
+<p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/hxpibcflmC96xleefL4q3YZNianVzIOLlgFXicZCYLhfQ1QTsovuxtMK1LiaNQiaZIH7GKZicPv4pemz3esiaZRVrfVeQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=webp" alt="图片"></p>
+<p><strong>4. 先破后立，双向提高打破隐含假设的能力</strong></p>
+<p>- 破群体信念、反共识、抵抗本能</p>
+<p>群体信念往往是最危险的隐含假设，它包含你与周围人的共识，也是行业常规。</p>
+<p>世俗意义上的“真理”（第一性原理），往往教人“所有人相信的就是真的”，进而将群体信念作为行为准则的评判标准。</p>
+<p>当身处群体中，不仅个体难以察觉，且从众心理让个体即使察觉了，也倾向于选择和群体保持一致。</p>
+<p><strong>打开认知新世界，升维第一步：学会质疑已知、质疑共识，并抵抗从众本能。</strong></p>
+<p>- 立创造性思维、多元思维模型</p>
+<p>我们自认为是在使用大脑进行思考，其实只是用大脑中既有的思维模型在思考。</p>
+<p>本来创造性思维和第一性原理，都是每个人与生俱来的本能，只是很多时候被后天的知识和教育遮蔽了。</p>
+<p>过去的经验和规训后的思维模式帮助我们更快地认知世界，但同时也将我们束缚在一个认知边界内。</p>
+<p><strong>建立多元思维模型、并刻意练习毕生培养</strong></p>
+<ul>
+<li>交叉学习：学习跨学科的基础思维/基本原理、差异化思维方式</li>
+<li>迁移式学习：将知识拆解为基本原理，并在新领域重构基本原理并应用</li>
+</ul>
+<p>知识是给定的内容，而想象力是突破已知的重要力量。</p>
+<p>好奇心是才一个人所能拥有的最宝贵的财富。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7c6f0a1b/">最美的消费品：身体（鲍德里亚）</a>
+            
+            
+            <a class="next" rel="next" href="/f458c7ee/">马克思对欧洲中心主义的批判与超越</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7c6f0a1b/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f458c7ee/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

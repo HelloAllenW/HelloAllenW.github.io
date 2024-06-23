@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Git流程规范配置 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Git流程规范配置</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 14, 2023&nbsp;&nbsp;11:46:03</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 14, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Git相关依赖介绍"><a href="#Git相关依赖介绍" class="headerlink" title="Git相关依赖介绍"></a>Git相关依赖介绍</h1><table>
+<thead>
+<tr>
+<th>依赖</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>husky</td>
+<td>操作 git 钩子的工具（在 git xx 之前执行某些命令）</td>
+</tr>
+<tr>
+<td>lint-staged</td>
+<td>在提交之前进行 eslint 校验，并使用 prettier 格式化本地暂存区的代码</td>
+</tr>
+<tr>
+<td>@commitlint/cli</td>
+<td>校验 git commit 信息是否符合规范，保证团队的一致性</td>
+</tr>
+<tr>
+<td>@commitlint/config-conventional</td>
+<td>Anglar 的提交规范</td>
+</tr>
+<tr>
+<td>commitizen</td>
+<td>基于 Node.js 的 git commit 命令行工具，生成标准化的 commit message</td>
+</tr>
+<tr>
+<td>cz-git</td>
+<td>一款工程性更强，轻量级，高度自定义，标准输出格式的 commitize 适配器</td>
+</tr>
+</tbody></table>
+<br />
+
+<h1 id="commit拦截（husky-lint-staged）"><a href="#commit拦截（husky-lint-staged）" class="headerlink" title="commit拦截（husky + lint-staged）"></a>commit拦截（husky + lint-staged）</h1><p>我们的目的是在 git commit 之前，先强制执行prettier格式化（防止某些成员开发期间不开启编辑器格式化）、再检查代码规范，如果检查不通过、阻止提交。</p>
+<h2 id="1-新建-eslintignore-prettierignore"><a href="#1-新建-eslintignore-prettierignore" class="headerlink" title="1. 新建 .eslintignore + .prettierignore"></a>1. 新建 .eslintignore + .prettierignore</h2><p><code>.eslintignore</code>、<code>.prettierignore</code>，内容参考如下：（没使用eslint和prettier可跳过）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">node_modules</span><br><span class="line">dist</span><br><span class="line">.gitignore</span><br><span class="line">.eslintignore</span><br><span class="line">.prettierignore</span><br><span class="line">LICENSE</span><br><span class="line">README.md</span><br><span class="line">yarn.lock</span><br><span class="line"></span><br><span class="line"># local env files</span><br><span class="line">.env.local</span><br><span class="line">.env.*.local</span><br><span class="line"></span><br><span class="line"># Log files</span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line"></span><br><span class="line"># Editor directories and files</span><br><span class="line">.idea</span><br><span class="line">.vscode</span><br><span class="line">*.suo</span><br><span class="line">*.ntvs*</span><br><span class="line">*.njsproj</span><br><span class="line">*.sln</span><br><span class="line">*.sw?</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-husky：操作git钩子的工具"><a href="#2-husky：操作git钩子的工具" class="headerlink" title="2. husky：操作git钩子的工具"></a>2. husky：操作git钩子的工具</h2><p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install husky -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）使用（为了添加<code>.husky</code> 文件夹）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1、打开package.json文件，在scripts中添加</span><br><span class="line">&quot;prepare&quot;: &quot;husky install&quot;</span><br><span class="line"></span><br><span class="line">// 2、添加完成之后，执行如下命令</span><br><span class="line">npm run prepare</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-lint-staged：本地暂存代码检查工具"><a href="#3-lint-staged：本地暂存代码检查工具" class="headerlink" title="3. lint-staged：本地暂存代码检查工具"></a>3. lint-staged：本地暂存代码检查工具</h2><p>git commit 之前，会自动使用 prettier 格式化 ignore 之外的代码。格式化后，自动检查所有文件，是否全部符合 eslint 规范。存在不符合规范的代码，git commit 将被终止。</p>
+<p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install lint-staged -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）添加 ESlint Hook（在.husky 文件夹下添加 pre-commit 文件）</p>
+<p>执行以下命令，在husky文件夹下会自动生成pre-commit文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx husky add .husky/pre-commit &quot;npm run lint:lint-staged&quot;</span><br></pre></td></tr></table></figure>
+
+<p>作用是通过钩子函数，判断提交的代码是否符合规范，并使用 prettier 格式化代码</p>
+<p>（3）项目根目录下手动新增 <code>lint-staged.config.js</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	&quot;*.&#123;js,jsx,ts,tsx&#125;&quot;: [&quot;eslint --fix&quot;, &quot;prettier --write&quot;],</span><br><span class="line">	&quot;&#123;!(package)*.json,*.code-snippets,.!(browserslist)*rc&#125;&quot;: [&quot;prettier --write--parser json&quot;],</span><br><span class="line">	&quot;package.json&quot;: [&quot;prettier --write&quot;],</span><br><span class="line">	&quot;*.vue&quot;: [&quot;eslint --fix&quot;, &quot;prettier --write&quot;, &quot;stylelint --fix&quot;],</span><br><span class="line">	&quot;*.&#123;scss,less,styl,html&#125;&quot;: [&quot;stylelint --fix&quot;, &quot;prettier --write&quot;],</span><br><span class="line">	&quot;*.md&quot;: [&quot;prettier --write&quot;]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br />
+
+<h1 id="规范commit内容（husky-commit-msg）"><a href="#规范commit内容（husky-commit-msg）" class="headerlink" title="规范commit内容（husky + commit-msg）"></a>规范commit内容（husky + commit-msg）</h1><p>commitlint是一个开源的msg的提交规范库，使用 commitlint 可以规范我们每一次的 commit，我们也可以用来自动生成 changeLog 等文件，方便代码管理。</p>
+<h2 id="1-commitlint-制定提交规范"><a href="#1-commitlint-制定提交规范" class="headerlink" title="1. commitlint:  制定提交规范"></a>1. commitlint:  制定提交规范</h2><p>（1）安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @commitlint/cli @commitlint/config-conventional -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）配置命令（在.husky 文件夹下自动生成 commit-msg 文件，执行如下代码自动生成）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx husky add .husky/commit-msg &#x27;npx --no-install commitlint --edit &quot;$1&quot;&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-commitizen：基于-Node-js-的-git-commit-命令行工具，生成标准化的-message"><a href="#2-commitizen：基于-Node-js-的-git-commit-命令行工具，生成标准化的-message" class="headerlink" title="2. commitizen：基于 Node.js 的 git commit 命令行工具，生成标准化的 message"></a>2. commitizen：基于 Node.js 的 git commit 命令行工具，生成标准化的 message</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装 commitizen，如此一来可以快速使用 cz 或 git cz 命令进行启动。</span><br><span class="line">npm install commitizen -D</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-cz-git"><a href="#3-cz-git" class="headerlink" title="3. cz-git"></a>3. cz-git</h2><p>（1）指定提交文字规范，一款工程性更强，高度自定义，标准输出格式的 commitizen 适配器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cz-git -D</span><br></pre></td></tr></table></figure>
+
+<p>（2）配置 package.json：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;config&quot;: &#123;</span><br><span class="line">  &quot;commitizen&quot;: &#123;</span><br><span class="line">    &quot;path&quot;: &quot;node_modules/cz-git&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）新建 <code>commitlint.config.js</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">// @see: https://cz-git.qbenben.com/zh/guide</span><br><span class="line">/** @type &#123;import(&#x27;cz-git&#x27;).UserConfig&#125; */</span><br><span class="line">/**</span><br><span class="line">* feature：新功能</span><br><span class="line">* update：更新某功能</span><br><span class="line">* fixbug：修补某功能的bug</span><br><span class="line">* refactor：重构某个功能</span><br><span class="line">* optimize: 优化构建工具或运行时性能</span><br><span class="line">* style：仅样式改动</span><br><span class="line">* docs：仅文档新增/改动</span><br><span class="line">* chore：构建过程或辅助工具的变动</span><br><span class="line">*/</span><br><span class="line">module.exports = &#123;</span><br><span class="line">	ignores: [commit =&gt; commit === &quot;init&quot;],</span><br><span class="line">    // commitlint 推荐我们使用 config-conventional 配置去写 commit</span><br><span class="line">	extends: [&quot;@commitlint/config-conventional&quot;],</span><br><span class="line">	rules: &#123;</span><br><span class="line">		// @see: https://commitlint.js.org/#/reference-rules</span><br><span class="line">		&quot;body-leading-blank&quot;: [2, &quot;always&quot;],</span><br><span class="line">		&quot;footer-leading-blank&quot;: [1, &quot;always&quot;],</span><br><span class="line">		&quot;header-max-length&quot;: [2, &quot;always&quot;, 108],</span><br><span class="line">		&quot;subject-empty&quot;: [2, &quot;never&quot;],</span><br><span class="line">		&quot;type-empty&quot;: [2, &quot;never&quot;],</span><br><span class="line">		&quot;subject-case&quot;: [0],</span><br><span class="line">		&quot;type-enum&quot;: [</span><br><span class="line">			2,</span><br><span class="line">			&quot;always&quot;,</span><br><span class="line">			[</span><br><span class="line">				&quot;feat&quot;,</span><br><span class="line">				&quot;fix&quot;,</span><br><span class="line">				&quot;docs&quot;,</span><br><span class="line">				&quot;style&quot;,</span><br><span class="line">				&quot;refactor&quot;,</span><br><span class="line">				&quot;perf&quot;,</span><br><span class="line">				&quot;test&quot;,</span><br><span class="line">				&quot;build&quot;,</span><br><span class="line">				&quot;ci&quot;,</span><br><span class="line">				&quot;chore&quot;,</span><br><span class="line">				&quot;revert&quot;,</span><br><span class="line">				&quot;wip&quot;,</span><br><span class="line">				&quot;workflow&quot;,</span><br><span class="line">				&quot;types&quot;,</span><br><span class="line">				&quot;release&quot;</span><br><span class="line">			]</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	prompt: &#123;</span><br><span class="line">		messages: &#123;</span><br><span class="line">			type: &quot;选择你要提交的类型 :&quot;,</span><br><span class="line">			scope: &quot;选择一个提交范围（可选）:&quot;,</span><br><span class="line">			customScope: &quot;请输入自定义的提交范围 :&quot;,</span><br><span class="line">			subject: &quot;填写简短精炼的变更描述 :\n&quot;,</span><br><span class="line">			body: &#x27;填写更加详细的变更描述（可选）。使用 &quot;|&quot; 换行 :\n&#x27;,</span><br><span class="line">			breaking: &#x27;列举非兼容性重大的变更（可选）。使用 &quot;|&quot; 换行 :\n&#x27;,</span><br><span class="line">			footerPrefixsSelect: &quot;选择关联issue前缀（可选）:&quot;,</span><br><span class="line">			customFooterPrefixs: &quot;输入自定义issue前缀 :&quot;,</span><br><span class="line">			footer: &quot;列举关联issue (可选) 例如: #31, #I3244 :\n&quot;,</span><br><span class="line">			confirmCommit: &quot;是否提交或修改commit ?&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		types: [</span><br><span class="line">			&#123; value: &quot;feat: 特性&quot;, name: &quot;特性:   🚀  新增功能&quot;, emoji: &quot;🚀&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;fix: 修复&quot;, name: &quot;修复:   🧩  修复缺陷&quot;, emoji: &quot;🧩&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;docs: 文档&quot;, name: &quot;文档:   📚  文档变更&quot;, emoji: &quot;📚&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;style: 格式&quot;, name: &quot;格式:   🎨  代码格式（不影响功能，例如空格、分号等格式修正）&quot;, emoji: &quot;🎨&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;refactor: 重构&quot;, name: &quot;重构:   ♻️  代码重构（不包括 bug 修复、功能新增）&quot;, emoji: &quot;♻️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;perf: 性能&quot;, name: &quot;性能:   ⚡️  性能优化&quot;, emoji: &quot;⚡️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;test: 测试&quot;, name: &quot;测试:   ✅  添加疏漏测试或已有测试改动&quot;, emoji: &quot;✅&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;chore: 构建&quot;, name: &quot;构建:   📦️  构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）&quot;, emoji: &quot;📦️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;ci: 集成&quot;, name: &quot;集成:   🎡  修改 CI 配置、脚本&quot;, emoji: &quot;🎡&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;revert: 回退&quot;, name: &quot;回退:   ⏪️  回滚 commit&quot;, emoji: &quot;⏪️&quot; &#125;,</span><br><span class="line">			&#123; value: &quot;build: 打包&quot;, name: &quot;打包:   🔨  项目打包发布&quot;, emoji: &quot;🔨&quot; &#125;</span><br><span class="line">		],</span><br><span class="line">		useEmoji: true,</span><br><span class="line">		themeColorCode: &quot;&quot;,</span><br><span class="line">		scopes: [],</span><br><span class="line">		allowCustomScopes: true,</span><br><span class="line">		allowEmptyScopes: true,</span><br><span class="line">		customScopesAlign: &quot;bottom&quot;,</span><br><span class="line">		customScopesAlias: &quot;custom&quot;,</span><br><span class="line">		emptyScopesAlias: &quot;empty&quot;,</span><br><span class="line">		upperCaseSubject: false,</span><br><span class="line">		allowBreakingChanges: [&quot;feat&quot;, &quot;fix&quot;],</span><br><span class="line">		breaklineNumber: 100,</span><br><span class="line">		breaklineChar: &quot;|&quot;,</span><br><span class="line">		skipQuestions: [],</span><br><span class="line">		issuePrefixs: [&#123; value: &quot;closed&quot;, name: &quot;closed:   ISSUES has been processed&quot; &#125;],</span><br><span class="line">		customIssuePrefixsAlign: &quot;top&quot;,</span><br><span class="line">		emptyIssuePrefixsAlias: &quot;skip&quot;,</span><br><span class="line">		customIssuePrefixsAlias: &quot;custom&quot;,</span><br><span class="line">		allowCustomIssuePrefixs: true,</span><br><span class="line">		allowEmptyIssuePrefixs: true,</span><br><span class="line">		confirmColorize: true,</span><br><span class="line">		maxHeaderLength: Infinity,</span><br><span class="line">		maxSubjectLength: Infinity,</span><br><span class="line">		minSubjectLength: 0,</span><br><span class="line">		scopeOverrides: undefined,</span><br><span class="line">		defaultBody: &quot;&quot;,</span><br><span class="line">		defaultIssues: &quot;&quot;,</span><br><span class="line">		defaultScope: &quot;&quot;,</span><br><span class="line">		defaultSubject: &quot;&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<br />
+
+<h1 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h1><h2 id="1-配置package-json命令"><a href="#1-配置package-json命令" class="headerlink" title="1. 配置package.json命令"></a>1. 配置package.json命令</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;scripts&quot;: &#123;</span><br><span class="line">		&quot;dev&quot;: &quot;vite&quot;,</span><br><span class="line">		&quot;serve&quot;: &quot;vite&quot;,</span><br><span class="line">		&quot;build:dev&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode development&quot;,</span><br><span class="line">		&quot;build:test&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode test&quot;,</span><br><span class="line">		&quot;build:pro&quot;: &quot;vue-tsc --noEmit &amp;&amp; vite build --mode production&quot;,</span><br><span class="line">		&quot;preview&quot;: &quot;vite preview&quot;,</span><br><span class="line">		// 以下为必配置</span><br><span class="line">		&quot;lint:eslint&quot;: &quot;eslint --fix --ext .js,.ts,.vue ./src&quot;,</span><br><span class="line">		&quot;lint:prettier&quot;: &quot;prettier --write --loglevel warn \&quot;src/**/*.&#123;js,ts,json,tsx,css,less,scss,vue,html,md&#125;\&quot;&quot;,</span><br><span class="line">		&quot;lint:stylelint&quot;: &quot;stylelint --cache --fix \&quot;**/*.&#123;vue,less,postcss,css,scss&#125;\&quot; --cache --cache-location node_modules/.cache/stylelint/&quot;,</span><br><span class="line">		&quot;lint:lint-staged&quot;: &quot;lint-staged&quot;,</span><br><span class="line">		&quot;prepare&quot;: &quot;husky install&quot;,</span><br><span class="line">		&quot;release&quot;: &quot;standard-version&quot;,</span><br><span class="line">		&quot;commit&quot;: &quot;git pull &amp;&amp; git add -A &amp;&amp; git-cz &amp;&amp; git push&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-配置完成，提交代码"><a href="#2-配置完成，提交代码" class="headerlink" title="2. 配置完成，提交代码"></a>2. 配置完成，提交代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run commit</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-效果如下"><a href="#3-效果如下" class="headerlink" title="3. 效果如下"></a>3. 效果如下</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404091548707.png" alt="img"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404091548363.png" alt="img"></p>
+<br />
+
+<h1 id="根据-commit-message-自动生成-changelog"><a href="#根据-commit-message-自动生成-changelog" class="headerlink" title="根据 commit message 自动生成 changelog"></a>根据 commit message 自动生成 changelog</h1><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141156857.png" alt="img"></p>
+<p>使用参考 <a target="_blank" rel="noopener" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog">conventional-changelog</a></p>
+<h2 id="1-安装依赖"><a href="#1-安装依赖" class="headerlink" title="1. 安装依赖"></a>1. 安装依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install conventional-changelog conventional-changelog-cli --save-dev</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-添加脚本"><a href="#2-添加脚本" class="headerlink" title="2. 添加脚本"></a>2. 添加脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;changelog&quot;: &quot;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-生成CHANGELOG-md文件"><a href="#3-生成CHANGELOG-md文件" class="headerlink" title="3. 生成CHANGELOG.md文件"></a>3. 生成CHANGELOG.md文件</h2><p>直接运行下面的命令即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run changelog</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141158345.png" alt="img"></p>
+<p>如果type为feat、fix、perf、revert，则该 commit 将肯定出现在 Change log 之中。其他情况（docs、chore、style、refactor、test）由你决定，要不要放入 Change log，建议是不要。</p>
+<p>注意：版本的log使用 npm version 才会生成新的log，手动修改 package.json version 不会有新的版本log。</p>
+<h2 id="4-package-version"><a href="#4-package-version" class="headerlink" title="4. package version"></a>4. package version</h2><p>npm version [ | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]</p>
+<p>参考<a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v8/commands/npm-version">npm version</a></p>
+<p>npm version 命令用于更新和设置包的版本号，并可以自动创建并提交Git标签以及更新package.json文件。该命令的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version [&lt;newversion&gt; | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]</span><br></pre></td></tr></table></figure>
+
+<p>每个参数的含义如下：</p>
+<ul>
+<li><p><code>&lt;newversion&gt;</code>：这是一个可选的参数，表示你要将包的版本号更新为的具体版本号。可以是任何有效的版本号，如1.2.3。如果提供了这个参数，它将直接设置包的版本号为指定的值。</p>
+</li>
+<li><p>major：这是一个可选的参数，表示要执行主版本号升级。执行此命令后，包的主版本号将加1，次版本号和修订号将重置为0。</p>
+</li>
+<li><p>minor：这是一个可选的参数，表示要执行次版本号升级。执行此命令后，包的次版本号将加1，修订号将重置为0。</p>
+</li>
+<li><p>patch：这是一个可选的参数，表示要执行修订号升级。执行此命令后，包的修订号将加1。</p>
+</li>
+<li><p>premajor：这是一个可选的参数，表示要执行主版本号升级，并在版本号后添加一个预发布标签（如-alpha.1）。</p>
+</li>
+<li><p>preminor：这是一个可选的参数，表示要执行次版本号升级，并在版本号后添加一个预发布标签。</p>
+</li>
+<li><p>prepatch：这是一个可选的参数，表示要执行修订号升级，并在版本号后添加一个预发布标签。</p>
+</li>
+<li><p>prerelease：这是一个可选的参数，表示要在当前版本号的基础上添加一个预发布标签。</p>
+</li>
+<li><p>from-git：这是一个可选的参数，用于根据最新的Git提交信息自动确定新版本号。这可以用于生成一个语义版本号，根据Git提交历史中的特性和修复来决定。</p>
+</li>
+<li><p>npm version 命令通常用于升级包的版本号，并且在升级后，它会自动创建一个Git标签，以及在package.json中更新新的版本号。你可以根据项目需求选择不同的参数来执行不同类型的版本升级和预发布标签。</p>
+</li>
+</ul>
+<p>通过使用npm 钩子，可以做一些自动化的东西，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;preversion&quot;: &quot;npm test&quot;,</span><br><span class="line">    &quot;version&quot;: &quot;npm run build &amp;&amp; git add -A dist&quot;,</span><br><span class="line">    &quot;postversion&quot;: &quot;git push &amp;&amp; git push --tags &amp;&amp; rm -rf build/temp&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-自定义conventional-changelog"><a href="#5-自定义conventional-changelog" class="headerlink" title="5. 自定义conventional-changelog"></a>5. 自定义conventional-changelog</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">const compareFunc = require(&#x27;compare-func&#x27;)</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  writerOpts: &#123;</span><br><span class="line">    transform: (commit, context) =&gt; &#123;</span><br><span class="line">      let discard = true</span><br><span class="line">      const issues = []</span><br><span class="line"></span><br><span class="line">      commit.notes.forEach(note =&gt; &#123;</span><br><span class="line">        note.title = &#x27;BREAKING CHANGES&#x27;</span><br><span class="line">        discard = false</span><br><span class="line">      &#125;)</span><br><span class="line">      if (commit.type === &#x27;feat&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;✨ Features | 新功能&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;fix&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🐛 Bug Fixes | Bug 修复&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;perf&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;⚡ Performance Improvements | 性能优化&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;revert&#x27; || commit.revert) &#123;</span><br><span class="line">        commit.type = &#x27;⏪ Reverts | 回退&#x27;</span><br><span class="line">      &#125; else if (discard) &#123;</span><br><span class="line">        return</span><br><span class="line">      &#125; else if (commit.type === &#x27;docs&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;📝 Documentation | 文档&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;style&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;💄 Styles | 风格&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;refactor&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;♻ Code Refactoring | 代码重构&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;test&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;✅ Tests | 测试&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;build&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;👷‍ Build System | 构建&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;ci&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🔧 Continuous Integration | CI 配置&#x27;</span><br><span class="line">      &#125; else if (commit.type === &#x27;chore&#x27;) &#123;</span><br><span class="line">        commit.type = &#x27;🎫 Chores | 其他更新&#x27;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      if (commit.scope === &#x27;*&#x27;) &#123;</span><br><span class="line">        commit.scope = &#x27;&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">      if (typeof commit.hash === &#x27;string&#x27;) &#123;</span><br><span class="line">        commit.hash = commit.hash.substring(0, 7)</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      if (typeof commit.subject === &#x27;string&#x27;) &#123;</span><br><span class="line">        let url = context.repository</span><br><span class="line">          ? `$&#123;context.host&#125;/$&#123;context.owner&#125;/$&#123;context.repository&#125;`</span><br><span class="line">          : context.repoUrl</span><br><span class="line">        if (url) &#123;</span><br><span class="line">          url = `$&#123;url&#125;/issues/`</span><br><span class="line">          // Issue URLs.</span><br><span class="line">          commit.subject = commit.subject.replace(/#([0-9]+)/g, (_, issue) =&gt; &#123;</span><br><span class="line">            issues.push(issue)</span><br><span class="line">            return `[#$&#123;issue&#125;]($&#123;url&#125;$&#123;issue&#125;)`</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        if (context.host) &#123;</span><br><span class="line">          // User URLs.</span><br><span class="line">          commit.subject = commit.subject.replace(/\B@([a-z0-9](?:-?[a-z0-9/])&#123;0,38&#125;)/g, (_, username) =&gt; &#123;</span><br><span class="line">            if (username.includes(&#x27;/&#x27;)) &#123;</span><br><span class="line">              return `@$&#123;username&#125;`</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return `[@$&#123;username&#125;]($&#123;context.host&#125;/$&#123;username&#125;)`</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // remove references that already appear in the subject</span><br><span class="line">      commit.references = commit.references.filter(reference =&gt; &#123;</span><br><span class="line">        if (issues.indexOf(reference.issue) === -1) &#123;</span><br><span class="line">          return true</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false</span><br><span class="line">      &#125;)</span><br><span class="line">      return commit</span><br><span class="line">    &#125;,</span><br><span class="line">    groupBy: &#x27;type&#x27;,</span><br><span class="line">    commitGroupsSort: &#x27;title&#x27;,</span><br><span class="line">    commitsSort: [&#x27;scope&#x27;, &#x27;subject&#x27;],</span><br><span class="line">    noteGroupsSort: &#x27;title&#x27;,</span><br><span class="line">    notesSort: compareFunc</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后在 package.json 中的 scripts 添加一条语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &quot;changelog&quot;: &quot;conventional-changelog -p custom-config -i CHANGELOG.md -s -r 0  -n ./changelog-option.js&quot;</span><br><span class="line">//在这指定配置文件位置，本人放在了根目录，也可以指定其他地方</span><br><span class="line">/*配置项说明：</span><br><span class="line">-p custom-config 指定风格 </span><br><span class="line">-i CHANGELOG.md 指定输出的文件名称</span><br><span class="line">-s -r 0 指定增量更新，不会覆盖以前的更新日志</span><br><span class="line">-n ./changelog-option.js 指定自定义配置</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>注意：本项目中用到了 custom-config，因此需要先安装 custom-config【单纯的 changelog-option.js 是不完整的配置，在此只修改了自己需要的部分，其他部分默认】，如果不加这个插件，是不生效的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i conventional-changelog-custom-config compare-func -D</span><br></pre></td></tr></table></figure>
+
+<p>最后再运行<code>npm run changelog</code></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33a58706/">前端项目构建最佳实践</a>
+            
+            
+            <a class="next" rel="next" href="/5fb3e8ea/">手动搭建一个完整的vue项目</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33a58706/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/5fb3e8ea/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

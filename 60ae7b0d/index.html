@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>西方思想史，传承脉络全景图 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">西方思想史，传承脉络全景图</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 11, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 11, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeqCEj0UyUSoekbSibq6LyThiaDico6hfmwhFzLP8gHc6zTeCYr9LJ1DV1s99grAzU3SJVbkMO2dWRcRA/640?wx_fmt=jpeg&wxfrom=13&tp=wxpic" alt="图片"></p>
+<p><strong>从古希腊神话，到西方哲学</strong></p>
+<p>西方思想起源于古希腊。</p>
+<p>古老的希腊孕育了西方思想中最为璀璨夺目的一颗明珠——古希腊哲学。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/sM5SdPkqTeqCEj0UyUSoekbSibq6LyThiawksvlb5xOPTuiaGdhg5c3uiaqtwMNbXyTSOctISicLzia6eclLB8spE0ibA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="01-西方哲学的起源，是对原始宗教、古希腊神话幻想的取代"><a href="#01-西方哲学的起源，是对原始宗教、古希腊神话幻想的取代" class="headerlink" title="01. 西方哲学的起源，是对原始宗教、古希腊神话幻想的取代"></a>01. 西方哲学的起源，是对原始宗教、古希腊神话幻想的取代</h2><p>希腊神话天真美丽的幻想和质朴纯洁清新的风采至今仍吸引着人们，对整个希腊乃至后来欧洲的文学艺术都产生了深远的影响。</p>
+<p><strong>希腊神话是人们对美好事物最初的信仰</strong></p>
+<p>古希腊神话与宗教信仰是密切相连的。古希腊宗教是一种多神信仰的宗教，在各城邦的生活中占有相当重要的位置，所有希腊公民都是笃信宗教的。但是，与其他民族，特别是与东方民族不同的是，希腊世界没有享有特权的祭司阶层，神庙中的男女祭司地位相当于城邦的公务人员，神庙的管理权掌握在城邦委派的公民团体手中。因此，源于古老的民间信仰形成的希腊宗教观念，在特有的希腊城邦社会条件下产生了与其他民族不同的特点，也使希腊神话具有了自己鲜明的特征，其中居于核心地位的是“神人同形同性论”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/sM5SdPkqTeqCEj0UyUSoekbSibq6LyThiarkgEpfNkRnrUDf1GoxX8WFdficpzNBjqDx6OGLgpOdznWGo7mzQ6Fpw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>希腊人是相信命运观念的，这在神话中也有体现，但神话同时也表明他们不是匍匐在命运脚下的奴隶，而是一个珍惜个人荣誉、强调人的抗争、热爱世俗生活、积极进取、崇尚英雄气节的民族。希腊神话是把人放在中心地位的神话，凸显的是人的精神，回荡着昂扬、乐观、健康的显示气息，对其后的希腊文学产生了持久的影响。</p>
+<center>希腊神谱 ▽</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7PqkMWCZ8tz8egmoU07NOnR5jEHq3GVoncUu5QWL5dOGzLkmXHQNoXL5vqcOr7G5FhZfu1DpHrnzw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>公元前20世纪以前，在遥远的地中海东部，美丽的爱琴海边有一片富饶的土地，叫克里特，那里山峦起伏，海岸线曲折，海上岛屿星罗棋布，相传在远古时期，这里由一个叫米诺斯的国王统治。他修建了富丽堂皇的王宫，里面的通道纵横曲折，任何陌生人进去都走不出来。爱琴海西面，是美丽的希腊半岛，希腊半岛三面环海，岛上山脉丘陵纵横隔绝，使得古希腊人民往来较少，没有形成统一的王国。</p>
+<p><strong>自由文化释放人民的天性和想象力</strong></p>
+<p>在那远古时代，人们对自然现象、对人的生死、都感到神秘和难解，于是他们不断幻想、沉思。由于希腊半岛人口过剩，人民不得不向外寻拓生活空间，这时候涌现了许多英雄豪杰，从而产生了许多人神交织的民族英雄故事。这些故事最初是人们口耳相传，直到西元前7世纪左右，有一位叫荷马的诗人，将这些神话英雄故事整理记录在《荷马史诗》中，这些众人所创造的的人、神、物的故事，经由时间的淬炼，就形成了后来我们熟知的“希腊神话”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/sM5SdPkqTeqCEj0UyUSoekbSibq6LyThialkmuHG3dy3OyEMfbO8aqlEOFRMeMo5oaLnPcDVLteqbMX1fpTYwQpA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>希腊神话自公元前9世纪成型，古希腊人用它解释自然界和社会发生的一切自然现象。这一时期，人们认为神人同行同性，诸神有着与凡人相同的体态相貌、七情六欲，没有“从无到有”的创世观念，（@听哲学推送）神的意欲行为和自然的生成变化被不加区分的交织成一副世界图式，这个自给自足的世界观长期统治着人们的思想，直到公园前6世纪左右，人们开始对普通人习以为常的观念感到诧异，逻辑思辨的智慧自此开始。</p>
+<p>公元前5世纪时期，米底王国和迦勒底人联合攻占了亚述首都尼尼微，亚述的领土被两国瓜分了。米底继续向西扩张，和吕底亚王国在哈吕斯河一带展开了一场长达五年的战争，平民百姓流离失所。这时候，有一位智者，扬言上天反对人世战争，某日必以日食为警告，当时没有人相信他。公元前585年5月28日，当两国将士短兵相接时，天突然黑了下来，白昼顿时变成了黑夜，交战的双方惊恐万分，于是马上停战和好，后来两国还互通婚姻。而这位人类史上首次预言日食的智者，就是后来被世人追为西方哲学史第一位哲学家——<strong>泰勒斯</strong>。</p>
+<p>泰勒斯，出生于爱奥尼亚的米利都城，创建了古希腊最早的哲学学派，是希腊最早的哲学学派——米利都学派（也称爱奥尼亚学派）的创始人。是古希腊及西方第一个自然科学家和哲学家。泰勒斯的学生有阿那克西曼德、阿那克西美尼等。</p>
+<p>他是第一个提出“世界的本原是什么？”并开启了哲学史的“本体论转向”的哲学家，被后人称为“希腊七贤之一”和“哲学和科学的始祖”，是学界公认的“哲学史第一人”。</p>
+<h2 id="02-西方思想史思维导图"><a href="#02-西方思想史思维导图" class="headerlink" title="02. 西方思想史思维导图"></a>02. 西方思想史思维导图</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7PqkMWCZ8tz8egmoU07NOnRKLxbnFkH0rlGkTReYjlt96pgkicSgLCiacpSqY3P9o2TibuAPicpAOVaiag/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="03-西方哲学史脉络图解"><a href="#03-西方哲学史脉络图解" class="headerlink" title="03.西方哲学史脉络图解"></a>03.西方哲学史脉络图解</h2><p>古希腊罗马哲学包括自然哲学、形而上学和伦理哲学三个阶段，为西方哲学的理性思辨和形而上学打下了传统根基。</p>
+<p>它提出了逻各斯、存在、实体等成为西方哲学的经典命题，而柏拉图和亚里士多德关于共相性质的争论开启了中世纪基督教哲学关于唯名论和实在论的争论。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFDbJhAtMFm1PwBEAHS0LmtBvzq3ibfEJh2L3nfAVqyfI8ib3ibMnlJ4kBw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>古希腊罗马哲学包括自然科学、形而上学和伦理哲学三个阶段，为西方哲学的理性思辩和形而上学打下了传统根基。它提出了逻辑、存在、实体等成为西方哲学的经典命题，而柏拉图和亚里士多德关于共相性质的争论开启了中世纪基督教哲学关于唯名论和实在论的争论。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFoQVKohArqhVvgVMUoDOS431dK5k7dVYShrOFRMeubNHtAnWxoOKeyw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>西罗马帝国崩溃后，基督教成为西欧不可侵犯的绝对的意识形态，哲学成为“神学的婢女”，被基督教信仰的浓重阴影所笼罩。从教父哲学（柏拉图-奥古斯丁体系）到经院哲学（亚里士多德-阿奎那体系）的过渡，反应了希腊罗马理性精神的复苏，而唯名论和实在论的对立为近代理性主义和经验论的兴起开辟了道路。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFiaODzem7v4jeeCLQnkUErJVTqEHdxNzZysmmHDsrhVAZOddYU43mq2Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>近代早期西欧哲学从文艺复兴和宗教改革运动开始，演化出欧陆唯理论同不列颠经验论的对立，其核心是理性反思和对经验（外在或内在）的重视。唯理论演变成莱布尼茨-沃尔夫体系中的独断论，而经验论则在休谟那里成为彻底的怀疑主义，这为法兰西启蒙思想和德意志古典哲学的出现埋下了伏笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFaW36VZI4jGl36niaVc8Q10HqmlP3n9k6FRF66rmUQsQDTU9yVoGw2ibQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>18世纪法国哲学包括法国自然神论和唯物主义两块，探讨的核心问题是人与自然的关系，理论上则表现为思维和存在的关系。法国自然神论奠定了西方政治学的基础，而激进的卢梭则引导了后世批判哲学（马克思和尼采）的出现。法国唯物主义者否定自由意志，但推崇人的理性，使理性主义成为法国哲学鲜明的特点。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFFrDHnqXw2Pduuu8rvTbshIgQj4B66R5la5aa7HBiclJb1ODhYj22R9Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>18世纪末19世纪初，德意志古典哲学体系的出现标志着传统西方哲学的最高成就。它将考察重点转向主体与客体的关系，实现了西方哲学继亚里士多德形而上学体系之后的第二次飞跃。康德通过对自在之物和现象的严格区分，发展出认识论的先验自我意识统摄机能和道德实践领域的纯粹理性，以及沟通两者的判断力批判。黑格尔通过辩证法三段论将整个世界容纳在绝对精神从自在状态过渡到自为状态，最终达成绝对理性自我意识的宏大历史过程。因此，黑格尔成为最后一个形而上学大体系，并引发费尔巴哈和马克思对其的反思。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/EP7wHYjTF7NibuL90csR5v6FmazwmwmGFlmndFia0jmK4dv5kpCRIk50u9anAicBERoBdXWhIGfuVRZfME6DjUASQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>19世纪中后期，形而上学和理性主义的传统西方哲学走向终结，导致了向现代西哲的过渡时期。马克思把哲学从天上拽回了人间，对人的感性活动即实践的确认使得马克思主义成为形而上学的终结者（海德格尔语）；以尼采为代表的非理性主义则着重于人生命意志的实现。两者的思想都没有构成完整的体系，但对后世的现代西哲、现象学运动、结构主义、西马、精神分析学乃至后现代哲学，产生了不可替代的巨大启发。</p>
+<h2 id="4-西方哲学思想的50命题"><a href="#4-西方哲学思想的50命题" class="headerlink" title="4. 西方哲学思想的50命题"></a>4. 西方哲学思想的50命题</h2><p><strong>泰勒斯</strong>：水是万物的始基。这一命题开创了人类认识的一个新时代，拉开了从哲学的角度审视世界的大幕。</p>
+<p><strong>阿那克西曼德</strong>：世界源于无定。阿那克西曼德生于米利都，是泰勒斯的追随者和最出色的学生。</p>
+<p><strong>阿那克西米尼</strong>：世界源于无限的空气。在西方哲学史上，他开创了用事物量的变化来说明事物在性质上的区别的历史。</p>
+<p><strong>毕达哥拉斯</strong>：万物都是数。“最优秀的人则献身于发现生活本身的意义和目的。他设法揭示自然的奥秘，热爱知识，这种人就是哲学家。”</p>
+<p><strong>巴门尼德</strong>：存在是一。从巴门尼德开始，哲学的研究开始进入思辨的领域。</p>
+<p><strong>赫拉克利特</strong>：人不能两次踏进同一条河流。“一切皆流，无物常住。”</p>
+<p><strong>普罗泰戈拉</strong>：人是万物的尺度。他是第一个自称为智者的人，也是古希腊第一位公众教师，还是第一个收学费的人。</p>
+<p><strong>苏格拉底</strong>：自知其无知。就是这么一个其貌不扬的人物，让很多年轻人聚集在他的周围，和他就形形色色的问题展开激辩，成为他们的精神导师和良师益友。</p>
+<p><strong>芝诺</strong>：飞矢不动。亚里士多德说他是论辩法即辩证法的创始人。他的论证方法及辩论技巧，是后来智者们的思想渊源，促进了逻辑和理论思维的发展。</p>
+<p><strong>恩培多克勒</strong>：同类相知。他的一生充满了传奇的色彩，可以说在他那里，哲学家、预言者、科学家和江湖术士等等身份经常交错出现，以至于我们无法确切地勾勒出他的形象。</p>
+<p><strong>阿那克萨戈拉</strong>：异类相知。作为原子唯物论的思想先驱，阿那克萨戈拉凭借自己的哲学活动和哲学思想证明了自己的价值，也赢得了足够的尊重。</p>
+<p><strong>柏拉图</strong>：哲学为王。爱默生则如此称赞柏拉图和他的代表作《(理想国)》：“柏拉图就是哲学，哲学就是柏拉图。”“烧掉所有的图书馆吧，因为它的全部价值都在这本书里了。”</p>
+<p><strong>德谟克利特</strong>：原子与虚空生成宇宙。德谟克利特被马克思和恩格斯称为“经验的自然科学家和希腊人中第一个百科全书式的学者”。</p>
+<p><strong>第欧根尼</strong>：别挡住我的阳光。“一个哲人，即便他身为奴隶，也是他人的自然统治者，就像医生是病人的导师一样。”</p>
+<p><strong>亚里士多德</strong>：求知是人类的本性。他的全部著作多达1000多卷。亚里士多德的研究几乎覆盖了当时所有的知识领域。</p>
+<p><strong>伊壁鸠鲁</strong>：快乐是幸福生活的起点和终点。当有人问他什么是哲学的时候，他回答：“哲学就是一帖治疗灵魂疾病的药剂。”</p>
+<p><strong>西塞罗</strong>：友谊能使我们对未来充满希望。德行是友谊的基础，也是友谊的孕育和保护者。</p>
+<p><strong>卢克莱修</strong>：人的真正财富是拥有简单平和的心灵。“卢克莱修在他的时代独自进行了一场壮烈的战争，他当然是一位最伟大的哲学诗人。因为他，以及后来的卡塔路斯、西塞罗和维吉尔，拉丁文学才走向成熟。”</p>
+<p><strong>奥古斯丁</strong>：真理就居住在人的内心。奥古斯丁哲学的目的是用哲学的手段论证基督教的信仰，指引人们寻求上帝的路径。</p>
+<p><strong>爱留根纳</strong>：信仰应当服从理性。黑格尔认为，在中世纪，真正的哲学是从爱留根纳开始的。</p>
+<p><strong>安瑟伦</strong>：信仰了才能理解。安瑟伦是欧洲中世纪经院哲学家、神学家，唯实论的主要代表之一，被称为“最后一名教父和第一个经院哲学。</p>
+<p><strong>罗吉尔·培根</strong>：危险莫大于愚昧。罗吉尔·培根可以说是旧时代最后一位具有科学思想的学者，也是新时代最早的一位科学思想家。</p>
+<p><strong>托马斯·阿奎那</strong>：哲学是神学的婢女。他一共提出了证明上帝存在的五种形式，这五种形式被简称为通向上帝的“五路”。</p>
+<p><strong>艾克哈特</strong>：神和神性有天地之别。艾克哈特关于神和灵魂的思辨无疑深刻地影响了后世德国哲学的思辨精神。</p>
+<p><strong>邓斯·司各脱</strong>：完善的知识是个别的知识。司各脱意识到了理性对信仰的威胁，并力图通过放弃理性对信仰的证明，限制认识，为信仰保留地盘。但这种做法，在客观上却为哲学摆脱神学束缚创造了条件。</p>
+<p><strong>威廉·奥卡姆</strong>：若无必要，勿增实体。在哲学史上，这个命题被称为“奥卡姆剃刀”。</p>
+<p><strong>库萨的尼古拉</strong>：认识是有学问的无知。所谓有学问的无知，绝不是正统神学家鼓吹愚昧无知的蒙昧主义，而是指人们通过对知识的探求，而后达到对自己无知的认识。</p>
+<p><strong>布鲁诺</strong>：宇宙是太一。“火并不能把我征服，未来的世界会了解我，懂得我的价值的！”</p>
+<p><strong>弗朗西斯·培根</strong>：知识就是力量。友情的一个主要功效乃是使人心中有各种情感引起的郁积和萦绕的心事得以宣泄和释放。</p>
+<p><strong>霍布斯</strong>：自由与必然是相容的。与同时代的人相比，霍布斯对于“和平与安全”有着更为敏感的感受和更为迫切的渴望。</p>
+<p><strong>笛卡尔</strong>：我思故我在。作为哲学家的笛卡尔，是公认的现代西方哲学的奠基人。</p>
+<p>斯宾诺莎：心灵的绝对德性就是理解。他明确地将自己哲学的目的定位于道德上的至善，即达到人生最高的完美境界。</p>
+<p><strong>洛克</strong>：我们的全部知识是建立在经验上面的。人的心灵就如同一块没有任何标记的“白板”，只有在经验在上面留下印痕之后，我们才形成了观念和知识。</p>
+<p><strong>莱布尼茨</strong>：单子并没有可供某物出入的窗户。这位对古老的中国充满敬仰和好奇的学者，就是17、18世纪之交德国最重要的数学家、物理学家和哲学家莱布尼茨。</p>
+<p><strong>贝克莱</strong>：存在就是被感知。这一命题在西方哲学史上第一次明确地肯定了主体、精神的能动作用，对其后的哲学发展产生了重要影响。</p>
+<p><strong>孟德斯鸠</strong>：自由是做法律所许可的一切事情的权利。从最广泛的意义来说，法是由事物的本性所产生出来的必然关系。</p>
+<p><strong>伏尔泰</strong>：幸福是由若干快乐感觉构成的一种抽象概念。他有一系列桂冠和荣耀：“法兰西最优秀诗人”、“高乃依和拉辛的继承人”、“欧洲思想界的泰斗”、“凡尔那教长”、“法兰西学院院长”……</p>
+<p><strong>拉美特利</strong>：人是一架机器。“凡是真正的哲学家都会同意，从动物到人并不是一个剧烈的转变。”</p>
+<p><strong>休谟</strong>：习惯是人生的伟大指南。“除了哲学和一般学问的钻研而外，我对任何东西都感到一种不可抑制的嫌恶。”</p>
+<p><strong>卢梭</strong>：在我们的生命的每一个时刻，我们都在死亡和诞生。“人是生而自由的，却无往不在枷锁之中。”</p>
+<p><strong>狄德罗</strong>：迈向哲学的第一步，就是怀疑。在狄德罗的领导、组织和坚持下，《百科全书)》成了启蒙思想家们向封建反动势力进行斗争的锐利武器。</p>
+<p><strong>爱尔维修</strong>：利益是我们的惟一推动力。在西方哲学史上，爱尔维修的独特之处，就是以利益为核心的功利主义伦理学思想。</p>
+<p><strong>霍尔巴赫</strong>：一切正直和诚实的心灵都倾听理性的声音。霍尔巴赫是一个聪明的战士。</p>
+<p><strong>康德</strong>：人为自然立法。“有两样东西，我们愈经常愈持久地加以思索，它们就愈使心灵充满日新月异、有加无己的景仰和敬畏：头上的灿烂星空和心中的道德律令。”</p>
+<p><strong>费希特</strong>：学者就是人类的教师。在康德哲学的影响下，费希特建构了自己以“自我”为起点的哲学体系，他称之为“知识学”。</p>
+<p><strong>谢林</strong>：人类能够而且应该自己创造自己的历史。在哲学上，谢林把康德和费希特的主观唯心论转变为客观唯心论，把主观辩证法推广到外部世界，从而为后来黑格尔建立哲学体系创造了条件。</p>
+<p><strong>黑格尔</strong>：凡是合乎理性的都是现实的。黑格尔建立起令人叹为观止的客观唯心主义体系，主要讲述绝对精神自我发展的三个阶段：逻辑学、自然哲学、精神哲学。</p>
+<p><strong>费尔巴哈</strong>：哲学上最高的东西是人的本质。“这部书的解放作用，只有亲身体验过的人才能想象得到。当时大家都很兴奋：我们一时都成为费尔巴哈派了。”</p>
+<p><strong>马克思：</strong>怀疑一切。“哲学家们只是用不同的方式解释世界，问题在于改变世界。”</p>
+<p><strong>恩格斯：</strong>文化上的每一个进步，都是迈向自由的一步。“人对一定问题的判断越是自由，这个判断的内容所具有的必然性就越大。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/27dd4745/">西方文明最早期的18个哲学流派</a>
+            
+            
+            <a class="next" rel="next" href="/ed7acd17/">西方哲学史思维导图+脉络图（完整版）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/27dd4745/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/ed7acd17/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

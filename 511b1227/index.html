@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>论媚俗 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">论媚俗</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 2, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 2, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">13.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">48 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HW4IdMYbXDicWWqEpt1XQB1c9CXzCOXjoibq2qYeop43Od868pl97pDaQ/640?wx_fmt=jpeg&wxfrom=13&tp=wxpic" alt="图片"></p>
+<p>美国现代波普艺术代表人物之一安迪·沃霍尔（（Andy Warhol，1928-1987）的丝网画名作《玛丽莲·梦露》2022年在纽约佳士得拍卖行以1.95亿美元成交，创美国艺术家作品拍卖售价纪录</p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">文 | 李明明</div>
+
+<p><strong>摘  要</strong>：“媚俗”是理解现代性的关键词之一, 当情感、欲望和趣味在现代理性的高堂庙宇中无处容身, 就会被媚俗的江湖所吸引。</p>
+<p>本文对媚俗概念的由来和理论化过程做了细致的历史考察, 并从美学、文学、社会学、心理学、宗教、媒介研究等多个角度, 深度剖析了媚俗概念的内涵和话语转换, 以期重新审视媚俗在被流行文化、大众媒介和消费社会主导的文化体系中的位置与功能。</p>
+<p><strong>关键词</strong>：媚俗；现代性；后现代；媚俗艺术；大众文化；通俗文学</p>
+<h2 id="略-说"><a href="#略-说" class="headerlink" title="略   说"></a>略   说</h2><p><strong>媚俗</strong>（Kitsch）编织了一张庞大的关系网：“若要谈论媚俗，必要谈到大众工业与我们精神生活赖以运转的机器，谈到艺术与金钱，政治、道德和宗教，审查与警察，人类的愿望和梦想，他们的低级愚蠢和伟大崇高。”（Bry: 399）可以说，当法国人津津乐道于“品味”、“时尚”的高尚话题，英美人跃入“大众文化”的喧嚣潮流时，德国人在默默积累关于媚俗的理论话语。从19世纪末直至今日，媚俗可能是仅次于“奥斯维辛”，对德意志民族的神经构成最大刺激的字眼。</p>
+<p>国内对媚俗的研究经历了80年代末至90年代初由米兰·昆德拉小说引发的一个小高潮之后，就淡出了理论界的视野。零星出现的论文大都从昆德拉的小说世界与评论的只言片语、马泰·卡林内斯库的《现代性的五副面孔》之《媚俗艺术》、克莱门特·格林伯格的《先锋派与庸俗艺术》中寻找理论支撑，也有极少数研究者注意到了奥地利作家布洛赫（Hermann Broch）的“反媚俗观”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HdSQF3Q2Ka4zyFNKH7CuOGm4ibUrhQbXazITqelg4PNibK2dgiaOGrZLxg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">奥地利小说家赫尔曼·布洛赫 <br />（Hermann Broch，1886-1951）</center>
+
+
+
+<p>然而，在对后结构主义的接受以及后现代的讨论中，媚俗这一概念作为现代艺术发展的附带产物，本应受到重视与研究。在现代艺术发展特别是世俗化的进程中，现代艺术被推上神坛，成为宗教的替身。原创性、独一无二、高雅等一系列对艺术的评判要求，都出自于现代性的加速度自我强迫症。而现代艺术的发展又不得不面临市场与技术发展的挑战。随着有修养的市民阶层的兴起，艺术欣赏与接受构成了普遍修养的重要组成部分，而艺术的占有又与经济条件紧密相关，因此大众的艺术修养要求不得不依赖于复制品。</p>
+<p>复制技术对于这种要求的满足无疑起了推波助澜的作用，正是在大众需求与复制技术的关联中，瓦尔特·本雅明看到了动员大众、进行审美政治化的可能。之后，无论是要求打破高雅与通俗界限的英国的文化研究，还是喊出“填补鸿沟”（Fiedler）口号的后现代潮流，所关注的都是大众的这一基本文化需求。因此，在与之相伴的对经典化的颠覆与解构过程中，我们不得不重新审视媚俗在流行文化、大众媒介和消费社会主导的文化体系中的位置与功能。</p>
+<h2 id="综-述"><a href="#综-述" class="headerlink" title="综   述"></a>综   述</h2><p><strong>19世纪80年代，在德国慕尼黑艺术品市场，媚俗一词首次出现，随之便在都市艺术家圈子里不胫而走。</strong>1922年德国作家艾文南留斯（Ferdinand Avenarius）在《媚俗》(“Kitsch”)一文中，首次对媚俗的词源加以大胆推测。他认为，媚俗艺术产生于19世纪末慕尼黑艺术品商人与英美游客的交易过程，与英语的“sketch”和德语的“Skizze”联系紧密，即指速写、素描、草图、粗样等。<strong>为了与认真创作、价格不菲的正宗艺术品相区分，他们把那些草草完成、价格低廉、“迎合大众口味”因而“易于出售的商品”称为媚俗艺术品。</strong></p>
+<p>（222）由此看来，<strong>媚俗艺术是工业化生产和商品经济联姻诞下的早产儿，因为艺术天分的先天不足和外界强加的利益动机，从诞生之初，便生活在鄙视与耻笑之中。</strong>德国画家兼作家科维尔（Eduard Koelwel）对此说法提出了异议。他在与一位来自德国西南部的老画家的对话中获得灵感，认为“媚俗”可能源于西南方言中“die  Kitsche”一词，即“一种在建筑工地、街道维护与清洁时使用的工具，用于清除街面泥污或是填平碎石路的坑洼”。（59）他还在一本编于1899年的普法尔茨地区方言词典里另有发现：“Kitsch，阳性，一种清扫烤炉灰尘的工具。”（59）两种工具的共同之处是都指向了一种涂抹的动作，与画家手中的画笔具有某些类似的结构与功能，而被清扫抹除的街面泥浆和烤炉炭尘，最后混合成一种酱褐色，有如那些“色调晦暗、涂抹不匀的酱油画”。（59）<strong>这一词源解释令人联想起媚俗画作的主要特征：废弃之物、污秽肮脏、不洁不雅、乌七八糟。</strong>奥地利作家穆齐尔（Robert Musil）也被这个溯源游戏所吸引。他在当时人们对艺术水准不高的小说、戏剧和艺术品的牢骚言辞中捕捉到了一个关键动词“verkitschen”，即“低价促销”。<strong>穆齐尔认为，“媚俗”就是指“过于廉价的促销打折品”，是“毫无用处、一文不值的商品”。</strong>（928）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HVsj4qnlaHLI9cecMakXyfMxIPIl2vpI7e0b81lPhp8Sb5H4t3x2liaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">奥地利小说家罗伯特·穆齐尔 <br />（Robert Musil，1880-1942）</center>
+
+
+
+<p>19世纪是工业技术高歌猛进、商品经济羽翼日丰的时代。技术上的可能性促使艺术品和一般消费品的生产与销售更趋专业化，另一方面，对美化日常生活和提供消遣娱乐的普遍要求也与日俱增。<strong>待到19世纪末，媚俗一词在艺术圈子里广为流行，它开始公然与艺术分庭抗礼，媚俗成为“非艺术”和“伪艺术”的代名词。艺术与媚俗之间形成了无可消解、彼此支撑的二元对立，一如善与恶、真与假、高雅与低俗。</strong></p>
+<p>步入20世纪初，媚俗的魅影可谓无所不在。在当时的有识之士看来，媚俗的节节胜利不仅揭示了艺术的蜕变和文化之乱象，更为可怕的是，它意味着道德伦理的式微与滑坡。德国艺术史学家帕曹雷克（Gustav E. Pazaurek）发起了一场针对媚俗的抵抗之战：“要对公众施以教育熏陶，培养其品味文化，开启其审美意识。”（11）他所采取的行动之一便是在他任职的斯图加特手工艺博物馆中特辟一个名为“品味退化”的展区，搜集展示了来自日常起居各个细节的可疑物品。他对所陈列的媚俗物品的定义是：“它们对所有伦理、逻辑或是美学上的要求充耳不闻，对质料、技巧以及创作目的和艺术形式所遭受的恶行视而不见，它们的诉求独有一个：务求便宜，同时最好能够让人感觉它似乎蕴含某种更高的价值。”（349）20世纪20年代伊始，对媚俗的同仇敌忾情绪在时光的打磨中，逐渐沉淀为智性的思索，关于媚俗的理论雏形渐次显现。此时，对媚俗的讨论不再局限于艺术和文学圈子，而是延伸至文化批评与政治批判的宏观视域。</p>
+<p>“每一个文化衰落的时代就是媚俗大行其道的时代。”（Broch: 316）奥地利小说家赫尔曼·布洛赫对媚俗的阐发影响最为深远。1933年《艺术价值体系之中的恶》（“Das Böse im Wertsystem der Kunst”）一文在《新评论》（<em>Die Neue Rundschau</em>）发表，<strong>布洛赫将媚俗定义为“极端的恶”。在他的眼中，媚俗绝不仅仅意味着糟糕的艺术，而是已经发展出一整套足以与艺术抗衡的独立价值体系。</strong>1951年布洛赫在耶鲁大学做了题为《关于媚俗的几点看法》（“Einige Bemerkungen zum Problem des Kitsches”）的报告。他认为，<strong>媚俗的产生根源是将伦理范畴与美学范畴置换倒错，它的口号是“求美” （Arbeite schön），而艺术的至高境地则是伦理学意义上的“求善”（Arbeite gut）。</strong>（307）从这一宗旨出发，媚俗之物只为追求眼下“美”的效果，无视“真”与“善”的道德要求，最后沦为美丽的谎言和诱人的假象。布洛赫试图从19世纪步入历史视野的市民阶层身上寻找媚俗的发端。这是一个视宗教与伦理为生存基础的社会群体，他们讲求理性，自我克制，摒弃欲望，对具有感官诱惑的艺术与装饰抱有敌意。而他们所要继承的另一个文化传统则来自完全陌生的封建宫廷贵族世界，这里的一切与市民阶层的自身传统针锋相对，他们追求一种极尽奢华、唯美主义的生活装饰术，以及借助视觉手段彰显地位的权力展示术和精神与感官上的享乐主义生活。马丁·路德的新教改革加速了两个门户的融合，个人与上帝之间建立起直接的联系——在布洛赫看来，这也正是浪漫派诞生的重要契机。与上帝的直接精神交流使人变得极度自信，甚至“自负”（Übermut）起来，在这股“膨胀的激情”（Überschwenglichkeit）的驱使下，浪漫派诗人们穷尽一切力量，要将尘世间贫瘠的世俗生活升华入绝对世界，汇入永恒之流。（298-99）由此，一种<strong>“俗世的审美宗教</strong>”（irdische Schönheits-religion）（302）确立起来，<strong>这是一种植根于世俗生活、奉“美”为教义的狭隘封闭体系，企图把柏拉图关于美的理念变成艺术作品中直接可感的形象，在布洛赫看来，这也正是浪漫派为媚俗提供的精神养料，也是他称其为“媚俗之母”的原因。</strong>笔者认为，与浪漫派对世俗生活加以升华的主旨不同，<strong>媚俗是在将绝对永恒的美强行下拉，是一种急功近利思想的后果，它企图通过对“美”直接而又浅表的模仿，直达绝对与永恒，而实则是将对美的无尽追求具象化了，为美设立标准、划定边界，将无限开放的美的体系封闭起来。</strong>在另一篇题为《恶的代表》（“Repräsentanz des Bösen”）的文论中，布洛赫对媚俗做出如下总结：“正是这种利用有限和理性的手段满足欲望的方式，正是这种有限被吹嘘抬升为无限以及对‘美’的径直追求，使得媚俗被蒙上了不诚实的面纱，而躲藏其后的就是为人所诟病的伦理道德之‘恶’。”（316）至此布洛赫更是直接对媚俗的制造者们施以不留情面的痛斥，称他们为“道德败坏者”和“作恶的罪人”。（316）布洛赫批判的另一群人则是“媚俗之人”（Kitsch-Mensch），即那些媚俗的忠实门徒，他们依靠媚俗的“谎言和美化之镜”为生，“他们从镜中认出自己，并且不无欣喜地爱上了镜中的虚像”。（295）布洛赫将媚俗从艺术的对立面挪至伦理道德的刑讯室。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3Hibts6gTicNvdB7NUkNIteHWXJZnHtKE7IqZTnky6LmPaiaBN13eHLY81Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">赫尔曼·布洛赫作品全集</center>
+
+
+
+<p>本雅明，这个时代的最佳思考者，对他所处的时代抱有毫无保留的认同，包括媚俗。《媚俗之梦》（“Traumkitsch”）（1921）是本雅明唯一一篇对媚俗加以专门阐述的小品文，其余则更多穿插于对“复制技术”、“感知变化”、“电影”、“居室”、“收藏者”等时代现象的散见之中。在《媚俗之梦》一文里，本雅明敏锐地洞察到，<strong>代表当时艺术发展新倾向的超现实主义展开了一部有待书写的新的梦乡史。浪漫派的蓝花之梦逝去不可追，现代人踏上了灰暗的媚俗之梦这条“直通平庸的快捷之道”</strong>，（1991: 620）而媚俗就是“平庸的最后一张面具，我们喜欢在做梦或者交谈的时候戴上它，以期从物质世界这具干尸身上吸取些许力量”。（621）现代人身陷死寂的物质世界，无力突围，只有在“米老鼠”这类充满奇迹的媚俗之梦中，“弥补着白日的悲痛和胆怯，表现着清醒状态无力可及，非常简单却十分伟大的生存实现”。（1999: 257）复制技术的提高正好为现代人预备了沉睡梦乡的温床，大量出现的复制品不再是“一定距离外的独一无二的显现”，失去了艺术的灵晕（Aura）。（267）这种深刻的变化使它们脱离了传统的权威和仪式，进入一个新的展示空间，在它们身上，“展览价值”超越了“膜拜价值”。（268）出于对事物在空间上和人性上全面贴近的需求，作为装饰物的复制品占领了私人居室的窗台、壁炉、铺垫和一切目力所及之处。“失去真实意义的吸引中心在私人家庭中找到了栖息所。”（2007: 190）装饰物摆脱了实用性单调乏味的苦役，为它的收藏者盖上个性的印章，而退隐居室的收藏者则借此在自己的生存空间“留下痕迹”（191），保持住个体的经验内容和记忆碎片，用以对抗外部世界的挤压与侵占。有趣的是，帕曹雷克眼中的“家居恶饰”（Hausgreuel）实现华丽转身，成为本雅明笔下的个体印迹与生存慰藉。对于作为商品的复制品中所隐含的趣味博弈，本雅明也了然于心。在《论趣味》一文中，他精辟独到地阐述了趣味的意义：顾客对商品材质、质量等专门知识的衰退导致趣味变得愈发重要。对于顾客而言，趣味以一种繁复的方式掩盖了缺乏行家眼光的事实，而对于厂家来说，趣味给消费者带来新鲜的刺激，从而消除了他的其他要求，而满足那些要求则要昂贵得多。（124—25）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdho4vocrwMJ5V42pP52R1Zich2vD9NX1wEjnahILkbfHsHjUQEPLNp8kwlEkZtrOgLNvhasjVXmRlfg/640?wx_fmt=other&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">瓦尔特·本雅明（Walter Benjamin，1892-1940）</center>
+
+
+
+<p>此时关于媚俗的热烈争论也引起了心理分析学派的注意，其代表人物之一萨科斯（Hanns Sachs）于1932年撰文《媚俗》(“Kitsch”)，探索其作为个体与社会行为的内在动因。他认为，媚俗之作正好契合了受众内在的“移情动力”（Einfühlungsstreben），（190）即寻找情绪体验的替代对象，为力比多寻求代偿性满足。媚俗作品为此扫清了障碍，它使用简洁易懂的指示符号，不给受众制造复杂的心理情境并使其面临艰难的心理抉择，也不给怀疑和犹豫制造机会，而是在设置适度的迷惑之后，迅速清晰地用安慰的语调公布答案。<strong>从心理分析的角度来看，媚俗与“白日梦”有着相似的形态与功能</strong>：“媚俗就是不做白日梦的人对白日梦的借用。”（187）本雅明也曾说过：“媚俗就是事物转向梦境的那一面。”（1991: 620）<strong>媚俗与梦的关系也是媚俗研究中一再涉及、值得进一步关注的重要主题。</strong></p>
+<p>特奥多·阿多诺，法兰克福学派的另一员重将，对音乐中的媚俗现象始终保持着高度警觉。在他关于音乐的大量文论中，“媚俗”是一个频繁出没的关键词。1932年他索性撰文《媚俗》(“Kitsch”)，从他擅长的音乐分析入手，剖析媚俗的特征与社会功能。<strong>阿多诺在充满媚俗味道的音乐中听出了一种创作上的惰性，它们“把不再具有任何价值、已经从原生背景中隐退出来的形式和套路加以重新利用”。</strong>（1984: 791）这应该就是他之后在《论流行音乐》（“Über populäre Musik”）中谈到的“标准化”和“被预先消化过的”音乐的源头所在。这类音乐的任务与悖论之处就在于，“要将风格特征与平淡无奇融为一体”，（793）它既要通过模仿、吸取风格特征，使自己脱颖而出、免遭淘汰，而如此又会使自身变得平淡无奇、毫无特点。阿多诺所称的“中间艺术”和“中庸之道的继承人”就是这些媚俗之作，即在两者夹缝之间找到了生存空间的中间值。（794）在他与霍克海默合著的代表力作《文化工业：作为大众欺骗的启蒙》（“Kulturindustrie: Aufklärung als Massenbetrug”）中，也论及相似的观点：<strong>“所有伟大的艺术作品都会在风格上实现一种自我否定，而拙劣的作品常常要依赖于与其他作品的相似性，依赖于一种具有替代性特征的一致性。”</strong>（2012: 117）<strong>这就是以媚俗为代表的文化工业产品所具有的“同质性”与“可预见性”的原因之一。</strong>对于此类音乐，“听众根本无需集中精力，而是在心理分析所说的‘无意识’状态中就能完成欣赏。”（1984: 793）这就是阿多诺总结的“听觉退化”，而听众所欣赏到的绝非某种想象的愉悦，而只是获得了贫瘠的心灵慰藉与宣泄式的情感净化。因为媚俗之作总是竭力把过去的描绘成现时的，把潜心设计的细节当作自然流露并借此实施其社会功能，即“用谎言来遮蔽人们的真实处境，用神话来美化他们的存在境遇，让权力心仪的目标焕发出童话般的诱人光芒”。（792）这种意识形态工具也正是阿多诺论及流行音乐时谈到的“社会黏合剂”功能。<strong>媚俗善于将类型化、标准化、已经过时的既往模式改头换面，用修饰美化的手段制造出虚假的安全和愚蠢的安慰，为逃避现实的心理退缩提供庇护之所</strong>，也就是说，“用周密的手法来满足饱受折磨的人们的每一个具体愿望”。（792）<strong>阿多诺在《媚俗》中谈到的媚俗音乐与《文化工业》中论述的由经济机器生产、暗中植入精心规划的意识形态以及在娱乐放松中使大众缴械投降的文化工业产品可以直接划上等号。</strong>而这种浸染浓重媚俗色彩的文化工业最虚伪之处就是：“它从外部祛除了真理”，——借助技术理性，“同时又在内部用谎言把真理重建起来。”——而这无疑就有媚俗的一份功劳。（2012: 121）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HbbKGWUc3dJiaXzcRia1h8Pu92bR1XIrc6tuc9dD1k4s4E6hpFMdjflfA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">阿多诺（Theodor Wiesengrund Adorno，1903-1969）</center>
+
+
+
+<p>1939年第一篇来自非德语国家参与媚俗讨论的文章问世了，美国艺术评论家克莱门特·格林伯格试图通过《先锋派与庸俗艺术》（“Avantgarde und Kitsch”）一文，厘清二者之间的含混关系。在他看来，<strong>先锋派属于真正的艺术，其创作宗旨是为了表现绝对价值，它的先锋性体现在对表现媒介的不断探索创新，而庸俗艺术是工业革命的产物</strong>，“一种代用文化”，它把“真正文化所贬斥和程式化了的形象作为原材料，助长和培养了这种迟钝感觉”，它是“虚假的快乐体验和感官愉悦”，是“我们这个时代生活中一切虚假事物的缩影。它宣称除了金钱以外，对消费者无所要求，甚至不费时间。”（194-95）他以毕加索与列宾的作品为例，阐释其中差别。<strong>毕加索的作品热衷于对绘画媒介（空间、色彩、形状等）的大胆创新，形式抽象，隔离移情，隐藏其中的造型特质需要观者的静观玄思方能彰显。而列宾的油画擅长讲故事，形象直观可辨，观赏者无需努力便能获得艺术快感。</strong>这也正是先锋派或者真正的艺术显得曲高和寡的原因之一，用格林伯格的话来说，就是无法深入大众的内心，无法达到一种宣传的效果。而当时以德国、意大利和苏联为代表的极权政府深谙庸俗艺术之道，利用它来向广大民众谄媚示好，煽风点火。至此格林伯格发现了媚俗的第二个本质：<strong>“庸俗艺术使得独裁者与民众‘心心相印’”。</strong>（201）<strong>它正在沦为政治意识形态的宣传工具和某种官方文化政策，成为独裁者贴近民众、巩固统治的手段，这与本雅明在《机械复制时代的艺术作品》末尾处提出的关于“法西斯主义所鼓吹的政治审美化”和“共产主义”的“艺术政治化”的观点不谋而合。</strong>（292）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3H5sEeybycb1leVczhA65Fy0rOX54wvLUG11BoPyk5phkCPm7OHcBD1Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">美国艺术批评家克莱门特·格林伯格 <br />（Clement Greenberg，1909-1994）</center>
+
+
+
+<p>与格林伯格对艺术先锋派的赞许不同，德国艺术史学家格拉瑟（Curt Glaser）将新印象派、未来主义、达达主义、立体主义等统称为危险的<strong>“酸媚俗”</strong>，认为它们的共同之处就是理论先行，艺术沦为理论的佐证。（173）而与之相对的是众人熟知的<strong>“甜媚俗”</strong>。他借助味觉感受，概括出两种风格迥异的媚俗形式：<strong>“甜媚俗”，即甜美无邪、柔弱无骨、浸泡着感伤泪水的取悦型媚俗，以及“酸媚俗”，即怪异暴突、狂野刺激、令人蹙眉努嘴的不悦型媚俗。</strong>视先锋派为洪水猛兽、将其归入媚俗之伍，这是20世纪初保守派艺评家的典型论调。<strong>先锋派与媚俗艺术之争持续至今，二者的首要区别在于：艺术先锋派动机纯粹，“为艺术而艺术”是其唯美主张，反叛过去是其一贯态度，追求形式创新是其表达方式；而媚俗艺术，不论酸甜，只存在形式和效用上的差异，却没有偏离诉诸纯粹感官效果、以受众反应为指导、借用已有模式的媚俗制造纲要。</strong></p>
+<p>二战结束之后，德国纳粹一手打造的政治审美化的媚俗帝国走向毁灭。格林伯格所揭示的媚俗与权力机制的交好勾结引发了德国知识界的反思共鸣。许多研究者把法西斯主义与媚俗捆在了一起，其中经典之作有布雷纳（Hildegard Brenner）的《纳粹艺术政策》（<em>Die Kunstpolitik des Nationalsozialismus</em>, 1963），书中运用详实的史料揭露了艺术沦为政治宣传工具的不争事实，探讨媚俗所参与的意识形态建构和隐藏的政治意涵。斯坦伯格（Rolf Steinberg）编撰的《纳粹媚俗》（<em>NaziKitsch</em>, 1975）是一部关于1933—1945年间第三帝国的媚俗编年史。二战后，媚俗不仅在德国成为文学、艺术、音乐、神学、哲学人类学与社会学等众多学科的正式研究对象，而且对媚俗主题的兴趣也从德国蔓延到英美等国，延伸到大众文化、通俗文化、媒介研究的诸多领域。</p>
+<p>对晚近的媚俗理论与思考方向影响最巨者，当推德国哲学家吉斯（Ludwig Giesz）于1960年出版的《媚俗现象学》（<em>Phänomenologie des Kitsches</em>）一书。吉斯对以媚俗之物作为客观对象的研究传统发出质疑，主张从人本美学（anthropologische Ästhetik）的角度出发，<strong>将着眼点从媚俗的物体实在移至充满媚俗意味的主观体验。</strong>吉斯所撰写的实质是一部关于媚俗之人的现象学，他们作为媚俗存在之可能的前提条件、作为媚俗的体验主体，当时还处在研究的边缘。吉斯用<strong>“过度伤感”</strong>（Rührseligkeit）一词来概括他们的体验方式和意识状态。（38）<strong>“过度伤感”是一种随时迎接感动和感伤来袭的心理准备和能力，为了进入此种状态，媚俗之人甚至会臆想出一些空穴来风的感动瞬间，进而还要为感受到这份感动而感动，陶醉于自我感动的情绪体验之中。这种充满媚俗意味的体验状态的虚伪之处在于，它最终要将这份自我感动强说成是来自外部的，是被客观物体或环境所打动。</strong>“媚俗的眼光在某些方面天分十足，它不放过每个令人动容的片段，同时又能屏蔽掉与之相对的不利因素。”（39）此外，媚俗之人的接受方式抛弃了传统美学中主客体之间的审美距离，以及以“严肃”、“冷静”、“崇高”为特征的审美态度。它追求绝对的“一体感”（Einsfühlung），主客体构成一个由“渗透”与“粘着”作用生发出的“聚合体”，一种新的“组织肌体”，主体沉浸于一种“切肤的享受”。（40）正是此种附体式的欣赏方式，纵使艺术真品也可能落入媚俗之人的眼眶，沦为媚俗感受的传递媒介。从主体的接受和体验方式作为切入点，这一角度对之后的媚俗研究具有很大的启发性。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HFnOZtRzRibbuYcW1BcZEXiaaLGJJVPQlnd8a4kdyUs0ZrZBM66yZricfw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">路德维希·吉斯《媚俗现象学》</center>
+
+
+
+<p>“伊甸园里没有媚俗。”（9）罗马天主教神学家艾根特（Richard Egenter）一语道破了基督教伦理捍卫者眼中媚俗的产生根源——原罪。媚俗是“原罪的后果。原罪使人们失去了生命等级与欲望冲力原有的天赐和谐，在精神与肉体的对立中，人们感受到私欲和毫无章法地追求享乐所带来的痛苦”。（9）<strong>从宗教的角度来看，媚俗就是原罪滋生出来的损害个人灵性的一切恶行和各种失控的欲望：对金钱与权力的贪欲，逃避现实的惰性，纵情声色犬马，沉溺感官刺激，过分贪图逸乐，过度迷恋自我等。这是每个带着原罪的烙印降生俗世的人都面临的威胁和诱惑。</strong>此外，因为“禀赋不足”和“缺乏教育”所造成的“灵性扁平”（metaphysische Untiefe）使虔敬的教徒也难逃媚俗的侵袭。（69）更值得警惕的是，艾根特观察到，现代社会中的“灵性扁平”并非个案，而是整个虔敬体系正在经历的深邃变化：“随着现代人个体化进程的加速，宗教变得日益肤浅，它的重点从富含深度的宗教秘仪转移到个人感知的边缘区域，最后在简单的祷告中匆匆收场。”（77）随着宗教连接形式上的日趋松散，宗教仪式及其象征物的价值与意义也日渐衰落，现在它们已经神性殆尽，沦为纪念品商店里售卖的廉价小玩意，或是百姓居室中装饰功能远胜于宗教光晕的摆设品。在艾根特看来，<strong>它们就是媚俗的直观形象，虽然披着宗教的神圣外衣，实质却是为了传播纯粹的感官享乐。</strong>《媚俗与基督教生活》（<em>Kitsch und Christenleben</em>）是首部从宗教视角对媚俗现象的立著思考。</p>
+<p>来自奥地利天主教文化的代表帕维克（Karl Pawek）把艾根特所描述的变化视作时代使然：<strong>“将世间万物变为媚俗是这个时代的合法风格。”</strong>（144）宗教当然也被裹狭其中。在帕维克眼中，宗教媚俗不过是众多以商品消费为基础的媚俗现象之一，并无特殊性可言。其始作俑者也并非普通民众，他们早已化身消费者，货币等价物赋予其平等意义。在“事件”（Geschehen）变为“物件”（Gegenstand）（147）的世俗化趋势的启示下，帕维克看到了“神学的本质殒落”（theologischer Substanzverlust）（146），即“一种无处不有的滑坡景观，从凝结存在意义、崇高超然的至高点……滑向肉身与道德的地面”。（148）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HuRQHRNXaRyDvkhAhslICEE2Z7r12g9967KultQwACPUZOll5ibtovoA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">《媚俗：文本与理论》</center>
+
+
+
+<p>在文学领域，对媚俗文学的理论思考也愈发成熟。早在媚俗一词在艺术界出现以前，18世纪末的德国文学界就已经嗅到了它的存在。处于启蒙运动向古典文学过渡时期的德国文坛的边缘，出现了一股文学潮流：消遣文学（Unterhaltungsliteratur），以及戏剧、音乐繁荣带来的消遣文化（Unterhaltungskultur）。概括地说，这与当时印刷出版业的日臻发达，市民阶层教育文化水平的提高所导致的审美感官的细腻化，以及自由闲暇时光的出现所带来的有利可图的文化市场联系紧密。这一时期的美学探讨虽然没有直接指向媚俗，但其中对情感与冲动的定义、对艺术与非艺术的界定尝试、对接受者审美活动的探讨、对商业文化苗头的观察等，都为之后的媚俗研究确立了方阵。随着19世纪商业化出版制度的建立，消遣文学又或通俗文学（Trivialliteratur）挤占了更为广阔的地盘。H．克劳伦（H. Clauren）是德国19世纪初最高产、拥有最多读者的消遣文学作家之一，被戏称为“媚俗的文学之父”。他的爱情童话《咪咪莉》（<em>Mimili</em>，1819）一经杂志连载登出，便受到极大追捧。同时代的文学评论家豪夫（Wilhelm Hauff）从中总结出一种所谓的<strong>“咪咪莉风格”：“浅显易懂，讨巧献媚，模式僵化，趣味低俗，精心布局的情感操控，僭越道德，隐含色情。”</strong>（107）<strong>这些也成为之后鉴赏一部文学作品是否为媚俗之作的首要标准。</strong>20世纪以来，艺术和文学对市场法则的屈从与日俱增，消遣文学和通俗文学被许多评论家直接冠以“垃圾文学”（Schundliteratur）和“媚俗”的名头。媚俗之作即大量“以经济利益为导向，道德败坏，艺术价值低下的文学作品”。（Dettmar/Küpper: 112）二战以后，通俗文学更是“被视为法西斯思想的精神扫路人”。（Bannasch: 43）</p>
+<p>1961年媚俗文学的研究经典《德式媚俗》（<em>Deutscher Kitsch</em>）问世了，文学研究者柯利（Walther Killy）用该书总结了德语小说的媚俗特征。他在此书开篇将七个风格相似的小说片段连成一体，形成一个粗看好似天衣无缝的新文本。柯利借此发挥，对拼接文本中的媚俗特征逐一梳理。<strong>首先这几个节选文本最大的特点就是毫无特点，从选词造句到修辞手法，再到人物塑造，就连令人昏昏欲睡的叙述节奏都如出一辙。其次，“气氛的渲染远比内容陈述重要”。</strong>（10）文本的情节内容乏善可陈，只有依靠形式上的炫目多彩来获得填充和支撑。它们惯用“堆砌”（Kumulation）和“重复”（Repetition）的手法直扑效果，营造氛围。（11）文中对叙述对象的描写没有突破既定的符号框架，大量形容词和副词的堆积只为唤起某种诗情画意的美好感觉；动词缺乏急剧的动感，而是富有流动性，制造出一幅缓缓流动的画面，缺乏凝神的视角，也没有画面质感的沉淀。<strong>这种叙事抒情化的模式是对诗歌的模仿，也正是柯利总结出的媚俗文学的第三宗罪：“媚俗之作完全没有边界感。”</strong>（18）它在叙事中掺入诗歌元素，作为情感填充料。不仅如此，它连道德的边界也敢于僭越，为了制造感官刺激，媚俗之作一边使出情色诱惑，一边又通过平衡术、障眼法或者其他冠冕堂皇的理由，将情欲压制下来，要么将其提升为非肉体的灵魂之爱、上帝之爱。爱的倾诉与情感的宣泄满篇皆是，但是“它们不知纯粹情感为何物”，而是将彼此无染的感情——例如对风景的赞叹，对上帝的虔敬，对国家的热爱，对异性的渴望，对生死的喟叹等——糅混码放，共时呈现。（17）此外，媚俗作品青睐比喻和象征的修辞手法，但是它们与内容之间缺乏必要的逻辑关联，而且总是按捺不住，急于自我揭示，唯恐读者领会不到。<strong>如果说上述只是媚俗作品的外在特征的话，那么柯利认为，媚俗的内在本质就是一种“诗化现实主义（poetischer Realismus），因为它要掩盖其与童话同源的反现实主义基色”。</strong>（30）这在通俗文学作品身上得以充分展现，因此柯利在通俗文学与媚俗之间毫不犹豫地划上了等号。他认为，通俗文学“采用童话的模式来满足人们的原始要求，同时又不忘给自己换上‘时髦’的外衣，以期通过时时更迭的时代感为自己赢取可信度”。（30）</p>
+<p>可以说，<strong>通俗文学是经历了世俗化易容之后的童话</strong>，鬼怪巫神以及一切与原始恐惧相关的记忆载体被道德上的恶人所取代，“灰姑娘”式的命运逆转、“白雪公主”式的九死一生、“小红帽”式的越轨与回归——无伤大碍的成人童话频频上演。而这些无疑与现实生活的复杂嬗变和难以预料是格格不入的。<strong>如果说童话在体裁框架内的无视现实和浪漫遐想出自其审美特质，非善即恶、非美即丑的黑白区隔泄露了人类意识深层孩童般的原始认知，那么通俗文学以及我们生活中四处潜藏的“现代童话”是否可以被视作某种审美与认知方面的双重退行呢？</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3H8WBmJXonWbox02fU36AZEnhY0j9LhXj552mbAZZhgjwn4OZW05Nd3g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">《德式媚俗》</center>
+
+
+
+<p>柯利使用阐释学的方法对媚俗所做的文本分析给当时的文学研究领域带来了不小的震荡。数年之隔，另一位著名的文学研究者克洛伊泽（Helmut Kreuzer）便发出质疑的声音。他认为，<strong>柯利总结的所谓媚俗的风格特征，例如堆砌、重复、统感和诗化，在19世纪和20世纪的高雅文学中普遍存在，而在诸如侦探小说和西部小说这些通俗文学里倒是踪影难觅，这是因为“柯利完全忽视了小说的类型差别”。</strong>（175）克洛伊泽意识到，把媚俗看做孤立的审美对象，对其加以封闭的阐释学研究，并不能得出有信服力的结论。他提出，“要将美学概念转化为历史概念”，（184）即从文学社会学的角度出发，考查媚俗的社会效用，及其所折射出的品味历史的流转，考察具体历史条件下，它的归类、划分与定义的运行机制。一篇关于媚俗的简微史，正是本文的写作初衷，而克洛伊泽所期待的为媚俗树立一座社会学历史纪念碑的宏伟目标想必也是饶有趣味。</p>
+<p>80年代以来，越来越多的研究者开始从文化和媒介理论出发，论述媚俗在社会和文化场域所扮演的角色。德国媒介研究者普洛斯（Harry Pross）依据职业敏感，捕捉到媚俗与媒介的密切关联：<strong>“媚俗是一种交流手段，媒介，它试图掩盖观念与想象、愿望与实现、图像与物体之间的差别，从而达到快速传递情感效果的目的。”</strong>（27）作为媒介的媚俗，其目的并非实现如实直接地传达，而是要对信息进行加工后再传递：黏合裂隙，调和矛盾，整合意义，使异质与环境相适应。<strong>如此煞费苦心只为快、准、狠地击中人们的感觉中枢，快速开启情感的阀门，达到输入某种既定意识形态的目的。</strong>所以媚俗“表面上是一个美学问题”，实际上“不论主题、符号和强制手段如何变幻，它操控大众的本质丝毫未变”。（30）<strong>环顾我们身处的时代，媚俗已经成为社会控制的全能手段，从印刷媒介到影视媒体，从新闻到娱乐，从商业宣传到道德宣扬，媚俗媒介一再证明了自身的卓越有效。</strong></p>
+<p>意大利政治学家蒙加蒂尼（Carlo Mongardini）试图从现代人的生存处境出发，摘掉布洛赫以来媚俗头顶的“恶俗”帽子：<strong>“媚俗处于善恶之彼岸：它是一种自欺，用以维持平衡的幻象。人们借此安然度过伦理与审美价值缺失所引发的不安。”</strong>（88）他认同法国哲学先锋居伊·德波所描绘的<strong>“景观社会”，即一个被影像剥夺了深度、秘密与内在性的社会，表现为全然的外观呈现，并且乐于生产自我表现的影像。</strong>“这种景观社会无力维持持续的价值观，又面临迅疾的变化，因此它轻而易举就成了一个媚俗味十足的社会。”（93）蒙加蒂尼在媚俗的生活态度中，读出了现代人的“冷淡症”和“非政治化”倾向：“冷淡症”即基于对文化堕落与时代空乏的清晰认识，选择冷漠随意和轻浮肤浅的应对态度，仿佛出于正当防卫的需要，是“对社会价值体系的漠然淡视”；而“非政治化”则是一种与世无争、随遇而安的生存策略，不再投身你死我活的斗争，不再纠结你对我错的争辩，不再追求个性化的表达，而是选择“集体潜水”，在媚俗氛围的包裹中韬光养晦。（85）<strong>在蒙加蒂尼的笔下，媚俗已然成为现代人的生活政治</strong>：“媚俗是某个群体内部的约定习俗，在被文化淘汰的次品材料的帮助下，在传统与日常的体系之内，这些习俗对某些道德和审美原则加以戏仿：它就是那些因为自己的软弱无能而倍感煎熬的弱者的道德观与审美观。”（88）</p>
+<p><strong>与普洛斯相似的是，蒙加蒂尼也发现了媚俗的媒介性。它是一种“能够使时间缩短或者停滞的媒介”。</strong>（90）它通过对时间的强行中断，屏蔽掉时光与生命终将逝去这一无可挽回的局面；通过缩短或者加速时间的当下进程，帮助人们逃离眼前的困局，遁入未来的辉煌；而通过时针的回拨，又可以将人们带回往昔的黄金时代。借此媚俗悄悄地篡改现实感受，影响历史意识的形成：“在媚俗的作用下，历史发展被缩减为当下；历史意识慢慢减弱，对未来进行思考与建构的能力也在一并削弱。”（90）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HylmtibCCtYvgZpdAlZqwmAKW5NcRlu1nu9VORah7BS8KeYD50EiaSedg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">《媚俗：品味问题的社会与政治方面》</center>
+
+
+
+<p>将媚俗与时间和历史联系起来，展开更为丰富的想象思考的理论家是传播学学者傅拉瑟（Vilém Flusser），他在后工业时代“讯息社会”的情境启示下，提出了<strong>有关媚俗的“垃圾循环论”</strong>。关于“文化”的理解最为普遍的认识是，物体被从自然状态中剥离出来，人们把它当作膜层，将信息铭刻其上。借此“赋形”过程，自然物体便成为文化客体，被当作记忆与信息保留起来，被纳入“文化”这一存储器中代代相传。这种“线性文化模式”遵循着单向的线性法则：“自然——膜层/半成品——文化”。此种文化认识产生的基础是，人类一直在竭力对抗信息的瓦解，对抗遗忘与死亡，但同时又无法摆脱被遗忘与走向死亡的宿命。在这场徒劳的战斗中，他们学会了把信息刻入自然物体，试图凭借这种存储形式来躲避遗忘的侵扰。傅拉瑟指出，这一模式是不完整的，因其忽略了文化形成之后的发展动向。按照自然规律，没有长存不朽的事物，宇宙中的万事万物都难逃“熵的法则”，文化也不例外。（51）“文化客体在彻底解形（返回自然界）之前，形成一个由半解形物体组成的介于文化与自然之间的过渡领域，即垃圾。”（51）也就是说，从文化形成的那一刻起，便进入熵化的过程，先从文化客体退变为垃圾，即半分解的文化客体，然后继续退变，直到完全分解变形，重返自然界。按照傅拉瑟的阐释，这是一个周而复始的圆周循环：“自然——半成品——文化——垃圾——自然”。（53）当中的每个环节都是“可以人为控制的”，可以“加速”、“减速”、“刹车”甚至“逆转”。（53）而媚俗就是产生在“由垃圾向文化的循环”逆转过程中。（53）<strong>借助媚俗，人们实现了对时间直线流逝的有力扭转，推迟了信息与记忆的解体，也就是推延了遗忘与死亡，“把逝去固定在当下”。</strong>（53）这种崭新的时间掌控体验被傅拉瑟称作“后历史的”（post-historisch）（53）。现代社会中媚俗现象的长盛不衰被他诊断为“循环障碍”。（54）照其论述，工业革命加速了半成品到文化成品的赋形过程。但是文化这一存储器并没有做好相应的扩容准备，无法容纳汹涌而至的文化产品。许多产品几乎未被消耗就直接成了废物垃圾，“这种文化与垃圾大量并存的局面被称为‘大众文化’，它是一种循环障碍。”（54）而所谓的“进步”就是“由半成品到文化产品，然后又由文化到垃圾的加速度过程”。（53）加速的文化生产，加速的文化消耗，加速的垃圾制造形成了严重的拥塞。此外，使用更为耐用的人造材料也加剧延缓了垃圾的自然回解过程，造成了堆积，即环境污染。更为有趣的是，傅拉瑟观察到，这些垃圾试图以媚俗的形式杀回文化的阵营，实现由垃圾到文化的逆循环。傅拉瑟关于媚俗的“垃圾循环论”与莫勒斯（Abraham A. Moles）和瓦特（Peter Ward）的“剩余社会论”相似，认为<strong>媚俗是后工业时代商品过剩导致的文化过剩现象。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HcKtGANckj4rZBfgVKb8xd7wPuDpyNenR15U5jGYUfHcicUb5LEftyqQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">维兰·傅拉瑟（Vilém Flusser，1920-1991）<br />媒介理论家、作家</center>
+
+
+
+<p>随着电子技术和机器媒介狂潮般的更新推进，一个为媚俗打造的安乐窝在后现代工业社会的怀抱里日渐有型，它是尼尔·波兹曼描绘的娱乐帝国，也是马歇尔·麦克卢汉笔下以视像、声音与狂热为特征的媒介杂交的电子环境。<strong>媚俗从之前渗透文化和社会的隐蔽力量走向公开，它在大众文化、通俗文化、媒介和（视觉）感知研究以及后现代主义的理论支撑下，找到了庇护之所。</strong>以雷蒙德·威廉、罗兰·巴特、皮埃尔·布尔迪厄和斯图尔特·霍尔为代表的当代文化批评家，用审视高雅文化的态度，为媚俗的小玩意创造出令人耳目一新的理论话语。<strong>与此同时，媚俗与艺术之间的等次与边界也开始变得模糊。</strong>艺术家如安迪·沃霍尔、杰夫·昆斯甚至直接用媚俗元素成就作品，似乎以此来回应“杜尚之后，艺术何为”的世纪难题。那么他们确是媚俗的拥趸吗？</p>
+<p><strong>至少从20世纪下半叶开始，艺术领域出现了一支“伪媚俗”的队伍。而在苏珊·桑塔格看来，这个情况还要早得多。她在发端于17世纪末和18世纪初并在20世纪上半叶以王尔德为代表而得以复兴的“坎普”艺术和文学中，观察到了一种创造性的感受力和态度，夸张、奇异、琐碎、狂热、天真、玩笑、游戏、纨绔是其关键词。它超越了对复制品的厌恶，欣赏粗俗，体现了一种万物等量齐观的民主精神。</strong>在媚俗研究中，《关于“坎普”的札记》（“Notes on ‘Camp’”）是引用率最高的文章之一，不少研究者把桑塔格对坎普的描述误读成为媚俗画像，其实两者的趣味差别就在“纯粹”和“蓄意”之分。总结桑塔格的描述，“纯粹的坎普”（309）态度上绝对严肃朴实，有赖于天真，不是图好玩，不为取悦他人，内部蕴含着某种宏大不凡，不仅见之于作品本身的铺张风格，也见之于志向的宏伟高尚。而“蓄意的坎普”（308）志向平庸，不出奇，也不离谱，仅仅是装饰性的、四平八稳的花哨东西，以一种不连贯或者不狂热的方式展现铺张，也并非来自一种不可遏制的感受力，因此显得拘泥做作，缺乏想象与激情。可以看出，媚俗即是桑塔格笔下“知道自己是坎普的坎普”，是“做坎普”，（308）是对坎普的不到位模仿。如果说媚俗是一种劣等品味的话，那么坎普则是一种“对劣等趣味的良好趣味”，或曰精致的糟糕艺术。（320）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HkpIZu5ogG8xxPQet4Gzmg4NQicUQIvnFOzEJ1C9YLzcYcJ4EcQn6q5Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">苏珊·桑塔格（Susan Sontag，1933-2004）</center>
+
+
+
+<p>20世纪60年代的波普艺术消解了艺术的高雅和低俗之分，是艺术对商业和消费文化的释然拥抱，一度被看成是平庸恶俗之作。20年后，直接售卖自己身体与私隐的杰夫·昆斯名利双收，他祛除媚俗的羞辱心，在与资本的艳遇中助其登入艺术的殿堂，使其成为争议不休的“媚俗艺术”（Kitsch-Art）。德国媒介学者博尔茨（Norbert Bolz）把昆斯定义为“朝媚俗张开双臂”的“后现代艺术家”。（132）“降格”（Unterbietung）和“平庸”（Banalität）是其创作态度，以此“戒除追求先锋性的强迫症，克服大师情结，祛除美学的神秘感，摆脱意义的主宰。”（134）</p>
+<p>桑塔格文中的“坎普”和昆斯身体力行的“媚俗艺术”来自“伪媚俗”的队伍。桑塔格指出，“坎普在引号中看待一切事物。”（306）也就是说，坎普是对生活的引用演绎，“滑稽模仿、仿拟、戏剧性”是其青睐的表演手段，（306）而且带着“自我嘲弄”的豁然通达。（309）<strong>真正的媚俗不惜一切代价追求诉诸视觉、听觉和触觉的感官刺激，而带有反讽意义的自觉媚俗则依借感官通道，意在对观念施以刺激。</strong>昆斯在一次访谈中提到，“观众才是真正的主题，……我认为，他们是能够被某些观念所影响的。”（25）<strong>昆斯之辈的自觉媚俗者们把媚俗作为反讽的策略，制造感官刺激，在间离震惊之余，期待质疑，唤起讨论，将人们带离道德伦理、主流价值、既定观念构筑的安乐窝。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/x1rwIvJwdhpa5fRHCCZh4yEfWI8IKa3HZRgp9peERrvF0fFRgllrTIJtDk9Qn4NqlOblrVGWvB7icfcDxsSaahQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">杰夫·昆斯（Jeff Koons）与他经典的装置作品<br />《气球狗》（镀铬不锈钢材料制作）</center>
+
+
+
+<h2 id="结-语"><a href="#结-语" class="headerlink" title="结   语"></a>结   语</h2><p>20世纪初至今，“媚俗”概念被一群风格各异的思考者推动着，从“垃圾艺术”、“极端之恶”的唾弃声中爬起，搭乘商品与消费文化的顺风车，朝着享乐主义的世俗化奔驰，有如一场脱冕、降格、戏拟式的狂欢，沿着身体与物质的方向径直下坠。</p>
+<p>“媚俗”是理解现代性的关键词之一，当情感、欲望和趣味在现代理性的高堂庙宇中无处容身，就会被媚俗的江湖所吸引。而在“媚俗”的转换进程中，反映出的是双重的“启蒙辩证法”：奉历史哲学的进步观念为指引的现代派在追求不断自我超越的进程中远离了既定目标，它的曲高和寡将启蒙对象拱手让给了通俗艺术；而后现代艺术则在消解一统梦幻与宏大叙事的同时，通过对“高雅”的戏仿，承接了现代派设想的任务，在强调多元化、承认差异的“穿越理性”（Welsch: 7）方案中，“媚俗”再度成为文化体系中重新思考的对象。</p>
+<div style="color:gray;font-size:0.9em;">
+参考文献<br />
+1. Adorno, Theodor W.: Kitsch. In: Ders.: *Musikalische Schriften V* (Gesammelte Schriften,Bd. 18), Frankfurt a. M. 1984, S. 791-94.<br />
+2. Avenarius, Ferdinand: Kitsch. In: *Kunstwart und Kulturwart* 33 (1920) H. 2. S. 222.<br />
+3. Bannasch, Bettina: Unsäglichesoder Unsagbares? Zur Rede über Kitsch und Kunst. In: *Sprache und Literatur* 28 (1997) H. 79. S. 40-53.<br />
+4. Benjamin, Walter: Traumkitsch. In: Ders.: *Gesammelte Schriften*. Hrsg. von Rolf Tiedemann und Hermann Schweppenhäuser. Bd. 2. Frankfurt a. M. 1991. S. 620-22.<br />
+5. Bolz, Norbert: Marketing als Kunst oder: Was man von Jeff Koons lernen kann. In: Ders./Cordula Meier/Birgit Richard/Susanne Holschbach (Hrsg.): *Riskante Bilder. Kunst, Literatur, Medien*. München 1996. S. 129-36.<br />
+6. Broch, Hermann: *Essays*. Bd. 1. Hrsg. von Hannah Arendt. Zürich 1955.<br />
+7. Bry, Carl Christian: Der Kitsch. In: *Hochland*. Monatsschrift für alle Gebiete des Wissens, der Literatur und Kunst 22. 2,1925.<br />
+8. Curt, Glaser: Vom süßen und vomsauren Kitsch. In: *Kitsch. Texte und Theorien*. Hrsg. von Ute Dettmar/Thomas Küpper. Stuttgart 2007, S. 167-73.<br />
+9. Dettmar, Ute / Küpper, Thomas (Hrsg.): *Kitsch. Texte und Theorien*. Stuttgart 2007.<br />
+10. Egenter, Richard: *Kitsch und Christenleben*. Würzburg 1962.<br />
+11. Flusser, Vilém: Gespräch, Gerede, Kitsch. Zum Problem des unvollkommenenInformationskonsums. In: *Kitsch**. Soziale und politische Aspekte einer Geschmacksfrage*. Hrsg. von Harry Pross. München 1985. S. 47-62.<br />
+12. Giesz, Ludwig: *Phänomenologie des Kitsches*. Zweite, vermehrte und verbesserte Auflage. München 1971.<br />
+13. Hauff, Wilhelm: Kontrovers-Predigtüber H. Clauren und den Mann im Monde. In: H. Clauren: *Mimili. Eine Erzählung*. Hrsg. von Joachim Schöberl. Stuttgart 1984. S. 79-114.<br />
+14. Killy, Walther: *Deutscher Kitsch.* Göttingen 1962.<br />
+15. Koelwel, Eduard: Kitsch und Schäbs. In: *Muttersprache*. Zeitschrift des Deutschen Sprachvereins 52 (1937) H. 2. S. 58-60.<br />
+16. Koons, Jeff: Interview mit Anthony Haden-Guest. Aus dem Engl. übers. von Uta Goridis. In: Angelika Muthesius (Hrsg.): *J**eff Koons*. Köln,1992, S. 12-36.<br />
+17. Kreuzer, Helmut: Trivialliteratur als Forschungsproblem. Zur Kritik desdeutschen Trivialromans seit der Aufklärung. In: *Der Deutschunterricht*. Beiträge zu seiner Praxis undwissenschaftlichen Grundlegung 19 (1967) H. 2. S. 173-91.<br />
+18. Mongardini, Carlo: Kultur, Subjekt, Kitsch. Auf dem Weg in die Kitschgesellschaft. In: *Kitsch. Soziale und politische Aspekte einer Geschmacksfrage.* Hrsg. von Harry Pross. München 1985. S. 83-94.<br />
+19. Musil, Robert: Über die Dummheit. In: Ders.: *Tagebücher, Aphorismen, Essays und Reden*. Hrsg. von Adolf Frisé. Hamburg 1955. S. 918-938.<br />
+20. Pawek, Karl: Christlicher Kitsch. In: *Der Kitsch*. Hrsg. von Gillo Dorfles. Übers.von Birgid Mayr. Gütersloch 1977. S. 143-50.<br />
+21. Pazaurek, Gustav Edmund: *Guter und schlechter Geschmack im Kunstgewerbe*. Stuttgart/Berlin 1912.<br />
+22. Sachs, Hanns: Kitsch. In: *Kitsch. Texte und Theorien*. Hrsg. von Ute Dettmar/Thomas Küpper. Stuttgart 2007. S. 184-92.<br />
+23. Pross, Harry: Kitsch oder nicht Kitsch? In: *Kitsch. Soziale und politische Aspekte einer Geschmacksfrage*. Hrsg. von Ders. München 1985. S. 19-30.<br />
+24. Welsch, Wolfgang: *Unsere postmoderne Moderne*. Berlin 1987. S. 7.<br />
+25. 本雅明：《经验与贫乏》，王炳钧、杨劲译。天津：百花文艺出版社，1999。<br />
+26. 本雅明：《发达资本主义时代的抒情诗人》，张旭东、魏文生译。北京：三联书店，2007。<br />
+27. 格林伯格：《先锋派与庸俗艺术》，载福柯等《激进的美学锋芒》，周宪译。北京：中国人民大学出版社，2003。<br />
+28. 霍克海默、阿多诺：《启蒙辩证法》，渠敬东、曹卫东译。上海：上海人民出版社，2012。<br />
+29. 桑塔格：《反对阐释》，程巍译。上海：上海译文出版社，2011。<br />
+原刊于《外国文学》2014年第5期<br />
+作者：李明明，上海外国语大学德语语言文学博士，现为清华大学外文系副教授、中国人民大学“德国研究中心”兼职研究员。主要研究方向为现当代德语文学、德国文化学、文艺理论。<br />
+文章转载自公众号：和鸣记，特此鸣谢
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e298e617/">深入理解 CSS 中的溢出问题</a>
+            
+            
+            <a class="next" rel="next" href="/b3817988/">论婚姻（罗素）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e298e617/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b3817988/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

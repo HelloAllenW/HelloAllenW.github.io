@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>一个人卓有成就的16条法则 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">一个人卓有成就的16条法则</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 17, 2022&nbsp;&nbsp;7:07:41</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 17, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/">激励与自律 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">11k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">37 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8ibluH2wwkdrjiaOibbDFu4KSpzXKic9ceR2FOHQSpbicOCuRc4xWLZYkVbQ/640?wx_fmt=jpeg&wxfrom=13&tp=wxpic" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+文 | 塔尔盖（ID：Ta_Ergai）<br />
+作者:塔尔盖,清华本科,斯坦福MBA<br />
+如何让自己变得更加优秀？
+</div>
+
+<p>这里准备了16条恒久法则，希望对你有所帮助。</p>
+<h3 id="1-对自己的行为负责"><a href="#1-对自己的行为负责" class="headerlink" title="1. 对自己的行为负责"></a>1. 对自己的行为负责</h3><p>当自己所处的境遇不好的时候，更多看看自己身上的原因。</p>
+<p>有一句话说，你现在在哪儿是你过去两年来的选择决定的；你两年后在哪儿是你接下去两年中的选择决定的。我非常认可。</p>
+<p>优秀需要努力，而努力是不舒服的事情；长期持续做不舒服的事情，一定要有足够的动力；这种动力的重要来源之一，就是对于现状的不满足。</p>
+<p>这种不满足人人都有，但是能够「化不满足为力量」的人是少数。</p>
+<p><strong>连接「对现实的不满足」和「努力」的桥梁，就是自己对自己的行为负责</strong>。</p>
+<h3 id="2-认真、投入"><a href="#2-认真、投入" class="headerlink" title="2. 认真、投入"></a>2. 认真、投入</h3><p>什么叫投入？我的理解就是全身心的做事。</p>
+<p><strong style="border-bottom: 1px green dashed;">「活在当下」，不论在做什么，专心致志地把眼前的事做好，再去想别的。不投入的时候，连玩都没有幸福感</strong>。</p>
+<h3 id="3-被人逼着进步"><a href="#3-被人逼着进步" class="headerlink" title="3. 被人逼着进步"></a>3. 被人逼着进步</h3><p>当然有超级优秀的人从小就自己管理自己，但是多数人，特别是小的时候，还是要被逼一下的。毕竟，进步是个辛苦活儿，有几个人天生能够喜欢呢？当然，逼你的人也要有水平。</p>
+<h3 id="4-目标明确"><a href="#4-目标明确" class="headerlink" title="4. 目标明确"></a>4. 目标明确</h3><p>进步往往是痛苦的。为什么？因为进步意味着改变，而改变往往不舒服。</p>
+<p><strong style="border-bottom: 1px green dashed;">怎样克服这种不舒服？对于另外一个事物或者状态的追求。</strong></p>
+<p>目标越明确，这种渴求的痛苦，或者说怕得不到的痛苦，就越能驱动人们克服那种努力的痛苦。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8LzniclWK1icf22vRRI2SbYNfsC0BlrYCdWX39ZJJHcRDRicKYumHkpA1Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="5-比别人多做一点点"><a href="#5-比别人多做一点点" class="headerlink" title="5. 比别人多做一点点"></a>5. 比别人多做一点点</h3><p>有时候你真的只需要比别人多付出一点，就会有很不同的效果。</p>
+<h3 id="6-兴趣和坚持"><a href="#6-兴趣和坚持" class="headerlink" title="6. 兴趣和坚持"></a>6. 兴趣和坚持</h3><p>把这两条放在一起，因为我觉得没有兴趣很难坚持，而且没有兴趣时的坚持意义不大。为什么？坚持的意义不在于简单的重复。</p>
+<p>大家可能都听过一万小时理论，可这理论有个前提：</p>
+<p>练习的难度和强度需要不断提高，换句话说练习的人需要不断突破自己。如果仅仅是无脑的重复1万小时就可以成为专家，那么我们每个人在20岁之前岂不都应该成为语言专家？事实上简单的重复可以提高熟练度，但是无法真正提高技能。</p>
+<p>在长达一万小时的历程里（以每天3小时计算大概是十年），每时每刻都想着如何挑战自己突破自己，如果没有兴趣，根本坚持不下来。或者坚持下来了，也仅仅是把那些个动作做出来，而心思根本不在里边。</p>
+<p>有了兴趣，就可以坚持，而且是不断钻研的坚持，全身心全方位全时段的琢磨一个事情……这不就是著名的1.01的365次方的道理吗？1.01^365 = 37.8; 1.02^365 =1377.4; 1.01^730 = 1427.6 …这样下去，想不优秀都难。</p>
+<h3 id="7-功利心不要太强"><a href="#7-功利心不要太强" class="headerlink" title="7. 功利心不要太强"></a>7. 功利心不要太强</h3><p>功利心太强的时候，难免短视。短视的结果是稍微付出，发现没有回报，就想改变方向。很多人对于努力的态度是，除非我能明确看到回报，要不干嘛费心思？问题是凡是能立竿见影的事，多半价值有限。</p>
+<p>如果真有一个机会付出一块钱，能够保证收回两块钱，难道不是会吸引所有的人去做？而当所有的人都去做追求同一个机会的时候，那个机会就不再是机会了。</p>
+<p>其实说白了，就是<strong style="border-bottom: 1px green dashed;">做事没有捷径</strong>。但凡想做出点事情来，还是要花笨功夫。</p>
+<p>笨的意思不是不动脑子，而是不总是朝三暮四的想哪条路可以更省力。</p>
+<p>有人会说这和第四条目标明确不矛盾吗？</p>
+<p>我的理解，目标明确是从长远的战略上；功利心是指每天的心态。其实这也是优秀的重要素质之一，能够把看似矛盾的两种事物统一起来。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8pEcZxT9r3V77nWsFasicWb4iafkleJMdplQ8WTrTiafgg2QIEkCVbfN0A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="8-光靠蛮力不够"><a href="#8-光靠蛮力不够" class="headerlink" title="8. 光靠蛮力不够"></a>8. 光靠蛮力不够</h3><p>清华大一是我有生以来学习最「用力」的时候，然而学习成绩却几乎是最差的时候。其实即使在当时，我也觉得有些不对，但是却懒于改变，或者说没有勇气面对这个问题。</p>
+<p>一方面那么刻苦，另一方面却懒惰？这怎么可能？这非常可能。</p>
+<p>懒惰其实和勇气是直接关联的。每天起早贪黑学习是件辛苦的事儿，然而更辛苦的，其实是直面自己的弱点。</p>
+<p>我当时的问题，出在学习方法上。而我不敢面对这个问题，因为我觉得对我学习方法的疑问，基本上是在质疑我的整个人，整个人生。</p>
+<p>我把累，分成三个类型：体累，脑累，心累。</p>
+<p>对于我来说，最容易克服的，就是体累；而在大一的时候，我的努力其实仅仅是体现在这个层级上的。而这个层级上的努力，往往价值极低。</p>
+<p><strong style="border-bottom: 1px green dashed;">不要试图用战术上的勤勉，去弥补思维上的懒惰</strong>。我觉得讲得是同样的道理。</p>
+<p>想要优秀，仅仅靠努力是不够的。那还要靠什么呢？</p>
+<h3 id="9-主动找方向、持续努力"><a href="#9-主动找方向、持续努力" class="headerlink" title="9. 主动找方向、持续努力"></a>9. 主动找方向、持续努力</h3><p>什么方向都行。可以不努力学习，但总要有个愿意为之付出辛苦的兴趣爱好吧？</p>
+<p>可以不努力工作，但总要在某个方向有个一技之长吧，写毛笔字吹口琴都行啊。</p>
+<p>不愿意在被这个社会广泛认可的事情上努力，总要有个自己认可的方向吧？</p>
+<p>优秀是一种习惯。这句话有很多解。</p>
+<p>其中一个是说，其实通过大量的努力去优秀地掌握一项技能，这本身就是一种能力。换句话说，成为优秀的京剧表演艺术家，和成为优秀的跨栏运动员，和成为优秀的企业家，这里边有很多相似的东西。</p>
+<p>如果你真觉得自己优秀，就找一片天地证明一下，不要找借口。而<strong style="border-bottom: 1px green dashed;">你在任何一个方向上积累的这种优秀的习惯，在其它方向上往往会对你大有裨益</strong>。</p>
+<p>在过去六年中，我面试过接近1000个人，录用过其中的上百个人。<strong style="border-bottom: 1px green dashed;">我几乎每次必问的一个问题就是你有什么业余爱好，你坚持了多少年，你从中学到了什么</strong>。</p>
+<p>因为我坚信，<strong>一个人一旦在一件事情上有过坚持多年不断进步的体会，TA很容易把这种体会带到其它事情上来</strong>。因为这是优秀的重要特质。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8Xghu2zOYicyiakQTxlmBqSzILKHMaPB6UDh4aialOxpTCWBpF43iaicPVJg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>想要变得更优秀吗？找一个自己感兴趣的方向，先把时间和精力花进去再说。<strong style="border-bottom: 1px green dashed;">不要一步没有走，已经再想这样是否最优，这样是否投资回报最大化，这样是否一定有最好的结果……</strong></p>
+<p>这些想法多数时候是没用的；或者说这些想法是对那些已经把功夫下进去的人才有意义。<strong style="border-bottom: 1px green dashed;">边走边想，边试验边琢磨，用事实和实际行动和时间证明一切吧</strong>。</p>
+<p>2000年，我去了美国留学，为了改变自己。</p>
+<p>虽然讨厌工科，但是工科是我唯一有可能拿到奖学金的方向，所以只好忍下去。拼命学，成绩终于不差，但是厌倦有增无减。</p>
+<h3 id="10-没有精气神不行"><a href="#10-没有精气神不行" class="headerlink" title="10. 没有精气神不行"></a>10. 没有精气神不行</h3><p>仅仅是做出动作，而没有精气神，是没有意义的。来美国了，真的有了生存压力。迫于压力，不得不做了很多不喜欢的事儿；勉强做出来的东西，最多只是二流三流，根本称不上优秀。</p>
+<p>问题的根源在哪儿呢？我觉得是兴趣是激情。<strong style="border-bottom: 1px green dashed;">做自己有兴趣和有激情的事情</strong>是什么样的呢？</p>
+<p>当时我在印第安纳找了一份新工作，但也有很多不顺心。</p>
+<p>想来想去，只想到读MBA。然后我就开始了准备过程，前所未有的努力。</p>
+<p>给斯坦福商学院最著名的申请文章 What matters to you most, and why，我足足写了8个月。推到重来的改动不下20次。在基本定稿之后，我逐字逐句的改了不知道多少遍。3000字的文章，每一句话，每一个短语，每一个单词都推敲过。</p>
+<p>文章写到最后，我几乎是释然和平静的感觉。</p>
+<p>因为我觉得我真的第一次可以不夸张地说，我使出了我的全部本领。在这种情况下，如果斯坦福不录取我，那么应该是命运之神对我有其它安排。当然也不光是因为这篇文章。</p>
+<p>在长达一年半的准备过程里，我几乎做到了把全部业余时间都用来申请MBA。这不仅是我第一次这样努力，而且是我第一次努力了这样久，而且是我第一次在并非迫不得已的情况下努力了这样久。</p>
+<p>也因为这段努力，我心里有种暗暗的自信。因为我知道，即使申请不到MBA，只要把这种努力程度用到别的地方，我也一定可以主宰自己的命运。</p>
+<p>我当时最喜欢的一句话：Grab life by the horns（抓住生命的犄角）。</p>
+<p>我觉得特别形象。</p>
+<p>很多时候，命运就是那样可怕那样不可控。但是害怕并没有什么卵用。</p>
+<p><strong>与其抱着脑袋被牛角戳屁股，不如迎头而上，跟它斗个你死我活</strong>。</p>
+<p>准备了一年半，终于提交了申请。在斯坦福结果揭晓的那几天，说不紧张是假的。太多期待，太多付出，太多感慨。</p>
+<p>话筒里传来一个陌生的声音，当我听到「congratulations，你被斯坦福商学院录取了」的时候，我的手都麻了。从来没有那么兴奋过。</p>
+<p>真想大喊两声，告诉全世界的人。</p>
+<p>那一刻的自豪、满足、欣慰、激动，似乎再也没有经历过。</p>
+<p>大概没有什么比苦苦付出之后收获的果实更甜了吧。</p>
+<h3 id="11-敢折腾，Dream-Big"><a href="#11-敢折腾，Dream-Big" class="headerlink" title="11. 敢折腾，Dream Big"></a>11. 敢折腾，Dream Big</h3><p>要不满足于现状，要敢折腾，要dream big。申请MBA这件事教会了我许多：</p>
+<p>1）在咨询一些过来人的时候，他们都劝我不要申请斯坦福，因为我的硬件条件不够好，而斯坦福录取率太低（一直低于10%）。而我觉得，我就是喜欢这所学校代表的一切，就是要试一试。最多就是没有被录取，又能怎样呢？</p>
+<p>2）在准备的时候，我就把我的心路历程都写在了博客上。有好朋友说，你这样做不怕到时候不成功没面子吗？我说，我就是不想给自己留任何后路。</p>
+<p>3）回过头来看，斯坦福的经历是我人生的转折点，让我重活10遍我仍然会做出一模一样的选择。</p>
+<p><strong style="border-bottom: 1px green dashed;">要想优秀，首先要敢于伸手去够那些更高的果子。很多时候把手伸出去把脚踮起来，已经战胜了90%的人</strong>。</p>
+<p>不敢伸手的人怕的往往也不是失败本身，而是没面子。问题是，谁在看你啊？对于我们每个人来说，我们最在乎的人，还是自己。那个成天以嘲笑别人失败为乐的人，基本肯定是个loser。</p>
+<p>不敢伸手的人往往有很多借口：万一不成功，我的辛苦不就白费了吗？</p>
+<p>我的经验是，只要把心血花进去，其实辛苦不会白费。即使得不到眼前最直接的目标，这些辛苦会在未来某天生出利息。</p>
+<p>而且，很多时候，即使我们不努力，那些省下来的精力也并非去做了更有意义的事，而是散落在朋友圈电视上网聊天里，什么痕迹都没留下。</p>
+<p>不敢伸手的人还有一个常见理由：我还没有想好目标／方法／方向，等我想好了我就出发。</p>
+<p>越是复杂的事情，越是不能靠空想；<strong style="border-bottom: 1px green dashed;">越是重要的事情，越要边走边想</strong>。一方面，空想的东西往往不成立；另一方面，<strong style="border-bottom: 1px green dashed;">把事情做起来，会给我们很多灵感</strong>。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI88IzfLicc6FJ9fRmAr5BK23ia31C3CE7swYAnIpd3BndOE7k3Ltl8ic9XQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>有的时候，Good is the enemy of great（好是卓越的敌人）。手里已经有了什么，就容易被牵绊，就容易患得患失。去够更高的果子，肯定有风险。然而没有风险却又高回报的路，哪里存在啊？</p>
+<p>更关键的是，这次上学，和以往完全不同。</p>
+<p>这是我自愿选择的事情，所以我非常清楚我为什么来上这个学。当目的清楚的时候，做事就变得有条不紊。学校提供的机会特别多，从优秀的教授、到有趣的社团、到每天都有的讲座……</p>
+<p>虽然目不暇接，但是静下心来的时候，还是能够按照自己的想法做事。比如我感兴趣的课程（组织行为学），我就拼命选；我不感兴趣的课程，我就只做到及格。</p>
+<p>因为是自觉自愿的选择，所以再苦再累也没有抱怨。苦完累完，更多的是满足和踏实，还有踌躇满志。</p>
+<p>因为是自觉自愿的选择，所以和旁人比的心态也少了很多，更多是在和自己的目标去比。而且追求自己目标的同时，也能去享受整个过程。</p>
+<p>因为是自觉自愿的选择，于是会更用心。这与大学一年级的状态正好相反。那个时候每天拖着疲惫的身躯早出晚归，脑子却并没有真正用进去。MBA这两年，对于我感兴趣的课程，我是真的把心思放在上边了。</p>
+<p>最明显的例子，是斯坦福商学院的「奇课」：Interpersonal Dynamics（人际动力学）。</p>
+<p>因为投入，因为用心，因为心甘情愿，这门课让我有凤凰涅槃一般的经历。毫不夸张的说，这门课改变了我的人生轨迹。</p>
+<p>两年的学习经历，让我收获了知识，也收获了朋友；更重要的是，开了眼界。知道这个世界原来如此丰富多彩，知道了这个世界还有如此多的活法。</p>
+<p>职业发展越到后期，知识和技能的重要性越低，胸怀和见识的重要性越高。</p>
+<p>知识和技能往往足够努力就可以获得，而胸怀和见识却不是一个人独自努力就可以拓展的，还需要周边的环境等诸多因素。</p>
+<h3 id="12-井底之蛙？换个井看看"><a href="#12-井底之蛙？换个井看看" class="headerlink" title="12. 井底之蛙？换个井看看"></a>12. 井底之蛙？换个井看看</h3><p>每个人都不可避免是井底之蛙，但是我们可以时常换个井看看。</p>
+<p><strong>最可怕的不是我们的看法有局限性，最可怕的是意识不到自己的局限性。</strong></p>
+<p>如何才能意识到自己的局限性，而少被自己的局限性所局限呢？学会换个角度看问题。</p>
+<p>但是换个角度看问题很难，因为我们看这个世界的唯一视角，就是自己的主观视角。怎么办？</p>
+<p>多和优秀的人在一起。和优秀的人在一起会让自己的局限性暴露无遗：</p>
+<p>原本你觉得自己很懂的地方发现山外有山，原本你认为很简单的东西发现在别人手里可以别有洞天，原本你深信不疑的理念发现其实并不一定是绝对真理，原本你不屑一顾的理论发现其实自己的不屑其实来源于不理解……</p>
+<p>这样的事情经历得多了，会让人变得更谦逊。我对谦逊的理解，不是在遇到优秀的人的时候肯学习，而是在任何时候都如履薄冰一般不敢对事情随意下结论，因为知道自己的局限性。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8eN5ZnFEuaGXwKdNnSPZJxVT7SricnSay2510qPLIsaOfCcnVken0SgQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>有了对世界的多样性的敬畏，有了对自己的局限性的认知，接受不同角度的观点就少了一些障碍，换井观天的意愿就会强很多。虽然终究我们还是只能看到自己头顶那一小片天，但是至少在我们心里可以装得下那些看不到的天。</p>
+<p>斯坦福的两年，是快乐而充实的两年。这两年，其实很奢侈。一个成年人，放弃工作，在长达两年的时间里专职学习新东西，专职思考未来，专职尝试不同的事情。每当我回头，都能为自己有那样一段经历而感恩。</p>
+<p>读MBA，最重要的思考可能就是职业选择了。因为绝大多数人读MBA不是为了换行业就是为了换职能。某种意义上，MBA把大家各自的起跑线洗牌重组了一下，于是每个人都面临很多选择和机会。</p>
+<p>我当时对于职业选择只有三个要求：1）回国，2）管理，3）global pay。</p>
+<p>在拿到几个offer的情况下，我很快选择了Danaher，因为当时觉得和自己路数最一致。</p>
+<p>Danaher的机会是在一个牙科医疗器械公司参加一个General Management Development Program（轮岗培养总经理）。</p>
+<p>一想到熬几年可以成为总经理，而且轮岗的时候可以把我在销售市场等方面的短板都补上，而且是和咨询公司一样的pay（还有stock option），我就选择了Danaher。</p>
+<p>去Danaher其实还有其它分公司可以选择，最终我选择了牙科。原因有二：</p>
+<p>1）牙科是医疗行业，在国内是新兴行业；</p>
+<p>2）当时这家公司在全球是数一数二的，但是在国内还很小，我觉得我有机可乘。事实证明，我这两个判断都是正确的。</p>
+<p>在美国总部工作了两年，总体而言平平淡淡乏善可陈，除了我做销售的那段经历。这家公司是个销售主导的公司，我一进公司，立刻被告知我做牙科生意，最大的短板就是销售。虽然我极其不情愿，但是也没办法。</p>
+<p>有一天，总裁问我销售进展如何。我说，呃，努力中。他笑着说，你什么时候卖掉第一单，什么时候回国。</p>
+<h3 id="13-没杀死你的，让你更强大。没干掉你的东西，让你更强大。"><a href="#13-没杀死你的，让你更强大。没干掉你的东西，让你更强大。" class="headerlink" title="13. 没杀死你的，让你更强大。没干掉你的东西，让你更强大。"></a>13. 没杀死你的，让你更强大。没干掉你的东西，让你更强大。</h3><p>坐在电脑前回想当年的囧，我自己都觉得搞笑。今天的我再去做那些事，虽然不能说驾轻就熟，但是肯定不会那样难受。为什么？因为经历过了。</p>
+<p>很多时候，我们迈不过去的坎儿，都是心魔。</p>
+<p>没人喜欢被人挂电话，可是挂了又怎样呢？</p>
+<p>没人喜欢做自己不擅长的事，可是摔倒几回又怎样呢？</p>
+<p><strong style="border-bottom: 1px green dashed;">优秀的来源是进步，而进步的本质就是不同。只有做不同的事，用不同的方式做事，才有可能有进步</strong>。</p>
+<p>而第一次做不同的事或用不同方式的时候，一定不擅长啊，没做过的事怎么可能一上来就擅长呢？</p>
+<p>大家都知道要推自己出舒适区，可为什么很少人这样做？</p>
+<p>我觉得最重要原因，就是怕失败，怕被人否定，怕被人嘲笑。但是，仔细想想，其实别人对你的嘲笑，如果对你造成任何伤害，都是你自己允许的。</p>
+<p>我不是说忽略别人嘲笑容易，今天的我也不能完全做到。</p>
+<p><strong>但是因为怕失败怕被嘲笑怕没面子，而不敢去尝试不同的事情，这大概是优秀的最大敌人。</strong></p>
+<p>如果你想变得更优秀，就要主动去做那些让你不舒服的事情。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tmkZVANzAcs3bJ5cxPHgn5ltIbhOX1icOM0SqGlfmvUT5h9IFNfAatrx6MxSxy03nE3NcgCicDBW6diadmhl481Ig/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>马云说，男人的胸怀是让委屈撑大的。我说，人的胆量是让窘境撑大的。<strong style="border-bottom: 1px green dashed;">没有胆量，不可能真正的优秀</strong>。</p>
+<p>卖出了我人生的第一单，也差不多该回国了。2010年初，我正式被派回国内。</p>
+<p>那时的公司，百废待兴。公司刚刚成立没几个月，除了办公室几乎什么都没有。我回来才两个月，总经理因为和美国总部闹不和被解雇，于是公司更加混乱，我成为临时的负责人。在随后的几个月里，我真的尝到了又当爹又当妈的滋味。</p>
+<p>公司要发展，第一步就是雇人。当时我同时和四五个猎头打交道，筛简历排面试走流程；以至有好几个猎头以为我是公司的HR经理。</p>
+<p>公司要卖货，第一步就是备货。我是所有人当中最懂产品的，于是我硬着头皮在几万个货号当中挑（xia）选（cai）那些最有可能在中国大卖的。定的多了怕库存高被美国老板骂，定的少了怕断货被代理商骂。</p>
+<p>销售代表雇进来，没有人做培训，我来。从产品到理念，从公司文化到规章制度。</p>
+<p>没有IT支持，我来。美国总部要财务数据，我们没有财务经理，我来。</p>
+<p>破破烂烂搞了几个Excel表格，自己都看不过去。好在美国财务一看我们这个状况，也就不逼我们了。</p>
+<p>母公司CEO要战略计划，可我们连总经理都没有，我来。</p>
+<p>和两个同事熬夜两天拼凑了一个PPT出来蒙混过关，居然还获得好评。签不到代理商，我和销售经理一起上阵，各种画大饼喝酒搂着脖子称兄道弟掏心窝子拍胸脯。</p>
+<p>任何事，只要有价值，只要没人做，我就会尽量去做。</p>
+<p>然后团队就那样搭起来了，业绩活生生就做上去了……</p>
+<p>直到公司重新招到一个总经理，然后我从临时负责人被放到市场部经理的位置。我多少有些失落，但是我一点不后悔，因为那段日子我学到了很多。</p>
+<p>我本科毕业就出国，在国内没有任何工作经验。对国内的牙科也知之甚少，基本上是从零开始。其实如果不是公司一片混乱，也轮不到我做很多决定。</p>
+<p>也许有人在那个情形下会做不同的选择：城头变幻大王旗，是不是应该看准方向再努力，否则万一站错了队怎么办？</p>
+<p>或者说，是不是应该先谈条件再付出，省的最后竹篮打水一场空？也的确有人劝过我，说我没必要那么较真，又不是自己的生意，不过打工而已。</p>
+<p>但是我还是一点都不后悔。</p>
+<p>我好不容易给自己争取到了一个能够体现价值的机会，我不想浪费。我平庸的时间已经足够久了，我要shine。我要把我的全部能量都释放出去，看看自己到底能做出些什么。</p>
+<p>而且从完全功利的角度上说，这段经历让我迅速的了解了公司各个职能部门的意义和做事方法，而且也帮助我和美国总部的各个部门建立了关系。只有做得多，才能学得多；只有够操心，才能有收获。老天在这个问题上，是公平的。</p>
+<p>事实上，我后来的辞职，与这种状态的丢失，有很大关系。</p>
+<h3 id="14-得失心不要太重"><a href="#14-得失心不要太重" class="headerlink" title="14. 得失心不要太重"></a>14. 得失心不要太重</h3><p>如果你不在乎谁能得到什么，你的成就也不会有止境。</p>
+<p>说句实话，不在乎很难。但是，我们终究要有取舍。如果没有承担，就没有学习。</p>
+<p>承担得多，自然付出的也多。我有一个理论，这个理论就是如果你不能做决定，或者做决定之后不能承担这个决定的后果，你就无法真正学习。</p>
+<p>其实在大公司里混日子，与带着保护轮旁边有人扶的骑车非常相似。</p>
+<p>越好的公司，流程和制度越完善。流程和制度很像保护轮，它们最大的意义，就是让我们不犯错误、少犯错误。流程的最高境界，其实是「防呆」。</p>
+<p>防呆是什么意思？就是呆子都不会做错。那么我们想想看，我们每天在这样的系统里做事，我们的大脑能够得到多少刺激，获得多少进步？</p>
+<p>如果你在有一个管理起来事无巨细的老板，你能学到什么东西？因为这样的老板就好像那个一直扶着你骑车的人。你的确摔倒的概率降低了，但是你也基本上失去了学习的机会。</p>
+<p>更可怕的是，你可能还觉得自己做出了很多成就。在一个优秀的平台上工作，你有时候很难分清，什么是你的作用什么是平台的作用。而多数人在这个时候都会倾向于认为是自己的作用。比学不到本领更糟糕的，就是明明没有学到，但是还觉得自己很牛。</p>
+<p>回国的前三年，是最累的三年，但是也是最开心的。看着团队一天天壮大，看着自己负责的生意一天天成长，看着自己负责的品牌越来越家喻户晓，也能感受到自己对于行业、管理、和生意的认知逐渐加深。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZsUic8pXgxFicVp1n57BvUeW4e5jqX0HI8icJVV1efZeOfaKibJWKEJcT0X0tyaxfx9J040LUmuSwXhLGfujSlgOGg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>可是随着公司规模的变大，很多东西都在变。</p>
+<p>第一个变化就是公司人数超过100的时候，不是每个新员工都叫得上名字；第二，随着各种规章制度和流程的建立，官僚机构的感觉逐渐开始出现；第三，随着公司规模变大，层级变多，结构变复杂，政治的味道开始出现。</p>
+<p>其实，这些现象都是难以避免的，甚至必要的。毕竟，一个大外企不可能很随意的做事。为了确保公司不犯低级错误，肯定要通过种种制约手段，让一个人的不小心不可能产生巨大的破坏作用。</p>
+<p>但是对于我来说，这种按部就班的日子越来越难熬。每天处理200封邮件不再让我觉得日理万机创造价值，而越来越觉得流于形式，因为太多的邮件都是关于申请批准或者给予批准；一年到头做PPT，不再觉得是实现自己脑中的想法，而是觉得在应付差事。</p>
+<p>随着对公司的业务越来越熟悉，随着过去几年的积累逐渐在市场上越来越有效果，随着团队的建制越来越完善，我的日子越来越轻松。</p>
+<p>销售有经验丰富的全国销售经理帮忙搞定，市场部有几个部门经理搞定执行细节，我似乎有越来越多的时间做自己想做的事情。但是仍然有什么地方不对……</p>
+<p>我第一次在周一早上有不想上班的感觉；以往的我想到去公司要设计的项目，要完成的事情，有按捺不住的兴奋。</p>
+<p>其实那一年是我回国以来最轻松的一年，业绩好，人缘好，职业发展也好。回国4年，晋升3次，被总公司作为重点培养对象；</p>
+<p>经常去参加一些针对总经理级别的培训和会议，而我往往都是里边最年轻，级别最低的人。我知道，只要再熬一两年就会成为某个公司的总经理。</p>
+<p>但是我突然觉得自己不想熬了。因为我想到乔帮主在斯坦福大学演讲时的一段话。</p>
+<blockquote>
+<p>When I was 17, I read a quote that went something like: If you live each day as if it was your last day, someday you’ll most certainly be right.</p>
+<p>It made an impression on me, and since then, for the past 33 years, I have looked in the mirror every morning and asked myself: </p>
+<p>If today were the last day of my life, would I want to do what I am about to do today?And whenever the answer has been 「No」 for too many days in a row, I know I need to change something.</p>
+</blockquote>
+<p>而我当时的状态，已经不是「假设这是生命最后一天，你想不想做这些事」的问题了；而根本就是，我真的多一天都不想再做，不管我生命还有多少天。</p>
+<p>问题的本质是，我对这种工作方式越来越无法接受。</p>
+<p>即使我换一家公司，情况也不会有什么改变，事实上很有可能更糟。想清楚这些，我意识到，创业是我唯一的路。</p>
+<p>说到创业，不得不提一下我的斯坦福校友陈欧。</p>
+<p>他比我低一届，所以在学校的时候我们打交道不多。吃过几次饭，聊过几次天，他还因为选课的事情给我打过一个电话，大概仅此而已。</p>
+<p>所以当时他并没有给我留下深刻的印象。再一次听说他是在同学聚会的时候，有人谈到他在做一个化妆品网站。</p>
+<p>当时人们的普遍看法是：一个大男人，又没有电商经验，做化妆品网站怎么可能成功？我也觉得大家的分析挺有道理。</p>
+<p>再一次听说，就是关于他的网站如何火，什么一天就做几千万云云。然后大家就各种羡慕嫉妒恨，我也不例外。</p>
+<p>再后来的故事，基本上百度都搜索得到了。总而言之，他用三年时间把一个化妆品网站做到NYSE上市，成为NYSE的220余年历史上最年轻的CEO。</p>
+<p>他也一瞬间成为斯坦福校友中最家喻户晓的一位。如果你让我描述一种典型意义上的登峰造极的成功，那基本也不过如此了。</p>
+<p>这样的故事，发生在身边，对我影响很大。我突然有点看不上自己原来做的那些事情。总觉得比起他来，我管的那点生意，有点不值一提。</p>
+<p>和他的成就相比，我做的事情显得如此渺小。更可怕的是，按照我当时做事的趋势，如果画一个延长线，到5年之后，依旧不能和他相提并论。这个想法，深深地动摇了我。</p>
+<p><strong>与人比，是一切痛苦的来源。这道理我懂。但是，如此具有可比性的人，反差如此之大，还是让我不能淡定。</strong></p>
+<p>创业，几乎是唯一的选择。但是，真正面临抉择的时候，心里还是很虚。</p>
+<p>我的父母都是老师，我从小成长在学校院里。上大学、出国、工作，全都是中规中矩的路数。</p>
+<p>现在突然要辞职创业，面对巨大的未知，这个转变太大。我心里很害怕。</p>
+<p>与身边的亲友聊这个事，大家居然都很支持。</p>
+<p>当我把创业的想法告诉我太太的时候，她说：我肯定支持。因为我理解你有多么想做这件事，如果我不支持，你会记恨我一辈子的，哈哈哈……</p>
+<p>那时我们刚买房，而且准备要第二个孩子；创业意味着拿原来20%不到的薪水，生活水准肯定要下降；而且这种下降不知道什么时候是个头……在这种情况下，她还肯支持我，我很感激。</p>
+<p>我的父母知道以后，一方面很担心，另一方面还是支持。他们做了一辈子老师，根本没什么积蓄，但是他们居然做好准备全部拿出来给我用。</p>
+<p>这就是父母，永远想着自己的孩子。70多岁了，还在为自己奔四的孩子操心。写到这儿我眼泪都快下来了。</p>
+<p>最让我感动的是我岳父。他平常是个不善言辞的人。</p>
+<p>他知道我的想法之后，专门对我说：我这辈子就是这样了，平平淡淡的，没什么成就。但是我支持你创业，年轻人就是应该闯一闯。</p>
+<p>你在前边好好干吧，我们在后方全力支持！我当时特别感动，感动得都说不出话来。这番话听着，就好像是老派电视剧一样，然而我知道里边的情份。</p>
+<p>然而最终推动我走出那一步的，是我哥，亲哥。他长我14岁，非常优秀。从小他就是我的榜样：出国、回国、做管理，我无一不是在追随他的脚步。</p>
+<p>在我成长的路上，他更像一个导师，总是能站在更高的地方，提供想法和建议。</p>
+<p>当创业的想法刚刚冒出来的时候，我第一个告诉了哥哥。没想到他比我还兴奋，他对我说，「你一定要去做，这么好的市场，为什么不做？而且你的性格，你的特点，很适合去做这件事。」</p>
+<p>当我的创业想法略有雏形的时候，他说：「我要是年轻10岁，也辞职跟你一起去做。就算别人不投资，我也要投资你」。</p>
+<p>不得不承认，我哥的热情影响了我。</p>
+<p>本来我非常的瞻前顾后，一会儿觉得自己还没有准备好，一会儿觉得放弃了已经拥有的一切很可惜，一会儿觉得创业这事根本没有那么靠谱，一会儿觉得活那么累干嘛轻轻松松不也挺好……但是他的热情突然让我觉得我好像没必要再犹豫了。</p>
+<p>在创业这个念头出来之后的第三个月，我正式提交了辞职信。</p>
+<h3 id="15-人是环境的产物"><a href="#15-人是环境的产物" class="headerlink" title="15. 人是环境的产物"></a>15. 人是环境的产物</h3><p>虽然我们都愿意觉得自己是特立独行的，但是环境对我们的影响太大了。</p>
+<p>当你的同学把考90分当作天经地义的时候，和当你的同学把考60分当作最高要求的时候，你会如何设定你的目标？</p>
+<p>当你的同事成天抱怨指责偷懒的时候，和当你同事每天学习思考进步的时候，你的状态会是怎样的？</p>
+<p>巴菲特说，你在职业发展上，最重要的决定，是你选择谁做你的配偶。</p>
+<p>不能同意更多。我觉得道理很简单，因为你的配偶和你在一起的时间超过任何人，所以Ta就是你环境中最重要的因素。</p>
+<p>你配偶的世界观价值观为人处事，必定对你有极大的影响。或者正面，或者负面。</p>
+<p>还有一个说法，说你最终拥有的财富，是你最要好的五个朋友的财富的平均值，细思极恐。</p>
+<p>但是还是说的同样的道理。</p>
+<p>如果同学当中有人成为亿万富翁，会让多数人对于如何定义财富上的成功，有新的思考。至少我是如此。</p>
+<p>到底是进入了好的环境才能优秀，还是优秀了才能进入好的环境？</p>
+<p>我觉得它们互为因果。</p>
+<p><strong>越优秀，就越有可能接触到优秀的人；接触到越多优秀的人，就越有可能优秀。</strong></p>
+<p>对于我们来说意味着什么？</p>
+<p>1）努力进步；2）认真挑选你身边的人。</p>
+<p>创业维艰，这句话真的不是说说而已。</p>
+<p>离开公司的第一天，感受还是蛮奇怪的。一方面跃跃欲试，觉得天高任鸟飞；另一方面，心里多少还是有些没底。</p>
+<p>毕竟自己即将开始一段总体而言成功率小于95%的事情；</p>
+<p>毕竟自己没有一丁点创业经验；</p>
+<p>毕竟是在三十大几的高龄，放弃了稳定的工作和被许多人羡慕的机会。</p>
+<p>组建团队，确定方向，找钱，开干……一转眼已经一年多。</p>
+<p>从来没想过创业会容易，但是确实没有预想到自己遇到的那些困难。自己做事了，才发现那些被说了一百遍的创业的苦都是真的。</p>
+<p>1）没有后方，都是前方。</p>
+<p>在大公司的时候，面对客户是前方，回到公司里是后方。创业，特别是初期，根本没有后方。放眼望去，到处都是问题。想要解决问题，又发现自己什么都没有。</p>
+<p>2）从零开始，百废待兴。</p>
+<p>原来可以依赖公司的资源，自己的团队，个人的积累；一个初创公司，什么都没有。如果你想让一件事发生，那么你最好直接确保它发生。</p>
+<p>3）自由。</p>
+<p>有那么一句话我特别认同，「创业给你自由，创业给你自由让你把你所有的时间和精力都献给工作」，的确如此。然而最熬人的还不是工作，是焦虑。</p>
+<p>4）24x7的焦虑。</p>
+<p>创业之后，工作和生活的界限就模糊了，不论什么时间什么地点，只要稍微闲下来，脑子自动开始考虑工作的事情。</p>
+<p>根本是不由自主的，而且基本上对所有其它事情都不感兴趣。有一半时间是在思考各种可能性，还有一半时间是在焦虑，各种担心。方向，团队，生意，融资，或者自己都不知道自己焦虑什么……</p>
+<p>我是天性乐观的人，在创业中我居然开始有些明白「抑郁症」是什么意思。</p>
+<p>我觉得，抑郁就是没来由的焦虑。焦虑居然成为常态。原来在公司的时候，只要下了班，只要我想，多数时候还是可以把工作暂时放在一边。</p>
+<p>因为本质上，在大公司里，没有什么事情是真的大不了的。实在不行，我换个地方一样打工。然而创业不同，因为责任。</p>
+<p>5）责任。</p>
+<blockquote>
+<p>我，作为创始人，必须承担的责任。</p>
+<p><strong>家庭：</strong>我拿着不到原来五分之一的工资，每天忙得顾不上家里，全家人的生活质量都受到很大影响，关键我还不能保证这种日子要持续几年，而且持续几年之后一定会有什么结果。所以我必须要考虑清楚创业对于他们来说意味着什么。</p>
+<p><strong>团队：</strong>有好几个都是从很好的公司辞职出来，放弃了很多和我一起创业。虽然说我们都是成年人，自己做自己的决定。但是，我必须对得起他们的信任。</p>
+<p><strong>投资人：</strong>没有投资人的支持，我们的事业就没法开始。我必须为这份支持负责。</p>
+<p><strong>客户：</strong>客户信赖我们，而且我们做的是医疗服务，所以必须踏踏实实把事做对做好。创始人的词典里也不能有借口这个词。因为这个词根本没有意义。</p>
+</blockquote>
+<p>如果由于这次创业，我的家庭白白受苦，团队浪费了时间精力青春，投资人浪费了钱，客户的利益受到了损害；不管我能找到多么好的借口，这一切依然都是我造成的。我必须负责。</p>
+<p>如此彻底的负责，对人的心态影响很大。除了压力之外，最大的不同就是不再指责。因为指责在这里不值一分钱。创业是我自己的选择，所以不论发生什么事，我除了想办法解决，没有第二条路。如果要指责，我也只能指责自己。</p>
+<p>我确信，未来遇到的困难只会更多更大。但是，我一点都不后悔。重新来一遍，我还是会选择创业。因为，这就是我要的生活。</p>
+<h3 id="16-想要，就去做！想要，就行动。"><a href="#16-想要，就去做！想要，就行动。" class="headerlink" title="16. 想要，就去做！想要，就行动。"></a>16. 想要，就去做！想要，就行动。</h3><p>创业以来最大的感触之一，就是「好想法根本不值钱」，甚至还有坏处。怎么讲？</p>
+<p>你身边有没有这样的人，他们总是有很多「好点子」？</p>
+<p>他们描述点子的时候总是唾沫星横飞，绘声绘色，结合当今国际形势和最新科技潮流，各种巧妙和创新；然而他们永远只停留在点子阶段。</p>
+<p>事实上这是多数人，因为浅尝辄止最容易。</p>
+<p><strong style="border-bottom: 1px green dashed;">出点子，只是把一件事做成当中最简单的一步</strong>。</p>
+<p>在脑子里设想一些情景的时候，是不需要为这些情景的后果负责的。</p>
+<p>当点子在头脑里飞的时候，很多细节在「好点子」的光辉下，都显得不重要。</p>
+<p>然而现实里，就是细节决定成败。</p>
+<p>雇的每个人，做的每个决定，选择的每个供应商，花的每一笔钱，制定的每一个策略，一个企业就是由千千万万个这样的细节累积而成的。</p>
+<p>当我们没有付诸行动的时候，我们的「点子」可以随时改变。</p>
+<p>这些「好点子」，会让我们觉得自己很优秀，很有想法。于是更加安于现状，或者更喜欢评头论足。</p>
+<p>然而，直到迈出第一步，这些点子都是虚的。有人说没有能够幸存到A轮的商业计划书。</p>
+<p>意思就是所有的生意的方向，都是在实践中逐渐摸索出来的。</p>
+<p>所有觉得凭着一个点子就能创业成功的人，多半没有闯过业，甚至根本没有做过什么高不确定性的事儿。</p>
+<p>可是一旦迈出了第一步，哪怕是很小的一步，或者是晃晃悠悠的一步，真正的learning就开始了，真正的进步才有可能开始。</p>
+<p>喜欢某个女孩？</p>
+<p><strong>不要纠结她是否喜欢你，不要纠结什么是最好的搭讪方式。立刻行动起来，追！很多事，只有做了才知道怎么做。</strong></p>
+<p>希望换工作？</p>
+<p>不要踌躇那些未知的事情，不要担忧那些风险。拿出简历来，现在就开始改；找到猎头的电话，和他们聊聊；去招聘网站上，看看都有什么机会。把offer拿到手里再考虑要不要换也不迟。</p>
+<p>想要变得优秀？</p>
+<p>立刻开始行动。读书也行，写文章也行，跑步也行，旅行也行。做啥都行，别闲着。We only live once. Do something. Anything. If not you, who? if not now, when?</p>
+<p>最后，分享一下我的座右铭，希望你喜欢。</p>
+<p><strong style="border-bottom: 1px green dashed;">「像不需要钱一样工作，像无人观看一样跳舞，像从未受过伤一样去爱」</strong>。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/"># 激励与自律</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9266b9f5/">最早的中国</a>
+            
+            
+            <a class="next" rel="next" href="/33f7e4ae/">严重伤害大脑的12个坏习惯</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9266b9f5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/33f7e4ae/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

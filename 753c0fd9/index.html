@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>身体是“情绪的地图”，它教导我们如何与世界相处 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">身体是“情绪的地图”，它教导我们如何与世界相处</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 22, 2016&nbsp;&nbsp;10:07:41</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 22, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/">激励与自律 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>当我们生病时</p>
+<p>很多时候，这是一个契机</p>
+<p>让我们来倾听自己内心的压抑的真实</p>
+<p>聆听身体的声音</p>
+<p>身体能够教会我们如何对待情绪</p>
+<p>进而教导我们如何与世界相处</p>
+<h2 id="01-身体上，有你的“情绪地图”"><a href="#01-身体上，有你的“情绪地图”" class="headerlink" title="01. 身体上，有你的“情绪地图”"></a>01. 身体上，有你的“情绪地图”</h2><p>皮肤是身体的镜子，身体则是心灵的镜子。生病，是身体在为心灵买单。</p>
+<p>身体问题与心理问题密不可分，<strong style="border-bottom: 1px green dashed;">绝大部分的身体疾病都是由心理、情绪导致的</strong>。因此，结合心理原因，身心同调，才能真正的解决身体问题。</p>
+<p>这就是心理治疗师常说的“身心症”。说白了，就是身体提供了心理问题一个“宣泄”的窗口。</p>
+<p>请你想想，我们是不是能很自在的告诉别人“最近我胃口不好”，却很难告诉别人“最近我很没有安全感”。</p>
+<p>是的，对于不太愿意也不太好意思和别人分享心理情绪的人来说，述说身体的状况要比述说心理状况要有面子和容易得多。</p>
+<p>根据世界心理卫生组织的统计：我们70%以上的情绪，都会以“攻击”身体器官的方式来消化自身的情绪困扰。</p>
+<p>既然身体器官得遭受这些无妄之灾，那么有哪些部位是最倒霉、最容易被情绪利用来当作“替罪羔羊”的？</p>
+<p><strong style="border-bottom: 1px green dashed;">消化系统、内分泌系统和皮肤</strong>，在排行榜上位列前3甲。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/DDU95Jib9INGYD9qgBUA6xKHEcOxShRva9icxIribBtULaHUptIPmQoxgEyib6Wic6EZlA9blhY7uMwj0GDYANb2SgQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="02-消化系统是情绪的替罪羊"><a href="#02-消化系统是情绪的替罪羊" class="headerlink" title="02. 消化系统是情绪的替罪羊"></a>02. 消化系统是情绪的替罪羊</h2><p>情绪经常郁积于肠胃中，最受伤的是我们的消化系统。</p>
+<p>很多人都一定有这样的经验，一遇到紧张焦虑的状况就会胃痛或泻肚子。</p>
+<p>近几年由于生活的节奏太快、压力太大，许多都市白领或多或少都有肠胃不适的症状，胃疼、消化不良、胀气、便秘…几乎成为忙碌上班族的识别图腾。</p>
+<p>事实上，消化系统也是孩子们宣泄情绪时最容易攻击的器官。</p>
+<p>幼教老师们都知道，当孩子不想或不敢做某件事情时，他们最常找的借口就是：“老师，我肚子痛！”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/DDU95Jib9INGYD9qgBUA6xKHEcOxShRvagmNa3XANQY3WS10yswy4C55UTgk5tNNXrzItxZWGJCicGoo3BHsBJzg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="03-情绪如何进入你的身体？"><a href="#03-情绪如何进入你的身体？" class="headerlink" title="03. 情绪如何进入你的身体？"></a>03. 情绪如何进入你的身体？</h2><p>分泌系统紧跟其后，尤其是性腺和肾上腺。</p>
+<p>失恋长了满脸的青春痘；天天玩命加班弄得月经失调；发现老公疑似有外遇之后突然检查出有肌瘤…</p>
+<p>这些事常常发生在女性朋友们身上，说明当情感的需求受到伤害时，屈辱和痛苦的洪流往往发泄在性荷尔蒙的分泌上。</p>
+<p>主管“精气神”的肾上腺也无法幸免于难。</p>
+<p>我们在报纸新闻上经常会看到一些超常的事件：</p>
+<p>某个娇小的妈妈在大火发生时，一手抱着孩子、一肩扛着老人冲出房门。某个年幼的孩子独自将父亲从即将爆炸的压扁车厢中给拖了出来…</p>
+<p>这些平日不可能做得到的事情，却在面临危难时超常的完成，原因也就出在肾上腺。</p>
+<p>肾上腺是做什么的？当人类遇到突如其来的刺激时，受了惊吓的情绪会立刻“通知”它大量地分泌肾上腺素以准备应付接下来的状况。</p>
+<p>现在我们从另一个方向来看它，如果你经常遇见需要肾上腺来帮忙的状况：</p>
+<p>每天面对同事的挑衅、面对老板的无理暴怒；面对老公的冷漠疏离、面对孩子的胡搅蛮缠，让肾上腺长期处于备战状态。</p>
+<p>久而久之它就养成了亢奋的分泌水平，最后造成呼吸急促、敏感易怒、焦躁不安的身心状况。</p>
+<h2 id="04-皮肤为情绪买单"><a href="#04-皮肤为情绪买单" class="headerlink" title="04. 皮肤为情绪买单"></a>04. 皮肤为情绪买单</h2><p>最容易被忽略的，是皮肤。</p>
+<p>第三个宣泄情绪的窗口是我们最容易被忽略的部位：皮肤，尤其是头皮。因为皮肤里布满了感觉神经细胞，而头皮上不仅有密密麻麻的神经末梢，还有密密麻麻、会分泌油脂的皮脂腺。</p>
+<p>人类的感觉神经系统分布在真皮层，非常接近皮肤的表面，因此对外界环境有非常敏锐的感知能力。这些小小的感觉末梢神经细胞，能感受环境的冷、热、触摸、痛和力度，而且不仅仅是对有形物质的感觉，也包含对无形感受的感觉。</p>
+<p>如果你有空走访一趟皮肤科门诊，对候诊室里等待看病的朋友做个随机访问，你会发现一个让人惊讶的结论：皮肤和心理情绪的关系竟如此紧密。</p>
+<p>不论是反复无常的荨麻疹、湿疹；或是看似寻常的痤疮、皮脂漏…背后都可能有一个叫做“压力”的讨厌鬼。它既是因、又是果，紧紧地纠缠着皮肤不放。</p>
+<p>即便你很幸运地没有任何皮肤炎症，但情绪压力仍然如影随形。紧张时头皮发痒、害怕时头皮发麻、烦躁时头皮屑增加、睡不好时容易掉头发，应该都不是陌生的事。</p>
+<p>此外，拿头皮或头发来说事，不仅仅只有作为情绪宣泄的原因，还有更深层的心理暗示。</p>
+<h2 id="05-情绪导致的能量通道阻滞"><a href="#05-情绪导致的能量通道阻滞" class="headerlink" title="05. 情绪导致的能量通道阻滞"></a>05. 情绪导致的能量通道阻滞</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/DDU95Jib9INGYD9qgBUA6xKHEcOxShRva9RibUxDcvtqxWupkXtmvAQdzxoBP1DFTAfaU4ibDBdL8b4O9beJBAmzg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲体温是一种表情，反映你当下的内心</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/DDU95Jib9INGYD9qgBUA6xKHEcOxShRvaNiaibhz5kVO8ILhYOdhm7pZy4lrniaxy9qtibmcaLxs8OMiaG8B7XbJ7w7w/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲身体情绪热量图</center>
+
+<p>著名中医心理学家肖然认为：无论身体疾病还是心理疾病，在人体都会表现为某一部位能量通道阻滞。</p>
+<p>为什么身体通道会出现阻塞呢？很大一部分是由于情绪，小部分才是因为外力造成的。人生气时会觉得心理难受，就是因为情绪影响内动力，损害五脏里的精力，引起身体能量的内燃耗，就是内耗。</p>
+<p>情绪比外界环境更影响我们的身体。所以，体内环保需从情绪入手。</p>
+<p>情绪以一种信息形式在神经和经络传导，当某种情绪过大，传导神经就会受到破坏，堵在那里，从而形成一个记忆。</p>
+<p>身体像是我们历史的记事本，藏着所有的记忆，创伤和故事，它通常以疾病的形式提醒着我们。</p>
+<p>比如：</p>
+<ul>
+<li><p>肩颈板硬、酸痛，通常是愤怒积压而成的。</p>
+</li>
+<li><p>左侧肩胛骨与背椎间板硬，易导致心脏问题，主要由伤心、委屈等情绪累积.</p>
+</li>
+<li><p>右侧肩胛骨板硬主要由于抱怨、不满等情绪积压所致，易导致胃部炎症。</p>
+</li>
+<li><p>后背部板硬的人通常具有讨好性人格，会出现内分泌失调，代谢紊乱，并且容易得糖尿病。</p>
+</li>
+<li><p>腰椎板硬主要受恐惧的情绪影响，易导致肾虚、肾炎和腰椎间盘突出等问题。</p>
+</li>
+<li><p> 低椎僵硬的人要注意抑郁症的倾向，因为经常会独自生闷气。</p>
+</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/US10Gcd0tQHc7z24Mam24tbFhKEUL2zu5BoIe0lMcSxTjS8WPATz2q1Fazj9UwTSicOlicibzpGibQjEVasOuSI0og/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="06-身体教导我们：如何与他人、与世界相处"><a href="#06-身体教导我们：如何与他人、与世界相处" class="headerlink" title="06. 身体教导我们：如何与他人、与世界相处"></a>06. 身体教导我们：如何与他人、与世界相处</h2><p>如果我们能敏锐地觉察自己的身体，感知它的变化，倾听它的声音，尊敬它的需求并与它对话，我们就能跟随身体的情绪地图：找到内在的发声根源，找到我们压抑的需求，和积压的情绪。让身体教导我们成为掌握情绪的学习者。</p>
+<p>不仅如此，<strong style="border-bottom: 1px green dashed;">身体还更进一步地教导我们，如何与他人乃至这个世界相处</strong>。</p>
+<h3 id="边界"><a href="#边界" class="headerlink" title="边界"></a>边界</h3><p>皮肤，是我们身体的表层。皮肤的隐喻是：“边界”。</p>
+<p>如果你守不住自己的边界，你的边界总被入侵，那么你就容易得各种皮肤病。</p>
+<p>边界的意思很简单：我允许你靠近，你才可以靠近。如果你不能对别人简单说“不”，就意味着你守不住自己的边界。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/PCmcUTd3ZCpmLW5dcw3GVcIxgiaJa4t9ic0MAEInibfoaAe1PCQBWTe9hqhPpy3550L791ODRfIdyZE7LjJYQRjYg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="感受"><a href="#感受" class="headerlink" title="感受"></a>感受</h3><p>我们很容易过于相信自己的头脑，并将头脑的思维等同于自己，但思维与头脑是虚拟的，而身体是现实的。</p>
+<p>感受其实比思维要可靠的多，思维更多的是来源于经验。</p>
+<p>相信你的感受，不要被你的头脑带走，欺骗自己。</p>
+<h3 id="评判"><a href="#评判" class="headerlink" title="评判"></a>评判</h3><p>卓越的人和普通的人之间的差异，首先是心理评价机制的差异。</p>
+<p>卓越的人有一个『内在』的心理评价机制，普通的人有一个『外在』的心理评价机制。</p>
+<p>卓越的人善于从自己的身上寻找答案，时刻倾听内心的声音，听从体验和直觉。</p>
+<p>普通的人总是习惯于从别人的评价中寻找支撑，做决定的时候，也容易摇摆和迷失。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/US10Gcd0tQHc7z24Mam24tbFhKEUL2zuZeLpyX6uOQGbzJ5ic09hWXQ4mJ9U651P4TYgNqDCS8XyHsaMFPGyBMA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="真诚"><a href="#真诚" class="headerlink" title="真诚"></a>真诚</h3><p>真诚有两层含义：一种是所说的和所想的一致，叫『不欺人』；一种是所想的和所体验的一致，叫『不自欺』。</p>
+<p>前一种相对来说很容易做到，后一种就不容易了。</p>
+<p>之所以会这样，或许是我们太依赖头脑，而头脑却容易自欺欺人。</p>
+<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><p><strong style="border-bottom: 1px green dashed;">有挫败时，别攻击自己；顺利时，也别太飘飘然</strong>。</p>
+<p>自我攻击和飘飘然都会让你失去平衡，从而失去理性的判断。</p>
+<p>当你遭遇现实的大悲大喜，心态失衡时间，你可以通过感受身体，如双脚踩在地上的感觉，或感受呼吸，让自己重新恢复平衡。</p>
+<p>身体的好坏，强弱，健康，疾病，胖瘦，及所表现出来的症状，都是一个结果！</p>
+<p>对，只是一个结果，是你喂养身体，对待身体的结果。</p>
+<p>身体本没有错，错的在于你不正确，无知，或错误对待身体的心理、行为、饮食习惯的结果。</p>
+<p>这是一个结果，你要改变的不是身体！</p>
+<p>要改变的是你自已作用于身体的心理、行为及生活饮食习惯。这才是根本的原因所在。</p>
+<h3 id="剥离"><a href="#剥离" class="headerlink" title="剥离"></a>剥离</h3><p><strong style="border-bottom: 1px green dashed;">一个人的自我该是这样的整合体——发达的头脑，敏感的身体和饱满的情感</strong>，即身心灵的真自体。</p>
+<p>当一个人太依赖头脑和理性时，身体和情感就被剥离了。</p>
+<p>以头脑为主的自体就是假自体。</p>
+<p>有真自体的人，你能感觉到他的『饱满』；而假自体的人，你能感觉到他的『干瘪』。</p>
+<h3 id="逼迫"><a href="#逼迫" class="headerlink" title="逼迫"></a>逼迫</h3><p>逼迫：即头脑想逼迫身体，超我想逼迫本我，内在的父母想逼迫内在的小孩…甚至可以说，是侵入到我头脑中的『你』想控制『我』。</p>
+<p>如果这份逼迫成功，就意味着『我』的空间被侵略，所以要用懈怠和决绝的方式来捍卫『我』的空间，很多拖延就是这样产生的。</p>
+<p><strong style="border-bottom: 1px green dashed;">你对自己越不真诚，你内在的逼迫和矛盾也就越多，情绪的压力也会越大</strong>。</p>
+<h3 id="逆境与挫折"><a href="#逆境与挫折" class="headerlink" title="逆境与挫折"></a>逆境与挫折</h3><p>当连续有几件琐事不顺时，你或许会焦躁，而你发现，焦躁会导致接下来一连串的不顺，甚至很重要的事情也被影响了。</p>
+<p>这其实也是导致“霉运不止”、“祸不单行”的潜在因素。</p>
+<p><strong style="border-bottom: 1px green dashed;">出现这种情形时，特别有效的一个办法是，让自己停下来，安静一会儿，调整呼吸，感受你身体和周围物体碰触的真实</strong>。</p>
+<p>这可以让你找回重心，恢复理性和平和，事情也会重新变得顺利。</p>
+<h3 id="主人"><a href="#主人" class="headerlink" title="主人"></a>主人</h3><p>灵魂需要身体为居所，身体需要家为居所。</p>
+<p>你需要了解的是，你必须成为你身体的主人。</p>
+<p>头脑只是你身体和精神的一部分，然而大部分人都被头脑奴役，屏蔽心灵、忽略身体与灵魂。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/22DweldIr64ZficVFUJLqrQcHb7y3VNgIXDMmZyta2wBETZCU9icG5JOzTPDU59HuSA0qrOo7fOX2OX3zs6iaD1vg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="谢谢"><a href="#谢谢" class="headerlink" title="谢谢"></a>谢谢</h3><p>当发现身体承担太多痛苦时，可对身体说：</p>
+<p>过去我虚弱时，谢谢你一直帮我承担情绪的痛苦，现在我承诺，不管情绪上的挑战有多大。</p>
+<p>我都会努力在调节内部平衡，并在外部关系中表达，我再也不想你受这份苦了！谢谢你，我爱你。</p>
+<p>一旦你知道你可以从内在了解自己的身体，并且只有你才能这样做时，你会更加地自信。而自信又会使你更容易领悟疾病和情绪的语言。</p>
+<h3 id="让身体讲话的途径是关爱。"><a href="#让身体讲话的途径是关爱。" class="headerlink" title="让身体讲话的途径是关爱。"></a>让身体讲话的途径是关爱。</h3><p>关键是要逐步理解疾病的意义，只有理解它，它才会转变，情绪淤塞才可以消除。</p>
+<p>这就是身心健康的运行机理：不是以这样那样的方式来与疾病抗争，而是像朋友一样接纳它——它才能给你指出正确的方向。</p>
+<div style="color:gray;font-size:0.9em;">文章转载自网络，作者不详，特此鸣谢！</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%BF%80%E5%8A%B1%E4%B8%8E%E8%87%AA%E5%BE%8B/"># 激励与自律</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5d69d47a/">50位西方社会学思想家的思想</a>
+            
+            
+            <a class="next" rel="next" href="/a9d963ef/">38句发人深省的人性心理解读</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5d69d47a/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/a9d963ef/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

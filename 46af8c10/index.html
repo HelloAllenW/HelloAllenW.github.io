@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>科普：滚动部署、蓝绿发布、金丝雀发布（灰度发布）、A/B Test | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">科普：滚动部署、蓝绿发布、金丝雀发布（灰度发布）、A/B Test</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 7, 2024&nbsp;&nbsp;13:37:57</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 7, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">分布式架构设计 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>随着微服务架构的普及，线上服务越来越多，随之而来的就是部署越来越频繁；随着互联网行业的兴旺，产品迭代的频率也是越来越快，服务上线速度逐步提升。有上线、有部署，就有风险。有风险，就对业务有影响，然后就有了一系列减少这种风险的部署方案：蓝绿部署、金丝雀发布（灰度发布），也有适应产品迭代频率的AB测试。</p>
+<p>本文主要是简单解释下这几个概念，帮助自己理解，如果有错误，请大佬们斧正。</p>
+<h2 id="滚动部署"><a href="#滚动部署" class="headerlink" title="滚动部署"></a>滚动部署</h2><p>在滚动部署中，应用的新版本逐步替换旧版本。实际的部署发生在一段时间内。在此期间，新旧版本会共存，而不会影响功能和用户体验。这个过程可以更轻易的回滚和旧组件不兼容的任何新组件。</p>
+<p>下图显示了该部署模式：旧版本显示为蓝色，新版本显示为绿色，它们部署在集群中的每一台服务器上。</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/8e81ce78a0bc4d4083e8172166edd2e9.jpg" alt="1.jpg"></p>
+<p>应用程序套件升级是一个滚动部署的典型例子。如果原始应用部署在容器中，升级可以一次处理一个容器。修改每个容器从应用供应商的站点上下载最新的镜像。如果其中的一个应用存在兼容性问题，旧的镜像可以重新创建这个容器。在这种情况下，套件的新旧版本应用可以共存，直到每个应用都更新完毕。</p>
+<p><strong>但是滚动升级有一个问题，在开始滚动升级后，流量会直接流向已经启动起来的新版本，但是这个时候，新版本是不一定可用的，比如需要进一步的测试才能确认。那么在滚动升级期间，整个系统就处于非常不稳定的状态，如果发现了问题，也比较难以确定是新版本还是老版本造成的问题。</strong></p>
+<p><strong>为了解决这个问题，我们需要为滚动升级实现流量控制能力。</strong></p>
+<h2 id="蓝绿发布"><a href="#蓝绿发布" class="headerlink" title="蓝绿发布"></a><strong>蓝绿发布</strong></h2><p>蓝绿发布提供了一种零宕机的部署方式。不停老版本，部署新版本进行测试，确认OK，将流量切到新版本，然后老版本同时也升级到新版本。始终有两个版本同时在线，有问题可以快速切换。</p>
+<h3 id="蓝绿发布的特点："><a href="#蓝绿发布的特点：" class="headerlink" title="蓝绿发布的特点："></a>蓝绿发布的特点：</h3><p>在部署应用的过程中，应用始终在线。并且新版本上线过程中，不会修改老版本的任何内容，在部署期间老版本状态不受影响。只要老版本的资源不被删除，可以在任何时间回滚到老版本。</p>
+<p>以下示意图可描述灰度发布的大致流程：先切分20%的流量到新版本，若表现正常，逐步增加流量占比，继续测试新版本表现。若新版本一直很稳定，那么将所有流量都切分到新版本，并下线老版本。</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/4662ecc7d8b140cdb55f5de96381d334.gif" alt="2.gif"></p>
+<p>切分20%的流量到新版本后，新版本出现异常，则快速将流量切回老版本。</p>
+<p><img src="https://ucc.alicdn.com/pic/developer-ecology/c73ffa116f1e4cff9b217985ef49560b.gif" alt="3.gif"></p>
+<p><strong>蓝绿部署要求在升级过程中，同时运行两套程序，对硬件的要求就是日常所需的二倍，比如日常运行时，需要10台服务器支撑业务，那么使用蓝绿部署，你就需要购置二十台服务器。</strong></p>
+<h3 id="蓝绿发布的具体过程："><a href="#蓝绿发布的具体过程：" class="headerlink" title="蓝绿发布的具体过程："></a>蓝绿发布的具体过程：</h3><p>步骤一：部署绿色集群，这个时候是初始状态，蓝色集群承担全部责任，接收全部流量，等待被替换。绿色集群刚刚部署，还没有投入使用，流量为0，等待验证和上线。</p>
+<p>步骤二：蓝色集群流量不变，向绿色集群引入流量。这个过程可以分成几个阶段完成。第一个阶段，引入少量非实时流量，仅用于数据测试；第二个阶段，引入全部实时流量，用于做系统验证。</p>
+<p>步骤三：切断向蓝色集群引入流量，将全部流量引入绿色集群。这个时候，绿色集群已经承担全部责任，接收全部流量。这个过程也可以分阶段操作。第一个阶段，平衡蓝色和绿色集群流量，也就是蓝色和绿色集群一同承担职责；第二个阶段，切断蓝色集群流量，流量全部写入绿色集群。是否采用分阶段操作，完全看升级的功能是否是破坏性的，是否可兼容。</p>
+<p>步骤四：监控系统运行，这个过程是必要的。因为没有人能够保证测试时100%的覆盖的，所以新集群可能会出现这样那样、或大或小的问题，如果评估需要回滚，就需要将全部流量切换到蓝色集群。也完成了版本回滚。</p>
+<h3 id="为什么还需要蓝绿？"><a href="#为什么还需要蓝绿？" class="headerlink" title="为什么还需要蓝绿？"></a>为什么还需要蓝绿？</h3><p>有了灰度发布之后，为什么还需要蓝绿发布呢？主要有如下几点考虑：</p>
+<ul>
+<li>应用在生产环境全量发布后，发现故障时回滚时间慢。当线上核心应用存在几十上百的服务实例时，应用实例分批滚动回滚，部分业务应用启动时间需要几分钟，导致整个回滚过程的时间可能超过十分钟，甚至几十分钟。</li>
+<li>灰度发布期间能发现的问题有限。如数据库慢查问题、死锁问题等，10%流量很难发现，可能只会在100%流量中才容易暴露。</li>
+<li>灰度发布成功后，仍然需要进行全量发布，在此过程中仍有较多不确定性，如因一些未预料的异常导致发布失败等。</li>
+</ul>
+<p>对于上面几个问题，使用蓝绿发布系统都可以较好地解决：</p>
+<ul>
+<li>蓝绿发布期间，流量全部切至新集群时，原稳定集群继续保持在线，若新集群有问题，可通过流量控制秒级切回至原稳定集群，没有应用启动以及其他等待时间。</li>
+<li>蓝绿发布期间，新集群规模与原稳定集群规模一致，即使是瞬时大流量也没有问题。</li>
+<li>蓝绿发布期间，新集群承载全站流量，容易验证各种场景，如数据库死锁等并发问题。</li>
+<li>蓝绿发布新集群验证完成后，已经处于正常服务状态，不会再引入不确定性的变更操作。</li>
+</ul>
+<h2 id="金丝雀发布（灰度发布）"><a href="#金丝雀发布（灰度发布）" class="headerlink" title="金丝雀发布（灰度发布）"></a><strong>金丝雀发布（灰度发布）</strong></h2><p>在生产环境上引一部分实际流量对一个新版本进行测试，测试新版本的性能和表现，在保证系统整体稳定运行的前提下，尽早发现新版本在实际环境上的问题。</p>
+<p>金丝雀发布，与蓝绿部署不同的是，它不是非黑即白的部署方式，所以又称为灰度发布。它能够缓慢的将修改推广到一小部分用户，验证没有问题后，再推广到全部用户，以降低生产环境引入新功能带来的风险。</p>
+<p><strong>“为什么叫金丝雀发布呢，是因为金丝雀对矿场中的毒气比较敏感，所以在矿场开工前工人们会放一只金丝雀进去，以验证矿场是否存在毒气，这便是金丝雀发布名称的由来。”</strong></p>
+<p><strong>灰度发布</strong>：金丝雀部署是灰度发布的一种方式。灰度发布是指在黑与白之间，能够平滑过渡的一种发布方式。AB test就是一种灰度发布方式，让一部分用户继续用A，一部分用户开始用B，如果用户对B没有什么反对意见，那么逐步扩大范围，把所有用户都迁移到B上面来。灰度发布可以保证整体系统的稳定，在初始灰度的时候就可以发现、调整问题，以保证其影响度。</p>
+<h3 id="金丝雀发布的特点："><a href="#金丝雀发布的特点：" class="headerlink" title="金丝雀发布的特点："></a>金丝雀发布的特点：</h3><p>通过在线上运行的服务中，新加入少量的新版本的服务，然后从这少量的新版本中快速获得反馈，根据反馈决定最后的交付形态。</p>
+<p>金丝雀部署和蓝绿有点像，但是它更加规避风险。你可以阶段性的进行，而不用一次性从蓝色版本切换到绿色版本。</p>
+<p>采用金丝雀部署，你可以在生产环境的基础设施中小范围的部署新的应用代码。一旦应用签署发布，只有少数用户被路由到它。最大限度的降低影响。如果没有错误发生，新版本可以逐渐推广到整个基础设施。</p>
+<h3 id="金丝雀发布的具体过程："><a href="#金丝雀发布的具体过程：" class="headerlink" title="金丝雀发布的具体过程："></a>金丝雀发布的具体过程：</h3><p>步骤一：将流量从待部署节点移出，更新该节点服务到待发布状态，将该节点称为金丝雀节点；</p>
+<p>步骤二：根据不同策略，将流量引入金丝雀节点。策略可以根据情况指定，比如随机样本策略（随机引入）、狗粮策略（就是内部用户或员工先尝鲜）、分区策略（不同区域用户使用不同版本）、用户特征策略（这种比较复杂，需要根据用户个人资料和特征进行分流，类似于千人千面）；</p>
+<p>步骤三：金丝雀节点验证通过后，选取更多的节点称为金丝雀节点，重复步骤一和步骤二，直到所有节点全部更新</p>
+<h2 id="A-B-Test"><a href="#A-B-Test" class="headerlink" title="A/B Test"></a><strong>A/B Test</strong></h2><p><strong>A/B测试和蓝绿发布、滚动发布以及金丝雀发布，完全是两回事。</strong></p>
+<p>蓝绿发布、滚动发布和金丝雀是发布策略，目标是确保新上线的系统稳定，关注的是新系统的BUG、隐患。</p>
+<p>A/B测试是效果测试，同一时间有多个版本的服务对外服务，这些服务都是经过足够测试，达到了上线标准的服务，有差异但是没有新旧之分（它们上线时可能采用了蓝绿部署的方式）。</p>
+<p><strong>A/B测试关注的是不同版本的服务的实际效果，譬如说转化率、订单情况等。</strong></p>
+<p>A/B测试时，线上同时运行多个版本的服务，这些服务通常会有一些体验上的差异，譬如说页面样式、颜色、操作流程不同。相关人员通过分析各个版本服务的实际效果，选出效果最好的版本。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-6488420/g9yvftk3b.jpeg" alt="img"></p>
+<p>这个没有具体的步骤（也可以采用金丝雀部署的步骤，只不过不是全量更新），根据策略（这个策略可以是金丝雀分布中的策略一致），将一部分流量引入A版本，另外一部分流量引入B版本，也可能出现CDEF版本。然后相关人员通过分析不同版本的实际效果，选出最优解。最优解可能是一个版本获胜，取代另一个版本，也可能是催生出更多的版本，服务于用户，还有可能是多个版本在不同区域同时提供服务。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><p>这里总结一下：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>特点</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蓝绿部署</td>
+<td>同时存在两个集群，两个集群中只有一个集群真正提供服务，另外一个集群测试、验证或待命</td>
+<td>服务文档，版本回退简单，适用于各种场景的升级，大版本不兼容升级的或迭代兼容升级</td>
+<td>浪费硬件资源，需要同时有两个集群，如果集群比较大，比如有1000个节点，这种方式几乎不可用</td>
+</tr>
+<tr>
+<td>金丝雀部署</td>
+<td>逐点部署，逐步替换线上服务</td>
+<td>小步快跑，快速迭代</td>
+<td>只能适用于兼容迭代的方式，如果是大版本不兼容的场景，就没办法使用这种方式了</td>
+</tr>
+</tbody></table>
+<p>AB测试和上面两个不是一个范畴，不做比较。但是需要说明的一点，AB测试可以采用上面两种部署方式的手法。</p>
+<p>以上，希望对你有所帮助！</p>
+<center>End</center>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"># 分布式架构设计</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/693e41f9/">哈马斯简史</a>
+            
+            
+            <a class="next" rel="next" href="/f06e9ff3/">服务架构演进史</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/693e41f9/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f06e9ff3/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>

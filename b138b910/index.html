@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>从零开始学习Vue3源码 （一、搭建环境） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从零开始学习Vue3源码 （一、搭建环境）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 16, 2023&nbsp;&nbsp;10:50:10</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 16, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/Vue/">Vue </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Vue3正式版发布没多久，当初赶上公司在拆分项目，很多模块都被拆分成了单独的子项目，刚好由我来负责项目的技术选型和搭建，之前的项目团队都是<code>Vue2</code>来开发的，<code>Vue2</code>的一些不足就不多说了，本来新项目想直接上<code>react</code>，边开发边学习的，但是考虑到了后边很可能有其他同事来接手，如果都是<code>react</code>代码，学习的成本就会较大，刚好<code>Vue3</code>也发正式版了，索性就直接上<code>Vue3</code>，如果只是写写业务的话，<code>Vue2</code>转<code>Vue3</code>，基本上看看文档几天就能够上手直接一把梭。</p>
+<p><code>Vue3</code>用了也有一段时间了，但是对于其原理和一些新玩法新花样，还是没有完全吃透，就像问：<code>Vue2</code>和<code>Vue3</code>响应式原理有啥不同？答：<code>Vue2</code>用的是<code>Object.defineProperty</code>，<code>Vue3</code>用的是<code>Proxy</code>，然后就没有然后了，完全经不住深挖。之前也看过<code>Vue2</code>的原理，经过这小两年时间的洗礼，基本上已经忘了个七七八八，所以趁着现在正在写重学前端这一系列文章，那么<code>Vue3</code>原理这块，也打算尽早提上日程，和之前的那些文章一样，我依旧会用最适合小白的文字，来慢慢讲解，同时对我来说，每次写一篇文章都是一次新的学习，那我们就开始吧！</p>
+<h2 id="学完本篇文章你能收获到"><a href="#学完本篇文章你能收获到" class="headerlink" title="学完本篇文章你能收获到"></a>学完本篇文章你能收获到</h2><ul>
+<li>什么是<code>Monorepo</code>；</li>
+<li><code>pnpm</code>的基本概念以及简单用法，使用<code>pnpm</code>搭建<code>Monorepo</code>环境；</li>
+<li><code>Vue3</code>组成的简介，实现自己的<code>Vue3</code>的搭建；</li>
+</ul>
+<h2 id="Vue3设计思想的变化"><a href="#Vue3设计思想的变化" class="headerlink" title="Vue3设计思想的变化"></a>Vue3设计思想的变化</h2><p>我们先来了解一下<code>Vue3</code>和<code>Vue2</code>在哪些设计方面有了很大的变化：</p>
+<ul>
+<li><code>Vue3</code>将很多功能都设计成了单独的模块，比如可以直接<code>import &#123; ref, reactive &#125; from &#39;vue&#39;</code>使用响应式的方法，模块间耦合度低，可以独立使用；而<code>Vue2</code>没办法单独使用部分模块，就算只用到了响应式的部分，也只能引入完整的<code>Vuejs</code>。</li>
+<li><code>Vue2</code>很多的方法，都是直接挂载到<code>vm</code>也就是实例上了，导致没使用的这些方法，也会被打包进最终的打包文件中；<code>Vue3</code>中的功能，因为进行了模块拆分，都是函数式<code>API</code>，所以打包的时候利用<code>Tree-shaking</code>机制，做到了按需引入，有效的减少打包的体积。</li>
+<li><code>Vue3</code>可以自定义渲染器，增强了扩展能力，暴露了很多的方法，可以进行自定义逻辑；而在一些跨平台的框架中比如小程序，如果想使用<code>Vue2</code>作为技术栈，则需要在<code>Vue2</code>的源码基础上，改动源码的逻辑，才能进行打包，这相当于破坏了源码，随着更新也会出现一些问题。</li>
+</ul>
+<h2 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h2><p>一上来如果就带着大家去看源码，相信没有多少人能够接收，直接就把文章pass掉了，所以，我们可以先自己简单实现<code>Vue3</code>的原理，实现一个简版的<code>Vue3</code>，之后我们再去调试源码，再去看，就会变得没那么困难和难以接受了。我们先搭建一个开发环境。我们要使用<code>Monorepo</code>的方式来搭建整个项目，那什么是<code>Monorepo</code>呢？</p>
+<p><code>Monorepo</code>是目前很多大型开源项目，管理代码的一个方式，就是在一个<code>git</code>项目仓库中管理多个模块或者工具包。<code>Vue3</code>的源码就是采用这种方式，将模块拆分到<code>package</code>目录中，那么好处就是：</p>
+<ul>
+<li>一个仓库可维护多个模块或工具包，不用到处找各自的仓库。</li>
+<li>方便每个模块的版本管理和依赖管理，模块之间的引用和调用变的十分方便。</li>
+</ul>
+<p>我们使用<code>pnpm</code>这个工具，来搭建<code>Monorepo</code>环境。简单说下<code>pnpm</code>是个啥，其实就是个包管理工具，特点就是非常快，并且能节省磁盘空间。大体的使用方法和<code>npm</code>没啥区别，具体细节可以查看官方文档，我们这里直接用，不来细说。</p>
+<p>上文说到<code>Vue3</code>采用的是<code>Monorepo</code>这种方式，所以，我们只需要大致写一下<code>Vue3</code>中包含的各种包，就能实现一个简单版本的<code>Vue3</code>了。常见的包有：</p>
+<ul>
+<li><p><code>reactivity</code>：响应式系统</p>
+</li>
+<li><p><code>compiler-core</code>：编译核心</p>
+</li>
+<li><p><code>compiler-dom</code>：针对浏览器的编译模块</p>
+<p>……</p>
+</li>
+</ul>
+<h3 id="生成项目的基本架构"><a href="#生成项目的基本架构" class="headerlink" title="生成项目的基本架构"></a>生成项目的基本架构</h3><p>首先，如果没有安装过<code>pnpm</code>，需要全局安装，这里使用<code>npm install pnpm -g</code>这个方式来安装；之后<code>mkdir vue3-source-code</code>来创建文件夹，使用<code>pnpm init -y</code>命令，初始化<code>package.json</code>文件。之后我们创建如下所示的目录结构：</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vue3-source-code</span><br><span class="line"><span class="code">             ——| packages文件夹 // 存放Vue3相关的所有包</span></span><br><span class="line"><span class="code">                             |—— reactivity文件夹 // 响应式原理的包</span></span><br><span class="line"><span class="code">                                 |—— src</span></span><br><span class="line"><span class="code">                                     |—— index.ts // 入口文件代码</span></span><br><span class="line"><span class="code">                             |—— shared文件夹 // 存放一些公共方法的包</span></span><br><span class="line"><span class="code">                                 |—— src</span></span><br><span class="line"><span class="code">                                     |—— index.ts // 入口文件代码</span></span><br><span class="line"><span class="code">             ——| scripts文件夹 // 存放我们自定义的一些脚本</span></span><br><span class="line"><span class="code">             ——| .npmrc // npm配置文件</span></span><br><span class="line"><span class="code">             ——| package.json</span></span><br><span class="line"><span class="code">             ——| pnpm-workspace.yaml // 管理workspace的配置文件</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们开始完善配置项和一些调试代码，让项目能够跑的通： 在项目根目录，使用<code>tsc --init</code>命令，来初始化<code>tsconfig.json</code>文件，如果没有安装过<code>tsc</code>，需要先全局执行<code>npm install typescript -g</code>命令。我们直接把以下配置填写在<code>tsconfig.json</code>文件中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ts.config.json文件</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;outDir&quot;</span>: <span class="string">&quot;dist&quot;</span>, <span class="comment">// 输出的目录</span></span><br><span class="line">    <span class="string">&quot;sourceMap&quot;</span>: <span class="literal">true</span>, <span class="comment">// 启用sourcemap</span></span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;es2016&quot;</span>, <span class="comment">// 目标语法</span></span><br><span class="line">    <span class="string">&quot;module&quot;</span>: <span class="string">&quot;esnext&quot;</span>, <span class="comment">// 模块格式为esm</span></span><br><span class="line">    <span class="string">&quot;moduleResolution&quot;</span>: <span class="string">&quot;node&quot;</span>, <span class="comment">// 模块解析方式</span></span><br><span class="line">    <span class="string">&quot;strict&quot;</span>: <span class="literal">false</span>, <span class="comment">// 严格模式，可以使用any</span></span><br><span class="line">    <span class="string">&quot;resolveJsonModule&quot;</span>: <span class="literal">true</span>, <span class="comment">// 解析json模块</span></span><br><span class="line">    <span class="string">&quot;esModuleInterop&quot;</span>: <span class="literal">true</span>, <span class="comment">// 允许通过es6语法引入commonjs模块</span></span><br><span class="line">    <span class="string">&quot;jsx&quot;</span>: <span class="string">&quot;preserve&quot;</span>, <span class="comment">// jsx 不转义</span></span><br><span class="line">    <span class="string">&quot;lib&quot;</span>: [<span class="string">&quot;esnext&quot;</span>, <span class="string">&quot;dom&quot;</span>], <span class="comment">// 支持的类库 esnext及dom</span></span><br><span class="line">    <span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;./&quot;</span>,</span><br><span class="line">    <span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;@vue/*&quot;</span>: [<span class="string">&quot;packages/*/src&quot;</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>心细的朋友可能发现，最后两个配置项没有注释，我们一会再来解释这两个配置项的作用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .npmrc文件</span></span><br><span class="line">shamefully-hoist = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这个配置项非常有意思，我们来解释一下这个配置项是啥意思呢？那么这里不得不提及一下<code>npm</code>在安装依赖时候的特征了：那就是<strong>会将依赖拍平在node_modules文件夹中</strong>，而<code>pnpm</code>在安装依赖之后，则不会将依赖拍平在<code>node_modules</code>文件夹中。举个栗子🌰，在一个空白项目中，如果我们使用了<code>npm install webpack</code>命令，那么当你打开<code>node_modules</code>文件夹的时候，会发现安装了一大堆依赖，此时我们在项目中使用<code>require(&#39;express&#39;)</code>，发现依旧不会报错，因为在安装<code>webpack</code>的时候，也用到了<code>express</code>这个依赖，而且都拍平在<code>node_modules</code>文件夹下了，所以在项目中<code>require(&#39;express&#39;)</code>是能够找到，而且不会报错的；但果我们使用<code>pnpm install webpack</code>的话，此时再打开<code>node_modules</code>文件，会发现少了很多东西，观察目录结构会发现，其实依赖都被放在了<code>.pnpm</code>这个文件夹下，此时如果我们直接<code>require(&#39;express&#39;)</code>，则就会报错，因为<code>node_modules</code>目录下，根本不存在<code>express</code>模块。那么，在<code>.npmrc</code>文件中加入了<code>shamefully-hoist = true</code>这个配置项，就能够将<code>.pnpm</code>中的依赖，拍平在<code>node_modules</code>文件夹中，达到的效果就和<code>npm</code>很类似了。</p>
+<p>接下来<code>cd</code>进入<code>shared</code>目录，使用<code>pnpm init -y</code>命令初始化，并将<code>package.json</code>文件中配置项改为<code>&quot;name&quot;: &quot;@vue/shared&quot; ......</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// shared/src/index.ts 文件中，我们先写一个判断是否为数组的方法，并将其导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">isArray</span> = value =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">isArray</span>(value)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的方法，<code>cd</code>进入<code>reactivity</code>目录下，使用<code>pnpm init -y</code>命令初始化，并将<code>package.json</code>文件中配置项改为<code>&quot;name&quot;: &quot;@vue/reactivity&quot; ......</code>。接下来，如果我们想在<code>reactivity/src/index.ts</code>文件中，使用<code>shared</code>包中暴露出来的那个<code>isArray</code>方法，那么应该如何引入呢？首先想到的就是我直接<code>import &#123; isArray &#125; from &#39;../../shared/src/index.ts&#39;</code>不就完了么，相对路径一把梭，乍看一眼没啥问题，但是稍微一想，像<code>shared，reactivity</code>这种包，最后发布可是要打包完后，单独发布到<code>npm</code>上边的，这时候使用相对路径，那肯定就不太合适了吧。有朋友又会说了，那直接用<code>import &#123; isArray &#125; from &#39;@vue/shared&#39;</code>来导入不就好了么？没错，但是如果不进行任何配置，这种写法是去哪里找<code>@vue/shared</code>的这个包呢？<code>node_modules</code>目录中，那<code>node_modules</code>目录中没有这个<code>shared</code>包啊，该怎么办呢？聪明的朋友已经还记得，上文我们在配置<code>tsconfig.json</code>文件的时候，埋下了一个伏笔。没错，就是最后两个配置项。</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;baseUrl&quot;</span>: <span class="string">&quot;./&quot;</span>,</span><br><span class="line"><span class="string">&quot;paths&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;@vue/*&quot;</span>: [<span class="string">&quot;packages/*/src&quot;</span>]</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先，<code>baseUrl</code>可以将根路径定位在当项目的根目录。其次<code>paths</code>可以自定义寻找包的路径，比如上边配置的意思就是，只要<code>import</code>了以<code>@vue/*</code>开头的包，那么就会去<code>packages文件夹下的*/src</code>目录下寻找。所以加上了这个配置项，我们在<code>reactiviey/src/index.ts</code>文件中，就可以正常的导入<code>shared</code>模块了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// reactiviey/src/index.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123; isArray &#125; <span class="keyword">from</span> <span class="string">&#x27;@vue/shared&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">isArray</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  isArray</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>pnpm-workspace.yaml</code>文件中，我们先填写如下内容，代表<code>packages</code>文件夹下所有的目录，都当做包来管理。</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">packages:</span> </span><br><span class="line">- <span class="comment">&#x27;packages/*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，一个简单的<code>Monorepo</code>环境就已经搭建好啦~，那么有朋友可能会问了，这咋跑起来？我们写一个库肯定得边写边调试的吧，都看不到效果，怎么知道写的有没有问题呢？别急，我们继续往下走。</p>
+<h3 id="编写脚本进行开发环境打包"><a href="#编写脚本进行开发环境打包" class="headerlink" title="编写脚本进行开发环境打包"></a>编写脚本进行开发环境打包</h3><p>对于开发环境，我们使用<code>esbuild</code>包进行打包，对于生产环境，我们使用<code>rollup</code>进行打包。 首先在项目根目录先安装包<code>pnpm intall esbuild -D -w</code>，之所以加上<code>-w</code>是为了能够让依赖成功安装在项目根目录，不然就会报错。我们先把入口写成固定为<code>reactivity/src/index.ts</code>。具体的配置，可以查看<code>esbuild</code>的官方文档，下边就直接写上需要的配置项，并简单做下注释解释。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scripts/dev.js 文件</span></span><br><span class="line"><span class="keyword">const</span> &#123; context &#125; = <span class="built_in">require</span>(<span class="string">&#x27;esbuild&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> target = <span class="string">&#x27;reactivity&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">context</span>(&#123;</span><br><span class="line">  <span class="comment">// 打包入口</span></span><br><span class="line">  <span class="attr">entryPoints</span>: [path.<span class="title function_">resolve</span>(__dirname, <span class="string">`../packages/<span class="subst">$&#123;target&#125;</span>/src/index.ts`</span>)],</span><br><span class="line">  <span class="attr">outfile</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">`../packages/<span class="subst">$&#123;target&#125;</span>/dist/<span class="subst">$&#123;target&#125;</span>.js`</span>),</span><br><span class="line">  <span class="attr">bundle</span>: <span class="literal">true</span>, <span class="comment">// 把里文件中的依赖也同时打包进来</span></span><br><span class="line">  <span class="attr">sourcemap</span>: <span class="literal">true</span>, <span class="comment">// 生成sourcemap，可以调试</span></span><br><span class="line">  <span class="attr">format</span>: <span class="string">&#x27;esm&#x27;</span>, <span class="comment">// 打包出来的是esm模块</span></span><br><span class="line">  <span class="attr">platform</span>: <span class="string">&#x27;browser&#x27;</span>,</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 监听文件变化，只要发生了改动，就重新打包编译结果</span></span><br><span class="line">  ctx.<span class="title function_">watch</span>().<span class="title function_">then</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;watching~~~&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在<code>package.json</code>文件中添加一个命令，进行打包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// package.json</span></span><br><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&quot;dev&quot;</span>: <span class="string">&quot;node scripts/dev.js&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后，执行<code>npm run dev</code>命令，可以看到，在<code>reactivity</code>文件夹下，生成了<code>reactivity.js</code>和<code>reactivity.js.map</code>两个文件，我们打开<code>reactivity.js</code>文件，可以看到，打包结果为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// packages/shared/src/index.ts</span></span><br><span class="line"><span class="keyword">var</span> <span class="title function_">isArray</span> = (<span class="params">value</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">isArray</span>(value);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// packages/reactivity/src/index.ts</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">isArray</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]));</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  isArray</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//# sourceMappingURL=reactivity.js.map</span></span><br></pre></td></tr></table></figure>
+
+<p>那么此时<code>js</code>文件就已经被成功的打包了，在<code>dist</code>目录下，我们新建个<code>index.html</code>文件，看看刚才打包的结果，能不能在页面上用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- reactivity/dist/index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">import</span> &#123; isArray &#125; <span class="keyword">from</span> <span class="string">&#x27;./reactivity.js&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;index.html文件中测试代码：&#x27;</span>, <span class="title function_">isArray</span>([<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]))</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>特别要注意的是，<code>&lt;script&gt;</code>标签要加上<code>type=&quot;module&quot;</code>，因为我们是通过<code>esModule</code>的方式进行导入导出的。此时我们要启动一个本地服务器，来查看<code>index.html</code>文件，这里方式很多，我推荐使用一条命令，能够直接启动一个本地服务器，并且不需要安装任何东西。我们<code>cd</code>进入到<code>reactivity</code>目录下，执行<code>npx serve dist</code>命令（要保证npm版本≥5.2才能够使用npx），这套命令就是将dist文件夹作为服务器根目录，然后将<code>index.html</code>文件默认作为主文件入口进行展示，执行完毕后，可以看到默认的端口是3000，我们直接在浏览器中打开<code>localhost:3000</code>，打开控制台，可以发现输出了2行代码，一个是<code>reactivity.js</code>文件中输出的，一个是<code>index.html</code>文件中，导入进来输出的。</p>
+<p>到这里，我们开发环境的基本架子，就搭建好了，至于生产环境的配置，我们之后的文章会提到，接下来的文章，我们首先来学习一下<code>Vue3</code>的响应式原理吧!</p>
+<p>作者：柠檬soda水<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7195065768231305274">https://juejin.cn/post/7195065768231305274</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Vue/"># Vue</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ae462cc0/">从零开始学习Vue3源码 （五、拾遗）</a>
+            
+            
+            <a class="next" rel="next" href="/72108fd/">从零开始学习Vue3源码（二、Vue3响应式原理（上））</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ae462cc0/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/72108fd/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+</body>
+
+</html>
