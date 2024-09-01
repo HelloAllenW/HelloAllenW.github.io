@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>CSS方法论（从命名规范到代码分离再到文件组织） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CSS方法论（从命名规范到代码分离再到文件组织）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2021&nbsp;&nbsp;8:57:55</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">28 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>CSS 方法论是一种面向 CSS、由个人和组织设计、已被诸多项目检验且公认有效的最佳实践。这些方法论都会涉及结构化的命名约定，并且在组织 CSS 时可提供相应的指南，从而提升代码的性能、可读性以及可维护性。</p>
+<p>根据 State of CSS  2020 的调查结果显示，目前使用最多的五种分别为：BEM、ACSS、OOCSS、SMACSS、ITCSS。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemQqRzaEnqibclLUTlMaib4tf5g1FK25w38H1xKYMzXzZBAsoXP6nwDK8w/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面就分别看看这五种 CSS 方法论！</p>
+<h2 id="1-BEM"><a href="#1-BEM" class="headerlink" title="1. BEM"></a>1. BEM</h2><p>BEM 全称为 Block Element Modifier，分别表示块（Block）、元素（Element）、修饰符（Modifier），它是由 Yandex 团队提出的一种 CSS 命名方法。这种命名方法让 CSS 便于统一团队开发规范和方便维护。该方法论由以下三部分组成：</p>
+<ul>
+<li><strong>Block：</strong> 尽量以元素的性质来命名对象，例如：<code>.list</code>、<code>.card</code>、<code>.navba</code>r；</li>
+<li><strong>Element：</strong> 使用 <code>__</code> 两个下划线来连接 Block 对象，例如：<code>.list__item</code>、<code>.card__img</code>、<code>.navbar__brand</code>；</li>
+<li><strong>Modifier：</strong> 使用 <code>--</code> 两个连字符连接 Block 或 Element 对象，例如：<code>.list__item--active</code>、<code>.card__img--rounded</code>、<code>.navbar--dark</code>。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemVkl3q4qJ2GARA6xtib1BoUIpALw8gsOEty0kLbWOZZqqRLEOjDhzSwg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在 BEM 中并没有那些抽象的规则，它是基于功能为导向（Function-Oriented Programming, FOP）而设计的，不存在像是 <code>.pl-3</code> 这种难以理解的 <code>class</code> 名称，为了保证 BEM 能够合理的将元素模块化，需要遵守以下规则：</p>
+<ul>
+<li>不能使用 <code>class</code> 以外的选择器来编写样式；</li>
+<li>不要过度模块化，应该适当控制元素的模组化深度。</li>
+</ul>
+<h3 id="（1）Block-块"><a href="#（1）Block-块" class="headerlink" title="（1）Block 块"></a>（1）Block 块</h3><p>所谓的 Block 就是指应用中可独立存在的元素，类似于 SMACSS 中的 Layout 或 Module，这里称其为块。需要遵守以下规范：</p>
+<ul>
+<li>Block 名称需要清楚的表达其用途、功能、意义，且具有唯一性；</li>
+<li>Block 可以放在页面上的任何位置，也可以相互嵌套；</li>
+<li>单词之间可以使用驼峰形式或者使用 <code>-</code> 将其分隔。</li>
+</ul>
+<p>参考以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.list &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.card &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.navbar &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.header &#123; /* ... */ &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）Element-元素"><a href="#（2）Element-元素" class="headerlink" title="（2）Element 元素"></a>（2）Element 元素</h3><p>如果把块描述为一个元素，那就可以将 Element 描述为此元素的子元素。参考以下规则：</p>
+<ul>
+<li>Element 名称需要清楚的表达元素的用途及意义；</li>
+<li>Element 和 Element 之间可以相互嵌套；</li>
+<li>Element 与Block 之间使用 <code>__</code> 两个下划线连接；</li>
+<li>单词之间可以使用驼峰式或者使用 <code>-</code> 将其分隔。</li>
+</ul>
+<p>参考以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.list__item &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.card__img &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.navbar__brand &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.header__title &#123; /* ... */ &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意，Element 无法独立于 Block 之外，其存在的目的就是子元素，元素既然不存在，那何来的子元素？如果使用 SCSS 来编写样式，可以改用 <code>&amp;</code> 父选择器来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.list &#123;</span><br><span class="line">  display: flex;</span><br><span class="line"></span><br><span class="line">  &amp;__item &#123;</span><br><span class="line">    flex: 0 0 25%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样可读性就变好了一些，然后就可以将这些样式应用于 HTML 元素上了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;list&quot;&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>BEM 没有过多复杂的概念，而且通过 <code>class</code> 名称就可以知道 HTML 元素的结构，更容易理解和使用。</p>
+<p>下面再来看一个 Element 相互嵌套的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;list&quot;&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;list__item__link&quot;&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;list__item__link&quot;&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>一个元素通常不会只有两层结构，很多时候都具有三层以上的结构。此时使用 BEM 编写的代码就会像上面这样。这里的问题在于这样的处理会造成嵌套越来越深，导致 <code>class</code> 名称越来越长，HTML代码可读性越来越差。如果存在多层嵌套，可以尝试进行以下修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;list&quot;&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;list__link&quot;&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;list__link&quot;&gt;&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这也就意味着，所有的子元素都仅仅会被 <code>.list</code> 所影响，<code>link</code> 不会绑死在 <code>item</code> 下，<code>link</code> 可以自由的放在 <code>list</code> 的任何位置。</p>
+<h3 id="（3）Modifier-修饰符"><a href="#（3）Modifier-修饰符" class="headerlink" title="（3）Modifier 修饰符"></a>（3）Modifier 修饰符</h3><p>Modifier 就像 OOCSS 中的 Skin 与 SMACSS 中的 State，主要用来表示 Block 或 Element 的行为及样式。参考以下规范：</p>
+<ul>
+<li>Modifier 名称需要清楚的表达元素样式、状态或行为；</li>
+<li>Modifier 与 Block 或 Element 之间使用 <code>--</code> 两个连字符连接；</li>
+<li>单词之间可以使用驼峰式或者使用 - 将其分隔。</li>
+</ul>
+<p>参考以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.list__item--active &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.card__img--rounded &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.navbar--dark &#123; /* ... */ &#125;</span><br><span class="line"></span><br><span class="line">.header__title--size-s &#123; /* ... */ &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Modifier 也是无法单独存在的，Modifier 必定是作用于某个对象，这里所指的对象可能是 Block 或 Element。如果使用的是 SCSS，可以改用 <code>&amp;</code>父选择器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.list &#123;</span><br><span class="line">  display: flex;</span><br><span class="line"></span><br><span class="line">  &amp;__item &#123;</span><br><span class="line">    flex: 0 0 25%;</span><br><span class="line"></span><br><span class="line">    &amp;--active &#123;</span><br><span class="line">      color: #fffc3d;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;--dark &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: #272727;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以将样式应用在 HTML 元素上了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;list list--dark&quot;&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item list__item--active&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;list__item&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>从上面 HTML 代码中就可以很明显的看到其关联性，很容易的辨认出哪些是 Block，哪些是 Element，哪些是 Modifier，并进一步推断出哪部分的 HTML 可以独立使用，这也是 BEM 的初衷。</p>
+<h2 id="2-OOCSS"><a href="#2-OOCSS" class="headerlink" title="2. OOCSS"></a>2. OOCSS</h2><h3 id="（1）基本概念"><a href="#（1）基本概念" class="headerlink" title="（1）基本概念"></a>（1）基本概念</h3><p>OOCSS 是 Object Oriented CSS 的缩写，意为面向对象的CSS。它是所有 CSS 方法论中最早提出的一个，由 Nicole Sullivan 提出。可以把它理解为将 CSS 模块化。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemfNkHhg3mnkicjic1iaxMTKaSfGKkyWLVUicpmtU3SYCL6aFXoibt984sDkQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>OOCSS 提倡样式可重用性，在编写 CSS 样式时需要遵循以下规则：</p>
+<ul>
+<li>应尽量避免使用后代选择器(<code>.navbar ul</code>) 或 id 选择器(<code>#list</code>)；</li>
+<li>应尽量避免样式依赖于结构，尝试使用 <code>class</code> 替代标签选择器。</li>
+</ul>
+<h3 id="（2）主要原则"><a href="#（2）主要原则" class="headerlink" title="（2）主要原则"></a>（2）主要原则</h3><p>OOCSS 有两个主要原则：<strong>结构与样式分离</strong>和<strong>容器与内容分离</strong>。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemicCjCzbf9gwiaRME3j849EqUz6mq0ibCv1a1uZGuMZbjJnUyt52jQ2w2A/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">OOCSS 作者对这两个原则的描述</p>
+<h4 id="1）结构与样式分离（Separate-structure-and-skin）"><a href="#1）结构与样式分离（Separate-structure-and-skin）" class="headerlink" title="1）结构与样式分离（Separate structure and skin）"></a>1）结构与样式分离（Separate structure and skin）</h4><p>结构与样式之间就像 <code>.btn</code> 与 <code>.btn-primary</code> 的关系一样。来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$theme-colors: (</span><br><span class="line">  primary: blue,</span><br><span class="line">  success: green,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">.btn-primary &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">  color: #fff;</span><br><span class="line">  background-color: map-get($theme-colors, primary);</span><br><span class="line">  border: 1px solid map-get($theme-colors, primary);</span><br><span class="line">  border-radius: 0.25rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>平时我们可能习惯性的把全部样式都写在同一个<code>class</code> 中，就像上面代码一样。此时如果我们需要新增一个主题为 <code>success</code> 的按钮呢？你可能会这样做：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.btn-primary &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">  color: #fff;</span><br><span class="line">  background-color: map-get($theme-colors, primary);</span><br><span class="line">  border: 1px solid map-get($theme-colors, primary);</span><br><span class="line">  border-radius: 0.25rem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn-success &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">  color: #fff;</span><br><span class="line">  background-color: map-get($theme-colors, success);</span><br><span class="line">  border: 1px solid map-get($theme-colors, success);</span><br><span class="line">  border-radius: 0.25rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时，两个按钮就会有很多重复的样式，每增加一个主题的按钮，就需要增加一组样式，这就有点浪费时间了。而 OOCSS 中的结构与样式分离主要就是为了改善这个问题，将以上代码根据 OOCSS 的规范进行改写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.btn &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">  color: black;</span><br><span class="line">  background-color: transparent;</span><br><span class="line">  border: 1px solid transparent;</span><br><span class="line">  border-radius: 0.25rem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn-primary &#123;</span><br><span class="line">  color: #fff;</span><br><span class="line">  background-color: map-get($theme-colors, primary);</span><br><span class="line">  border: 1px solid map-get($theme-colors, primary);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 OOCSS 的概念中，表现型的 <code>style</code> 就属于样式，封装型的 <code>style</code> 就属于结构，如下所示：</p>
+<ul>
+<li>样式(skin)：<code>color</code>、<code>background-color</code>、<code>border-color</code>；</li>
+<li>结构(structure)：<code>display</code>、<code>box-sizing</code>、<code>padding</code>。</li>
+</ul>
+<p>那这样做的用意是什么呢？button 按钮一般是这样来使用这些样式的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt; button  class = &quot;btn btn-primary&quot; &gt; Primary &lt;/ button &gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以很明确的知道这个元素的结构与样式，以后如果想要增加不同主题的按钮，就只需要编写像<code>.btn-success</code>、<code>.btn-danger</code>这样的样式类即可，而无需再编写按钮的结构。</p>
+<p>当然，也可以借助 Sass 中的 <code>@each</code> 来更快速地实现多种主题按钮的样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$theme-colors: (</span><br><span class="line">  primary: blue,</span><br><span class="line">  success: green,</span><br><span class="line">  danger: red,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">.btn &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">  color: black;</span><br><span class="line">  background-color: transparent;</span><br><span class="line">  border: 1px solid transparent;</span><br><span class="line">  border-radius: 0.25rem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@each $key, $value in $theme-colors &#123;</span><br><span class="line">  .btn-#&#123;$key&#125; &#123;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background-color: $value;</span><br><span class="line">    border: 1px solid $value;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按钮在定义时只需添加对应的样式即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;button class=&quot;btn btn-primary&quot;&gt;Primary&lt;/button&gt;</span><br><span class="line">&lt;button class=&quot;btn btn-success&quot;&gt;Success&lt;/button&gt;</span><br><span class="line">&lt;button class=&quot;btn btn-danger&quot;&gt;Danger&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>相信通过上面的例子，你已经了解了什么是结构与样式分离。如果以 OOCSS 中的 OO (Object Oriented) 来描述的话，这里的结构(Structure)就是所指的元素。以上面例子来说，我们封装了 button 元素，以后如果要使用 button 的话，只需要编写 <code>.btn</code> 结构样式名称与对应的样式（skin)即可。</p>
+<h4 id="2）容器与内容分离（Separate-container-and-content）"><a href="#2）容器与内容分离（Separate-container-and-content）" class="headerlink" title="2）容器与内容分离（Separate container and content）"></a>2）容器与内容分离（Separate container and content）</h4><p>接下来看看容器与内容该如何分离。容器与内容之间就像 <code>.card</code> 与 <code>.btn</code> 的关系一样。来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.card &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  min-width: 0;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.card button &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在编写 CSS 样式时，通常都是根据 HTML 的结构来编写。从上面的代码中可以看出，<code>.card</code> 里面有个 button。这样编写样式就会失去灵活度，<code>button</code> 就完全被绑定在了 <code>.card</code> 里面，OOCSS 中的容器与内容分离主要就是用来改善这个问题的，将上面的代码根据 OOCSS 的规范进行改写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.card &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  min-width: 0;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.btn &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  padding: 0.375rem 0.75rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容器与内容分离旨在将两个不同的父子元素给分离出来，借此达到父子元素不相互依赖的目的。且父子元素只存在名称上的关系，实际上两者都可以单独存在并可以在不同的区域使用。这里的 <code>.card</code> 就属于容器，.<code>btn</code> 就属于内容，如下所示：</p>
+<ul>
+<li>容器(container)：<code>.container</code>、<code>.col-4</code>、<code>.header</code>；</li>
+<li>内容(content)：<code>.btn</code>、<code>.input</code>、<code>.dropdown</code>。</li>
+</ul>
+<p>需要注意，并非所有的元素都必须遵守容器与内容分离的原则，来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.col-4 &#123;</span><br><span class="line">  flex: 0 0 100% * (4/12);</span><br><span class="line">  position: relative;</span><br><span class="line">  padding-left: 15px;</span><br><span class="line">  padding-right: 15px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.card &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  min-width: 0;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line"></span><br><span class="line">  &amp;-body &#123;</span><br><span class="line">    margin: 10px auto;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个对象可能同时是容器与内容。对于 <code>.col-4</code> 对象来说，<code>.card</code> 就属于内容，而对于 <code>.card-body</code> 对象来说，<code>.card</code>就属于容器。那你可能会想，为什么不把 <code>.card-body</code> 做分离呢？不是说容器必须与内容作分离吗？这里的 <code>.card-body</code> 如果独立存在本身是没有任何意义的，需与<code>.card</code> 搭配才会有意义，在这种情况下，<code>.card-body</code> 属于 <code>.card</code> 的继承，就无须将其分离出来，与前面的<code>.btn</code> 不同，<code>.btn</code> 独立存在是可以重复使用在其他元素上的。</p>
+<p>通过上面的例子，相信大家已经理解了 OOCSS 的基本思想。其实，Bootstrap 就是根据 OOCSS 规范实现的，来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav class=&quot;navbar navbar-light bg-light&quot;&gt;</span><br><span class="line">  &lt;a class=&quot;navbar-brand&quot;&gt;Navbar&lt;/a&gt;</span><br><span class="line">  &lt;form class=&quot;form-inline&quot;&gt;</span><br><span class="line">    &lt;input class=&quot;form-control mr-sm-2&quot; type=&quot;search&quot; placeholder=&quot;Search&quot; aria-label=&quot;Search&quot; /&gt;</span><br><span class="line">    &lt;button class=&quot;btn btn-outline-success my-2 my-sm-0&quot; type=&quot;submit&quot;&gt;Search&lt;/button&gt;</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">&lt;/nav&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这段代码中包含了 <code>.navbar</code>、<code>.navbar-light</code>等 <code>class</code>，这些就属于 OOCSS 中的结构与样式分离，而<code>.form-inline</code>、<code>.btn</code> 等 <code>class</code> 就属于容器与内容分离。如果对 OOCSS 方法论感兴趣，可以阅读一下 Bootstrap 的源码，其处理的细腻程度可以说是将 OOCSS 发挥的淋漓尽致。</p>
+<h2 id="3-SMACSS"><a href="#3-SMACSS" class="headerlink" title="3. SMACSS"></a>3. SMACSS</h2><p>SMACSS 全称为 Scalable and Moduler Architecture for CSS，意为可扩展的模块化 CSS 结构，由 Jonathan Snook 提出。SMACSS 不仅包含了<strong>结构与样式分离</strong>的概念，还具有极具特色的<strong>结构化命名</strong>的概念。所谓的结构化命名，就是将元素做结构分类并限制其命名，以此达到易扩展和模块化的目的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemQgibPcvW2gz3dLap0elHpiaucicARsObW8bwCRcxG0NXUQ3S5sxZ0VqzA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>SMACSS 相对于 OOCSS 更偏向于整体结构的分类及模组化 CSS，其中结构的分类包括：</p>
+<ul>
+<li><strong>Base（基础）：</strong> 不需要特别的提供前缀，且不会使用到 <code>class</code>、<code>id</code> 选择器，目的在于设定元素基本样式。例如：<code>html</code>、<code>*:before</code>、<code>img</code>；</li>
+<li><strong>Layout（布局）：</strong> 使用 <code>l-</code> 或 <code>layout-</code> 为次要布局样式提供前缀，目的在于将布局样式与其他样式做区分。例如：<code>.l-header</code>、<code>.l-sidebar</code>、<code>.l-grid</code>；</li>
+<li><strong>Module（模块）：</strong> 使用块本身命名为子元素样式提供前缀，目的在于快速了解其相关性。例如：<code>.card</code>、<code>.card-header</code>、<code>.card-body</code>；</li>
+<li><strong>State（状态）：</strong> 使用 <code>is-</code> 为状态样式提供前缀，通过语意化方式了解当前状态。例如：<code>.is-active</code>、<code>.is-hidden</code>、<code>.is-collapsed</code>；</li>
+<li><strong>Theme（状态）：</strong> 不需要特别的提供前缀，使用对象本身的名称覆盖其原先的主题样式。例如：<code>.l-header-dark</code>、<code>.card-dark</code>。</li>
+</ul>
+<h3 id="（1）Base-规则"><a href="#（1）Base-规则" class="headerlink" title="（1）Base 规则"></a>（1）Base 规则</h3><p>Base 主要面向某些对象的基本及预设样式，也就是全局的初始化（重置）样式。在编写这些样式时应该遵循以下规则：</p>
+<ul>
+<li>可以使用元素选择器、后代选择器、子选择器以及任何伪类将基本样式应用于元素；</li>
+<li>不应该使用 <code>class</code>、<code>id</code> 选择器来设置元素预设的样式；</li>
+<li>不应该使用 <code>!important</code> 来设置元素预设的样式（其权重过高，无法被覆盖）。</li>
+</ul>
+<p>参考如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">html, form &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">  padding: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*, *:before, *:after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">img &#123;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">  height: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）Layout-规则"><a href="#（2）Layout-规则" class="headerlink" title="（2）Layout 规则"></a>（2）<strong>Layout 规则</strong></h3><p>SMACSS 中的 Layout 根据重用性将页面划分成<strong>主要布局样式</strong>和<strong>次要布局样式</strong>，主要布局样式是指不发生重用的元素，而次要布局样式就是指会发生重用的元素，在编写样式时应该遵守以下规则：</p>
+<ul>
+<li>主要布局样式通常使用 <code>id</code> 选择器进行设置；</li>
+<li>次要布局样式通常使用 <code>class</code> 选择器进行设置；</li>
+<li>次要布局样式可提供 <code>l-</code> 或 <code>layout-</code> 前缀用以将布局样式与基本样式做区分；</li>
+<li>参考 OOCSS 中的容器与内容分离的概念。</li>
+</ul>
+<p>参考如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#header, #article, #footer &#123;</span><br><span class="line">  width: 960px;</span><br><span class="line">  margin: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#article &#123;</span><br><span class="line">  border: solid #CCC;</span><br><span class="line">  border-width: 1px 0 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和 SMACSS 规则不同的是，在 Layout 规则中的主要布局样式是可以使用 <code>id</code> 选择器来定义的。如果想要在特定情况下更改其布局样式，可以与次要布局样式搭配使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#article &#123;</span><br><span class="line">  float: left;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#sidebar &#123;</span><br><span class="line">  float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.l-flipped #article &#123;</span><br><span class="line">  float: right;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.l-flipped #sidebar &#123;</span><br><span class="line">  float: left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据 CSS 层叠的特性，可以让元素应用到更高层的布局样式，以覆盖其预设的样式。这里需要注意，所谓的主要布局样式和次要布局样式都只是名称上的定义，不要将自己的思维局限在只能使用主要布局样式，也就是全部使用 <code>id</code>选择器来编写布局样式。大部分情况下，次要布局样式比主要布局样式使用的更多。参考下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;featured&quot;&gt;</span><br><span class="line">  &lt;h2&gt;Featured&lt;/h2&gt;</span><br><span class="line">  &lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&lt;a href=&quot;…&quot;&gt;…&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&lt;a href=&quot;…&quot;&gt;…&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    …</span><br><span class="line">  &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果不考虑 SMACSS 中的次要布局样式写法，我们可能会为 <code>div</code> 添加名为<code>featured</code>的<code>id</code>，然后通过 <code>id</code> 选择器来设置样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div#featured ul &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">  padding: 0;</span><br><span class="line">  list-style-type: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div#featured li &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  height: 100px;</span><br><span class="line">  margin-left: 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就相当于把元素完全绑定死了，这里的 <code>#featured</code> 只能用在<code>div</code> 标签上。这不就是 OOCSS 要解决的问题吗？可以根据 SMACSS 中的次要布局样式规则来解决这个问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.l-grid &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">  padding: 0;</span><br><span class="line">  list-style-type: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.l-grid &gt; li &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  margin: 0 0 10px 10px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实 SMACSS 中的次要布局样式就像是 OOCSS 中的容器与内容分离原则，目的都是将依赖性降到最低。其实对于次要布局样式，就相当于在 OOCSS 的基础上，加上其命名限制中的 <code>-l</code> 前缀就可以了。</p>
+<h3 id="（3）Module-规则"><a href="#（3）Module-规则" class="headerlink" title="（3）Module 规则"></a>（3）Module 规则</h3><p>Module 主要面向应用中的可重用元素的样式，与 Layout 不同的地方在于其元素更为准确。基于 Module 的元素都应该以独立元素的方式存在。在编写是需要遵循以下规则：</p>
+<ul>
+<li>不应该使用元素选择器、<code>id</code> 选择器设置元素样式；</li>
+<li>仅使用 <code>class</code> 选择器设置元素样式；</li>
+<li>使用元素本身命名为子元素样式提供前缀；</li>
+<li>参考 OOCSS 中的结构与样式分离概念。</li>
+</ul>
+<p>参考如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;card&quot;&gt;</span><br><span class="line">  &lt;div&gt;Card Header&lt;/div&gt;</span><br><span class="line">  &lt;div&gt;Card Footer&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这时我们可能会这样编写样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.card &gt; div &#123;</span><br><span class="line">  padding-left: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样写的问题在于，<code>.card</code> 中的 <code>div</code> 被绑定死了，如果想要针对里面不同的 <code>div</code> 编写样式，就需要做出调整。SMACSS 中的 Module 建议都使用 <code>class</code> 选择器来编写样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.card-header &#123;</span><br><span class="line">  padding-left: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.card-footer &#123;</span><br><span class="line">  padding-left: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就解决了 <code>div</code> 被绑定死的问题，同时代码的可读性也增加了。SMACSS 的作者建议不要使用<code>div</code>、<code>span</code>这种元素选择器来定义样式，而是使用 <code>class</code> 选择器来强调语意化及可重用性。继续来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.pod &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.pod input[type=&#x27;text&#x27;] &#123;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line">#sidebar .pod input[type=&#x27;text&#x27;] &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前面提到，基于 Module 的元素应该能够在应用的任意部分使用。这时编写的的样式就会像上面的代码这样，代码越来越复杂，可能一不小心就忽略了CSS的优先级，导致样式被错误的覆盖。SMACSS 建议使用以下方式来写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.pod &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pod input[type=&#x27;text&#x27;] &#123;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pod-constrained input[type=&#x27;text&#x27;] &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后为指定对象添加元素与子元素 class 名称：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;pod pod-constrained&quot;&gt;...&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其实它的概念就像 OOCSS 中的结构与样式分离，只不过这里称之为子类化（Subclassing），通过将样式抽离出来，以后再不同元素中使用模块时，只需要添加模块名称与子类化模块名称即可。</p>
+<h3 id="（4）State-规则"><a href="#（4）State-规则" class="headerlink" title="（4）State 规则"></a>（4）State 规则</h3><p>State 主要面向 Layout 或 Module 在应用上的特效及动作，其概念类似于 BEM 中的Modifier，为了保证样式可以作用于对象，允许使用 <code>@important</code>。在编写时可以参照以下规则：</p>
+<ul>
+<li>State 可以嵌套在 Layout 或 Module 中；</li>
+<li>可以使用 JavaScript 改变样式；</li>
+<li>提供 is- 前缀用以区分此样式为状态样式；</li>
+<li>可以合理的使用 <code>!important</code> 来覆盖样式；</li>
+</ul>
+<p>参考如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul class=&quot;nav&quot;&gt;</span><br><span class="line">  &lt;li class=&quot;nav-item&quot;&gt;</span><br><span class="line">    &lt;a class=&quot;nav-link is-active&quot; href=&quot;#&quot;&gt;Link&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;nav-item&quot;&gt;</span><br><span class="line">    &lt;a class=&quot;nav-link&quot; href=&quot;#&quot;&gt;Link&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">  &lt;li class=&quot;nav-item&quot;&gt;</span><br><span class="line">    &lt;a class=&quot;nav-link is-disabled&quot; href=&quot;#&quot;&gt;Link&lt;/a&gt;</span><br><span class="line">  &lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>与上面介绍的子模块样式不同的地方在于，状态样式不需要继承于任何对象，而只是单纯的将样式应用于对象，可以参考 Bootstrap 中的 <code>.active</code> 或 <code>.disabled</code> 样式，作用就类似于上面的 <code>is-active</code> 与 <code>is-disabled</code>，为了保证状态样式可以作用于指定对象，在 State 中允许使用 <code>@important</code>。</p>
+<h3 id="（5）Theme-规则"><a href="#（5）Theme-规则" class="headerlink" title="（5）Theme 规则"></a>（5）Theme 规则</h3><p>Theme 主要面向应用中为主视觉定义的 Layout 或 Module 样式，例如主题切换。在编写时需要遵循以下规则：</p>
+<ul>
+<li>直接使用 Layout 或 Module 定义的 <code>class</code> 覆盖其样式。</li>
+</ul>
+<p>参考如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// index.css</span><br><span class="line">.mod &#123;</span><br><span class="line">  border: 1px solid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// themeA.css</span><br><span class="line">.mod &#123;</span><br><span class="line">  border-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意，不需要使用独立的 <code>class</code> 去添加主题样式，在 Theme 的规则中建议使用与原来 Layout 或 Module 中相同的样式名称，而 <code>themeA.css</code> 样式会在 <code>index.css</code> 之后才加载，这样就可以达到覆盖样式的目的，如果应用中有很多主题样式，也只需要新增像 <code>themeB.css</code> 这样的样式文件即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.mod &#123;</span><br><span class="line">  border-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-ITCSS"><a href="#4-ITCSS" class="headerlink" title="4. ITCSS"></a>4. ITCSS</h2><p>ITCSS 全称为 Inverted Triangle CSS，意为倒三角CSS，由 Harry Robers 开发。ITCSS 是一种可扩展和可管理的架构，独立于预处理器存在。它出现的主要目的是帮助组织项目的 CSS 文件，从而解决由级联和选择器的特殊性引起的问题。</p>
+<p>ITCSS 的目标是通过分层组织 CSS 文件，实现了自下而上的特异性。它基于分层的概念把项目中的样式分为七层：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemiboLW4wVYRuLFeAhy6QL9EDxDwYhxoia4tGsl96HJKAxWt7WnAE93jVg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上层定义的代码比下层定义的代码影响更大。因此，上层会影响下层，下层不会影响上层。下层将继承上级的样式，越往下越具体。</p>
+<p>ITCSS 通过三个关键指标对 CSS 项目进行排序：</p>
+<ul>
+<li><strong>通用到显式（explicitness）：</strong> 在 ITCSS 的分层中，每一层的权重是越来越大，作用的范围越来越小。从通用的规则到非常明确的规则；</li>
+<li><strong>低特异性到高特异性（specificity）：</strong> 开始的时候选择器具有最低的特异性（优先级），随着层数的增加，特异性也在不断变大。因此，要尽量避免在低特异性选择器之前编写高特异性选择器；</li>
+<li><strong>深远到本地化（reach）：</strong> 上层定义的样式会影响很多HTML的表现，随着层数的增加，影响范围逐渐减小。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemeq57PiakBkicwX8icx7jiaDpUScvDUzj1MHpoHljva1jAva5xjCZibVbP9g/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（1）SETTINGS"><a href="#（1）SETTINGS" class="headerlink" title="（1）SETTINGS"></a>（1）SETTINGS</h3><p>第一层 SETTINGS 表示设置，这一层包含项目的所有<strong>全局</strong>设置。通常会定义一些全局变量，例如颜色、字体大小等，这一层不会生成实际的 CSS。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$main-color: #6834cb;</span><br><span class="line">$main-font-size: 24px;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）TOOLS"><a href="#（2）TOOLS" class="headerlink" title="（2）TOOLS"></a>（2）TOOLS</h3><p>第二层 TOOLS 表示工具，如果使用了预处理器，可以在这一层定义 <code>function</code> 和 <code>mixins</code>。Tools 层位于 Settings 层之后，因为 mixin 可能需要全局设置中的一些变量来作为默认参数。同样，这一层也不会生成实际的 CSS。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@function sum($numbers...) &#123;</span><br><span class="line">  $sum: 0;</span><br><span class="line">  @each $number in $numbers &#123;</span><br><span class="line">    $sum: $sum + $number;</span><br><span class="line">  &#125;</span><br><span class="line">  @return $sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@mixin sample-mixin () &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）GENERIC"><a href="#（3）GENERIC" class="headerlink" title="（3）GENERIC"></a>（3）GENERIC</h3><p>第三层 GENERIC 表示通用，可以在这一层来定义重置或者标准化浏览器的基本样式，这一层很少会被修改。这也是第一个实际会生成 CSS 的层。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  padding: 0;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">*,</span><br><span class="line">*::before,</span><br><span class="line">*::after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）ELEMENTS"><a href="#（4）ELEMENTS" class="headerlink" title="（4）ELEMENTS"></a>（4）ELEMENTS</h3><p>第四层 ELEMENTS 表示元素，通常用来定义影响 HTML 单个标签的样式，例如 <code>h1</code>、<code>p</code> 标签的默认样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h1 &#123;</span><br><span class="line">  color: $main-color;</span><br><span class="line">  font-size: $main-font-size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）OBJECTS"><a href="#（5）OBJECTS" class="headerlink" title="（5）OBJECTS"></a>（5）OBJECTS</h3><p>第五层 OBJECTS 表示对象，可以在这一层定义整个项目中可重用的页面结构类。与上一层相比，这一层对 DOM 的影响更小，具有更高的特异性（优先级），并且更加明确，因为现在将 DOM 的部分作为目标来设置了样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.grid-container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: auto auto auto auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）COMPONENTS"><a href="#（6）COMPONENTS" class="headerlink" title="（6）COMPONENTS"></a>（6）COMPONENTS</h3><p>第六层 COMPONENTS  表示 UI 组件，与对象不用，组件是页面的特定部分。比如搜索框的样式，为组件定义的样式只会影响到对应的组件。这一层比上一层更加明确，因为现在为 DOM 设计了明确的样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.c-btn &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  &amp;--primary &#123;</span><br><span class="line">    background-color: #ff5959;</span><br><span class="line">    color: #fff;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &amp;--large &#123;</span><br><span class="line">    font-size: 16px;</span><br><span class="line">    padding: 16px 14px;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）TRUMPS"><a href="#（7）TRUMPS" class="headerlink" title="（7）TRUMPS"></a>（7）TRUMPS</h3><p>这一层也称为 Utilities，包含所有那些覆盖之前层中定义的任何其他规则的规则。它是唯一允许使用 <code>!important </code>的层。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.d-none &#123;</span><br><span class="line">  display: none!important;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（8）项目结构"><a href="#（8）项目结构" class="headerlink" title="（8）项目结构"></a>（8）项目结构</h3><p>那这七层结构的 CSS 文件该如何组织呢？主要有两种方式：</p>
+<ul>
+<li>每一层一个文件夹：</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemcZibia0ib4ibveHEWHuQ7fcqgAMlbl74GOKlgaM6xoia8QVKQgt5mL6PibYg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li>文件名使用层的名字作为前缀：</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPgUBAYiaIsuCux5AtXakXemrTibRFnGNnGToFjXeywiaNsGlFQ5LpJNbib6KhicLrtrzxwyW9KYVLcm7Q/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在使用样式时，就需要按照层的顺序来引用这些 CSS，就像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;settings.global.scss&quot;;</span><br><span class="line">@import &quot;settings.colors.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;tools.functions.scss&quot;;</span><br><span class="line">@import &quot;tools.mixins.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;generic.box-sizing.scss&quot;;</span><br><span class="line">@import &quot;generic.normalize.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;elements.headings.scss&quot;;</span><br><span class="line">@import &quot;elements.links.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;objects.wrappers.scss&quot;;</span><br><span class="line">@import &quot;objects.grid.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;components.site-nav.scss&quot;;</span><br><span class="line">@import &quot;components.buttons.scss&quot;;</span><br><span class="line">@import &quot;components.carousel.scss&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;trumps.clearfix.scss&quot;;</span><br><span class="line">@import &quot;trumps.utilities.scss&quot;;</span><br><span class="line">@import &quot;trumps.ie8.scss&quot;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-ACSS"><a href="#5-ACSS" class="headerlink" title="5. ACSS"></a>5. ACSS</h2><p>ACSS 的全称为 Atomic CSS，意为原子CSS。它专注于创建很多小型的 CSS 样式类，以便在 HTML 上使用。这种方法旨在提供高度精细和可重用的样式，而不是为每个组件提供规则。这可以减少特异性（优先级）冲突并以可预测的方式使样式更具可变性。这种方法有助于减少代码冗余和覆盖 CSS 样式的混淆。</p>
+<p>参考以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.mb-sm &#123; margin-bottom: 16px; &#125;</span><br><span class="line">.mb-lg &#123; margin-bottom: 32px; &#125;</span><br><span class="line">.color-blue &#123; color: #1e90ff; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在HTML中这样来使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;mb-lg&quot;&gt;</span><br><span class="line"> &lt;p class=&quot;mb-lg color-blue&quot;&gt;Blue text&lt;/p&gt;</span><br><span class="line"> &lt;img class=&quot;mb-sm&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ACSS 有一些编程方法，可以根据用户添加到 HTML 的类或属性自动生成 CSS。Atomizer 就是这样的一个工具，它允许将 HTML 进行如下定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;Mb(32px)&quot;&gt;</span><br><span class="line"> &lt;p class=&quot;Mb(32px) C(#1e90ff)&quot;&gt;Blue text&lt;/p&gt;</span><br><span class="line"> &lt;img class=&quot;Mb(16px)&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样在构建时就会自动生成以下CSS：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.Mb\(16px\)   </span><br><span class="line">&#123; margin-bottom: 16px; &#125;</span><br><span class="line">.Mb\(32px\)   </span><br><span class="line">&#123; margin-bottom: 32px; &#125;</span><br><span class="line">.C\(#1e90ff\) &#123; color: #1e90ff; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，单独使用 ACSS 会导致类的数量多到难以管理，并且 HTML 结构会非常臃肿。因此，通常只会使用 ACSS 原则来创建定义一致、可重用的声明块的辅助类。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3fdf11ef/">一文读懂CSS单位</a>
+            
+            
+            <a class="next" rel="next" href="/2d2f9f9d/">实现九宫格布局，你能想到多少种方法？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3fdf11ef/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2d2f9f9d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

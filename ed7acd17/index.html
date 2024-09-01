@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>西方哲学史概述 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">西方哲学史概述</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 20, 2024&nbsp;&nbsp;20:25:00</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 20, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">14.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">48 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="古希腊神话"><a href="#古希腊神话" class="headerlink" title="古希腊神话"></a>古希腊神话</h2><p>西方哲学来源于对原始宗教、神话幻想的取代。</p>
+<ol>
+<li><strong>希腊神话是人们对美好事物最初的信仰</strong></li>
+</ol>
+<p>古希腊神话与宗教信仰是密切相连的。古希腊宗教是一种多神信仰的宗教，在各城邦的生活中占有相当重要的位置，所有希腊公民都是笃信宗教的。</p>
+<p>但是，与其他民族，特别是与东方民族不同的是，希腊世界没有享有特权的祭司阶层，神庙中的男女祭司地位相当于城邦的公务人员，神庙的管理权掌握在城邦委派的公民团体手中。</p>
+<p>因此，源于古老的民间信仰形成的希腊宗教观念，在特有的希腊城邦社会条件下产生了与其他民族不同的特点，也使希腊神话具有了自己鲜明的特征，其中居于核心地位的是“<strong style="border-bottom: 1px green dashed;">神人同形同性论</strong>”。</p>
+<p>希腊人是相信命运观念的，这在神话中也有体现，但神话同时也表明他们不是匍匐在命运脚下的奴隶，而是一个珍惜个人荣誉、强调人的抗争、热爱世俗生活、积极进取、崇尚英雄气节的民族。</p>
+<p><strong style="border-bottom: 1px green dashed;">希腊神话是把人放在中心地位的神话，凸显的是人的精神</strong>，回荡着昂扬、乐观、健康的现实气息，对其后的希腊文学产生了持久的影响。</p>
+<ol start="2">
+<li><strong>自由文化释放人民的天性和想象力</strong></li>
+</ol>
+<p>在那远古时代，人们对自然现象、对人的生死、都感到神秘和难解，于是他们不断幻想、沉思。由于希腊半岛人口过剩，人民不得不向外寻拓生活空间，这时候涌现了许多英雄豪杰，从而产生了许多人神交织的民族英雄故事。</p>
+<p>这些故事最初是人们口耳相传，直到<strong style="border-bottom: 1px green dashed;">公元前7世纪左右，有一位叫荷马的诗人，将这些神话英雄故事整理记录在《荷马史诗》中</strong>，这些众人所创造的人、神、物的故事，经由时间的淬炼，就形成了后来我们熟知的“希腊神话”。</p>
+<p>希腊神话自公元前9世纪成型，古希腊人用它解释自然界和社会发生的一切自然现象。</p>
+<p>这一时期，人们认为神人同型同性，诸神有着与凡人相同的体态相貌、七情六欲，没有“从无到有”的创世观念，神的意欲行为和自然的生成变化被不加区分的交织成一副世界图式。</p>
+<p>这个自给自足的世界观长期统治着人们的思想，直到公元前6世纪左右，人们开始对普通人习以为常的观念感到诧异，逻辑思辨的智慧自此开始。</p>
+<p>公元前5世纪时期，米底王国和迦勒底人联合攻占了亚述首都尼尼微，亚述的领土被两国瓜分了。</p>
+<p>米底继续向西扩张，和吕底亚王国在哈吕斯河一带展开了一场长达五年的战争，平民百姓流离失所。</p>
+<p>这时候，有一位智者，扬言上天反对人世战争，某日必以日食为警告，当时没有人相信他。</p>
+<p>公元前585年5月28日，当两国将士短兵相接时，天突然黑了下来，白昼顿时变成了黑夜，交战的双方惊恐万分，于是马上停战和好，后来两国还互通婚姻。</p>
+<p>而这位人类史上首次预言日食的智者，就是后来被世人追为<strong style="border-bottom: 1px green dashed;">西方哲学史第一位哲学家——泰勒斯</strong>。</p>
+<p>泰勒斯（公元前624年－公元前546年）， 出生于爱奥尼亚的米利都城，创建了古希腊最早的哲学学派，是希腊最早的哲学学派——<strong style="border-bottom: 1px green dashed;">米利都学派（也称爱奥尼亚学派）的创始人。是古希腊及西方第一个自然科学家和哲学家</strong>。泰勒斯的学生有阿那克西曼德、阿那克西美尼等。</p>
+<p>他是第一个提出“世界的本原是什么？”并开启了哲学史的“本体论转向”的哲学家，被后人称为“希腊七贤之一”和“哲学和科学的始祖”，是学界公认的“哲学史第一人”。</p>
+<h2 id="古希腊最初的哲学流派"><a href="#古希腊最初的哲学流派" class="headerlink" title="古希腊最初的哲学流派"></a>古希腊最初的哲学流派</h2><p>（公元前6世纪-公元前4世纪）</p>
+<h3 id="1-希腊文明崛起"><a href="#1-希腊文明崛起" class="headerlink" title="1. 希腊文明崛起"></a>1. 希腊文明崛起</h3><p>崇拜“俄尔普斯”，荷马创作《荷马史诗》</p>
+<h3 id="2-米利都学派"><a href="#2-米利都学派" class="headerlink" title="2. 米利都学派"></a>2. 米利都学派</h3><p>米利都学派是古希腊的第一个哲学派别，相传为泰勒斯于公元前7世纪末至6世纪所创立。米利都学派主要包括三位哲学家：泰勒斯、阿那克西曼德和阿那克西美尼。因为它们都出生或经常活动在米利都，因此哲学史上称之为米利都学派。</p>
+<p>这一学派在西方哲学史上第一次提出了世界本原的问题。泰勒斯认为水是世界的本原，阿那克西曼德认为世界的本原是“无定形”，阿那克西美尼则认为世界的本原是“气”。总之，这一学派是以物理学家的目光审视这个世界，标志着古希腊人开始拒绝将人格神作为世界的支配者，而是在世界的内部寻找世界的本原。</p>
+<p>（1）泰勒斯</p>
+<p>哲学之父泰勒斯（公元前624年~公元前547年），认为万物之源是水，水生万物，万物又复归于水。</p>
+<p>（2）阿那克西曼德</p>
+<p>阿那克西曼德（公元前610年~公元前546年），泰勒斯的学生，认为世界源于无定。主张万物本源是“无限”，一切生于无限复归于无限，无限本身即不能创造又不能消灭。</p>
+<p>（3）阿那克西美尼</p>
+<p>泰勒斯的学生，认为世界源于无限的空气。在西方哲学史上，他开创了用事物量的变化来说明事物在性质上的区别的历史。</p>
+<h3 id="3-毕达哥拉斯学派"><a href="#3-毕达哥拉斯学派" class="headerlink" title="3. 毕达哥拉斯学派"></a>3. 毕达哥拉斯学派</h3><p>毕达哥拉斯不仅终生研究数学，还创立了一个研究数学的学派。这个学派就是西方哲学史上著名的毕达哥拉斯学派。这个学派不仅是学术团体，而且还是一个有着神秘主义倾向的宗教团体。</p>
+<p>加入这个团体的人，不仅要掌握有关数学、音乐等方面的知识，而且还要遵守很多在今天我们看来匪夷所思的禁忌和规定。比如，禁食豆子；东西落下了，不要拣起来；不要去碰白公鸡；不要劈开面包；不要迈过门闩；不要用铁拨火；不要吃整个的面包；不要招花环；不要坐在斗上；不要吃心；不要在大路上行走；房里不许有燕子……</p>
+<p>在毕达哥拉斯建立的这个团体里，不分男女都可以参加；财产是公有的，而且有一种共同的生活方式，甚至于科学和数学的发现也认为是集体的，而且，在一种神秘的意义上，都得归功于毕达哥拉斯；甚至于在他死后也还是如此。据说，梅达彭提翁的希巴索斯曾违反了这条规矩，便因船只失事而死，这是神对于他的不虔诚而震怒的结果。</p>
+<p>这个学派在宗教信仰上相信灵魂转世和轮回。一个人要想加入该学派，就必须接受一段时期的考验，经过挑选后才被允许去听坐在帘子后面的毕达哥拉斯的讲授。只有再过若干年后当他们的灵魂因为受音乐的不断熏陶和经历贞洁的生活而变得更加纯净时，才允许见到毕达哥拉斯本人。他们认为，经过纯化并进入和谐及数的神秘境界，可以使灵魂趋近神圣而从轮回转生中得到解脱。</p>
+<p>（1）毕达哥拉斯</p>
+<p>毕达哥拉斯（公元前500年 ~ 公元前490年），万物都是数。毕达哥拉斯定理（勾股定理），师从泰勒斯、阿那克西曼德。</p>
+<p>“最优秀的人则献身于发现生活本身的意义和目的。他设法揭示自然的奥秘，热爱知识，这种人就是哲学家。”</p>
+<h3 id="4-爱菲斯学派"><a href="#4-爱菲斯学派" class="headerlink" title="4. 爱菲斯学派"></a>4. 爱菲斯学派</h3><p>（1）赫拉克利特</p>
+<p>赫拉克利特（公元前540年 ~ 公元前470年），师从米利都学派、毕达哥拉斯。第一个提出认识论的哲学家，朴素辩证法思想的代表人物。人不能两次踏进同一条河流，“一切皆流，无物常住。”</p>
+<h3 id="5-爱利亚学派"><a href="#5-爱利亚学派" class="headerlink" title="5. 爱利亚学派"></a>5. 爱利亚学派</h3><p>爱利亚学派因意大利南部都市爱利亚而得名，流行于公元前6至5世纪之际，这一派别的中心思想是：<strong>世界的本原是不变的一。</strong>这与主张本原是单一，但却是变化的伊奥尼亚学派和主张本原是不变，但却是众多的毕达哥拉斯学派不同。</p>
+<p>爱利亚学派成员对本原的表述不一，论证的思路也不同，但按照时间顺序，可以把该派思想的发展分为三个阶段：</p>
+<ol>
+<li>理神论阶段。这一阶段的代表人物是克塞诺芬尼。克塞诺芬尼对神人同形同性论提出了严厉的批判，认为神是唯一的、不变的本原。</li>
+<li>存在论阶段。这一阶段的代表人物是巴门尼德。他把“存在”规定为世界的本原，认为，唯有人的思维才能达到存在，揭示真理，我们的感官提供给我们的仅仅是意见，而意见是会骗人的。</li>
+<li>论辩阶段。这一阶段的代表人物是芝诺。他把老师巴门尼德的存在概念贯彻到了可感事物上面，从而提出了一系列为今天我们所熟知的悖论。</li>
+</ol>
+<p>（1）色诺芬尼</p>
+<p>色诺芬尼（公元前570年~公元前470年），认为人类获取知识要靠自身努力而非依赖神的启示。</p>
+<p>（2）巴门尼德</p>
+<p>爱利亚派的实际创始人和主要代表着，色诺芬尼的学生。著有《论自然》，认为感官是骗人的，并把大量的可感觉的事务都斥之为单纯的幻觉。唯一真实的存在就是“一”。师从米利都学派、毕达哥拉斯。从巴门尼德开始，哲学的研究开始进入思辨的领域。</p>
+<h3 id="6-元素论者"><a href="#6-元素论者" class="headerlink" title="6. 元素论者"></a>6. 元素论者</h3><p>元素论者是古希腊时期的一个自然哲学学派，以恩培多克勒、阿纳克萨戈拉和德谟克里特为代表。这一学派将世界的本原归结为组成事物不可分割的物理单元，因此被后来的亚里士多德概括为“元素论者”。</p>
+<p>恩培多克勒提出的是“四根说”。他认为世界的本原是火、土、水、气，统称“四根”。万物因四根的组合而生成，因四根的分离而消失。四根本身没有组合和分离的能力，它们的分和需要外部原因来解释。这些原因就是使“四根”相互眷恋的“爱”和使“四根”相互争斗的“恨”。</p>
+<p>恩培多克勒用四根来说明事物的可感性质，用爱恨来说明事物的发展变化。阿纳克萨戈拉认为世界的本原是“种子”。种子的性质与事物的可感性质相同，事物有多少种性质，构成它的种子就有多少类。数目众多的一类种子构成事物的一种性质或一部分。和恩培多克勒一样，阿纳克萨戈拉在种子意外，也设定了能动性的本原，即“心灵”。心灵弥漫在世界之中，支配着种子的运动。</p>
+<p>后来的德谟克里特是元素论的集大成者。他继承并深化了恩培多克勒和阿纳克萨戈拉的观点，把世界的本原归结为“原子”和“虚空”，用“原子”在“虚空”中的运动变化来解释万物的可感性质和运动变化。</p>
+<p>（1）恩培多克勒</p>
+<p>恩培多克勒（公元前495年~公元前435年），认为万物皆由水、土、火、气四者构成，再由“爱”与“冲突”或合或间。</p>
+<p>提出“同类相知”</p>
+<p>他的一生充满了传奇的色彩，可以说在他那里，哲学家、预言者、科学家和江湖术士等等身份经常交错出现，以至于我们无法确切地勾勒出他的形象。</p>
+<p>（2）阿那克萨哥拉</p>
+<p>阿那克萨哥拉（公元前500年~公元前428年），认为生命的一切都是由心支配，任何事物都由更小的事物组成。</p>
+<p>提出“异类相知”</p>
+<p>作为原子唯物论的思想先驱，阿那克萨戈拉凭借自己的哲学活动和哲学思想证明了自己的价值，也赢得了足够的尊重。</p>
+<p>（3）留基伯</p>
+<p>率先提出原子论（万物由原子构成），是德谟克利特的老师。</p>
+<p>（4）德谟克利特</p>
+<p>德谟克利特（公元前460年~公元前370年），认为每一种事物都是由原子组成的，整个世界的本质只是原子和虚空。</p>
+<p>德谟克利特被马克思和恩格斯称为“经验的自然科学家和希腊人中第一个百科全书式的学者”。</p>
+<h3 id="7-智者学派"><a href="#7-智者学派" class="headerlink" title="7. 智者学派"></a>7. 智者学派</h3><p>智者运动是流行于公元前5世纪至4世纪的广泛的社会思潮，它不局限于哲学领域，但对哲学的发展方向、哲学的主题和方法产生了深远的影响。在希腊文中，“智者”来源于“智慧”一词，意思是“具有智慧的人”。开始的时候，这个词主要用来指诗人、音乐家、预言家、狂诵者。</p>
+<p>希腊历史上著名的“七贤”就有这样的称号。然而到了公元前5世纪后期，“智者”则专门指那些以传授智慧为职业，并在公众事业中有所成就的人。在当时的希腊人看来，智慧就是用优雅的语言来表达思想的艺术，而智者正是传授这门艺术的教师。</p>
+<p>智者并不是为智慧而教授智慧的思辨家，他们传授智慧是具有功利目的，即要培养能够在政治活动中获胜的人才。而来学习语言艺术的人，都要向老师交纳学费。据柏拉图说，当时负有盛名的智者普罗泰戈拉的学生都是来自名门望族，他们的目的或是成为政治家，或是成为职业智者。而对智者而言，传授知识则是为了挣钱。每一个来学习的人都要交纳学费。没有学费，是不能成为智者的学生的。</p>
+<p>在这方面，智者与希腊早期的自然哲学家形成了鲜明的对比。可以说，早期的哲学家是以智慧为追求目标的“爱智慧的人”。智者虽然也是“有智慧的人”，但智慧只是他们用来达到实用目的的手段。这一点，遭到了后来柏拉图的强烈批评。他把智者斥为“批发或零售精神食粮的商人”。</p>
+<p>（1）普罗泰戈拉</p>
+<p>普罗泰戈拉（公元前490年~公元前420年），著有《论神》，提出“人是万物的尺度”的著名命题。他是第一个自称为智者的人，也是古希腊第一位公众教师，还是第一个收学费的人。</p>
+<p>（2）高尔吉亚</p>
+<p>高尔吉亚（公元前483年~公元前375年），著有《论自然和非存在》</p>
+<h3 id="8-怀疑主义"><a href="#8-怀疑主义" class="headerlink" title="8. 怀疑主义"></a>8. 怀疑主义</h3><p>怀疑是伴随着哲学发展的始终的，因为我们不可能穷尽对这个世界的认识，我们永远不敢绝对的说已经把握了世界的本质。人也是因为有了怀疑，才开始探索这个世界的原因的，同样也正是因为有怀疑，我们的认识才能够逐步接近于世界的本质。</p>
+<p>在古希腊晚期哲学中，怀疑主义和伊壁鸠鲁学派、斯多葛学派并驾齐驱，虽然他们都是抱着同样高尚的伦理目的——追求灵魂安宁的最高境界，但是他们选择了不同的道路。伊壁鸠鲁学派选择追求感观快乐，斯多葛学派选择恪守理性规则，而怀疑主义则选择放弃对世界的认知。怀疑主义把伊壁鸠鲁学派和斯多葛学派的观点都斥为独断论，既不相信感觉，也不相信理性或者逻各斯，他们主张对一切都保持沉默，对一切都不做判断，不为任何事物动心，试图完全把自己封闭在空白的心灵之中。</p>
+<p>把怀疑主义作为一种理论形态引进哲学中的是皮浪。皮浪虽然承认现象的存在，但是他否定现象的真实性。既然现象没有任何真实性，那么我们就不能从现象中得到任何的真实的认识。我们既不能判断我们的感觉是真的也不能判断我们的感觉是假的，因此他主张对一切问题实行“中止判断”。皮浪还认为对于每一个命题都可以提出一个相反的命题与之对立，二者具有同样的价值和效力，所以一切独断论都是不能成立了。</p>
+<h2 id="希腊三贤"><a href="#希腊三贤" class="headerlink" title="希腊三贤"></a>希腊三贤</h2><p>（公元前4世纪-公元4世纪）</p>
+<h3 id="1-苏格拉底"><a href="#1-苏格拉底" class="headerlink" title="1. 苏格拉底"></a>1. 苏格拉底</h3><p>苏格拉底（公元前470年～公元前399年），西方哲学的奠基者，和其学生柏拉图及柏拉图的学生亚里士多德并称为“<strong style="border-bottom: 1px green dashed;">希腊三贤</strong>”。被雅典法庭以不虔诚和腐蚀雅典青年思想之罪名（原因是不相信神）判处死刑。</p>
+<p>对于西方思想最重要的贡献是他的<strong style="border-bottom: 1px green dashed;">辩证法</strong>，或称为苏格拉底教学法或诘问法。他自称自己为“精神助产士”。</p>
+<p>追求德性。</p>
+<p>通过辩论让对方承认自己理论上的弱点，并让对方逐渐构成正确的意见。</p>
+<h3 id="2-柏拉图"><a href="#2-柏拉图" class="headerlink" title="2. 柏拉图"></a>2. 柏拉图</h3><p>柏拉图（公元前427年～公元前347年），西方客观唯心主义的创始人。</p>
+<p>著作《理想国》向我们描绘出了一副理想的乌托邦的画面，柏拉图认为，国家应当由哲学家来统治。《理想国》提出了<strong style="border-bottom: 1px green dashed;">理念论和回忆说的认识论</strong>，并将它作为其教学理论的哲学基础。</p>
+<p>柏拉图哲学是一种典型的形而上学（<strong style="border-bottom: 1px green dashed;">形而上学就是把这个世界分为表象和本质，我们看得见摸得着的纷繁芜杂的世界都是表象，在表象的背后，还有一个主宰表象的本质世界，这个本质世界是统一的、永恒的、纯粹的、美好的，因而也是能给我们的生活赋予意义的。</strong>）。柏拉图提出了理念论，认为世间万物之所以能够存在是因为先有了理念，桌子有桌子的理念，人有人的理念，善有善的理念。理念是看不见摸不着的，它是纯粹的、永恒的，是高居于彼岸世界的。现实世界不是永恒的是虚无的，只有理念才是真实的存在。</p>
+<p>灵魂也是一种理念，灵魂因为理念的特性从而不朽。灵魂是折断了翅膀的天使，灵魂有着高贵的血统，因此，<strong style="border-bottom: 1px green dashed;">学习是一种回忆</strong>，智慧不是后天学习得到的，也不是无中生有地产生的，而是灵魂本身所固有的。</p>
+<p>《裴多篇》发展为基督教的重要学说，成为神学的一部分。因此后来尼采认为<strong style="border-bottom: 1px green dashed;">基督教是用户下沉了的柏拉图主义</strong>。</p>
+<p>《蒂迈欧篇》提出了宇宙生成论。</p>
+<p>《美诺篇》探索了美德究竟是否被教导、以及美德究竟为何。</p>
+<p>《泰阿泰德篇》认为眼和耳朵只是知觉的工具，而不是思考的工具。</p>
+<h3 id="3-亚里士多德"><a href="#3-亚里士多德" class="headerlink" title="3. 亚里士多德"></a>3. 亚里士多德</h3><p>亚里士多德（公元前384～公元前322），西方哲学的奠基者。在亚里士多德，古希腊哲学发展到顶峰，之后开始衰落。从此哲学关心的问题开始转向，哲学家的注意力已经不再集中于世界从何而来这样的自然问题，而是集中在寻求个人的幸福，寻找摆脱痛苦的办法。因此这个时候，哲学的中心问题是伦理。</p>
+<p>形而上学方面，反对理念说，提出共相学说，创造了名词“本质”，提出了“形式”与“质料”的区别。《论灵魂》中将“灵魂”与“心灵”区分开来。</p>
+<p>伦理学方面，同意柏拉图将灵魂分为理性和不理性，将道德分为理智与道德的。</p>
+<p>政治学方面，点明了国家的重要性，反对柏拉图的集体主义，认为国家不应该对外扩张，认为公民不应该从商或务农，而应该多思考。</p>
+<p>逻辑学方面，提出“三段论”学说：人都会死（大前提），苏格拉底是人（前提），苏格拉底会死（结论）。</p>
+<p>物理学方面，著有《物理学》和《论天》，其影响力延伸到了文艺复兴时期，最终被牛顿物理学取代。</p>
+<p>经济学方面，对于经济活动的分类与看法持续影响到中世纪，直到被亚当斯密的古典经济学派取代为止。</p>
+<h3 id="4-不同学派"><a href="#4-不同学派" class="headerlink" title="4. 不同学派"></a>4. 不同学派</h3><h4 id="小苏格拉底派"><a href="#小苏格拉底派" class="headerlink" title="小苏格拉底派"></a>小苏格拉底派</h4><p>苏格拉底死后，他的一些弟子自称继承了他的思想和风格。后世一般称他们为“小苏格拉底派”。这一名称并不表示一个统一的学派，而是持不同观点的个人的总称。</p>
+<p>他们虽然都关心苏格拉底提出的什么是善的问题，但对善的认识和实践各不相同。他们按照地域可以分为麦加拉派、昔兰尼派和爱托利亚排，最著名者是因为仿效狗的生活而成名的犬儒派。他们的著作都已经佚失，只在柏拉图、亚里士多德、德奥弗拉斯托和拉尔修，以及西塞罗和斯多亚派哲学家的著作里留下零星的踪迹。</p>
+<h4 id="柏拉图学园"><a href="#柏拉图学园" class="headerlink" title="柏拉图学园"></a>柏拉图学园</h4><p>“柏拉图学园”，顾名思义，就是柏拉图创立的学园，又叫“阿加德米”（Academy）学园。今天的大学“学院”就是从“阿加德米”这个词来的。</p>
+<p>公元前399年，苏格拉底受审并被判死刑，柏拉图逃往梅加腊避难。后来他到各地游历，包括西西里岛、南意大利、埃及等地。公元前387年，柏拉图回到雅典，并创办了学园（或称“阿加德米”，Academy）。学园的名字与学园的地址有关，学园的校址所在地与希腊的传奇英雄阿卡得摩斯（Academus）有关，因而以此命名。</p>
+<p>学园是西方最早的教学机构，它是中世纪时在西方发展起来的大学的前身。柏拉图学园存在了900多年，直到公元529年被查士丁尼大帝关闭为止。该学园受毕达哥拉斯的影响较大，课程设置类似于毕达哥拉斯学派的传统课题，包括了算术、几何学、天文学以及声学。</p>
+<p>公元前367年，柏拉图再度出游，此时学园已经创立二十多年了。他到达锡拉库萨，并将自己的理念付诸实施，但是却遭到强行放逐，于公元前360年回到雅典，继续在学园讲学、写作。</p>
+<h4 id="逍遥学派"><a href="#逍遥学派" class="headerlink" title="逍遥学派"></a>逍遥学派</h4><p>逍遥学派是亚里士多德创立的学派，故又称作亚里士多德学派。公元前347年，亚里士多德应马其顿国王腓力浦二世的邀请，从雅典回到故乡马其顿，成为当时年仅13岁的亚历山大大帝的老师。</p>
+<p>公元前335年，腓力浦去世，亚里士多德又回到雅典，并在那里建立了自己的学校。学园的名字（Lyceum）以阿波罗神殿附近的杀狼者（吕刻俄斯）来命名。在此期间，亚里士多德边讲课，边撰写了多部哲学著作。亚里士多德讲课时有一个习惯，即边讲课，边漫步于走廊和花园，正是因为如此，学园的哲学被称为“逍遥哲学”或者“漫步的哲学”。</p>
+<p>亚里士多德死后，该派由他的弟子继承下来。公元前287年以前，领导该派的是泰奥弗拉斯多。他继续老师的所有研究领域，尤其致力于生物学的研究，在植物学和逻辑方面做出了贡献。在哲学上，他提出了物质自己运动的观点，反对在自然界中寻找目的因。公元前287～前269年，该派由斯特拉图领导。他致力于自然科学研究，并做出了贡献；在哲学上他反对灵魂不朽。继斯特拉图之后领导该派的是吕康，但从这时起，该派已失去其重要地位。</p>
+<p>公元前1世纪，该派继承者安德罗尼科重新开始了对亚里士多德学说的研究，但他主要是对亚里士多德著作进行校勘、整理、编纂和注释。该派由此活跃起来，持续数世纪。2世纪，亚弗洛弟西亚的亚历山大对亚里士多德的主要论著作重要的评注，使注释工作达到了高峰。逍遥学派主要是对亚里士多德著作的保存、流传和研究作出了重要贡献。6世纪初，拜占庭皇帝尤斯底年下令禁止亚里士多德学说的传播，该派因而瓦解。</p>
+<h2 id="亚里士多德之后的哲学流派"><a href="#亚里士多德之后的哲学流派" class="headerlink" title="亚里士多德之后的哲学流派"></a>亚里士多德之后的哲学流派</h2><h3 id="1-犬儒学派"><a href="#1-犬儒学派" class="headerlink" title="1. 犬儒学派"></a>1. 犬儒学派</h3><p>“犬儒学派”这个名字的由来有两种解释：有人说该学派创始人安提斯泰尼经常到雅典一个被人们叫做“快犬”的体育场去和人们谈话、辩论，在这个地方逐渐形成了他的思想和观点的最初的追随者队伍，因而被称作“犬儒派”。</p>
+<p>也有人说，当时奉行这一主义的哲学家或思想家，他们的举止言谈、行为方式甚至是生活态度，都与狗的某些特征很相似。他们旁若无人、放浪形骸、不知廉耻，却忠诚可靠、感觉灵敏、敌我分明、敢咬敢斗。于是人们就称这些人为“犬儒”，意思是“像狗一样的人”该学派的人生活简朴，像狗一样地存在，被当时其他学派的人称为“犬”。</p>
+<p>犬儒主义者奉行简单的生活方式。在他们看来，除了自然的需要必须满足外，其他的任何东西，包括社会生活和文化生活，都是不自然的、无足轻重的。由此，他们的行为无拘无束，我行我素，无所顾忌，不知羞耻，无动于衷，粗俗无礼，虚荣自负，傲视一切，自我欣赏。他们不要家庭，不要子女，即使结婚，则夫妻同为犬儒，而且竟然在大庭广众之下行交合之事。犬儒主义诗人克拉底和女犬儒主义者喜帕契亚就是一对犬儒夫妇。他们藐视一切权威，谁都敢“损”，谁都敢“讽”。</p>
+<p>犬儒派是希腊城邦制度的现实产物，也是希腊城邦文化的叛逆。希腊的城邦制度的繁荣孕育了犬儒主义这个极端化的产儿，城邦制度的衰落催生了它。对这个学派而言，生命的目的与其说是成就某种积极的善，还不如说是逃避不幸。正像罗素说的，这种学说除了对于强有力的罪恶是一种抗议外，是不可能指望难有促进艺术、科学或政治以及其它任何有用的事物进步的。</p>
+<p>（1）安提西尼</p>
+<p>安提西尼（公元前445年 ~ 公元前365年），苏格拉底的学生。接受并发展了苏格拉底对于伦理的教导，强调实践禁欲的生活是一种美德。</p>
+<p>（2）第欧根尼</p>
+<p>第欧根尼（公元前412年 ~ 公元前324年），安提西尼的学生。强调禁欲主义的自我满足，鼓励放弃舒适环境。</p>
+<p>“别挡住我的阳光”</p>
+<p>“一个哲人，即便他身为奴隶，也是他人的自然统治者，就像医生是病人的导师一样。”</p>
+<h3 id="2-怀疑派"><a href="#2-怀疑派" class="headerlink" title="2. 怀疑派"></a>2. 怀疑派</h3><p>（1）皮浪</p>
+<p>皮浪（公元前360年 ~ 公元前270年），除了感官怀疑，加入了道德怀疑和逻辑怀疑。</p>
+<p>（2）蒂孟</p>
+<p>蒂孟（公元前 ？年 ~ 公元前235年），皮浪的弟子，提出怀疑主义不相信绝对的事情，击中了亚里士多德哲学体系的软肋。</p>
+<p>（3）阿塞西劳斯</p>
+<p>阿塞西劳斯（公元前316年 ~ 公元前241年），柏拉图阿卡德米学园中的首位怀疑主义者，从不提倡任何论点，但对学生所提出的任务论点他都会反驳。</p>
+<h3 id="3-伊壁鸠鲁派"><a href="#3-伊壁鸠鲁派" class="headerlink" title="3. 伊壁鸠鲁派"></a>3. 伊壁鸠鲁派</h3><p>伊壁鸠鲁学派是伊壁鸠鲁于公元前307年开始在雅典建立了一个学派。这个学派在伊壁鸠鲁去世之前一直在雅典活动。传说中该学派居于他的住房和庭院内，与外部世界完全隔绝，因此被人称为“花园哲学家”。据说在庭院的入口处有一块告示牌写着：“陌生人，你将在此过着舒适的生活。在这里享乐乃是至善之事。”</p>
+<p>伊壁鸠鲁死后，他的学说被历代弟子奉为必须遵守的信条。伊壁鸠鲁的学说广泛传播于希腊——罗马世界。伊壁鸠鲁学派作为最有影响的学派之一延续了4个世纪。罗马时期伊壁鸠鲁学派的著名代表有菲拉德谟和卢克莱修。他写的哲学长诗《物性论》，系统地宣传和保存了伊壁鸠鲁的学说。3世纪以后，伊壁鸠鲁的学说成了基督教的劲敌。</p>
+<p>在中世纪，伊壁鸠鲁成了不信上帝、不信天命、不信灵魂不死的同义语。文艺复兴时期，由于卢克莱修《物性论》的发现和出版，扩大了伊壁鸠鲁学说对早期启蒙思想家的影响。17世纪P.伽森狄全面恢复了伊壁鸠鲁学说，它直接影响了17～18世纪英、法唯物主义哲学和自然科学。伊壁鸠鲁的社会契约说是近代社会契约论的直接先驱，他的伦理思想对英国J.边沁、J.S.密尔等的功利主义发生了影响。</p>
+<p>伊壁鸠鲁主义的经典之作是《物性论》。《物性论》，也可译为《论事物的本性》，出自忠实的伊壁鸠鲁主义者卢克莱修之手。这是一部用拉丁文写成的哲学诗集，全书共六卷。</p>
+<p>第一卷重点论述了原子和虚空学说；第二卷解释原子的运动，以此说明一切可感事物的原因。第三卷论述了原子如何构成人的灵魂，详细论述了灵魂的可朽性。第四卷对感觉、意志等心理活动作了原子论的解释。第五卷阐述了伊壁鸠鲁的宇宙观。第六卷进一步解释了一些具体的自然现象，比如雷电、磁力等等。最后，全书以伯罗奔尼撒战争期间雅典瘟疫为题结束全书。</p>
+<p>《物性论》充满了对伊壁鸠鲁的赞美。这一方面表露出伊壁鸠鲁的追随者神化其师的一贯做法，另一方目也反映出卢克莱修承袭师说的忠实立场。</p>
+<p>《物性论》虽然没有理论上的创新，但却丰富了伊壁鸠鲁主义。而且，这部著作用优雅的拉丁诗体写成，具有很大的文学价值。</p>
+<p>（1）伊壁鸩鲁</p>
+<p>当有人问他什么是哲学的时候，他回答：“哲学就是一帖治疗灵魂疾病的药剂。”</p>
+<p>伊壁鸩鲁（公元前341～公元前270年），发展了阿瑞斯提普斯的享乐主义，并将之与德谟克利特的原子论结合起来。学说的主要宗旨就是要达到不受干扰的宁静状态。</p>
+<p>古希腊哲学家、无神论者（被认为是西方第一个无神论哲学家）、伊壁鸠鲁学派的创始人。他的学说的主要宗旨就是要达到不受干扰的宁静状态，并要学会快乐。</p>
+<p>伊壁鸠鲁作为一个哲学家，他毕生致力于研究如何让人们获得真正的幸福和快乐。他的学说——伊壁鸠鲁主义，是古希腊哲学中最重要的一支流派之一，对后世的哲学、文化、艺术等领域产生了深远的影响。</p>
+<p>伊壁鸠鲁主义的核心思想是“快乐至上”，这并非只是一种简单的享乐主义。相反，伊壁鸠鲁认为，<strong>真正的快乐源于理智和自律，而不是肉体上的感官刺激</strong>。因此，为了达到真正的快乐，我们需要通过自律、节制和理性思考来规划自己的行为，避免过度满足欲望和短视的行为决策。</p>
+<p>他的学说还强调了人与人之间的相互关系，<strong>提倡友谊和公正，并反对权力和财富的过度追求</strong>。他让人们重新审视生命的意义，认识到<strong>真正的幸福源于自我掌控和内在的平静感</strong>。</p>
+<p>当然，伊壁鸠鲁主义仍然有其不足之处。比如，该学派在宣扬自由和个人解放的同时，往往会忽略社会整体的利益和责任。此外，伊壁鸠鲁主义并不是一个完全封闭的哲学体系，在后世曾经发生过多次变异和发展。</p>
+<p>1、关于快乐：快乐是幸福生活的开始和目的，因此我们认为幸福生活是我们天生的最高的善，我们的一切取舍都从快乐出发，我们的最终目的是得到快乐。</p>
+<p>快乐就是身体的无痛苦和灵魂的无纷扰。</p>
+<p>2、关于死亡的看法：死亡对于我们是无足轻重的，因为当我们存在时，死亡对于我们还没有来，而当死亡来时，我们已经不存在了。</p>
+<p>3、相反的哲学——<strong>霍菲尔德（</strong>1879年－1918年，美国分析法学代表人物<strong>）</strong>的哲学思想和贡献</p>
+<p>除了伊壁鸠鲁主义，霍菲尔德也是哲学史上的重要人物之一。他在研究认识论和形而上学方面做出了巨大的贡献，并对西方法律思想史产生了深刻影响。</p>
+<p>霍菲尔德的哲学思想是建立在康德、黑格尔等人的基础上的，强调人类意识的自我反思和自我发现。他认为，只有通过对本体、存在、真理等问题的探讨，才能达到真正的认知和理解。</p>
+<p>与伊壁鸠鲁主义不同的是，霍菲尔德并没有将快乐视为终极目标。相反，他更加注重人类的精神发展和道德价值。他认为，<strong>唯有通过对自我、他人和环境的责任感和关爱，才能达到全面的幸福和快乐</strong>。</p>
+<p>（2）卢克莱修</p>
+<p>卢克莱修（公元前99年 ~ 公元前55年），将伊壁鸠鲁的哲学转换成了诗歌的形式，著有哲理长诗《物性论》</p>
+<p>人的真正财富是拥有简单平和的心灵</p>
+<p>“卢克莱修在他的时代独自进行了一场壮烈的战争，他当然是一位最伟大的哲学诗人。因为他，以及后来的卡塔路斯、西塞罗和维吉尔，拉丁文学才走向成熟。”</p>
+<h3 id="4-斯多葛派"><a href="#4-斯多葛派" class="headerlink" title="4. 斯多葛派"></a>4. 斯多葛派</h3><p>雅典城有一个用希腊著名画家波立戈诺特的绘画装饰起来的富丽堂皇的画廊。大约在公元前308年，希腊哲学家们在这个地方创立了一个学派。画廊在希腊文中叫斯多亚（stoa），所以，这个学派就叫斯多亚学派，也可以叫画廊学派。</p>
+<p>斯多亚学派存在的时间很长，一般分为三个时期：</p>
+<p>早期斯多亚学派（从公元前308年—公元前2世纪中叶），代表人物有芝诺、克雷安德和克吕西波。它的特点是在自然哲学和认识论中有较多的唯物主义因素。</p>
+<p>中期斯多亚学派（公元前2世纪中叶—公元1世纪末），代表人物有巴内修斯和波塞唐纽斯。它的特点是抛弃了早期斯多亚学派的唯物主义成分，引进了相当多的柏拉图主义的理论。</p>
+<p>晚期斯多亚学派（公元1世纪—2世纪），代表人物是辛尼加、爱比克泰德和奥里略。它的特点是着重发展了宿命论和禁欲主义的伦理学。在这三个时期中，影响比较大的是早期和晚期两个学派，中期的影响不大。</p>
+<p>斯多亚派的代表作——《沉思录》。《沉思录》，古罗马唯一一位哲学家皇帝马可·奥勒留所著，这本自己与自己的十二卷对话，内容大部分是他在鞍马劳顿中所写，是斯多亚派哲学的一个里程碑。《沉思录》来自于作者对身羁宫廷的自身和自己所处混乱世界的感受，追求一种摆脱了激情和欲望、冷静而达观的生活。</p>
+<p>马可·奥勒留在书中阐述了灵魂与死亡的关系，解析了个人的德行、个人的解脱以及个人对社会的责任，要求常常自省以达到内心的平静，要摈弃一切无用和琐屑的思想、正值地思考。而且，不仅要思考善、思考光明磊落的事情，还要付诸行动。</p>
+<p>马可·奥勒留把一切对他发生的事情都不看成是恶，认为痛苦和不安仅仅是来自内心的意见，并且是可以由心灵加以消除的。他对人生进行了深刻的哲学思考，热诚地从其他人身上学习他们最优秀的品质，果敢、谦逊、仁爱……他希望人们热爱劳作、了解生命的本质和生活的艺术、尊重公共利益并为之努力。《沉思录》是一些从灵魂深处流淌出来的文字，朴实却直抵人心。</p>
+<p>（1）芝诺</p>
+<p>芝诺（公元前335年 ~ 公元前263年），不认可柏拉图学说，反对灵魂不死。继承苏格拉底的学说，提出最重要的是“德行”，坚持决定论。</p>
+<p>“飞矢不动”</p>
+<p>亚里士多德说他是论辩法即辩证法的创始人。他的论证方法及辩论技巧，是后来智者们的思想渊源，促进了逻辑和理论思维的发展。</p>
+<p>（2）赛内卡</p>
+<p>赛内卡（公元前4年 ~ 公元65年），古罗马时代著名的科尔多瓦斯多亚学派哲学家、政治家、剧作家。曾任尼禄皇帝的导师及顾问，62年因躲避政治斗争而引退。</p>
+<p>（3）爱比克泰德</p>
+<p>爱比克泰德（公元55年~公元135年），学生编撰了《语录》和《手册》，从而积存了他的思想。</p>
+<p>（4）马可 奥勒留</p>
+<p>马可 奥勒留（公元121年 ~ 公元180年），罗马帝国最伟大的皇帝之一，著有《沉思录》。</p>
+<h3 id="5-新柏拉图主义"><a href="#5-新柏拉图主义" class="headerlink" title="5. 新柏拉图主义"></a>5. 新柏拉图主义</h3><p>新柏拉图主义是古希腊文化末期最重要的哲学流派，并对西方中世纪的基督教神学产生了重大影响。该流派主要基于柏拉图的学说，但在许多地方进行了新的诠释。新柏拉图主义被认为是以古希腊思想来建构宗教哲学的典型。新柏拉图主义流行于公元3—5世纪。</p>
+<p>它虽然被归属于柏拉图主义阵营，但却带有折衷主义倾向，与亚里土多德学说和斯多亚派有着明显的联系。它的特点在于：建构了超自然的世界图式，更明确地规定了人在其中的位置，把人神关系置于道德修养的核心，强化了哲学和宗教的同盟，具有更浓厚的神秘主义色彩。新柏拉图主义的中心有罗马、亚历山大城、叙利亚、雅典。</p>
+<p>新柏拉图主义认为，世界有两极，一端是被称为“上帝”的神圣之光，另一端则是完全的黑暗。但新柏拉图主义也相信，完全的黑暗并不存在，只是缺乏亮光而已。世间唯一存在的就是上帝，照耀着神圣之光，但就像光线会逐渐变弱，神圣之光也无法普照整个世界。</p>
+<p>普罗提诺认为，灵魂受到神圣之光的照耀，物质则位于那光照不到的黑暗世界，而柏拉图所提出的自然界的“形式”则微微受到神圣之光的照耀。因此，新柏拉图主义强调，世间一切事物都有这种神圣之光，但最接近上帝的光芒的，还是人类的灵魂，只有灵魂才能与神秘与伟大合而为一。在一些偶然的时候，人甚至可以体验到自己就是那神圣的自然之光。</p>
+<p>普罗提诺（公元204年 ~ 公元270年），新柏拉图学派最著名的哲学家，新柏拉图主义之父。主张有神论，同时主张神秘主义，对基督教和天主教神学产生重大影响。</p>
+<h2 id="中世纪哲学"><a href="#中世纪哲学" class="headerlink" title="中世纪哲学"></a>中世纪哲学</h2><p>（公元4世纪-14世纪）</p>
+<h3 id="1-奥古斯丁"><a href="#1-奥古斯丁" class="headerlink" title="1. 奥古斯丁"></a>1. 奥古斯丁</h3><p>奥古斯丁（公元354年~公元430年），著有《忏悔录》，被称为西方历史上第一部自传。著有《上帝之城》，书中说明罗马的衰退是肇因于道德的衰退；基督教不但不是罗马衰退的原因，反而有助于道德的提升。</p>
+<p>“真理就居住在人的内心”</p>
+<p>奥古斯丁哲学的目的是用哲学的手段论证基督教的信仰，指引人们寻求上帝的路径。</p>
+<h3 id="2-本尼狄克"><a href="#2-本尼狄克" class="headerlink" title="2. 本尼狄克"></a>2. 本尼狄克</h3><p>本尼狄克（公元480年~公元547年），西方修道僧制度中最重要的人物，对西派教会产生了重大影响。本尼狄克教团缔造者，指定了“本尼狄克”教规。提出“越能极端的苦行的人，就越有可能被认为是神圣的人”</p>
+<h3 id="3-查士丁尼"><a href="#3-查士丁尼" class="headerlink" title="3. 查士丁尼"></a>3. 查士丁尼</h3><p>查士丁尼（公元527年~公元565年），东罗马帝国（拜占庭帝国）皇帝。下令纂成《渣士丁尼法典》等重要的罗马法典。</p>
+<h3 id="4-大格里高利"><a href="#4-大格里高利" class="headerlink" title="4. 大格里高利"></a>4. 大格里高利</h3><p>大格里高利（公元540年~公元604年），第64任罗马天主教教皇，著有《伦理丛谈》、《司牧训话》。神学思想主要是遵循奥古斯丁的学说，但较少强调预定论。</p>
+<h3 id="5-约翰-司各特"><a href="#5-约翰-司各特" class="headerlink" title="5. 约翰 司各特"></a>5. 约翰 司各特</h3><p>约翰 司各特（公元800年~公元877年），中世纪后期唯名论的代表之一，新柏拉图主义者，倾向斐拉鸠斯教派。主张泛神论，认为理性应在信仰之上。</p>
+<h3 id="6-托马斯-阿奎那"><a href="#6-托马斯-阿奎那" class="headerlink" title="6. 托马斯 阿奎那"></a>6. 托马斯 阿奎那</h3><p>托马斯 阿奎那（公元1225年~公元1274年），公认的最伟大的经院派哲学家和神学家。理性引进神学，用“自然法则”来论证“君权神圣”说。西欧封建社会基督教神学和神权政治理论的最高权威，经院哲学的集大成者。保存并且修改了亚里士多德学派的思想，著有《神学大全》。</p>
+<p>哲学是神学的婢女</p>
+<p>他一共提出了证明上帝存在的五种形式，这五种形式被简称为通向上帝的“五路”。</p>
+<h3 id="7-爱留根纳"><a href="#7-爱留根纳" class="headerlink" title="7. 爱留根纳"></a>7. 爱留根纳</h3><p>信仰应当服从理性</p>
+<p>黑格尔认为，在中世纪，真正的哲学是从爱留根纳开始的。</p>
+<h3 id="8-安瑟伦"><a href="#8-安瑟伦" class="headerlink" title="8. 安瑟伦"></a>8. 安瑟伦</h3><p>信仰了才能理解</p>
+<p>安瑟伦是欧洲中世纪经院哲学家、神学家，唯实论的主要代表之一，被称为“最后一名教父和第一个经院哲学。</p>
+<h3 id="9-不同学派"><a href="#9-不同学派" class="headerlink" title="9. 不同学派"></a>9. 不同学派</h3><h4 id="经院哲学"><a href="#经院哲学" class="headerlink" title="经院哲学"></a>经院哲学</h4><p>“经院哲学”（英文“scholasticism”或者“scholastic philosophy”，原意为“学院中人的思想”，又译作“士林哲学”。当它被翻译成“经院哲学”时，其特殊含义是，在公教会或天主教学校里传授的，以神学为背景的哲学。</p>
+<p>经院哲学有两个基本特征：一是它以经院（即教会或修道院办的学校）为生存环境，二是它以“辩证法”（即亚里士多德所说的论辩推理）为操作原则。</p>
+<p>经院哲学并不研究自然界和现实生活中的事物，它的主要任务是对天主教教义、教条进行论证，以神灵、天使和天国中的事物为对象。当然，在神学允许的范围内也讨论了一些哲学问题，其中最突出的是关于一般和个别的关系问题，对这一问题的不同回答，形成了激烈斗争的两派，即唯名论和唯实论。</p>
+<p>唯实论认为，一般先于个别，是存在于个别事物之外的一种实在；唯名论则相反，认为只有个别事物是实在的，一般知识是人们用来表示个别事物的名称和概念，他没有实在性。</p>
+<p>中世纪是哲学变为神学的婢女的蒙难期，经院哲学是理性思维产生的怪胎，但其内部唯名论与唯实论之争仍显现着人类的哲学思维在向前迈进。</p>
+<h4 id="唯名论"><a href="#唯名论" class="headerlink" title="唯名论"></a>唯名论</h4><p>中世纪经院哲学围绕个别与共相的关系之争形成的两个对立派别。以罗瑟林﹑培根﹑司各特﹑奥康的威廉为代表的唯名论者，反对共相具有客观实在性，主张唯有个别事物才具有客观实在性，认为共相后于事物，共相只是个别事物的“名称”或人们语言中的“声息”。</p>
+<p>这种论断称之为极端的唯名论。以阿贝拉尔为代表的唯名论者，除了否认共相的客观实在性和主张唯有个别事物具有客观实在性之外，又认为共相表现个别事物的相似性和共同性，因而共相只存在于人们的思想之中。这种论点称为概念论，属于温和的唯名论。</p>
+<h4 id="实在论"><a href="#实在论" class="headerlink" title="实在论"></a>实在论</h4><p>中世纪经院哲学围绕个别与共相的关系之争形成的两个对立派别。以香浦的威廉和安瑟尔谟为代表的极端的实在论者，断言共相具有客观实在性，共相是独立于个别事物的第一实体，共相是个别事物的本质或原始形式。个别事物只是共相这第一实体派生出来的个别情况和偶然现象，所以共相先于事物。</p>
+<p>以托马斯·阿奎那为代表的温和的实在论者也断言共相是独立存在的精神实体，但又强调共相这一客观实在，既独立存在于事物之前，又存在于事物之中和事物之后。即共相这概念作为神创造个别事物的原型理念或原始形式，存在于被创造物之前。也就是说，存在于神的理智之中。共相作为神创造的个别事物的本质或形式，则存在于事物之中。共相作为人对个别事物的抽象归纳的概念，它在事物之后，也就是说存在于人们的理智之中。</p>
+<h2 id="近代哲学"><a href="#近代哲学" class="headerlink" title="近代哲学"></a>近代哲学</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepmPWU90fOrYOFdfibMUVfcQEwdkhMQ4LNwiaGmZzibMFRSOEnqqda8WhlMfzPE7Q3HuNmkOkTZAbdWg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>（1）艾克哈特：神和神性有天地之别</p>
+<p>艾克哈特关于神和灵魂的思辨无疑深刻地影响了后世德国哲学的思辨精神。</p>
+<p>（2）邓斯·司各脱：完善的知识是个别的知识</p>
+<p>司各脱意识到了理性对信仰的威胁，并力图通过放弃理性对信仰的证明，限制认识，为信仰保留地盘。但这种作法，在客观上却为哲学摆脱神学束缚创造了条件。</p>
+<p>（3）威廉·奥卡姆：若无必要，勿增实体</p>
+<p>在哲学史上，这个命题被称为“奥卡姆剃刀”。</p>
+<p>（4）库萨的尼古拉：认识是有学问的无知</p>
+<p>所谓有学问的无知，绝不是正统神学家鼓吹愚昧无知的蒙昧主义，而是指人们通过对知识的探求，而后达到对自己无知的认识。</p>
+<p>（5）布鲁诺：宇宙是太一</p>
+<p>“火并不能把我征服，未来的世界会了解我，懂得我的价值的！”</p>
+<p>（6）霍布斯：自由与必然是相容的</p>
+<p>与同时代的人相比，霍布斯对于“和平与安全”有着更为敏感的感受和更为迫切的渴望。</p>
+<p>（7）拉美特利：人是一架机器</p>
+<p>“凡是真正的哲学家都会同意，从动物到人并不是一个剧烈的转变。”</p>
+<p>（8）狄德罗：迈向哲学的第一步，就是怀疑</p>
+<p>在狄德罗的领导、组织和坚持下，《百科全书)》成了启蒙思想家们向封建反动势力进行斗争的锐利武器。</p>
+<p>（9）爱尔维修：利益是我们的惟一推动力</p>
+<p>在西方哲学史上，爱尔维修的独特之处，就是以利益为核心的功利主义伦理学思想。</p>
+<p>（10）霍尔巴赫：一切正直和诚实的心灵都倾听理性的声音</p>
+<p>霍尔巴赫是一个聪明的战士。</p>
+<p>（11）费希特：学者就是人类的教师</p>
+<p>在康德哲学的影响下，费希特建构了自己以“自我”为起点的哲学体系，他称之为“知识学”。</p>
+<p>（12）谢林：人类能够而且应该自己创造自己的历史</p>
+<p>在哲学上，谢林把康德和费希特的主观唯心论转变为客观唯心论，把主观辩证法推广到外部世界，从而为后来黑格尔建立哲学体系创造了条件。</p>
+<p>（13）费尔巴哈：哲学上最高的东西是人的本质</p>
+<p>“这部书的解放作用，只有亲身体验过的人才能想象得到。当时大家都很兴奋：我们一时都成为费尔巴哈派了。”</p>
+<h2 id="卢梭到现代哲学"><a href="#卢梭到现代哲学" class="headerlink" title="卢梭到现代哲学"></a>卢梭到现代哲学</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepmPWU90fOrYOFdfibMUVfcQLHVFe0S6Q28pSAIANQQic9Wv5MAicNDnL2sqicWhu9NWxXnlt9icHNL19A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="1-新托马斯主义"><a href="#1-新托马斯主义" class="headerlink" title="1. 新托马斯主义"></a>1. 新托马斯主义</h3><p>“新托马斯主义”是20世纪天主教的神学思潮，以复兴中世纪基督教思想为宗旨，又称新经院主义神学。它起源于1879年教皇利奥十三世发表“复兴托马斯黄金般的智慧”通谕，主要目标是构筑一种新的经院学术综合体系，并使之与现代科学步调一致。</p>
+<p>新托马斯主义者们认为，作为一种教义载体，托马斯主义的真理是永恒的，独立于时间的流变之外；另一方面，作为这种教义在人类历史过程中的表述，托马斯主义又需要适应不断变化的条件。因此新托马斯主义的任务就是将托马斯主义的遗产，如四因学说、关于上帝存在的各种证明、类比理论、关于哲学与神学关系的理论等等，用新的方法使之适用于新的时代。</p>
+<p>在现代基督教思潮的各种流派中，只有新托马斯主义得到了教廷当局的广泛支持，大量天主教大学成了托马斯主义的研究中心，有几十家杂志专门研究经院神学与哲学。最主要的代表有法国哲学家兼神学家马里坦和日尔松，英国哲学家兼神学家科普尔斯顿、法雷尔和马斯科尔等。</p>
+<h2 id="西方哲学史脉络梳理"><a href="#西方哲学史脉络梳理" class="headerlink" title="西方哲学史脉络梳理"></a>西方哲学史脉络梳理</h2><h3 id="1-古希腊罗马哲学"><a href="#1-古希腊罗马哲学" class="headerlink" title="1. 古希腊罗马哲学"></a>1. 古希腊罗马哲学</h3><p>古希腊罗马哲学包括自然哲学、形而上学和伦理哲学三个阶段，为西方哲学的理性思辨和形而上学打下了传统根基。</p>
+<p>它提出了逻各斯、存在、实体等成为西方哲学的经典命题，而柏拉图和亚里士多德关于共相性质的争论开启了中世纪基督教哲学关于唯名论和实在论的争论。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDY7JG2WgF4e5EhprRJYcwODVZBrjSl6JXa2Pxt5f2Bty31PY2a0qF2cw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="2-中世纪基督教哲学"><a href="#2-中世纪基督教哲学" class="headerlink" title="2. 中世纪基督教哲学"></a>2. 中世纪基督教哲学</h3><p>西罗马帝国崩溃后，基督教成为西欧不可侵犯的绝对意识形态，哲学成为“神学的婢女”，被基督教信仰的浓重阴影所笼罩。从教父哲学（柏拉图-奥古斯丁体系）到经院哲学（亚里士多德-阿奎那体系）的过渡反应了希腊罗马理性精神的复苏，而唯名论和实在论的对立为近代理性主义和经验论的兴起开辟了道路。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDYuuvMk8teVB3ibQlcLFwibKiblNic4suanyWVM5tDejebvnwqiboqMXgLCXA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="3-近代早起西欧哲学"><a href="#3-近代早起西欧哲学" class="headerlink" title="3. 近代早起西欧哲学"></a>3. 近代早起西欧哲学</h3><p>近代早期西欧哲学从文艺复兴和宗教改革运动开始，演化出欧陆唯理论同不列颠经验论的对立，其核心是理性反思和对经验（外在或内在）的重视。唯理论演变成莱布尼茨-沃尔夫体系中的独断论，而经验论则在休谟那里成为彻底的怀疑主义，这为法兰西启蒙思想和德意志古典哲学的出现埋下了伏笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDYZfHS0SHQ3dtloHwYibD5VjTvt1YfAzyJdRq3kbr6OEpynK1s4uHwxXw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="4-法兰西启蒙思想和唯物主义"><a href="#4-法兰西启蒙思想和唯物主义" class="headerlink" title="4. 法兰西启蒙思想和唯物主义"></a>4. 法兰西启蒙思想和唯物主义</h3><p>18世纪法国哲学包括法国自然神论和唯物主义两块，探讨的核心问题是人与自然的关系，理论上则表现为思维和存在的关系。法国自然神论奠定了西方政治学的基础，而<strong style="border-bottom: 1px green dashed;">激进的卢梭则引导了后世批判哲学（马克思和尼采）的出现</strong>。法国唯物主义者否定自由意志，但推崇人的理性，使<strong style="border-bottom: 1px green dashed;">理性主义成为法国哲学鲜明的特点</strong>。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDYe2DEZSWqibia9tPgic45NBKH5uriaJoxDyiboQWPb1qzibfyXF0PSKy065cA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="5-德意志古典哲学"><a href="#5-德意志古典哲学" class="headerlink" title="5. 德意志古典哲学"></a>5. 德意志古典哲学</h3><p><strong style="border-bottom: 1px green dashed;">18C末19C初，德意志古典哲学体系的出现标志着传统西方哲学的最高成就</strong>。它将考察重点转向主体与客体的关系，实现了西方哲学继亚里士多德形而上学体系之后的第二次飞跃。康德通过对自在之物和现象的严格区分，发展出认识论的先验自我意识统摄机能和道德实践领域的纯粹理性，以及沟通两者的判断力批判。黑格尔通过辩证法三段论将整个世界容纳在绝对精神从自在状态过渡到自为状态，最终达成绝对理性自我意识的宏大历史过程。因此，<strong style="border-bottom: 1px green dashed;">黑格尔成为最后一个形而上学大体系</strong>，并引发费尔巴哈和马克思对其的反思。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDYDibrewAialF4cQbS20H3lCvZwubkSx7uHIo3CiaHD2BOicmZaEoKaicu1ng/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="6-现代西哲过渡时期"><a href="#6-现代西哲过渡时期" class="headerlink" title="6. 现代西哲过渡时期"></a>6. 现代西哲过渡时期</h3><p>19世纪中后期，形而上学和理性主义的传统西方哲学走向终结，导致了向现代西哲的过渡时期。马克思把哲学从天上拽回了人间，对人的感性活动即实践的确认使得马克思主义成为形而上学的终结者（海德格尔语）；以尼采为代表的非理性主义则着重于人生命意志的实现。两者的思想都没有构成完整的体系，但对后世的现代西哲，现象学运动、结构主义、西马、精神分析学乃至后现代哲学，产生不可替代的巨大启发。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/UkD7gPlAKLGuiborODbSYrMTD3YFibtJDYXia7DnalntPNLWvprW31icxgotdc1gqfGIlPEicCxG2AIic1kYnrZpXuhQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/dfc58039/">审美真的分高低吗？</a>
+            
+            
+            <a class="next" rel="next" href="/9caf74d1/">如何克服虚无主义？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/dfc58039/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/9caf74d1/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

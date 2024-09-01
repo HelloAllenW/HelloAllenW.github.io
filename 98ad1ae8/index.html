@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>《鲁迅全集》读书笔记 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《鲁迅全集》读书笔记</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 11, 2024&nbsp;&nbsp;23:01:16</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 11, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/">文学与艺术 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>说话说到有人厌恶，比起毫无动静来，还是一种幸福。（差评也是流量，黑粉也是粉）</p>
+<p>我十分感谢我的几个朋友，替我搜集，抄写，校印，各费去许多追不回来的光阴。我的报答，却只能希望当这书印钉成工时，或者可以博得各人的真心愉快的一笑。别的奢望，并没有什么；至多，但愿这本书能够暂时躺在书摊上的书堆里，正如博厚的大地，不至于容不下一点小土块。再进一步，可就有些不安分了，那就是中国人的思想，趣味，目下幸而还未被所谓正人君子所统一，譬如有的专爱瞻仰皇陵，有的却喜欢凭吊荒冢，无论怎样，一时大概总还有不惜一顾的人罢。只要这样，我就非常满足了；那满足，盖不下于取得富家的千金云。</p>
+<h2 id="人之历史"><a href="#人之历史" class="headerlink" title="人之历史"></a>人之历史</h2><p>故究进化论历史，当首德黎，继乃局脊于神造之论；比至兰麻克而一进；得达尔文而大成；迨黑格尔出，复总会前此之结果，建官品之种族发生学，于是人类演进之事，昭然无疑影矣。</p>
+<p>——人之历史，德国黑格尔氏种族发生学之一元研究诠解</p>
+<h2 id="我之节烈观"><a href="#我之节烈观" class="headerlink" title="我之节烈观"></a>我之节烈观</h2><p>国民将到被征服的地位，守节盛了；烈女也从此着重。因为女子既是男子所有，自己死了，不该嫁人，自己活着，自然更不许被夺。然而自己是被征服的国民，没有力量保护，没有勇气反抗了，只好别出心裁，鼓吹女人自杀。</p>
+<p>如此情形，女子便非“服也”不可。然而男子一面，何以也不主张真理，只是一味敷衍呢？汉朝以后，言论的机关，都被“业儒”的垄断了。宋元以来，尤其利害。我们几乎看不见一部非业儒的书，听不到一句非士人的话。除了和尚道士，奉旨可以说话的以外，其余“异端”的声音，决不能出他卧房一步。况且世人大抵受了“儒者柔也”的影响；不述而作，最为犯忌。即使有人见到，也不肯用性命来换真理。即如失节一事，岂不知道必须男女两性，才能实现。他却专责女性；至于破人节操的男子，以及造成不烈的暴徒，便都含糊过去。男子究竟较女性难惹，惩罚也比表彰为难。其间虽有过几个男人，实觉于心不安，说些室女不应守志殉死的平和话，可是社会不听；再说下去，便要不容，与失节的女人一样看待。他便也只好变了“柔也”，不再开口了。所以节烈这事，到现在不生变革。</p>
+<p>社会上多数古人模模糊糊传下来的道理，实在无理可讲；能用历史和数目的力量，挤死不合意的人。</p>
+<p>节烈这事，现代既然失了存在的生命和价价值；节烈的女人，岂非白苦一番么？</p>
+<p>可以答他说：还有哀悼的价值。他们是可怜人；不幸上了历史和数目的无意识的圈套，做了无主名的牺牲。可以开一个追悼大会。</p>
+<p>我们追悼了过去的人，还要发愿：要自己和别人，都纯洁聪明勇猛向上。要除去虚伪的脸谱。要除去世上害己害人的昏迷和强暴。</p>
+<p>我们追悼了过去的人，还要发愿：要除去于人生毫无意义的苦痛。要除去制造并赏玩别人苦痛的昏迷和强暴。</p>
+<p>我们还要发愿：要人类都受正当的幸福。</p>
+<h2 id="我们现在怎样做父亲"><a href="#我们现在怎样做父亲" class="headerlink" title="我们现在怎样做父亲"></a>我们现在怎样做父亲</h2><p>生命的价值和生命价值的高下，现在可以不论。单照常识判断，便知道既是生物，第一要紧的自然是生命。因为生物之所以为生物，全在有这生命，否则失了生物的意义。生物为保存生命起见，具有种种本能，最显著的是食欲。因有食欲才摄取食品，因有食品才发生温热，保存了生命。但生物的个体，总免不了老衰和死亡，为继续生命起见，又有一种本能，便是性欲。因性欲才有性交，因有性交才发生苗裔，继续了生命。所以食欲是保存自己，保存现在生命的事；性欲是保存后裔，保存永久生命的事。饮食并非罪恶，并非不净；性交也就并非罪恶，并非不净。饮食的结果，养活了自己，对于自己没有恩；性交的结果，生出子女，对于子女当然也算不了恩。——前前后后，都向生命的长途走去，仅有先后的不同，分不出谁受谁的恩典。</p>
+<p>是说，此后觉醒的人，应该先洗净了东方固有的不净思想，再纯洁明白一些，了解夫妇是伴侣，是共同劳动者，又是新生命创造者的意义。所生的子女，固然是受领新生命的人，但他也不永久占领，将来还要交付子女，像他们的父母一般。只是前前后后，都做一个过付的经手人罢了。</p>
+<h2 id="未有天才之前"><a href="#未有天才之前" class="headerlink" title="未有天才之前"></a>未有天才之前</h2><p>天才并不是自生自长在深林荒野里的怪物，是由可以使天才生长的民众产生，长育出来的，所以没有这种民众，就没有天才。有一回拿破仑过Alps山，说，“我比Alps山还要高！”这何等英伟，然而不要忘记他后面跟着许多兵；倘没有兵，那只有被山那面的敌人捉住或者赶回，他的举动，言语，都离了英雄的界线，要归入疯子一类了。所以我想，在要求天才的产生之前，应该先要求可以使天才生长的民众。——譬如想有乔木，想看好花，一定要有好土；没有土，便没有花木了；所以土实在较花木还重要。花木非有土不可，正同拿破仑非有好兵不可一样。</p>
+<p>… …</p>
+<p>其一就是“整理国故”。自从新思潮来到中国以后，其实何尝有力，而一群老头子，还有少年，却已丧魂失魄的来讲国故了，他们说，“中国自有许多好东西，都不整理保存，倒去求新，正如放弃祖宗遗产一样不肖。”抬出祖宗来说法，那自然是极威严的，然而我总不信在旧马褂未曾洗净迭好之前，便不能做一件新马褂。就现状而言，做事本来还随各人的自便，老先生要整理国故，当然不妨去埋在南窗下读死书，至于青年，却自有他们的活学问和新艺术，各干各事，也还没有大妨害的，但若拿了这面旗子来号召，那就是要中国永远与世界隔绝了。倘以为大家非此不可，那更是荒谬绝伦！我们和古董商人谈天，他自然总称赞他的古董如何好，然而他决不痛骂画家，农夫，工匠等类，说是忘记了祖宗：他实在比许多国学家聪明得远。</p>
+<p>… …</p>
+<p>恶意的批评家在嫩苗的地上驰马，那当然是十分快意的事；然而遭殃的是嫩苗——平常的苗和天才的苗。幼稚对于老成，有如孩子对于老人，决没有什么耻辱；作品也一样，起初幼稚，不算耻辱的。因为倘不遭了戕贼，他就会生长，成熟，老成；独有老衰和腐败，倒是无药可救的事！我以为幼稚的人，或者老大的人，如有幼稚的心，就说幼稚的话，只为自己要说而说，说出之后，至多到印出之后，自己的事就完了，对于无论打着什么旗子的批评，都可以置之不理的！</p>
+<p>就是在座的诸君，料来也十之九愿有天才的产生罢，然而情形是这样，不但产生天才难，单是有培养天才的泥土也难。我想，天才大半是天赋的；独有这培养天才的泥土，似乎大家都可以做。做土的功效，比要求天才还切近；否则，纵有成千成百的天才，也因为没有泥土，不能发达，要像一碟子绿豆芽。</p>
+<p>做土要扩大了精神，就是收纳新潮，脱离旧套，能够容纳，了解那将来产生的天才；又要不怕做小事业，就是能创作的自然是创作，否则翻译，介绍，欣赏，读，看，消闲都可以。以文艺来消闲，说来似乎有些可笑，但究竟较胜于戕贼他。</p>
+<p>泥土和天才比，当然是不足齿数的，然而不是坚苦卓绝者，也怕不容易做；不过事在人为，比空等天赋的天才有把握。这一点，是泥土的伟大的地方，也是反有大希望的地方。而且也有报酬，譬如好花从泥土里出来，看的人固然欣然的赏鉴，泥土也可以欣然的赏鉴，正不必花卉自身，这才心旷神怡的——假如当作泥土也有灵魂的说。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/"># 文学与艺术</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ef54409c/">未来极具潜力的50项新兴技术（2024全球智库动态）</a>
+            
+            
+            <a class="next" rel="next" href="/f3549ddc/">CSS中的物理属性和逻辑属性</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ef54409c/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f3549ddc/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

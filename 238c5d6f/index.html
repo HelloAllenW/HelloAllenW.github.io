@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>10大思想实验 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">10大思想实验</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 15, 2016&nbsp;&nbsp;22:27:29</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 15, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_gif/sM5SdPkqTeoGNaU3v3t72nyKZA9ehS9wib9OnMCedOHvFAUnHebov3nRuWu69nL7IlZVJwMPmpW2QD2Uh210b3g/640?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;">
+文章来自《如果没有今天，明天会不会有昨天？》<br>
+伊夫·博萨尔特著，区立远 译
+</div>
+
+
+
+<p>古希伯来有句谚语：人类一思考，上帝就发笑。这句话大概展现了人类对自身思想局限性的承认以及无奈，带着调侃的意味。但是，谁能阻止思考继续呢？小到今天午饭吃什么，大到什么是“我”活着的意义，神明是否真的存在，人类在哲学思考的道路上从未放弃过。</p>
+<p>但哲学无法用科学实验来检验其正确性，于是哲学家在脑中设计出具体的假设情境，测试哲学理论是否符合我们对于相关概念的理解，以找出人生根本问题的答案。苏格拉底、柏拉图、萨特、加缪、尼采……众多伟大的哲学家都曾设计过让人脑洞大开的思想实验。</p>
+<p>下面就让我们来列举10大哲学思想实验，看看古今伟大的哲学家是如何思考人生的。</p>
+<h2 id="永劫回归：尼采"><a href="#永劫回归：尼采" class="headerlink" title="永劫回归：尼采"></a>永劫回归：尼采</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIUw65gYnRzxpTkkzb6lzJ5qDDBDYdJ9piahG6tnnjzeIiahMZmEB1HWdw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>有人说，所有通向哲学之路的人都要翻过一座山，这座山的名字就叫作弗里德里希•威廉•尼采。</p>
+<p><strong>【实验内容】</strong></p>
+<p>请想象，你的人生将无限次地重新上演，一个细节都不少：初恋、求职、分手、跳槽、生育、病痛……总之，包括一切。如果你设想你的人生将无限次地重演，你现在做的种种决定会不会有所不同？换句话来讲，如果你知道，你的人生将永恒地重复下去，你会不会改变生活方式？</p>
+<p>即使再来一遍，你还会这么选择么？我们能否把对这个问题的回答看作个体对生活满意与否的检验标准？有些人也许会活得更有勇气，另一些人会更谨慎些，也有些人会选择更自我。</p>
+<p><strong style="border-bottom: 1px green dashed;">永劫回归的想法不会太沉重么？尼采认为，我们会因此开始过有意识的生活，而不是过一天算一天，向生活做出妥协。</strong></p>
+<h2 id="西绪弗斯与大石头：加缪"><a href="#西绪弗斯与大石头：加缪" class="headerlink" title="西绪弗斯与大石头：加缪"></a>西绪弗斯与大石头：加缪</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIYWbdOfq9cRIG1B7SeSX7r4Lq0MSg41JU8mpAfqQh0JZibZYzCb2RK7g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>法国哲学家加缪说过：哲学第一严峻的命题，就是人到底值不值得活着。</p>
+<p><strong>【实验内容】</strong></p>
+<p>请想象，触犯天神的你需要将一块大石推上山顶。你用尽洪荒之力，受尽磨难，终于将大石推到了山顶，当你环顾山顶的时候，大石从你的手中滑走，瞬间滚下了山，一切辛苦白费，之前的努力之于结果毫无意义。此时，天神嘲笑你：这就是你的命运！你必须再次把大石推上山顶，而且每次它都将再度滚下去。</p>
+<p>你有些挫败地走下山去，并且意识到，这块大石就是你的命运，你的使命。你再度投入工作，这一次，不是因为天神的命令，而是自愿这么做，你把命运握在手里，感到了幸福。</p>
+<p><strong style="border-bottom: 1px green dashed;">加缪认为，西绪弗斯与大石头，就像我们与毫无意义的人生一样 —— 是荒谬的。人类寻求意义，追求目标，在漫无边际、看不到时间尽头的宇宙毫无意义。但当我们认识并接受了人生的荒谬性，就等于发现了自由，我们把命运掌握在自己手里，这种主宰感赋予了我们热情和希望。</strong></p>
+<h2 id="我思故我在：笛卡尔"><a href="#我思故我在：笛卡尔" class="headerlink" title="我思故我在：笛卡尔"></a>我思故我在：笛卡尔</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIW4de7n0TuvDXZFTF66GnhIxGF1RAskugJTibqNSV8BE1B9FNyWFFQZg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>法国著名的哲学家、物理学家、数学家、神学家，解析几何之父。</p>
+<p><strong>【实验内容】</strong></p>
+<p>想象有个恶灵，它有办法在我们心中制造各种感觉与思想，在我们的眼前变出一个几可乱真的虚假世界，就连最简单不过的事物，恶灵也能骗过我们。比如说，它能让我们以为一加一等于三，我们甚至不会注意到这其实是错的。有没有什么事情是这个恶灵绝不可能骗过我们的？有没有什么事情是绝对无可怀疑的，哪怕是有这样一只恶灵竭尽所能地误导我们？</p>
+<p>那就是“我正在思考”的这个事实；哪怕我思考的一切内容都是被蒙蔽的，“我在思考”的这件事仍然成立。我的的确确在经验一些什么、思考一些东西，哪怕我的经验是虚妄的，我所想的都是错误的。而若是能确定我在思考这一点，那我也必定是存在的。</p>
+<p>笛卡尔认为，对自己经验的意识，是人类知识无可怀疑的基础，同时也是自我存在的证据。</p>
+<h2 id="电车与胖子：菲利帕·富特"><a href="#电车与胖子：菲利帕·富特" class="headerlink" title="电车与胖子：菲利帕·富特"></a>电车与胖子：菲利帕·富特</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIgyLcnHrcbibe6jxNyZUDSOtjTrWHeRSW10wKddmd4O1icNZvzPv0DicLg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>菲利帕·富特致力于批判功利主义，并且热衷于讨论道德义务论。</p>
+<p><strong>【实验内容】</strong></p>
+<p>请想象，一列无人驾驶的电车，正朝着五名轨道工人疾驶过去。这些工人都没有察觉，也就是说，这列电车将会辗死那五名工人。你可以切换转辙器阻止这场灾难。然而请注意：如果你切换转辙器，电车将切换到另一条支线上，而那条支线也有一个工人，电车如果驶过去，他也将会丧生。要么你什么也不做，让五个人死去，要么你切换转辙器，让一个人死亡。你怎么选择？让电车改道，好让只有一个轨道工人死去，并让另外五个人得以活命，这样是对的吗？</p>
+<p>请你再想象一下以下这个类似的，而且有点残忍的状况：这辆无人驾驶的电车正往五名工人驶去，这次没有转辙器。你站在桥上，电车正要从桥下冲过去，唯一可以阻止电车的办法，就是把站在你旁边的胖子推下桥去，让他卡在电车之前，使电车停下来，可是这位胖子当然就死了。你会怎么做？</p>
+<p>我们常常认为，做坏事比不做好事更应该受到谴责，而在电车实验里，积极的作为与消极的不作为之间，存在怎样的道德差异？</p>
+<h2 id="无知之幕：罗尔斯"><a href="#无知之幕：罗尔斯" class="headerlink" title="无知之幕：罗尔斯"></a>无知之幕：罗尔斯</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzItklI89kRrnaBuUdRRlrzHibUfy9XcRDjmvQ4ukQSU03b6mtkkSLdINg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>美国哲学家罗尔斯的《正义论》被视为二十世纪最重要的政治哲学论著。</p>
+<p><strong>【实验内容】</strong></p>
+<p>假设你有机会可以为社会彻底地重新立法，可以颁布所有你希望实行的法律。不过有一点得注意：你被“无知之幕”所笼罩，你无法预知你在新社会中将站在什么位置上。你不知道你的一切情况，包括性别、健康、天赋、收入、宗教、种族…….这个无知之幕是否能保证你将会打造出公平正义的社会？哪些基本法则是你与其他人都能接受的？</p>
+<p>罗尔斯实际上讨论的是国家应该建立在哪些基本原则之上。什么是公平正义？无知之幕恰好可以保证，在寻找共同生活的基本规范时，不会受到私人利益的操控，这层遮蔽可以防止偏颇与营私。</p>
+<h2 id="大脑义肢：瑟尔"><a href="#大脑义肢：瑟尔" class="headerlink" title="大脑义肢：瑟尔"></a>大脑义肢：瑟尔</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIB13vuw3rhohyOnkIUicjBW8FQr9xJcXbBABhXs8O3uRP3wDWesXmaJQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当代极富影响力的意识哲学家与语言哲学家。</p>
+<p><strong>【实验内容】</strong></p>
+<p>请想象，你大脑里的神经细胞正被非常微小的硅芯片取代。渐渐地，你的大脑大部分都是硅做的了，就像一台电脑。而每一块芯片所负担的，都是原来那条神经细胞的功能，所以大脑的运作会跟原来完全一样，只不过不是基于生物组织。</p>
+<p>会发生什么事？会一切突然变黑吗？再也没有嗅觉、没有意识了吗？如果是这样，这些变化会在什么时候发生？是在芯片取代第一条神经细胞时吗？还是直到换了第一百万条时才出现？还是一切如常，根本什么问题都没有？</p>
+<p>假如一切毫无改变，那么问题来了：机器人也可以有情感吗？</p>
+<p>瑟尔认为，精神需要生物的基础，即使人工硬件执行了跟神经细胞相同的功能，也不能等同于精神意识。人工智能能够模仿人类的大部分心智功能，但它并不理解自己在做什么，情感就更谈不上了。他的理念可以被推翻么？</p>
+<h2 id="太空茶壶：罗素"><a href="#太空茶壶：罗素" class="headerlink" title="太空茶壶：罗素"></a>太空茶壶：罗素</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIOEI13iaQCjb6FNupdO4wjpoTlzqW4MKw55qbkRe2gw0ncvvSnDBRbuA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1950年，罗素获得诺贝尔文学奖，很多人将罗素视为这个时代的先知。</p>
+<p><strong>【实验内容】</strong></p>
+<p>请想象，有人宣称，地球与火星之间有一个茶壶绕着太阳运转，到目前为止还没有人观测到这个茶壶，因为茶壶太小了，小于望远镜的观测范围。然而，茶壶的存在也从来不曾被否证过。你这位邻居对这个茶壶的存在就深信不疑，他宣称，只要没有人能反驳他的观点，他就是对的。证明的义务落在反对者的头上，也就是那些宣称此茶壶并不存在的人。是否没有被否证的事，就是可以相信的？</p>
+<p>应该提出证明的人是谁？反茶壶论论者还是茶壶论论者？还是说怀疑论才是这场争论中唯一理性的立场？哪一种信念才最站得住脚：第一，相信茶壶的存在，第二，相信茶壶不存在，还是第三，不做任何判断？</p>
+<p>罗素指出，<strong style="border-bottom: 1px green dashed;">科学没有义务证明上帝不存在</strong>。如果茶壶论者认为，只要没有被推翻，就都是可以相信的，那就等于给各种偏执与疯狂的人打开了大门。</p>
+<h2 id="理发师：罗素"><a href="#理发师：罗素" class="headerlink" title="理发师：罗素"></a>理发师：罗素</h2><p><strong>【实验内容】</strong></p>
+<p>请想象一下：村子里住着理发师，他只帮自己不刮胡子的村民刮胡子。准确地说，他帮每个自己不刮胡子的村民刮胡子，但是不帮自己刮胡子的村民刮胡子。那他自己的胡子该怎么办呢？他是自己刮，还是让别人帮他刮？</p>
+<p>假设他自己刮胡子，那就表示，他自己不刮胡子，因为他向来只帮自己不刮胡子的人刮胡子。但是如果他自己不刮胡子，那他就一定是自己刮胡子，因为他帮所有自己不刮胡子的人刮胡子。那么到底应该怎么办？</p>
+<p>罗素这个理发师的例子（逻辑上的二律背反案例）摇撼了数学家脚下的地基，几乎让整个数理系统应声倒下。因为集合论（Mengenlehre）在当时被认为是数学的基础，罗素的例子却显示出集合的概念会自相矛盾。你还能举出哪些例子？</p>
+<h2 id="时间能静止多久：康德"><a href="#时间能静止多久：康德" class="headerlink" title="时间能静止多久：康德"></a>时间能静止多久：康德</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIt5OJpuPK9OR4cOfkANnrfO8Eyia8uslODsibQLfYNWmzAaic9R3vgN9wQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>德国古典哲学创始人，启蒙运动时期最重要的思想家之一。</p>
+<p><strong>【实验内容】</strong></p>
+<p>你能想象没有时间的世界吗？如果你认为这太容易了，那你一定有地方搞错了。你要想象的是没有时间流逝的世界，而不是一切静止不动、没有变化的世界。因为静止的世界仍旧是在时间里的世界：事物要能静止不动，是以时间为基础的，每段静止都有持续多久的问题，所以都需要在时间中才有可能。</p>
+<p>所以，我们应该要问：没有时间的世界看起来是什么模样？既没有变动也没有静止的世界？</p>
+<p>康德坚定认为，有些东西是我们无论怎么想都无法摆脱的：时间就是这样。时间是“直观形式”（Anschauungsform），是我们无法将之抽离的，因此我们想象不出没有时间的世界；有时候我们会希望时间停止，但是根本说来，我们希望停下来的并不是时间，而是运动与变动。</p>
+<p>这个世界一点都不在乎我们的理解能力，它是什么模样，就是什么模样，不管我们能不能理解。</p>
+<h2 id="如果没有今天，明天就不会有昨天：奥古斯丁"><a href="#如果没有今天，明天就不会有昨天：奥古斯丁" class="headerlink" title="如果没有今天，明天就不会有昨天：奥古斯丁"></a>如果没有今天，明天就不会有昨天：奥古斯丁</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/97rm3aQe51BxZdd5tuEwODlvmN0AWnzIvI8CPju3AbFOWY1f0YboYEg9JcqBAPySBPib9TJ7pf4V4ZFqg7tYRew/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>古罗马帝国时期基督教思想家,是西方哲学史上首位提出主观时间理解的人。</p>
+<p><strong>【实验内容】</strong></p>
+<p>过去就是现在的未来，有人巧妙地这么说。时间流逝，因为未来的变成现在，现在的又变成过去，所以时间是由未来、现在与过去构成的。</p>
+<p>然而这就产生一个问题：未来还不存在，过去又已不存在，而现在是介于未来与过去之间的、没有扩延可言的界线。所以既没有未来、过去，也没有现在，又既然时间由这三者组成，所以时间也不存在。</p>
+<p>奥古斯丁解救时间的办法，是把时间放入我们的心里，奥古斯丁认为，未来的、现在的与过去的，都存在于我们的思想与想象里。我们记得过去的事，期待未来的事，也体验现在的事。我们的心智能回头伸入过去，预先伸进未来，因为它把过去的与未来的都呈现在眼前。</p>
+<p>作为神学家，有人问他，上帝在创造世界跟时间之前在做什么呢，奥古斯丁回答：“上帝在准备地狱的刑罚，好处理那些提出这类放肆问题的人。”</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/80f7164a/">21位思想者的60个智慧箴言</a>
+            
+            
+            <a class="next" rel="next" href="/1d836cfc/">8位全球顶级心理学大师，对生活的最深刻洞察</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/80f7164a/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1d836cfc/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

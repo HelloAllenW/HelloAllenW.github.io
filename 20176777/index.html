@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>原生 CSS 嵌套功能的使用 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">原生 CSS 嵌套功能的使用</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2022&nbsp;&nbsp;22:01:01</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>2023年8 月 29 日，Firefox 117版本发布，该版本增加了对 CSS 原生嵌套的支持。至此，所有主流桌面浏览器现在都已经支持原生 CSS 嵌套语法！</p>
+<p>注意，有些移动浏览器还不支持该语法，不过，这些浏览器合计只占约全球浏览器市场份额的 3%。</p>
+<p>之前，我们需要借助预处理器（SCSS/Less）来编写嵌套语法。现在，CSS 终于原生支持嵌套语法了。下面就来看看原生 CSS 嵌套是怎么用的，未来是否还需要使用预处理器？</p>
+<h2 id="一、CSS-嵌套入门"><a href="#一、CSS-嵌套入门" class="headerlink" title="一、CSS 嵌套入门"></a>一、CSS 嵌套入门</h2><p>使用 CSS 嵌套，可以编写更少的代码，并且代码更易于阅读和维护。没有CSS嵌套时，我们只能这样输入完成的选择器路径：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.parent1 .child1,</span><br><span class="line">.parent2 .child1 &#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.parent1 .child2,</span><br><span class="line">.parent2 .child2 &#123;</span><br><span class="line">  color: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.parent1 .child2:hover,</span><br><span class="line">.parent2 .child2:hover &#123;</span><br><span class="line">  color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用新的嵌套语法，可以将子选择器嵌套在父选择器中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.parent1, .parent2 &#123;</span><br><span class="line">  .child1 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">  &#125;</span><br><span class="line">  .child2 &#123;</span><br><span class="line">    color: green;</span><br><span class="line">    &amp;:hover &#123;</span><br><span class="line">      color: blue;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以将选择器嵌套任意深度，但是最好不要超过三层，虽然没有技术上的硬性限制，但是嵌套深度越大，会使代码更难读，并且生成的 CSS 可能会变得不必要的冗长。</p>
+<h2 id="二、CSS-嵌套语法"><a href="#二、CSS-嵌套语法" class="headerlink" title="二、CSS 嵌套语法"></a>二、CSS 嵌套语法</h2><p>可以将任何选择器嵌套在另一个选择器中，但它必须以符号开头，例如 &amp;、.（用于HTML类）、#（用于HTML id）、@（用于媒体查询）、：、::、*、+、~、&gt; 或 [。换句话说，它不能直接引用HTML元素。下面这段代码是无效的，</p>
+<p>选择器不会被解析。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.parent1 &#123;</span><br><span class="line">  p &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1、需要使用 &amp; 符号来引用当前选择器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.parent1 &#123;</span><br><span class="line">  &amp; p &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，还可以使用以下任一方法：</p>
+<ul>
+<li>&gt; p：只会为 .parent1 的直接子元素设置样式</li>
+<li>:is(p)：使用最具体选择器的特异性</li>
+<li>:where(p)：特异性为零</li>
+</ul>
+<p>在这个例子中，它们都可以正常工作，但在更复杂的样式表中，可能会遇到特异性问题。</p>
+<p>2、&amp; 还允许在父选择器上针对伪元素和伪类进行定位，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">p.my-element &#123;</span><br><span class="line">  &amp;::after &#123;&#125;</span><br><span class="line">  &amp;:hover &#123;&#125;</span><br><span class="line">  &amp;:target &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不使用&amp;符号，将会选择该选择器的所有子元素，而不是p.my-element。（在Sass中也是如此。）</p>
+<p>3、可以在选择器的任何位置使用&amp;，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.child1 &#123;</span><br><span class="line">  .parent3 &amp; &#123;</span><br><span class="line">    color: red;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这将转换为以下非嵌套语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.parent3 .child1 &#123; color: red; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、我们甚至可以在选择器中使用多个&amp;符号：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ul &#123;</span><br><span class="line">  &amp; li &amp; &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这将选择嵌套的<ul>元素（ul li ul），但不建议这样做，因为这样代码会变得混乱。</p>
+<p>5、除此之外，还可以嵌套媒体查询。以下代码将为段落元素应用青色，当浏览器窗口宽度至少为800像素时，将会覆盖该样式，并将段落元素的颜色更改为紫色。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">  color: cyan;</span><br><span class="line">  @media (min-width: 800px) &#123;</span><br><span class="line">    color: purple;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、CSS-嵌套陷阱"><a href="#二、CSS-嵌套陷阱" class="headerlink" title="二、CSS 嵌套陷阱"></a>二、CSS 嵌套陷阱</h2><p>原生嵌套将父选择器封装在:is()中，这可能会导致与Sass输出的差异。</p>
+<p>1、考虑下面的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.parent1, #parent2 &#123;</span><br><span class="line">  .child1 &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当在浏览器中解析时，这会变成了以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:is(.parent1, #parent2) .child1 &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于原生嵌套使用了:is()并根据其最具体选择器（#parent2）的优先级来确定优先级，因此在.parent1内部的.child1元素具有101的优先级。而对于Sass编译，会将相同的代码编译成不同的结构。</p>
+<p>Sass 会将相同的代码编译为以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.parent1 .child1,</span><br><span class="line">#parent2 .child1 &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，.parent1内部的.child1元素的优先级为002，因为它匹配了两个类（#parent2被忽略）。它的选择器比原生选项更不具体，因此在级联中被覆盖的可能性较大。</p>
+<p>2、还可能遇到一个更微妙的问题，考虑以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.parent .child &#123;</span><br><span class="line">  .grandparent &amp; &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原生CSS的等效代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.grandparent :is(.parent .child) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这将匹配以下顺序错误的HTML元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;grandparent&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;child&quot;&gt;MATCH&lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>MATCH 被应用样式是因为CSS解析器执行了以下操作：</p>
+<ol>
+<li>它找到所有具有class为child的元素，并且这些元素在DOM层次结构中的任意位置都有一个祖先元素为parent。</li>
+<li>找到包含MATCH的元素后，解析器检查是否存在一个祖先元素为grandparent，同样是在DOM层次结构的任意位置。它找到了一个并相应地给该元素应用样式。</li>
+</ol>
+<p>但在Sass中，情况并非如此，它编译成以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.grandparent .parent .child &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于HTML元素的类没有遵循严格的grandparent、parent和child的顺序，因此上面的HTML不会被应用样式。</p>
+<p>3、最后，Sass 使用字符串替换，因此以下声明也是有效的，并且匹配任何具有outer-space类的元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.outer &#123;</span><br><span class="line">  &amp;-space &#123; color: black; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原生 CSS 会忽略&amp;-space选择器。</p>
+<h2 id="三、还需要预处理器吗？"><a href="#三、还需要预处理器吗？" class="headerlink" title="三、还需要预处理器吗？"></a>三、还需要预处理器吗？</h2><p>现在很多前端项目都还在借助CSS预处理器来编写 CSS，以添加一下实用的功能到 CSS 中，例如 mixin、函数、嵌套等功能。在应用的构建过程中，会将这些代码转换为常规的 CSS，以便浏览器可以理解它。</p>
+<p>Sass 开发团队也宣布他们将支持在.css文件中使用原生CSS嵌套，并保持代码不变。他们将继续像以前一样编译嵌套的SCSS代码，以避免破坏现有的代码库，但在全局浏览器支持达到98%时，将开始使用:is()选择器。</p>
+<p>现在，越来越多预处理器带来的功能都在原生 CSS 中内置了，嵌套语法就是其中之一。虽然，嵌套语法已被主流浏览器支持，但是很多用户还在使用旧版本的浏览器，无法很好的得到新语法的支持，并且个人认为，预处理器的嵌套语法相比原生嵌套语法更简单易懂。所以，在很长一段时间内，我们仍然是需要借助预处理器来编写 CSS。</p>
+<p>除此之外，我们仍然需要借助 PostCSS 等后处理器来处理新的 CSS 功能，以将其转化为浏览器可以理解的内容。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1acc2f95/">500 多个纯 CSS 实现的 Loading 效果，炫酷！</a>
+            
+            
+            <a class="next" rel="next" href="/e426dd9a/">有趣且实用的 CSS 小技巧</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1acc2f95/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e426dd9a/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

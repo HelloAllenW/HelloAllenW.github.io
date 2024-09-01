@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Github + jsDelivr + PicGo 打造稳定快速、高效免费的图床! | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Github + jsDelivr + PicGo 打造稳定快速、高效免费的图床!</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 12, 2023&nbsp;&nbsp;0:24:01</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 12, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Others/">Others</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">5 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>不希望将大量的图片等静态资源放在自己部署了项目的云服务器上，又不希望增加成本去专门购置一台静态资源服务器，<br>放在其他免费服务器上又希望能做到CDN加速。于是找到了<strong>Github + jsDelivr + PicGo</strong>来解决这个需求。以下文章部分转载自<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv4297993">利用jsDelivr白嫖全球超高速静态资源访问服务！</a>。</p>
+<h1 id="jsDelivr是什么"><a href="#jsDelivr是什么" class="headerlink" title="jsDelivr是什么"></a>jsDelivr是什么</h1><p>jsDelivr由ProspectOne维护的公共库，使用的融合CDN技术，由Cloudflare、Fastly、StackPath、QUANTIL等CDN供应商提供了<strong>全球超过750个CDN节点</strong>。<br>最重要的是，jsDelivr在<strong>中国大陆</strong>也拥有超过数百个节点，因为jsDelivr拥有<strong>正规的ICP备案</strong>，解决了中国大陆的访问速度优化，实现真正的<strong>全球极速低延迟</strong>体验。<br>jsDelivr是<strong>免费</strong>的、<strong>不限制带宽</strong>的，可以加速<strong>NPM</strong>、<strong>Github</strong>内的文件。<br>本文采用的方法就是将静态文件资源放到Github的仓库内，再使用jsDelivr进行加速访问，最后通过PicGo上传管理资源，打造一个高速访问的图床！<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci01LndlYnA?x-oss-process=image/format,png" alt="全球节点分布地图"></p>
+<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>在Github新建一个公开仓库，用于存放我们的静态文件资源。这里不再过多赘述，下面的链接是我的<a target="_blank" rel="noopener" href="https://github.com/HelloAllenW/BlogAssets">静态文件资源仓库</a>。</p>
+<h1 id="使用jsDelivr访问资源"><a href="#使用jsDelivr访问资源" class="headerlink" title="使用jsDelivr访问资源"></a>使用jsDelivr访问资源</h1><p>根据<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/">jsdelivr官方文档</a>，有很多种访问资源的方式，这里主要介绍三种。</p>
+<h2 id="通过releases访问"><a href="#通过releases访问" class="headerlink" title="通过releases访问"></a>通过releases访问</h2><p>在仓库首页找到releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0xLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>创建new releases，如果之前创建过则选择Draft a new releases<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0yLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>标题输入版本号，根据你的需求即可，比如我这里是v1.0<br>输入完毕后点击下方绿色按钮。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci0zLnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>跳转到以下页面代表创建成功<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAdjEuMy9pbWFnZXMvMjAyMC8wNC9qc2RlbGl2ci00LnBuZw?x-oss-process=image/format,png" alt="新建releases"><br>根据jsDelivr的要求，文件路径为：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/user/repo@version/file">https://cdn.jsdelivr.net/gh/user/repo@version/file</a><br>以我的为例，访问仓库目录下的jsdelivr-1.png文件，为以下链接：<br><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@v1.3/images/2020/04/jsdelivr-1.png</a><br>可以正常访问，成功~<br>这种方案的优点是，可以区分版本，就算以后删掉了一些文件也可以通过旧的releases访问，而且可以及时更新缓存。<br>美中不足的是，每次仓库里更新资源后，需要发布个releases才能获取更新文件，并不是很方便，所以适合于存放基本不需要更新修改添加的静态文件。需要频繁修改或上传的文件不建议放到这里面来。</p>
+<h2 id="直接访问"><a href="#直接访问" class="headerlink" title="直接访问"></a>直接访问</h2><p>根据jsDelivr的要求，文件路径为：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/user/repo/file">https://cdn.jsdelivr.net/gh/user/repo/file</a><br>以我的为例：<br><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/2020/04/jsdelivr-1.png</a><br>不推荐使用这种方法，暂未摸清如何更新缓存。</p>
+<h2 id="访问最新文件"><a href="#访问最新文件" class="headerlink" title="访问最新文件"></a>访问最新文件</h2><p>根据jsDelivr的要求，文件路径为：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/user/repo@latest/file">https://cdn.jsdelivr.net/gh/user/repo@latest/file</a><br>以我的为例：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets@latest/images/2020/04/jsdelivr-1.png</a><br>这种方案不需要发布releases，可以直接从repo读取文件，而且实时更新缓存。<br>但是官方并不推荐使用这种方法，因为修改repo的文件后，如果没有修改网站的旧链接，可能会出问题。根据你自己的情况决定吧。</p>
+<h1 id="访问统计"><a href="#访问统计" class="headerlink" title="访问统计"></a>访问统计</h1><p>jsDelivr还提供了文件列表和文件访问统计页面：<br>文件列表：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/user/repo/">https://cdn.jsdelivr.net/gh/user/repo/</a><br>比如我的：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/</a></p>
+<p>访问统计：<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/gh/user/repo">https://www.jsdelivr.com/package/gh/user/repo</a><br>比如我的：<a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets">https://www.jsdelivr.com/package/gh/HelloAllenW/BlogAssets</a></p>
+<h1 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a>代码压缩</h1><p>jsDelivr还提供了代码压缩服务，比如将JS/CSS的代码压缩，优化访问速度。<br>只是前几次访问会执行压缩操作，速度比较慢。后面就会将文件缓存，速度不会再慢了。<br>直接将访问链接的文件后缀改成.min.js即可，比如：<br><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js">https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/src/core.min.js</a></p>
+<h1 id="在GitHub中生成一个Token"><a href="#在GitHub中生成一个Token" class="headerlink" title="在GitHub中生成一个Token"></a>在GitHub中生成一个Token</h1><p>在主页依次选择【Settings】-【Developer settings】-【Personal access tokens】-【Tokens(classic)】-【Generate new token】- 【Generate new token(classic)】，填写好描述，勾选【repo】，然后点击【Generate token】生成一个Token，注意这个Token只会显示一次，自己先保存下来，或者等后面配置好PicGo后再关闭此网页。<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112349137.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352386.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352936.png"><br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242323101.png"></p>
+<h1 id="配置PicGo"><a href="#配置PicGo" class="headerlink" title="配置PicGo"></a>配置PicGo</h1><p>前往<a target="_blank" rel="noopener" href="https://molunerfinn.com/PicGo/">下载PicGo</a>，如果官方下载速度过慢，请使用<a target="_blank" rel="noopener" href="https://mirrors.sdu.edu.cn/github-release/1702304660/github-release/Molunerfinn_PicGo/">山东大学镜像</a>进行下载。安装好后开始配置图床。<br><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png"></p>
+<ul>
+<li>设定仓库名：按照【用户名 / 图床仓库名】的格式填写</li>
+<li>设定分支名：【master】 【main】(github 更新后默认为 main)</li>
+<li>设定Token：粘贴之前生成的【Token】</li>
+<li>指定存储路径：填写想要储存的路径，如【images/】，这样就会在仓库下创建一个名为 images 的文件夹，图片将会储存在此文件夹中</li>
+<li>设定自定义域名：它的作用是，在图片上传后，PicGo会按照【自定义域名+储存路径+上传的图片名】的方式生成访问链接，放到粘贴板上，因为我们要使用 jsDelivr 加速访问，所以可以设置为【<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E5%90%8D">https://cdn.jsdelivr.net/gh/用户名/图床仓库名</a> 】，上传完毕后，我们就可以通过【<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/%E7%94%A8%E6%88%B7%E5%90%8D/%E5%9B%BE%E5%BA%8A%E4%BB%93%E5%BA%93%E5%90%8D/%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84">https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径</a> 】加速访问我们的图片了，比如：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png">https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312112352311.png</a></li>
+</ul>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA0L2pzZGVsaXZyLWRpdmlzaW9uLnBuZw?x-oss-process=image/format,png" alt="分割线"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>经速度测试，访问速度非常快，有效提升整体速度，还能省下一大笔费用，实属优质白嫖~<br>并且配置好PicGo后，我们可以直接将图片拖拽到上传区（选择URL格式），将会自动上传并复制访问链接，将链接粘贴到博文中就行了，此外PicGo还有相册功能，可以对已上传的图片进行删除，修改链接等快捷操作，PicGo还可以生成不同格式的链接、支持批量上传、快捷键上传、自定义链接格式、上传前重命名等，更多功能自己去探索吧！</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"># 博客搭建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7d9d60a6/">2023年度欧洲摄影大奖，30幅作品</a>
+            
+            
+            <a class="next" rel="next" href="/cdac8766/">哥大校长2023毕业演讲：认识到自己巨大的无知，时刻保持开放的心态！</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7d9d60a6/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/cdac8766/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

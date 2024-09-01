@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>iframe 实现微前端 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">iframe 实现微前端</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 25, 2023&nbsp;&nbsp;23:04:02</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 25, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>下面以一个实际案例来详细介绍如果通过<code>iframe</code>将一个线上在运行的系统接入到另外一个系统，实现微前端的全过程。</p>
+<p>以笔者前段时间刚完成的ACP（全称Alibaba.com Pay，阿里巴巴国际站旗下一站式全球收款平台，下称A系统）接入生意贷（下称B系统）为例，已知：</p>
+<ul>
+<li><p>ACP和生意贷都是MPA页面；</p>
+</li>
+<li><p>ACP系统在此之前没有接入其他系统的先例，生意贷是第一个；</p>
+</li>
+<li><p>生意贷作为被接入系统，本次需要接入的一共有20多个页面，且服务端包含大量业务逻辑以及跳转控制，有些页面想看看长什么样子都非常困难，需要在Node层mock大量接口；</p>
+</li>
+<li><p>接入时需要做功能删减，部分接口入参需要调整；</p>
+</li>
+<li><p>生意贷除了接入到ACP系统中，之前还接入过AMES系统，本次接入需要兼容这部分历史逻辑；</p>
+</li>
+</ul>
+<p>我们希望的效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252225782.png"></p>
+<p>假设我们新增一个页面 <code>/fin/base.html?entry=xxx</code> 作为我们A系统承接B系统的地址，A系统有类似如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class App extends React.Component &#123;</span><br><span class="line">    state = &#123;</span><br><span class="line">        currentEntry: decodeURIComponent(iutil.getParam(&#x27;entry&#x27;) || &#x27;&#x27;) || &#x27;&#x27;,</span><br><span class="line">    &#125;;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;iframe id=&quot;microFrontIframe&quot; src=&#123;this.state.currentEntry&#125;/&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="隐藏原系统导航菜单"><a href="#隐藏原系统导航菜单" class="headerlink" title="隐藏原系统导航菜单"></a>隐藏原系统导航菜单</h1><p>因为是接入到另外一个系统，所以需要将原系统的菜单和导航等都通过一个类似<code>hideLayout</code>的参数去隐藏。</p>
+<br />
+
+<h1 id="前进后退处理"><a href="#前进后退处理" class="headerlink" title="前进后退处理"></a>前进后退处理</h1><p>需要特别注意的是，iframe页面内部的跳转虽然不会让浏览器地址栏发生变化，但是却会产生一个看不见的<code>history记录</code>，也就是点击前进或后退按钮（<code>history.forward()</code>或<code>history.back()</code>）可以让iframe页面也前进后退，但是地址栏无任何变化。</p>
+<p>所以准确来说前进后退无需我们做任何处理，我们要做的就是让浏览器地址栏同步更新即可。</p>
+<p>如果要禁用浏览器的上述默认行为，一般只能在iframe跳转时通知父页面更新整个<code>&lt;iframe /&gt;</code>DOM节点。</p>
+<br />
+
+<h1 id="URL的同步更新"><a href="#URL的同步更新" class="headerlink" title="URL的同步更新"></a>URL的同步更新</h1><p>让URL同步更新需要处理2个问题，一个是什么时候去触发更新的动作，一个是URL更新的规律，即父页面的URL地址（A系统）与iframe的URL地址（B系统）映射关系的维护。</p>
+<p>保证URL同步更新功能正常需要满足这3种情况：</p>
+<ul>
+<li><p>case1: 页面刷新，iframe能够加载正确页面；</p>
+</li>
+<li><p>case2: 页面跳转，浏览器地址栏能够正确更新；</p>
+</li>
+<li><p>case3: 点击浏览器的前进或后退，地址栏和iframe都能够同步变化；</p>
+</li>
+</ul>
+<h2 id="1-什么时候更新URL地址"><a href="#1-什么时候更新URL地址" class="headerlink" title="1.什么时候更新URL地址"></a>1.什么时候更新URL地址</h2><p>首先想到的肯定是在iframe加载完发送一个通知给父页面，父页面通过<code>history.replaceState</code>去更新URL。</p>
+<p>为什么不是<code>history.pushState</code>呢？因为前面提到过，浏览器默认会产生一条历史记录，我们只需要更新地址即可，如果用pushState会产生2条记录。</p>
+<p>B系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var postMessage = function(type, data) &#123;</span><br><span class="line">    if (window.parent !== window) &#123;</span><br><span class="line">        window.parent.postMessage(&#123;</span><br><span class="line">            type: type,</span><br><span class="line">            data: data,</span><br><span class="line">        &#125;, &#x27;*&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 为了让URL地址尽早地更新，这段代码需要尽可能前置，例如可以直接放在document.head中</span><br><span class="line">postMessage(&#x27;afterHistoryChange&#x27;, &#123; url: location.href &#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>A系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&#x27;message&#x27;, e =&gt; &#123;</span><br><span class="line">    const &#123; data, type &#125; = e.data || &#123;&#125;;</span><br><span class="line">    if (type === &#x27;afterHistoryChange&#x27; &amp;&amp; data?.url) &#123;</span><br><span class="line">        // 这里先采用一个兜底的URL承接任意地址</span><br><span class="line">        const entry = `/fin/base.html?entry=$&#123;encodeURIComponent(data.url)&#125;`;</span><br><span class="line">        // 地址不一样才需要更新</span><br><span class="line">        if (location.pathname + location.search !== entry) &#123;</span><br><span class="line">            window.history.replaceState(null, &#x27;&#x27;, entry);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-优化URL的更新速度"><a href="#2-优化URL的更新速度" class="headerlink" title="2.      优化URL的更新速度"></a>2.      优化URL的更新速度</h2><p>按照上面的方法实现后可以发现，URL虽然可以更新但是速度有点慢，点击跳转后一般需要等待7-800毫秒地址栏才会更新，有点美中不足。可以把地址栏的更新在“跳转后”基础之上再加一个“跳转前”。为此我们必须有一个全局的<code>beforeRedirect</code>钩子，先不考虑它的具体实现：</p>
+<p>B系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function beforeRedirect(href) &#123;</span><br><span class="line">    postMessage(&#x27;beforeHistoryChange&#x27;, &#123; url: href &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>A系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&#x27;message&#x27;, e =&gt; &#123;</span><br><span class="line">    const &#123; data, type &#125; = e.data || &#123;&#125;;</span><br><span class="line">    if ((type === &#x27;beforeHistoryChange&#x27; || type === &#x27;afterHistoryChange&#x27;) &amp;&amp; data?.url) &#123;</span><br><span class="line">        // 这里先采用一个兜底的URL承接任意地址</span><br><span class="line">        const entry = `/fin/base.html?entry=$&#123;encodeURIComponent(data.url)&#125;`;</span><br><span class="line">        // 地址不一样才需要更新</span><br><span class="line">        if (location.pathname + location.search !== entry) &#123;</span><br><span class="line">            window.history.replaceState(null, &#x27;&#x27;, entry);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>加上上述代码之后，点击iframe中的跳转链接，URL会实时更新，浏览器的前进后退功能也正常。</p>
+<p>为什么需要同时保留跳转前和跳转后呢？因为如果只保留跳转前，只能满足前面的case1和case2，case3无法满足，也就是点击后退按钮只有iframe会后退，URL地址不会更新。</p>
+<h2 id="3-美化URL地址"><a href="#3-美化URL地址" class="headerlink" title="3.      美化URL地址"></a>3.      美化URL地址</h2><p>简单的使用<code>/fin/base.html?entry=xxx</code>这样的通用地址虽然能用，但是不太美观，而且很容易被人看出来是iframe实现的，比较没有诚意，所以如果被接入系统的页面数量在可枚举范围内，建议给每个地址维护一个新的短地址。</p>
+<p>首先，新增一个SPA页面<code>/fin/*.html</code>，和前面的<code>/fin/base.html</code>指向同一个页面，然后维护一个URL地址的映射，类似这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// A系统地址到B系统地址映射</span><br><span class="line">const entryMap = &#123;</span><br><span class="line">    &#x27;/fin/home.html&#x27;: &#x27;https://fs.alibaba.com/xxx/home.htm?hideLayout=1&#x27;,</span><br><span class="line">    &#x27;/fin/apply.html&#x27;: &#x27;https://fs.alibaba.com/xxx/apply?hideLayout=1&#x27;,</span><br><span class="line">    &#x27;/fin/failed.html&#x27;: &#x27;https://fs.aibaba.com/xxx/failed?hideLayout=1&#x27;,</span><br><span class="line">    // 省略</span><br><span class="line">&#125;;</span><br><span class="line">const iframeMap = &#123;&#125;; // 同时再维护一个子页面 -&gt; 父页面URL映射</span><br><span class="line">for (const entry in entryMap) &#123;</span><br><span class="line">    iframeMap[entryMap[entry].split(&#x27;?&#x27;)[0]] = entry;</span><br><span class="line">&#125;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    state = &#123;</span><br><span class="line">        currentEntry: decodeURIComponent(iutil.getParam(&#x27;entry&#x27;) || &#x27;&#x27;) || entryMap[location.pathname] || &#x27;&#x27;,</span><br><span class="line">    &#125;;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;iframe id=&quot;microFrontIframe&quot; src=&#123;this.state.currentEntry&#125;/&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时完善一下更新URL地址部分：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// base.html继续用作兜底</span><br><span class="line">let entry = `/fin/base.html?entry=$&#123;encodeURIComponent(data.url)&#125;`;</span><br><span class="line">const [path, search] = data.url.split(&#x27;?&#x27;);</span><br><span class="line">if (iframeMap[path]) &#123;</span><br><span class="line">    entry = `$&#123;iframeMap[path]&#125;?$&#123;search || &#x27;&#x27;&#125;`;</span><br><span class="line">&#125;</span><br><span class="line">// 地址不一样才需要更新</span><br><span class="line">if (location.pathname + location.search !== entry) &#123;</span><br><span class="line">    window.history.replaceState(null, &#x27;&#x27;, entry);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>省略参数透传部分代码。</p>
+<br />
+
+<h1 id="全局跳转拦截"><a href="#全局跳转拦截" class="headerlink" title="全局跳转拦截"></a>全局跳转拦截</h1><p>为什么一定要做全局跳转拦截呢？一个因为我们需要把<code>hideLayout</code>参数一直透传下去，否则就会点着点着突然出现下面这种双菜单的情况：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252226881.png"></p>
+<p>另一个是有些页面在被嵌入前是当前页面打开的，但是被嵌入后不能继续在当前iframe打开，比如支付宝付款这种第三方页面，想象一下下面这种情况会不会觉得很怪？所以这类页面一定要做特殊处理让它跳出去而不是当前页面打开。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252227385.png"></p>
+<p>URL跳转可以分为服务端跳转和浏览器跳转，浏览器跳转又包括<code>a标签</code>跳转、<code>location.href</code>跳转、<code>window.open</code>跳转、<code>historyAPI</code>跳转等；</p>
+<p>而根据是否新标签打开又可以分为以下4种场景：</p>
+<p>a. 继续当前iframe打开，需要隐藏原系统的所有layout；</p>
+<p>b. 当前父页面打开第三方页面，不需要任何layout；</p>
+<p>c. 新开标签打开第三方页面（如支付宝页面），不需要做特殊处理；</p>
+<p>d. 新开标签打开宿主页面，需要把原系统layout替换成新layout；</p>
+<p>为此，先定义好一个<code>beforeRedirect</code>方法，由于新标签打开有<code>target=&quot;_blank&quot;</code>和<code>window.open</code>等方式，父页面打开有<code>target=&quot;_parent&quot;</code>和<code>window.parent.location.href</code>等方式，为了更好的统一封装，我们把特殊情况的跳转统一在<code>beforeRedirect</code>处理好，并约定只有有返回值的情况才需要后续继续处理跳转：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">// 维护一个需要做特殊处理的第三方页面列表</span><br><span class="line">const thirdPageList = [</span><br><span class="line">    &#x27;https://service.alibaba.com/&#x27;,</span><br><span class="line">    &#x27;https://sale.alibaba.com/xxx/&#x27;,</span><br><span class="line">    &#x27;https://alipay.com/xxx/&#x27;,</span><br><span class="line">    // ...</span><br><span class="line">];</span><br><span class="line">/**</span><br><span class="line"> * 封装统一的跳转拦截钩子，处理参数透传和一些特殊情况</span><br><span class="line"> * @param &#123;*&#125; href 要跳转的地址，允许传入相对路径</span><br><span class="line"> * @param &#123;*&#125; isNewTab 是否要新标签打开</span><br><span class="line"> * @param &#123;*&#125; isParentOpen 是否要在父页面打开</span><br><span class="line"> * @returns 返回处理好的跳转地址，如果没有返回值则表示不需要继续处理跳转</span><br><span class="line"> */</span><br><span class="line">function beforeRedirect(href, isNewTab) &#123;</span><br><span class="line">    if (!href) &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 传过来的href可能是相对路径，为了做统一判断需要转成绝对路径</span><br><span class="line">    if (href.indexOf(&#x27;http&#x27;) !== 0) &#123;</span><br><span class="line">        var a = document.createElement(&#x27;a&#x27;);</span><br><span class="line">        a.href = href;</span><br><span class="line">        href = a.href;</span><br><span class="line">    &#125;</span><br><span class="line">    // 如果命中白名单</span><br><span class="line">    if (thirdPageList.some(item =&gt; href.indexOf(item) === 0)) &#123;</span><br><span class="line">        if (isNewTab) &#123;</span><br><span class="line">            // _rawOpen参见后面 window.open 拦截</span><br><span class="line">            window._rawOpen(href);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // 第三方页面如果不是新标签打开就一定是父页面打开</span><br><span class="line">            window.parent.location.href = href;</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 需要从当前URL继续往下透传的参数</span><br><span class="line">    var params = [&#x27;hideLayout&#x27;, &#x27;tracelog&#x27;];</span><br><span class="line">    for (var i = 0; i &lt; params.length; i++) &#123;</span><br><span class="line">        var value = getParam(params[i], location.href);</span><br><span class="line">        if (value) &#123;</span><br><span class="line">            href = setParam(params[i], value, href);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (isNewTab) &#123;</span><br><span class="line">        let entry = `/fin/base.html?entry=$&#123;encodeURIComponent(href)&#125;`;</span><br><span class="line">        const [path, search] = href.split(&#x27;?&#x27;);</span><br><span class="line">        if (iframeMap[path]) &#123;</span><br><span class="line">            entry = `$&#123;iframeMap[path]&#125;?$&#123;search || &#x27;&#x27;&#125;`;</span><br><span class="line">        &#125;</span><br><span class="line">        href = `https://payment.alibaba.com$&#123;entry&#125;`;</span><br><span class="line">        window._rawOpen(href);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 如果是以iframe方式嵌入，向父页面发送通知</span><br><span class="line">    postMessage(&#x27;beforeHistoryChange&#x27;, &#123; url: href &#125;);</span><br><span class="line">    return href;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-服务端跳转拦截"><a href="#1-服务端跳转拦截" class="headerlink" title="1.      服务端跳转拦截"></a>1.      服务端跳转拦截</h2><p>服务端主要是对301或302重定向跳转进行拦截，以Egg为例，只要重写 <code>ctx.redirect</code> 方法即可。</p>
+<h2 id="2-a标签跳转拦截"><a href="#2-a标签跳转拦截" class="headerlink" title="2.      a标签跳转拦截"></a>2.      a标签跳转拦截</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#x27;click&#x27;, function (e) &#123;</span><br><span class="line">    var target = e.target || &#123;&#125;;</span><br><span class="line">    // A标签可能包含子元素，点击目标可能不是A标签本身，这里只简单判断2层</span><br><span class="line">    if (target.tagName === &#x27;A&#x27; || (target.parentNode &amp;&amp; target.parentNode.tagName === &#x27;A&#x27;)) &#123;</span><br><span class="line">        target = target.tagName === &#x27;A&#x27; ? target : target.parentNode;</span><br><span class="line">        var href = target.href;</span><br><span class="line">        // 不处理没有配置href或者指向JS代码的A标签</span><br><span class="line">        if (!href || href.indexOf(&#x27;javascript&#x27;) === 0) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        var newHref = beforeRedirect(href, target.target === &#x27;_blank&#x27;);</span><br><span class="line">        // 没有返回值一般是已经处理了跳转，需要禁用当前A标签的跳转</span><br><span class="line">        if (!newHref) &#123;</span><br><span class="line">            target.target = &#x27;_self&#x27;;</span><br><span class="line">            target.href = &#x27;javascript:;&#x27;;</span><br><span class="line">        &#125; else if (newHref !== href) &#123;</span><br><span class="line">            target.href = newHref;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, true);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-location-href拦截"><a href="#3-location-href拦截" class="headerlink" title="3.      location.href拦截"></a>3.      location.href拦截</h2><p><code>location.href</code>拦截至今是一个困扰前端界的难题，这里只能采用一个折中的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 由于 location.href 无法重写，只能实现一个 location2.href = &#x27;&#x27;</span><br><span class="line">if (Object.defineProperty) &#123;</span><br><span class="line">    window.location2 = &#123;&#125;;</span><br><span class="line">    Object.defineProperty(window.location2, &#x27;href&#x27;, &#123;</span><br><span class="line">        get: function() &#123;</span><br><span class="line">            return location.href;</span><br><span class="line">        &#125;,</span><br><span class="line">        set: function(href) &#123;</span><br><span class="line">            var newHref = beforeRedirect(href);</span><br><span class="line">            if (newHref) &#123;</span><br><span class="line">                location.href = newHref;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为我们不仅实现了<code>location.href</code>的写，<code>location.href</code>的读也一起实现了，所以可以放心大胆的进行全局替换。找到对应前端工程，首先全局搜索<code>window.location.href</code>，批量替换成<code>(window.location2 || window.location).href</code>，然后再全局搜索<code>location.href</code>，批量替换成<code>(window.location2 || window.location).href</code>（思考一下为什么一定是这个顺序呢）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252228911.png"></p>
+<p>另外需要注意，有些跳转可能是写在npm包里面的，这种情况只能npm也跟着替换一下了，并没有其它更好办法。</p>
+<h2 id="4-window-open拦截"><a href="#4-window-open拦截" class="headerlink" title="4.      window.open拦截"></a>4.      window.open拦截</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var tempOpenName = &#x27;_rawOpen&#x27;;</span><br><span class="line">if (!window[tempOpenName]) &#123;</span><br><span class="line">    window[tempOpenName] = window.open;</span><br><span class="line">    window.open = function(url, name, features) &#123;</span><br><span class="line">        url = beforeRedirect(url, true);</span><br><span class="line">        if (url) &#123;</span><br><span class="line">            window[tempOpenName](url, name, features);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-history-pushState拦截"><a href="#5-history-pushState拦截" class="headerlink" title="5.      history.pushState拦截"></a>5.      history.pushState拦截</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var tempName = &#x27;_rawPushState&#x27;;</span><br><span class="line">if (!window.history[tempName]) &#123;</span><br><span class="line">    window.history[tempName] = window.history.pushState;</span><br><span class="line">    window.history.pushState = function(state, title, url) &#123;</span><br><span class="line">        url = beforeRedirect(url);</span><br><span class="line">        if (url) &#123;</span><br><span class="line">            window.history[tempName](state, title, url);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-history-replaceState拦截"><a href="#6-history-replaceState拦截" class="headerlink" title="6.      history.replaceState拦截"></a>6.      history.replaceState拦截</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var tempName = &#x27;_rawReplaceState&#x27;;</span><br><span class="line">if (!window.history[tempName]) &#123;</span><br><span class="line">    window.history[tempName] = window.history.replaceState;</span><br><span class="line">    window.history.replaceState = function(state, title, url) &#123;</span><br><span class="line">        url = beforeRedirect(url);</span><br><span class="line">        if (url) &#123;</span><br><span class="line">            window.history[tempName](state, title, url);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="全局loading处理"><a href="#全局loading处理" class="headerlink" title="全局loading处理"></a>全局loading处理</h1><p>完成上述步骤后，基本上已经看不出来是iframe了，但是跳转的时候中间有短暂的白屏会有一点顿挫感，体验不算很流畅，这时候可以给iframe加一个全局的loading，开始跳转前显示，页面加载完再隐藏：</p>
+<p>B系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&#x27;DOMContentLoaded&#x27;, function (e) &#123;</span><br><span class="line">    postMessage(&#x27;iframeDOMContentLoaded&#x27;, &#123; url: location.href &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>A系统：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&#x27;message&#x27;, (e) =&gt; &#123;</span><br><span class="line">    const &#123; data, type &#125; = e.data || &#123;&#125;;</span><br><span class="line">    // iframe 加载完毕</span><br><span class="line">    if (type === &#x27;iframeDOMContentLoaded&#x27;) &#123;</span><br><span class="line">        this.setState(&#123;loading: false&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    if (type === &#x27;beforeHistoryChange&#x27;) &#123;</span><br><span class="line">        // 此时页面并没有立即跳转，需要再稍微等待一下再显示loading</span><br><span class="line">        setTimeout(() =&gt; this.setState(&#123;loading: true&#125;), 100);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还需要利用iframe自带的onload加一个兜底，防止iframe页面没有上报 <code>iframeDOMContentLoaded</code> 事件导致loading不消失：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// iframe自带的onload做兜底</span><br><span class="line">iframeOnLoad = () =&gt; &#123;</span><br><span class="line">    this.setState(&#123;loading: false&#125;);</span><br><span class="line">&#125;</span><br><span class="line">render() &#123;</span><br><span class="line">    return &lt;div&gt;</span><br><span class="line">        &lt;Loading visible=&#123;this.state.loading&#125; tip=&quot;正在加载...&quot; inline=&#123;false&#125;&gt;</span><br><span class="line">            &lt;iframe id=&quot;microFrontIframe&quot; src=&#123;this.state.currentEntry&#125; onLoad=&#123;this.iframeOnLoad&#125;/&gt;</span><br><span class="line">        &lt;/Loading&gt;</span><br><span class="line">    &lt;/div&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还需要注意，当新标签页打开页面时并不需要显示loading，需要注意区分。</p>
+<br />
+
+<h1 id="弹窗居中问题"><a href="#弹窗居中问题" class="headerlink" title="弹窗居中问题"></a>弹窗居中问题</h1><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252229409.png"></p>
+<p>当前场景下弹窗个人觉得并不需要处理，因为菜单的宽度有限，不仔细看的话甚至都没注意到弹窗没有居中：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252230745.png"></p>
+<p>如果非要处理的话也不麻烦，覆盖一下原来页面弹窗的样式，当包含<code>hideLayout</code>参数时，让弹窗的位置分别向左移动<code>menuWidth/2</code>、向上移动<code>navbarHeight/2</code>即可（遮罩位置不能动、也动不了）。<br>添加了<code>marginLeft=-120px</code>、<code>marginTop=-30px</code> 后的弹窗效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252230012.png"></p>
+<br />
+
+<h1 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h1><p>其实不难看出，最终效果和SPA几乎无异，而且菜单和导航本来就是无刷新的，页面跳转没有割裂感：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252231935.gif"></p>
+<br />
+
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>上述方案有几个没有提到的点：</p>
+<ul>
+<li>方案成立的前提是建立在2个系统共用一套用户体系，否则需要对2个系统的登录体系进行打通，一般包括账号绑定、A系统默认免登B系统，等等，这需要一定额外的工作量；</li>
+<li>参数的透传与删除，例如我希望除了hideLayout参数之外其它URL参数全部在父子页面之间透传；</li>
+<li>埋点，数据上报的时候需要增加一个额外参数来标识流量来自另外一个系统；</li>
+</ul>
+<p>在第一次摸索方案时可能需要花费一些时间，但是在熟悉之后，如果后续还有类似把B系统接入A系统的需求，在没有特殊情况且顺利的前提下可能花费1-2天时间即可完成，最重要的是大部分工作都是全局生效的，不会随着页面的增多而导致工作量增加，测试回归的成本也非常低，只需要验证所有页面跳转、展示等是否正常，功能本身一般不会有太大问题，而如果是微前端方案的话需要从头到尾全部仔仔细细测试一遍，开发和测试的成本都不可估量。</p>
+<p>作者：阿里巴巴终端技术<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7185070739064619068">https://juejin.cn/post/7185070739064619068</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"># 微前端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/28fe053e/">微前端（single-spa）简介</a>
+            
+            
+            <a class="next" rel="next" href="/57769d31/">微前端父子应用css命名冲突的解决方案</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/28fe053e/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/57769d31/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

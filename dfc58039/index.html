@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>审美真的分高低吗？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">审美真的分高低吗？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 29, 2024&nbsp;&nbsp;9:01:24</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 29, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近些年中文互联网上流行一个词汇——“low”。说一个人“很low”是一个贬低人的话，不同于在英文语境中，“low”更多是在道德层面贬低人，在中文语境中，“low”是在审美品味上贬低一个人，意思是说，这个人的审美品味很低端、很俗气，或者用老一辈人爱说的话，“low”就是指低级趣味。</p>
+<p>市面上似乎存在一种审美鄙视链，好像有些审美品味就会被人们认为是高雅的、高端的，而另有些审美品味相比之下就是low的、低级趣味的，比如，古典音乐是高端的，而流行音乐是low的；俄罗斯文学是高端的，而晋江文学是low的；塔可夫斯基的《雕刻时光》是高端的，而《小时代》是low的。印象派绘画是高端的，而波普艺术是low的……</p>
+<p>凭什么呢？我喜欢流行音乐，你喜欢古典音乐，不同的审美品味难道不是萝卜青菜各有所爱的事儿吗？为什么要有高雅和低俗之分呢？</p>
+<p>不过，话又说回来，如果审美全都是萝卜青菜各有所爱的事，这样就会落入审美的相对主义，甚至审美的虚无主义，也就是说，我们就不好说有些文艺作品就是比另外一些要更高级，我们就不能说陀思妥耶夫斯基的《罪与罚》就比晋江文学更高级，不好说贝多芬的《第5号交响曲》就比《老公老婆我爱你》更高级。当我们的孩子沉迷网络爽文的时候，我们就没有理由劝说他应当多读读《卡拉马佐夫兄弟》。</p>
+<p>回到这个大问题：审美品味的高下之分是真实存在的吗？还是说它只是被人们建构出来的假象？如果存在，它存在的基础是什么？如果是建构的，人们又为了什么而建构这种鄙视链呢？</p>
+<p>为了解答这一大问题，本期大问题节目将要介绍三派哲学家的观点，他们分别是：以毕达哥拉斯和柏拉图为代表的古希腊学派、康德，以及布尔迪厄。</p>
+<h2 id="1-毕达哥拉斯"><a href="#1-毕达哥拉斯" class="headerlink" title="1. 毕达哥拉斯"></a>1. 毕达哥拉斯</h2><p><strong>美是一种客观自在的规律或理念，审美的高下之分就在于对这个理念的把捉程度。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJW1vzjeLxibAFWo9I6kynQ9OsRtv1z5RWkUCV7ibRcdpdcNweT3ePP23jTInpo3O6eINbeSpl2FO77A/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>审美当然不是萝卜青菜各有所爱的事情，美是有绝对标准的，美的就是美的，丑的就是丑的。<strong>这种绝对标准就是一种美的规律，而这种规律也就是一种数学规律，美的本源就是数的和谐与神圣的比例。</strong></p>
+<p>有一次我路过铁匠铺，我发现铁匠打铁时，铁锤发出的谐音和铁锤的重量之间存在特殊的比例关系。接着我就在琴弦上做了实验，发现谐音和琴弦的长度比例同样存在特殊的数学关联，当两个音的弦长成为简单整数比时，同时或连续弹奏，所发出的声音是和谐悦耳的。这让我意识到，音乐的美可以用数学的比例来表示，有了这样的比例关系后，只要是符合这个关系的事物就是美的，并且一切美的事物必然也具有类似的和谐关系。</p>
+<p>事实上，对于建筑和雕塑比例的分析也证明了我的观点，按照黄金分割的比例关系去设计建筑和雕塑，这个建筑和雕塑就会显现出美感。可以说离开了数的和谐，美就不复存在了，因此美归根结底就是数的和谐。</p>
+<p>我请问各位，这世上还有什么是能比数更客观、更普遍、更恒定不变的？无论是身处哪个文化的人，都不可能否认2+2=4的客观普遍性，因此，既然美是基于数的和谐，那么美就是客观普遍的！一个有理智的人都会对美有共通的感知。<strong>如果你错把丑的当成是美的，那只能说是你没能认识到这个普遍必然的美的规律，这就像你认识不到2+2=4，这只能说明你的审美能力有问题。</strong></p>
+<h2 id="2-柏拉图"><a href="#2-柏拉图" class="headerlink" title="2. 柏拉图"></a>2. 柏拉图</h2><p><strong>美是一种客观自在的规律或理念，审美的高下之分就在于对这个理念的把捉程度。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJW1vzjeLxibAFWo9I6kynQ9OyTQoMpq1XAYbgS5GpyicUc6g2BNkfYbn8x84cVSBkADU9rmoHsEgPCQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>毕达哥拉斯说的很对！在我看来，这种美的规律是一种精神性的存在，我称之为“理念”。<strong>精神性的存在是比物质性的存在更高级的，因为物质都是有朽的，而精神理念就像数学一样，是永恒不朽的，现实有形事物是对理念的分有和模仿，虽然这些有朽的事物都是不完美的，但是正因为它们部分地分有和模仿了那个绝对不朽的美的理念，所以它会显得是美的。</strong></p>
+<p>为什么审美品位有高下之分呢？这还是精神和物质的配比关系的问题。<strong>有些人之所以沉迷低端审美，是因为他们的灵魂不够纯粹，他们灵魂中的精神性的存在，也就是人的理性，被灵魂中的物质性的存在，也就是肉体欲望所裹挟，这就干扰了他们对那个精神性的美的理念的感知，</strong>因此他们的审美品味都是肉欲向的，或者就是那种特别具象化的审美，也就是不经过任何形式化和抽象化的那种直接到手的快感，这些都是低级趣味。</p>
+<p>这些沉迷于低级趣味的人，是理性被欲望宰制的人，<strong>而能够欣赏高雅艺术的人，都是理性占据主导的人，理性能够控制欲望的人是哲学家，所以高端审美是一种哲学家才有的审美。</strong>哲学家的审美是不带肉欲向的，是用人类的理性这种精神性的存在去把握同是精神性的存在的美的理念，这种审美关注的不是具体的物件，而是关注一种形式上的美感，是透过这个具体的物件去追求一种纯粹精神上的交流。</p>
+<p>说实话，大部分老百姓的审美其实都是低级趣味，因为他们始终摆脱不了肉欲的裹挟，因此在我设想的理想国里面要搞文艺审查制度，所有文艺作品都要接受审查，那些搞低级趣味的文艺作品统统都要下架，相应的文艺创作者都要被驱逐出城邦，这样才能引导理想国中的老百姓过上一种健康节制的生活。</p>
+<h2 id="3-康德"><a href="#3-康德" class="headerlink" title="3. 康德"></a>3. 康德</h2><p><strong>审美品味内在于人类先验的判断力结构，自由品味相比于必然品味更是纯粹的审美。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJW1vzjeLxibAFWo9I6kynQ9OnA1YcrXBjQiboQdVPbxHy87icibd8SUM2jp9sjpebK77K06Zht5iavXyuw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>对于古希腊哲学家而言，美是一种是客观自在的精神实体，但是我认为，<strong>审美并不完全是客观的活动，而是也有主观的成分在里面。</strong>审美毕竟是人在审美，就像人的认知活动一样，这是脱离不开人的主观形式的。</p>
+<p>但是我并不因此就陷入了审美相对主义，虽然人类的审美有人的主观因素，但这种的主观因素，也就是人心，是人同此心心同此理的。我们人类对于美的判断有一种先验的共通感，这种共通感是每个人身上都一样的，我认为是美的东西，你必然也会认为是美的。</p>
+<p><strong>有两种审美趣味：1.反应性的趣味，2.反思性的趣味。前一种是经验的趣味、必然的趣味，后一种是理性的趣味、自由的趣味。</strong></p>
+<p>第一类的趣味并不具有普遍必然性，这是萝卜青菜各有所爱的事情，因为这种审美趣味关注的更多是感官上的快适感，追求快适感的审美趣味无所谓谁比谁高的问题，就好比你喜欢吃甜豆腐脑我喜欢吃咸豆腐脑，这里没有谁高谁低的问题，不至于争执起来。</p>
+<p>但是第二类趣味则具有普遍必然性，它要求普遍同意，比如说，我觉得一首曲子非常好听，我就会期待别人和我有一样的看法，如果有人说它不好听，我就会感觉不服气。</p>
+<p>前一种趣味关注对象的质料，也就是是关注具体内容的，后一种趣味关注对象的形式，是在抽象层面关注美感的，相比之下，后一种审美趣味是真正的审美、纯粹的审美。</p>
+<p>这第二种自由的审美趣味是通过人发挥它的想象力，透过艺术品的物质质料，也就是透过那些刺激感官的内容，进而对艺术品的形式进行把捉，在这种高级审美中，由于审美者脱离了感官和肉欲层面的爽感，因此这种审美是没有功利关系的，审美者之所以欣赏这个对象，并非出于个体感官上的偏爱，是脱离私欲的，他不图什么，他的审美没有目的，他的目的只是为了审美本身，因此这种无利害关系、无私欲牵涉、无目的的审美就是对任何人都有效的，我觉得它是美的，你也必然会觉得它是美的。</p>
+<p>由此，我认为第二种审美趣味相比于第一种审美趣味，是更高级的，是真正的审美。<strong>这取决于你是发挥理性去欣赏对象的形式，还是掺杂着感官欲望去欣赏对象的质料。如果说一个人的审美品味不够高级，这说明他没有摆脱对感官上快适感的追求。</strong></p>
+<h2 id="4-布尔迪厄"><a href="#4-布尔迪厄" class="headerlink" title="4. 布尔迪厄"></a>4. 布尔迪厄</h2><p><strong>审美品味的高下之分是被建构出来的，它是阶级斗争的副产品。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJW1vzjeLxibAFWo9I6kynQ9OkH1M2CQ7jpW84iczBX5G7cTWXjRibe9A8Gia89xQLzXPy1Ze5dcnNfNDw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>康德说审美无功利，好像有一种纯粹的美学领域，好像康德所言的自由品味是符合了一种美学，所以才是高级的。<strong>但是，哪有什么先验的、普遍必然的审美品味？哪有什么美学本身？有的只有利益，只有资本！并不存在纯粹的审美领域，审美的作用在于区分开不同的阶级。</strong></p>
+<p>我们知道，传统意义上阶级的区分标志是对生产资料的占有，简单说，也就是财产。因此，根据有钱没钱，就区分出了上层的资产阶级，以及底层的无产阶级。<strong>但是随着工业化和资本主义的进一步发展，用有钱没钱来区分阶级，已经不那么好使了，</strong>现在生活消费品十分便宜，而且，工人阶级也开始持股了，现在谁有钱谁没钱，很难从表面上看出来了。</p>
+<p>但是，阶级还是需要区分的啊，尤其是上层的资产阶级，他们永远想要通过某种方式来宣布，我们和穷人不一样，从而进一步巩固现有的阶级秩序和统治秩序，这种需求一直是有的，那么既然经济上阶级的区分已经模糊化了，这时候就需要从品味入手。</p>
+<p><strong>审美品味是一个特别好的区分阶级的标志，因为一个人如果要有高端的审美品味，也就是康德所谓的那种形式化的、抽象的自由品味，想要获得这种品味，这是需要大量的、以及长时间的文化资本的投入的。</strong></p>
+<p> 想要获得这种自由品味，并不是你去读两本比如《如何看懂高雅艺术》或者《如何正确穿戴奢侈品》就能速成的，就比如你去博物馆看一幅名画，并不存在一种教科书式的对名画的解读，并不存在一种速成学习法。<strong>对高雅艺术的感知是出于一种积习（habitus），这种积习需要你从小接受一种教育和熏陶，</strong>这种教育可不是实用教育，而是一种无用的教育，它需要你有大量的闲暇，需要你本人长时间为此亲力亲为，这只有当你摆脱了实际生计的考虑，然后耗费大量的时间和金钱，并且你对这种审美始终保持一种无功利的心态以后才能培养出来的一种习惯。</p>
+<p>这种积习可不是上层资产阶级故意装出来的，它是一种由于长时间的培养而产生的自然而然的、举手投足之间透露着的一种气质、一种修养，它体现在你的日常谈吐、做事的风格，体现在你日常的生活用品，甚至体现在你的神情之上。<strong>你要是没有沉浸在这种积习之中，这是装不出来的，但正是因为装不来，它才是一个有效的区分阶级的标志，因为高级的审美品味非常非常贵，也只有上层阶级才能负担的起这种审美配置。而大众由于不具备这样的审美配置，因而他们就不处在那样的积习之中，因而就培养不出高级的审美品味。</strong></p>
+<p>拥有高端审美品味的一个表现就是，你会拥有一种对高雅艺术以及高端用品的解码能力，你并没有去背诵审美解读的公式，但你就能看懂一些高雅艺术，你就能得体地使用一些高端用品，你就能说出一些富人圈的小圈子才能领会的审美黑话。</p>
+<p><strong>大众不具有这种解码能力，因为他们没有那样的审美配置，他们只会纵情那种直接的、无需培训的、感情激昂的、大吃大喝式的、被肉欲裹挟了的所谓的低级趣味。</strong></p>
+<p> 拿摄影来举例，上层阶级拍照片，任何对象都能拍出美感来，因为这种美感不在于拍摄的内容，而在于拍摄的形式。而底层阶级拍照主要是关注所拍摄的具体内容，比如落日、美人、奇观，他们拍照无视方法或风格，认为美就是具体事物的形象。</p>
+<p><strong>一边，是所谓低级的、粗俗的、贪财的、奴性的，总之是自然的享乐；另一边，则是所谓升华的、精致的、无关利害的、优雅的快乐，于是，阶级就被区分开了。</strong></p>
+<p> 其实，我是认可康德对他所谓的高级的自由品味的描述的，也就是一种无功利的，对纯粹形式的一种抽象的把握，但是康德认为这种品味是真实存在的，而我认为，所谓的美只是被人为建构出来的，审美鄙视链并不真实存在，它只是上层阶级用来把自身与大众区隔开来的标志。</p>
+<div
+   style="position: relative; width: 80%; height: 0; padding-bottom: 75%;margin-bottom:-15%;">
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=716162635&bvid=BV1cQ4y1R73z&cid=354622814&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 80%; Left: 10%; top: 0;"></iframe>
+</div>
+
+
+
+
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d81dfaa9/">我可能要结婚了！</a>
+            
+            
+            <a class="next" rel="next" href="/ed7acd17/">西方哲学史概述</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d81dfaa9/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/ed7acd17/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

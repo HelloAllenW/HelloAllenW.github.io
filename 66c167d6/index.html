@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>绝对知识的瓦解 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">绝对知识的瓦解</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 14, 2016&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 14, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">9.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">30 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/9qQW9X4vELDFIbjPyMlBT31PAC3gZs0puJIVxPWy2kOND2TurtQb7pa0u7uEjq6GBKApRMvCwqCLCSX6wGlJeA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+图片：德里达<br />
+文章作者：李永毅<br />
+原载：《外国哲学》2015 年 02 期
+</div>
+
+
+
+<p>德里达把黑格尔视为西方形而上学传统由盛转衰的标志性人物，后者对绝对知识的绝对自信只是理性主义过度膨胀导致的幻觉。通过对其宗教观、时间观、语言观、阅读观和死亡观的细致分析，德里达向我们表明，正是那些被黑格尔驱赶到边缘的因素最终敲响了绝对知识的丧钟。然而，绝对知识的终结是一件幸事，因为它打开了通向真知(当然只是被具体时空限定的真知)的空间。</p>
+<p>在德里达眼中，黑格尔是一个双重性的人物。一方面，他是西方形而上学传统的最典型代表和集大成者，梦想“破译出一种真理或起源”，“可以逃脱符号的游戏和秩序”，找到终极的绝对知识。①他所处的19世纪是理性主义取得全面胜利的时代，人类对理性的信心极度膨胀，仿佛可以胸有成竹地解释宇宙间的一切现实，百科全书式的写作主导了科学、哲学、文学等各个领域。</p>
+<p>在科学领域，有将牛顿体系推向极致的拉普拉斯决定论；在哲学领域，有黑格尔的《精神现象学》和孔德的《实证哲学教程》的庞大体系；在文学领域，有巴尔扎克的《人间喜剧》和左拉的家族传系列的恢宏画卷。黑格尔的否定之否定模式和基督教的救赎叙事、牛顿的时空体系一起，形成了主流的确定性宇宙观。在此框架内，时间或者听命于必然的逻辑，或者服从于目的论的统治，或者沦为单纯的坐标，真正意义上的变化和不确定性的幽灵都被驱逐了。</p>
+<p>但在另一方面，黑格尔也代表了形而上学盛极而衰的转折点和哲学死亡的开始。②自那时起，“哲学一直笼罩在自己即将死亡的意识中”，但是“在哲学的死亡之外，在它的垂死状态之外，甚至可能正由于它的死亡，思想仍然有一个未来”③。德里达所说的哲学是西方传统模式的哲学，它的终结反而会给思想以自由。从《论书写学》到《丧钟》再到《哲学的边缘》，德里达试图向我们展示的是，正是那些被黑格尔驱赶到边缘的因素最终敲响了绝对知识的丧钟。</p>
+<p><strong>一、希腊与希伯来：哲学的暴力</strong></p>
+<p>在《暴力与形而上学》一文中，德里达指出，古希腊哲学创立之初就蕴含了一种唯我独尊的暴力。到了黑格尔这里，这种“光明的独白”更直接把赤裸裸的种族主义偏见变成了“客观”的知识。在西方历史上，犹太文化或者说希伯来文化一直被树为希腊文化的对立面，黑格尔把这种盲目的仇视发展到了宇宙观的高度。</p>
+<p>黑格尔在《基督教精神及其命运》中以哲学命题的方式肆意侮辱希伯来文明，把犹太人视为西方文明进步过程中必须征服的否定面。他轻蔑地写道，希腊人的平等是因为他们都是自由、自立的，犹太人的平等是因为他们都无法自力更生。更令人惊骇的是，他把犹太人看成了反自然的非人类：“犹太民族的大悲剧不是希腊的悲剧，它既不能唤起恐惧，也不能唤起怜悯，引发这两种感情的必须是一个美好人物因为不可避免的错误而遭致的命运。犹太民族的命运是麦克白的命运，他们越出了自然的边界，与邪魔为伍，所以他们在宗教仪式中会践踏和残害人性中一切神圣的东西，所以他们会被自己的神(因为这些神只是赝品，而他们是赝品的奴隶)抛弃，并因为自己的信仰而粉身碎骨。”④</p>
+<p>如此非理性、如此恶毒的论断居然会长期占据哲学经典的地位，说明反犹主义已经成为西方文化的集体无意识⑤，而其根源则在与犹太文明遭遇之前的古希腊。古希腊的野蛮人概念不是以文明程度而是以民族为基础划定的，一切非希腊人都是野蛮人。亚里士多德在《政治学》中为古希腊社会的民族偏见提供了一段著名的“理性”论证，提出只有温和气候下的希腊人兼具亚洲人的智力和欧洲人的血气，能够设计出理想的政治制度。⑥后来的古罗马史家李维完全认同上述立场，他说：“全体希腊人和外族人、野蛮人的战争是永恒的，因为决定他们是敌人的乃是天性，而非每日都在变化的因素。”⑦德里达在更为隐蔽的形而上学领域发现了同样的民族中心意识。他认为，古希腊哲学对“同一和太一”的垄断就如同压迫本身，“一种世上其他任何压迫不能与之相比的压迫，一种存在论意义上的超验压迫，同时也是世上一切压迫的源头和借口”⑧。德里达对希腊哲学的批判似乎过于严厉，但如果我们联想起黑奴贸易中拯救灵魂的宗教辩护、殖民扩张中以驯化野蛮名义进行的屠杀和纳粹登峰造极的种族灭绝政策，便不会太感震惊，因为这些罪行的背后是同一种以文明话语洗白暴力的欲望。德里达提醒我们，隐喻不是无辜的，语言不是无辜的，抽象的理论和血腥的征服可能具有同谋关系。</p>
+<p>然而，德里达抨击古希腊哲学的暴力，并不是为了把希伯来文化从边缘推到中心。虽然从他的犹太血缘来说，有这样的动机并不奇怪。苏珊·韩德尔曼讨论过他与犹太法典的关系⑨，海伦·希苏曾把他描绘为一位犹太圣徒⑩，本宁顿也指出，我们很容易将德里达作为“犹太思想反对希腊逻各斯暴政”的武器，用希伯来“律法的思维”对抗希腊“法律的思维”(11)。但德里达却刻意强调自己与犹太思想的距离：“虽然我认为将希腊和犹太并置思考很关键，但我认为自己的思想不属于任何一方。我经常感觉，相对于我在希腊哲学传统的外围所提出的问题，犹太模式构成了一个他者……但悖论在于，我从来没有从内部或者以直接的方式引用过犹太传统。”(12)</p>
+<p>无论德里达与犹太传统的距离是否真的如此之远，他之所以如此表白，是因为他相信以黑格尔为代表的二元对立思维是错误的，希腊和希伯来并不是对立的两极，这所谓的两极本身就不具备黑格尔所想象的自我同一性。以希腊哲学为例，并不存在一种可以称为其本质的东西，它是由众多不可调和的异质因素构成的混合体，非要认定某部分希腊哲学才是“希腊”的，是思想暴力的体现。虽然我们仍然需要在整体意义上使用“希腊”这个词，德里达却指出了它内在的分裂状态。“希腊”包含了“非希腊”，包含了相对于希腊而言的他者(埃及人、蛮族和一切被希腊判定为他者的人)的因素，甚至包含了在希腊的语言和逻各斯之外、希腊人无法想象的完全的他者。(13)不仅如此，倘若反叛古希腊传统的行为可以比作弑亲的话，“和任何弑亲行为一样，它只发生于家庭内部，外来者只有在某种意义上融入家庭的时候，才可能成为弑亲者”(14)。所以，古希腊哲学不仅不能摒弃，反而应当深入研究。</p>
+<p>德里达相信，希伯来文化和希腊文化并不是黑格尔所理解的对立关系，“我们活在希腊和犹太的差异中，这种差异或许可以称为历史的整体”(15)。这个结论看似黑格尔的正题、反题、合题的翻版，但实际却有天壤之别。黑格尔的扬弃最终抹掉了差异，德里达却要始终保存差异，甚至认为差异是更为本源的东西，这不是黑格尔的辩证法，而是解构主义的补替观。</p>
+<p><strong>二、时间与非时间：两种公正观</strong></p>
+<p>黑格尔哲学的基础是时间化身为历史的观点，德里达将批判的火力对准了这个观点，因为他相信，将公正视为复仇的思想就是此种时间观的直接后果。讨论时间不是纯粹的本体论思辨，而是牵涉到政治哲学的基本框架。</p>
+<p>黑格尔的时间观始终受到自身逻辑的威胁。在他的体系中，时间是超时间的，因而“从时间上说”是不可能的，然而它对于哲学而言却又是必不可少的。他坚信，时间的概念是永恒的，因而是真理和哲学的起始范畴，但是“当时间发生时”，每个时刻或者说“现在”却在效果上摧毁了前面的一个时刻或“现在”。黑格尔的化解方式是区分了观念层面的时间和经验层面的时间。观念层面的时间是永恒的，非时间的(in－temporal)，但对于居住在历史时间中的生灵来说，时间却以“现在”的具体经验的形式化身为历史，每一个“现在”都汇聚了过去的记忆和未来的期望。(16)</p>
+<p>然而，这样的解释仍然没能克服一个矛盾。时间化身为历史意味着时间有一个以历史的形式进入的起点。在黑格尔的理解里，原初的自然是毫无区分的纯粹存在，是德里达所说的“绝对空间”(17)。这样，当时间从空间中涌现时，甚至在它化身为历史“之前”(当然，这里的“之前”其实是没有意义的，因为它标志的时间尚未“发生”)，它必须先区分空间，通过否定其绝对的“空间性”将空间和自身区分开来。因此，时间的存在不仅需要具体的生灵在具体的世界中经验到的差异，还需要一种源头的差异，就是时间刺穿无差异的绝对空间所产生的差异。这一点被黑格尔完全忽略了。</p>
+<p>不仅如此，黑格尔的时间虽然号称化身为历史，其实却摧毁了历史，因为如果相信他的永恒时间，所谓现在早已被将来注定，所谓将来也早已被过去注定。按照他的说法，从我们有限的角度看，下一时刻发生的事似乎是不确定的，但这种不确定的假象是一种认知错误。因为“历史”——绝对精神的时间在世界上的轨迹——并非漫无目的，而是有自己的方向和确定的终点。绝对精神在时间中演化的历程只是为了让世界获得对它的知识。对于绝对精神或者观念层面的时间而言，历史变化并不是真实的。</p>
+<p>在这样的历史中游历的人，在朝向所谓终极真理的路上，必定会不断遭受自身认知被否定的挫败。黑格尔在《精神现象学》中对此过程的描述是乐观的，似乎人总是能在回顾中理解自己的道路。但对于多数人而言，这样的挫败完全可能导向相反的结果。一旦接受历史进程早已注定的观点，那些受到不公对待的人或者会认为自己是历史的牺牲品，或者认为历史本身出了错，应该把它引向另一条轨道。公正即复仇的理念正是发源于这种对历史的目的论式的阐释。</p>
+<p>德里达在《马克思的幽灵》中以莎士比亚笔下的哈姆雷特为例分析了以复仇为目标的公正观。他揭示了哈姆雷特的命运和革命阶级的命运之间的高度相似。哈姆雷特宣称“时代已经脱位”，自己“可憎的使命”就是用复仇让时代复位。(18)与此相应，革命阶级相信必须翻开历史的新篇章，“以被践踏世代的名义完成解放的任务”(19)。和哈姆雷特一样，革命阶级必须清楚未来应当如何设计，历史在何处步入了歧途，谁应当被惩罚。如果历史有一条“正确的”道路，那么决定其走向的便是“正确的”阐释者。德里达提醒我们，对阐释权的争夺虽然不可避免，但却“可能在面对世界的苦难时把我们带回……一种宿命式的理想主义或者抽象教条的末世论”(20)。</p>
+<p>由此看来，在黑格尔的时间概念和将公正理解为复仇的思维之间的确存在逻辑的链条。黑格尔是通过抑制时间对空间的依赖(和空间对时间的依赖)保证了时间在概念上的纯粹。一连串相同的“现在”构成的时间掩盖了时间的原初性差异和延异性(différantial)结构。黑格尔在“现在”里填充了一个被将来预定的在场，德里达却相信它“必然是不确定的，抽象的，仿佛荒野……用以等待他者”(21)。他呼吁我们放弃那种目的论的时间观和与之相伴的公正观，不再幻想在未来的某一天，上帝或绝对精神会完全实现其意旨，公正会完美地实现，而要继承弥赛亚精神的“非神学遗产”(22)，怀着对公正的期盼，在历史复杂矛盾的无限进程中，既非提前也非滞后地创造出解决问题的办法。</p>
+<p><strong>三、深坑与金字塔：虚妄的语言等级</strong></p>
+<p>德里达把黑格尔视为西方语音中心主义的代表人物之一，而且与柏拉图、卢梭、胡塞尔等人不同，黑格尔的语音中心论是与种族主义偏见直接绑在一起的。在《深坑与金字塔》中，德里达分析了黑格尔《哲学科学百科全书》等著作的相关段落，指出其符号理论的核心就是“将特权或优越地位”赋予“语音系统”，让语音凌驾于书写之上。(23)</p>
+<p>“深坑”和“金字塔”是黑格尔讨论符号问题时使用的两个比喻。他把人的心智比作“暗夜一般的深坑”或者“无意识的深坑”。(24)之所以如此形容，是因为心智是储存形象的容器。当我们进入想象的领域，形象就从这个深坑中提取出来，隐藏在深坑的暗夜中的形象就会通过想象的再生产进入光明之境。德里达评论道，心智如深坑，也就“沉默如死亡，回响着它所储备的语音的全部力量”(25)。“金字塔”是符号的比喻。作为一种外化的力量，想象生产了符号。符号是“一种无中介的直觉，代表了与自然属于它的东西全然不同的引入之物，它是金字塔，一个异国的灵魂被运进来，在其中保存”(26)。符号和象征的区别在于，它和所指代的概念之间没有任何本然的联系或相似性。太阳是善的象征，因为它以光明养育着生命。但是希腊语的字母X与chi的声音之间没有任何天然关联。德里达评论道，金字塔的比喻揭示了符号的“任意性”和“异质性”，生产具备任意性的符号表现了“精神的自由”。(27)他注意到，黑格尔的两个比喻都与死亡有关。形象是从暗夜一般的深坑中提取出来的，但它没有机会复活，却被立刻再次埋葬进了符号的金字塔。符号虽然可见，却是死的，活的是精神，是以语音形式存在的语言。</p>
+<p>死亡—书写、生命—语音的联系只是德里达在黑格尔文本中发现的语音中心论的一个征候而已。黑格尔将时间置于空间之上，将不同的书写系统纳入等级秩序，将计算和机器逐出哲学疆界之外，都是从不同侧面表现了同一种倾向：贬低书写，尊崇语音。</p>
+<p>书写是空间的，语音却不需要空间来呈现。德里达认为，既然黑格尔让空间臣服于时间，书写的地位也自然比语音卑微。黑格尔提出，时间是空间的扬弃，是空间的真相。(28)在符号学的范围内，空间和时间的关系体现为书写符号和言语声音的关系。因此，黑格尔宣称，具备内在时间性的语音比在空间中延伸的书写符号更真实。(29)</p>
+<p>按照书写符号与语音邻近的程度，黑格尔武断地建立了一个世界语言的等级秩序，占据顶端的自然是“最智慧的”拼音文字，底层则是中国的象形文字。黑格尔的理由是，拼音文字由于脱胎于言语或者说语音，其书写字母是“符号的符号”，正因为它是语音的记录，摆脱了形象的羁绊，可以让心智的注意力从感性形象转移到“语音词语及其抽象元素的形式结构上”，逐渐形成一个“内在的、独立的智力领域”，而象形文字却依赖没有语音起源的空间形象，缺乏语言的符号性质，使得具体概念之间的关系“纠缠紊乱”，阐释起来有“许多种不同的结果”。因此，中国的象形文字不仅不是莱布尼茨所鼓吹的哲学语言的理想候选者，而且不利于智力的发展，仅适用于“中国文明这种停滞的哲学”(30)。然而，德里达却指出，这些貌似客观的分析其实只是伪装的偏见。一个明显的例证是，黑格尔不仅诋毁汉字——书写系统，也诋毁汉语——语音系统。(31)黑格尔指责中国的口头语言有严重缺陷，发音相同的词太多，需要依赖音调和轻重，欧洲人根本无法掌握“这些荒谬的发音区别”(32)。这种违背自己逻辑体系的做法表明，推动黑格尔确立语言等级的不是探求真理的精神，而是竭力证明西方文明优越性的种族主义心态，同样的心态也体现在他对中国宗教和哲学的攻击上。(33)</p>
+<p>黑格尔不仅否定象形文字，也否定数学书写，认为它不是符号系统，而是象征系统。他说计算是“一种外在的过程，因而是机械的”，一个证明就是人们能够发明出独立完成数学运算的计算器。(34)德里达声称，黑格尔“永远不愿考虑的是一台能够工作的机器”(35)。因为在后者看来，如果某种东西仅仅为着功能性而存在，缺乏任何终极用途和意义，在一个以目的论为指向的宇宙观框架里，是没有价值的。书写符号的物质性和机械性与机器相似，因而也不如与精神更邻近的语音。</p>
+<p>德里达承认符号的物质性，但他认为物质性不是书写的根本特征：“只有当书写的内容作为表意符号死亡时，它才作为语言诞生。”(36)书写是活的，是生产差异的永不停息的运动。他杜撰的著名词语延异(différance)打破了书写和语音的对立，并且隐藏着一个跟黑格尔开的玩笑。在法语的语音体系中，différance和différence(差异)的发音完全相同，ance和ence的差别只有通过书写才能体现出来。字母A曾经被黑格尔解释为金字塔的影像(37)，金字塔又代表了黑格尔心目中的符号，而différance的全部意义和全部活力恰恰浓缩在字母A中。</p>
+<p><strong>四、署名与作者：确定性的消失</strong></p>
+<p>自传常被视为文学的一种边缘体裁，因为它的“非虚构性”似乎与文学的“虚构性”相冲突。但在《丧钟》一书中，德里达却通过黑格尔哲学文本和让·热内(Jean Genet)自传文本的巧妙互动(38)，以署名问题为突破口，揭示了作者和主体是一切文学作品的核心问题，自传不仅不是文学的边缘体裁，反而是文学的样本。在此过程中，黑格尔的宗教和美学观念也受到了德里达的批判。</p>
+<p>德里达的《丧钟》是一部奇特的作品，每页的左栏是关于黑格尔《精神现象学》和《美学》的哲学讨论，右栏是以热内自传为出发点的抒情性、联想性评论文字。在评论热内的自传时，德里达提出，署名的地位是解释文学形式性“必不可少的初始问题”(39)。不剖析这个问题，就无法理解自传是什么。他的策略是向我们展示，热内的自传其实是一系列署名问题的变奏，它最终摧毁了自传概念中关于署名的基本预设，德里达自己在《丧钟》里的署名和热内的署名遵循的是同样的运作方式。</p>
+<p>我们通常认为，署名是文本内的一个记号，它指向文本外的某个起源(作者)，但德里达却指出，这样的预设存在逻辑漏洞。倘若署名真在文本之内，那么它就不再是署名，而只是一个名词，一个词，文本的一小部分。它无法保证终极所指，无法表达作者的意图，无法代表文本的起源。可是，如果署名在文本“之外”，那么文本就并不真正需要它，就独立于它，它就成了多余之物。(40)在《丧钟》里，德里达始终用父母和孩子的比喻来讨论作者与文本的关系。在柏拉图那里，作者永远是父亲，但德里达却提出，作者轮流扮演父亲和母亲的角色。不仅如此，由于署名取代了不在场的作者，我们也可把它比作与文本没有血缘的“代父母”。借用这样的比喻，德里达得以把热内的家庭关系纳入他的讨论。热内出生时就被父母遗弃，他的出生证上印着“加布里埃尔·热内”(Gabrielle Genet)，他只知道Genet是母亲的名字。母亲遗弃私生子，只留下一个名字，德里达于此发现了作者/文本/署名关系的一个绝佳寓言。但无论署名是在文本之内还是之外，它都以某种形式将文本据为己有。这样，在希望获得自由的文本和强加其上的署名之间就存在冲突。文本似乎能够独立发挥自己的作用，它似乎杀死了生产自己的父亲或母亲。(41)</p>
+<p>热内的名字本身还另有玄机，genet是西班牙出产的一种马，而genêt是金雀花。《丧钟》右栏的大量篇幅都在说明热内如何在文本中将自己的名字与花和马的形象联系起来。德里达指出，换称(antonomasia)这种文字游戏是文学的基本传统，它或者把专有名词变成事物的名称，或者用普通名词来指称个人。“当热内命名时，他既是在施洗，也是在谴责。”(42)他认为，换称凸显了一切命名行为的共同特征：没有任何名字绝对适合它所指称的人，是系统赋予它合法性，让它为个人分类，在语言和国家中给他一个位置。专有名词永远可以用来指称别人，永远可以被重复、剥夺和重新占有。在这个意义上，换称揭穿了专有名词的谎言，后者和私有财产一样，只是被假定属于某人。(43)换称是一种盗窃，但它让我们得以窥见命名的原初行为中的盗窃。但从另一个角度看，换称把一个普通名词变成大写，变成专有名词，也是企图将它带出流通过程，带出语言系统，成为自己的财产。虽然它的性质是盗窃，但却和偷盗成性的孤儿热内一样，其原因不是蔑视保护私有财产的制度，而是希望拥有某种真正属于自己的私有财产。因此，换称是一种双重姿态，它既质疑制度(文学和专名)，又确认制度。(44)它是文学作者问题的完美象征。</p>
+<p>德里达讨论热内名字的植物和动物意义，也是为了影射《丧钟》开始部分左栏中引用的黑格尔文本。黑格尔在《精神现象学》中考察了宗教的演进。他认为，自然宗教是朝绝对宗教发展的第一阶段，而植物和动物的宗教是自然宗教的第二阶段。花的宗教是无辜的，动物的宗教是有罪的，因为花还不是自我、主体和为自己而存在的破坏性力量，却又代表了这样的自我。(45)热内从genêt变成genet，从金雀花变成马，如同花的宗教向动物的宗教过渡。黑格尔还指出，自然宗教的第一阶段是太阳的宗教，其特点是没有形象的再现。从太阳的宗教过渡到植物和动物的宗教，也是从纯粹的现象领域进入形象再现的领域。与此对应，宗教的最后阶段(绝对宗教)之后的绝对知识状态同样以没有形象为其特征，这样就完成了无形象——有形象——无形象的循环。(46)</p>
+<p>如果把黑格尔所描述的宗教演进过程与阅读过程(尤其是阅读《精神现象学》的过程)类比，我们就会发现黑格尔心目中的理想文本是由能够在理解的同时被消耗掉的形象或象征组成的。这种典范文本永远可以回到它的源头，回到作者，回到保证作者意图的署名。文本中的形象只是临时的必需，它们最终将被意义的太阳之光焚尽，不留下任何阅读的剩余物。通过追踪太阳的宗教向花的宗教的过渡，德里达提出了取代这种末世论阅读方式的另一种方式：“人们不再爱太阳的灿烂光芒，而开始爱花。”(47)当热内把抽象的姓氏Genet变成具体的植物genêt时，代表源头、太阳和无形象的署名就变成了代表游戏、自由和形象的普通名词。这样的阅读不再指向预定的终点和绝对知识，而在对文字和思想的爱恋中流连。</p>
+<p><strong>五、死亡与辩证法：普遍机制</strong></p>
+<p>辩证法是黑格尔哲学的核心，也是最终获得绝对知识的保证。但在他关于死亡的论述中，巴塔耶却找到了辩证法的阿喀琉斯之踵。在《从有限机制到普遍机制》中，德里达通过与黑格尔、巴塔耶文本的三方对话，进一步揭示了黑格尔哲学的内部危机。</p>
+<p>巴塔耶的策略是用哲学所贬斥的笑和喜剧来消解形而上学的信条，指明它们无根基的本相，在一种非目的论的倒推过程中，把所谓的可知还原为不可知。(48)他的理念是：“某种东西可笑，可能仅仅是因为它不可知。”(49)康德曾把事物分为可知的现象之物和不可知的自在之物。当代哲学又指明了限制人类意识获得知识的三个因素：“外部事物与内部意识的差异、外部主体或者说主体间他者与主体的差异以及经验整体溢出人类理解的过剩。”(50)在黑格尔的辩证经验里，一切经验都是有目的的，按照肯定、否定、否定之否定的预设轨道前进，直至绝对知识或者绝对精神的自我完成。巴塔耶理解的经验与此不同，它是持续的，却不是发展的、前进的，它是一个不可从整体上把握的连续体，而不是螺旋的上升线。他认为，黑格尔的辩证法缺乏有效的预设，从一开始就压制了知识。(51)他嘲笑黑格尔篡夺了上帝的宝座，将上帝降格为摄政王。所谓永恒不变的上帝“沦为了一个临时的目的，他活着只是为了等待某种更好的东西”，圣人黑格尔才是真正的君王，因为“历史是向他完整揭示存在(being)的发展轨迹和它变化(becoming)的全貌的”(52)。</p>
+<p>巴塔耶把他的批判聚焦到黑格尔关于死亡的论述上。德里达认为，巴塔耶的分析揭示了黑格尔死亡观的双重性。在主奴辩证法中，自我意识(self－consciousness)明白它无法否定一切，在理论上它可以独立于一切事物——除了存在所必需的生命。黑格尔写道：“自我意识觉察到生命和纯粹的自我意识一样必不可少。”(53)他把真实死亡和理论死亡的差别概括为抽象的否定性和扬弃式否定的差别。他声称“真实死亡的结果是一种抽象的否定，不是来自意识的否定，后者在取代的同时仍然保存着被取代的东西，因此在取代之后继续存在。”(54)这样，真实死亡的危险似乎就被克服了，被死亡意念的期待取代了。巴塔耶却认为，黑格尔人为地区分了存在于意识之外的抽象否定性和作为探索死亡工具的意识之内的否定，只能搅混他自己的逻辑。正如上帝永恒的神性使得耶稣的受难失去了死亡的真实性，自我意识的生命赌注也已经先验地被它终将继续存在的条件所取消。</p>
+<p>因此，在死亡的机制里，有两种否定性在发挥作用。第一种是扬弃的生产性否定，它将物质性的死亡内化为一种观念性的死亡，从而超越了它。第二种是抽象的否定性。德里达指出，黑格尔一方面承认抽象的否定性是“沉默的非生产性的死亡，纯粹简单的死亡”，一方面试图阻止它对系统做无穷的阐释。(55)以这两种否定为基础，德里达提出了两种机制。黑格尔在《精神现象学》中希望把讨论控制在有限机制范围内。有限机制确保否定性能生产期望的意义。在它的框架下，辩证法通过扬弃式否定提供交换法则，制造出确定的意义和预定的价值观。普遍机制不是这样的交换机制，而是浪费的机制，是有投入却无回报的机制，是毫无保留地牺牲和破坏意义的机制。它就是抽象否定性的运作方式。正如真实死亡是观念死亡的意义流通的基础，抽象否定性也是扬弃式否定存在的前提，它是“溢出”辩证法逻辑的过剩物。</p>
+<p>德里达指明了两种机制的根本差异。黑格尔式的扬弃完全从话语内部、从表意系统内部生产出来。一个确定意义的过程被另一个确定意义的过程所否定，但却被保存在后者中。人从无限的不确定状态朝着无限的确定状态进发，在此过程中意义始终与自身保持关联。扬弃始终在绝对知识的循环内部发声，从不越过边界，从不质疑话语、意义、法律之类的总体性。而普遍机制只是模仿了扬弃的空洞形式，它并不将自己禁锢在绝对知识的循环之内，而是“在意义的世界和无意义的世界之间搭起桥梁”。德里达相信，巴塔耶的努力具有范式意义：“在写作的形式之内，一个哲学内部的概念，一个典型的思辨概念，被迫指称一种溢出一切哲学素的运动。”(56)换言之，巴塔耶通过分析一个形而上学概念内部的矛盾，发现了某种无法容纳于形而上学体系之中的东西。</p>
+<p><strong>六、结语：傲慢的遗产</strong></p>
+<p>黑格尔的哲学体现了19世纪启蒙叙事全盛期人类的傲慢，一种穷尽宇宙知识的野心。一旦观念的惯性将已知视为未知的绝对裁判，将暂时的见解神话为永恒的结论，自我更新的力量就丧失了。此时，阐释欲望便会远远超出知识许可的程度，文化建构的偏见会轻易逃过理性的“客观性”审查，化身为不染人间烟火的“客观知识”。在一个变动不居的浩瀚宇宙中，黑格尔等人竭力为自己的精神寻找一个不会被时间和变化摧垮的住所，从而获得一种从精神上掌控世界的虚幻快感。德里达对黑格尔的批判是全方位的，但他的切入点往往是微观的，这说明傲慢的理性必然会留下逻辑的盲点。在德里达看来，绝对知识的终结是一件幸事，因为它打开了通向真知(当然只是被具体时空限定的暂时真知)的空间。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/844a8fae/">罗素：强烈的爱好可以抗衰老</a>
+            
+            
+            <a class="next" rel="next" href="/54a729a0/">给光脚的人类一双鞋（全人类必读，朴素的震撼）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/844a8fae/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/54a729a0/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

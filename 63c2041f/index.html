@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>还原HTTPS的设计过程 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">还原HTTPS的设计过程</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2016&nbsp;&nbsp;19:33:55</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%8E%E7%BD%91%E7%BB%9C/">计算机与网络</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/HTTP/">HTTP </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="1、缘起"><a href="#1、缘起" class="headerlink" title="1、缘起"></a>1、缘起</h1><p>我们从一个聊天软件说起，我们要实现A能发一个hello消息给B。如果我们要实现这个聊天软件，只考虑安全性问题，要做到：</p>
+<p>A发送B的hello消息包，即使被中间人拦截到了，也无法得知消息的内容。</p>
+<h1 id="2、使用对称加密算法加密A与B的通信内容"><a href="#2、使用对称加密算法加密A与B的通信内容" class="headerlink" title="2、使用对称加密算法加密A与B的通信内容"></a>2、使用对称加密算法加密A与B的通信内容</h1><p>所以我们对通信安全性的理解就是说A与B通信的内容，有且只有A和B有能力看到通信的真正内容。</p>
+<p>那么，我们很容易想到，对A和B的通信内容进行加密。这边选用对称加密算法，只要密钥不公开给第三者，同时密钥足够安全。那么世界上就会有且只有A与B知道如何加密和解密他们之间的消息。</p>
+<h1 id="3、每个客户端有唯一的对称加密算法"><a href="#3、每个客户端有唯一的对称加密算法" class="headerlink" title="3、每个客户端有唯一的对称加密算法"></a>3、每个客户端有唯一的对称加密算法</h1><p>但是一台服务器会对应多个客户端，如果都使用同样的对称加密算法，那就无异于没有加密。那怎么办呢？怎么能做到既能使用对称加密算法，又不公开密钥？</p>
+<p>答案是：Web服务器与每个客户端使用不同的对称加密算法。</p>
+<h1 id="4、对协商过程进行加密"><a href="#4、对协商过程进行加密" class="headerlink" title="4、对协商过程进行加密"></a>4、对协商过程进行加密</h1><p>慢着，另一个问题来了，我们的服务器怎么告诉客户端该使用哪种对称加密算法呢？当然是通过协商。但是协商的过程如果没有加密的话，被中间人拦截的话岂不是拿到算法了。 那我们再对这个协商过程进行对称加密就好了，那你对协商过程加密的加密还是没有加密，怎么办？再加密不就好了……好吧，进行鸡生蛋蛋生鸡的问题了。</p>
+<h1 id="5、采用非对称加密算法对协商过程进行加密"><a href="#5、采用非对称加密算法对协商过程进行加密" class="headerlink" title="5、采用非对称加密算法对协商过程进行加密"></a>5、采用非对称加密算法对协商过程进行加密</h1><p>那么对于4中鸡生蛋蛋生鸡的问题如何解决呢？ 如何对协商过程进行加密？密码学领域中，有一种称为“非对称加密”的加密算法，特点是私钥加密后的密文，只要是公钥，都可以解密；但是公钥加密后的密文，只有私钥可以解密。私钥只有一个人有，而公钥可以发给所有的人。</p>
+<p>这样私钥保存在服务端，公钥广播给每个客户端。虽然服务端向A、B…的方向还是不安全的，但是至少A、B等客户端向服务端方向是安全的。</p>
+<p>至此，如何协商加密算法的问题，我们解决了： 使用非对称加密算法进行对称加密算法协商过程。</p>
+<h1 id="6、使用随机数生成对称加密算法"><a href="#6、使用随机数生成对称加密算法" class="headerlink" title="6、使用随机数生成对称加密算法"></a>6、使用随机数生成对称加密算法</h1><p>要达到web服务器针对每个客户端都使用不同的对称加密算法并且不被第三者猜出来这个对称加密算法，怎么办？使用随机数，就是使用随机数来生成对称加密算法。这样就可以做到服务端和客户端每次交互都是新的加密算法，而且只有在交互的那一刻才确定加密算法。（你这些明白为什么HTTPS协议握手阶段会有那么多随机数了吧）</p>
+<h1 id="7、如何得到公钥？"><a href="#7、如何得到公钥？" class="headerlink" title="7、如何得到公钥？"></a>7、如何得到公钥？</h1><p>细心的人可能已经注意到了如果使用非对称加密算法，我们的客户端A、B需要一开始就持有公钥，处理方式就是服务端一开始就将公钥发给每一个客户端。</p>
+<h1 id="8、公钥被调包了怎么办？"><a href="#8、公钥被调包了怎么办？" class="headerlink" title="8、公钥被调包了怎么办？"></a>8、公钥被调包了怎么办？</h1><p>如果一个中间人将客户端A的公钥调包，给了A一个假的公钥，再拿真的公钥伪装成A和服务器通信。怎么办</p>
+<h1 id="9、使用第三方机构的公钥"><a href="#9、使用第三方机构的公钥" class="headerlink" title="9、使用第三方机构的公钥"></a>9、使用第三方机构的公钥</h1><p>公钥被调包的问题出现，是因为我们的客户端无法分辨返回公钥的人到底是中间人，还是真的服务器。这其实就是密码学中提的身份验证问题。</p>
+<p>我们想应该这样解决这个问题： 既然服务器需要将公钥传给客户端，这个过程本身是不安全，那么我们为什么不对这个过程本身再加密一次？可是，你是使用对称加密，还是非对称加密？这下好了，我感觉又进了鸡生蛋蛋生鸡问题了。</p>
+<p>问题的难点是如果我们选择直接将公钥传递给客户端的方案，我们始终无法解决公钥传递被中间人调包的问题。</p>
+<p>所以想了个办法，我们不能直接将服务器的公钥传递给客户端，而是第三方机构使用它的私钥对我们的公钥进行加密后，再传给客户端。客户端再使用第三方机构的公钥进行解密。</p>
+<h1 id="10、证书被掉包？"><a href="#10、证书被掉包？" class="headerlink" title="10、证书被掉包？"></a>10、证书被掉包？</h1><p>但是第三方机构发的证书也有可能被中间人进行调包。客户端在这种情况下是无法分辨接收到的证书是中间人的还是第三方机构的。</p>
+<h1 id="11、客户端本地怎么验证证书呢？"><a href="#11、客户端本地怎么验证证书呢？" class="headerlink" title="11、客户端本地怎么验证证书呢？"></a>11、客户端本地怎么验证证书呢？</h1><p>怎么解决10的问题呢？那就需要客户端有能力辨别证书是否被篡改。而且不能有远端协助验证，所以只能放在客户端本地进行验证证书。</p>
+<p>客户端本地怎么验证证书呢？答案是证书本身就已经告诉客户端怎么验证证书的真伪。</p>
+<p>也就是证书上写着如何根据证书的内容生成证书编号。客户端拿到证书后根据证书上的方法自己生成一个证书编号，如果生成的证书编号与证书上的证书编号相同，那么说明这个证书是真实的。</p>
+<p>同时，为避免证书编号本身又被调包，所以使用第三方的私钥进行加密。</p>
+<p>但是第三方机构的公钥怎么跑到了客户端的机器中呢？世界上这么多机器。</p>
+<p>其实呢，现实中，浏览器和操作系统都会维护一个权威的第三方机构列表（包括它们的公钥）。因为客户端接收到的证书中会写有颁发机构，客户端就根据这个颁发机构的值在本地找相应的公钥。</p>
+<blockquote>
+<p>题外话：如果浏览器和操作系统这道防线被破了，就没办法。想想当年自己装过的非常规XP系统，都害怕。</p>
+</blockquote>
+<p>说到这里，想必大家已经知道上文所说的，证书就是HTTPS中数字证书，证书编号就是数字签名，而第三方机构就是指数字证书签发机构（CA）。</p>
+<h1 id="12、CA如何颁发数字证书给服务端？"><a href="#12、CA如何颁发数字证书给服务端？" class="headerlink" title="12、CA如何颁发数字证书给服务端？"></a>12、CA如何颁发数字证书给服务端？</h1><p>这个问题应该问：CA如何颁发给我们的网站管理员，而我们的管理员又如何将这个数字证书放到我们的服务器上。</p>
+<p>就是网站管理员去CA机构申请，申请拿到证书后，我们就可以将证书配置到自己的服务器上了。</p>
+<h1 id="13、整理下思路"><a href="#13、整理下思路" class="headerlink" title="13、整理下思路"></a>13、整理下思路</h1><p>我们通过推算的方式尝试还原HTTPS的设计过程。这样，我们也就明白了为什么HTTPS比HTTP多那么多次的交互，为什么HTTPS的性能会差，以及找到HTTPS的性能优化点。</p>
+<p>而上面一大堆工作都是为了让客户端与服务器端安全地协商出一个对称加密算法。这就是HTTPS中的SSL/TLS协议主要干的活。剩下的就是通信时双方使用这个对称加密算法进行加密解密。</p>
+<h1 id="14、一句话总结HTTPS"><a href="#14、一句话总结HTTPS" class="headerlink" title="14、一句话总结HTTPS"></a>14、一句话总结HTTPS</h1><p>HTTPS要使客户端与服务器端的通信过程得到安全保证，必须使用的对称加密算法，但是协商对称加密算法的过程，需要使用非对称加密算法来保证安全，然而直接使用非对称加密的过程本身也不安全，会有中间人篡改公钥的可能性，所以客户端与服务器不直接使用公钥，而是使用数字证书签发机构颁发的证书来保证非对称加密过程本身的安全。这样通过这些机制协商出一个对称加密算法，就此双方使用该算法进行加密解密。从而解决了客户端与服务器端之间的通信安全问题。</p>
+<h1 id="15、HTTPS通信过程"><a href="#15、HTTPS通信过程" class="headerlink" title="15、HTTPS通信过程"></a>15、HTTPS通信过程</h1><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061935917.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061935828.png"></p>
+<h1 id="16、总结"><a href="#16、总结" class="headerlink" title="16、总结"></a>16、总结</h1><p>一开始服务端就向客户端传过去证书（公钥），客户端本地校验证证书（根据证书内容生成编号然后和证书上的签名比较是否一样）无误后，客户端生成一个随机值（对称加密算法密钥），然后用证书对随机值进行加密（只有服务端的私钥才能解密），服务端解密拿到随机值也就是对称加密算法，开始正常通信。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/HTTP/"># HTTP</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/6154ca16/">从URL输入到页面展现到底发生什么？</a>
+            
+            
+            <a class="next" rel="next" href="/1f35bcf5/">ES6迭代器和生成器</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/6154ca16/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1f35bcf5/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

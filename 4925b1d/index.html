@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>笛卡尔：寻求真理的方法 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">笛卡尔：寻求真理的方法</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 20, 2016&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 20, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x5bicwYc8RBjD7GNy4BOphO776tLBo9sP2YREGB5TCkkelRrtxAMssl4iby0koKqUib3v9KJv78hvpztoWaxlJgXg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">笛卡尔<br />(法国哲学家)</center>
+
+<p>杰出的人才固然能够做出最大的好事，也同样可以做出最大的坏事；行动十分缓慢的人只要始终循着正道前进，就可以比离开正道飞奔的人走在前面很多。</p>
+<p>一、良知，是人间分配得最均匀的东西。</p>
+<p>因为人人都认为自己具有非常充分的良知，就连那些在其他一切方面全都极难满足的人，也从来不会觉得自己的良知不够，要想再多得一点。</p>
+<p>那种正确判断、辨别真假的能力，也就是我们称为良知或理性的那种东西，本来就是人人均等的；我们的意见之所以分歧，并不是由于有些人的理性多些，有些人的理性少些，而只是由于我们运用思想的途径不同，所考察的对象不是一回事。</p>
+<p>因为单有聪明才智是不够的，主要在于正确地运用才智。杰出的人才固然能够做出最大的好事，也同样可以做出最大的坏事；行动十分缓慢的人只要始终循着正道前进，就可以比离开正道飞奔的人走在前面很多。</p>
+<p>拿我来说，就从来没有以为自己的才智完美，有什么胜于常人的地方。甚至于我还常常希望自己能有跟某些人一样敏锐的思想，一样清楚分明的想像，一样广博或者一样鲜明的记忆。</p>
+<p>不过我可以大胆地说，我觉得自己非常幸运，从年轻的时候起，就摸索到几条门路，从而作出一些考察，得到一些准则，由此形成了一种方法。凭着这种方法，我觉得有办法使我的知识逐步增长，一步一步提高到我的平庸才智和短暂生命所能容许达到的最高水平。</p>
+<p>因为我已经用这种方法取得了那么多的成果，尽管我对自己的评判一贯从严，总是力求贬抑，不敢自负，尽管我用哲学家的眼光看世人从事的各种活动和事业，觉得几乎没有一样不是虚浮无益的，我还是抑制不住对自己认为在寻求真理方面已经取得的那种进展感到极大的满意，觉得前途无量，如果在正派人从事的行业中有一种是确实有益而且重要的，我敢相信那就是我所挑选的那一种。</p>
+<p>我很愿意在这篇谈话里向大家说清楚我走过哪些道路，把我的经历如实地一一描绘出来，使大家都能作出评判，好从群众的议论里听取大家对我的意见。这可以说是我在惯常采用的那些自我教育办法之外添上的一种新办法。</p>
+<p>因此，我并不打算在这里教给大家一种方法，以为人人都必须遵循它才能正确运用自己的理性；我只打算告诉大家我自己是怎样运用我的理性的。</p>
+<p>二、书本教育</p>
+<p>我自幼受书本教育。由于听信人家的话，认为读书可以得到明白可靠的知识，懂得一切有益人生的道理，所以我如饥似渴地学习。可是等到学完全部课程，按例毕业，取得学者资格的时候，我的看法就完全改变了。因为我发现自己陷于疑惑和谬误的重重包围，觉得努力求学并没有得到别的好处，只不过越来越发现自己无知。</p>
+<p>尽管如此，我还是重视学校里所受的各种训练。</p>
+<p>我很明白：学校里教的语言文字，是通晓古书的必要条件；寓言里的机智，可以发聋振聩；史传上的丰功伟业，可以激励人心；精研史册，可以有助于英明善断；遍读好书，有如走访著书的前代高贤，同他们促膝谈心，而且是一种精湛的交谈，古人向我们谈出的只是他们最精粹的思想。</p>
+<p>我也明白：雄辩优美豪放无与伦比；诗词婉转缠绵动人心弦；数学有十分奥妙的发明，用处很大，既能满足好奇心，又能帮助各种技艺，减轻人们的劳动；宣扬风化的文章包含许多教训、许多箴言，劝人淑世为善；神学指引升天大道；哲学教人煞有介事地无所不谈，博得浅人敬佩；法学、医学等类学问给治学者带来盛名厚利。</p>
+<p>而且我还明白：博学旁通，连最迷信、最虚妄的东西也不放过，是有好处的，可以知道老底，不上它们的当。可是我认为自己用在语言文字上的功夫已经够多，诵读古书、读历史、读寓言花的时间也已经不少。</p>
+<p>因为同古人交谈有如旅行异域，知道一点殊方异俗是有好处的，可以帮助我们比较恰当地评价本乡的风俗，不至于像没有见过世面的人一样，总是以为违反本乡习惯的事情统统是可笑的、不合理的。可是旅行过久就会对乡土生疏，对古代的事情过分好奇每每会对现代的事情茫然无知。何况寓言使人想入非非，把许多不可能的事情想成可能。就连最忠实的史书，如果不歪曲、不夸张史实以求动听，至少总要略去细微末节，因而不能尽如原貌；如果以此为榜样亦步亦趋，每每会同传奇里的侠客一样陷于浮夸，想出来的计划每每会无法实现。</p>
+<p>三、关于雄辩和诗词</p>
+<p>我很看重雄辩，并且热爱诗词。可是我认为雄辩和诗词都是才华的产物，而不是研究的成果。一个人只要推理能力极强，极会把自己的思想安排得明白易懂，总是最有办法使别人信服自己的论点的，哪怕他嘴里说的只是粗俗的布列塔尼土话，也从来没有学过修辞学。一个人只要有绝妙的构思，又善于用最佳的辞藻把它表达出来，是无法不成为最伟大的诗人的，哪怕他根本不知道什么诗法。</p>
+<p>四、关于数学</p>
+<p>我特别喜爱数学，因为它的推理确切明了；可是我还看不出它的真正用途，想到它一向只是用于机械技术，心里很惊讶，觉得它的基础这样牢固，这样结实，人们竞没有在它的上面造起崇楼杰阁来。相反地，古代异教学者们写的那些讲风化的文章好比宏伟的宫殿，富丽堂皇，却只是建筑在泥沙上面。他们把美德捧得极高说得比世上任何东西都可贵；可是他们并不教人认识清楚美德是什么，被他们加上这个美名的往往只是一种残忍，一种傲慢，一种灰心，一种弑上。</p>
+<p>五、关于神学</p>
+<p>我尊敬我们的神学，并且同别人一样要求升天。可是人家十分肯定地说：最无知的人也同最博学的人一样可以进天堂，指引人们升天的天启真理不是我们的智力所能理解的。我听了这些话，就不敢用我的软弱推理去窥测那些真理了。我想一定要有天赐的特殊帮助，而且是个超人，才能从事研究那些真理，得到成就。</p>
+<p>六、关于哲学</p>
+<p>关于哲学我只能说一句话：我看到它经过千百年来最杰出的能人钻研，却没有一点不在争论中，因而没有一点不是可疑的，所以我不敢希望自己在哲学上的遭遇比别人好；我考虑到对同一个问题可以有许多不同的看法，都有博学的人支持，而正确的看法却只能有一种，所以我把仅仅貌似真实的看法一律看成大概是虚假的。</p>
+<p>至于其他的学问，既然它们的本原是从哲学里借来的，我可以肯定，在这样不牢固的基础上决不可能建筑起什么结实的东西来。这类学问所能提供的名利，是不足以促使我去学习它们的，因为谢天谢地，我并不感到境遇窘迫，要拿学问去牟利，以求改善生活；我虽不像犬儒派那样自称藐视荣誉，对于那种只能依靠虚假的招牌取得的名声我是很不在意的。</p>
+<p>最后说到那些骗人的学说，我认为已经摸清了它们的老底，再也不会上当受骗，不管它是炼金术士的包票，还是占星术士的预言，是巫师的鬼把戏，还是那些强不知以为知的家伙的装腔做势、空心牛皮。</p>
+<p>七、抛开书本去游历</p>
+<p>就是因为这个缘故，一到年龄容许我离开师长的管教，我就完全抛开了书本的研究。我下定决心，除了那种可以在自己心里或者在世界这本大书里找到的学问以外，不再研究别的学问。</p>
+<p>于是趁年纪还轻的时候就去游历，访问各国的宫廷和军队，与气质不同、身分不同的人交往，搜集各种经验，在碰到的各种局面里考验自己，随时随地用心思考面前的事物，以便从中取得教益。</p>
+<p>因为在我看来，普通人的推理所包含的真理要比读书人的推理所包含的多得多：普通人是对切身的事情进行推理，如果判断错了，它的结果马上就会来惩罚他；读书人是关在书房里对思辨的道理进行推理，思辨是不产生任何实效的，仅仅在他身上造成一种后果，就是思辨离常识越远，他由此产生的虚荣心大概就越大，因为一定要花费比较多的心思，想出比较多的门道，才能设法把那些道理弄得好像是真理。我总是如饥似渴地要求学会分清真假，以便在行动中心明眼亮，一辈子满怀信心地前进。</p>
+<p>的确，我在专门考察别国风俗的阶段，根本没有看到什么使我确信的东西，我发现风俗习惯是五花八门的，简直同我过去所看到的那些哲学家的意见一样。所以我由此得到的最大的好处就是大开眼界，看到有许多风俗尽管我们觉得十分离奇可笑，仍然有另外一些大民族一致赞成采纳，因此我懂得不能一味听从那些成规惯例坚信不移，这样，我就摆脱了许多错误的看法，免得我们天然的灵明受到蒙蔽，不能听从理性。可是，我花了几年工夫像这样研究世界这本大书、努力取得若干经验之后，终于下定决心同时也研究我自己，集中精力来选择我应当遵循的道路。这样做，我觉得取得的成就比不出家门、不离书本大多了。</p>
+<div style="color:gray;font-size:0.9em;">本文来源：《谈谈方法》，商务印书馆 </div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/66d40ab/">寻禅</a>
+            
+            
+            <a class="next" rel="next" href="/89e17f39/">对于过去我无能为力，但每个人永远可以改变未来</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/66d40ab/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/89e17f39/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>JavaScript中的设计模式 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JavaScript中的设计模式</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2017&nbsp;&nbsp;11:34:46</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">9.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">41 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在程序设计中有很多实用的设计模式，而其中大部分语言的实现都是基于“类”。</p>
+<p>在JavaScript中并没有类这种概念，JS中的函数属于一等对象，在JS中定义一个对象非常简单（var obj = {}），而基于JS中闭包与弱类型等特性，在实现一些设计模式的方式上与众不同。</p>
+<p>本文基于<a target="_blank" rel="noopener" href="https://book.douban.com/subject/26382780/">《JavaScript设计模式与开发实践》</a>一书，用一些例子总结一下JS常见的设计模式与实现方法。文章略长，自备瓜子板凳~</p>
+<h2 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h2><p><strong>单一职责原则（SRP）</strong></p>
+<p>一个对象或方法只做一件事情。如果一个方法承担了过多的职责，那么在需求的变迁过程中，需要改写这个方法的可能性就越大。</p>
+<p>应该把对象或方法划分成较小的粒度</p>
+<p><strong>最少知识原则（LKP）</strong></p>
+<p>一个软件实体应当 尽可能少地与其他实体发生相互作用 </p>
+<p>应当尽量减少对象之间的交互。如果两个对象之间不必彼此直接通信，那么这两个对象就不要发生直接的 相互联系，可以转交给第三方进行处理</p>
+<p><strong>开放-封闭原则（OCP）</strong></p>
+<p>软件实体（类、模块、函数）等应该是可以 扩展的，但是不可修改</p>
+<p>当需要改变一个程序的功能或者给这个程序增加新功能的时候，可以使用增加代码的方式，尽量避免改动程序的源代码，防止影响原系统的稳定</p>
+<h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a><strong>什么是设计模式</strong></h2><p>作者的这个说明解释得挺好</p>
+<blockquote>
+<p>假设有一个空房间，我们要日复一日地往里 面放一些东西。最简单的办法当然是把这些东西 直接扔进去，但是时间久了，就会发现很难从这 个房子里找到自己想要的东西，要调整某几样东 西的位置也不容易。所以在房间里做一些柜子也 许是个更好的选择，虽然柜子会增加我们的成本，但它可以在维护阶段为我们带来好处。使用 这些柜子存放东西的规则，或许就是一种模式</p>
+</blockquote>
+<p>学习设计模式，有助于写出可复用和可维护性高的程序</p>
+<p>设计模式的原则是“找出 程序中变化的地方，并将变化封装起来”，它的关键是意图，而不是结构。</p>
+<p>不过要注意，使用不当的话，可能会事倍功半。</p>
+<h2 id="一、单例模式"><a href="#一、单例模式" class="headerlink" title="一、单例模式"></a>一、单例模式</h2><p><strong>1. 定义</strong></p>
+<p>保证一个类仅有一个实例，并提供一个访问它的全局访问点</p>
+<p><strong>2. 核心</strong></p>
+<p>确保只有一个实例，并提供全局访问</p>
+<p><strong>3. 实现</strong></p>
+<p>假设要设置一个管理员，多次调用也仅设置一次，我们可以使用闭包缓存一个内部变量来实现这个单例</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function SetManager(name) &#123;</span><br><span class="line">    this.manager = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SetManager.prototype.getName = function() &#123;</span><br><span class="line">    console.log(this.manager);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var SingletonSetManager = (function() &#123;</span><br><span class="line">    var manager = null;</span><br><span class="line"></span><br><span class="line">    return function(name) &#123;</span><br><span class="line">        if (!manager) &#123;</span><br><span class="line">            manager = new SetManager(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return manager;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">SingletonSetManager(&#x27;a&#x27;).getName(); // a</span><br><span class="line">SingletonSetManager(&#x27;b&#x27;).getName(); // a</span><br><span class="line">SingletonSetManager(&#x27;c&#x27;).getName(); // a</span><br></pre></td></tr></table></figure>
+
+<p>这是比较简单的做法，但是假如我们还要设置一个HR呢？就得复制一遍代码了</p>
+<p>所以，可以改写单例内部，实现地更通用一些</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 提取出通用的单例</span><br><span class="line">function getSingleton(fn) &#123;</span><br><span class="line">    var instance = null;</span><br><span class="line"></span><br><span class="line">    return function() &#123;</span><br><span class="line">        if (!instance) &#123;</span><br><span class="line">            instance = fn.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再进行调用，结果还是一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 获取单例</span><br><span class="line">var managerSingleton = getSingleton(function(name) &#123;</span><br><span class="line">    var manager = new SetManager(name);</span><br><span class="line">    return manager;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">managerSingleton(&#x27;a&#x27;).getName(); // a</span><br><span class="line">managerSingleton(&#x27;b&#x27;).getName(); // a</span><br><span class="line">managerSingleton(&#x27;c&#x27;).getName(); // a</span><br></pre></td></tr></table></figure>
+
+<p>这时，我们添加HR时，就不需要更改获取单例内部的实现了，仅需要实现添加HR所需要做的，再调用即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function SetHr(name) &#123;</span><br><span class="line">    this.hr = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SetHr.prototype.getName = function() &#123;</span><br><span class="line">    console.log(this.hr);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var hrSingleton = getSingleton(function(name) &#123;</span><br><span class="line">    var hr = new SetHr(name);</span><br><span class="line">    return hr;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">hrSingleton(&#x27;aa&#x27;).getName(); // aa</span><br><span class="line">hrSingleton(&#x27;bb&#x27;).getName(); // aa</span><br><span class="line">hrSingleton(&#x27;cc&#x27;).getName(); // aa</span><br></pre></td></tr></table></figure>
+
+<p>或者，仅想要创建一个div层，不需要将对象实例化，直接调用函数</p>
+<p>结果为页面中仅有第一个创建的div</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function createPopup(html) &#123;</span><br><span class="line">    var div = document.createElement(&#x27;div&#x27;);</span><br><span class="line">    div.innerHTML = html;</span><br><span class="line">    document.body.append(div);</span><br><span class="line"></span><br><span class="line">    return div;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var popupSingleton = getSingleton(function() &#123;</span><br><span class="line">    var div = createPopup.apply(this, arguments);</span><br><span class="line">    return div;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">    popupSingleton(&#x27;aaa&#x27;).innerHTML,</span><br><span class="line">    popupSingleton(&#x27;bbb&#x27;).innerHTML,</span><br><span class="line">    popupSingleton(&#x27;bbb&#x27;).innerHTML</span><br><span class="line">); // aaa  aaa  aaa</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、策略模式"><a href="#二、策略模式" class="headerlink" title="二、策略模式"></a>二、策略模式</h2><p><strong>1. 定义</strong></p>
+<p>定义一系列的算法，把它们一个个封装起来，并且使它们可以相互替换。</p>
+<p><strong>2. 核心</strong></p>
+<p>将算法的使用和算法的实现分离开来。</p>
+<p>一个基于策略模式的程序至少由两部分组成：</p>
+<p>第一个部分是一组策略类，策略类封装了具体的算法，并负责具体的计算过程。</p>
+<p>第二个部分是环境类Context，Context接受客户的请求，随后把请求委托给某一个策略类。要做到这点，说明Context 中要维持对某个策略对象的引用</p>
+<p><strong>3. 实现</strong></p>
+<p>策略模式可以用于组合一系列算法，也可用于组合一系列业务规则</p>
+<p>假设需要通过成绩等级来计算学生的最终得分，每个成绩等级有对应的加权值。我们可以利用对象字面量的形式直接定义这个组策略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 加权映射关系</span><br><span class="line">var levelMap = &#123;</span><br><span class="line">    S: 10,</span><br><span class="line">    A: 8,</span><br><span class="line">    B: 6,</span><br><span class="line">    C: 4</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 组策略</span><br><span class="line">var scoreLevel = &#123;</span><br><span class="line">    basicScore: 80,</span><br><span class="line"></span><br><span class="line">    S: function() &#123;</span><br><span class="line">        return this.basicScore + levelMap[&#x27;S&#x27;]; </span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    A: function() &#123;</span><br><span class="line">        return this.basicScore + levelMap[&#x27;A&#x27;]; </span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    B: function() &#123;</span><br><span class="line">        return this.basicScore + levelMap[&#x27;B&#x27;]; </span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    C: function() &#123;</span><br><span class="line">        return this.basicScore + levelMap[&#x27;C&#x27;]; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 调用</span><br><span class="line">function getScore(level) &#123;</span><br><span class="line">    return scoreLevel[level] ? scoreLevel[level]() : 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">    getScore(&#x27;S&#x27;),</span><br><span class="line">    getScore(&#x27;A&#x27;),</span><br><span class="line">    getScore(&#x27;B&#x27;),</span><br><span class="line">    getScore(&#x27;C&#x27;),</span><br><span class="line">    getScore(&#x27;D&#x27;)</span><br><span class="line">); // 90 88 86 84 0</span><br></pre></td></tr></table></figure>
+
+<p>在组合业务规则方面，比较经典的是单的验证方法。这里列出比较关键的部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">// 错误提示</span><br><span class="line">var errorMsgs = &#123;</span><br><span class="line">    default: &#x27;输入数据格式不正确&#x27;,</span><br><span class="line">    minLength: &#x27;输入数据长度不足&#x27;,</span><br><span class="line">    isNumber: &#x27;请输入数字&#x27;,</span><br><span class="line">    required: &#x27;内容不为空&#x27;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 规则集</span><br><span class="line">var rules = &#123;</span><br><span class="line">    minLength: function(value, length, errorMsg) &#123;</span><br><span class="line">        if (value.length &lt; length) &#123;</span><br><span class="line">            return errorMsg || errorMsgs[&#x27;minLength&#x27;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    isNumber: function(value, errorMsg) &#123;</span><br><span class="line">        if (!/\d+/.test(value)) &#123;</span><br><span class="line">            return errorMsg || errorMsgs[&#x27;isNumber&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    required: function(value, errorMsg) &#123;</span><br><span class="line">        if (value === &#x27;&#x27;) &#123;</span><br><span class="line">            return errorMsg || errorMsgs[&#x27;required&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 校验器</span><br><span class="line">function Validator() &#123;</span><br><span class="line">    this.items = [];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Validator.prototype = &#123;</span><br><span class="line">    constructor: Validator,</span><br><span class="line">    </span><br><span class="line">    // 添加校验规则</span><br><span class="line">    add: function(value, rule, errorMsg) &#123;</span><br><span class="line">        var arg = [value];</span><br><span class="line"></span><br><span class="line">        if (rule.indexOf(&#x27;minLength&#x27;) !== -1) &#123;</span><br><span class="line">            var temp = rule.split(&#x27;:&#x27;);</span><br><span class="line">            arg.push(temp[1]);</span><br><span class="line">            rule = temp[0];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        arg.push(errorMsg);</span><br><span class="line"></span><br><span class="line">        this.items.push(function() &#123;</span><br><span class="line">            // 进行校验</span><br><span class="line">            return rules[rule].apply(this, arg);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 开始校验</span><br><span class="line">    start: function() &#123;</span><br><span class="line">        for (var i = 0; i &lt; this.items.length; ++i) &#123;</span><br><span class="line">            var ret = this.items[i]();</span><br><span class="line">            </span><br><span class="line">            if (ret) &#123;</span><br><span class="line">                console.log(ret);</span><br><span class="line">                // return ret;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 测试数据</span><br><span class="line">function testTel(val) &#123;</span><br><span class="line">    return val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var validate = new Validator();</span><br><span class="line"></span><br><span class="line">validate.add(testTel(&#x27;ccc&#x27;), &#x27;isNumber&#x27;, &#x27;只能为数字&#x27;); // 只能为数字</span><br><span class="line">validate.add(testTel(&#x27;&#x27;), &#x27;required&#x27;); // 内容不为空</span><br><span class="line">validate.add(testTel(&#x27;123&#x27;), &#x27;minLength:5&#x27;, &#x27;最少5位&#x27;); // 最少5位</span><br><span class="line">validate.add(testTel(&#x27;12345&#x27;), &#x27;minLength:5&#x27;, &#x27;最少5位&#x27;);</span><br><span class="line"></span><br><span class="line">var ret = validate.start();</span><br><span class="line"></span><br><span class="line">console.log(ret);</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 优缺点</strong></p>
+<p><strong>优点</strong></p>
+<p>可以有效地避免多重条件语句，将一系列方法封装起来也更直观，利于维护</p>
+<p><strong>缺点</strong></p>
+<p>往往策略集会比较多，我们需要事先就了解定义好所有的情况</p>
+<h2 id="三、代理模式"><a href="#三、代理模式" class="headerlink" title="三、代理模式"></a>三、代理模式</h2><p><strong>1. 定义</strong></p>
+<p>为一个对象提供一个代用品或占位符，以便控制对它的访问</p>
+<p><strong>2. 核心</strong></p>
+<p>当客户不方便直接访问一个 对象或者不满足需要的时候，提供一个替身对象 来控制对这个对象的访问，客户实际上访问的是 替身对象。</p>
+<p>替身对象对请求做出一些处理之后， 再把请求转交给本体对象</p>
+<p>代理和本体的接口具有一致性，本体定义了关键功能，而代理是提供或拒绝对它的访问，或者在访问本体之前做一 些额外的事情</p>
+<p><strong>3. 实现</strong></p>
+<p>代理模式主要有三种：保护代理、虚拟代理、缓存代理</p>
+<p>保护代理主要实现了访问主体的限制行为，以过滤字符作为简单的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 主体，发送消息</span><br><span class="line">function sendMsg(msg) &#123;</span><br><span class="line">    console.log(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 代理，对消息进行过滤</span><br><span class="line">function proxySendMsg(msg) &#123;</span><br><span class="line">    // 无消息则直接返回</span><br><span class="line">    if (typeof msg === &#x27;undefined&#x27;) &#123;</span><br><span class="line">        console.log(&#x27;deny&#x27;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 有消息则进行过滤</span><br><span class="line">    msg = (&#x27;&#x27; + msg).replace(/泥\s*煤/g, &#x27;&#x27;);</span><br><span class="line"></span><br><span class="line">    sendMsg(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sendMsg(&#x27;泥煤呀泥 煤呀&#x27;); // 泥煤呀泥 煤呀</span><br><span class="line">proxySendMsg(&#x27;泥煤呀泥 煤&#x27;); // 呀</span><br><span class="line">proxySendMsg(); // deny</span><br></pre></td></tr></table></figure>
+
+<p>它的意图很明显，在访问主体之前进行控制，没有消息的时候直接在代理中返回了，拒绝访问主体，这数据保护代理的形式</p>
+<p>有消息的时候对敏感字符进行了处理，这属于虚拟代理的模式</p>
+<p>虚拟代理在控制对主体的访问时，加入了一些额外的操作</p>
+<p>在滚动事件触发的时候，也许不需要频繁触发，我们可以引入函数节流，这是一种虚拟代理的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 函数防抖，频繁操作中不处理，直到操作完成之后（再过 delay 的时间）才一次性处理</span><br><span class="line">function debounce(fn, delay) &#123;</span><br><span class="line">    delay = delay || 200;</span><br><span class="line">    </span><br><span class="line">    var timer = null;</span><br><span class="line"></span><br><span class="line">    return function() &#123;</span><br><span class="line">        var arg = arguments;</span><br><span class="line">          </span><br><span class="line">        // 每次操作时，清除上次的定时器</span><br><span class="line">        clearTimeout(timer);</span><br><span class="line">        timer = null;</span><br><span class="line">        </span><br><span class="line">        // 定义新的定时器，一段时间后进行操作</span><br><span class="line">        timer = setTimeout(function() &#123;</span><br><span class="line">            fn.apply(this, arg);</span><br><span class="line">        &#125;, delay);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var count = 0;</span><br><span class="line"></span><br><span class="line">// 主体</span><br><span class="line">function scrollHandle(e) &#123;</span><br><span class="line">    console.log(e.type, ++count); // scroll</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 代理</span><br><span class="line">var proxyScrollHandle = (function() &#123;</span><br><span class="line">    return debounce(scrollHandle, 500);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">window.onscroll = proxyScrollHandle;</span><br></pre></td></tr></table></figure>
+
+<p>缓存代理可以为一些开销大的运算结果提供暂时的缓存，提升效率</p>
+<p>来个栗子，缓存加法操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 主体</span><br><span class="line">function add() &#123;</span><br><span class="line">    var arg = [].slice.call(arguments);</span><br><span class="line"></span><br><span class="line">    return arg.reduce(function(a, b) &#123;</span><br><span class="line">        return a + b;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 代理</span><br><span class="line">var proxyAdd = (function() &#123;</span><br><span class="line">    var cache = [];</span><br><span class="line"></span><br><span class="line">    return function() &#123;</span><br><span class="line">        var arg = [].slice.call(arguments).join(&#x27;,&#x27;);</span><br><span class="line">        </span><br><span class="line">        // 如果有，则直接从缓存返回</span><br><span class="line">        if (cache[arg]) &#123;</span><br><span class="line">            return cache[arg];</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            var ret = add.apply(this, arguments);</span><br><span class="line">            return ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">console.log(</span><br><span class="line">    add(1, 2, 3, 4),</span><br><span class="line">    add(1, 2, 3, 4),</span><br><span class="line"></span><br><span class="line">    proxyAdd(10, 20, 30, 40),</span><br><span class="line">    proxyAdd(10, 20, 30, 40)</span><br><span class="line">); // 10 10 100 100</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="四、迭代器模式"><a href="#四、迭代器模式" class="headerlink" title="四、迭代器模式"></a>四、迭代器模式</h2><p><strong>1. 定义</strong></p>
+<p>迭代器模式是指提供一种方法顺序访问一个聚合对象中的各个元素，而又不需要暴露该对象的内部表示。</p>
+<p><strong>2. 核心</strong></p>
+<p>在使用迭代器模式之后，即使不关心对象的内部构造，也可以按顺序访问其中的每个元素</p>
+<p><strong>3. 实现</strong></p>
+<p>JS中数组的map forEach 已经内置了迭代器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].forEach(function(item, index, arr) &#123;</span><br><span class="line">    console.log(item, index, arr);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>不过对于对象的遍历，往往不能与数组一样使用同一的遍历代码</p>
+<p>我们可以封装一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">function each(obj, cb) &#123;</span><br><span class="line">    var value;</span><br><span class="line"></span><br><span class="line">    if (Array.isArray(obj)) &#123;</span><br><span class="line">        for (var i = 0; i &lt; obj.length; ++i) &#123;</span><br><span class="line">            value = cb.call(obj[i], i, obj[i]);</span><br><span class="line"></span><br><span class="line">            if (value === false) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        for (var i in obj) &#123;</span><br><span class="line">            value = cb.call(obj[i], i, obj[i]);</span><br><span class="line"></span><br><span class="line">            if (value === false) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">each([1, 2, 3], function(index, value) &#123;</span><br><span class="line">    console.log(index, value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">each(&#123;a: 1, b: 2&#125;, function(index, value) &#123;</span><br><span class="line">    console.log(index, value);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 0 1</span><br><span class="line">// 1 2</span><br><span class="line">// 2 3</span><br><span class="line"></span><br><span class="line">// a 1</span><br><span class="line">// b 2</span><br></pre></td></tr></table></figure>
+
+<p>再来看一个例子，强行地使用迭代器，来了解一下迭代器也可以替换频繁的条件语句</p>
+<p>虽然例子不太好，但在其他负责的分支判断情况下，也是值得考虑的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function getManager() &#123;</span><br><span class="line">    var year = new Date().getFullYear();</span><br><span class="line"></span><br><span class="line">    if (year &lt;= 2000) &#123;</span><br><span class="line">        console.log(&#x27;A&#x27;);</span><br><span class="line">    &#125; else if (year &gt;= 2100) &#123;</span><br><span class="line">        console.log(&#x27;C&#x27;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        console.log(&#x27;B&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getManager(); // B</span><br></pre></td></tr></table></figure>
+
+<p>将每个条件语句拆分出逻辑函数，放入迭代器中迭代</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">function year2000() &#123;</span><br><span class="line">    var year = new Date().getFullYear();</span><br><span class="line"></span><br><span class="line">    if (year &lt;= 2000) &#123;</span><br><span class="line">        console.log(&#x27;A&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function year2100() &#123;</span><br><span class="line">    var year = new Date().getFullYear();</span><br><span class="line"></span><br><span class="line">    if (year &gt;= 2100) &#123;</span><br><span class="line">        console.log(&#x27;C&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function year() &#123;</span><br><span class="line">    var year = new Date().getFullYear();</span><br><span class="line"></span><br><span class="line">    if (year &gt; 2000 &amp;&amp; year &lt; 2100) &#123;</span><br><span class="line">        console.log(&#x27;B&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function iteratorYear() &#123;</span><br><span class="line">    for (var i = 0; i &lt; arguments.length; ++i) &#123;</span><br><span class="line">        var ret = arguments[i]();</span><br><span class="line"></span><br><span class="line">        if (ret !== false) &#123;</span><br><span class="line">            return ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var manager = iteratorYear(year2000, year2100, year); // B</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、发布-订阅模式"><a href="#五、发布-订阅模式" class="headerlink" title="五、发布-订阅模式"></a>五、发布-订阅模式</h2><p><strong>1. 定义</strong></p>
+<p>也称作观察者模式，定义了对象间的一种一对多的依赖关系，当一个对象的状态发 生改变时，所有依赖于它的对象都将得到通知</p>
+<p><strong>2. 核心</strong></p>
+<p>取代对象之间硬编码的通知机制，一个对象不用再显式地调用另外一个对象的某个接口。</p>
+<p>与传统的发布-订阅模式实现方式（将订阅者自身当成引用传入发布者）不同，在JS中通常使用注册回调函数的形式来订阅</p>
+<p><strong>3. 实现</strong></p>
+<p>JS中的事件就是经典的发布-订阅模式的实现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 订阅</span><br><span class="line">document.body.addEventListener(&#x27;click&#x27;, function() &#123;</span><br><span class="line">    console.log(&#x27;click1&#x27;);</span><br><span class="line">&#125;, false);</span><br><span class="line"></span><br><span class="line">document.body.addEventListener(&#x27;click&#x27;, function() &#123;</span><br><span class="line">    console.log(&#x27;click2&#x27;);</span><br><span class="line">&#125;, false);</span><br><span class="line"></span><br><span class="line">// 发布</span><br><span class="line">document.body.click(); // click1  click2</span><br></pre></td></tr></table></figure>
+
+<p>自己实现一下</p>
+<p>小A在公司C完成了笔试及面试，小B也在公司C完成了笔试。他们焦急地等待结果，每隔半天就电话询问公司C，导致公司C很不耐烦。</p>
+<p>一种解决办法是 AB直接把联系方式留给C，有结果的话C自然会通知AB</p>
+<p>这里的“询问”属于显示调用，“留给”属于订阅，“通知”属于发布</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">// 观察者</span><br><span class="line">var observer = &#123;</span><br><span class="line">    // 订阅集合</span><br><span class="line">    subscribes: [],</span><br><span class="line"></span><br><span class="line">    // 订阅</span><br><span class="line">    subscribe: function(type, fn) &#123;</span><br><span class="line">        if (!this.subscribes[type]) &#123;</span><br><span class="line">            this.subscribes[type] = [];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 收集订阅者的处理</span><br><span class="line">        typeof fn === &#x27;function&#x27; &amp;&amp; this.subscribes[type].push(fn);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // 发布  可能会携带一些信息发布出去</span><br><span class="line">    publish: function() &#123;</span><br><span class="line">        var type = [].shift.call(arguments),</span><br><span class="line">            fns = this.subscribes[type];</span><br><span class="line">        </span><br><span class="line">        // 不存在的订阅类型，以及订阅时未传入处理回调的</span><br><span class="line">        if (!fns || !fns.length) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 挨个处理调用</span><br><span class="line">        for (var i = 0; i &lt; fns.length; ++i) &#123;</span><br><span class="line">            fns[i].apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 删除订阅</span><br><span class="line">    remove: function(type, fn) &#123;</span><br><span class="line">        // 删除全部</span><br><span class="line">        if (typeof type === &#x27;undefined&#x27;) &#123;</span><br><span class="line">            this.subscribes = [];</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var fns = this.subscribes[type];</span><br><span class="line"></span><br><span class="line">        // 不存在的订阅类型，以及订阅时未传入处理回调的</span><br><span class="line">        if (!fns || !fns.length) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (typeof fn === &#x27;undefined&#x27;) &#123;</span><br><span class="line">            fns.length = 0;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 挨个处理删除</span><br><span class="line">        for (var i = 0; i &lt; fns.length; ++i) &#123;</span><br><span class="line">            if (fns[i] === fn) &#123;</span><br><span class="line">                fns.splice(i, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 订阅岗位列表</span><br><span class="line">function jobListForA(jobs) &#123;</span><br><span class="line">    console.log(&#x27;A&#x27;, jobs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function jobListForB(jobs) &#123;</span><br><span class="line">    console.log(&#x27;B&#x27;, jobs);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// A订阅了笔试成绩</span><br><span class="line">observer.subscribe(&#x27;job&#x27;, jobListForA);</span><br><span class="line">// B订阅了笔试成绩</span><br><span class="line">observer.subscribe(&#x27;job&#x27;, jobListForB);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// A订阅了笔试成绩</span><br><span class="line">observer.subscribe(&#x27;examinationA&#x27;, function(score) &#123;</span><br><span class="line">    console.log(score);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// B订阅了笔试成绩</span><br><span class="line">observer.subscribe(&#x27;examinationB&#x27;, function(score) &#123;</span><br><span class="line">    console.log(score);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// A订阅了面试结果</span><br><span class="line">observer.subscribe(&#x27;interviewA&#x27;, function(result) &#123;</span><br><span class="line">    console.log(result);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">observer.publish(&#x27;examinationA&#x27;, 100); // 100</span><br><span class="line">observer.publish(&#x27;examinationB&#x27;, 80); // 80</span><br><span class="line">observer.publish(&#x27;interviewA&#x27;, &#x27;备用&#x27;); // 备用</span><br><span class="line"></span><br><span class="line">observer.publish(&#x27;job&#x27;, [&#x27;前端&#x27;, &#x27;后端&#x27;, &#x27;测试&#x27;]); // 输出A和B的岗位</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// B取消订阅了笔试成绩</span><br><span class="line">observer.remove(&#x27;examinationB&#x27;);</span><br><span class="line">// A都取消订阅了岗位</span><br><span class="line">observer.remove(&#x27;job&#x27;, jobListForA);</span><br><span class="line"></span><br><span class="line">observer.publish(&#x27;examinationB&#x27;, 80); // 没有可匹配的订阅，无输出</span><br><span class="line">observer.publish(&#x27;job&#x27;, [&#x27;前端&#x27;, &#x27;后端&#x27;, &#x27;测试&#x27;]); // 输出B的岗位</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 优缺点</strong></p>
+<p><strong>优点</strong></p>
+<p>一为时间上的解耦，二为对象之间的解耦。可以用在异步编程中与MV*框架中</p>
+<p><strong>缺点</strong></p>
+<p>创建订阅者本身要消耗一定的时间和内存，订阅的处理函数不一定会被执行，驻留内存有性能开销</p>
+<p>弱化了对象之间的联系，复杂的情况下可能会导致程序难以跟踪维护和理解</p>
+<h2 id="六、命令模式"><a href="#六、命令模式" class="headerlink" title="六、命令模式"></a>六、命令模式</h2><p><strong>1. 定义</strong></p>
+<p>用一种松耦合的方式来设计程序，使得请求发送者和请求接收者能够消除彼此之间的耦合关系</p>
+<p>命令（command）指的是一个执行某些特定事情的指令</p>
+<p><strong>2. 核心</strong></p>
+<p>命令中带有execute执行、undo撤销、redo重做等相关命令方法，建议显示地指示这些方法名</p>
+<p><strong>3. 实现</strong></p>
+<p>简单的命令模式实现可以直接使用对象字面量的形式定义一个命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var incrementCommand = &#123;</span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        // something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>不过接下来的例子是一个自增命令，提供执行、撤销、重做功能</p>
+<p>采用对象创建处理的方式，定义这个自增</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">// 自增</span><br><span class="line">function IncrementCommand() &#123;</span><br><span class="line">    // 当前值</span><br><span class="line">    this.val = 0;</span><br><span class="line">    // 命令栈</span><br><span class="line">    this.stack = [];</span><br><span class="line">    // 栈指针位置</span><br><span class="line">    this.stackPosition = -1;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">IncrementCommand.prototype = &#123;</span><br><span class="line">    constructor: IncrementCommand,</span><br><span class="line"></span><br><span class="line">    // 执行</span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        this._clearRedo();</span><br><span class="line">        </span><br><span class="line">        // 定义执行的处理</span><br><span class="line">        var command = function() &#123;</span><br><span class="line">            this.val += 2;</span><br><span class="line">        &#125;.bind(this);</span><br><span class="line">        </span><br><span class="line">        // 执行并缓存起来</span><br><span class="line">        command();</span><br><span class="line">        </span><br><span class="line">        this.stack.push(command);</span><br><span class="line"></span><br><span class="line">        this.stackPosition++;</span><br><span class="line"></span><br><span class="line">        this.getValue();</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    canUndo: function() &#123;</span><br><span class="line">        return this.stackPosition &gt;= 0;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    canRedo: function() &#123;</span><br><span class="line">        return this.stackPosition &lt; this.stack.length - 1;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // 撤销</span><br><span class="line">    undo: function() &#123;</span><br><span class="line">        if (!this.canUndo()) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        this.stackPosition--;</span><br><span class="line"></span><br><span class="line">        // 命令的撤销，与执行的处理相反</span><br><span class="line">        var command = function() &#123;</span><br><span class="line">            this.val -= 2;</span><br><span class="line">        &#125;.bind(this);</span><br><span class="line">        </span><br><span class="line">        // 撤销后不需要缓存</span><br><span class="line">        command();</span><br><span class="line"></span><br><span class="line">        this.getValue();</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 重做</span><br><span class="line">    redo: function() &#123;</span><br><span class="line">        if (!this.canRedo()) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 执行栈顶的命令</span><br><span class="line">        this.stack[++this.stackPosition]();</span><br><span class="line"></span><br><span class="line">        this.getValue();</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 在执行时，已经撤销的部分不能再重做</span><br><span class="line">    _clearRedo: function() &#123;</span><br><span class="line">        this.stack = this.stack.slice(0, this.stackPosition + 1);</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 获取当前值</span><br><span class="line">    getValue: function() &#123;</span><br><span class="line">        console.log(this.val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>再实例化进行测试，模拟执行、撤销、重做的操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">var incrementCommand = new IncrementCommand();</span><br><span class="line"></span><br><span class="line">// 模拟事件触发，执行命令</span><br><span class="line">var eventTrigger = &#123;</span><br><span class="line">    // 某个事件的处理中，直接调用命令的处理方法</span><br><span class="line">    increment: function() &#123;</span><br><span class="line">        incrementCommand.execute();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    incrementUndo: function() &#123;</span><br><span class="line">        incrementCommand.undo();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    incrementRedo: function() &#123;</span><br><span class="line">        incrementCommand.redo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;increment&#x27;](); // 2</span><br><span class="line">eventTrigger[&#x27;increment&#x27;](); // 4</span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;incrementUndo&#x27;](); // 2</span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;increment&#x27;](); // 4</span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;incrementUndo&#x27;](); // 2</span><br><span class="line">eventTrigger[&#x27;incrementUndo&#x27;](); // 0</span><br><span class="line">eventTrigger[&#x27;incrementUndo&#x27;](); // 无输出</span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;incrementRedo&#x27;](); // 2</span><br><span class="line">eventTrigger[&#x27;incrementRedo&#x27;](); // 4</span><br><span class="line">eventTrigger[&#x27;incrementRedo&#x27;](); // 无输出</span><br><span class="line"></span><br><span class="line">eventTrigger[&#x27;increment&#x27;](); // 6</span><br></pre></td></tr></table></figure>
+
+<p>此外，还可以实现简单的宏命令（一系列命令的集合）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">var MacroCommand = &#123;</span><br><span class="line">    commands: [],</span><br><span class="line"></span><br><span class="line">    add: function(command) &#123;</span><br><span class="line">        this.commands.push(command);</span><br><span class="line"></span><br><span class="line">        return this;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    remove: function(command) &#123;</span><br><span class="line">        if (!command) &#123;</span><br><span class="line">            this.commands = [];</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (var i = 0; i &lt; this.commands.length; ++i) &#123;</span><br><span class="line">            if (this.commands[i] === command) &#123;</span><br><span class="line">                this.commands.splice(i, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        for (var i = 0; i &lt; this.commands.length; ++i) &#123;</span><br><span class="line">            this.commands[i].execute();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var showTime = &#123;</span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        console.log(&#x27;time&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var showName = &#123;</span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        console.log(&#x27;name&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var showAge = &#123;</span><br><span class="line">    execute: function() &#123;</span><br><span class="line">        console.log(&#x27;age&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">MacroCommand.add(showTime).add(showName).add(showAge);</span><br><span class="line"></span><br><span class="line">MacroCommand.remove(showName);</span><br><span class="line"></span><br><span class="line">MacroCommand.execute(); // time age</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="七、组合模式"><a href="#七、组合模式" class="headerlink" title="七、组合模式"></a>七、组合模式</h2><p><strong>1. 定义</strong></p>
+<p>是用小的子对象来构建更大的 对象，而这些小的子对象本身也许是由更小 的“孙对象”构成的。</p>
+<p><strong>2. 核心</strong></p>
+<p>可以用树形结构来表示这种“部分- 整体”的层次结构。</p>
+<p>调用组合对象 的execute方法，程序会递归调用组合对象 下面的叶对象的execute方法</p>
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810130111913-1574024010.png" alt="img"></p>
+<p>但要注意的是，组合模式不是父子关系，它是一种HAS-A（聚合）的关系，将请求委托给 它所包含的所有叶对象。基于这种委托，就需要保证组合对象和叶对象拥有相同的 接口</p>
+<p>此外，也要保证用一致的方式对待 列表中的每个叶对象，即叶对象属于同一类，不需要过多特殊的额外操作</p>
+<p><strong>3. 实现</strong></p>
+<p>使用组合模式来实现扫描文件夹中的文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">// 文件夹 组合对象</span><br><span class="line">function Folder(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.parent = null;</span><br><span class="line">    this.files = [];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Folder.prototype = &#123;</span><br><span class="line">    constructor: Folder,</span><br><span class="line"></span><br><span class="line">    add: function(file) &#123;</span><br><span class="line">        file.parent = this;</span><br><span class="line">        this.files.push(file);</span><br><span class="line"></span><br><span class="line">        return this;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    scan: function() &#123;</span><br><span class="line">        // 委托给叶对象处理</span><br><span class="line">        for (var i = 0; i &lt; this.files.length; ++i) &#123;</span><br><span class="line">            this.files[i].scan();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    remove: function(file) &#123;</span><br><span class="line">        if (typeof file === &#x27;undefined&#x27;) &#123;</span><br><span class="line">            this.files = [];</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (var i = 0; i &lt; this.files.length; ++i) &#123;</span><br><span class="line">            if (this.files[i] === file) &#123;</span><br><span class="line">                this.files.splice(i, 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 文件 叶对象</span><br><span class="line">function File(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.parent = null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">File.prototype = &#123;</span><br><span class="line">    constructor: File,</span><br><span class="line"></span><br><span class="line">    add: function() &#123;</span><br><span class="line">        console.log(&#x27;文件里面不能添加文件&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    scan: function() &#123;</span><br><span class="line">        var name = [this.name];</span><br><span class="line">        var parent = this.parent;</span><br><span class="line"></span><br><span class="line">        while (parent) &#123;</span><br><span class="line">            name.unshift(parent.name);</span><br><span class="line">            parent = parent.parent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        console.log(name.join(&#x27; / &#x27;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>构造好组合对象与叶对象的关系后，实例化，在组合对象中插入组合或叶对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var web = new Folder(&#x27;Web&#x27;);</span><br><span class="line">var fe = new Folder(&#x27;前端&#x27;);</span><br><span class="line">var css = new Folder(&#x27;CSS&#x27;);</span><br><span class="line">var js = new Folder(&#x27;js&#x27;);</span><br><span class="line">var rd = new Folder(&#x27;后端&#x27;);</span><br><span class="line"></span><br><span class="line">web.add(fe).add(rd);</span><br><span class="line"></span><br><span class="line">var file1 = new File(&#x27;HTML权威指南.pdf&#x27;);</span><br><span class="line">var file2 = new File(&#x27;CSS权威指南.pdf&#x27;);</span><br><span class="line">var file3 = new File(&#x27;JavaScript权威指南.pdf&#x27;);</span><br><span class="line">var file4 = new File(&#x27;MySQL基础.pdf&#x27;);</span><br><span class="line">var file5 = new File(&#x27;Web安全.pdf&#x27;);</span><br><span class="line">var file6 = new File(&#x27;Linux菜鸟.pdf&#x27;);</span><br><span class="line"></span><br><span class="line">css.add(file2);</span><br><span class="line">fe.add(file1).add(file3).add(css).add(js);</span><br><span class="line">rd.add(file4).add(file5);</span><br><span class="line">web.add(file6);</span><br><span class="line"></span><br><span class="line">rd.remove(file4);</span><br><span class="line"></span><br><span class="line">// 扫描</span><br><span class="line">web.scan();</span><br></pre></td></tr></table></figure>
+
+<p>扫描结果为</p>
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810134809099-1727124887.png" alt="img"></p>
+<p> <strong>4. 优缺点</strong></p>
+<p><strong>优点</strong></p>
+<p>可 以方便地构造一棵树来表示对象的部分-整体 结构。在树的构造最终 完成之后，只需要通过请求树的最顶层对 象，便能对整棵树做统一一致的操作。</p>
+<p><strong>缺点</strong></p>
+<p>创建出来的对象长得都差不多，可能会使代码不好理解，创建太多的对象对性能也会有一些影响</p>
+<h2 id="八、模板方法模式"><a href="#八、模板方法模式" class="headerlink" title="八、模板方法模式"></a>八、模板方法模式</h2><p><strong>1. 定义</strong></p>
+<p>模板方法模式由两部分结构组成，第一部分是抽象父类，第二部分是具体的实现子类。</p>
+<p><strong>2. 核心</strong></p>
+<p>在抽象父类中封装子类的算法框架，它的 init方法可作为一个算法的模板，指导子类以何种顺序去执行哪些方法。</p>
+<p>由父类分离出公共部分，要求子类重写某些父类的（易变化的）抽象方法</p>
+<p><strong>3. 实现</strong></p>
+<p>模板方法模式一般的实现方式为继承</p>
+<p>以运动作为例子，运动有比较通用的一些处理，这部分可以抽离开来，在父类中实现。具体某项运动的特殊性则有自类来重写实现。</p>
+<p>最终子类直接调用父类的模板函数来执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">// 体育运动</span><br><span class="line">function Sport() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sport.prototype = &#123;</span><br><span class="line">    constructor: Sport,</span><br><span class="line">    </span><br><span class="line">    // 模板，按顺序执行</span><br><span class="line">    init: function() &#123;</span><br><span class="line">        this.stretch();</span><br><span class="line">        this.jog();</span><br><span class="line">        this.deepBreath();</span><br><span class="line">        this.start();</span><br><span class="line"></span><br><span class="line">        var free = this.end();</span><br><span class="line">        </span><br><span class="line">        // 运动后还有空的话，就拉伸一下</span><br><span class="line">        if (free !== false) &#123;</span><br><span class="line">            this.stretch();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 拉伸</span><br><span class="line">    stretch: function() &#123;</span><br><span class="line">        console.log(&#x27;拉伸&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 慢跑</span><br><span class="line">    jog: function() &#123;</span><br><span class="line">        console.log(&#x27;慢跑&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 深呼吸</span><br><span class="line">    deepBreath: function() &#123;</span><br><span class="line">        console.log(&#x27;深呼吸&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // 开始运动</span><br><span class="line">    start: function() &#123;</span><br><span class="line">        throw new Error(&#x27;子类必须重写此方法&#x27;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    // 结束运动</span><br><span class="line">    end: function() &#123;</span><br><span class="line">        console.log(&#x27;运动结束&#x27;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 篮球</span><br><span class="line">function Basketball() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Basketball.prototype = new Sport();</span><br><span class="line"></span><br><span class="line">// 重写相关的方法</span><br><span class="line">Basketball.prototype.start = function() &#123;</span><br><span class="line">    console.log(&#x27;先投上几个三分&#x27;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Basketball.prototype.end = function() &#123;</span><br><span class="line">    console.log(&#x27;运动结束了，有事先走一步&#x27;);</span><br><span class="line">    return false;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 马拉松</span><br><span class="line">function Marathon() &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Marathon.prototype = new Sport();</span><br><span class="line"></span><br><span class="line">var basketball = new Basketball();</span><br><span class="line">var marathon = new Marathon();</span><br><span class="line"></span><br><span class="line">// 子类调用，最终会按照父类定义的顺序执行</span><br><span class="line">basketball.init();</span><br><span class="line">marathon.init();</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810175832079-2143812978.png" alt="img"></p>
+<h2 id="九、享元模式"><a href="#九、享元模式" class="headerlink" title="九、享元模式"></a>九、享元模式</h2><p><strong>1. 定义</strong></p>
+<p>享元（flyweight）模式是一种用于性能优化的模式，它的目标是尽量减少共享对象的数量</p>
+<p><strong>2. 核心</strong></p>
+<p>运用共享技术来有效支持大量细粒度的对象。</p>
+<p>强调将对象的属性划分为内部状态（属性）与外部状态（属性）。内部状态用于对象的共享，通常不变；而外部状态则剥离开来，由具体的场景决定。</p>
+<p><strong>3. 实现</strong></p>
+<p>在程序中使用了大量的相似对象时，可以利用享元模式来优化，减少对象的数量</p>
+<p>举个栗子，要对某个班进行身体素质测量，仅测量身高体重来评判</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">// 健康测量</span><br><span class="line">function Fitness(name, sex, age, height, weight) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.sex = sex;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.height = height;</span><br><span class="line">    this.weight = weight;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 开始评判</span><br><span class="line">Fitness.prototype.judge = function() &#123;</span><br><span class="line">    var ret = this.name + &#x27;: &#x27;;</span><br><span class="line"></span><br><span class="line">    if (this.sex === &#x27;male&#x27;) &#123;</span><br><span class="line">        ret += this.judgeMale();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        ret += this.judgeFemale();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(ret);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 男性评判规则</span><br><span class="line">Fitness.prototype.judgeMale = function() &#123;</span><br><span class="line">    var ratio = this.height / this.weight;</span><br><span class="line"></span><br><span class="line">    return this.age &gt; 20 ? (ratio &gt; 3.5) : (ratio &gt; 2.8);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 女性评判规则</span><br><span class="line">Fitness.prototype.judgeFemale = function() &#123;</span><br><span class="line">    var ratio = this.height / this.weight;</span><br><span class="line">    </span><br><span class="line">    return this.age &gt; 20 ? (ratio &gt; 4) : (ratio &gt; 3);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var a = new Fitness(&#x27;A&#x27;, &#x27;male&#x27;, 18, 160, 80);</span><br><span class="line">var b = new Fitness(&#x27;B&#x27;, &#x27;male&#x27;, 21, 180, 70);</span><br><span class="line">var c = new Fitness(&#x27;C&#x27;, &#x27;female&#x27;, 28, 160, 80);</span><br><span class="line">var d = new Fitness(&#x27;D&#x27;, &#x27;male&#x27;, 18, 170, 60);</span><br><span class="line">var e = new Fitness(&#x27;E&#x27;, &#x27;female&#x27;, 18, 160, 40);</span><br><span class="line"></span><br><span class="line">// 开始评判</span><br><span class="line">a.judge(); // A: false</span><br><span class="line">b.judge(); // B: false</span><br><span class="line">c.judge(); // C: false</span><br><span class="line">d.judge(); // D: true</span><br><span class="line">e.judge(); // E: true</span><br></pre></td></tr></table></figure>
+
+<p>评判五个人就需要创建五个对象，一个班就几十个对象</p>
+<p>可以将对象的公共部分（内部状态）抽离出来，与外部状态独立。将性别看做内部状态即可，其他属性都属于外部状态。</p>
+<p>这么一来我们只需要维护男和女两个对象（使用factory对象），而其他变化的部分则在外部维护（使用manager对象）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">// 健康测量</span><br><span class="line">function Fitness(sex) &#123;</span><br><span class="line">    this.sex = sex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 工厂，创建可共享的对象</span><br><span class="line">var FitnessFactory = &#123;</span><br><span class="line">    objs: [],</span><br><span class="line"></span><br><span class="line">    create: function(sex) &#123;</span><br><span class="line">        if (!this.objs[sex]) &#123;</span><br><span class="line">            this.objs[sex] = new Fitness(sex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return this.objs[sex];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 管理器，管理非共享的部分</span><br><span class="line">var FitnessManager = &#123;</span><br><span class="line">    fitnessData: &#123;&#125;,</span><br><span class="line">    </span><br><span class="line">    // 添加一项</span><br><span class="line">    add: function(name, sex, age, height, weight) &#123;</span><br><span class="line">        var fitness = FitnessFactory.create(sex);</span><br><span class="line">        </span><br><span class="line">        // 存储变化的数据</span><br><span class="line">        this.fitnessData[name] = &#123;</span><br><span class="line">            age: age,</span><br><span class="line">            height: height,</span><br><span class="line">            weight: weight</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        return fitness;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 从存储的数据中获取，更新至当前正在使用的对象</span><br><span class="line">    updateFitnessData: function(name, obj) &#123;</span><br><span class="line">        var fitnessData = this.fitnessData[name];</span><br><span class="line"></span><br><span class="line">        for (var item in fitnessData) &#123;</span><br><span class="line">            if (fitnessData.hasOwnProperty(item)) &#123;</span><br><span class="line">                obj[item] = fitnessData[item];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 开始评判</span><br><span class="line">Fitness.prototype.judge = function(name) &#123;</span><br><span class="line">    // 操作前先更新当前状态（从外部状态管理器中获取）</span><br><span class="line">    FitnessManager.updateFitnessData(name, this);</span><br><span class="line"></span><br><span class="line">    var ret = name + &#x27;: &#x27;;</span><br><span class="line"></span><br><span class="line">    if (this.sex === &#x27;male&#x27;) &#123;</span><br><span class="line">        ret += this.judgeMale();</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        ret += this.judgeFemale();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(ret);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 男性评判规则</span><br><span class="line">Fitness.prototype.judgeMale = function() &#123;</span><br><span class="line">    var ratio = this.height / this.weight;</span><br><span class="line"></span><br><span class="line">    return this.age &gt; 20 ? (ratio &gt; 3.5) : (ratio &gt; 2.8);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 女性评判规则</span><br><span class="line">Fitness.prototype.judgeFemale = function() &#123;</span><br><span class="line">    var ratio = this.height / this.weight;</span><br><span class="line">    </span><br><span class="line">    return this.age &gt; 20 ? (ratio &gt; 4) : (ratio &gt; 3);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var a = FitnessManager.add(&#x27;A&#x27;, &#x27;male&#x27;, 18, 160, 80);</span><br><span class="line">var b = FitnessManager.add(&#x27;B&#x27;, &#x27;male&#x27;, 21, 180, 70);</span><br><span class="line">var c = FitnessManager.add(&#x27;C&#x27;, &#x27;female&#x27;, 28, 160, 80);</span><br><span class="line">var d = FitnessManager.add(&#x27;D&#x27;, &#x27;male&#x27;, 18, 170, 60);</span><br><span class="line">var e = FitnessManager.add(&#x27;E&#x27;, &#x27;female&#x27;, 18, 160, 40);</span><br><span class="line"></span><br><span class="line">// 开始评判</span><br><span class="line">a.judge(&#x27;A&#x27;); // A: false</span><br><span class="line">b.judge(&#x27;B&#x27;); // B: false</span><br><span class="line">c.judge(&#x27;C&#x27;); // C: false</span><br><span class="line">d.judge(&#x27;D&#x27;); // D: true</span><br><span class="line">e.judge(&#x27;E&#x27;); // E: true</span><br></pre></td></tr></table></figure>
+
+<p>不过代码可能更复杂了，这个例子可能还不够充分，只是展示了享元模式如何实现，它节省了多个相似的对象，但多了一些操作。</p>
+<p>factory对象有点像单例模式，只是多了一个sex的参数，如果没有内部状态，则没有参数的factory对象就更接近单例模式了</p>
+<h2 id="十、职责链模式"><a href="#十、职责链模式" class="headerlink" title="十、职责链模式"></a>十、职责链模式</h2><p><strong>1. 定义</strong></p>
+<p>使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系，将这些对象连成一条链，并沿着这条链 传递该请求，直到有一个对象处理它为止</p>
+<p><strong>2. 核心</strong></p>
+<p>请求发送者只需要知道链中的第一个节点，弱化发送者和一组接收者之间的强联系，可以便捷地在职责链中增加或删除一个节点，同样地，指定谁是第一个节点也很便捷</p>
+<p><strong>3. 实现</strong></p>
+<p>以展示不同类型的变量为例，设置一条职责链，可以免去多重if条件分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">// 定义链的某一项</span><br><span class="line">function ChainItem(fn) &#123;</span><br><span class="line">    this.fn = fn;</span><br><span class="line">    this.next = null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ChainItem.prototype = &#123;</span><br><span class="line">    constructor: ChainItem,</span><br><span class="line">    </span><br><span class="line">    // 设置下一项</span><br><span class="line">    setNext: function(next) &#123;</span><br><span class="line">        this.next = next;</span><br><span class="line">        return next;</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 开始执行</span><br><span class="line">    start: function() &#123;</span><br><span class="line">        this.fn.apply(this, arguments);</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 转到链的下一项执行</span><br><span class="line">    toNext: function() &#123;</span><br><span class="line">        if (this.next) &#123;</span><br><span class="line">            this.start.apply(this.next, arguments);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            console.log(&#x27;无匹配的执行项目&#x27;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 展示数字</span><br><span class="line">function showNumber(num) &#123;</span><br><span class="line">    if (typeof num === &#x27;number&#x27;) &#123;</span><br><span class="line">        console.log(&#x27;number&#x27;, num);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 转移到下一项</span><br><span class="line">        this.toNext(num);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 展示字符串</span><br><span class="line">function showString(str) &#123;</span><br><span class="line">    if (typeof str === &#x27;string&#x27;) &#123;</span><br><span class="line">        console.log(&#x27;string&#x27;, str);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.toNext(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 展示对象</span><br><span class="line">function showObject(obj) &#123;</span><br><span class="line">    if (typeof obj === &#x27;object&#x27;) &#123;</span><br><span class="line">        console.log(&#x27;object&#x27;, obj);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.toNext(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var chainNumber = new ChainItem(showNumber);</span><br><span class="line">var chainString = new ChainItem(showString);</span><br><span class="line">var chainObject = new ChainItem(showObject);</span><br><span class="line"></span><br><span class="line">// 设置链条</span><br><span class="line">chainObject.setNext(chainNumber).setNext(chainString);</span><br><span class="line"></span><br><span class="line">chainString.start(&#x27;12&#x27;); // string 12</span><br><span class="line">chainNumber.start(&#123;&#125;); // 无匹配的执行项目</span><br><span class="line">chainObject.start(&#123;&#125;); // object &#123;&#125;</span><br><span class="line">chainObject.start(123); // number 123</span><br></pre></td></tr></table></figure>
+
+<p>这时想判断未定义的时候呢，直接加到链中即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 展示未定义</span><br><span class="line">function showUndefined(obj) &#123;</span><br><span class="line">    if (typeof obj === &#x27;undefined&#x27;) &#123;</span><br><span class="line">        console.log(&#x27;undefined&#x27;);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        this.toNext(obj);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var chainUndefined = new ChainItem(showUndefined);</span><br><span class="line">chainString.setNext(chainUndefined);</span><br><span class="line"></span><br><span class="line">chainNumber.start(); // undefined</span><br></pre></td></tr></table></figure>
+
+
+
+<p>由例子可以看到，使用了职责链后，由原本的条件分支换成了很多对象，虽然结构更加清晰了，但在一定程度上可能会影响到性能，所以要注意避免过长的职责链。</p>
+<h2 id="十一、中介者模式"><a href="#十一、中介者模式" class="headerlink" title="十一、中介者模式"></a>十一、中介者模式</h2><p><strong>1. 定义</strong></p>
+<p>所有的相关 对象都通过中介者对象来通信，而不是互相引用，所以当一个对象发生改变时，只需要通知中介者对象即可</p>
+<p><strong>2. 核心</strong></p>
+<p>使网状的多对多关系变成了相对简单的一对多关系（复杂的调度处理都交给中介者）</p>
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810203810861-1292637448.png" alt="img"></p>
+<p>使用中介者后</p>
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810203755778-500873457.png" alt="img"></p>
+<p><strong>3. 实现</strong></p>
+<p>多个对象，指的不一定得是实例化的对象，也可以将其理解成互为独立的多个项。当这些项在处理时，需要知晓并通过其他项的数据来处理。</p>
+<p>如果每个项都直接处理，程序会非常复杂，修改某个地方就得在多个项内部修改</p>
+<p>我们将这个处理过程抽离出来，封装成中介者来处理，各项需要处理时，通知中介者即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">var A = &#123;</span><br><span class="line">    score: 10,</span><br><span class="line"></span><br><span class="line">    changeTo: function(score) &#123;</span><br><span class="line">        this.score = score;</span><br><span class="line"></span><br><span class="line">        // 自己获取</span><br><span class="line">        this.getRank();</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    // 直接获取</span><br><span class="line">    getRank: function() &#123;</span><br><span class="line">        var scores = [this.score, B.score, C.score].sort(function(a, b) &#123;</span><br><span class="line">            return a &lt; b;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        console.log(scores.indexOf(this.score) + 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var B = &#123;</span><br><span class="line">    score: 20,</span><br><span class="line"></span><br><span class="line">    changeTo: function(score) &#123;</span><br><span class="line">        this.score = score;</span><br><span class="line"></span><br><span class="line">        // 通过中介者获取</span><br><span class="line">        rankMediator(B);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var C = &#123;</span><br><span class="line">    score: 30,</span><br><span class="line"></span><br><span class="line">    changeTo: function(score) &#123;</span><br><span class="line">        this.score = score;</span><br><span class="line"></span><br><span class="line">        rankMediator(C);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 中介者，计算排名</span><br><span class="line">function rankMediator(person) &#123;</span><br><span class="line">    var scores = [A.score, B.score, C.score].sort(function(a, b) &#123;</span><br><span class="line">        return a &lt; b;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    console.log(scores.indexOf(person.score) + 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// A通过自身来处理</span><br><span class="line">A.changeTo(100); // 1</span><br><span class="line"></span><br><span class="line">// B和C交由中介者处理</span><br><span class="line">B.changeTo(200); // 1</span><br><span class="line">C.changeTo(50); // 3</span><br></pre></td></tr></table></figure>
+
+
+
+<p>ABC三个人分数改变后想要知道自己的排名，在A中自己处理，而B和C使用了中介者。B和C将更为轻松，整体代码也更简洁</p>
+<p>最后，虽然中介者做到了对模块和对象的解耦，但有时对象之间的关系并非一定要解耦，强行使用中介者来整合，可能会使代码更为繁琐，需要注意。</p>
+<h2 id="十二、装饰者模式"><a href="#十二、装饰者模式" class="headerlink" title="十二、装饰者模式"></a>十二、装饰者模式</h2><p><strong>1. 定义</strong></p>
+<p>以动态地给某个对象添加一些额外的职责，而不会影响从这个类中派生的其他对象。</p>
+<p>是一种“即用即付”的方式，能够在不改变对 象自身的基础上，在程序运行期间给对象动态地 添加职责</p>
+<p><strong>2. 核心</strong></p>
+<p>是为对象动态加入行为，经过多重包装，可以形成一条装饰链</p>
+<p><strong>3. 实现</strong></p>
+<p>最简单的装饰者，就是重写对象的属性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var A = &#123;</span><br><span class="line">    score: 10</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A.score = &#x27;分数：&#x27; + A.score;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用传统面向对象的方法来实现装饰，添加技能</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function Person() &#123;&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.skill = function() &#123;</span><br><span class="line">    console.log(&#x27;数学&#x27;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 装饰器，还会音乐</span><br><span class="line">function MusicDecorator(person) &#123;</span><br><span class="line">    this.person = person;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MusicDecorator.prototype.skill = function() &#123;</span><br><span class="line">    this.person.skill();</span><br><span class="line">    console.log(&#x27;音乐&#x27;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 装饰器，还会跑步</span><br><span class="line">function RunDecorator(person) &#123;</span><br><span class="line">    this.person = person;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RunDecorator.prototype.skill = function() &#123;</span><br><span class="line">    this.person.skill();</span><br><span class="line">    console.log(&#x27;跑步&#x27;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var person = new Person();</span><br><span class="line"></span><br><span class="line">// 装饰一下</span><br><span class="line">var person1 = new MusicDecorator(person);</span><br><span class="line">person1 = new RunDecorator(person1);</span><br><span class="line"></span><br><span class="line">person.skill(); // 数学</span><br><span class="line">person1.skill(); // 数学 音乐 跑步</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在JS中，函数为一等对象，所以我们也可以使用更通用的装饰函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 装饰器，在当前函数执行前先执行另一个函数</span><br><span class="line">function decoratorBefore(fn, beforeFn) &#123;</span><br><span class="line">    return function() &#123;</span><br><span class="line">        var ret = beforeFn.apply(this, arguments);</span><br><span class="line">        </span><br><span class="line">        // 在前一个函数中判断，不需要执行当前函数</span><br><span class="line">        if (ret !== false) &#123;</span><br><span class="line">            fn.apply(this, arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function skill() &#123;</span><br><span class="line">    console.log(&#x27;数学&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function skillMusic() &#123;</span><br><span class="line">    console.log(&#x27;音乐&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function skillRun() &#123;</span><br><span class="line">    console.log(&#x27;跑步&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var skillDecorator = decoratorBefore(skill, skillMusic);</span><br><span class="line">skillDecorator = decoratorBefore(skillDecorator, skillRun);</span><br><span class="line"></span><br><span class="line">skillDecorator(); // 跑步 音乐 数学</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="十三、状态模式"><a href="#十三、状态模式" class="headerlink" title="十三、状态模式"></a>十三、状态模式</h2><p><strong>1. 定义</strong></p>
+<p>事物内部状态的改变往往会带来事物的行为改变。在处理的时候，将这个处理委托给当前的状态对象即可，该状态对象会负责渲染它自身的行为</p>
+<p><strong>2. 核心</strong></p>
+<p>区分事物内部的状态，把事物的每种状态都封装成单独的类，跟此种状态有关的行为都被封装在这个类的内部</p>
+<p><strong>3. 实现</strong></p>
+<p>以一个人的工作状态作为例子，在刚醒、精神、疲倦几个状态中切换着</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">// 工作状态</span><br><span class="line">function Work(name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.currentState = null;</span><br><span class="line"></span><br><span class="line">    // 工作状态，保存为对应状态对象</span><br><span class="line">    this.wakeUpState = new WakeUpState(this);</span><br><span class="line">    // 精神饱满</span><br><span class="line">    this.energeticState = new EnergeticState(this);</span><br><span class="line">    // 疲倦</span><br><span class="line">    this.tiredState = new TiredState(this);</span><br><span class="line"></span><br><span class="line">    this.init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Work.prototype.init = function() &#123;</span><br><span class="line">    this.currentState = this.wakeUpState;</span><br><span class="line">    </span><br><span class="line">    // 点击事件，用于触发更新状态</span><br><span class="line">    document.body.onclick = () =&gt; &#123;</span><br><span class="line">        this.currentState.behaviour();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 更新工作状态</span><br><span class="line">Work.prototype.setState = function(state) &#123;</span><br><span class="line">    this.currentState = state;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 刚醒</span><br><span class="line">function WakeUpState(work) &#123;</span><br><span class="line">    this.work = work;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 刚醒的行为</span><br><span class="line">WakeUpState.prototype.behaviour = function() &#123;</span><br><span class="line">    console.log(this.work.name, &#x27;:&#x27;, &#x27;刚醒呢，睡个懒觉先&#x27;);</span><br><span class="line">    </span><br><span class="line">    // 只睡了2秒钟懒觉就精神了..</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        this.work.setState(this.work.energeticState);</span><br><span class="line">    &#125;, 2 * 1000);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 精神饱满</span><br><span class="line">function EnergeticState(work) &#123;</span><br><span class="line">    this.work = work;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">EnergeticState.prototype.behaviour = function() &#123;</span><br><span class="line">    console.log(this.work.name, &#x27;:&#x27;, &#x27;超级精神的&#x27;);</span><br><span class="line">    </span><br><span class="line">    // 才精神1秒钟就发困了</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        this.work.setState(this.work.tiredState);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 疲倦</span><br><span class="line">function TiredState(work) &#123;</span><br><span class="line">    this.work = work;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TiredState.prototype.behaviour = function() &#123;</span><br><span class="line">    console.log(this.work.name, &#x27;:&#x27;, &#x27;怎么肥事，好困&#x27;);</span><br><span class="line">    </span><br><span class="line">    // 不知不觉，又变成了刚醒着的状态... 不断循环呀</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        this.work.setState(this.work.wakeUpState);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var work = new Work(&#x27;曹操&#x27;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>点击一下页面，触发更新状态的操作</p>
+<p><img src="https://images2018.cnblogs.com/blog/688270/201808/688270-20180810223020756-1949601941.png" alt="img"></p>
+<p><strong>4. 优缺点</strong></p>
+<p><strong>优点</strong></p>
+<p>状态切换的逻辑分布在状态类中，易于维护</p>
+<p><strong>缺点</strong></p>
+<p>多个状态类，对于性能来说，也是一个缺点，这个缺点可以使用享元模式来做进一步优化</p>
+<p>将逻辑分散在状态类中，可能不会很轻易就能看出状态机的变化逻辑</p>
+<h2 id="十四、适配器模式"><a href="#十四、适配器模式" class="headerlink" title="十四、适配器模式"></a>十四、适配器模式</h2><p><strong>1. 定义</strong></p>
+<p>是解决两个软件实体间的接口不兼容的问题，对不兼容的部分进行适配</p>
+<p><strong>2. 核心</strong></p>
+<p>解决两个已有接口之间不匹配的问题</p>
+<p><strong>3. 实现</strong></p>
+<p>比如一个简单的数据格式转换的适配器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 渲染数据，格式限制为数组了</span><br><span class="line">function renderData(data) &#123;</span><br><span class="line">    data.forEach(function(item) &#123;</span><br><span class="line">        console.log(item);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 对非数组的进行转换适配</span><br><span class="line">function arrayAdapter(data) &#123;</span><br><span class="line">    if (typeof data !== &#x27;object&#x27;) &#123;</span><br><span class="line">        return [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (Object.prototype.toString.call(data) === &#x27;[object Array]&#x27;) &#123;</span><br><span class="line">        return data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    var temp = [];</span><br><span class="line"></span><br><span class="line">    for (var item in data) &#123;</span><br><span class="line">        if (data.hasOwnProperty(item)) &#123;</span><br><span class="line">            temp.push(data[item]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var data = &#123;</span><br><span class="line">    0: &#x27;A&#x27;,</span><br><span class="line">    1: &#x27;B&#x27;,</span><br><span class="line">    2: &#x27;C&#x27;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">renderData(arrayAdapter(data)); // A B C</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="十五、外观模式"><a href="#十五、外观模式" class="headerlink" title="十五、外观模式"></a>十五、外观模式</h2><p><strong>1. 定义</strong></p>
+<p>为子系统中的一组接口提供一个一致的界面，定义一个高层接口，这个接口使子系统更加容易使用</p>
+<p><strong>2. 核心</strong></p>
+<p>可以通过请求外观接口来达到访问子系统，也可以选择越过外观来直接访问子系统</p>
+<p><strong>3. 实现</strong></p>
+<p>外观模式在JS中，可以认为是一组函数的集合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 三个处理函数</span><br><span class="line">function start() &#123;</span><br><span class="line">    console.log(&#x27;start&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function doing() &#123;</span><br><span class="line">    console.log(&#x27;doing&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function end() &#123;</span><br><span class="line">    console.log(&#x27;end&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 外观函数，将一些处理统一起来，方便调用</span><br><span class="line">function execute() &#123;</span><br><span class="line">    start();</span><br><span class="line">    doing();</span><br><span class="line">    end();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 调用init开始执行</span><br><span class="line">function init() &#123;</span><br><span class="line">    // 此处直接调用了高层函数，也可以选择越过它直接调用相关的函数</span><br><span class="line">    execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init(); // start doing end</span><br></pre></td></tr></table></figure>
+
+<h2 id="十六、总结"><a href="#十六、总结" class="headerlink" title="十六、总结"></a>十六、总结</h2><h3 id="1-JS的24种设计模式，分三大类："><a href="#1-JS的24种设计模式，分三大类：" class="headerlink" title="1. JS的24种设计模式，分三大类："></a>1. JS的24种设计模式，分三大类：</h3><p>（1）创建型模式：工厂方法模式、抽象工厂模式、单例模式、多例模式、建造者模式（生成器模式）、原型模式</p>
+<p>（2）结构型模式：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式</p>
+<p>（3）行为型模式：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式</p>
+<h3 id="2-介绍其中几种模式"><a href="#2-介绍其中几种模式" class="headerlink" title="2. 介绍其中几种模式"></a>2. 介绍其中几种模式</h3><p>（1）观察者模式：vue的双向绑定原理中依赖收集和通知更新</p>
+<p>（2）单例模式：多个Error提示框时只显示一个</p>
+<p>（3）工厂方法模式：</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/db093a5a/">JavaScript运行机制最全面的一次梳理</a>
+            
+            
+            <a class="next" rel="next" href="/7aead763/">JavaScript中的垃圾回收和内存泄漏</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/db093a5a/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7aead763/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>佛学中的一些基本问题 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">佛学中的一些基本问题</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 8, 2016&nbsp;&nbsp;22:03:44</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 8, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="念经为什么要敲木鱼？"><a href="#念经为什么要敲木鱼？" class="headerlink" title="念经为什么要敲木鱼？"></a>念经为什么要敲木鱼？</h3><p>鱼是昼夜瞪着眼睛的，鱼睡觉就是停在那里不动，休息一下就算睡觉了。所以庙里敲木鱼，是要我们不断精进，修道要效法鱼的精神，昼夜努力不停。</p>
+<h3 id="波斯匿王"><a href="#波斯匿王" class="headerlink" title="波斯匿王"></a>波斯匿王</h3><p>波斯匿王(梵语 Prasenajit )，是中印度憍萨罗国国王，兼领有迦尸国，与摩竭陀国并列为佛陀时代的大强国。波斯匿王与佛陀同龄，曾和佛陀辩论而结成好友，视佛陀如师，在印度与频婆娑罗王同是护持佛教的两大国王。</p>
+<h3 id="达摩祖师"><a href="#达摩祖师" class="headerlink" title="达摩祖师"></a>达摩祖师</h3><p>佛陀就是释迦牟尼佛，释迦牟尼和达摩都属于佛教。释迦牟尼是佛教的创立者，达摩通彻大乘佛法，释迦牟尼佛是达摩的老师，双方是师徒关系。</p>
+<p>佛在没出家前，为净饭王之太子，佛俗名叫：乔达摩·悉达多，乔达摩是佛俗家的姓，悉达多是佛俗家的名字。这里很多人混淆了，因为佛的姓，很容易让人联系到达摩祖师，所以就会搞不清楚关系。</p>
+<p>佛教的创立者释迦牟尼（佛陀），是古代中印度迦毗罗卫国的释迦族人，他存在于西元前第一个千年的中期。此时商品贸易的繁荣促使了刹帝利阶层的崛起，构成阻碍的传统婆罗门教权威地位被削弱，思想界活跃着包括佛教在内的沙门思潮。</p>
+<p>而达摩祖师，法名全称菩提达摩，他是释迦牟尼佛心法传人的第28代，佛的禅宗法脉传给其弟子大迦叶，大迦叶为印度禅宗第一代祖，那么在印度传了28代。</p>
+<p>菩提达摩就是佛教禅宗第28代祖，后到中国弘法，将禅宗传入中国，又称中国禅宗初祖（达摩祖师来华是相当于中国南北朝时代）。</p>
+<h3 id="世间"><a href="#世间" class="headerlink" title="世间"></a>世间</h3><p>佛学里所谓世间，有三世间与四世间两种概念。所谓三世间是：器世间、国土世间、有情世间。</p>
+<ul>
+<li><p>器世间：就是国土世界，用现在的观念，就是物质世界，是这个地球上，有人类、生物存在的世界。</p>
+</li>
+<li><p>国土世间：就是地球上各个分别的国土，中国、美国、欧洲等，是这个世间观念里的一个范围。</p>
+</li>
+<li><p>有情世间：有情就是一切众生，有生命有灵知性的存在，这是一个世间的观念，等同于我们现在所讲的社会、人类等观念。</p>
+</li>
+</ul>
+<p>所谓四世间，是除了前三种之外，另有第四种，就是圣贤世间，也就是得道的圣贤所成就的另外一个范围。阿弥陀佛西方极乐世界，就是有道之士所居住的圣贤世界。其他宗教所讲的天堂，是另外一种圣贤、善人所居住的世间。</p>
+<p>佛学里有净土，有秽土，我们这个娑婆世界算秽土，阿弥陀佛西方极乐世界是净土。所谓土，有两种观念。一种是常寂光土，这个土已经不是土地，不是物质，而是说，在那个境界里，永远都是快乐的、清净的、寂灭的。另外一种观念是指我们这个世间，是凡圣同居土，圣人与凡夫共同居住的地方。这个世界也可以说同时包括了四世间，与各个国土的观念。所以说佛经里所称的世界，是包括我们这个世界，以及超过这个地球范围所有世间的世界。</p>
+<h3 id="大千世界"><a href="#大千世界" class="headerlink" title="大千世界"></a>大千世界</h3><p>佛认为一个太阳系统是一个世界，这个是普通观念的世界。一个太阳，一个月亮，带领了九大行星，中间有一个地球，就是一个太阳系。</p>
+<p>过去物理学、天文学称太阳为恒星，现在有人反对，不一定叫它恒星，这个是科学上没有定论的。在这一个太阳系中，地球是很小的，与其他行星的寿命来比较，也是很短的。可是在我们看来已经是不得了啦！这算是一个世界。</p>
+<p>佛说，这个地球上的人，以六十岁或者以一百岁为一寿命。这个世界上的人，认为一昼夜很了不起，而在月球上是半个月白天，半个月黑夜。现在人到了太空，发现果然与佛两千多年前说的一样。佛告诉弟子们说，这个虚空中，像这样的太阳系统，带领很多星球构成的世界，是无量数、不可知，如恒河沙一样多。</p>
+<p>一千个太阳系统这样的世界，叫做一个小千世界，一千个小千世界，叫做一个中千世界，再把一千个中千世界加起来，叫做一个大千世界，他说这个虚空中，有三千个大千世界，实际上不止三千大千世界，而是不可知、不可数、不可量那样多。</p>
+<h3 id="佛陀十大弟子"><a href="#佛陀十大弟子" class="headerlink" title="佛陀十大弟子"></a>佛陀十大弟子</h3><p>佛陀十大弟子指释迦十大弟子，又作释迦十圣、十弟子，即佛弟子中特别卓越之十人。随乐欲各执一法门，皆具众德而各有偏长，故称第一。</p>
+<h4 id="1-舍利弗（智慧第一）"><a href="#1-舍利弗（智慧第一）" class="headerlink" title="1. 舍利弗（智慧第一）"></a>1. 舍利弗（智慧第一）</h4><p>智慧猛利，能解决诸种疑问，故有「智慧第一」之称。师广习世间之技艺、通晓四吠陀论，又了解其他诸论，年十六已能催伏其他议论。闻佛弟子说佛所说之因缘法，即能了解诸法无我之理。师素来通晓外典，故归佛后屡能催伏外道。</p>
+<h4 id="2-摩诃目犍连（神通第一）"><a href="#2-摩诃目犍连（神通第一）" class="headerlink" title="2. 摩诃目犍连（神通第一）"></a>2. 摩诃目犍连（神通第一）</h4><p>神足轻擧，能飞到十方。故称「神通第一」。幼与舍利弗亲交。与舍利弗一起出家，随六师外道之一删闍耶修学。后受舍利弗之引导，皈依佛。其修行特色为得天眼、天耳、知他心，及能之过去未来之神通。为救陷于饿鬼道之母，乃从佛所教，修盂兰盆供。又提婆达多破僧团时，与舍利弗同至伽耶山，使五百之徒众复归佛。 </p>
+<h4 id="3-摩诃迦叶（头陀第一）"><a href="#3-摩诃迦叶（头陀第一）" class="headerlink" title="3. 摩诃迦叶（头陀第一）"></a>3. 摩诃迦叶（头陀第一）</h4><p>行十二头陀，因能忍受苦行，故称「头陀第一」。师本娶跋陀罗迦卑棃耶为妻，皆不好五欲，后一起出家。师受佛教化，发正智，奉上比丘之大衣，着佛所授与之粪扫衣。世尊示三乘解脱同一，分半座与迦叶。而灵山会上拈花微笑之故事，在禅家上甚为著名。佛将无上正法付嘱于师，为佛灭后诸比丘之大依正。 </p>
+<h4 id="4-须菩提（解空第一）"><a href="#4-须菩提（解空第一）" class="headerlink" title="4. 须菩提（解空第一）"></a>4. 须菩提（解空第一）</h4><p>恒好空定，能通达空之义理，故称「解空第一」。据增一阿含经卷二十八所载，佛由天下降阎浮地时，众人皆前去礼佛。师正缝衣，欲往迎时，顿生一念，乃愿诸法皆空、不造不作之理，遂解今所归命实为真正之法聚，遂还作缝衣。 </p>
+<h4 id="5-富楼那（说法第一）"><a href="#5-富楼那（说法第一）" class="headerlink" title="5. 富楼那（说法第一）"></a>5. 富楼那（说法第一）</h4><p>又作满愿子。能广说法，分别义理，故有「说法第一」之称。师说法之时，先以辩才使众座生欢喜。次以苦楚之言，责切其心。终以明慧教诲空无，令闻者解脱，从之证果至入涅槃度化者九万九千人。 </p>
+<h4 id="6-迦旃延（论义第一）"><a href="#6-迦旃延（论义第一）" class="headerlink" title="6. 迦旃延（论义第一）"></a>6. 迦旃延（论义第一）</h4><p>能分别深义，敷演道教，故称「论义第一」。长于将佛略说之法义详细分析说明，甚益于弟子们对佛法之理解。又热心布教，住于阿般提国，教化多人。 </p>
+<h4 id="7-阿那律（天眼第一）"><a href="#7-阿那律（天眼第一）" class="headerlink" title="7. 阿那律（天眼第一）"></a>7. 阿那律（天眼第一）</h4><p>得天眼，能见十方世界，故称「天眼第一」。师曾于听法中酣睡，佛陀叱责之，阿那律遂立誓不再睡眠，因而失眠。肉眼虽败坏，然以精进修行，遂获天眼。 </p>
+<h4 id="8-优波离（持律第一）"><a href="#8-优波离（持律第一）" class="headerlink" title="8. 优波离（持律第一）"></a>8. 优波离（持律第一）</h4><p>奉持戒律，无丝毫触犯之处，故称「持律第一」。师原为宫廷理发师，和诸王子一起出家。实为佛陀广开门户，平等摄化四姓之第一步。第一次结集时，阿难诵出经，优波离诵出律；故为律藏传持之祖。 </p>
+<h4 id="9-罗睺罗（密行第一）"><a href="#9-罗睺罗（密行第一）" class="headerlink" title="9. 罗睺罗（密行第一）"></a>9. 罗睺罗（密行第一）</h4><p>不坏禁戒，能诵读而不懈怠，故称「密行第一」。是释尊出家前之子，年十五出家。因未受具足戒，不可与比丘同宿，出房宿于厕所。曾与舍利弗行乞，于途中受迫害，以慈心而能忍。师能严守制戒，修道精进，依数息观而得证圣果。于十六阿罗汉中列第十一位。 </p>
+<h4 id="10-阿难（多闻第一）"><a href="#10-阿难（多闻第一）" class="headerlink" title="10. 阿难（多闻第一）"></a>10. 阿难（多闻第一）</h4><p>阿难（迦毗罗卫人，公元前463年－?），白饭王的儿子，佛的堂弟。能知时明物，所至无障碍，所记忆不忘，故多闻广远，又堪忍奉上，故称「多闻第一」。为佛之从弟，出家后则为佛常随之侍者。世尊之姨母及五百释氏女得以出家，皆因阿难尽力说服所致者。 </p>
+<h3 id="关于佛、菩萨、罗汉、比丘"><a href="#关于佛、菩萨、罗汉、比丘" class="headerlink" title="关于佛、菩萨、罗汉、比丘"></a>关于佛、菩萨、罗汉、比丘</h3><h4 id="1-如来"><a href="#1-如来" class="headerlink" title="1. 如来"></a>1. 如来</h4><p>佛已成了道，所以就叫如来。《金刚经》上有句话，是佛自己下的注解：“<strong>无所从来，亦无所去，故名如来</strong>”。无来也无去，换句话说，不生也不灭，不动也不静，当然无喜亦无忧，不高也不矮，都是平等，永远存在，这个道理就是如来。用现在的观念说，他永远在你这里，永远在你的面前，只要有人一念虔信，佛就在这里。</p>
+<h4 id="2-菩萨"><a href="#2-菩萨" class="headerlink" title="2. 菩萨"></a>2. 菩萨</h4><p>“菩萨”，这也是梵文的翻译，它的全称是<strong>菩提萨埵</strong>。菩提的意思就是觉悟，萨埵是有情。</p>
+<p>所谓的觉悟，觉悟什么呢？就是佛的境界，也就是所谓<strong>自利利他，自觉觉他</strong>的这个觉悟。借用孟子的话：“使先知觉后知”，就是先知先觉的人，教导后知后觉的人。一个人如果觉悟了，悟道了，对一切功名富贵看不上，而万事不管，脚底下抹油溜了，这种人叫做罗汉。但是菩萨境界则不然，觉悟了，解脱了世间一切的痛苦，自己升华了，但是看到世上林林总总的众生还在苦难中，就要再回到世间广度一切众生。这种牺牲自我，利益一切众生的行为，就是所谓有情，是大乘菩萨道。</p>
+<p>“菩萨”是佛弟子中，走大乘路线的一个总称。</p>
+<h4 id="3-罗汉"><a href="#3-罗汉" class="headerlink" title="3. 罗汉"></a>3. 罗汉</h4><p>佛的出家弟子们，离开人世间妻儿、父母、家庭，这种出家众叫做大比丘众。在佛教经典中的出家众，归类到小乘的范围，他们离开人世间的一切，专心于自己的修行，也就是放弃一切而成就自己的道，叫做小乘罗汉的境界。这在中文叫做自了汉，只管自己了了，其他一切不管。禅宗则称之谓担板汉，挑一个板子走路，只看到这一面，看不见另一面。也就是说，把空的一面，清净的一面，抓得牢牢的，至于烦恼痛苦的一面，他拿块板子把它隔着，反正他不看。</p>
+<h4 id="4-比丘"><a href="#4-比丘" class="headerlink" title="4. 比丘"></a>4. 比丘</h4><p>所谓比丘就是出家人，翻译成中文的意思就是“乞士”。乞士意思是讨饭的，讨什么饭呢？不是讨一口饭吃的饭，是讨一个永远不生不灭的精神食粮。所以，上乞法于佛，下乞食于一切众生，称为学佛比丘。比丘，也有破除一切烦恼，了却一切生死，方能有所成就，才能证果的意思。</p>
+<h4 id="5-佛、菩萨、罗汉的区别？"><a href="#5-佛、菩萨、罗汉的区别？" class="headerlink" title="5. 佛、菩萨、罗汉的区别？"></a>5. 佛、菩萨、罗汉的区别？</h4><p>《楞严经》上说：“<strong>自未得度，先度人者，菩萨发心。自觉已圆，能觉他者，如来应世</strong>”。菩萨是如来的前因，成了佛如来是菩萨的果位，成就的果位。</p>
+<p>佛教里表现实相叫示现，为表达那个形相，大菩萨们的示现都是在家的装扮。譬如大慈大悲观世音、大智文殊菩萨、大行普贤菩萨，以及另外一些菩萨等，都是在家人的装束示现，除了大愿地藏王菩萨。出家人是绝对不准穿华丽衣服的，绝对不准化妆的，可是你看菩萨们，个个都是化妆的啊！又戴耳环，又挂项链，又戴戒指，叮叮当当，一身都挂满了，又擦口红，又抹粉的，这是菩萨的塑像。这个道理是什么呢？就是说他是入世的，外形虽是入世的，心却是出世的，所以菩萨境界谓之大乘。罗汉境界住空，不敢入世，一切不敢碰，眼不见心不烦，只管自己。</p>
+<p>小乘，罗汉境界，自渡。大乘，菩萨境界，自渡渡人。最高境界，如来，佛。</p>
+<p>有余依涅槃（一边打坐，一边打牌）是罗汉境界，不彻底；无余依涅槃是佛境界，是非常彻底的。</p>
+<p>学佛是放下一切，彻底无所求，无所得。你这个还是有求，有得，不能究竟。所谓无求无得，本质上是因为我们本来就是，所有修行都是让你放下，醒来，所以无求无得。</p>
+<p>学佛的成果分为几个层次，比如只求自了的罗汉和普度众生的菩萨。一个除根，一个去本。成佛是可望而不可求的，通过学佛，能够看淡一些，解脱一些，求得相对的内心清净，也不失为成功。</p>
+<h3 id="五眼"><a href="#五眼" class="headerlink" title="五眼"></a>五眼</h3><p>肉眼、天眼、慧眼、法眼、佛眼</p>
+<h3 id="大慈大悲"><a href="#大慈大悲" class="headerlink" title="大慈大悲"></a>大慈大悲</h3><p>慈悲是两个观念组合起来的佛学名词，慈是父性，代表男性的爱，至善的爱；悲代表了母性至善的爱，慈悲是父母所共性的仁德。是至善，无条件，平等，所以叫大慈大悲。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/14053296/">你越慢，得到的越多（蒋勋）</a>
+            
+            
+            <a class="next" rel="next" href="/c00712b5/">佛学，阉割生命冲动的法门</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/14053296/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/c00712b5/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

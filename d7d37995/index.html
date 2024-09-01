@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>执行上下文和执行栈 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">执行上下文和执行栈</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2016&nbsp;&nbsp;9:11:58</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">23 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>如果你是一名 JavaScript 开发者，或者想要成为一名 JavaScript 开发者，那么你必须知道 JavaScript 程序内部的执行机制。执行上下文和执行栈是JavaScript中关键概念之一，是JavaScript难点之一。 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。本文尽可能用通俗易懂的方式来介绍这些概念。</p>
+<p>我们先来看个例子：</p>
+<h3 id="1-顺序执行？No"><a href="#1-顺序执行？No" class="headerlink" title="1. 顺序执行？No"></a>1. 顺序执行？No</h3><p>如果要问到 JavaScript 代码执行顺序的话，想必写过 JavaScript 的开发者都会有个直观的印象，那就是顺序执行，毕竟：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var foo = function () &#123;</span><br><span class="line">    console.log(&#x27;foo1&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();  // foo1</span><br><span class="line"></span><br><span class="line">var foo = function () &#123;</span><br><span class="line">    console.log(&#x27;foo2&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(); // foo2</span><br></pre></td></tr></table></figure>
+
+<p>然而去看这段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">    console.log(&#x27;foo1&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();  // foo2</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(&#x27;foo2&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(); // foo2</span><br></pre></td></tr></table></figure>
+
+<p>打印的结果却是两个 foo2。</p>
+<p>刷过面试题的都知道这是因为 JavaScript 引擎并非一行一行地分析和执行程序，而是一段一段地分析执行。当执行一段代码的时候，会进行一个“准备工作”，比如第一个例子中的变量提升，和第二个例子中的函数提升。</p>
+<p>但是本文真正想让大家思考的是：这个“一段一段”中的“段”究竟是怎么划分的呢？</p>
+<p>到底JavaScript引擎遇到一段怎样的代码时才会做“准备工作”呢？</p>
+<h3 id="2-可执行代码"><a href="#2-可执行代码" class="headerlink" title="2. 可执行代码"></a>2. 可执行代码</h3><p>这就要说到 JavaScript 的可执行代码(executable code)的类型有哪些了？</p>
+<p>其实很简单，就三种：全局代码、函数代码、eval代码。</p>
+<p>举个例子，当执行到一个函数的时候，就会进行准备工作，这里的“准备工作”，让我们用个更专业一点的说法，就叫做”执行上下文(execution context)”。</p>
+<p>（JavaScript没有块级作用域，除了全局作用域之外，常用的只有函数可以创建作用域）</p>
+<h3 id="3-执行上下文栈"><a href="#3-执行上下文栈" class="headerlink" title="3. 执行上下文栈"></a>3. 执行上下文栈</h3><p>接下来问题来了，我们写的函数多了去了，如何管理创建的那么多执行上下文呢？</p>
+<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文</p>
+<p>为了模拟执行上下文栈的行为，让我们定义执行上下文栈是一个数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [];</span><br></pre></td></tr></table></figure>
+
+<p>试想当 JavaScript 开始要执行代码的时候，最先遇到的就是全局代码，所以初始化的时候首先就会向执行上下文栈压入一个全局执行上下文，我们用 globalContext 表示它，并且只有当整个应用程序结束的时候，ECStack 才会被清空，所以程序结束之前， ECStack 最底部永远有个 globalContext：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>现在 JavaScript 遇到下面的这段代码了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function fun3() &#123;</span><br><span class="line">    console.log(&#x27;fun3&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fun2() &#123;</span><br><span class="line">    fun3();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function fun1() &#123;</span><br><span class="line">    fun2();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun1();</span><br></pre></td></tr></table></figure>
+
+<p>当执行一个函数的时候，就会创建一个执行上下文，并且压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。知道了这样的工作原理，让我们来看看如何处理上面这段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 伪代码</span><br><span class="line"></span><br><span class="line">// fun1()ECStack.push(&lt;fun1&gt; functionContext);</span><br><span class="line"></span><br><span class="line">// fun1中竟然调用了fun2，还要创建fun2的执行上下文</span><br><span class="line">ECStack.push(&lt;fun2&gt; functionContext);</span><br><span class="line"></span><br><span class="line">// 擦，fun2还调用了fun3！</span><br><span class="line">ECStack.push(&lt;fun3&gt; functionContext);</span><br><span class="line"></span><br><span class="line">// fun3执行完毕</span><br><span class="line">ECStack.pop();</span><br><span class="line"></span><br><span class="line">// fun2执行完毕</span><br><span class="line">ECStack.pop();</span><br><span class="line"></span><br><span class="line">// fun1执行完毕</span><br><span class="line">ECStack.pop();</span><br><span class="line"></span><br><span class="line">// javascript接着执行下面的代码，但是ECStack底层永远有个globalContext</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、执行上下文（Execution-Context）"><a href="#二、执行上下文（Execution-Context）" class="headerlink" title="二、执行上下文（Execution Context）"></a>二、执行上下文（Execution Context）</h2><h3 id="1-什么是执行上下文"><a href="#1-什么是执行上下文" class="headerlink" title="1. 什么是执行上下文"></a>1. 什么是执行上下文</h3><p>简而言之，执行上下文就是当前 JavaScript 代码被解析和执行时所在环境的抽象概念， JavaScript 中运行任何的代码都是在执行上下文中运行。</p>
+<h3 id="2-执行上下文的类型"><a href="#2-执行上下文的类型" class="headerlink" title="2. 执行上下文的类型"></a>2. 执行上下文的类型</h3><p>执行上下文总共有三种类型：</p>
+<ul>
+<li>全局执行上下文： 这是默认的、最基础的执行上下文。不在任何函数中的代码都位于全局执行上下文中。它做了两件事：1. 创建一个全局对象，在浏览器中这个全局对象就是 window 对象。2. 将 this 指针指向这个全局对象。一个程序中只能存在一个全局执行上下文。</li>
+<li>函数执行上下文： 每次调用函数时，都会为该函数创建一个新的执行上下文。每个函数都拥有自己的执行上下文（严谨点讲，这个时候应该叫做作用域），但是只有在函数被调用的时候才会被创建。一个程序中可以存在任意数量的函数执行上下文。每当一个新的执行上下文被创建，它都会按照特定的顺序执行一系列步骤，具体过程将在本文后面讨论。</li>
+<li>Eval 函数执行上下文： 运行在 eval 函数中的代码也获得了自己的执行上下文，但由于 Javascript 开发人员不常用 eval 函数，所以在这里不再讨论。</li>
+</ul>
+<h2 id="三、执行上下文的生命周期"><a href="#三、执行上下文的生命周期" class="headerlink" title="三、执行上下文的生命周期"></a>三、执行上下文的生命周期</h2><p>我们已经知道，当调用一个函数时（激活），一个新的执行上下文就会被创建。而一个执行上下文的生命周期可以分为两个阶段。</p>
+<ul>
+<li><p>创建阶段</p>
+<p>在这个阶段中，执行上下文会分别创建变量对象，建立作用域链，以及确定this的指向</p>
+</li>
+<li><p>代码执行阶段</p>
+<p>创建完成之后，就会开始执行代码，这个时候，会完成变量赋值，函数引用，以及执行其他代码。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061008048.png"></p>
+</li>
+</ul>
+<p>  从这里我们就可以看出详细了解执行上下文极为重要，因为其中涉及到了变量对象，作用域链，this等很多人没有怎么弄明白，但是却极为重要的概念，因此它关系到我们能不能真正理解JavaScript。</p>
+<p>  执行上下文的生命周期包括三个阶段：创建阶段 → 执行阶段 → 回收阶段，本文重点介绍创建阶段。</p>
+<h3 id="1-创建阶段"><a href="#1-创建阶段" class="headerlink" title="1. 创建阶段"></a>1. 创建阶段</h3><ul>
+<li>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061009370.png"></p>
+<ul>
+<li>创建变量对象：首先初始化函数的参数arguments，提升函数声明和变量声明。下文会详细说明。</li>
+<li>创建作用域链（Scope Chain）：在执行期上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。</li>
+<li>确定this指向：包括多种情况，下文会详细说明</li>
+</ul>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为undefined，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过 函数执行上下文中会多出this arguments和函数的参数。</p>
+<h3 id="2-执行阶段"><a href="#2-执行阶段" class="headerlink" title="2. 执行阶段"></a>2. 执行阶段</h3><p>执行变量赋值、代码执行</p>
+<h3 id="3-回收阶段"><a href="#3-回收阶段" class="headerlink" title="3. 回收阶段"></a>3. 回收阶段</h3><p>执行上下文出栈等待虚拟机回收执行上下文</p>
+<h2 id="四、变量对象"><a href="#四、变量对象" class="headerlink" title="四、变量对象"></a>四、变量对象</h2><h3 id="1-变量对象的创建，依次经历了以下几个过程。"><a href="#1-变量对象的创建，依次经历了以下几个过程。" class="headerlink" title="1. 变量对象的创建，依次经历了以下几个过程。"></a>1. 变量对象的创建，依次经历了以下几个过程。</h3><p>（1）建立arguments对象。检查当前上下文中的参数，建立该对象下的属性与属性值。</p>
+<p>（2）检查当前上下文的函数声明，也就是使用function关键字声明的函数。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果函数名的属性已经存在，那么该属性将会被新的引用所覆盖。</p>
+<p>（3）检查当前上下文中的变量声明，每找到一个变量声明，就在变量对象中以变量名建立一个属性，属性值为undefined。如果该变量名的属性已经存在，为了防止同名的函数被修改为undefined，则会直接跳过，原属性值不会被修改。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061010091.png"></p>
+<h3 id="2-举个例子"><a href="#2-举个例子" class="headerlink" title="2. 举个例子"></a>2. 举个例子</h3><p>根据这个规则，理解变量提升就变得十分简单了。在很多文章中虽然提到了变量提升，但是具体是怎么回事还真的很多人都说不出来，以后在面试中用变量对象的创建过程跟面试官解释变量提升，保证瞬间提升逼格。</p>
+<p>在上面的规则中我们看出，function声明会比var声明优先级更高一点。为了帮助大家更好的理解变量对象，我们结合一些简单的例子来进行探讨。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// demo01</span><br><span class="line">function test() &#123; </span><br><span class="line">    console.log(a); </span><br><span class="line">    console.log(foo()); </span><br><span class="line"></span><br><span class="line">    var a = 1; </span><br><span class="line">    function foo() &#123; </span><br><span class="line">        return 2; </span><br><span class="line">    &#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>在上例中，我们直接从test()的执行上下文开始理解。全局作用域中运行test()时，test()的执行上下文开始创建。为了便于理解，我们用如下的形式来表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">创建过程</span><br><span class="line">testEC = &#123;</span><br><span class="line">    // 变量对象</span><br><span class="line">    VO: &#123;&#125;,</span><br><span class="line">    scopeChain: &#123;&#125;,</span><br><span class="line">    this: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 因为本文暂时不详细解释作用域链和this，所以把变量对象专门提出来说明</span><br><span class="line"></span><br><span class="line">// VO 为 Variable Object的缩写，即变量对象</span><br><span class="line">VO = &#123;</span><br><span class="line">    arguments: &#123;...&#125;,  //注：在浏览器的展示中，函数的参数可能并不是放在arguments对象中，这里为了方便理解，我做了这样的处理</span><br><span class="line">    foo: &lt;foo reference&gt;  // 表示foo的地址引用</span><br><span class="line">    a: undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象转变为了活动对象，里面的属性都能被访问了，然后开始进行执行阶段的操作。</p>
+<p>这样，如果再面试的时候被问到变量对象和活动对象有什么区别，就又可以自如的应答了，他们其实都是同一个对象，只是处于执行上下文的不同生命周期。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 执行阶段</span><br><span class="line">VO -&gt;  AO   // Active Object</span><br><span class="line">AO = &#123;</span><br><span class="line">    arguments: &#123;...&#125;,</span><br><span class="line">    foo: &lt;foo reference&gt;,</span><br><span class="line">    a: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此，上面的例子demo1，执行顺序就变成了这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function test() &#123;</span><br><span class="line">    function foo() &#123;</span><br><span class="line">        return 2;</span><br><span class="line">    &#125;</span><br><span class="line">    var a;</span><br><span class="line">    console.log(a);</span><br><span class="line">    console.log(foo());</span><br><span class="line">    a = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-全局上下文的变量对象"><a href="#3-全局上下文的变量对象" class="headerlink" title="3. 全局上下文的变量对象"></a>3. 全局上下文的变量对象</h3><p>以浏览器中为例，全局对象为window。</p>
+<p>全局上下文有一个特殊的地方，它的变量对象，就是window对象。而这个特殊，在this指向上也同样适用，this也是指向window。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 以浏览器中为例，全局对象为window</span><br><span class="line">// 全局上下文</span><br><span class="line">windowEC = &#123;</span><br><span class="line">    VO: window,</span><br><span class="line">    scopeChain: &#123;&#125;,</span><br><span class="line">    this: window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p>
+<h2 id="五、变量提升和this指向的细节"><a href="#五、变量提升和this指向的细节" class="headerlink" title="五、变量提升和this指向的细节"></a>五、变量提升和this指向的细节</h2><h3 id="1-变量声明提升"><a href="#1-变量声明提升" class="headerlink" title="1. 变量声明提升"></a>1. 变量声明提升</h3><p>大部分编程语言都是先声明变量再使用，但在JS中，事情有些不一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(a)// undefined</span><br><span class="line">var a = 10</span><br></pre></td></tr></table></figure>
+
+<p>上述代码正常输出undefined而不是报错Uncaught ReferenceError: a is not defined,这是因为声明提升（hoisting），相当于如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a; //声明 默认值是undefined “准备工作”</span><br><span class="line">console.log(a);</span><br><span class="line">a=10; //赋值</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-函数声明提升"><a href="#2-函数声明提升" class="headerlink" title="2. 函数声明提升"></a>2. 函数声明提升</h3><p>我们都知道，创建一个函数的方法有两种，一种是通过函数声明function foo(){} 另一种是通过函数表达式var foo = function(){} ,那这两种在函数提升有什么区别呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(f1) // function f1()&#123;&#125;</span><br><span class="line">function f1() &#123;&#125; // 函数声明</span><br><span class="line"></span><br><span class="line">console.log(f2) // undefined</span><br><span class="line">var f2 = function() &#123;&#125; // 函数表达式</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们通过一个例子来说明这个问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function test() &#123;</span><br><span class="line">    foo(); // Uncaught TypeError &quot;foo is not a function&quot;</span><br><span class="line">    bar(); // &quot;this will run!&quot;</span><br><span class="line"></span><br><span class="line">    // function expression assigned to local variable &#x27;foo&#x27;</span><br><span class="line">    var foo = function () &#123;</span><br><span class="line">        alert(&quot;this won&#x27;t run!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function bar() &#123; // function declaration, given the name &#x27;bar&#x27;</span><br><span class="line">        alert(&quot;this will run!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+
+<p>在上面的例子中，foo()调用的时候报错了，而bar能够正常调用。</p>
+<p>我们前面说过变量和函数都会上升，遇到函数表达式 var foo = function(){}时，首先会将var foo上升到函数体顶部，然而此时的foo的值为undefined,所以执行foo()报错。</p>
+<p>而对于函数bar(), 则是提升了整个函数，所以bar()才能够顺利执行。</p>
+<p>有个细节必须注意：当遇到函数和变量同名且都会被提升的情况，函数声明优先级比较高，因此变量声明会被函数声明所覆盖，但是可以重新赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert(a); // 输出：function a()&#123; alert(&#x27;我是函数&#x27;) &#125;</span><br><span class="line">function a()&#123; alert(&#x27;我是函数&#x27;) &#125;</span><br><span class="line">var a = &#x27;我是变量&#x27;;</span><br><span class="line">alert(a);   // 输出：&#x27;我是变量&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>function声明的优先级比var声明高，也就意味着当两个同名变量同时被function和var声明时，function声明会覆盖var声明</p>
+<p>这代码等效于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function a()&#123;alert(&#x27;我是函数&#x27;)&#125;</span><br><span class="line">var a;    // hoisting</span><br><span class="line">alert(a);    // 输出：function a()&#123; alert(&#x27;我是函数&#x27;) &#125;</span><br><span class="line">a = &#x27;我是变量&#x27;; // 赋值</span><br><span class="line">alert(a);   // 输出：&#x27;我是变量&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们看个复杂点的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function test(arg)&#123;</span><br><span class="line">    // 1. 形参 arg 是 &quot;hi&quot;</span><br><span class="line">    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function</span><br><span class="line">    console.log(arg);  </span><br><span class="line">    </span><br><span class="line">    var arg = &#x27;hello&#x27;; // 3.var arg 变量声明被忽略， arg = &#x27;hello&#x27;被执行</span><br><span class="line">    function arg()&#123;</span><br><span class="line">        console.log(&#x27;hello world&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(arg);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(&#x27;hi&#x27;);</span><br><span class="line">/* 输出：</span><br><span class="line">    function arg()&#123;</span><br><span class="line">        console.log(&#x27;hello world&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">    hello</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<p>这是因为当函数执行的时候,首先会形成一个新的私有的作用域，然后依次按照如下的步骤执行：</p>
+<ul>
+<li>如果有形参，先给形参赋值</li>
+<li>进行私有作用域中的预解释，函数声明优先级比变量声明高，最后后者会被前者所覆盖，但是可以重新赋值</li>
+<li>私有作用域中的代码从上到下执行</li>
+</ul>
+<h3 id="3-确定this的指向"><a href="#3-确定this的指向" class="headerlink" title="3. 确定this的指向"></a>3. 确定this的指向</h3><p>先搞明白一个很重要的概念 —— this的值是在执行的时候才能确认，定义的时候不能确认！ 为什么呢 —— 因为this是执行上下文环境的一部分，而执行上下文需要在代码执行之前确定，而不是定义的时候。看如下例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">// 情况1</span><br><span class="line">function foo() &#123;</span><br><span class="line">  console.log(this.a) // 1</span><br><span class="line">&#125;</span><br><span class="line">var a = 1</span><br><span class="line">foo()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 情况2</span><br><span class="line">function fn()&#123;</span><br><span class="line">  console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">var obj=&#123;fn:fn&#125;;</span><br><span class="line">obj.fn(); // this-&gt;obj</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 情况3</span><br><span class="line">function CreateJsPerson(name,age) &#123;</span><br><span class="line">    // this是当前类的一个实例p1</span><br><span class="line">    this.name = name; //=&gt;p1.name=name</span><br><span class="line">    this.age = age; //=&gt;p1.age=age</span><br><span class="line">&#125;</span><br><span class="line">var p1 = new CreateJsPerson(&quot;尹华芝&quot;,48);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 情况4</span><br><span class="line">function add(c, d)&#123;</span><br><span class="line">  return this.a + this.b + c + d;</span><br><span class="line">&#125;</span><br><span class="line">var o = &#123;a:1, b:3&#125;;</span><br><span class="line">add.call(o, 5, 7); // 1 + 3 + 5 + 7 = 16</span><br><span class="line">add.apply(o, [10, 20]); // 1 + 3 + 10 + 20 = 34</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 情况5</span><br><span class="line">&lt;button id=&quot;btn1&quot;&gt;箭头函数this&lt;/button&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;   </span><br><span class="line">    let btn1 = document.getElementById(&#x27;btn1&#x27;);</span><br><span class="line">    let obj = &#123;</span><br><span class="line">        name: &#x27;kobe&#x27;,</span><br><span class="line">        age: 39,</span><br><span class="line">        getName: function () &#123;</span><br><span class="line">            btn1.onclick = () =&gt; &#123;</span><br><span class="line">                console.log(this);//obj</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    obj.getName();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们逐一解释上面几种情况</p>
+<ul>
+<li>对于直接调用 foo 来说，不管 foo 函数被放在了什么地方，this 一定是 window</li>
+<li>对于 obj.foo() 来说，我们只需要记住，谁调用了函数，谁就是 this，所以在这个场景下 foo 函数中的 this 就是 obj 对象</li>
+<li>在构造函数模式中，类中(函数体中)出现的this.xxx=xxx中的this是当前类的一个实例</li>
+<li>call、apply和bind：this 是第一个参数</li>
+<li>箭头函数this指向:箭头函数没有自己的this，看其外层的是否有函数，如果有，外层函数的this就是内部箭头函数的this，如果没有，则this是window。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061016795.png"></p>
+<h2 id="六、执行上下文栈（Execution-Context-Stack）"><a href="#六、执行上下文栈（Execution-Context-Stack）" class="headerlink" title="六、执行上下文栈（Execution Context Stack）"></a>六、执行上下文栈（Execution Context Stack）</h2><p>函数多了，就有多个函数执行上下文，每次调用函数创建一个新的执行上下文，那如何管理创建的那么多执行上下文呢？</p>
+<p>JavaScript 引擎创建了执行上下文栈来管理执行上下文。可以把执行上下文栈认为是一个存储函数调用的栈结构，遵循先进后出的原则。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061017886.gif"></p>
+<p>从上面的流程图，我们需要记住几个关键点：</p>
+<ul>
+<li>JavaScript执行在单线程上，所有的代码都是排队执行。</li>
+<li>一开始浏览器执行全局的代码时，首先创建全局的执行上下文，压入执行栈的顶部。</li>
+<li>每当进入一个函数的执行就会创建函数的执行上下文，并且把它压入执行栈的顶部。当前函数执行完成后，当前函数的执行上下文出栈，并等待垃圾回收。</li>
+<li>浏览器的JS执行引擎总是访问栈顶的执行上下文。</li>
+<li>全局上下文只有唯一的一个，它在浏览器关闭时出栈。</li>
+</ul>
+<p>我们再来看个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var color = &#x27;blue&#x27;;</span><br><span class="line">function changeColor() &#123;</span><br><span class="line">    var anotherColor = &#x27;red&#x27;;</span><br><span class="line">    function swapColors() &#123;</span><br><span class="line">        var tempColor = anotherColor;</span><br><span class="line">        anotherColor = color;</span><br><span class="line">        color = tempColor;</span><br><span class="line">    &#125;</span><br><span class="line">    swapColors();</span><br><span class="line">&#125;</span><br><span class="line">changeColor();</span><br></pre></td></tr></table></figure>
+
+<p>上述代码运行按照如下步骤：</p>
+<ul>
+<li>当上述代码在浏览器中加载时，JavaScript 引擎会创建一个全局执行上下文并且将它推入当前的执行栈</li>
+<li>调用 changeColor函数时，此时changeColor函数内部代码还未执行，js执行引擎立即创建一个changeColor的执行上下文（简称EC），然后把这执行上下文压入到执行栈（简称ECStack）中。</li>
+<li>执行changeColor函数过程中，调用swapColors函数，同样地，swapColors函数执行之前也创建了一个swapColors的执行上下文，并压入到执行栈中。</li>
+<li>swapColors函数执行完成，swapColors函数的执行上下文出栈，并且被销毁。</li>
+<li>changeColor函数执行完成，changeColor函数的执行上下文出栈，并且被销毁。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061017182.png"></p>
+<h2 id="七、作用域与执行上下文"><a href="#七、作用域与执行上下文" class="headerlink" title="七、作用域与执行上下文"></a>七、作用域与执行上下文</h2><p>许多开发人员经常混淆作用域和执行上下文的概念，误认为它们是相同的概念，但事实并非如此。</p>
+<p>我们知道JavaScript属于解释型语言，JavaScript的执行分为：解释和执行两个阶段,这两个阶段所做的事并不一样：</p>
+<p>解释阶段：</p>
+<ul>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>作用域规则确定</li>
+</ul>
+<p>执行阶段：</p>
+<ul>
+<li>创建执行上下文</li>
+<li>执行函数代码</li>
+<li>垃圾回收</li>
+</ul>
+<p>JavaScript解释阶段便会确定作用域规则，因此作用域在函数定义时就已经确定了，而不是在函数调用时确定，但是执行上下文是函数执行之前创建的。执行上下文最明显的就是this的指向是执行时确定的。而作用域访问的变量是编写代码的结构确定的。</p>
+<p>作用域和执行上下文之间最大的区别是： 执行上下文在运行时确定，随时可能改变；作用域在定义时就确定，并且不会改变。</p>
+<p>一个作用域下可能包含若干个上下文环境。有可能从来没有过上下文环境（函数从来就没有被调用过）；有可能有过，现在函数被调用完毕后，上下文环境被销毁了；有可能同时存在一个或多个（闭包）。同一个作用域下，不同的调用会产生不同的执行上下文环境，继而产生不同的变量的值。</p>
+<h2 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h2><h3 id="1-调用一个函数时，一个新的执行上下文就会被创建："><a href="#1-调用一个函数时，一个新的执行上下文就会被创建：" class="headerlink" title="1. 调用一个函数时，一个新的执行上下文就会被创建："></a>1. 调用一个函数时，一个新的执行上下文就会被创建：</h3><p>创建执行上下文时会创建变量对象、建立作用域链、确定this指向等，然后压入执行上下文栈，当函数执行完毕的时候，就会将函数的执行上下文从栈中弹出。执行上下文的生命周期为创建 - 执行 - 回收。</p>
+<h3 id="2-执行上下文中的变量对象："><a href="#2-执行上下文中的变量对象：" class="headerlink" title="2. 执行上下文中的变量对象："></a>2. 执行上下文中的变量对象：</h3><p>（1）变量对象是 arguments对象、变量对象中以函数名建立一个属性（value是函数的内存地址）、检查var变量，声明创建属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">VO = &#123;</span><br><span class="line">    arguments: &#123;...&#125;,</span><br><span class="line">    foo: &lt;foo reference&gt;,</span><br><span class="line">    a: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）执行之后，变量对象称为执行对象。（未执行阶段，变量对象中的属性不能访问）</p>
+<h3 id="3-JS代码运行过程概述（以及变量环境和词法环境的区别）："><a href="#3-JS代码运行过程概述（以及变量环境和词法环境的区别）：" class="headerlink" title="3. JS代码运行过程概述（以及变量环境和词法环境的区别）："></a>3. JS代码运行过程概述（以及变量环境和词法环境的区别）：</h3><p>（1）编译是把代码拿过来创建执行上下文，并创建变量环境、词法环境、可执行代码，将执行上下文压入执行栈。（这里说的编译是把解释（确定作用域等）和执行前的准备阶段（执行上下文）都包含了。）</p>
+<p>（2）执行是在当前执行上下文环境下执行可执行代码。</p>
+<p>（记住：解释是代码写好之后就做的，而执行前的准备阶段是必须调用代码后才做的）</p>
+<p>变量环境：通过var声明或function(){}声明的变量存在这里</p>
+<p>词法环境：通过let const with() try-catch创建的变量存在这里</p>
+<p>可执行代码：变量声明提前后，剩下的代码</p>
+<h3 id="4-编译原理"><a href="#4-编译原理" class="headerlink" title="4. 编译原理"></a>4. 编译原理</h3><p>（1）JS编译执行概述</p>
+<p>我们知道JavaScript属于解释型语言，JavaScript的执行分为：解释和执行两个阶段,这两个阶段所做的事并不一样：</p>
+<p>解释阶段：</p>
+<ul>
+<li>词法分析</li>
+<li>语法分析</li>
+<li>作用域规则确定</li>
+</ul>
+<p>执行阶段：</p>
+<ul>
+<li>创建执行上下文</li>
+<li>执行函数代码</li>
+<li>垃圾回收</li>
+</ul>
+<p>JavaScript解释阶段便会确定作用域规则，因此作用域在函数定义时就已经确定了，而不是在函数调用时确定。但是执行上下文是函数执行之前创建的，执行上下文最明显的就是this的指向是执行时确定的。而作用域访问的变量是编写代码的结构确定的。</p>
+<p>（2）编译原理</p>
+<p>JavaScript 引擎进行编译的步骤和传统的编译语言非常相似，在传统的编译语言中，程序中的代码在执行之后会经历三个步骤：词法分析、语法分析、代码生成：</p>
+<ul>
+<li><p>词法分析：这个阶段会将源代码拆成最小的、不可再分的词法单元（token）。比如代码 var name = ‘hello’；通常会被分解成 var 、name、=、hello、; 这五个词法单元。代码中的空格在 JavaScript 中是被直接忽略的。</p>
+</li>
+<li><p>语法分析：这个过程是将上一步生成的 token 数据，根据语法规则转为 AST。如果源码符合语法规则，这一步就会顺利完成。如果源码存在语法错误，这一步就会终止，并抛出一个“语法错误”。</p>
+</li>
+<li><p>可执行代码生成：这一步就是将AST转化为可执行代码，简单来说就是将 var name = ‘hello’; 的AST转化为一组机器指令，用来创建一个 name 变量（需要给name分配内存），并将一个值储存在 name 中。</p>
+</li>
+</ul>
+<p>比起那些编译过程只有三个步骤的语言的编译器，JavaScript 引擎要复杂的多，这里不再细说。总之，任何JavaScript代码片段在执行前都要进行编译，因此在 JS 引擎眼里，var name = ‘hello’; 语句包含了两个声明：</p>
+<ul>
+<li>var name （编译时处理）</li>
+<li>name = ‘hello’ （运行时处理）</li>
+</ul>
+<p>你可能会问，JS 不是不存在编译阶段的“动态语言”吗？事实上，JS 也是有编译阶段的，它和传统语言的区别在于，JS 不会早早地把编译工作做完，而是一边编译一边执行。简单来说，所有的 JS 代码片段在执行之前都会被编译，只是这个编译的过程非常短暂（可能就只有几微妙、或者更短的时间），紧接着这段代码就会被执行。</p>
+<p>在编译阶段和执行阶段阶段的过程如下：</p>
+<ul>
+<li>编译阶段： 编译器会找遍当前作用域，看看是不是已经有一个叫 name 的变量。如果有，那么就忽略 var name 这个声明，继续编译下去；如果没有，则在当前作用域里新增一个 name。然后，编译器会为引擎生成运行时所需要的代码，程序就进入了执行阶段。</li>
+<li>执行阶段： JS 引擎在执行代码的时候，仍然会查找当前作用域，看看是不是有一个叫 name 的变量。如果能找到，就给它赋值。如果找不到，就会从当前作用域里向上层作用域逐级查找。如果最终仍然找不到 name 变量，引擎就会抛出一个异常。</li>
+</ul>
+<p>这里，JS引擎的查找过程就是作用域链，作用域指的是变量能够被访问到的范围。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d146bed3/">作用域和作用域链</a>
+            
+            
+            <a class="next" rel="next" href="/55fb48a0/">JavaScript中的字符串方法</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d146bed3/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/55fb48a0/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

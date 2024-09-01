@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>微前端（qiankun）使用手册 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微前端（qiankun）使用手册</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 25, 2023&nbsp;&nbsp;23:40:11</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 25, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">9.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">38 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文中主应用采用<code>vue2</code>构建，微应用采用<code>vue2</code>、<code>vue3</code>、<code>react</code>构建。其中主应用和微应用都采用<code>webpack</code>打包，并且主应用路由模式选择了<code>History</code>（该模式需要服务端支持），微应用路由模式采用<code>History</code>、<code>Hash</code>。</p>
+<p>如果在项目采用<code>vite</code>构建的前提下需要使用<code>qiankun</code>，请查看文档<a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/%E5%BE%AE%E5%89%8D%E7%AB%AFqiankun%E6%8E%A5%E5%85%A5Vite%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AD%90%E5%BA%94%E7%94%A8/">《微前端qiankun接入Vite构建的子应用》</a>。</p>
+<p>如果主应用路由模式需要使用<code>hash</code>，请查看文档<a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%88qiankun%EF%BC%89Hash%E8%B7%AF%E7%94%B1%E5%AE%9E%E8%B7%B5/">《微前端（qiankun）Hash路由实践》</a>。</p>
+<br />
+
+<h1 id="创建主应用"><a href="#创建主应用" class="headerlink" title="创建主应用"></a>创建主应用</h1><h2 id="1-安装qiankun"><a href="#1-安装qiankun" class="headerlink" title="1.安装qiankun"></a>1.安装<code>qiankun</code></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`yarn add qiankun` 或者 `npm i qiankun -S`</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-注册微应用"><a href="#2-注册微应用" class="headerlink" title="2. 注册微应用"></a>2. 注册微应用</h2><p>在入口文件<code>main.js</code>中注册所有微应用并启动<code>qiankun</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">import &#123; registerMicroApps, start, addGlobalUncaughtErrorHandler, initGlobalState &#125; from &#x27;qiankun&#x27;</span><br><span class="line"></span><br><span class="line">// 1. 定义所有微应用</span><br><span class="line">const apps = [</span><br><span class="line">  &#123;</span><br><span class="line">    // 必须与子应用注册名字相同</span><br><span class="line">    name: &#x27;micro-app-vue2&#x27;,</span><br><span class="line">    // 入口路径，开发时为子应用所启本地服务，上线时为子应用线上路径</span><br><span class="line">    entry: &#x27;//localhost:3003&#x27;,</span><br><span class="line">    // 子应用挂载的节点</span><br><span class="line">    container: &#x27;#micro-app-vue2&#x27;,</span><br><span class="line">    // 当访问路由为 /micro-app-vue2 时加载子应用</span><br><span class="line">    activeRule: &#x27;/micro-app-vue2&#x27;,</span><br><span class="line">    // 主应用向子应用传递参数</span><br><span class="line">    props: &#123;</span><br><span class="line">        msg: &quot;我是来自主应用的值&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: &#x27;micro-app-vue3&#x27;,</span><br><span class="line">    entry: &#x27;//localhost:3001&#x27;,</span><br><span class="line">    container: &#x27;#micro-app-vue3&#x27;,</span><br><span class="line">    activeRule: &#x27;/micro-app-vue3&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: &#x27;micro-app-react&#x27;,</span><br><span class="line">    entry: &#x27;//localhost:4001&#x27;,</span><br><span class="line">    container: &#x27;#micro-app-react&#x27;,</span><br><span class="line">    activeRule: &#x27;/micro-app-react&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">// 2. 微应用生命周期</span><br><span class="line">// qiankun暴露了五个生命周期钩子：beforeLoad、beforeMount、afterMount 、beforeUnmount和afterUnmount，这五个钩子可以在主应用中注册子应用时使用。</span><br><span class="line">const microAppLifCycles = &#123;</span><br><span class="line">  beforeLoad: [ // 全局的微应用生命周期钩子，子应用加载前</span><br><span class="line">    app =&gt; &#123;</span><br><span class="line">      console.log(&#x27;子应用加载-beforeLoad&#x27;, app)</span><br><span class="line">      return Promise.resolve()</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  beforeMount: [ // 全局的微应用生命周期钩子，子应用挂载前</span><br><span class="line">    app =&gt; &#123;</span><br><span class="line">      console.log(&#x27;2-beforeMount&#x27;, app)</span><br><span class="line">      return Promise.resolve()</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  afterMount: [ // 全局的微应用生命周期钩子，子应用挂载后</span><br><span class="line">    app =&gt; &#123;</span><br><span class="line">      console.log(&#x27;3-afterMount&#x27;, app)</span><br><span class="line">      return Promise.resolve()</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  beforeUnmount: [</span><br><span class="line">    app =&gt; &#123;</span><br><span class="line">      console.log(&#x27;4-beforeUnmount&#x27;, app)</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 3. 注册微应用的基础配置信息（第二个参数可选）</span><br><span class="line">registerMicroApps(apps, microAppLifCycles)</span><br><span class="line"></span><br><span class="line">// 4. 添加全局的未捕获异常处理器</span><br><span class="line">addGlobalUncaughtErrorHandler((event) =&gt; &#123;</span><br><span class="line">  const &#123; message: msg &#125; = event</span><br><span class="line">  if (msg &amp;&amp; msg.includes(&#x27;died in status LOADING_SOURCE_CODE&#x27;)) &#123;</span><br><span class="line">    console.error(&#x27;微应用加载失败，请检查应用是否可运行&#x27;, event)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 5. 启动微应用</span><br><span class="line">start(&#123;</span><br><span class="line">  prefetch: true, // 是否开启预加载</span><br><span class="line">  sandbox: &#123;</span><br><span class="line">    experimentalStyleIsolation: true // 实验性的样式隔离</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>关于预加载微应用<code>prefetch</code>的属性说明：</p>
+<p>（1）配置为 true 则会在第一个微应用 mount 完成后开始预加载其他微应用的静态资源</p>
+<p>（2）配置为 all 则主应用 start 后即开始预加载所有微应用静态资源</p>
+<p>（3）配置为 string[] 则会在第一个微应用 mounted 后开始加载数组内的微应用资源</p>
+<p>（4）配置为 function 则可完全自定义应用的资源加载时机 (首屏应用及次屏应用)</p>
+<p>当微应用信息注册完之后，一旦浏览器的 url 发生变化，便会自动触发 qiankun 的匹配逻辑，所有 activeRule 规则匹配上的微应用就会被挂载到指定的 container 中，同时依次调用微应用暴露出的生命周期钩子。</p>
+<h2 id="3-创建微应用SFC"><a href="#3-创建微应用SFC" class="headerlink" title="3.创建微应用SFC"></a>3.创建微应用SFC</h2><p>每个微应用使用一个对应的单文件组件进行挂载，并在mounted中进行判断如果未开启qiankun则进行开启。</p>
+<p>该处以<code>microAppVue2</code>组件为例，其它组件只需要修改id和组件name。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">   &lt;!-- 这个id需要和注册微应用中的container的值对应 --&gt;</span><br><span class="line">  &lt;div id=&quot;micro-app-vue2&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import &#123; start &#125; from &#x27;qiankun&#x27;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;microAppVue2&#x27;,</span><br><span class="line">  components: &#123;&#125;,</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    if (!window.qiankunStarted) &#123;</span><br><span class="line">      window.qiankunStarted = true</span><br><span class="line">      start(&#123;</span><br><span class="line">        prefetch: true, // 是否开启预加载</span><br><span class="line">        sandbox: &#123;</span><br><span class="line">          experimentalStyleIsolation: true // 实验性的样式隔离</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-路由配置"><a href="#4-路由配置" class="headerlink" title="4.路由配置"></a>4.路由配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import VueRouter from &#x27;vue-router&#x27;</span><br><span class="line">Vue.use(VueRouter)</span><br><span class="line"></span><br><span class="line">const routes = [</span><br><span class="line">  &#123;</span><br><span class="line">    // 这个path需要和注册微应用中的activeRule的值对应</span><br><span class="line">    path: &#x27;/micro-app-vue2&#x27;,</span><br><span class="line">    component: () =&gt; import(&#x27;@/views/microAppVue2/index.vue&#x27;)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/micro-app-vue3&#x27;,</span><br><span class="line">    component: () =&gt; import(&#x27;@/views/microAppVue3/index.vue&#x27;)</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    path: &#x27;/micro-app-react&#x27;,</span><br><span class="line">    component: () =&gt; import(&#x27;@/views/microAppReact/index.vue&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  // 选择history模式时，需要设置base，这样在访问路由时会自动带上项目的基路径</span><br><span class="line">  mode: &#x27;history&#x27;,</span><br><span class="line">  base: process.env.BASE_URL,</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-主应用代理微应用的接口地址"><a href="#5-主应用代理微应用的接口地址" class="headerlink" title="5.主应用代理微应用的接口地址"></a>5.主应用代理微应用的接口地址</h2><p>在使用 qiankun 微前端框架时，主应用可以通过配置代理来转发子应用的接口请求。这样可以解决跨域问题和统一管理接口访问。</p>
+<p>首先，在主应用的配置文件中（例如 <code>webpack.config.js</code>）添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const &#123; createProxyMiddleware &#125; = require(&#x27;http-proxy-middleware&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  // ...其他配置</span><br><span class="line"></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    // ...其他 devServer 配置项</span><br><span class="line"></span><br><span class="line">    // 添加代理配置</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      &#x27;/api&#x27;: &#123;</span><br><span class="line">        target: &#x27;http://子应用的接口地址&#x27;,</span><br><span class="line">        changeOrigin: true,</span><br><span class="line">        pathRewrite: &#123;</span><br><span class="line">          &#x27;^/api&#x27;: &#x27;&#x27;, // 如果子应用接口有基础路径，需要进行重写</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，将 <code>/api</code> 路径下的请求转发到了子应用的接口地址，并进行了域名跨域处理。你可以根据实际情况修改目标地址和路径重写规则。</p>
+<p>然后，在微应用中调用接口时，使用相对于主应用的 <code>/api</code> 路径作为前缀，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fetch(&#x27;/api/users&#x27;)</span><br><span class="line">  .then(response =&gt; response.json())</span><br><span class="line">  .then(data =&gt; console.log(data))</span><br><span class="line">  .catch(error =&gt; console.error(error));</span><br></pre></td></tr></table></figure>
+
+<p>这样就能将请求发送给子应用的接口地址，并成功获取响应数据。</p>
+<p>注意：以上示例是基于 <code>webpack-dev-server</code> 进行配置的，在生产环境部署时需要根据实际情况配置代理服务器。 </p>
+<br />
+
+<h1 id="创建微应用"><a href="#创建微应用" class="headerlink" title="创建微应用"></a>创建微应用</h1><p><code>vue2</code>、<code>vue3</code>和<code>react</code>的配置由于框架不同而在代码上有些微区别（比如<code>vue2</code>创建实例是<code>new vue</code>，<code>vue3</code>是<code>createApp</code>），但整体<code>qiankun</code>的配置步骤和配置内容相同。此处不做区分，以下仅以<code>vue2</code>为例：</p>
+<h2 id="1-修改配置文件"><a href="#1-修改配置文件" class="headerlink" title="1.修改配置文件"></a>1.修改配置文件</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// vue.config.js</span><br><span class="line"></span><br><span class="line">// 1. package.json中name的值必须和主应用中注册微应用的name的值对应</span><br><span class="line">const packageName = require(&#x27;./package.json&#x27;).name;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    configureWebpack: &#123;</span><br><span class="line">        // 2. 打包方式改造</span><br><span class="line">        output: &#123;</span><br><span class="line">            library: packageName,</span><br><span class="line">            // 这里设置为umd意思是在 AMD 或 CommonJS 的 require 之后可访问。</span><br><span class="line">            libraryTarget: &quot;umd&quot;,</span><br><span class="line">            // webpack用来异步加载chunk的JSONP 函数。</span><br><span class="line">            jsonpFunction: `webpackJsonp_$&#123;packageName&#125;`,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        port: &quot;3003&quot;,</span><br><span class="line">        disableHostCheck: true, // 关闭主机检查，使微应用可以被 fetch</span><br><span class="line">        headers: &#123;</span><br><span class="line">            // 3. 因为qiankun内部请求都是fetch来请求资源，所以子应用必须允许跨域    &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>为什么 <code>qiankun</code> 要求子应用打包为 <code>umd</code> 库格式呢？</p>
+<p>主要是为了主应用能够拿到子应用在 入口文件 导出的 生命钩子函数，这也是主应用和子应用之间通信的关键。</p>
+<p><code>umd</code>全称是<code>UniversalModuleDefinition</code>，是一种通用模块定义格式，通常用在前端模块化开发中。</p>
+<p>由于不同的模块化规范定义不同，为了让各种规范的模块可以通用，在不同的环境下都可以正常运行，就出现了umd这个通用格式。</p>
+<p>umd 格式是一种既可以在浏览器环境下使用，也可以在 node 环境下使用的格式。它将 <code>CommonJS</code>、<code>AMD</code>以及普通的全局定义模块三种模块模式进行了整合。</p>
+<h2 id="2-修改publicPath"><a href="#2-修改publicPath" class="headerlink" title="2.修改publicPath"></a>2.修改publicPath</h2><p>src目录下新建<code>public-path.js</code>，用于处理打包后静态资源的路径问题。内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if(window.__POWERED_BY_QIANKUN__) &#123;</span><br><span class="line">  // eslint-disable-next-line no-undef</span><br><span class="line">  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-路由配置"><a href="#3-路由配置" class="headerlink" title="3.路由配置"></a>3.路由配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Router from &#x27;vue-router&#x27;</span><br><span class="line">import HelloWorld from &#x27;@/components/HelloWorld&#x27;</span><br><span class="line"> </span><br><span class="line">Vue.use(Router)</span><br><span class="line"> </span><br><span class="line">export default new Router(&#123;</span><br><span class="line">  // 1. 设置history模式</span><br><span class="line">  mode: &#x27;history&#x27;,</span><br><span class="line">  // 2. 设置base，值和主应用中的activeRule保持一致</span><br><span class="line">  base: window.__POWERED_BY_QIANKUN__ ? &quot;/micro-app-vue2&quot; : &quot;/&quot;,</span><br><span class="line">  routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当使用<code>vue-router v4.x</code>时，是通过<code>createRouter</code>的方式实例化<code>router</code>，设置<code>histroy</code>和<code>base</code>通过如下方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1. Hash路由设置方法，hash不需要设置base</span><br><span class="line">history: createWebHashHistory(), </span><br><span class="line"></span><br><span class="line">// 2. 设置 History 路由时必须添加base</span><br><span class="line">// history: createWebHistory(qiankunWindow.__POWERED_BY_QIANKUN__ ? &#x27;/micro-app-vue3-vite&#x27; : &#x27;/&#x27;),</span><br></pre></td></tr></table></figure>
+
+<p>当微应用为<code>History</code>时，主应用的<code>router/index.js</code>中必须多添加一项路由配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// ...</span><br><span class="line">&#123;</span><br><span class="line">    hidden: true,</span><br><span class="line">    name: &#x27;microAppVue2&#x27;,</span><br><span class="line">    // 匹配微应用的路由</span><br><span class="line">    path: &#x27;/micro-app-vue2/*&#x27;,</span><br><span class="line">    component: () =&gt; import(&#x27;@/views/microAppVue2/index.vue&#x27;)</span><br><span class="line">&#125;,</span><br><span class="line">// ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-入口文件修改"><a href="#4-入口文件修改" class="headerlink" title="4.入口文件修改"></a>4.入口文件修改</h2><p>修改入口文件<code>main.js</code>，修改内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 1. 顶部引入public-path</span><br><span class="line">import &#x27;./public-path&#x27;</span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import App from &#x27;./App&#x27;</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line"></span><br><span class="line">// 2. 定义一个Vue实例</span><br><span class="line">let instance = null</span><br><span class="line"></span><br><span class="line">// 3. 渲染方法</span><br><span class="line">function render(props = &#123;&#125;) &#123;</span><br><span class="line">  const &#123; container &#125; = props</span><br><span class="line">  instance = new Vue(&#123;</span><br><span class="line">    router,</span><br><span class="line">    render: (h) =&gt; h(App)</span><br><span class="line">  &#125;).$mount(container ? container.querySelector(&#x27;#app&#x27;) : &#x27;#app&#x27;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 4. 判断是否在qiankun环境下，非qiankun环境下独立运行</span><br><span class="line">if (!window.__POWERED_BY_QIANKUN__) &#123;</span><br><span class="line">  render()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 5. 暴露qiankun生命周期钩子</span><br><span class="line">export async function bootstrap() &#123;&#125;</span><br><span class="line">export async function mount(props) &#123;</span><br><span class="line">  render(props);</span><br><span class="line">&#125;</span><br><span class="line">export async function unmount() &#123;</span><br><span class="line">  instance.$destroy();</span><br><span class="line">  instance.$el.innerHTML = &#x27;&#x27;;</span><br><span class="line">  instance = null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>项目在迁移成子应用时，需要在入口文件配合<code>qiankun</code>来做一些改动，而这些改动有可能影响子应用的独立运行。为了解决子应用也能独立运行的问题，<code>qiankun</code>注入了一个变量：<code>window.__POWERED_BY_QIANKUN__</code>，这样就可以判断当前应用是否在独立运行。</p>
+<p>但是变量需要在运行时动态的注入，那么该变量设置的位置就需要考虑清楚，<code>qiankun</code>选择在<code>single-spa</code>提供的生命周期前进行变量的注入，在<code>beforeLoad</code>和<code>beforeMount</code>中把变量置为<code>true</code>，在<code>beforeUnmount</code>中把变量置为<code>false</code>。</p>
+<p>和<code>single-spa</code>一样，<code>qiankun</code>子应用的接入必须暴露三个生命周期：</p>
+<p>（1）Bootstrap：只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。</p>
+<p>（2）Mount：应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法。</p>
+<p>（3）Unmount：应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例。</p>
+<br />
+
+<h1 id="主应用和微应用通信"><a href="#主应用和微应用通信" class="headerlink" title="主应用和微应用通信"></a>主应用和微应用通信</h1><h2 id="1-主应用中注册全局状态"><a href="#1-主应用中注册全局状态" class="headerlink" title="1.主应用中注册全局状态"></a>1.主应用中注册全局状态</h2><p>在入口文件<code>main.js</code>中定义并监听全局状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import &#123; initGlobalState &#125; from &#x27;qiankun&#x27;</span><br><span class="line"></span><br><span class="line">// 定义全局状态，并返回通信方法，建议在主应用使用，微应用通过 props 获取通信方法</span><br><span class="line">const &#123; onGlobalStateChange, setGlobalState &#125; = initGlobalState(&#123;</span><br><span class="line">  user: &#x27;qiankun&#x27;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 在当前应用监听全局状态，有变更触发 callback</span><br><span class="line">onGlobalStateChange((value, prev) =&gt; console.log(&#x27;[onGlobalStateChange - main]:&#x27;, value + prev))</span><br><span class="line"></span><br><span class="line">// 按一级属性设置全局状态,微应用中只能修改已存在的一级属性</span><br><span class="line">setGlobalState(&#123;</span><br><span class="line">  ignore: &#x27;master&#x27;,</span><br><span class="line">  user: &#123;</span><br><span class="line">    name: &#x27;master&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-微应用中监听并修改"><a href="#2-微应用中监听并修改" class="headerlink" title="2.微应用中监听并修改"></a>2.微应用中监听并修改</h2><p>在入口文件<code>main.js</code>中添加如下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 微应用通过 props 获取通信方法</span><br><span class="line">function storeTest(props) &#123;</span><br><span class="line">  props.onGlobalStateChange &amp;&amp;</span><br><span class="line">    props.onGlobalStateChange(</span><br><span class="line">      (value, prev) =&gt; console.log(`[onGlobalStateChange - $&#123;props.name&#125;]:`, value, prev),</span><br><span class="line">      true,</span><br><span class="line">    );</span><br><span class="line">  props.setGlobalState &amp;&amp;</span><br><span class="line">    props.setGlobalState(&#123;</span><br><span class="line">      ignore: props.name,</span><br><span class="line">      user: &#123;</span><br><span class="line">        name: props.name,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export async function mount(props) &#123;</span><br><span class="line">  storeTest(props);</span><br><span class="line">  // 挂载到子应用，方便使用</span><br><span class="line">  instance.config.globalProperties.$onGlobalStateChange = props.onGlobalStateChange;</span><br><span class="line">  instance.config.globalProperties.$setGlobalState = props.setGlobalState;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上通信过程如下：</p>
+<p>（1）主应用里面先<code>initGlobalState</code></p>
+<p>（2）主应用监听<code>onGlobalStateChange</code></p>
+<p>（3）主应用去修改<code>setGlobalState</code></p>
+<p> &emsp;&emsp;（3.1）主应用监听到并执行回调</p>
+<p>​    &emsp;&emsp;（3.2）子应用监听到并执行回调</p>
+<p>（4）子应用监听<code>onGlobalStateChange</code></p>
+<p>（5）子应用去修改<code>setGlobalState</code></p>
+<p>​    &emsp;&emsp;（5.1）主应用监听到并执行回调</p>
+<p>​    &emsp;&emsp;（5.2）子应用监听到并执行回调</p>
+<br />
+
+<h1 id="qiankun-功能拓展"><a href="#qiankun-功能拓展" class="headerlink" title="qiankun 功能拓展"></a>qiankun 功能拓展</h1><h2 id="1-如何封装主应用和微应用中的共同的组件"><a href="#1-如何封装主应用和微应用中的共同的组件" class="headerlink" title="1.如何封装主应用和微应用中的共同的组件"></a>1.如何封装主应用和微应用中的共同的组件</h2><p>在微前端架构中，主应用和子应用可能会共享一些组件，为了实现组件的共享和封装，可以采用以下方法：</p>
+<p>（1）封装为独立的 npm 包：将共享的组件封装为独立的 npm 包，并发布到私有或公共的 npm 仓库中。主应用和子应用都可以通过 npm 安装该组件，并在需要的地方引入和使用。</p>
+<p>（2）Git 仓库依赖：将共享组件放置在一个独立的 Git 仓库中，并通过 Git 仓库的依赖关系来引入组件。主应用和子应用可以通过 Git 仓库的 URL 或路径来引入共享组件。</p>
+<p>（3）Git Submodule：如果主应用和子应用都在同一个 Git 仓库下，可以使用 <code>Git Submodule</code> 的方式来引入共享组件。将共享组件作为子模块添加到主应用和子应用的仓库中。</p>
+<p>（4）本地引用：如果主应用和子应用处于同一个代码仓库中，可以直接通过相对路径引入共享组件。将共享组件放置在一个独立的目录下，并通过相对路径引用。</p>
+<p>（5）将公共依赖打包为umd格式，并在qiankun的global对象上注册，使得其他子应用可以通过global对象来访问公共依赖。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1. 在主应用中注册公共依赖</span><br><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import ReactDOM from &#x27;react-dom&#x27;;</span><br><span class="line">import MyComponent from &#x27;my-component&#x27;;</span><br><span class="line"></span><br><span class="line">window.MyComponent = MyComponent;</span><br><span class="line"></span><br><span class="line">// 2. 在子应用中使用公共依赖</span><br><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import ReactDOM from &#x27;react-dom&#x27;;</span><br><span class="line">import &#123; useEffect &#125; from &#x27;react&#x27;;</span><br><span class="line"></span><br><span class="line">const &#123; MyComponent &#125; = window;</span><br></pre></td></tr></table></figure>
+
+<p>无论选择哪种方式，关键是要保持共享组件的独立性和可维护性。确保共享组件的代码和样式与具体的主应用和子应用解耦，避免出现冲突和依赖混乱的情况。同时，建议对共享组件进行版本管理，以便在更新和维护时能够更好地控制和追踪变更。</p>
+<p>在微前端架构中，可以通过合适的方式引入共享组件，使主应用和子应用可以共享和复用组件，提高开发效率和代码质量。</p>
+<h2 id="2-子应用调用其他子应用组件"><a href="#2-子应用调用其他子应用组件" class="headerlink" title="2.子应用调用其他子应用组件"></a>2.子应用调用其他子应用组件</h2><h3 id="（1）vue子应用调用React子应用中的组件"><a href="#（1）vue子应用调用React子应用中的组件" class="headerlink" title="（1）vue子应用调用React子应用中的组件"></a>（1）vue子应用调用React子应用中的组件</h3><p>可以先在主应用中通过 <code>registerMicroApps</code> 方法注册好所有的子应用，并在主应用中管理子应用之间的通信。然后，可以在需要使用其他子应用组件的子应用中通过 <code>loadMicroApp</code> 方法异步加载对应的子应用并获取到对应子应用的实例，从而使用其提供的组件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import &#123; loadMicroApp &#125; from &#x27;qiankun&#x27;;</span><br><span class="line"></span><br><span class="line">const loadReactApp = () =&gt; loadMicroApp(&#123;</span><br><span class="line">    name: &#x27;reactApp&#x27;,</span><br><span class="line">    entry: &#x27;//localhost:8082&#x27;,</span><br><span class="line">    container: &#x27;#react&#x27;,</span><br><span class="line">    activeRule: &#x27;/react&#x27;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 在需要使用 ReactApp 中的组件的 VueApp 组件中异步加载 ReactApp，并使用其提供的组件</span><br><span class="line">const VueApp = &#123;</span><br><span class="line">  template: `</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;VueApp&lt;/h1&gt;</span><br><span class="line">      &lt;react-component /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  `,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    // 异步加载ReactApp并获取其实例，然后通过getComponent方法获取到了ReactApp中提供的ReactComponent组件，并将其转换为Vue组件供VueApp使用</span><br><span class="line">    loadReactApp().then(app =&gt; &#123;</span><br><span class="line">      const ReactComponent = app.getComponent(&#x27;ReactComponent&#x27;);</span><br><span class="line">      Vue.component(&#x27;react-component&#x27;, &#123;</span><br><span class="line">        template: `&lt;div&gt;&lt;ReactComponent /&gt;&lt;/div&gt;`,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）React子应用中调用Vue子应用的组件"><a href="#（2）React子应用中调用Vue子应用的组件" class="headerlink" title="（2）React子应用中调用Vue子应用的组件"></a>（2）React子应用中调用Vue子应用的组件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">import &#123; loadMicroApp, getGlobalState &#125; from &#x27;qiankun&#x27;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">  const [vueComponent, setVueComponent] = useState(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    // React子应用中，加载Vue子应用并获取其组件</span><br><span class="line">    const vueApp = loadMicroApp(&#123;</span><br><span class="line">      name: &#x27;vue3&#x27;,</span><br><span class="line">      entry: &#x27;//localhost:8081&#x27;,</span><br><span class="line">      container: &#x27;#vue3&#x27;,</span><br><span class="line">      activeRule: &#x27;/vue3&#x27;,</span><br><span class="line">      props: &#123; name: &#x27;vue-app&#x27; &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    vueApp.onGlobalStateChange((state, prev) =&gt; &#123;</span><br><span class="line">      console.log(&#x27;[React] Vue global state changed: &#x27;, state);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    vueApp</span><br><span class="line">      .loadPromise.then(() =&gt; &#123;</span><br><span class="line">        const vueInstance = vueApp.bootstrap();</span><br><span class="line">        setVueComponent(vueInstance.$children[0]);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    return () =&gt; vueApp.unmount();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;React App&lt;/h1&gt;</span><br><span class="line">      &lt;hr /&gt;</span><br><span class="line">      &lt;h2&gt;Vue App Component:&lt;/h2&gt;</span><br><span class="line">      &#123;vueComponent &amp;&amp; (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">          &lt;p&gt;&#123;vueComponent.message&#125;&lt;/p&gt;</span><br><span class="line">          &lt;button onClick=&#123;() =&gt; vueComponent.handleClick()&#125;&gt;Click me!&lt;/button&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      )&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）传递参数"><a href="#（3）传递参数" class="headerlink" title="（3）传递参数"></a>（3）传递参数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import &#123; render, hydrate &#125; from &#x27;react-dom&#x27;;</span><br><span class="line">import &#123; registerMicroApps, start &#125; from &#x27;qiankun&#x27;;</span><br><span class="line">import App from &#x27;./App&#x27;;</span><br><span class="line"></span><br><span class="line">// 注册子应用</span><br><span class="line">registerMicroApps([...]);</span><br><span class="line"></span><br><span class="line">// 启动 qiankun</span><br><span class="line">start();</span><br><span class="line"></span><br><span class="line">// 在 App 组件中调用其他子应用的组件</span><br><span class="line">function App() &#123;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &#123;/* 调用 Vue 子应用的组件 */&#125;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &#123;/* 在调用时，可以将需要传递的参数放在props对象中，然后作为第二个参数传递给render方法 */&#125;</span><br><span class="line">        &#123;render(&#x27;vue3&#x27;, &#123; name: &#x27;Tom&#x27; &#125;, &#123; container: &#x27;#vue-container&#x27; &#125;)&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 渲染根组件</span><br><span class="line">hydrate(&lt;App /&gt;, document.getElementById(&#x27;root&#x27;));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h2&gt;Vue Component&lt;/h2&gt;</span><br><span class="line">        &lt;p&gt;Hello, &#123;&#123; name &#125;&#125;!&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &#x27;VueComponent&#x27;,</span><br><span class="line">    // 直接使用</span><br><span class="line">    props: &#123;</span><br><span class="line">        name: &#123;</span><br><span class="line">            type: String,</span><br><span class="line">            required: true,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-CSS-沙箱"><a href="#3-CSS-沙箱" class="headerlink" title="3.      CSS 沙箱"></a>3.      CSS 沙箱</h2><p>css隔离主要分为两种，一种是父子之间的隔离，另一种是子子之间的隔离。子应用之间的隔离，qiankun中并没有特别的提出，本质上就是在子应用加载时把其相应的样式加载进来，在卸载时进行移除即可。而父子之间的隔离在qiankun种有两种实现方法。</p>
+<h3 id="（1）strictStyleIsolation-Shadow-DOM"><a href="#（1）strictStyleIsolation-Shadow-DOM" class="headerlink" title="（1）strictStyleIsolation: Shadow DOM"></a>（1）<code>strictStyleIsolation: Shadow DOM</code></h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251853360.png"></p>
+<p>第一种是严格样式隔离，核心是<code>Shadow DOM</code>。它可以让一个<code>dom</code>拥有自己的“影子”DOM树，这个DOM树不能在主文档中被任意访问，可以拥有局部样式规则，天然实现了样式隔离，如上图所示，被代理的dom节点称为<code>shadow host</code>，<code>shadow tree</code>中的根节点称为<code>shadow root</code>。</p>
+<p>比如我们常用的<code>&lt;video&gt;</code>标签，一个标签就实现了一个简易的播放器，但其实它是由一些看不到的dom封装而成的，这里就是使用了<code>shadow DOM</code>。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251858049.png"></p>
+<p>现在先来模拟一下父子的样式污染问题，在下面的demo中子应用的样式设置成所有字体颜色为红色，使得父元素和子元素所有的文字都为红色。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h5&gt;父元素&lt;/h5&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id=&quot;app1&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">    *&#123;</span><br><span class="line">        color:red;</span><br><span class="line">     &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;h5&gt;子元素&lt;/h5&gt;</span><br><span class="line">    &lt;p class=&quot;title&quot;&gt;一行文字&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用严格样式隔离解决一下这个问题：获取到子应用的根节点，然后打开影子模式，把原来的dom结构赋值到代理的影子根节点中，然后清空原来的dom结构。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function openShadow(domNode) &#123;</span><br><span class="line">    var shadow = domNode.attachShadow(&#123; mode: &quot;open&quot; &#125;);</span><br><span class="line">    shadow.innerHTML = domNode.innerHTML;</span><br><span class="line">    domNode.innerHTML = &quot;&quot;;</span><br><span class="line">&#125;</span><br><span class="line">var bodyNode = document.getElementById(&quot;app1&quot;);</span><br><span class="line">openShadow(bodyNode);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251915695.png"></p>
+<h3 id="（2）experimentalStyleIsolation"><a href="#（2）experimentalStyleIsolation" class="headerlink" title="（2）experimentalStyleIsolation"></a>（2）<code>experimentalStyleIsolation</code></h3><p>第二种父子样式隔离是实验性样式隔离 ，即通过运行时修改CSS选择器来实现子应用间的样式隔离。</p>
+<p>下面也是一个模拟污染的demo，可以看到主应用和子应用有重名的选择器，子应用在后面，所以父样式被覆盖，造成了污染。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        p.title &#123;</span><br><span class="line">            color:red;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;p class=&quot;title&quot;&gt;父应用&lt;/p&gt;</span><br><span class="line">&lt;div id=&quot;data-qiankun-A&quot;&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        p.title &#123;</span><br><span class="line">            color:blue;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">    &lt;p class=&quot;title&quot;&gt;子应用&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里首先获取到子应用，然后通过正则匹配其中的所有<code>&lt;style&gt;</code>标签，给每一个标签加上前缀，从而缩小其样式应用的范围。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function scopeCss(styleNode, prefix) &#123;</span><br><span class="line">  const css = ruleStyle(styleNode.sheet.cssRules[0], prefix);</span><br><span class="line">  styleNode.textContent = css;</span><br><span class="line">&#125;</span><br><span class="line">function ruleStyle(rule, prefix) &#123;</span><br><span class="line">  const rootSelectorRE = /((?:[^\w\-.#]|^)(body|html|:root))/gm;</span><br><span class="line">  let &#123; cssText &#125; = rule;</span><br><span class="line">  // 绑定选择器, a,span,p,div &#123; ... &#125;</span><br><span class="line">  cssText = cssText.replace(/^[\s\S]+&#123;/, (selectors) =&gt;</span><br><span class="line">    selectors.replace(/(^|,\n?)([^,]+)/g, (item, p, s) =&gt; &#123;</span><br><span class="line">      // 绑定 div,body,span &#123; ... &#125;</span><br><span class="line">      if (rootSelectorRE.test(item)) &#123;</span><br><span class="line">        return item.replace(rootSelectorRE, (m) =&gt; &#123;</span><br><span class="line">          // 不要丢失有效字符 如 body,html or *:not(:root)</span><br><span class="line">          const whitePrevChars = [&quot;,&quot;, &quot;(&quot;];</span><br><span class="line">          if (m &amp; amp;&amp; amp; whitePrevChars.includes(m[0])) &#123;</span><br><span class="line">            return `$&#123;m[0]&#125;$&#123;prefix&#125;`;</span><br><span class="line">          &#125;</span><br><span class="line">          // 用前缀替换根选择器</span><br><span class="line">          return prefix;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    return `$&#123;p&#125;$&#123;prefix&#125; $&#123;s.replace(/^ */, &quot;&quot;)&#125;`;</span><br><span class="line">    &#125;)</span><br><span class="line">  );</span><br><span class="line">  return cssText;</span><br><span class="line">&#125;</span><br><span class="line">var container = document.getElementById(&quot;data-qiankun-A&quot;);</span><br><span class="line">var styleNode = container.getElementsByTagName(&quot;style&quot;)[0];</span><br><span class="line">scopeCss(styleNode, &quot;#data-qiankun-A&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>效果如下图所示，可以看到子应用的<code>&lt;style&gt;</code>标签中的选择器都加上了前缀，使父应用的颜色保持原有的红色，子应用的颜色是新设置的蓝色。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251921345.png"></p>
+<h2 id="4-JS-沙箱"><a href="#4-JS-沙箱" class="headerlink" title="4. JS 沙箱"></a>4. JS 沙箱</h2><p>js隔离是另一个在微前端中需要关注的问题，qiankun中有三种js隔离的做法。</p>
+<h3 id="（1）SnapshotSandbox"><a href="#（1）SnapshotSandbox" class="headerlink" title="（1）SnapshotSandbox"></a>（1）<code>SnapshotSandbox</code></h3><p>第一种是快照沙箱，先来看一下具体demo:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">let sandbox = new SnapshotSandbox();</span><br><span class="line">var a = &#x27;主应用A&#x27;;</span><br><span class="line">var c = &#x27;主应用C&#x27;;</span><br><span class="line">console.log(&#x27;主应用原来的Window:&#x27;, a, c);</span><br><span class="line">function beforeMounted() &#123;</span><br><span class="line">  sandbox.active();</span><br><span class="line">  console.log(&quot;加载子应用前&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function beforeUnMounted() &#123;</span><br><span class="line">  sandbox.inactive();</span><br><span class="line">  console.log(&quot;卸载子应用前&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function app1() &#123;</span><br><span class="line">  beforeMounted();</span><br><span class="line">  window.a = &#x27;app1A&#x27;;//修改</span><br><span class="line">  window.c = null;//删除</span><br><span class="line">  window.d = &#x27;app1D&#x27;;//新增</span><br><span class="line">  console.log(&quot;子应用的Window:&quot;, window.a, window.c, window.d);</span><br><span class="line">  beforeUnMounted();</span><br><span class="line">&#125;</span><br><span class="line">app1();</span><br><span class="line">console.log(&#x27;主应用现在的Window:&#x27;, a, c, d);</span><br></pre></td></tr></table></figure>
+
+<p>主应用中声明两个变量a和c，分别赋值主应用A和主应用C，然后加载子应用之后对全局变量ac进行修改，并且新增d，最后卸载时再打印acd，可以在左图看到主应用的变量被污染了。</p>
+<p>这时候开启沙箱再运行一遍，可以在右图看到主应用被恢复回来了，解决了变量污染的问题。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251923414.png"></p>
+<p>沙箱快照的核心思想如下：在子应用挂在前对当前主应用的全局变量保存，然后恢复之前的子应用环境，在子应用运行期间则正常get和set，在卸载时保存当前变量恢复主应用变量，整个过程类似于中断和中断恢复。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251923066.png"></p>
+<p>具体代码可参考这个demo，但这里也有一个比较明显的缺点就是每次切换时需要去遍历window，这种做法会有较大的时间消耗。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class SnapshotSandbox &#123;</span><br><span class="line">  () &#123;</span><br><span class="line">    this.proxy = window; //window属性</span><br><span class="line">    this.modifyPropsMap = &#123;&#125;; //记录在window上的修改</span><br><span class="line">  &#125;</span><br><span class="line">  active() &#123;//激活</span><br><span class="line">    this.windowSnapshot = &#123;&#125;; //快照</span><br><span class="line">    for (const prop in window) &#123;</span><br><span class="line">      if (window.hasOwnProperty(prop)) &#123;</span><br><span class="line">        this.windowSnapshot[prop] = window[prop]</span><br><span class="line">      &#125;</span><br><span class="line">      Object.keys(this.modifyPropsMap).forEach(p =&gt; &#123;</span><br><span class="line">        window[p] = this.modifyPropsMap[p]</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  inactive() &#123;//卸载</span><br><span class="line">    for (const prop in window) &#123;</span><br><span class="line">      if (window.hasOwnProperty(prop)) &#123;</span><br><span class="line">        if (window[prop] != this.windowSnapshot[prop]) &#123;</span><br><span class="line">          this.modifyPropsMap[prop] = window[prop];</span><br><span class="line">          window[prop] = this.windowSnapshot[prop];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）legacySandBox"><a href="#（2）legacySandBox" class="headerlink" title="（2）legacySandBox"></a>（2）<code>legacySandBox</code></h3><p>第二种则是legacy沙箱，下面的demo比上一个稍微复杂一点。主要是加载了两次子应用，并且每次改变的变量值不同。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">let &#123; sandbox, fakeWindow &#125; = new legacySandBox();</span><br><span class="line">var a = &#x27;主应用A&#x27;;</span><br><span class="line">var c = &#x27;主应用C&#x27;;</span><br><span class="line"></span><br><span class="line">console.log(&#x27;主应用原来的Window:&#x27;, a, c);</span><br><span class="line">function beforeMounted() &#123;</span><br><span class="line">  sandbox.active();</span><br><span class="line">  console.log(&quot;加载子应用前&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function beforeUnMounted() &#123;</span><br><span class="line">  sandbox.inactive();</span><br><span class="line">  console.log(&quot;卸载子应用前&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function app1(win = window) &#123;//这里使用了fakeWindow作为window</span><br><span class="line">  beforeMounted();</span><br><span class="line">  if (win.a === &#x27;app1A&#x27;) &#123;</span><br><span class="line">    win.a = &#x27;app1A-2&#x27;;</span><br><span class="line">    win.c = &#x27;2&#x27;;</span><br><span class="line">    win.d = &#x27;app1D-2&#x27;;</span><br><span class="line">    console.log(&quot;子应用第二次加载Window:&quot;,</span><br><span class="line">      win.a, win.c, win.d);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    win.a = &#x27;app1A&#x27;;//修改</span><br><span class="line">    win.c = null;//删除</span><br><span class="line">    win.d = &#x27;app1D&#x27;;//新增</span><br><span class="line">    console.log(&quot;子应用第一次加载Window:&quot;,</span><br><span class="line">      win.a, win.c, win.d);</span><br><span class="line">  &#125;</span><br><span class="line">  beforeUnMounted();</span><br><span class="line">&#125;</span><br><span class="line">app1(fakeWindow); console.log(&#x27;主应用现在的1Window:&#x27;, a, c, d);</span><br><span class="line">app1(fakeWindow); console.log(&#x27;主应用现在的2Window:&#x27;, a, c, d);</span><br></pre></td></tr></table></figure>
+
+<p>左图显示的是主应用被污染的结果，右图是打开沙箱之后解决污染的结果。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251928129.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251929334.png"></p>
+<p><code>legacy</code>沙箱的主要原理是使用了ES6中的Proxy，把原来的window代理到<code>fakeWindow</code>上，这样就不用遍历整个window去应用和恢复环境了。除此之外，它还在沙箱内部设置了三个变量池：<code>addedPropsMapinSandbox</code>用于存放子应用运行期间新增的全局变量，用于在卸载子应用的时候删除；<code>modifiedPropsOrginalMapInSandbox</code>用于存放子应用运行期间修改的全局变量，用于卸载时进行恢复；<code>currentUpdatedPropsValueMap</code>用于存放子应用运行期间所有变化的变量，这样可以在加载子应用时恢复其上一次的环境。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251929997.png"></p>
+<p>下面是具体实现的沙箱demo：      </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class legacySandBox &#123;</span><br><span class="line">  () &#123;</span><br><span class="line">    this.addedPropsMapInSandbox = new Map();//记录子应用运行期间新增的key</span><br><span class="line">    this.modifiedPropsOriginalValueMapInSandbox = new Map();//记录子应用运行期间修改的key</span><br><span class="line">    this.currentUpdatedPropsValueMap = new Map();//记录子应用运行期间的值</span><br><span class="line">    this.sandboxRunning = false;</span><br><span class="line">    const _this = this;</span><br><span class="line">    const fakeWindow = new Proxy(window, &#123;</span><br><span class="line">      set(_, p, value) &#123;</span><br><span class="line">        if (_this.sandboxRunning) &#123;</span><br><span class="line">          if (!window.hasOwnProperty(p)) &#123;</span><br><span class="line">            _this.addedPropsMapInSandbox.set(p, value);</span><br><span class="line">          &#125; else if (!_this.modifiedPropsOriginalValueMapInSandbox.has(p)) &#123;</span><br><span class="line">            const originalValue = window[p];</span><br><span class="line">            _this.modifiedPropsOriginalValueMapInSandbox.set(p, originalValue);</span><br><span class="line">          &#125;</span><br><span class="line">          _this.currentUpdatedPropsValueMap.set(p, value);</span><br><span class="line">          window[p] = value;</span><br><span class="line">          return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">      &#125;,</span><br><span class="line">      get(_, p) &#123;</span><br><span class="line">        if (p === &quot;top&quot; || p === &quot;window&quot; || p === &quot;self&quot;) &#123;</span><br><span class="line">          return proxy;</span><br><span class="line">        &#125;</span><br><span class="line">        return window[p];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    return &#123; sandbox: this, fakeWindow &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  active() &#123;//激活</span><br><span class="line">    if (!this.sandboxRunning) &#123;</span><br><span class="line">      this.currentUpdatedPropsValueMap.forEach((v, p) =&gt; this.setWindowProp(p, v));</span><br><span class="line">    &#125;</span><br><span class="line">    this.sandboxRunning = true;</span><br><span class="line">  &#125;</span><br><span class="line">  inactive() &#123;//卸载</span><br><span class="line">    this.modifiedPropsOriginalValueMapInSandbox.forEach((v, p) =&gt; this.setWindowProp(p, v));</span><br><span class="line">    this.addedPropsMapInSandbox.forEach((v, p) =&gt; this.setWindowProp(p, undefined, true));</span><br><span class="line">    this.sandboxRunning = false;</span><br><span class="line">  &#125;</span><br><span class="line">  setWindowProp(p, v) &#123;</span><br><span class="line">    window[p] = v;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）ProxySandbox"><a href="#（3）ProxySandbox" class="headerlink" title="（3）ProxySandbox"></a>（3）<code>ProxySandbox</code></h3><p>第二种沙箱的实现对于单例模式来说已经比较完善了，但是不适用于多例模式，即同时有多个子应用在运行期间的时候，qiankun针对这个问题提出来<code>proxySandbox</code>。</p>
+<p><code>proxySandbox</code>依然是使用proxy代理window，但不同的是对于每个子应用都代理了一个<code>fakeWindow</code>，这样在查找变量的时候在本地的<code>fakeWindow</code>上查找，如果没有找到就到主应用的window上查找，而修改时只修改本地的<code>fakeWindow</code>，不会影响到其他的应用，在最终卸载时把<code>fakeWindow</code>删除即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251930626.png"></p>
+<h2 id="5-其他功能"><a href="#5-其他功能" class="headerlink" title="5.其他功能"></a>5.其他功能</h2><p>其他功能比如“旧项目路由接入改造”、“微应用和路由之间如何<code>Keep alive</code>”、“<code>webStorage</code>应用之间的使用”、“资源共享”、“微应用内存溢出问题”、“同一路由多应用共存”等功能见<a target="_blank" rel="noopener" href="https://juejin.cn/post/7069566144750813197#heading-46">《万字长文-落地微前端 qiankun 理论与实践指北》</a></p>
+<br />
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="1-qiankun官方统计的常见问题"><a href="#1-qiankun官方统计的常见问题" class="headerlink" title="1.qiankun官方统计的常见问题"></a>1.qiankun官方统计的常见问题</h2><p><a target="_blank" rel="noopener" href="https://qiankun.umijs.org/zh/faq">官方问题汇总</a></p>
+<h2 id="2-子应用静态资源加载失败问题"><a href="#2-子应用静态资源加载失败问题" class="headerlink" title="2.子应用静态资源加载失败问题"></a>2.子应用静态资源加载失败问题</h2><p>说明：子应用的静态资源引用时都是相对路径，当子应用放入到基座中后，通过主应用url访问时，静态资源的请求域名默认会使用主应用的，所以导致静态资源全部加载失败。</p>
+<p>常规情况可以通过以下前两点解决这个问题：</p>
+<p>（1）使用 <code>webpack</code> 运行时 <code>publicPath</code>配置<code>qiankun</code> 将会在微应用 <code>bootstrap</code> 之前注入一个运行时的 <code>publicPath</code> 变量，你需要做的是在微应用的 <code>entry js</code> 的顶部添加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;</span><br></pre></td></tr></table></figure>
+
+<p>关于运行时 <code>publicPath</code> 的技术细节，可以参考 <code>webpack</code> 文档。</p>
+<p><code>runtime publicPath</code> 主要解决的是微应用动态载入的 脚本、样式、图片 等地址不正确的问题。</p>
+<p>（2）使用 <code>webpack</code> 静态 <code>publicPath</code>配置 你需要将你的 <code>webpack publicPath</code> 配置设置成一个绝对地址的 url，比如在开发环境可能是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  output: &#123;</span><br><span class="line">    publicPath: `//localhost:$&#123;port&#125;`,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）对于vite构建的子应用，上述两种方法可能失效，可尝试如下设置origin方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export default defineConfig(&#123;</span><br><span class="line">  // ...</span><br><span class="line">  server: &#123;</span><br><span class="line">    host: &#x27;localhost&#x27;,</span><br><span class="line">    port: 5174,</span><br><span class="line">    origin: &#x27;http://localhost:5174&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-解决切换路由时报错"><a href="#3-解决切换路由时报错" class="headerlink" title="3.      解决切换路由时报错"></a>3.      解决切换路由时报错</h2><p><code>[Vue Router warn]: Error with push/replace State DOMException: Failed to execute ‘replaceState’ on ‘History’: A history state object with URL ‘http://localhost:8080undefined/’ cannot be created in a document with origin ‘http://localhost:8080’ and URL ‘http://localhost:8080/mypage1/’.</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">  if (!window.history.state.current) window.history.state.current = to.fullPath;</span><br><span class="line">  if (!window.history.state.back) window.history.state.back = from.fullPath;</span><br><span class="line">  // 手动修改history的state</span><br><span class="line">  return next();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-微应用不是直接跟路由关联或是有需要手动触发子应用加载的场景该怎么做？"><a href="#4-微应用不是直接跟路由关联或是有需要手动触发子应用加载的场景该怎么做？" class="headerlink" title="4.微应用不是直接跟路由关联或是有需要手动触发子应用加载的场景该怎么做？"></a>4.微应用不是直接跟路由关联或是有需要手动触发子应用加载的场景该怎么做？</h2><p>这时候qiankun提供了一个 <code>loadMicroApp</code> 的方法进行子应用的手动加载，本质上是利用<code>single-spa</code>的<code>mountRootParcel api</code>来实现的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &#123; loadMicroApp &#125; from &#x27;qiankun&#x27;;</span><br><span class="line">loadMicroApp(</span><br><span class="line">&#123;</span><br><span class="line">    name: &#x27;app&#x27;,</span><br><span class="line">    entry: &#x27;//localhost:7100&#x27;,</span><br><span class="line">    container: &#x27;#Container&#x27;,</span><br><span class="line">&#125; );</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>loadMircoApp</code>还需要在子应用中暴露<code>update</code>钩子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 增加 update 钩子以便主应用手动更新微应用</span><br><span class="line">export async function update(props) &#123;</span><br><span class="line">    renderPatch(props);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-CSS-样式污染问题"><a href="#5-CSS-样式污染问题" class="headerlink" title="5.CSS 样式污染问题"></a>5.CSS 样式污染问题</h2><p>在微应用为vite时，样式问题是重灾区。由于没有沙箱，样式也不能进行隔离，由于前文提到的css加载的方式都是全局在主应用上生效的，所以全局上css互相影响的概率就很大，并且子应用使用的和主应用使用的组件库都是Element 或 Ant Design系列的，一些类名都是一致，这种情况下如果还按照之前的开发习惯直接控制组件对应的类名样式，大概率会出现互相层叠污染的情况，这时就需要一些开发规范和工程化的手段来设置样式。</p>
+<p>以下以Ant Design为例，说明如何引入prefix来解决样式冲突问题，当然<code>ElementPlus</code>中也支持设置 <code>prefix</code>：</p>
+<p>（1）<code>Ant Design</code>修改<code>prefix</code></p>
+<p>从工程化的角度可以解决多个<code>ant design</code>组件库同时使用的样式污染问题，qiankun官方也有提供该解决方案，就是通过<code>ant-desigtn</code>注入<code>prefix</code>，拿<code>ant-desigin-vue</code>来说：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;a-config-provider prefix-cls=&quot;custom&quot;&gt;</span><br><span class="line">    &lt;my-app /&gt;</span><br><span class="line">  &lt;/a-config-provider&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样实际使用的ant的类名都是以<code>.custom-xxx</code>的类名了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251937737.png"></p>
+<p>上图所见这样实现的自定义类名可以做到多份ant的css引入类名重复的问题。</p>
+<p>当然如果自定义类名的话可以在less构建时注入相同的<code>prefix</code>，让全局的less存在相同的一个前缀变量，实际修改<code>.ant-xxx</code>类似的类名时需要替换<code>.ant</code>为相应的注入的<code>prefix</code>变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// vite.config.js</span><br><span class="line">export default () =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">      css: &#123;</span><br><span class="line">      preprocessorOptions: &#123;</span><br><span class="line">        less: &#123;</span><br><span class="line">          modifyVars: &#123;</span><br><span class="line">            // 这里可以注入全局的less变量，通过注入的变量名称去实际业务样式修改的地方拼接prefix变量</span><br><span class="line">            &#x27;ant-prefix&#x27;: &#x27;custom&#x27;, // 这里注入的prefix如上文提到&lt;a-config-provider prefix-cls=&quot;custom&quot;&gt; 需要一致，以便一致</span><br><span class="line">          &#125;,</span><br><span class="line">          javascriptEnabled: true,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的<code>vite</code>配置注入的<code>ant-prefix</code>这样可以在实际的样式中拼接使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.@&#123;ant-prefix&#125; &#123;</span><br><span class="line">  .@&#123;ant-prefix&#125;-col &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样构建出来的样式修改也是<code>.custom-xxx</code>的类名，可以达到修改自己的ant组件样式还不影响其他ant的项目UI。</p>
+<p>（2）手动隔离子应用的样式</p>
+<p>上文的方式解决了UI框架级别的css污染，同时我们自己的全局样式配置也会有一些css样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">input:-webkit-autofill &#123;</span><br><span class="line">  -webkit-box-shadow: 0 0 0 1000px white inset !important;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">:-webkit-autofill &#123;</span><br><span class="line">  transition: background-color 5000s ease-in-out 0s !important;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a:focus,</span><br><span class="line">a:active,</span><br><span class="line">button,</span><br><span class="line">div,</span><br><span class="line">svg,</span><br><span class="line">span,</span><br><span class="line">label &#123;</span><br><span class="line">  outline: none !important;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a &#123;</span><br><span class="line">  color: #51ffff !important;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种情况需要我们手动进行隔离，我们可以在挂载的根节点元素上设置<code>vite</code>注入的<code>less</code>变量<code>ant-prefix</code>相同的类名，然后如下配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.@&#123;ant-prefix&#125; &#123;</span><br><span class="line">  input:-webkit-autofill &#123;</span><br><span class="line">    -webkit-box-shadow: 0 0 0 1000px white inset !important;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  :-webkit-autofill &#123;</span><br><span class="line">    transition: background-color 5000s ease-in-out 0s !important;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  a:focus,</span><br><span class="line">  a:active,</span><br><span class="line">  button,</span><br><span class="line">  div,</span><br><span class="line">  svg,</span><br><span class="line">  span,</span><br><span class="line">  label &#123;</span><br><span class="line">    outline: none !important;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  a &#123;</span><br><span class="line">    color: #51ffff !important;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过如上的包裹实现手动样式隔离，子应用设置的全局样式只作用于自己，不会影响到其他的项目。</p>
+<h2 id="6-CSS样式没被插入到页面中去"><a href="#6-CSS样式没被插入到页面中去" class="headerlink" title="6.CSS样式没被插入到页面中去"></a>6.CSS样式没被插入到页面中去</h2><p>qiankun的一个<a href="https://link.juejin.cn/?target=https://github.com/umijs/qiankun/issues/264">bug</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251939061.png"></p>
+<p>如上图qiankun的issue中确实有跟我遇到一样的问题，这个问题原因可能是qiankun的问题，也可能是qiankun主应用配置的问题，但是我作为第三方接入并没有权限去调整对方的主应用配置，只能自己排查去从子应用去解决。</p>
+<p>这个问题大概是我构建完的HTML Entry中样式是通过link标签引入的，同时还有一些我的第三方直接引入的css：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;link rel=&quot;styleSheet&quot; href=&quot;/resouce/assets/xxx.css&quot; /&gt;</span><br><span class="line">  &lt;link rel=&quot;styleSheet&quot; href=&quot;/resouce/assets/vonder.xxxx.css&quot; /&gt;</span><br><span class="line">  &lt;link rel=&quot;styleSheet&quot; href=&quot;/resouce/assets/index.xxxx.css&quot; /&gt;</span><br><span class="line">&lt;/head&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上文介绍的这种情况通过<code>import-html-entry</code>解析会通过fetch请求回来，但是奇怪的是并不会插入到主应用中，fetch的类型也不是styleSheet，这样虽然资源请求回来了但是css样式并不会生效，通过排查发现如果是通过javascript动态插入的link,主应用则会正确插入css使样式生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">   var i = document.createElement(&#x27;link&#x27;);</span><br><span class="line">   i.rel = &#x27;stylesheet&#x27;;</span><br><span class="line">   i.href = ip:port/path/to/css.css;</span><br><span class="line">   document.head.appendChild(i); </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>以上的代码会被解析并正确执行，插入到主应用中，使之生效。</p>
+<p>上面我们发现的一个qiankun加载css的问题，导致入口的css样式并不生效，也找到了方法去解决，开始的想法是在HTML Entry中用javascript脚本来将入口中的link标签转换为动态插入的javascript的代码，但是很遗憾由于打包后的css路径带有hash是动态的不能直接写死创建哪些link标签，动态获取link标签在主应用执行的时候会误伤主应用以及其他的子应用的link标签，所以这样并未达到预期.</p>
+<p>那思路就转换为是否能通过工程化的思维来通过脚本的方式来处理，在生成<code>HTML Entry</code>时将拿到的link动态转换成上文提到代码，同时前文也分析过<code>vite-plugin-qainkun</code>的实现，就想是不是可以通过vite插件的方式来对Index.html生成时做一些文章</p>
+<ul>
+<li><p>可以把link标签对应的css资源转换成style标签</p>
+</li>
+<li><p>可以像上文提到的通过javascript动态插入link把原来的link标签remove掉</p>
+</li>
+</ul>
+<p>最终选择了第二种方式来进行实现，当然这之前还需要一些vite插件编写的<a href="https://link.juejin.cn/?target=https://cn.vitejs.dev/guide/api-plugin.html">基础知识</a>,这里就不再赘述，以后有机会单独写一篇关于这些构建工具插件开发的文章。</p>
+<p>好了，现在通过参考vite-plugin-qiankun和vite插件的基本知识，结合自己的需求确定了我们只需要在插件的transformIndexHtml钩子方法中对Index.html进行脚本开发：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// vite-plugin-css-importtransform.js</span><br><span class="line">import cheerio from &#x27;cheerio&#x27;; // 插件需要安装cheerio来操作html（cheerio的一些api与jquery一致，node爬虫中会比较常用这个库）</span><br><span class="line">export default function cssImportPlugin() &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    name: &#x27;transform-css-import&#x27;,</span><br><span class="line">    transformIndexHtml: (html) =&gt; &#123; // 该钩子函数里面可以拿到构建时的html字符串</span><br><span class="line">      const $ = cheerio.load(html); // 载入然后可以像jquery一样控制html的各个标签了</span><br><span class="line">      const links = $(&#x27;head link[rel=styleSheet]&#x27;); // 拿到link css的标签然后转换</span><br><span class="line">      links.each(function (i, link) &#123;</span><br><span class="line">        $(&#x27;head&#x27;).append(`&lt;script&gt; </span><br><span class="line">          var i$&#123;i&#125; = document.createElement(&#x27;link&#x27;);</span><br><span class="line">          i$&#123;i&#125;.rel = &#x27;stylesheet&#x27;;</span><br><span class="line">          i$&#123;i&#125;.href = &#x27;$&#123;$(link).attr(&#x27;href&#x27;)&#125;&#x27;;</span><br><span class="line">          document.head.appendChild(i$&#123;i&#125;);</span><br><span class="line">         &lt;/script&gt;`);</span><br><span class="line">      &#125;);</span><br><span class="line">      links.remove(); // 把原有的link删掉</span><br><span class="line">      return $.html(); // 返回html字符串</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的插件逻辑比较简单，当然使用也比较简单，不需要传入什么参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// vite.config.js</span><br><span class="line">import qiankun from &#x27;vite-plugin-qiankun&#x27;;</span><br><span class="line">import cssImportPlugin from &#x27;./vite-plugin-css-import-transform&#x27;;</span><br><span class="line"></span><br><span class="line">export default () =&gt; &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    plugins: [</span><br><span class="line">      qiankun(&#x27;子应用标识&#x27;， &#123;</span><br><span class="line">        // 其他的一些配置</span><br><span class="line">      &#125;),</span><br><span class="line">      cssImportPlugin(), // 引入自定义的vite插件并使用</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过插件构建后的HTMl Entry就变成了这样：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251940053.png"></p>
+<p>至此也解决了实际中<code>HTML Entry</code>引入css样式不生效的问题。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"># 微前端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a38cd327/">你想要的【微前端】都在这里了！</a>
+            
+            
+            <a class="next" rel="next" href="/6e3761bf/">微前端qiankun接入Vite构建的子应用</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a38cd327/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/6e3761bf/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>《茨威格全集》读书笔记 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《茨威格全集》读书笔记</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 11, 2023&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 11, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/">文学与艺术 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="猩红热"><a href="#猩红热" class="headerlink" title="猩红热"></a>猩红热</h2><p>他玩命学习，并非是求什么上进，只是想消耗自己的精力，忘掉那些不得不放弃的东西。他明白，在这股狂热当中隐含了一个奇妙的秘密，许多人正是以此来欺骗自己，掩饰他们自己一生的碌碌无为和生活空虚。贝尔格也想这样赋予自己的生活一个意义，然而他忘了，在青春初期，要的并不是什么生活的意义，而是绚丽多彩的生活。</p>
+<p>… …</p>
+<p>这次经历尽管太短暂，但还是触动了他的内心。他暗自沉思：这种对友情的渴求是不是一个错误，一个秘密的欺骗？在这渴望摆脱孤独、获得亲昵的要求当中，是否有另一种竭力掩饰的需求在骚动？</p>
+<p>他回想起与妹妹共同度过的日子。他记起在那些蓝色的傍晚，妹妹坐在渐黑的花园里，他看不清她的样子，只见暮色中她的白衫微微泛着光，那样轻微，宛如在余晖褪尽的天际尚挂有一丝轻柔的白云。当她圆润清脆的声音轻轻地从黑暗里传来时，那欢快的笑声，脉脉的柔情，优美的乐音如和风般轻拂，小鸟依人，那时他究竟是因何感到幸福呢？难道这的确仅仅是兄妹情谊吗？难道在心灵深处没有潜藏着一种被不含欲念的友情所冷却的对女性的爱吗？难道没有包含对女人的最最温柔甜蜜的体验吗？而他现在默默渴望着的，莫非便是闪耀在他生命中的一道光彩，留在他生命中的女性灵魂的迷途的印迹？</p>
+<p>他抓住贝尔格的胳臂，把他拖走。贝尔格觉得根本无力抵抗，他只是模糊地意识到，施拉梅克对他的控制力有多大。施拉梅克像对付一个小妞一样捉住贝尔格，贝尔格这下第一次真正理解了，一个女人为何定会愿意让这样一个强壮爽朗、充满活力的男子汉来征服，这种屈服完全违背她的意志，却仅仅出于一种模模糊糊的对于身强体壮的赞赏，她降伏了。就像他现在这样想着施拉梅克一样，女人在被征服的那一刻也会这样评价那个男人，女人的心中一定有愤怒、有仇恨，但是还蕴含着另一种柔情，一种希望被强者征服的温柔之情。</p>
+<p>顿时，他明白了自己这一生的方向：他必须积极地生活，做个有用的人，那样，也就不会再有陌生感，不再孤独了。</p>
+<p>什么样的文章是好文章，就是读完以后读者会忍不住卧槽一下的，并且想从头再看一遍。</p>
+<p>他看她的时候越多，相识的日子越长，心里就升起一股极隐蔽、毫无欲求的柔情。这只是一种兄妹间的柔情，只要能抚摸一下她那双细小的手，见到她唇边绽开笑靥，他就感到非常幸福了。</p>
+<h2 id="灼人的秘密"><a href="#灼人的秘密" class="headerlink" title="灼人的秘密"></a>灼人的秘密</h2><p>他有多少东西，有多少丰富多彩的东西要思索啊。近日来在他生活中初次感受到的巨大的痛苦消失得无影无踪，他预感到未来的生活是神秘的，他有点陶醉了。在漆黑的夜里，窗外的树木在窸窣作响，但他不再感到恐惧。自从他知道生活是多么丰富以来，他对它就不再感到焦躁不安。他仿佛觉得今天是头一次看到赤裸裸的现实，这现实不再被童年的千百个谎言所遮蔽，而是呈现出它全部难以想象的、危险的未来。他从来没有想到，多姿多彩的生活中痛苦和欢乐竟然到处可以相互转换。而一想到他面前还有许多这样的时光，生活还深藏不露地等待着他惊喜地去揭开它的面纱时，他就感到快乐。现实生活的绚丽多彩，和对于多姿多彩的现实生活的朦胧预感的突然袭来，使他第一次相信他理解了人的本质，即即使他们彼此充满敌意，他们也都相互需求，被他们所爱又是多么甜蜜啊。</p>
+<p>我住在维也纳。我突然接到一个女人从一个休养胜地寄来的一封信，我跟她已有三年亲密无间的关系，我甚至可以坦率地说：我爱她。她给我写了一封长达十四页的心情激动的信，说她在这几周内在那里认识了一个男人，此人已在很多方面属于她，甚至完全成了她的人，她将在秋天跟他结婚，而我们之间的那种关系必须结束。她回想起跟我一起度过的时光，一点也不后悔，甚至感到幸福，对我的这种思绪将作为她昔日生活中最美好的部分陪她进入她新的婚姻生活里去，她希望我能原谅她的这个突如其来的决定。在通知了这件事之后，这封心情激动的信才开始提出真正感人的恳求，她希望我不要生她的气，不要因为她突然收回承诺而太痛苦，要我别试图用暴力把她拉回去，或者做戕害我自己的蠢事。信里的字行更加激昂地疾驰下去：让我在一个更好的女人那里求得安慰，要我立即给她写信，因为她很惦念我接到这个通知后的情况。作为补充，接着又用铅笔匆匆写道：“别做任何丧失理智的事，你要理解我，原谅我！”我读这封信时，起初还对这消息感到惊奇；看完一遍以后，又读第二遍时，心中不免多少有些羞愧，这羞愧又自然而然地迅速转化为一种内心的惊恐。因为，我的情人认为必然会出现的那种强烈的出自本性的心情，我心里连个影子都没有。得到她的通知，我没有感到痛苦，我也没生她的气，而且压根儿就没想到用暴力方式反对她或摧残我自己。我心里的这种感情冷漠现在变得极为古怪，连我自己都感到惊愕。一个女人曾陪伴我生活了好几年，她温热的身体那么有弹性地紧贴着我的身体，在多少漫漫的长夜里她的呼吸消失在我的呼吸里，现在她背弃了我，我却无动于衷，不去阻止，不设法把她夺回来。这个女人单凭本能设想的一个真正的人理应具有的那种感情，在我心里一点也没有产生。此时此刻，我第一次意识到，我的心灵麻木已经发展到多么严重的地步。</p>
+<h2 id="一个陌生女人的来信"><a href="#一个陌生女人的来信" class="headerlink" title="一个陌生女人的来信"></a>一个陌生女人的来信</h2><p>可是从此刻起，从我感到了那柔和的、脉脉含情的目光以来，我就属于你了。后来不久我就知道，对每个从你身边走过的女人，对每个卖给你东西的女店员，对每个给你开门的侍女，你一概投以你那拥抱式的、具有吸引力的、既脉脉含情又撩人销魂的目光，你那天生的诱惑者的目光。我还知道，在你身上这目光并不是有意识地表示心意和爱慕，而是因为你对女人所表现出的脉脉含情，所以你看她们的时候，不知不觉之中就使你的眼光变得柔和而温暖了。但是我这个十三岁的孩子却对此毫无所感：我心里像团烈火在燃烧。我以为你的柔情只是给我的，只是给我一人的，在这瞬间，我这个尚未成年的丫头的心里，已经感到自己是个女人，而这个女人永远属于你了。</p>
+<p>从这一秒钟起，我就爱上了你。我知道，许多女人对你这个被宠惯了的人常常说这句话。但是我相信，没有一个女人像我这样盲目地、忘我地爱过你，我对你永远忠贞不渝，因为世界上任何东西都比不上孩子暗地里悄悄所怀的爱情，因为这种爱情如此希望渺茫，曲意逢迎，卑躬屈节，低声下气，热情奔放，它与成年妇女那种欲火中烧的、本能地挑逗性的爱情并不一样。只有孤独的孩子才能将他们的全部热情集中起来：其余的人在社交活动中滥用自己的感情，在卿卿我我中把自己的感情消磨殆尽，他们听说过很多关于爱情的事，读过许多关于爱情的书。他们知道，爱情是人们的共同命运。他们玩弄爱情，就像玩弄一个玩具，他们夸耀爱情，就像男孩子夸耀他们抽了第一支香烟。但是我，我没有一个可以向他诉说我的心事的人，没有人开导我，没有人告诫我，我没有人生阅历，什么也不懂：我一下栽进了我的命运之中，就像跌入万丈深渊。</p>
+<p>你就是一切，是我整个生命。人间万物所以存在，只是因为都和你有关系，我生活中的一切，只有和你相连才有意义。你使我整个生活变了个样。原先我在学校里学习并不太认真，成绩也是中等，现在突然成了第一名，我读了上千本书，往往每天读到深夜，因为我知道，你是喜欢书的；突然我以近乎有点顽固的劲头坚持不懈地练起钢琴来了，使我母亲大为惊讶，因为我想，你是喜欢音乐的。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/"># 文学与艺术</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/216a1ae/">十大思想经典</a>
+            
+            
+            <a class="next" rel="next" href="/6f99116b/">《娜拉走后怎样》（鲁迅）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/216a1ae/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/6f99116b/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

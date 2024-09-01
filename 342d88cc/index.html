@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>维持平衡与不平衡 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">维持平衡与不平衡</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 2, 2024&nbsp;&nbsp;23:31:12</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 2, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E4%BA%BA%E9%97%B4%E4%B8%96/">人间世 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>有读者问我，《大江大河3》相比较于《繁花》，是不是更能体现90年代，是不是更能学到点什么？</p>
+<p>我很好奇地问，你要学什么？</p>
+<p>这个读者回答，他要学习企业管理。</p>
+<p>如果你真是为了学到点什么，是为了学习企业管理，那无论是宝总还是宋厂长，都是带着滤镜的。你通过他们，只能欣赏影视剧，不可能学到点什么。</p>
+<p><font color=red>因为传播学的基本概念就是足够简单。任何东西一旦复杂了，需要思考了，就没法传播了。</font></p>
+<br />
+
+<center><font color=red size=5>01</font></center>
+
+<center><font face="黑体"><b>任何时候，人们都不会</b></font></center>
+
+<center><font face="黑体"><b>就当时发生的事情进行深刻地讨论</b></font></center>
+
+<p>前些天有好几个读者留言，说美国之所以无法禁枪的真正原因，是枪支军火集团为了他们的利益。</p>
+<p>这个说法对不对？</p>
+<p>当然是对的。</p>
+<p>但是有没有意义？</p>
+<p>没有。</p>
+<p><font color=red>任何绝对正确的东西，都没有信息含量的。</font></p>
+<p>两个南方人，讨论兰州，说兰州之所以满大街牛肉面，是因为兰州牛肉利益集团的存在。</p>
+<p>这句话对不对？</p>
+<p>太对了，所以我说是废话。</p>
+<p>如果你因为悟到了这么句废话，就以为自己掌握了真理，跑去兰州创业，卖猪肉面，指望自己变成兰州的猪肉利益集团。</p>
+<p>你会亏得连姥姥都不认得。而且破产前还会仰天痛哭，为什么牛肉利益集团能做到的，我猪肉利益集团就不行呢…….</p>
+<p>网民的智慧也是智慧，你能看到美国的枪支利益集团，能看到兰州的牛肉利益集团，恭喜你，你在网民里已经算聪明的了。</p>
+<p>但这种聪明，也就看看电影电视剧行。现实生活中，没啥用的。</p>
+<p>就像咱们读者问两部电视剧哪部能学习？</p>
+<p>哪部也不值得学习。</p>
+<p>因为<font color=red>任何时候，人们都不会就当时发生的事情进行深刻地讨论，这是做不到的。</font></p>
+<p>你不会和你的儿子深刻地剖析自己，不会剖析你的爸爸，不会剖析你的爷爷，不会的。</p>
+<p>你有可能深刻剖析的，是隔壁老王家的爷爷。</p>
+<p>明白我这意思么？</p>
+<p>你的孩子如果要理解深刻的东西，是不可能通过你来做到的，他得通过隔壁老王。</p>
+<p>所以如果你要学企业管理，你不用看这些，这些一定是用来消遣的，你只能去看隔壁老王。</p>
+<p>比如，你可以看看日本的明治维新。</p>
+<br />
+
+<center><font color=red size=5>02</font></center>
+
+<center><font face="黑体"><b>一件事情的过程一定是复杂的</b></font></center>
+
+<center><font face="黑体"><b>绝对不会只是简单一句话概括</b></font></center>
+
+
+
+<p>你不用去看日本的史料或者怎么怎么样，不需要的，你只要看我们作为邻居对日本明治维新的研究，就已经足够深刻了，已经足够你成长了。</p>
+<p>日本的明治维新是说明治天皇要学欧美，然后一个农业国就转成工业国了？可不可能上下齐心这么简单一句话？</p>
+<p><strong style="border-bottom: 1px green dashed;">这种只是讲过程，一个过程的发生，一定是伴随着复杂的利益分配，以及各种团体的兴起。</strong></p>
+<p>明治要维新，第一件事就是动蛋糕，动了谁的蛋糕？动了整个武士阶层，包括各地藩主的蛋糕。</p>
+<p>日本的农民是把粮食上交大名的，大名再分配给武士，于是武士和大名之间有人身依附关系。</p>
+<p>各地的藩主大名和德川幕府之间也有人身依附关系，这是一个社会结构。</p>
+<p>现在要打破过去的社会结构，就意味着藩主大名没有办法直接征收粮食，矿产，同时也意味着武士阶层集体下岗。</p>
+<p>那这显然不是一句话的事情，兰州的牛肉利益集团也不是一句话就兴起了。</p>
+<p>确切地说，是日本州岛西部以及九州岛的那些武士们，集体留洋，考察英美俄德各个国家，最后企图制定一套新的游戏制度。</p>
+<p>那么这套新游戏下，谁说了算？谁留洋谁说了算，谁留洋谁被重新任命为管理层。而过去的传统武士，就会失业。</p>
+<p>所以这是利益冲突，留洋武士和没留洋武士之间的冲突，大家争的是话语权。</p>
+<p>最后的结果是战争，你看到很多漫画，描述明治维新时期武士，浪人斩的内容，这些都是在讲述那个时代的矛盾冲突。</p>
+<p>打完了之后，拥有武器的留洋派控制了日本，整个武士阶层消失，大家被迫转型，要么去经商，成为后来的三井三菱财阀社团，要么去从政，进入文官体系。</p>
+<p>在这个阶段，日本的下层是一无所知的。</p>
+<p>种地的还是种地，他根本不会理解什么维新不维新，他无非当初粮食交给藩主大名，现在藩主大名没有了，粮食直接上缴。</p>
+<p>在这个过程中，日本农民的负担更重了，因为两个需要。</p>
+<p>一个是需要工业化筹措启动资金，无论是留洋武士还是传统武士，他们都不事生产，财富只能取自农民。</p>
+<p>另一个是为工业化筹措劳动力，俗称失地农民，农民失去了土地，自然会转化成工厂的劳动力。</p>
+<p>俗称出钱是你，出力的还是你。</p>
+<p>这两件事都OK了，明治维新才开启马达，然后就是你知道的，日本人开始发动侵略了，无论对大清还是日俄战争。</p>
+<p>俗称明治维新的本质就是先达成一致，然后让农民出钱，农民出力，最后农民亲自当兵，到处打打打。</p>
+<p>这个过程，你通过了解明治维新的过程是可以初步理解创业的，如果你要做总经理的话。</p>
+<br />
+
+<center><font color=red size=5>03</font></center>
+
+<center><font face="黑体"><b>对一件事感兴趣，要找现实的参照物</b></font></center>
+
+<center><font face="黑体"><b>不要靠充满滤镜的电视剧</b></font></center>
+
+<p>你开一家公司，不可能是为了员工如何如何，虽然马云都是这么讲，员工第一，顾客第二，资方第三。</p>
+<p>但实际上真正执行的时候，不是这样的。</p>
+<p>如果你去看繁花，或者看大江大河，你很容易把做生意理解成过家家。</p>
+<p>宝总的朋友很多，女朋友也很多，他人也很仗义，今天帮帮张三，明天帮帮李四，后天张三李四都帮他。</p>
+<p>所谓的商战就是宝总带着一群人，去打对方带着一群人。</p>
+<p>但实际上，你通过了解明治维新也会清楚，日俄战争开打之前，日本自己走过多少路。</p>
+<p><strong style="border-bottom: 1px green dashed;">首先要明确一件事，就是往哪儿走。</strong></p>
+<p><font color=red>我要做什么。</font></p>
+<p>知道自己这家初创公司要做什么比具体怎么做更重要。</p>
+<p>为此日本派出了过半的精英，去各个先发的工业国考察，去研究人家是怎么做的，以及哪部分自己可以抄，哪部分要改良要本土化。</p>
+<p><strong style="border-bottom: 1px green dashed;">那么接下来第二步就是怎么达成一致。</strong></p>
+<p>很多富二代接班失败，被媒体嘲笑成个人能力不足，实际上跟个人能力毛线关系都没有。</p>
+<p>一家公司能够形成，能够运营，它一定是达成了某种平衡的。</p>
+<p>日本存在了那么多年，一定有它的道理，农民交租给藩主大名，藩主大名给武士发工资，这种现存的结构就是平衡。</p>
+<p><font color=red>你要打破这种平衡，就得形成新平衡。</font></p>
+<p><strong style="border-bottom: 1px green dashed;">你动了别人的蛋糕可以，但是你动完蛋糕之后，一定是要达成新的分配方案的。</strong></p>
+<p>李自成为什么注定失败？从第一阶段就注定了。</p>
+<p>闯王来了不纳粮，这就意味着他是一盘散沙。既然不纳粮，那组织结构怎么形成？没有组织结构，你怎么征召兵员呢？都靠个人主观能动性么？</p>
+<p>那么你看我，我看你，都不主动，李自成焉能不败。</p>
+<p>所以明治维新绝对不是说今年你不给武士纳粮了，明天你就吃饱了，你想太美了，没那好事儿。</p>
+<p>创业也是一样的，你永远不可能拿出一个方案大家都满意，资方满意，客户满意，员工满意，这是不可能的。</p>
+<p>你只能拿出一个方案，让大家都误以为自己会是那个被满意的。</p>
+<p>明白不？误以为。</p>
+<p><strong style="border-bottom: 1px green dashed;">误以为，才有积极性，不满意，才有积极性。</strong></p>
+<p>一定要明白这个道理，都对现状满意了，就没有积极性了，公司也就不可能前进了。</p>
+<p><font color=red>人只有对现状不满，又误以为未来会满意，才会有动力。</font></p>
+<p>一个优秀的企业家，一定是理解这个粗浅道理的。</p>
+<p>你才能驾驭着资方，员工，客户，在不平衡的过程中又勉强维持平衡，你需要不平衡来产生动力，你需要平衡来做刹车，开车不能只有油门没有刹车。</p>
+<p>所以我说，如果你对当老板这么感兴趣，随便找点啥做参照物都能明白，无论是隔壁老张还是隔壁老王。</p>
+<p>唯独不要靠电视剧，包括所谓神剧，那些是消遣娱乐的。</p>
+<div style="color:gray;font-size:0.9em">
+    来源:<br>
+    [1] <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/680944228">《繁花》之后《大江大河》也大结局了</a>(逆旅行人)
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%BA%BA%E9%97%B4%E4%B8%96/"># 人间世</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a7b87617/">Oracle数据库下载安装</a>
+            
+            
+            <a class="next" rel="next" href="/c198a4d6/">十分钟教会你如何使用VitePress搭建及部署个人博客站点</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a7b87617/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/c198a4d6/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

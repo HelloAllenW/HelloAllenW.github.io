@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>CSS 从媒体查询到容器查询 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CSS 从媒体查询到容器查询</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2023&nbsp;&nbsp;15:41:02</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在引入响应式设计之前，主要通过提供不同的站点来处理基于屏幕尺寸更改布局的问题。2010 年，Ethan Marcotte 引入了响应式设计的概念。响应式网页设计的理念是设计和开发应根据屏幕尺寸、设备和方向响应用户的行为和环境。这个想法实现的核心就是 <code>CSS 媒体查询</code>，它允许我们根据视口的大小设置各种布局规则。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031543549.png"></p>
+<p>如今，开发人员通常使用基于组件的 JavaScript 框架（如 React、Vue 等）以及 CSS 框架（如 Tailwind CSS、Material UI 和 Bootstrap）来制作响应式和可重用的布局和应用。2022年，一种新的响应式设计方法出现了 – <code>容器查询</code>，容器查询是根据组件的大小或样式而不是设备的视口进行响应式布局。</p>
+<h2 id="一、媒体查询的问题？"><a href="#一、媒体查询的问题？" class="headerlink" title="一、媒体查询的问题？"></a>一、媒体查询的问题？</h2><p>在介绍容器查询之前，先来看看媒体查询的概念。通常网页由不同的组件组成，我们可以通过使用 CSS 媒体查询使它们具有响应性。但是它是有局限性的。例如，可以使用媒体查询在移动设备和桌面设备上显示组件的最小版本。</p>
+<p>通常，响应式网页设计与视口或屏幕尺寸无关，而是与容器的大小有关。来看下面的例子：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031544562.png"></p>
+<p>这里是一个非常经典的带有卡片组件布局，这里有两种显示形式：左侧的堆叠式和右侧的平铺式。</p>
+<p>这在 CSS 中有多种实现方法，最常见的方法如下所示。我们需要创建一个基础组件，然后对其进行媒体查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.c-article &gt; * + * &#123; // 猫头鹰选择器用于选择所有具有前置兄弟元素的元素</span><br><span class="line">  margin-top: 1rem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (min-width: 46rem) &#123;</span><br><span class="line">    /* 右侧平铺部分 */</span><br><span class="line">  .c-article--horizontal &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-wrap: wrap;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .c-article &gt; * + * &#123;</span><br><span class="line">    margin-top: 0;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .c-article__thumb &#123;</span><br><span class="line">    margin-right: 1rem;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建了 .c-article–horizontal 类来处理组件的平铺部分，如果视口宽度大于 46rem，则组件应切换到平铺模式。这确实可以实现预期的效果，但是有局限，我们希望组件根据其父级宽度进行变化，而不是浏览器的视口或屏幕尺寸。</p>
+<p>可以用 CSS 容器查询来实现这个布局。我们需要当右侧区域的父级大于 400px 时切换到平铺模式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;o-grid&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;</span><br><span class="line">      &lt;!-- 内容 --&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;</span><br><span class="line">      &lt;!-- 内容 --&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.o-grid__item &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@container (min-width: 400px) &#123;</span><br><span class="line">  .c-article &#123;</span><br><span class="line">    /* 使文章平铺的样式 */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用容器查询，就可以在将组件放入窄的父组件中，它会变成堆叠版本，将组件放入宽的父组件中，它会变成平铺版本，所有这些都与视口宽度无关。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031546126.png"></p>
+<p>上面的代码只是简单的实现，下面就来看看 CSS 容器查询特性是如何使用的！</p>
+<h2 id="二、什么是容器查询？"><a href="#二、什么是容器查询？" class="headerlink" title="二、什么是容器查询？"></a>二、什么是容器查询？</h2><p>容器是包含另一个元素的元素。因此，简单来说，CSS 容器查询就是指定元素相对于其父容器或元素的更改，而不是整个视口。</p>
+<p>因此，仍然可以使用响应式网格来进行整体页面布局，但该网格中的组件可以通过查询其容器来定义自己的行为变化。然后，它可以根据它是在窄容器还是宽容器中显示来调整其样式。</p>
+<p>容器查询能够以非常精确和可预测的方式定义组件的全部样式，例如：增加或减少padding、更改字体大小、添加或删除背景图片，或者更改子元素的 display 属性和方向。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031547199.png"></p>
+<h2 id="三、如何使用容器查询？"><a href="#三、如何使用容器查询？" class="headerlink" title="三、如何使用容器查询？"></a>三、如何使用容器查询？</h2><p>容器查询中的“容器”就是被查询的元素，但是容器查询中规则仅影响后代元素。容器查询将允许定义这些元素如何在容器大小之间变化的规则。</p>
+<h3 id="1、容器查询语法"><a href="#1、容器查询语法" class="headerlink" title="1、容器查询语法"></a>1、容器查询语法</h3><p>要想设置容器查询，需要给被查询的元素设置 container-type 属性来指定容器的类型。语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container-type: inline-size;</span><br></pre></td></tr></table></figure>
+
+<p>container-type 属性有以下属性值：</p>
+<p>（1）size：创建一个查询容器，支持内联轴和块轴维度上进行查询。</p>
+<p>（2）inline-size：创建一个查询容器，支持在内联轴（文本流方向）维度上进行查询，这是最常用的选项。</p>
+<p>（3）block-size：创建一个查询容器，支持在块轴维度上维度查询。</p>
+<p>（4）style：允许通过定义查询容器进行样式查询。</p>
+<p>（5）state：允许通过定义查询容器进行状态查询。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.card-layout &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@container (min-width: 768px) &#123;</span><br><span class="line">  .card &#123;</span><br><span class="line">    display: grid;</span><br><span class="line">    font-size: 3rem;</span><br><span class="line">    color: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用 container-name 属性为容器指定一个名称，以区分具有唯一名称的容器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.card-layout &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">  container-name: card;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，我们就可以使用 card 为对应容器定义容器查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@container card (min-width: 480px) &#123;</span><br><span class="line">  .card &#123;</span><br><span class="line">    display: grid;</span><br><span class="line">    font-size: 2rem;</span><br><span class="line">    color: gray;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，定义的容器查询样式就不会干扰到其他容器，只会对指定的容器生效。</p>
+<p>我们可以使用 container 来简写 container-type 和 container-name 属性，格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container: card / inline-size;</span><br></pre></td></tr></table></figure>
+
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;main class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;article&gt;...&lt;/article&gt;</span><br><span class="line">  &lt;article&gt;...&lt;/article&gt;</span><br><span class="line">  &lt;article&gt;...&lt;/article&gt;</span><br><span class="line">&lt;/main&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里我们给 main 标签定义了一个 container 类，它将作为容器查询中的容器。接下来，可以设置一个容器查询来更改文章及其任何后代，这些样式将基于 main 的宽度发生改变。使用容器查询会随着容器的增长而改变样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">article &#123;</span><br><span class="line">  padding: 1rem;</span><br><span class="line">  font-size: 1rem;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">    container-type: inline-size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@container (min-width: 60ch) &#123;</span><br><span class="line">  article &#123;</span><br><span class="line">    padding: 2rem;</span><br><span class="line">    font-size: 1.25rem;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的代码很简单，当容器 container 的宽度达到 60ch 时，就增大 padding 和 font-size 的值。</p>
+<p>（1）min-width：当容器的大于或等于指定的宽度时，min-width 定义的样式会生效；</p>
+<p>（2）max-width：当容器的小于或等于指定的宽度时，max-width 定义的样式会生效；</p>
+<p>（3）@container：检测元素的父元素何时更改宽度，并指定每次宽度更改时要在子元素中进行哪些更改。</p>
+<h3 id="2、容器查询长度单位"><a href="#2、容器查询长度单位" class="headerlink" title="2、容器查询长度单位"></a>2、容器查询长度单位</h3><p>除此之外，容器查询还引入了几个专用的长度单位，当使用容器查询将样式应用于容器时，可以使用容器查询长度单位。这些单位指定相对于查询容器尺寸的长度。使用相对于其容器的长度单位的组件可以更灵活地用于不同的容器，而无需重新计算具体的长度值。</p>
+<p>容器查询长度单位包含：</p>
+<p>（1）cqw：查询容器宽度的 1%</p>
+<p>（2）cqh：查询容器高度的 1%</p>
+<p>（3）cqi：查询容器内联大小的 1%</p>
+<p>（4）cqb：查询容器块大小的 1%</p>
+<p>（5）cqmin：cqi 或 cqb 中较小的值</p>
+<p>（6）cqmax：cqi 或 cqb 中较大的值</p>
+<p>下面来看一个例子，根据容器的大小来设置二级标题的字体大小：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@container (min-width: 600px) &#123;</span><br><span class="line">  .card h2 &#123;</span><br><span class="line">    font-size: max(1.5em, 1.2em + 2cqi);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、容器元素选择器规则"><a href="#3、容器元素选择器规则" class="headerlink" title="3、容器元素选择器规则"></a>3、容器元素选择器规则</h3><p>上面我们说过，容器本身是不能在容器查询中设置样式的（除非它是嵌套容器并响应其祖先容器的查询）。但是，容器可以用作其子项的 CSS 选择器的一部分。</p>
+<p>这有什么作用吗？这样的话，就可以保留对可能需要源自容器的 CSS 伪类和选择器的访问，例如 :nth-child。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@container (min-width: 60ch) &#123;</span><br><span class="line">  .container:nth-child(odd) &gt; article &#123;</span><br><span class="line">    border: 1px solid grey;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、举个例子"><a href="#四、举个例子" class="headerlink" title="四、举个例子"></a>四、举个例子</h2><h3 id="1、卡片布局"><a href="#1、卡片布局" class="headerlink" title="1、卡片布局"></a>1、卡片布局</h3><p>下面来看一个卡片布局的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;o-grid&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;&lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;&lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;&lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;o-grid__item&quot;&gt;</span><br><span class="line">    &lt;article class=&quot;c-article&quot;&gt;&lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.o-grid &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</span><br><span class="line">  grid-gap: 1rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当有四个元素时，是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031549134.png"></p>
+<p>卡片的数量减少时，由于我们使用了 auto-fit 属性，卡片的宽度就会变宽。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031550225.png"></p>
+<p>这看起来太宽了，影响了视觉效果。如果每个卡片的布局能根据父元素的宽度来设置就太好了，这时就可以使用容器查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">.o-grid__item &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@container (min-width: 400px) &#123;</span><br><span class="line">  .c-article &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-wrap: wrap;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@container (min-width: 700px) &#123;</span><br><span class="line">  .c-article &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    justify-content: center;</span><br><span class="line">    align-items: center;</span><br><span class="line">    min-height: 350px;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  .card__thumb &#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: 0;</span><br><span class="line">    top: 0;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    object-fit: cover;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031550526.png"></p>
+<p>这样就得到了一个根据父级宽度进行样式响应的卡片组件。</p>
+<h3 id="2、表单布局"><a href="#2、表单布局" class="headerlink" title="2、表单布局"></a>2、表单布局</h3><p>下面再来看一个表单的例子，当表单所在容器宽度不同时，分别显示为水平或堆叠模式。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031551459.png"></p>
+<p>可以用容器查询轻松实现该布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">.form-item &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.input-group &#123;</span><br><span class="line">  @container (min-width: 350px) &#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    align-items: center;</span><br><span class="line">    gap: 1.5rem;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    input &#123;</span><br><span class="line">      flex: 1;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完成了这个样式，可以给父元素添加一个resize属性，使其大小可变，以测试容器查询是否生效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.parent &#123;</span><br><span class="line">  container-type: inline-size;</span><br><span class="line">  resize: horizontal;</span><br><span class="line">  overflow: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031552189.png"></p>
+<p>使用容器查询完美实现了预期效果！</p>
+<h2 id="五、调试容器查询"><a href="#五、调试容器查询" class="headerlink" title="五、调试容器查询"></a>五、调试容器查询</h2><p>目前 Chrome DevTools 中已经支持检查和调试容器查询。在 Elements 中，容器元素后面会显示 container 标志：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031552320.png"></p>
+<p>当容器满足查询条件时，可以检查@container应用于后代的规则：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031553689.png"></p>
+<p>当鼠标悬浮在父元素（div.form-item）上时，就会显示当前父元素的宽度：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031554492.png"></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1ec02f4f/">Flex 布局</a>
+            
+            
+            <a class="next" rel="next" href="/33a58706/">前端项目构建最佳实践</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1ec02f4f/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/33a58706/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

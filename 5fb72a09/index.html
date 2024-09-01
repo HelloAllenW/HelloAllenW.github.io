@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>2023 年 CSS 现状调查结果新鲜出炉，带你看看 CSS 生态圈最新技术趋势！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">2023 年 CSS 现状调查结果新鲜出炉，带你看看 CSS 生态圈最新技术趋势！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 4, 2023&nbsp;&nbsp;22:47:46</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 4, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">18 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>2023年8 月 26日，一年一度的 State of CSS 调查（CSS现状调查）结果正式公布！2023 年 CSS 状况调查于 2023 年 6 月 15 日至 7 月 15 日进行，共收到了 <strong>9108</strong> 份回复。下面就来通过这份调查结果看看 2023 年 CSS 生态圈的技术趋势！</p>
+<blockquote>
+<p>State of CSS 调查旨在确定 Web 开发生态系统中即将出现的趋势，以帮助开发人员做出技术选择。因此，这些调查的重点是预测未来几年会发生什么，而不是分析现在流行的趋势。此外，浏览器供应商会使用调查数据来确定功能的优先级并为 Interop 2023 等计划提供信息。</p>
+</blockquote>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/331c2109809e40f690479cb2342655c1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="功能概述"><a href="#功能概述" class="headerlink" title="功能概述"></a>功能概述</h2><p>CSS 最近一直在发展，许多引入的新功能正在缓慢但肯定地被开发者社区采用。下面是受访者对不同类别 CSS 新特性的了解和使用情况。其中，<strong>外圈</strong>的大小对应的是知道某个功能的用户总数（知道+用过的受访者），而<strong>内圈</strong>代表实际使用过的用户（用过的受访者）。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6e905e79f76141f39055c51336bc878c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 下面来分别看一下受访者对这些新 CSS 特性的了解和使用情况。</p>
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><h4 id="（1）子网格"><a href="#（1）子网格" class="headerlink" title="（1）子网格"></a>（1）子网格</h4><p>将更深层次的子网格嵌套到父网格中： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1903ac7d20394d4cb5c00b721092cd6f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）书写模式"><a href="#（2）书写模式" class="headerlink" title="（2）书写模式"></a>（2）书写模式</h4><p>书写模式是一个 CSS 模块，它定义了各种国际书写模式，例如从左到右、从右到左、双向和垂直。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e82c1434f935429795d427376e03fcd9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）逻辑属性"><a href="#（3）逻辑属性" class="headerlink" title="（3）逻辑属性"></a>（3）逻辑属性</h4><p>逻辑属性与值是 CSS 的一个模块，其引入的属性与值能做从逻辑角度控制布局，而不是从物理、方向或维度来控制。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bf6539e9c8524284b9d1b2cda7a72a81~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）纵横比"><a href="#（4）纵横比" class="headerlink" title="（4）纵横比"></a>（4）<strong>纵横比</strong></h4><p><code>aspect-ratio</code> 属性为 box 容器规定了一个期待的纵横比，这个纵横比可以用来计算自动尺寸以及为其他布局函数服务。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9231f548019a4864aad33fde2f998890~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）content-visibility"><a href="#（5）content-visibility" class="headerlink" title="（5）content-visibility"></a>（5）content-visibility</h4><p><code>content-visibility</code> 属性控制元素是否完全渲染其内容，从而允许用户代理在需要时可以省略大量的布局和渲染工作。 它使用户代理能够跳过元素的渲染工作（包括布局和绘制）直到需要它——这使得初始页面加载速度更快。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/054a78e1a4434cdabc6bda9fb88b2022~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（6）gap-grid-gap"><a href="#（6）gap-grid-gap" class="headerlink" title="（6）gap (grid-gap)"></a>（6）gap (grid-gap)</h4><p><code>gap</code> 属性是用来设置网格行与列之间的间隙（gutters），该属性是 <code>row-gap</code> 和 <code>column-gap</code> 的简写形式。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/493594722cde45748ac76a2fb9cedc2c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（7）容器查询"><a href="#（7）容器查询" class="headerlink" title="（7）容器查询"></a>（7）容器查询</h4><p>容器查询允许我们查看容器大小，并根据容器大小而不是视口或其他设备特征将样式应用于内容。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7baa04eecbbc438ab936e5498abfb9a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（8）object-view-box"><a href="#（8）object-view-box" class="headerlink" title="（8）object-view-box"></a>（8）object-view-box</h4><p>object-view-box 用于在一个元素上指定一个“视图框”，类似于SVG的viewBox属性，用于在元素的内容上进行缩放或平移。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/78ae3e50e3eb4e7a829ab840c6d8cc95~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（9）大、小和动态视口单位"><a href="#（9）大、小和动态视口单位" class="headerlink" title="（9）大、小和动态视口单位"></a>（9）大、小和动态视口单位</h4><p>大、小和动态视口单位是CSS中用于描述视口尺寸的单位。它们分别表示大视口、小视口和动态视口。</p>
+<ul>
+<li><strong>大视口</strong>：表示视口大小假设任何动态工具栏都是收缩状态。对应的单位是以lv为前缀，例如lvw、lvh、lvi、lvb、lvmin、lvmax。</li>
+<li><strong>小视口</strong>：表示视口大小假设任何动态工具栏都是扩展状态。对应的单位是以sv为前缀，例如svw、svh、svi、svb、svmin、svmax。</li>
+<li><strong>动态视口</strong>：表示根据地址栏UI是否缩小而使用小的、中间的和大的单位。当动态工具栏展开时，动态视口等于小视口的大小；当动态工具栏被缩回时，动态视口等于大视口的大小。对应的单位是以dv为前缀，例如dvw、dvh、dvi、dvb、dvmin、dvmax。</li>
+</ul>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d082da753cc24500a6214f04af8eccd6~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（10）媒体查询范围语法"><a href="#（10）媒体查询范围语法" class="headerlink" title="（10）媒体查询范围语法"></a>（10）媒体查询范围语法</h4><p>媒体查询中的”范围语法”是一种用于指定条件范围的语法，以实现更精细的样式控制。它主要用于媒体特性，例如视口宽度、视口高度、设备像素比等。</p>
+<p>范围语法有两种常见的形式：</p>
+<ol>
+<li>“min-“ 表示最小值：使用 min- 前缀来指定下限值。例如，min-width: 768px 意味着视口宽度必须大于或等于 768 像素才会应用样式。</li>
+<li>“max-“ 表示最大值：使用 max- 前缀来指定上限值。例如，max-width: 1024px 意味着视口宽度必须小于或等于 1024 像素才会应用样式。</li>
+</ol>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a8c0ccbd4ce449e79aae7958d0ae3dcb~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（11）锚定位"><a href="#（11）锚定位" class="headerlink" title="（11）锚定位"></a>（11）锚定位</h4><p>锚点定位是一种用于在网页中创建内部链接目标的技术。通过使用锚点定位，可以使用户点击某个链接时，页面会自动滚动到指定位置，以便显示相关内容。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7242aad3f194ea6850f76ad12c2245c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="形状和图形"><a href="#形状和图形" class="headerlink" title="形状和图形"></a>形状和图形</h3><h4 id="（1）-lt-blend-mode-gt"><a href="#（1）-lt-blend-mode-gt" class="headerlink" title="（1）&lt;blend-mode&gt;"></a>（1）<code>&lt;blend-mode&gt;</code></h4><p><code>&lt;blend-mode&gt;</code> 是一种 CSS 数据类型，用于描述当元素重叠时，颜色应当如何呈现。它被用于 <code>background-blend-mode</code> 和 <code>mix-blend-mode</code> 属性。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e74daf9707634897898b16ea6407a629~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）filter"><a href="#（2）filter" class="headerlink" title="（2）filter"></a>（2）filter</h4><p><code>filter</code> 属性将模糊或颜色偏移等图形效果应用于元素。滤镜通常用于调整图像、背景和边框的渲染。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/62e2c3f727c248d9ac4aea320557617a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）backdrop-filter"><a href="#（3）backdrop-filter" class="headerlink" title="（3）backdrop-filter"></a>（3）backdrop-filter</h4><p><code>backdrop-filter</code> 属性可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）。因为它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c82e6578653d420895815dafb073889f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）min-content"><a href="#（4）min-content" class="headerlink" title="（4）min-content"></a>（4）min-content</h4><p>min-content 是一个 CSS 的尺寸关键字，表示的是内容的最小宽度。对于文本内容而言，这意味着内容会利用所有软换行的机会，变得尽可能的小，大小不会超过最长单词的宽度。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2f29d3f72aac4193876484f0fa2b423b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）conic-gradient"><a href="#（5）conic-gradient" class="headerlink" title="（5）conic-gradient()"></a>（5）conic-gradient()</h4><p>CSS 函数 <code>conic-gradient()</code> 创建了一个由渐变组成的图像，渐变的颜色变换围绕一个中心点旋转（而不是从中心辐射）。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45256dae3fb04d2e90e41633bef8e1e1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（6）linear-缓动函数"><a href="#（6）linear-缓动函数" class="headerlink" title="（6）linear() 缓动函数"></a>（6）linear() 缓动函数</h4><p><code>linear()</code> 是一种简单的缓动函数，用于描述动画在给定时间范围内以恒定速度进行的行为。它提供了一种线性的方式来控制动画的进展。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4429a821ad1d4ce3a04da7f1fa3d13d3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（7）ViewTransition-API"><a href="#（7）ViewTransition-API" class="headerlink" title="（7）ViewTransition API"></a>（7）ViewTransition API</h4><p>ViewTransition API 为DOM更新提供了更加便利的过渡机制。这项实验性技术让开发者可以简单更新DOM，在不同DOM状态之间产生动画转换，并能进一步改变DOM的内容，简化单页应用程序切换画面的开发工作。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c692ed2f175941e4a67b015a64d85b73~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="颜色"><a href="#颜色" class="headerlink" title="颜色"></a>颜色</h3><h4 id="（1）color"><a href="#（1）color" class="headerlink" title="（1）color()"></a>（1）color()</h4><p><code>color()</code> 函数符号允许在特定的指定颜色空间中指定颜色。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/270c0a94c959451abf470da85bce0c71~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）accent-color"><a href="#（2）accent-color" class="headerlink" title="（2）accent-color"></a>（2）accent-color</h4><p><code>accent-color</code> 属性为某些元素生成的用户界面控件设置强调色。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef11642237c5446c99d970f03bd2892b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）-lt-color-gt"><a href="#（3）-lt-color-gt" class="headerlink" title="（3）&lt;color&gt;"></a>（3）<code>&lt;color&gt;</code></h4><p>CSS 数据类型 <code>&lt;color&gt;</code> 表示一种标准 RGB 色彩空间的颜色。一个颜色可以包括一个alpha 通道透明度值，来表明颜色如何与它的背景色混合。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5feb631b0a0e49149f05cef7314c3bd6~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）color-mix"><a href="#（4）color-mix" class="headerlink" title="（4）color-mix()"></a>（4）color-mix()</h4><p><code>color-mix()</code> 函数采用两个颜色值，并返回将它们在给定颜色空间中按给定数量混合的结果。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cc7104cacd9d41209e37053c71734679~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）lch"><a href="#（5）lch" class="headerlink" title="（5）lch()"></a>（5）lch()</h4><p><code>lch()</code> 函数表示 LCH 颜色空间中的给定颜色。它与 <code>lab()</code> 具有相同的 L 轴，但使用极坐标 C（色度）和 H（色调）。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f9ea26458d774fa19f5e97fe9a5b94f6~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（6）相对颜色"><a href="#（6）相对颜色" class="headerlink" title="（6）相对颜色"></a>（6）<strong>相对颜色</strong></h4><p>相对颜色是一种在 CSS 中使用的颜色表示方法，它基于另一个颜色值来定义新的颜色。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b420d10c810447958a1679b6bdf5d9ff~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（7）渐变色彩空间"><a href="#（7）渐变色彩空间" class="headerlink" title="（7）渐变色彩空间"></a>（7）<strong>渐变色彩空间</strong></h4><p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e099da5ef1a54493a18e715132897567~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><h4 id="（1）滚动快照"><a href="#（1）滚动快照" class="headerlink" title="（1）滚动快照"></a>（1）滚动快照</h4><p>滚动快照是 CSS 的模块，它引入滚动捕捉位置，它强制滚动位置，即 滚动容器的滚动端口在滚动操作完成后可能结束的滚动位置。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bda14eaba2174524990d59b4f6141b32~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）overscroll-behavior"><a href="#（2）overscroll-behavior" class="headerlink" title="（2）overscroll-behavior"></a>（2）overscroll-behavior</h4><p><code>overscroll-behavior</code> 属性是 <code>overscroll-behavior-x</code> 和 <code>overscroll-behavior-y</code> 属性的合并写法，让你可以控制浏览器过度滚动时的表现——也就是滚动到边界。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9c4df357bc894e9badecd1b6034f46f9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）touch-action"><a href="#（3）touch-action" class="headerlink" title="（3）touch-action"></a>（3）touch-action</h4><p><code>touch-action</code> 属性用于设置触摸屏用户如何操纵元素的区域 (例如，浏览器内置的缩放功能)。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0ce1ee82c4064af2be372e8600f3a826~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）scroll-behavior"><a href="#（4）scroll-behavior" class="headerlink" title="（4）scroll-behavior"></a>（4）scroll-behavior</h4><p>当用户手动导航或者 CSSOM scrolling API 触发滚动操作时，<code>scroll-behavior</code> 属性为一个滚动框指定滚动行为，其他任何的滚动，例如那些由于用户行为而产生的滚动，不受这个属性的影响。在根元素中指定这个属性时，它反而适用于视窗。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c92c8715c1a24b599369ff6b7f42bbd7~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）scrollbar-gutter"><a href="#（5）scrollbar-gutter" class="headerlink" title="（5）scrollbar-gutter"></a>（5）scrollbar-gutter</h4><p><code>scrollbar-gutter</code> 属性允许为滚动条保留空间，防止随着内容的增长而发生不必要的布局更改，同时在不需要滚动时避免不必要的视觉效果。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cfa9e959dd554c5a86280a4dfe3710bf~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="排版"><a href="#排版" class="headerlink" title="排版"></a>排版</h3><h4 id="（1）font-display"><a href="#（1）font-display" class="headerlink" title="（1）font-display"></a>（1）font-display</h4><p>font-display 属性决定了一个 @font-face 在不同的下载时间和可用时间下是如何展示的。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/470ba2ab2e154f61abaceeb6f39ffa00~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）-webkit-line-clamp"><a href="#（2）-webkit-line-clamp" class="headerlink" title="（2）-webkit-line-clamp"></a>（2）-webkit-line-clamp</h4><p><code>webkit-line-clamp</code> 属性可以把块容器中的内容限制为指定的行数。它只有在 <code>display</code> 属性设置成 <code>-webkit-box</code> 或者 <code>-webkit-inline-box</code> 并且 <code>-webkit-box-orient</code> (en-US) 属性设置成 <code>vertical</code> 时才有效果。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/04ea4a6f6da5495383d5baa6a267137f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）可变字体"><a href="#（3）可变字体" class="headerlink" title="（3）可变字体"></a>（3）可变字体</h4><p>可变字体（Variable fonts）是 OpenType 字体规范上的演进，它允许将同一字体的多个变体统合进单独的字体文件中。从而无需再将不同字宽、字重或不同样式的字体分割成不同的字体文件。你只需通过 CSS 与一行<code>@font-face</code> 引用，即可获取包含在这个单一文件中的各种字体变体。本文将介绍如何在 Web 中使用可变字体。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efde721a86044d57af45ab19413bd62f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）font-palette"><a href="#（4）font-palette" class="headerlink" title="（4）font-palette"></a>（4）<strong>font-palette</strong></h4><p><code>font-palette</code> CSS 属性允许用户代理指定某个字体所包含众多调色板中的其中一个。用户还可以通过使用 <code>@font-palette-values</code> @ 规则来覆盖调色板中的值或创建一个新的调色板。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d8d106a04b654cd68a5c5757abfe8bb1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h3><h4 id="（1）prefers-reduced-motion"><a href="#（1）prefers-reduced-motion" class="headerlink" title="（1）prefers-reduced-motion"></a>（1）prefers-reduced-motion</h4><p>CSS 媒体查询特性 <code>prefers-reduced-motion</code> 用于检测用户的系统是否被开启了动画减弱功能。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/632317e70eea44cebf20964f9de75dd3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）prefers-color-scheme"><a href="#（2）prefers-color-scheme" class="headerlink" title="（2）prefers-color-scheme"></a>（2）prefers-color-scheme</h4><p><code>prefers-color-scheme</code> 媒体特性用于检测用户是否有将系统的主题色设置为亮色或者暗色。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7057a069f704c38ae2294519e091fd7~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）prefers-reduced-data"><a href="#（3）prefers-reduced-data" class="headerlink" title="（3）prefers-reduced-data"></a>（3）prefers-reduced-data</h4><p><code>prefers-reduced-data</code> 媒体特性用于检测用户是否请求了消耗较少互联网流量的网络内容。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cbcadd7752a043feac849ff7ff408ba3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）color-scheme"><a href="#（4）color-scheme" class="headerlink" title="（4）color-scheme"></a>（4）color-scheme</h4><p><code>color-scheme</code> 属性允许元素指示它可以轻松渲染的配色方案。操作系统配色方案的常见选择是“亮”和“暗”，或者是“白天模式”和“夜间模式”。当用户选择其中一种配色方案时，操作系统会对用户界面进行调整。这包括表单控件、滚动条和 CSS 系统颜色的使用值。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/458bead4fbcf4d83bb4d2fcb40cd8914~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）prefers-contrast"><a href="#（5）prefers-contrast" class="headerlink" title="（5）prefers-contrast"></a>（5）prefers-contrast</h4><p><code>prefers-contrast</code>媒体特性用于检测用户是否请求以较低或较高对比度渲染 Web 内容。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a0fc7c206b7b4c9fa90963b92260acc9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（6）forced-colors"><a href="#（6）forced-colors" class="headerlink" title="（6）forced-colors"></a>（6）forced-colors</h4><p><code>forced-colors</code> 媒体功能用于检测用户代理是否启用了强制颜色模式，在这种模式下，它会在页面上强制使用用户选择的有限调色板。<code>forced-colors</code> 模式的一个示例是 Windows 高对比度模式。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/771bbeaed3fe446fa77a261e7e096bf1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（7）-focus-visible"><a href="#（7）-focus-visible" class="headerlink" title="（7）:focus-visible"></a>（7）:focus-visible</h4><p>当元素匹配<code>:focus</code>伪类并且客户端 (UA) 的启发式引擎决定焦点应当可见 (在这种情况下很多浏览器默认显示“焦点框”。) 时，<code>:focus-visible</code> 伪类将生效。这个选择器可以有效地根据用户的输入方式 (鼠标 vs 键盘) 展示不同形式的焦点。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/73ce7bb2e2cb4d9fb2e2de36bda289ae~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><h4 id="（1）变量"><a href="#（1）变量" class="headerlink" title="（1）变量"></a>（1）变量</h4><p>级联变量的 CSS 自定义属性是一个 CSS 模块，它允许创建可以反复使用的自定义属性。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb685773342a4ec2a2b2562b13d938c1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（2）-supports"><a href="#（2）-supports" class="headerlink" title="（2）@supports"></a>（2）@supports</h4><p><code>@supports</code> 可以指定依赖于浏览器中的一个或多个特定的 CSS 功能的支持声明。这被称为特性查询。该规则可以放在代码的顶层，也可以嵌套在任何其他条件组规则中。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/efeb9544406f4728b47765b2482850fd~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（3）值函数"><a href="#（3）值函数" class="headerlink" title="（3）值函数"></a>（3）值函数</h4><p>CSS 值函数是调用特殊数据处理或计算的语句，以返回一个 CSS 属性的 CSS 值。CSS 值函数代表更复杂的数据类型，它们可能需要一些输入参数来计算返回值。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7855df5f68d648449001b5c709fe08be~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（4）-property"><a href="#（4）-property" class="headerlink" title="（4）@property"></a>（4）@property</h4><p><code>@property</code> 是CSS Houdini API 的一部分，它允许开发者显式地定义他们的 css 自定义属性, 允许进行属性类型检查、设定默认值以及定义该自定义属性是否可以被继承。@property 规则提供了一个直接在样式表中注册自定义属性的方式，而无需运行任何 JS 代码。有效的 <code>@property</code> 规则会注册一个自定义属性，就像 <code>CSS.registerProperty</code> 函数被使用同样的参数调用了一样。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7666ddfd6d7b4935b70cfe93a816f388~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（5）-marker"><a href="#（5）-marker" class="headerlink" title="（5）::marker"></a>（5）::marker</h4><p><code>::marker</code> 伪元素选中一个 list item 的 marker box，后者通常含有一个项目符号或者数字。它作用在任何设置了<code>display: list-item</code>的元素或伪元素上，例如<code>&lt;li&gt;</code>和<code>&lt;summary&gt;</code>。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e4f44f7354243639b722310ee9cc6d1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（6）-has"><a href="#（6）-has" class="headerlink" title="（6）:has()"></a>（6）:has()</h4><p>CSS 函数式伪类 <code>:has()</code> 表示一个元素，如果作为参数传递的任何相对选择器在锚定到该元素时，至少匹配一个元素。这个伪类通过把可容错相对选择器列表作为参数，提供了一种针对引用元素选择父元素或者先前的兄弟元素的方法。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf285eeac1294660a58a5ce586c9a01c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（7）-where"><a href="#（7）-where" class="headerlink" title="（7）:where()"></a>（7）:where()</h4><p>CSS 伪类 <code>:where()</code> 接受选择器列表作为它的参数，将会选择所有能被该选择器列表中任何一条规则选中的元素。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fcda4902052b4aac8b7f32f9e9dbb396~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（8）-layer"><a href="#（8）-layer" class="headerlink" title="（8）@layer"></a>（8）@layer</h4><p><code>@layer</code> 声明了一个级联层，同一层内的规则将级联在一起，这给予了开发者对层叠机制的更多控制。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eaeae87a20fc4982a4d069a23e918962~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（9）-part"><a href="#（9）-part" class="headerlink" title="（9）::part()"></a>（9）::part()</h4><p><code>::part</code> 伪元素表示在 shadow DOM 中任何匹配 part 属性的元素。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6f661639d46a4181a4be8275343c3724~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（10）三角函数"><a href="#（10）三角函数" class="headerlink" title="（10）三角函数"></a>（10）三角函数</h4><p>三角函数是一组数学函数，用于处理角度和旋转的计算。CSS 中的三角函数包括 <code>sin()</code>、<code>cos()</code> 和 <code>tan()</code>。这些函数可以用来计算角度的正弦、余弦和正切值。它们可以应用于各种 CSS 属性，如变换（transform）、过渡（transition）和动画（animation），以实现元素的旋转、倾斜、位移等效果。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4cd81584013d4006a6d0864c7310224a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（11）-CSS-嵌套"><a href="#（11）-CSS-嵌套" class="headerlink" title="（11） CSS 嵌套"></a>（11） CSS 嵌套</h4><p>原生 CSS 嵌套，不使用预处理器或后处理器。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d5409368f4c34b6f9f78acf8d0bb050b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（12）image-set"><a href="#（12）image-set" class="headerlink" title="（12）image-set()"></a>（12）image-set()</h4><p><code>image-set()</code> 是一种让浏览器从给定集中选择最合适的 CSS 图像的方法，主要用于高像素密度屏幕。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9d801514348b4f0bab093c13ca9e2381~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（13）image"><a href="#（13）image" class="headerlink" title="（13）image()"></a>（13）image()</h4><p><code>image()</code> 函数以类似于 <code>url()</code> 函数的方式定义 <code>&lt;image&gt;</code>，但增加了一些功能，包括指定图像的方向性、仅显示由媒体片段定义的图像的一部分以及指定纯色作为后备，以防无法渲染指定的图像。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/89df95fb0781479ca0c57379ab737d12~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h4 id="（14）单独的变换属性"><a href="#（14）单独的变换属性" class="headerlink" title="（14）单独的变换属性"></a>（14）单独的变换<strong>属性</strong></h4><p>在将 CSS 变换（Transform）效果应用于元素时，可以单独控制和指定不同的变换属性。 <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2cec00e84f794361a1670bf61cabed8f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="CSS-框架"><a href="#CSS-框架" class="headerlink" title="CSS 框架"></a>CSS 框架</h2><p>Tailwind CSS 再次脱颖而出，成为开发人员乐于继续使用的主要 UI 框架；而 Open Props 则吸引了一小部分但充满热情的追随者。</p>
+<p>Bootstrap 仍然是使用率最高的 CSS 框架，并且遥遥领先于其他框架。值得注意的，Tailwind CSS 近年来受欢迎程度在快速升高，使用率已经到达了 80 %。</p>
+<p>下面来看看随着时间的推移，一些热门 CSS 框架的保留率、兴趣率、使用率和认知率。</p>
+<blockquote>
+<p>认知度低于 10% 的技术不包括在内。 每个比率定义如下：</p>
+<ul>
+<li>保留率：会再次使用/（会再次使用+不会再次使用）</li>
+<li>兴趣率：想学/（想学+没兴趣）</li>
+<li>使用率：（会再次使用+不会再次使用）/总计</li>
+<li>认知率：（总计 - 从未听说过）/总计</li>
+</ul>
+</blockquote>
+<p>保留率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9f412a3b8b064cdf9c0de3fdcad11406~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 兴趣率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f643bb730dcc4fbb9dcacbd7bedb682e~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 使用率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e24ee0af0d294628a6b602bdc6ec12d3~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 认知率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb90745371464240a44b0e956e4c90ca~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 随着时间的推移，受访者对所调查技术的看法： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e7b7e47e9bc64f639e6e4385c95d2655~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 下表在中心轴的两侧划分了正面（“想学习”、“会再次使用”）和负面（“不感兴趣”、“不会再次使用”）体验，其中条形粗细表示了解某项技术的受访者数量： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ea4a4a9dadc44742bc6e674ab58a87af~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 其他工具使用情况如下： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa4a8babd1444968889b14e32ab69910~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 受访者对 CSS 框架的现状满意情况，只有一半的用户对现在CSS框架是满意的： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9915a6e6ec4d4da787ba02da31e2c13a~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="CSS-in-JS"><a href="#CSS-in-JS" class="headerlink" title="CSS-in-JS"></a>CSS-in-JS</h2><p>经过一些初步的增长后，CSS-in-JS 领域似乎已经趋于稳定，而原生 CSS 本身正在采用其许多主要优势这一事实可能是一个很大的促成因素。Styled Components 仍然是使用率最高的 CSS-in-JS 库，</p>
+<p>下面来看看随着时间的推移，一些热门 CSS-in-JS 框架的保留率、兴趣率、使用率和认知率。</p>
+<blockquote>
+<p>认知度低于 10% 的技术不包括在内。 每个比率定义如下：</p>
+<ul>
+<li>保留率：会再次使用/（会再次使用+不会再次使用）</li>
+<li>兴趣率：想学/（想学+没兴趣）</li>
+<li>使用率：（会再次使用+不会再次使用）/总计</li>
+<li>认知率：（总计 - 从未听说过）/总计</li>
+</ul>
+</blockquote>
+<p>保留率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/931ed279af2648e58506e3f4ee78de63~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 兴趣率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2243534f72354dd5a15f5c70d450da54~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 使用率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/08ca1261f6dc454a9bb46fb51b025bbf~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 认知率： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/13adcb9b01ad4ad78a36ac23fd2efc8f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 随着时间的推移，受访者对所调查技术的看法： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/befb0dd44bc4499ab0f1c78bdac4198f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 下表在中心轴的两侧划分了正面（“想学习”、“会再次使用”）和负面（“不感兴趣”、“不会再次使用”）体验，其中条形粗细表示了解某项技术的受访者数量： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c5f666da84af4e229e5aca7acbcd0341~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 其他工具的使用情况（Panda 是一个全新的零运行时 CSS-in-JS 框架）： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8914f49bb8ba41e5b3f5a61f430ba8e0~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 受访者对CSS-in-JS 库的现状满意情况，只有 31% 的用户对目前的 CSS-in-JS 库是满意的： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/359d27fdcf884fce8035fbeaa9caaa8d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h2><p>在浏览器发明 30 年后，我们仍然在这个领域看到创新的发生。像Brave和Arc这样的新进入者，以及像Polypane这样的专业工具，正在获得市场份额。</p>
+<p>预处理器/后处理器的使用情况，Sass 使用份额继续持续遥遥领先，PostCSS 紧随其后： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1690d8ffb7fd4713b949392262171fb5~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 经常使用哪些实用程序或工具，Prettier 是最常使用的实用工具，Autoprefixer 紧随其后： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ddb8e4a1b06c4f739702f146a3b1f878~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 在开发期间，主要使用的浏览器，超过 80% 的用户使用 Chrome，超过56 % 的用户使用 Firefox，其他浏览器使用较少： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54ca5360bae14cc8a44728ae3bd11c9f~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="CSS-用法"><a href="#CSS-用法" class="headerlink" title="CSS 用法"></a>CSS 用法</h2><p>测试 CSS 的环境，在哪些尺寸或环境上进行测试？多数用户在桌面和智能手机上测试 CSS： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4afcbb9e48884e3ba87447dfc95f064c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 通常使用 CSS 做的项目类型，近 85% 的用户使用 CSS 开发 Web 应用： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9bd5fd7c36c34c31b04c6493821601db~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 分配编写 CSS（包括 HTML ）和 JavaScript 代码的时间情况： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e849baec69ef44a7bf5c23d443089f45~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 现有的 CSS 特性由于缺乏支持或浏览器之间的差异而难以使用的情况： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1495c7f0576b4dda9665547a3c17c7f8~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 目前 CSS 缺少的特性： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0c70621ae8e64137bd62312e3f86d427~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 其他与编写 CSS 相关的痛点，浏览器之间是差异是开发时最大的痛点，其次是编写表单元素的样式： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/251106b1c2284c52ab6ff2b356ebb0bc~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 对 Web 技术的总体状况满意情况，近80%的用户对于目前的 Web 技术是满意的，只有 3.2% 的用户是不满意的： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1eeb9468e26946608cd4d9eaecadf4bc~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 对 CSS 的总体状态满意情况，超过 92%的用户对于目前的 CSS 技术是满意的，只有 3% 的用户是不满意的： <img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7e51d3daa87147b29cb2b35864a51919~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>随着对较新的CSS特性的使用趋势上升，CSS框架的使用却呈下降趋势。这可能意味着人们开始逐渐适应了一种观念，即无需等待就可以使用较新的CSS特性，因为浏览器更新速度比以往更快。</p>
+<p>人们对原生CSS特性（如嵌套和<code>:has()</code>）的认知度很高，<code>:has()</code> 不仅像父选择器一样工作，而且有远超出此功能的其他用途，看起来我们正处在广泛采用这些特性的边缘。</p>
+<p>有趣的是，很多开发者认为 Animate to auto 和砌体布局是缺少的CSS特性。确实，在未明确声明元素尺寸（尤其是高度）时，浏览器很难确定它们的值。</p>
+<p>通过与诸如 Interop 之类的合作，以前被认为不可能的特性现在有可能成为现实！</p>
+<blockquote>
+<p>State of CSS 2023 调查报告：<a href="https://link.juejin.cn/?target=https://2023.stateofcss.com/">2023.stateofcss.com/</a></p>
+</blockquote>
+<p>作者：CUGGZ<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7271205668840767547">https://juejin.cn/post/7271205668840767547</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/309e26b0/">从马科长到马局长，他赌对了</a>
+            
+            
+            <a class="next" rel="next" href="/820b3f45/">使用PurgeCSS来删除未使用的CSS代码</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/309e26b0/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/820b3f45/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

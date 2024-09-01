@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>人类世界的几个最根源性问题 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">人类世界的几个最根源性问题</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 25, 2016&nbsp;&nbsp;20:05:24</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 25, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="灵魂与肉体的关系"><a href="#灵魂与肉体的关系" class="headerlink" title="灵魂与肉体的关系"></a>灵魂与肉体的关系</h2><hr>
+<p>通过本体问题，西方哲学最终切入了灵魂和肉体的关系问题。这个问题是所有问题的根源。正如我们上面所提到的，人是灵魂和肉体的矛盾结合体，正是二者无休止的冲突，正是人对这一问题的强烈意识，才产生了一切哲学问题。感官之所以会骗人，经验之所以靠不住，就是因为感官长在人的肉体之上。我们的鼻子、眼睛、耳朵、舌头，又有哪一个不是身体的一部分呢？何况肉体上会死的，根本不能带我们进入永恒的天堂。相反，我们的理性，我们的思维，都是灵魂的功能。它们之所以靠得住，是因为灵魂本身是纯洁的。认识世界，要靠思维，不能靠感觉；同样，人要进入天堂，就必须抛弃罪恶的肉体，拯救自己的灵魂。肉体只能让我们永远匍匐在地面上，永远不能超生。正如基督教义中的那句名言：“拯救灵魂，必然要抛弃肉体。”</p>
+<p>一言以蔽之，西方人探讨本体问题，仍然在于对自身有限性的意识，对永恒的渴望。本体是这个世界的根，既然认识到了本体，觉察到了本体，自己不也就超越有限，达到无限和永恒了吗？既然本体和存在惟有通过人的思维和理性来把握，那么，理性和思维就是拯救偷食了禁果的人类的唯一抓手和平台。正因为此，西方产生了一个具有浓厚拯救情节的科学传统。古希腊人，那么热衷于探索自然界的奥秘，那么迷恋逻辑学和几何学，也许就可以理解了。</p>
+<h2 id="世界的本源问题"><a href="#世界的本源问题" class="headerlink" title="世界的本源问题"></a>世界的本源问题</h2><hr>
+<p>关于世界本原问题的探讨，在哲学中是一个本体论问题。这是哲学的永恒课题。因为，自从人有自我意识那一天开始，就有一种倾向，即希望找到一个东西一劳永逸地解释自己所面对的世界。于是，本体论就成了哲学的主要问题。</p>
+<p>在远古时期，生产力不发达，人们往往将世界的本原归结为某一种自然物质。比如，古希腊第一位哲学家泰勒斯将水看作是世界的本原，认为万物产生于水，复归于水。阿那克西美尼认为气是世界的本原，赫拉克利特认为火是世界的本原……当然，这种观点早已经被科学证明是错误的，但这种思考却一直在西方社会延续，并构成了西方哲学史的主要内容。自从苏格拉底提出那句“认识你自己”的重要命题以后，西方对本原问题的探讨开始由外在世界转向心灵，开创了西方哲学史上长达两千多年的概念思辨传统。比如，毕达哥拉斯提出“数”是世界的本原。数这个东西，看不见、摸不着，已经是心灵的抽象了。到柏拉图提出“理念”之后，西方关于本体问题的探讨达到了最高峰。正如怀特海所说：“整个西方哲学史，不过是柏拉图主义的注脚。”</p>
+<p>到了近代以来，西方哲学的概念思辨遇到了自身无法克服的问题，转而兴起了反“形而上学”、反“本质主义”的浪潮，其实质就是要取消哲学中的“本体”概念。</p>
+<h2 id="思维与存在的关系问题"><a href="#思维与存在的关系问题" class="headerlink" title="思维与存在的关系问题"></a>思维与存在的关系问题</h2><hr>
+<p>存在、思想和语言的关系问题，实质上是上一个哲学问题的变种。在西方的哲学家看来，惟有本体才是真实的“存在”，而其他则是“幻相”和“非存在”。正因为此，西方的“本体论”也被称之为“存在论”。对人而言，惟有思维才能把握真实的“存在”，而感觉，面对的只是杂乱无章的幻相，因而是“非存在”。存在是永恒的，思维对存在的把握是真理，而感觉对非存在的把握则是意见。真理会带我们进入征途，而意见则会将我们带入歧途。</p>
+<p>比如，一个苹果摆在我们面前，我们眼睛看到的红色，鼻子闻到的香味，嘴巴尝到的甜味，都是不真实的。而惟有“苹果”的概念，才是存在，是真实的。因为“苹果”的概念是不会随时空的改变而改变的，而现实中的“这个苹果”，我们在不同的时间、不同的地点可能就会有不同的感觉。也许，我们在某一天会看到一个青色的苹果，会吃到一个酸酸的苹果……</p>
+<p>就这样，在西方哲学的传统中，感性和理性之间，真理和意见之间，存在和非存在之间，就有了一个无法逾越的鸿沟。重精神、轻物质，重灵魂、轻肉欲的传统也正是由此肇始。正是在这个意义上，巴门尼德说：“思维和存在是同一的”，“能被思维的与能存在的，其实是一回事情。”</p>
+<h2 id="逻各斯的三位一体问题"><a href="#逻各斯的三位一体问题" class="headerlink" title="逻各斯的三位一体问题"></a>逻各斯的三位一体问题</h2><hr>
+<p>存在只能显示在思维里，惟有思维才能把握存在。但把二者联接在一起的则是语言。语言是什么样的语言？是概念化的语言。于是，思维、存在、概念在西方哲学中就成了三位一体的东西。因为所谓的思维，本身就是一种抽象，而抽象则意味着把“相同”的东西和“不相同”的东西绝对地割裂开，把“相同”的归为一类，把“不相同”的归为一类，然后再在二者之间划定界限。比如，“苹果”之所以能和“梨”区别开来，是因为称之为“苹果”的那些东西肯定具有共同的东西，而这些共同的东西肯定是“梨”所没有的。因此，概念必然意味要界定内涵和外延，是就是，不是就不是，不能似是而非，模棱两可。正因为此，西方的语言是很清晰的，讨论一个问题必须要先弄清楚概念，表达意思必须要清楚，而且表达式多为“XX是XX”。</p>
+<p>这就是“逻各斯”的原本含义。逻各斯是赫拉克利特首先使用的一个概念。这个词原本的含义是“话语”（语言），而赫拉克利特则用它来表示“说出来的道理”（存在）。但就逻各斯是人认识的道理而言，它又被理解为“理性”和“思维”。</p>
+<h2 id="经验与超验的关系问题"><a href="#经验与超验的关系问题" class="headerlink" title="经验与超验的关系问题"></a>经验与超验的关系问题</h2><hr>
+<p>这个问题也是本体所牵带出来的一个问题。所谓的经验，就是我们感官所能感觉到的东西。所谓的超验，就是我们的感官所不能感觉，而只能靠思维去把握的东西。哲学上的本体问题，其实就是一个超验的问题。意思是说，这个问题已经超越我们的经验了，是我们的经验所不能回答的问题。比如，泰勒斯生活的环境四周都是水，他就得出了“世界的本原是水”的结论，这其实是用经验来回答超验的问题。因为，一个人不可能把整个世界都经验到，惟有靠头脑中的理性。</p>
+<p>因此，在本体论中，经验总是被排斥的。因为经验的东西总是靠感官感觉到的，是不值得相信的。惟有人的思维，才是最值得信赖的，因为它已经摆脱了感官的束缚。比如在几何学中，惟有思维和概念中“点”、“线”、“面”才是最完美的。相反，现实中的图形都是不完美的，或多或少都会有些缺陷和瑕疵。不相信，你就去用直尺化一条直线，或者用圆规去画一个圆。在严格意义上，它们肯定是不直、不圆的。</p>
+<h2 id="前提和理由的关系问题"><a href="#前提和理由的关系问题" class="headerlink" title="前提和理由的关系问题"></a>前提和理由的关系问题</h2><hr>
+<p>把前提和理由严格区别开来，是西方哲学史上的一个重要课题。前提，是事物存在的前提和载体，而理由则是事物成其为自身的内在原因。比如，人是肉体和灵魂的结合体。肉体没有了，人也就死了。所以说，肉体是人存在的前提和载体。但是，我们不能说肉体是人成为人的内在原因。让人成为人，和动物区别开来的东西是人的灵魂和精神。再比如，在物理学中，永动机是不可能被制造出来的。永动机之所以制造不出来，并不是因为我们缺乏制造永动机的物质材料（前提），而是因为永动机根本没有存在的理由，因为它违反了能量守恒定律。同样，“方的圆”之所以不存在，不是因为我们没有画“方的圆”的工具，而是因为“方的圆”不具备存在的理由。再比如，男女恋人之间的接吻。接吻固然需要两个嘴巴的碰撞和摩擦，这是前提。但这绝对不是接吻的成立的理由。</p>
+<p>前提是感性的、经验的，理由是抽象的、超验的。正因为此，人们往往把二者混淆，甚至把前提当成了理由。这是哲学上的一大误区。古希腊时期，雅典法庭以“败坏青年”为由要处死哲学家苏格拉底。有人劝苏格拉底逃跑，但苏格拉底却坦然面对了死刑。他说：“如果没有骨肉，没有身体的其他部分，我是不能实现我的目的的。但是，说我不逃跑是因为我有骨肉，说心灵的行动方式就是如此，而不是选择最好的事情，那可是非常轻率的、毫无根据的说法。这样说是分不清什么是真正的原因，什么是使原因起作用的条件。”</p>
+<p>可见，捍卫哲学上的“理由”，是哲学的本性，也是人类的尊严所在。</p>
+<div style="color:gray;font-size:0.9em">
+内容来自《不可不知的1000个哲学常识》作者：缘中源
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/55b38d90/">人类世界观的31次大转折</a>
+            
+            
+            <a class="next" rel="next" href="/e5267279/">人的认识如何自我超越？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/55b38d90/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e5267279/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

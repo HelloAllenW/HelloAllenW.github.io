@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>解读黑格尔辩证法 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">解读黑格尔辩证法</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 17, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 17, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTertvK8TspREgRMDNIUcSEhFbdxMwnu2XeEH7M7oDxjKkdryZZrKsHW60pE6VGVZykqDemXOv0PFWQ/0?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></strong></p>
+<p><strong>黑格尔辩证法</strong>是德国古典哲学最重要的成果之一。其基本思想是概念的辩证发展。它第一次把整个自然的历史的和精神的世界描写为一个过程，即描写为处在不断的运动，变化和发展之中的，并企图揭示其内在联系，从而猜测到了客观事物的辩证法。但颠倒了主观和客观的关系，是建立在唯心主义基础之上的。马克思、恩格斯批判的吸取了其中的合理内核，抛弃了它的唯心主义体系，创立了唯物辩证法。</p>
+<p><strong>物质欲望的本质</strong></p>
+<p>黑格尔认为自我意识是不可能孤立存在的。如果意识要对自身存在进行考察，它就必须基于某种对照。也就是说，人必需要有一个“非我”作参照物，才能了解何谓“自我”。自我意识绝不是一种简单的以个体为中心的意识而已。 对于全人类而言，“人本”问题类似对于个人来说的“自我”问题。探讨这个问题之所以举步维艰，正是因为人类只有以动物为参照物，才可能了解自己。但人的精神，却在一切动物中保持着超然的地位，这将精神的自我认知抛入了没有参照物的绝境之中。</p>
+<p>人最深沉的爱的是爱自己。但他必须须通过爱别人，或者恨别人的方法来展示自爱。无论是看着自己考卷上红色的一百分沾沾自喜，还是指点江山激扬文字，自我，都是在通过外人对“属于这个自我的外物”的评论中获得着对自身价值的认识。通过一组外部对象，自我意识建立了起来。但立即，自我意识就 会发现，任何一个外部对象都是对“自我”的一种讽刺。于是，自我意识与本来无关的外部间就构造了一种特殊的爱恨（love-hate）关系。</p>
+<p>“欲望就是自我意识的不满足状态”。 这是一个蹊跷的悖论关系。一方面，没有“非我”就没有“自我”；另一方面，没有“自我”也不会有“非我”。于是，自我意识从诞生那天起，就被卡在了“我”和“世界”之间进退不得，无限摇摆。解决这种痛苦的最主要手段就是通过把外物变成自我的一部分，来消除其外在性，使我们暂时停歇内心的挣扎，为“自我”找到一个落脚点。这正是物质欲望的本质。</p>
+<p><strong>辩证法</strong></p>
+<p>黑格尔的辩证法的真正“合理内核”正是他吸收了培根、洛克等归纳派的思想，而用于修正笛卡尔等人的唯理派的思想。他的辩证法是反基础主义的（笛卡尔等人的唯理派是基础主义的，即他们主张用普遍原理为知识奠基），即他认为并不能象笛卡尔等人的唯理派所说的那样，能够一次性的找到普遍公理，然后以其作为理论的基础。这表现在他的“正题－反题－合题”的辩证发展思想。</p>
+<h3 id="辩证法的逻辑"><a href="#辩证法的逻辑" class="headerlink" title="辩证法的逻辑"></a>辩证法的逻辑</h3><p>他的“正题－反题－合题”，应该理解成“某种我们认为的普遍概念或原理－—对普遍概念或原理的反对——新的普遍概念或原理”，这里的普遍概念或原理只是相对意义的，而不是演绎派所说的绝对意义的。至于绝对意义的普遍概念或原理（绝对意义的普遍概念或原理就是黑格尔所说的“绝对理念”）本应该是只能通过无限步骤的辩证发展才能够达到，但黑格尔却自信的认为在他当时的德国精神里达到了——即在他的哲学里达到了，就象马克思坚定的认为资本主义之后应该是共产主义一样。这是黑格尔哲学的一个问题，但还有一些更严重地问题。我以前曾说过一个“辩证法悖论”问题——即辩证法如何看待辩证法自身？黑格尔的辩证法是反普遍原理的，但是辩证法是不是普遍原理呢？显然黑格尔是作为普遍原理的，这样辩证法就要反对辩证法！</p>
+<p>黑格尔的辩证法主要是逻辑性质（概念性质、命题性质）的，他是把辩证法作为逻辑学来做的（即思辨逻辑、辩证逻辑）。他的“正题”是指演绎派和归纳派所说的“普遍概念”、“普遍命题”，只是演绎派是从绝对意义上说的，归纳派通常是从相对意义上说的，而黑格尔接受了归纳派的这种思想，通常也是从相对意义上来说的，要不会也不会有所谓的反题了；他的反题是对正题的反对性概念、命题和事例；合题则是更高层次、更基本的普遍概念和命题。</p>
+<p>黑格尔正是用这种“正题－反题－合题”的辩证法思想，去修正传统形式逻辑的“三段论”（“大前提－小前提－结论”）的。但是需要注意的是，这里的传统形式逻辑仅指传统演绎逻辑，而不包括归纳逻辑，因为归纳逻辑并不是“三段论”（“大前提－小前提－结论”）的，而是“从多个小前提中归纳出大前提”。</p>
+<p>许多人所犯的错误，就是以为辩证法好像是对整个形式逻辑（包括归纳逻辑）的颠覆。其实形式逻辑是通过演绎与归纳的互补和交替运用，来弥补演绎逻辑的不足的，即，归纳1→演绎1→归纳2→演绎2→归纳3→演绎3→……。这里的“归纳1”得到的就是黑格尔的“正题1”，然后再通过“演绎1”对“正题1”进行推演，如果推演的结果与事实相符，就说明我们暂时还没有碰到“反题1”；如果推演的结果与事实不相符，就说明“反题1”出现了；然后，我们再通过“归纳2”将“正题1”与“反题1”归纳成“合题1”，而“合题1”其实可以看成新的正题，即“正题2”，这样新一轮的“辩证”（“破缺循环”）又开始了。</p>
+<p>形式逻辑正是通过归纳与演绎的互补和交替运用来弥补双方的不足的，而这里的“辩证”其实就表现为归纳与演绎的交替运用，也就是我说的“破缺循环”，而不是逻辑本身。这是早在亚里斯多德就表达了的思想。</p>
+<p>黑格尔并未遵循亚里斯多德的正确道路，而只是吸收了经验主义、归纳派的一些正确思想，用于修补笛卡尔派的唯理主义思想。因此黑格尔的哲学其实是修正后的笛卡尔的唯理主义，这是人们将黑格尔的哲学也定为唯理主义的根本原因。正因为他的思想吸收了经验主义的一些正确思想，因此他的唯理主义要比笛卡尔的更合理，更真实的反映了人类理论的动态发展过程，而不象笛卡尔的唯理主义只是描述的人类知识的一种静态图景。</p>
+<p>我们前面已经说了，笛卡尔的唯理主义是基础主义的，基础（基本概念、公理）一旦建立，它就是固定不变的了，其它一切概念、原理都是从这些基本概念和公理演绎出来的，这是笛卡尔的唯理主义表现为静态的根本原因；黑格尔的唯理主义由于吸收了经验主义的一些正确成分，他认为并没有一个固定不变的基础，他的辩证法是反基础主义的，因此是动态的。</p>
+<p>有许多人都说形式逻辑是静态逻辑，辩证逻辑是动态逻辑，他们的理由是形式逻辑是研究的事物的量变的，而辩证逻辑是研究的事物的质变的。这种论述是错误的、荒唐的，根本就没有弄懂黑格尔辩证法的实质。辩证法（我只承认黑格尔的辩证法，不承认黑格尔的辩证逻辑）之所以是动态的，是因为它是反基础主义的，或者说它的基础是动态变化的；形式逻辑之所以是静态的，是因为它是有基础的，它有一个固定不变的、静态的基础。</p>
+<p>但是需要强调的是，这里的形式逻辑仅指演绎逻辑，而不包括归纳逻辑。形式逻辑是一个多义词，它常常专指演绎逻辑（包括传统演绎逻辑和现代演绎逻辑）；也常指现代数理逻辑（现代演绎逻辑）；至于作为与辩证逻辑相对的另一种逻辑的形式逻辑（即，包含传统演绎逻辑、现代演绎逻辑、传统归纳逻辑、现代归纳逻辑的逻辑），这主要是苏联、中国当年的意识形态斗争造成的，这种意义的形式逻辑在我们现在的教课书上通常直接称之谓逻辑学。由于语言的歧义性，人们常常将仅指演绎逻辑的形式逻辑的静态性，搞成了包含归纳逻辑的整个形式逻辑的静态性，这是极其错误的。事实上，在亚里斯多德那里，演绎逻辑的静态性是通过归纳逻辑而变为动态的，即，演绎与归纳互补、交替使用，从而使整个形式逻辑变为动态的。</p>
+<p>因此，黑格尔的经过修正后的唯理主义虽然比笛卡尔的唯理主义更正确，但是却比亚里斯多德的那种“归纳与演绎”相结合的思想则显得错误。因此，我们应当摆脱黑格尔的“正－反－合”的动态演绎模式（辩证发展模式），尽管他的这一模式要比笛卡尔的那种静态演绎模式要更能说明一些问题，而采用亚里斯多德的“演绎与归纳”相结合的动态交互模式，即我更详细的表述的，“归纳1→演绎1→归纳2→演绎2→归纳3→演绎3→……”。</p>
+<p>另外，造成这种“辩证”或“破缺循环”的原因，也不是客观世界所存在的男女、左右、正负、大小这样的对立属性，而是人的主客体二重性和有限性。人是客观宇宙的微小一部分，这是人的客观性特点；但是人同时又具有认识客观宇宙的能力，这是人的主观性特点。人虽然有认识客观宇宙的能力，但是人的这种能力不是无限的、超验的，而是有限的、经验的。</p>
+<p>人不可能一次性的了悟到整个宇宙的真理（如果是这样的话，就不存在所谓的人类认识的辩证发展了），而只能通过对其能感知（包括人的感官的感知和人所制造的观察工具、实验工具的感知）到的世界的归纳总结。当我们归纳出了这些能感知世界的范围内的知识和规律之后，我们就可以通过演绎法对未知世界进行推演和预测。当我们的能感知的世界的范围扩大之后，这先前归纳总结的小范围内的能感知的世界的知识和规律就不一定能适用了，这就需要我们归纳出新的，更大范围的知识和规律。人的认识和知识正是这样进展的。</p>
+<p>而客观世界所存在的男女、左右、正负、大小这样的对立属性，这些都只是客观世界的一些特殊事例，客观世界还存在那些三分属性、四分属性、多分属性、无限属性的事物。我们没有理由忽视这些事物，而只关注那些二分属性的事物。而人们所描述的客观恰恰是无量主观的归结,而主观,恰恰又是无量客观的归结,这也是人学的逻辑内外联系的基础。</p>
+<p>黑格尔曾把他的逻辑学说成是“关于神的思维的科学”（《逻辑学》下卷，商务印书馆1974年版，第552页），他宣称“这个内容就是上帝的展示，展示出永恒本质中的上帝在创造自然和一个有限的精神以前是怎样的”（《逻辑学》上卷，商务印书馆1974年版，第31页）。黑格尔已经很坦诚的承认了，他的逻辑学是“神”学，是“上帝的展示”。而我们要做的是“人”的逻辑学。至于黑格尔说的，“上帝的展示”，我们不认为它能在有限的认知领域中达到，我们是作为最高认知目标的。黑格尔建立了那么精致的哲学，但为什么会很快被抛弃了呢？正因为他建立的是“神”学，是我们人类无法采用的，我们人类能采用的是“人”学。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/4f460d21/">让人终生受益的14个信条</a>
+            
+            
+            <a class="next" rel="next" href="/e4051253/">西方的道家（荣格）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/4f460d21/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e4051253/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

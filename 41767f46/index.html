@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>使用Github Action实现全自动部署 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用Github Action实现全自动部署</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 24, 2023&nbsp;&nbsp;23:08:58</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 24, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Others/">Others</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Github-Action简介"><a href="#Github-Action简介" class="headerlink" title="Github Action简介"></a>Github Action简介</h1><p>Github Action是 GitHub于2018年10月推出的一个CI\CD服务。</p>
+<blockquote>
+<p> CI\CD 其实说的是三件事情：「持续集成（Continuous Integration）」、「持续交付（Continuous Delivery）」、「持续部署（Continuous Deployment）」。因为「持续交付」和「持续部署」的英文缩写是一样的，所以这三件事情缩写成了 CI\CD 。</p>
+</blockquote>
+<h1 id="教程常量声明"><a href="#教程常量声明" class="headerlink" title="教程常量声明"></a>教程常量声明</h1><table>
+<thead>
+<tr>
+<th>常量名</th>
+<th>常量释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>[Blogroot]</strong></td>
+<td>本地存放博客源码的文件夹路径</td>
+</tr>
+<tr>
+<td><strong>[SourceRepo]</strong></td>
+<td>存放博客源码的私有仓库名</td>
+</tr>
+<tr>
+<td><strong>[SiteBlogRepo]</strong></td>
+<td>存放编译好的博客页面的公有仓库名 Site指站点，教程中会替换成 Github</td>
+</tr>
+<tr>
+<td><strong>[SiteUsername]</strong></td>
+<td>用户名 Site指站点，教程中会替换成 Github</td>
+</tr>
+<tr>
+<td><strong>[SiteToken]</strong></td>
+<td>申请到的令牌码 Site指站点，教程中会替换成 Github、Gitee、Coding</td>
+</tr>
+<tr>
+<td><strong>[GithubEmail]</strong></td>
+<td>与github绑定的主邮箱，建议使用Gmail</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 在记事本中逐个记录，方便替换，以下为我的示例</span><br><span class="line">[Blogroot]：E:\Blogroot</span><br><span class="line"></span><br><span class="line">[SourceRepo]：HelloAllenW/HexoBlog</span><br><span class="line"></span><br><span class="line">[SiteBlogRepo]</span><br><span class="line">  [GithubBlogRepo]：HelloAllenW.github.io</span><br><span class="line"></span><br><span class="line">[SiteUsername]</span><br><span class="line">  [GithubUsername]：HelloAllenW</span><br><span class="line"></span><br><span class="line">[SiteToken]</span><br><span class="line">  [GithubToken]：15076c8eb9c874sad676bc9bfb13sadw86babf2</span><br><span class="line"></span><br><span class="line">[GithubEmail]：hailun081@163.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="Github-Action使用教程"><a href="#Github-Action使用教程" class="headerlink" title="Github Action使用教程"></a>Github Action使用教程</h1><h2 id="1-获取Token"><a href="#1-获取Token" class="headerlink" title="1. 获取Token"></a>1. 获取Token</h2><p>为了确保交由<code>Github Action</code>来持续部署时，<code>Github Action</code>具备足够的权限来进行<code>hexo deploy</code>操作，需要先获取<code>Token</code>，博主目前仅在<code>Github</code>处部署了静态页面，所以也就只需要获取<code>Github</code>的<code>Token</code>。</p>
+<p>在主页依次选择【Settings】-【Developer settings】-【Personal access tokens】-【Tokens(classic)】-【Generate new token】- 【Generate new token(classic)】，填写好描述，勾选【repo】和【workflows】，然后点击【Generate token】生成一个Token。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242328947.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242329656.png"></p>
+<blockquote>
+<p><code>token</code>只会显示这一次，之后将无法查看，所以务必保证你已经记录下了<code>Token</code>。之后如果忘记了就只能重新生成重新配置了。</p>
+</blockquote>
+<h2 id="2-创建存放源码的私有仓库"><a href="#2-创建存放源码的私有仓库" class="headerlink" title="2. 创建存放源码的私有仓库"></a>2. 创建存放源码的私有仓库</h2><p>我们需要创建一个用来存放<code>Hexo</code>博客源码的私有仓库<code>[SourceRepo]</code>。创建完成后，需要把博客的源码<code>push</code>到这里。首先获取远程仓库地址，此处虽然<code>SSH</code>和<code>HTTPS</code>均可。<code>SSH</code>在绑定过<code>ssh key</code>的设备上无需再输入密码，<code>HTTPS</code>则需要输入密码，但是<code>SSH</code>偶尔会遇到端口占用的情况。请自主选择。</p>
+<blockquote>
+<p>这里之所以是私有仓库，是因为在接下来的配置中会用到<code>Token</code>，如果<code>Token</code>被盗用，别人可以肆意操作你的github仓库内容，为了避免这一风险，才选择的博客源码闭源。</p>
+</blockquote>
+<h2 id="3-配置Github-Action"><a href="#3-配置Github-Action" class="headerlink" title="3. 配置Github Action"></a>3. 配置Github Action</h2><p>（1）在<code>[Blogroot]</code>新建<code>.github</code>文件夹,注意开头是有个<code>.</code>的。然后在<code>.github</code>内新建<code>workflows</code>文件夹，再在<code>workflows</code>文件夹内新建<code>autodeploy.yml</code>,在<code>[Blogroot]/.github/workflows/autodeploy.yml</code>里面输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"># 当有改动推送到master分支时，启动Action</span><br><span class="line">name: 自动部署</span><br><span class="line"></span><br><span class="line">on:</span><br><span class="line">  push:</span><br><span class="line">    branches:</span><br><span class="line">      - master #2020年10月后github新建仓库默认分支改为main，注意更改</span><br><span class="line"></span><br><span class="line">  release:</span><br><span class="line">    types:</span><br><span class="line">      - published</span><br><span class="line"></span><br><span class="line">jobs:</span><br><span class="line">  deploy:</span><br><span class="line">    runs-on: ubuntu-latest</span><br><span class="line">    steps:</span><br><span class="line">    - name: 检查分支</span><br><span class="line">      uses: actions/checkout@v2</span><br><span class="line">      with:</span><br><span class="line">        ref: master #2020年10月后github新建仓库默认分支改为main，注意更改</span><br><span class="line"></span><br><span class="line">    - name: 安装 Node</span><br><span class="line">      uses: actions/setup-node@v1</span><br><span class="line">      with:</span><br><span class="line">        node-version: &quot;12.x&quot; #action使用的node版本，建议大版本和本地保持一致。可以在本地用node -v查询版本号。</span><br><span class="line"></span><br><span class="line">    - name: 安装 Hexo</span><br><span class="line">      run: |</span><br><span class="line">        export TZ=&#x27;Asia/Shanghai&#x27;</span><br><span class="line">        npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line">    - name: 缓存 Hexo</span><br><span class="line">      uses: actions/cache@v1</span><br><span class="line">      id: cache</span><br><span class="line">      with:</span><br><span class="line">        path: node_modules</span><br><span class="line">        key: $&#123;&#123;runner.OS&#125;&#125;-$&#123;&#123;hashFiles(&#x27;**/package-lock.json&#x27;)&#125;&#125;</span><br><span class="line"></span><br><span class="line">    - name: 安装依赖</span><br><span class="line">      if: steps.cache.outputs.cache-hit != &#x27;true&#x27;</span><br><span class="line">      run: |</span><br><span class="line">        npm install --save</span><br><span class="line"></span><br><span class="line">    - name: 生成静态文件</span><br><span class="line">      run: |</span><br><span class="line">        hexo clean</span><br><span class="line">        hexo generate</span><br><span class="line"></span><br><span class="line">    - name: 部署 #此处master:master 指从本地的master分支提交到远程仓库的master分支，若远程仓库没有对应分支则新建一个。如有其他需要，可以根据自己的需求更改。</span><br><span class="line">      run: |</span><br><span class="line">        cd ./public</span><br><span class="line">        git init</span><br><span class="line">        git config --global user.name &#x27;$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;&#x27;</span><br><span class="line">        git config --global user.email &#x27;$&#123;&#123; secrets.GITHUBEMAIL &#125;&#125;&#x27;</span><br><span class="line">        git add .</span><br><span class="line">        git commit -m &quot;$&#123;&#123; github.event.head_commit.message &#125;&#125; $(date +&quot;%Z %Y-%m-%d %A %H:%M:%S&quot;) Updated By Github Actions&quot;</span><br><span class="line">        git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; master:master</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意最后一行的<code>master:master</code>指从本地的master分支提交到远程仓库的master分支,需要根据你自己的实际情况进行调整。本地分支可以在git bash中看到。线上分支可以在提交仓库中查看。因为“政治正确”的原因，github在2020年10月将默认分支改为main。而git软件在本地默认创建的分支依然是master，所以若你线上仓库默认分支是main，这里应该写成master:main，表示从本地的master推送到远程的main。</p>
+</blockquote>
+<p>（2）之后需要自己到仓库的Settings-&gt;Secrets-&gt;actions 下添加环境变量，变量名参考脚本中出现的，依次添加。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242335113.png"></p>
+<p>需要部署在githubpage上，那么脚本中必要的变量为<br><code>GITHUBUSERNAME</code>、<code>GITHUBEMAIL</code>、<code>GITHUBTOKEN</code>，因此添加这三条变量。变量具体内容释义可以查看本文开头。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242337935.png"></p>
+<h2 id="4-重新设置远程仓库和分支"><a href="#4-重新设置远程仓库和分支" class="headerlink" title="4. 重新设置远程仓库和分支"></a>4. 重新设置远程仓库和分支</h2><p>（1）添加屏蔽项<br>因为能够使用指令进行安装的内容不包括在需要提交的源码内，所有我们需要将这些内容添加到屏蔽项，表示不上传到github上。这样可以显著减少需要提交的文件量和加快提交速度。<br>打开<code>[Blogroot]/.gitignore</code>,输入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">.deploy_git*/</span><br><span class="line">.idea</span><br><span class="line">themes/butterfly/.git</span><br></pre></td></tr></table></figure>
+
+<p>如果不是<code>butterfly</code>主题，记得替换最后一行内容为你自己当前使用的主题。</p>
+<p>（2）提交源码到私有仓库<code>[SourceRepo]</code><br>在博客根目录[Blogroot]下启动终端，使用git指令重设仓库地址。这样在新建仓库，我们仍旧可以保留珍贵的commit history，便于版本回滚。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git remote rm origin # 删除原有仓库链接</span><br><span class="line">git remote add origin git@github.com:[GithubUsername]/[SourceRepo].git #[SourceRepo]为新的存放源码的github私有仓库</span><br><span class="line">git checkout -b master # 切换到master分支，</span><br><span class="line">#2020年10月后github新建仓库默认分支改为main，注意更改</span><br><span class="line"># 如果不是，后面的所有设置的分支记得保持一致</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot;github action update&quot;</span><br><span class="line">git push origin master</span><br><span class="line">#2020年10月后github新建仓库默认分支改为main，注意更改</span><br></pre></td></tr></table></figure>
+
+<p>（3）可能遇到的bug<br>因为<code>butterfly</code>主题文件夹下的<code>.git</code>文件夹的存在，那么主题文件夹会被识别子项目。从而无法被上传到源码仓库。若是遇到添加屏蔽项，但是还是无法正常上传主题文件夹的情况。请先将本地源码中的<code>themes</code>文件夹移动到别的目录下。然后<code>commit</code>一次。接着将<code>themes</code>文件夹移动回来，再<code>commit</code>一次。</p>
+<blockquote>
+<p>要是还不行，那就删了<code>butterfly</code>主题文件夹下的<code>.git</code>文件夹，然后再重复上述的<code>commit</code>操作。</p>
+</blockquote>
+<h2 id="5-查看部署情况"><a href="#5-查看部署情况" class="headerlink" title="5. 查看部署情况"></a>5. 查看部署情况</h2><p>此时，打开GIthub存放源码的私有仓库，找到action。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242341919.png"></p>
+<p>点击Deploy查看部署情况</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312242341784.png"></p>
+<p>若全部打钩，恭喜你，你现在可以享受自动部署的快感了。</p>
+<h1 id="Hexo自动部署至虚拟主机"><a href="#Hexo自动部署至虚拟主机" class="headerlink" title="Hexo自动部署至虚拟主机"></a>Hexo自动部署至虚拟主机</h1><p>打开 Action 配置文件<code>（本地博客仓库目录/.github/workflows/(Action配置文件).yml）</code>，在后面添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- name: Deploy Files on Ftp Server</span><br><span class="line">  uses: SamKirkland/FTP-Deploy-Action@4.3.3</span><br><span class="line">  with:</span><br><span class="line">    server: (FTP服务器地址)</span><br><span class="line">    username: (FTP用户名)</span><br><span class="line">    password: (FTP密码)</span><br><span class="line">    local-dir: ./public/</span><br><span class="line">    server-dir: (FTP服务器文件目录)</span><br><span class="line">    port: (FTP服务器端口，一般是21)</span><br><span class="line">    protocol: ftp</span><br></pre></td></tr></table></figure>
+
+<p>最后直接将博客源码提交到github上就行了。</p>
+<h1 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h1><h2 id="1-unknown-block-tag-“tagname”"><a href="#1-unknown-block-tag-“tagname”" class="headerlink" title="1. unknown block tag: “tagname”"></a>1. unknown block tag: “tagname”</h2><p>要是在github action部署时遇到<code>unknown block tag: &quot;tagname&quot;</code>这样的报错，说明你可能没有正确上传主题文件夹，也可能遇到安装依赖或生成页面失败的情况。</p>
+<p>请按照以下思路逐一排查。</p>
+<p>（1）是否将<code>node_modules</code>也上传到源码仓库<code>[SourceRepo]</code>了。源码仓库不需要有<code>node_modules</code>文件夹。</p>
+<p>（2）是否有将<code>[Blogroot]/themes/</code>下的主题文件夹上传，例如检查[SourceRepo]内的<code>[Blogroot]/themes/Butterfly</code>是否为空文件夹。为了能够正常编译页面，源码仓库需要有<code>[Blogroot]/themes/Butterfly</code>文件夹及它所包含的主题文件内容。<br>为了避免这两点，需要添加git屏蔽项。通过给<code>.gitignore</code>添加屏蔽项解决。<br>打开<code>[Blogroot]/.gitignore</code>,输入以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules/</span><br><span class="line">public/</span><br><span class="line">.deploy*/</span><br><span class="line">.deploy_git*/</span><br><span class="line">.idea</span><br><span class="line">themes/butterfly/.git</span><br></pre></td></tr></table></figure>
+
+<p>（3）若是遇到添加屏蔽项，但是还是无法正常上传主题文件夹的情况。</p>
+<ul>
+<li>请先将本地源码中的<code>themes/butterfly</code>文件夹下的<code>.git</code>文件夹删除。</li>
+<li>然后将<code>butterfly</code>文件夹移动到别的目录下。然后<code>commit</code>一次。</li>
+<li>接着将<code>butterfly</code>文件夹移动回来，再<code>commit</code>一次。</li>
+</ul>
+<h2 id="2-遇到spawn-failed报错。"><a href="#2-遇到spawn-failed报错。" class="headerlink" title="2. 遇到spawn failed报错。"></a>2. 遇到<code>spawn failed</code>报错。</h2><p>在<code>github action</code>的配置中出现这一报错。一般是因为涉及到部署地址的配置项有误。</p>
+<p>（1）首先排查你在<code>[Blogroot]\_config.yml</code>的<code>deploy</code>配置项是否按照上文<a target="_blank" rel="noopener" href="https://akilar.top/posts/f752c86d/#%E9%85%8D%E7%BD%AEdeploy%E9%A1%B9">配置deploy项</a>中的步骤正确组装配置链接。</p>
+<p>（2）其次排查<code>[Blogroot]\.github\workflows\autodeploy.yml</code>中各个关于仓库链接的配置内容，注意按照注释指引检查空格、分支等。</p>
+<p>（3）更多可能的因素和解决方案可以参考<a target="_blank" rel="noopener" href="https://blog.zhheo.com/">@洪哥HEO</a>写的方案:<a target="_blank" rel="noopener" href="https://blog.zhheo.com/p/128998ac.html">Hexo错误：spawn failed的解决方法</a>。</p>
+<h2 id="3-变量名称问题"><a href="#3-变量名称问题" class="headerlink" title="3. 变量名称问题"></a>3. 变量名称问题</h2><p>部分不愿意用教程给出的变量名的可能遇到未知bug，此处给出官方的命名规则：</p>
+<p>以下规则适用于密码名称：</p>
+<p>密钥名称只能包含字母数字字符（[a-z]、[A-Z]、[0-9]）或下划线 (_)。 不允许空格。</p>
+<p>密钥名称不得以 <code>GITHUB_</code> 前缀开头。</p>
+<p>密钥名称不能以数字开头。</p>
+<p>密钥名称不区分大小写。</p>
+<p>密钥名称在所创建的级别上必须是唯一的。</p>
+<h2 id="4-分支问题"><a href="#4-分支问题" class="headerlink" title="4. 分支问题"></a>4. 分支问题</h2><p>本地分支和线上分支不一致导致总是提交不上。<br>注意观察autodeploy.yml文件中，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; master:master</span><br></pre></td></tr></table></figure>
+
+<p>末尾的master:master指从本地的master分支提交到远程仓库的master分支。需要根据实际情况进行调整。本地的分支可在git bash中查看。线上的分支可在仓库查看。比如本地默认分支是master，线上默认分支是main，应该改成master:main。<br>会遇到这类问题，一般是有同学直接全局替换master为main导致。</p>
+<h2 id="5-CI-CD时提示：-public目录找不到"><a href="#5-CI-CD时提示：-public目录找不到" class="headerlink" title="5. CI/CD时提示：./public目录找不到"></a>5. CI/CD时提示：./public目录找不到</h2><p>配置文件<code>/.github/workflows/(Action配置文件).yml</code>应该放在博客根目录，并且<code>.github/ </code>和<code> themes/</code>同一级。</p>
+<h2 id="6-CI-CD到部署报错，错误如下："><a href="#6-CI-CD到部署报错，错误如下：" class="headerlink" title="6. CI/CD到部署报错，错误如下："></a>6. CI/CD到部署报错，错误如下：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: src refspec main does not match any</span><br><span class="line">error: failed to push some refs to &#x27;https://github.com/***/***.github.io.git&#x27;</span><br><span class="line">Error: Process completed with exit code 1.</span><br></pre></td></tr></table></figure>
+
+<p>原因是我本地分支时main，线上分支时main。然后我将配置文件<code>/.github/workflows/(Action配置文件).yml</code>的最后一行改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; main:main</span><br></pre></td></tr></table></figure>
+
+<p>正确应该为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; master:main</span><br></pre></td></tr></table></figure>
+
+<p>原因未知。</p>
+<h2 id="7-自动部署虚拟主机报错"><a href="#7-自动部署虚拟主机报错" class="headerlink" title="7. 自动部署虚拟主机报错"></a>7. 自动部署虚拟主机报错</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">----------------------  full error below  ----------------------</span><br><span class="line">----------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">Error: Timeout (control socket)</span><br><span class="line">    at Socket.&lt;anonymous&gt; (/home/runner/work/_actions/SamKirkland/FTP-Deploy-Action/4.3.3/dist/index.js:5288:58)</span><br><span class="line">    at Object.onceWrapper (node:events:627:28)</span><br><span class="line">    at Socket.emit (node:events:513:28)</span><br><span class="line">    at Socket._onTimeout (node:net:550:8)</span><br><span class="line">    at listOnTimeout (node:internal/timers:559:17)</span><br><span class="line">    at processTimers (node:internal/timers:502:7)</span><br><span class="line">Error: Error: Timeout (control socket)</span><br></pre></td></tr></table></figure>
+
+<p>解决方法是在配置中添加：<code>protocol: ftp</code></p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>这里可能有同学要问，github action有啥用？这不就是从<code>hexo cl &amp;&amp; hexo g &amp;&amp; hexo s</code>的三件套变成了<code>git add .</code>,<code>git commit -m &quot;commit content&quot;</code>,<code>git push</code>三件套吗？<br>其实github action的最大作用就是进一步提高速度和便携性，首先，配置要求提交源码这点，萌新小白就没必要再靠本地不断新建压缩包来备份源码了，借助git的版本管理，不管怎么改都可以快速回滚。<br>然后，git提交是增量更新，每次只提交新增或者删改的内容，而hexo deploy是在本地每次重新生成所有静态文件以后再整个提交。github action能帮我们节省大把时间，把最耗时的hexo generate和hexo deploy的工作丢给CI处理。让我们能够专心与编写博客内容，而不是水文3分钟，提交半小时。</p>
+<blockquote>
+<p>需要Gitee和Coding的部署方式，请<a target="_blank" rel="noopener" href="https://akilar.top/posts/f752c86d/">点击查看</a></p>
+</blockquote>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"># 博客搭建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/57769d31/">微前端父子应用css命名冲突的解决方案</a>
+            
+            
+            <a class="next" rel="next" href="/7d9d60a6/">2023年度欧洲摄影大奖，30幅作品</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/57769d31/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7d9d60a6/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

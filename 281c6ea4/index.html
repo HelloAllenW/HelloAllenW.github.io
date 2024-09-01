@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>如何提升应用的Lighthouse 分数 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何提升应用的Lighthouse 分数</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 8, 2020&nbsp;&nbsp;15:48:04</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 8, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">性能优化与代码规范 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、Web-Vitals"><a href="#一、Web-Vitals" class="headerlink" title="一、Web Vitals"></a>一、Web Vitals</h1><p>Lighthouse 的性能检测是基于 Web Vitals 指标来测量页面的性能。</p>
+<p>Web Vitals，即 Google 给的定义是一个良好网站的基本指标（Essential metrics for a healthy site）。在过去要去衡量一个高质量网站，需要的指标太多，且有些指标计算很复杂，所以，Google 推出 Web Vitals 就是为了简化这个过程，用户仅仅需要关注 Web Vitals 即可。</p>
+<p>Web Vitals 给出的指标：</p>
+<ul>
+<li>FCP(First Contentful Paint)：测量应用程序在初次访问期间需要渲染 DOM 中的第一个元素的时间。</li>
+<li>SI(Speed Index)：首屏展现平均值，衡量页面内容填充的速度（越低越好）。它特别适用于比较不同页面之间的差别衡量应用程序渲染内容的速度。Lighthouse 通过捕获在浏览器中加载页面的视频并检查每个视频帧（在启用视频捕获的测试中，每秒10帧）来完成的。</li>
+<li>LCP：显示最大内容元素所需时间。计算网页可视范围内最大的内容元件需花多少时间载入。这项指标的意义是：网页上的主要内容需花多少时间才会被使用者看到，相当于网页给人的第一印象。当页面被载入时，Google 会抓取页面中最大元素的载入时间作为 LCP，而且 LCP 会随着载入的内容越来越多而改变，直到页面完全载入后，最大元素即被确定为「真正的」LCP。</li>
+<li>TTI（交互时间）：测量应用程序何时准备好与用户交互。主要是通过跟踪耗时较长的任务来确定，设置 PerformanceObserver 观察类型为 longtask 的条目，然后可以根据耗时较长的条目的 startTime 和duration，来大致确认页面处于 idle 的时间，从而确定 TTI 指标。</li>
+<li>TBT（总阻塞时间）：衡量我们应用程序中“长任务”（耗时超过 50 毫秒的任务）的影响。测量First Contentful Paint 首次内容绘制 (FCP)与Time to Interactive 可交互时间 (TTI)之间的总时间，这期间，主线程被阻塞的时间过长，无法作出输入响应。那它是如何工作的？让我们看一下这个例子：</li>
+</ul>
+<p>假设我们的应用程序包含 20 个任务：</p>
+<ul>
+<li>10 个任务每个需要 40 毫秒</li>
+<li>10 个任务每个需要 60 毫秒</li>
+</ul>
+<p>TBT 只关心 60 毫秒的任务（更准确地说，是 50 毫秒阈值与值本身之间的差异），所以我们的最终结果将是：</p>
+<p>AMOUNT x (VALUE – THRESHOLD) = RESULT</p>
+<p>10 x (60ms – 50ms) = 100ms</p>
+<ul>
+<li>CLS（Cumulative Layout Shift）：初始视口中所有意想不到的布局变化。值是根据“不稳定”元素在帧之间移动的距离计算的。累计布局位移，用于衡量视觉稳定性，谷歌要求页面的CLS最好保持小于0.1。它是一个重要的、以用户为中心的衡量视觉稳定性的指标，因为它有助于量化用户体验意外布局位移的频率，低 CLS 有助于确保页面令人愉快。</li>
+</ul>
+<h1 id="二、开始修复"><a href="#二、开始修复" class="headerlink" title="二、开始修复"></a>二、开始修复</h1><h3 id="1-修复字体文件以提高-Lighthouse-分数"><a href="#1-修复字体文件以提高-Lighthouse-分数" class="headerlink" title="1. 修复字体文件以提高 Lighthouse 分数"></a>1. 修复字体文件以提高 Lighthouse 分数</h3><p>为什么字体会影响你的灯塔分数？这是因为它们的使用方式不仅会影响页面速度（不同的字体有不同的大小），而且会对查看者在不查看页面时的查看方式产生深远影响。以下是一些需要注意的事项：</p>
+<ul>
+<li>自托管：避免从无法控制的外部服务加载字体文件。只要有可能，应该自行托管字体文件以避免更长的 HTTP 请求，或者使用带有缓存的 CDN 托管。</li>
+<li>字体扩展：字体扩展对文件的最终大小有很大的影响。如果你选择的字体带有不同的扩展选项，则应始终选择最轻的 WOFF2。</li>
+</ul>
+<p>字体子集：一些字体有更小的变体，称为“子集”。 它们包含更少的字形，这进一步减小了文件的大小。例如，某些字体具有仅包含拉丁字母和字符的“拉丁”子集。</p>
+<ul>
+<li>可变字体：可以将字体的多种变体合并到单个文件中，因此我们可以仅加载一个通常小于所有文件组合的文件，而不是加载具有不同变体的“X”数量的不同文件。</li>
+</ul>
+<p>假设我们想使用字体的所有变体（在这个例子中是 9 个文件）。我们将之前的结果乘以 9，并将其大小与单个可变字体文件进行比较。</p>
+<h3 id="2-脚本"><a href="#2-脚本" class="headerlink" title="2. 脚本"></a>2. 脚本</h3><p>脚本也会影响应用的性能——尤其是当它们在不需要的地方出现瓶颈或占用宝贵的加载时间时。处理这方面的方法：</p>
+<ul>
+<li>异步加载。始终使用 async 或 defer 延迟加载第三方脚本，以防止阻塞应用程序的主线程。你还可以使用 next/script 来设置脚本的优先级。</li>
+<li>资源提示。明智地使用资源提示来进一步减少加载脚本所需的时间。</li>
+<li>跟踪代码管理器。考虑将第三方脚本的加载委托给代码管理器，你可以更好地控制脚本加载的顺序和脚本的数量。</li>
+</ul>
+<h3 id="3-样式"><a href="#3-样式" class="headerlink" title="3. 样式"></a>3. 样式</h3><ul>
+<li>CSS over CSS-in-JS 解决方案。在样式方面，您可能需要考虑一种更“老式”的方式。因为在 SSR 应用程序中，我们不想用更多的 JavaScript 占用主线程。这就是为什么 CSS-in-JS 解决方案不是最适合 Next.js 应用程序的原因。</li>
+</ul>
+<p>此外，Next.js 已经内置了很多 CSS 优化方案，比如类名和样式缩小、sass 支持、配置 postcss。</p>
+<ul>
+<li>字体显示。为了避免 FOUT（无样式文本的闪烁）或看到空白屏幕，应该始终通过使用字体上的 font-display 属性来控制字体的加载。</li>
+</ul>
+<h3 id="4-Bundles"><a href="#4-Bundles" class="headerlink" title="4. Bundles"></a>4. Bundles</h3><p>分析 Bundles 包可以很好地发现应用的 Chunk 的数量和大小。</p>
+<ul>
+<li>Bundle-wizard。它是 @next/bundle-analyzer 的一个很不错的替代品，它允许我们检查我们的应用程序包。在我看来，它比其他工具有 3 大优势：</li>
+</ul>
+<p>（1）它有一个更好的用户界面</p>
+<p>（2）它提供了 chunk 的覆盖范围</p>
+<p>（3）它可以在构建期间在任何已部署的应用程序上运行</p>
+<ul>
+<li>chunk 拆分。减少 bundles 包大小的一个好方法是将它们分成更小的部分。我们的应用程序更容易加载多个较小的块而不是几个大块。幸运的是，webpack 确实允许我们拆分合并的块。此外，我们可以控制模块的优先级。</li>
+<li>删除重复的模块。有时在 monorepo 架构中工作时，我们可能会得到多次捆绑的包。同样，webpack config 带有一个可以合并我们重复的块的属性。</li>
+</ul>
+<h3 id="5-CLS"><a href="#5-CLS" class="headerlink" title="5. CLS"></a>5. CLS</h3><p>每当可见元素将其位置从一个渲染帧更改为下一帧时，就会发生布局转换。</p>
+<p>最常见的影响CLS的分数的有：</p>
+<ul>
+<li>未指定尺寸的图片</li>
+<li>未指定尺寸的广告、嵌入元素、iframe</li>
+<li>动态插入内容</li>
+<li>自定义字体（引发FOIT/FOUT）</li>
+<li>在更新 DOM 之前等待网络响应的操作</li>
+</ul>
+<p>因此，需要为动态内容保留空间。为了防止任何意外的布局变化，我们应该始终为尚未渲染的内容保留空间。</p>
+<p>有很多很棒的方法，比如骨架加载，它模仿给定组件的一般外观，包括它的宽度和高度。这样，我们将保留确切的空间，从而消除 CLS。</p>
+<p>但有时，我们不必使用任何花哨的东西。我们可以只插入一个空的占位符框，这将确保用户没有不愉快的体验。</p>
+<p>（1）图像</p>
+<p>图像可能是最臭名昭著的页面速度的恶棍。我们有更多的技巧可以让这个问题成为不是问题：</p>
+<ul>
+<li>使用新一代文件扩展名。考虑以 webp 或 jpeg2000 文件扩展名提供图像。它比传统的 jpeg 或 png 轻得多，而且没有明显的质量损失。 有许多库可以在上传过程中将图像转换为 webp，因此请随意使用它们。但请始终记住，某些较旧的浏览器可能不支持该扩展，因此请准备适用格式的后备版本。</li>
+<li>尺寸变体。Lighthouse 确实建议为提供不同变体的图像。像Sharp 这样的库允许我们生成同一张图像的多种尺寸。要显示它们，我们可以使用 <picture> 标签或 img srcSet 属性。</li>
+<li>延迟加。总是延迟加载视口之外的图像。这样，我们可以在第一次访问我们的页面时节省时间。为此，我们可以在 img 标签上使用 loading=”lazy”属性。</li>
+<li>预加载。考虑预加载首屏的图像，尤其是 LCP 元素。预加载“告诉”浏览器需要比正常情况更早地获取内容。</li>
+<li>使用 Next/image 组件。Next/Image 组件，它将通过转换为 webp、调整大小、延迟加载和预加载 API 为我们优化图像。</li>
+</ul>
+<h3 id="6-Javascript"><a href="#6-Javascript" class="headerlink" title="6. Javascript"></a>6. Javascript</h3><p>有时，在 SEO 性能方面，JavaScript 可能会成为反派。为了提高应用程序的分数，我们可以避免一些常见错误：</p>
+<ul>
+<li>代码拆分（动态导入）。代码拆分允许我们延迟加载一些代码，因此它减少了我们应用程序的主线程必须做的工作量。 Next/dynamic 是一个很好的代码拆分工具。使用简单的 API，我们可以将组件拆分为单独的块，这些块将按需加载。我们还可以控制组件是否应该在服务器端呈现。</li>
+<li>树摇。避免直接使用 export default 导出文件, 而是导出需要用到的模块。例如：export const function test() {}</li>
+</ul>
+<h3 id="7-如何保持高性能"><a href="#7-如何保持高性能" class="headerlink" title="7. 如何保持高性能"></a>7. 如何保持高性能</h3><p>如果我们已经达到了让我们满意的性能水平，那么随着时间的推移将其保持在同一水平会很好。有一些工具可以帮助我们做到这一点：</p>
+<ul>
+<li>Bundle-wizard。在我们的应用程序增长时不时运行此工具是一个很好的做法，以确保包大小保持较小，并且我们不会遇到任何意外的块问题。</li>
+<li>Webpack 性能提示。来自 webpack 的性能提示是我们运行 bundle-wizard 的一个很好的指标。它们很容易配置，当任何应用程序块超过大小限制时，可以在构建期间抛出警告或错误。</li>
+<li>PageSpeed Insights / Lighthouse。当然，我们衡量应用程序性能的主要工具是 Lighthouse。我们可以通过 Chrome 浏览器中的开发工具运行它，也可以通过 PSI 网站运行它。</li>
+<li>WebPageTest。是 Lighthouse 的一个很酷的替代品。它也为我们测量了 Web Vitals，但以更易于访问的方式为我们提供了更多信息。例如，我们可以看到任务的瀑布或渲染过程的幻灯片。</li>
+<li>Lighthouse-CI。使用 Lighthouse-CI，我们可以为特定指标或 CI 流程的整体性能得分设置测试。这样，我们可以随着应用程序的增长持续测量页面速度。</li>
+<li>衡量真实用户的表现。这是对已经投入生产并拥有一些活跃用户的应用程序的提示。衡量真实用户的表现是了解我们的弱点在哪里的关键。</li>
+</ul>
+<p>像 Lighthouse 或 WebPageTest 这样的工具有时会产生误导，因为它们总是在稳定的互联网连接、最新版本的 Chrome 等环境下工作……而对于我们的最终用户而言，情况并非总是如此。通常，用户在给定页面上的表现可能比 Lighthouse 建议的要差得多。</p>
+<h1 id="三、结尾"><a href="#三、结尾" class="headerlink" title="三、结尾"></a>三、结尾</h1><p>Web App 的性能不是修复一次就可以完成的。 它更像是一个随着应用程序的增长而不断检查、分析和改进应用程序的过程。幸运的是，我们可以而且应该尽可能地自动化这个过程。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"># 性能优化与代码规范</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/15ddeb28/">在被短视频“投喂”的时代，如何保持清醒，独立思考？</a>
+            
+            
+            <a class="next" rel="next" href="/b16c9ff2/">Electron快速上手</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/15ddeb28/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b16c9ff2/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

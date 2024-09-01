@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>在 CSS 中隐藏元素的 10 种方法 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">在 CSS 中隐藏元素的 10 种方法</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2020&nbsp;&nbsp;22:31:41</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">5 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在 CSS 中很多隐藏元素的方法，但这些方法的可访问性、布局、动画、性能和事件处理的方式有所不同。</p>
+<ul>
+<li><strong>动画：</strong> 一些CSS隐藏元素的方法一般是全有或者全无，元素要么是完全可见，要么是完全不可见，并且没有中间状态。其他的，比如透明度，可以是一个范围的值，所以在这中间过程插入动画成为可能；</li>
+<li><strong>可访问性：</strong> 下面的每一种方法都会在视觉上隐藏一个元素，但不一样会真正的去除DOM元素。有一些方式隐藏元素后，屏幕阅读器仍然能读取到元素内容；</li>
+<li><strong>事件处理：</strong> 隐藏元素之后，有些方式元素上的事件仍然能被触发，而有些方式就会导致元素上的事件触发无效；</li>
+<li><strong>表现：</strong> 浏览器加载并解析 HTML DOM 和 CSS 对象模型后，页面将分三个阶段呈现：布局（生成每个元素的几何位置）、绘制（绘制每个元素的像素）、组合（以适当的顺序放置元素层）。仅导致构图变化的效果明显比影响布局的效果更好。在某些情况下，浏览器还可以使用硬件加速。</li>
+</ul>
+<p>下面就来看看CSS中隐藏元素的方式以及每种方式的特点。</p>
+<h2 id="1-opacity-和-filter-opacity"><a href="#1-opacity-和-filter-opacity" class="headerlink" title="1. opacity 和 filter: opacity()"></a>1. opacity 和 filter: opacity()</h2><p>opacity: N 和 filter: opacity(N) 属性可以传递一个 0 到 1 之间的数字，或者 0% 和 100% 之间的百分比，对应地表示完全透明和完全不透明。</p>
+<ul>
+<li>opacity: N：该属性用来设置元素的透明度；</li>
+<li>filter: opacity(N) ：filter属性用来设置元素的滤镜，opacity是滤镜的透明度，用来设置元素的透明度。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">    opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">    filter: opacity(0%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在现代浏览器中，这两者之间几乎没有实际的区别，但如果同时应用多种效果（模糊、对比度、灰度等）时，应该使用 filter 属性。</p>
+<p>注意：opacity 可以设置动画并提供出色的性能，但页面上保留完全透明的元素可能会触发事件。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6Aicorjiayia77yntS21GtQkIYLODOpbBHr7O3SXWEyA71fdlsESLPwhibiaUWA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="2-color-alpha-透明度"><a href="#2-color-alpha-透明度" class="headerlink" title="2. color alpha 透明度"></a>2. color alpha 透明度</h2><p>可以将元素的color、background-color 和 border-color 等属性设置为rgba(0,0,0,0)，这样就会使元素完全透明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: rgba(0,0,0,0);</span><br><span class="line">  background-color: rgba(0,0,0,0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这三个属性都是支持设置动画效果的，需要注意，透明度不能应用于带有背景图片的元素，除非它们是使用 linear-gradient 或类似方法生成的。</p>
+<p>Alpha 通道可以设置为：</p>
+<ul>
+<li>transparent：完全透明（中间不能插入动画）；</li>
+<li>rgba(r, g, b, a)：红色、绿色、蓝色和 alpha；</li>
+<li>hsla(h, s, l, a)：色相、饱和度、亮度和 alpha；</li>
+<li>#RRGGBBAA 或 #RGBA。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6AicoibjJPXLyD56dathYZrDkePeWB7e81OwGPf0HvfBxzCrgOLXGm2Hghtw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="3-transform"><a href="#3-transform" class="headerlink" title="3. transform"></a>3. transform</h2><p>transform 属性可以用于元素的平移、缩放、旋转或倾斜等。可以使用 scale(0) 或者 translate(-9999px, 0px)  属性值来将元素隐藏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  transform: scale(0);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  translate(-9999px, 0px)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>transform 属性提供了出色的性能和硬件加速，因为元素被有效地移动到了单独的层中，并且可以在 2D 或 3D 中进行动画处理。原始的布局空间会保持原样，并不会受影响。使用这种方式隐藏的元素不会触发任何事件。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6AicoXSLoWgiaSsHddicYV9cXoLnVuKjmAB6ibUoBD2d8icyDSKiaZ5v0iaT77Psw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="4-clip-path"><a href="#4-clip-path" class="headerlink" title="4. clip-path"></a>4. clip-path</h2><p>clip-path 属性可以创建一个剪辑区域，用于确定元素的哪些部分是可见的。使用 <code>clip-path: circle(0)</code> 可以将元素进行隐藏。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  clip-path: circle(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>clip-path为添加动画效果提供了空间，不过它只能在现代浏览器中使用。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6AicoicQPpd9azuY35cphgvntgKYdP6XYxAT3MSqDZZqWicWC4Idway67YE9w/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="5-visibility-hidden"><a href="#5-visibility-hidden" class="headerlink" title="5. visibility: hidden"></a>5. visibility: hidden</h2><p>visibility 属性可以设置为 visible 或 hidden 来显示和隐藏元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除非使用collapse值，否则元素使用的空间保持不变。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6Aico4KxsJOSB6b29fBwOoY4UQomuBJ7mEpWLEB3ic1MgstuApVwV73j2trw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="6-display-none"><a href="#6-display-none" class="headerlink" title="6. display: none"></a>6. display: none</h2><p>display 可能是最常用的元素隐藏方法; 。当其值为 none 时元素就隐藏了。被隐藏的元素不会在页面中占据位置，也不会响应绑定的监听事件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">   display: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，在大多数情况下，display 可能是最糟糕的 CSS 属性。除非使用 position:absolute 将元素移出文档流，或者采用contain属性，否则它的隐藏过程无法设置动画，并将触发页面重新布局。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6Aiconnzjzff56FFAiaia7dhQSWOpiaw3d0aRibXrt83MMbQEicnXiaUPebu4ibwLw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="7-z-index"><a href="#7-z-index" class="headerlink" title="7. z-index"></a>7. z-index</h2><p>可以通过将元素的 z-index 属性设置为负值，以实现元素的隐藏。这实际上就是将元素放在了我们看不到的层。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">   z-index: -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6AicoW13j16D8ia2KGAicicEdyt3IHyzibUdcG50MH6goTFu8Oc30C9d1aeL9wg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="8-position"><a href="#8-position" class="headerlink" title="8. position"></a>8. position</h2><p>position属性允许使用top、bottom、left、right 从页面中的默认位置移动元素。因此，绝对定位的元素可以通过左键：-9999px 等值移出屏幕：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">   position: absolute;</span><br><span class="line">   left: -999px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6AicoEOyqBiaeicwQDtJhE1BZvCILAicjJo50cLfpS0I4jnSEOsd9hTOGeRIHg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="9-覆盖另一个元素"><a href="#9-覆盖另一个元素" class="headerlink" title="9. 覆盖另一个元素"></a>9. 覆盖另一个元素</h2><p>通过在元素的上面放置与背景颜色相同的元素，可以在视觉上隐藏一个元素。下面来使用::after伪元素来实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">div::after &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  content: &#x27;&#x27;;</span><br><span class="line">  top: 0;</span><br><span class="line">  bottom: 100%;</span><br><span class="line">  left: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然这从技术上讲是可以实现的，但是这样做需要更多的代码。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6Aicov9gMFWSL0r3p8luLqFx1chSRJ7w64khE7NqltS0KCfbz1l5aCMc1Bg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="10-缩小尺寸"><a href="#10-缩小尺寸" class="headerlink" title="10. 缩小尺寸"></a>10. 缩小尺寸</h2><p>可以通过使用width、height、padding、border-width 或 font-size 来缩小元素的尺寸以实现元素的隐藏。可能还需要应用 overflow: hidden; 来确保内容不会溢出。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  height: 0;</span><br><span class="line">  padding: 0;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用这种形式我们可以在隐藏过程中使用动画效果，并且他的性能会比 transform 好很多。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMhsiaTP8ugv8zDfbEYp6Aico5zBrmLPiaKdWa3LO2iaib32SljzGcficYz5ZD6x8ib7wKOeicNTeYwK6JIEA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5b4d2881/">Console 实用调试技巧</a>
+            
+            
+            <a class="next" rel="next" href="/fb44acb/">前端代码风格指南</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5b4d2881/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/fb44acb/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

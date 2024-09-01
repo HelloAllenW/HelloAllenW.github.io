@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>关于闭包 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">关于闭包</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">七月 6, 2015&nbsp;&nbsp;8:52:32</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        七月 6, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h1><p>我们先来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var n = 999;</span><br><span class="line">function f1() &#123;</span><br><span class="line">    console.log(n);</span><br><span class="line">&#125;</span><br><span class="line">f1() // 999</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，函数f1可以读取全局变量n。但是函数外部无法读取函数内部声明的变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">&#125;</span><br><span class="line">console.log(n)</span><br><span class="line">// Uncaught ReferenceError: n is not defined</span><br></pre></td></tr></table></figure>
+
+<p>如果有时需要得到函数内的局部变量，正常情况下，这是办不到的。只有通过变通的方法才能实现，那就是在函数内部再定义一个函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">    var n = 999;</span><br><span class="line">    function f2() &#123;</span><br><span class="line">      console.log(n); // 999</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，函数f2就在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。既然f2可以读取到f1的局部变量，那么只要把f2作为f1的返回值，我们就可以在f1外部读取它的内部变量了。</p>
+<h1 id="二、闭包是什么？"><a href="#二、闭包是什么？" class="headerlink" title="二、闭包是什么？"></a>二、闭包是什么？</h1><h2 id="1-理解闭包"><a href="#1-理解闭包" class="headerlink" title="1. 理解闭包"></a>1. 理解闭包</h2><p>我们对上面代码进行修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">    var a = 999;</span><br><span class="line">    function f2() &#123;</span><br><span class="line">        console.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    return f2; // f1返回了f2的引用</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var result = f1(); // result就是f2函数了</span><br><span class="line">result();  </span><br><span class="line">// 执行result，全局作用域下没有a的定义，但是函数闭包，能够把定义函数的时候的作用域一起记住，输出999  </span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，函数f1的返回值就是函数f2，由于f2可以读取f1的内部变量，所以就可以在外部获得f1的内部变量了。</p>
+<p>闭包就是函数f2，即能够读取其他函数内部变量的函数。由于在JavaScript语言中，只有函数内部的子函数才能读取内部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。闭包最大的特点，就是它可以“记住”诞生的环境，比如f2记住了它诞生的环境f1，所以从f2可以得到f1的内部变量。在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<p>那到底什么是闭包呢？</p>
+<p>当函数可以记住并访问所在的词法作用域（通过let const with() try-catch创建的变量会存在词法环境中），即使函数是在当前词法作用域之外执行，这就产生了闭包。 —-《你不知道的Javascript上卷》</p>
+<h2 id="2-闭包的概念"><a href="#2-闭包的概念" class="headerlink" title="2. 闭包的概念"></a>2. 闭包的概念</h2><p>（1）MDN对闭包的定义是：闭包是指那些能够访问自由变量的函数。</p>
+<p>那什么是自由变量呢？自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。</p>
+<p>由此，我们可以看出闭包共有两部分组成：函数 + 函数能够访问的自由变量。</p>
+<p>举个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p>foo函数可以访问变量a，但a既不是foo函数的局部变量，也不是foo函数的参数，所以a就是自由变量。</p>
+<p>那么，函数foo+foo函数访问的自由变量a不就是构成了一个闭包嘛……</p>
+<p>还真是这样的！</p>
+<p>（2）所以在《JavaScript权威指南》中讲到：从技术的角度来讲，所有的JavaScript函数都是闭包。</p>
+<p>哎，这怎么跟我们平时看到的讲到的闭包不一样呢？</p>
+<p>别着急，这只是理论上的闭包，其实还有一个实践角度上的闭包：</p>
+<p>ECMAScript中，闭包指的是：</p>
+<p>从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。</p>
+<p>从实践角度：以下函数才算是闭包：</p>
+<p>（1）即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）</p>
+<p>（2）在代码中引用了自由变量</p>
+<p>平时主要研究的是实践上的闭包。</p>
+<h1 id="三、闭包的特性"><a href="#三、闭包的特性" class="headerlink" title="三、闭包的特性"></a>三、闭包的特性</h1><h2 id="1-每个函数都是闭包，每个函数天生都能够记忆自己定义时所处的作用域环境。"><a href="#1-每个函数都是闭包，每个函数天生都能够记忆自己定义时所处的作用域环境。" class="headerlink" title="1. 每个函数都是闭包，每个函数天生都能够记忆自己定义时所处的作用域环境。"></a>1. 每个函数都是闭包，每个函数天生都能够记忆自己定义时所处的作用域环境。</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 例题1</span><br><span class="line">var inner;</span><br><span class="line">function outer()&#123;</span><br><span class="line">    var a = 250;</span><br><span class="line">    inner = function()&#123;</span><br><span class="line">        alert(a); // 这个函数虽然在外面执行，但能够记忆住定义时的那个作用域，a是250</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">outer();</span><br><span class="line">var a = 300;</span><br><span class="line">inner(); // 一个函数在执行的时候，找闭包里面的变量，不会理会当前作用域。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 例题2</span><br><span class="line">function outer(x)&#123;</span><br><span class="line">    function inner(y)&#123;</span><br><span class="line">        console.log(x+y);</span><br><span class="line">    &#125;</span><br><span class="line">    return inner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var inn = outer(3); // 数字3传入outer函数后，inner函数中x便会记住这个值</span><br><span class="line">inn(5); // 当inner函数再传入5的时候，只会对y赋值，所以最后弹出8</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-闭包的内存泄露"><a href="#2-闭包的内存泄露" class="headerlink" title="2. 闭包的内存泄露"></a>2. 闭包的内存泄露</h2><p>栈内存提供一个执行环境，即作用域，包括全局作用域和私有作用域，那它们什么时候释放内存呢？</p>
+<p>全局作用域：只有当页面关闭的时候全局作用域才会销毁。</p>
+<p>私有作用域：只有函数执行才会产生。</p>
+<p>一般情况下，函数执行会形成一个新的私有的作用域，当私有作用域中的代码执行完成后，我们当前作用域都会主动的进行释放和销毁。但当遇到函数执行返回了一个引用数据类型的值，并且在函数的外面被一个其他的东西给接收了，这种情况下一般形成的私有作用域都不会销毁。</p>
+<p>如下面这种情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fn()&#123;</span><br><span class="line">    var num=100;</span><br><span class="line">    return function()&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var f=fn(); // fn执行形成的这个私有的作用域就不能再销毁了</span><br></pre></td></tr></table></figure>
+
+<p>也就是像上面这段代码，fn函数内部的私有作用域会被一直占用的，发生了内存泄漏。所谓内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。闭包不能滥用，否则会导致内存泄露，影响网页的性能。闭包使用完了后，要立即释放资源，将引用变量指向null。</p>
+<h1 id="四、闭包的作用"><a href="#四、闭包的作用" class="headerlink" title="四、闭包的作用"></a>四、闭包的作用</h1><h2 id="1-可以读取函数内部的变量。"><a href="#1-可以读取函数内部的变量。" class="headerlink" title="1. 可以读取函数内部的变量。"></a>1. 可以读取函数内部的变量。</h2><h2 id="2-可以使变量的值长期保存在内存中，生命周期比较长。因此不能滥用闭包，否则会造成网页的性能问题"><a href="#2-可以使变量的值长期保存在内存中，生命周期比较长。因此不能滥用闭包，否则会造成网页的性能问题" class="headerlink" title="2. 可以使变量的值长期保存在内存中，生命周期比较长。因此不能滥用闭包，否则会造成网页的性能问题"></a>2. 可以使变量的值长期保存在内存中，生命周期比较长。因此不能滥用闭包，否则会造成网页的性能问题</h2><h2 id="3-可以用来实现JS模块。"><a href="#3-可以用来实现JS模块。" class="headerlink" title="3. 可以用来实现JS模块。"></a>3. 可以用来实现JS模块。</h2><p>JS模块: 具有特定功能的js文件,将所有的数据和功能都封装在一个函数内部(私有的)，只向外暴露一个包含n个方法的对象或函数，模块的使用者，只需要通过模块暴露的对象调用方法来实现对应的功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// index.html文件</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;myModule.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  myModule2.doSomething()</span><br><span class="line">  myModule2.doOtherthing()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">// myModule.js文件</span><br><span class="line">(function () &#123;</span><br><span class="line">  var msg = &#x27;Beijing&#x27;//私有数据</span><br><span class="line">  //操作数据的函数</span><br><span class="line">  function doSomething() &#123;</span><br><span class="line">    console.log(&#x27;doSomething() &#x27;+msg.toUpperCase())</span><br><span class="line">  &#125;</span><br><span class="line">  function doOtherthing () &#123;</span><br><span class="line">    console.log(&#x27;doOtherthing() &#x27;+msg.toLowerCase())</span><br><span class="line">  &#125;</span><br><span class="line">  //向外暴露对象(给外部使用的两个方法)</span><br><span class="line">  window.myModule2 = &#123;</span><br><span class="line">    doSomething: doSomething,</span><br><span class="line">    doOtherthing: doOtherthing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、闭包的实际应用"><a href="#五、闭包的实际应用" class="headerlink" title="五、闭包的实际应用"></a>五、闭包的实际应用</h1><h2 id="1-IIFE（立即执行函数）"><a href="#1-IIFE（立即执行函数）" class="headerlink" title="1. IIFE（立即执行函数）"></a>1. IIFE（立即执行函数）</h2><p>IIFE 是一种自执行匿名函数，这个匿名函数拥有独立的作用域。这不仅可以避免了外界访问此 IIFE 中的变量，而且又不会污染全局作用域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 2;</span><br><span class="line">(function IIFE()&#123;</span><br><span class="line">  console.log(a);  // 输出2</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-函数柯里化"><a href="#2-函数柯里化" class="headerlink" title="2. 函数柯里化"></a>2. 函数柯里化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function outer()&#123;</span><br><span class="line">    var num = 0;</span><br><span class="line">    return function add()&#123;</span><br><span class="line">        num++;</span><br><span class="line">        console.log(num);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var func1=outer();</span><br><span class="line">func1();    // 实际上是调用add函数， 输出1</span><br><span class="line">func1();    // 输出2 因为outer函数内部的私有作用域会一直被占用</span><br><span class="line"></span><br><span class="line">var func2 = outer();</span><br><span class="line">func2();    // 输出1  每次重新引用函数的时候，闭包是全新的。</span><br><span class="line">func2();    // 输出2  </span><br></pre></td></tr></table></figure>
+
+<h2 id="3-循环输出问题"><a href="#3-循环输出问题" class="headerlink" title="3. 循环输出问题"></a>3. 循环输出问题</h2><p>最后来看一个常见的和闭包相关的循环输出问题，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1; i &lt;= 5; i ++)&#123;</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">  &#125;, 0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码输出的结果是 5 个 6，那为什么都是 6 呢？如何才能输出 1、2、3、4、5 呢？</p>
+<p>可以结合以下两点来思考第一个问题：</p>
+<ul>
+<li>setTimeout 为宏任务，由于 JS 中单线程 eventLoop 机制，在主线程同步任务执行完后才去执行宏任务，因此循环结束后 setTimeout 中的回调才依次执行。</li>
+<li>因为 setTimeout 函数也是一种闭包，往上找它的父级作用域链就是 window，变量 i 为 window 上的全局变量，开始执行 setTimeout 之前变量 i 已经就是 6 了，因此最后输出的连续就都是 6。</li>
+</ul>
+<p>那如何按顺序依次输出 1、2、3、4、5 呢？</p>
+<p>1）利用 IIFE可以利用 IIFE（立即执行函数），当每次 for 循环时，把此时的变量 i 传递到定时器中，然后执行，改造之后的代码如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for(var i = 1;i &lt;= 5;i++)&#123;</span><br><span class="line">  (function(j)&#123;</span><br><span class="line">    setTimeout(function timer()&#123;</span><br><span class="line">      console.log(j)</span><br><span class="line">    &#125;, 0)</span><br><span class="line">  &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，通过这样改造使用 IIFE（立即执行函数），可以实现序号的依次输出。利用立即执行函数的入参来缓存每一个循环中的 i 值。</p>
+<p>2）使用 ES6 中的 letES6 中新增的 let 定义变量的方式，使得 ES6 之后 JS 发生革命性的变化，让 JS 有了块级作用域，代码的作用域以块级为单位进行执行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i = 1; i &lt;= 5; i++)&#123;</span><br><span class="line">  setTimeout(function() &#123;</span><br><span class="line">    console.log(i);</span><br><span class="line">  &#125;,0)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，通过 let 定义变量的方式，重新定义 i 变量，则可以用最少的改动成本，解决该问题。</p>
+<p>3）定时器第三个参数setTimeout 作为经常使用的定时器，它是存在第三个参数的。我们经常使用前两个，一个是回调函数，另外一个是定时时间，setTimeout 从第三个入参位置开始往后，是可以传入无数个参数的。这些参数会作为回调函数的附加参数存在。那么结合第三个参数，调整完之后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(var i=1;i&lt;=5;i++)&#123;</span><br><span class="line">  setTimeout(function(j) &#123;</span><br><span class="line">    console.log(j)</span><br><span class="line">  &#125;, 0, i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，第三个参数的传递，可以改变 setTimeout 的执行逻辑，从而实现想要的结果，这也是一种解决循环输出问题的途径。</p>
+<h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><p>1、闭包概念：</p>
+<p>通俗来讲，闭包其实就是一个可以访问其他函数内部变量的函数（所以闭包概念是建立在作用域的基础上）。即一个定义在函数内部的函数，或者说闭包是个内嵌函数。</p>
+<p>通常情况下，函数内部变量是无法在外部访问的（即全局变量和局部变量的区别），因此使用闭包的作用，就具备实现了能在外部访问某个函数内部变量的功能，让这些内部变量的值始终可以保存在内存中。</p>
+<p>MDN对闭包的定义是：闭包是指那些能够访问自由变量的函数（自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。）。</p>
+<p>2、闭包产生的原因：</p>
+<p>当访问一个变量时，代码解释器会首先在当前的作用域查找，如果没找到，就去父级作用域去查找，直到找到该变量或者不存在父级作用域中，这样的链路就是作用域链。 所以闭包产生的本质就是：当前环境中存在指向父级作用域的引用。</p>
+<p>那是不是只有返回函数才算是产生了闭包呢？其实也不是，回到闭包的本质，只需要让父级作用域的引用存在即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 以下虽然返回了函数，但不是闭包。因为没有对父级作用域的引用。也就是fun2()没有访问自由变量</span><br><span class="line">function fun1() &#123;</span><br><span class="line">  var a = 2</span><br><span class="line">  function fun2() &#123;&#125;</span><br><span class="line">  return fun2;</span><br><span class="line">&#125;</span><br><span class="line">var result = fun1();</span><br><span class="line">result();</span><br></pre></td></tr></table></figure>
+
+<p>3、面试题：</p>
+<p>（1）闭包的特性：</p>
+<p>函数内再嵌套函数；内部函数可以引用外层的参数和变量；参数和变量不会被垃圾回收机制回收；</p>
+<p>（2）对闭包的理解</p>
+<p>使用闭包主要是为了设计私有的方法和变量。闭包的优点是可以避免全局变量的污染，缺点是闭包会常驻内存，会增大内存使用量，使用不当很容易造成内存泄露。在js中，函数即闭包，只有函数才会产生作用域的概念。</p>
+<p>闭包 的最大用处有两个，一个是可以读取函数内部的变量，另一个就是让这些变量始终保持在内存中。</p>
+<p>闭包的另一个用处，是封装对象的私有属性和私有方法。</p>
+<p>好处：能够实现封装和缓存等；</p>
+<p>坏处：就是消耗内存、不正当使用会造成内存溢出的问题；</p>
+<p>（3）使用闭包的注意点</p>
+<p>由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。</p>
+<p>解决方法是，在退出函数之前，将不使用的局部变量全部删除。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43126a4a/">从摄影师到情色片导演，被遗忘的一代：香港摄影师何藩</a>
+            
+            
+            <a class="next" rel="next" href="/b27b20b/">从《权力的游戏》看欧洲历史</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43126a4a/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b27b20b/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

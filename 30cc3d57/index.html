@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>ES7、ES8、ES9、ES10新特性 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES7、ES8、ES9、ES10新特性</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 5, 2021&nbsp;&nbsp;22:21:22</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 5, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>从 ECMAScript 2016（ES7）开始，版本发布变得更加频繁，每年发布一个新版本，好在每次版本的更新内容并不多，本文会细说这些新特性，尽可能和旧知识相关联，帮你迅速上手这些特性。</p>
+<h1 id="一、ES7新特性（2016）"><a href="#一、ES7新特性（2016）" class="headerlink" title="一、ES7新特性（2016）"></a>一、ES7新特性（2016）</h1><h2 id="1-Array-prototype-includes"><a href="#1-Array-prototype-includes" class="headerlink" title="1. Array.prototype.includes()"></a>1. Array.prototype.includes()</h2><p>在ES6中我们有<code>String.prototype.includes()</code>，而在ES7中给Array添加了同样的方法。</p>
+<h2 id="2-指数运算符"><a href="#2-指数运算符" class="headerlink" title="2. 指数运算符 **"></a>2. 指数运算符 <code>**</code></h2><p>ES7引入了指数运算符，具有和<code>Math.pow()</code>等效的计算结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(2 ** 10) // 1024</span><br><span class="line">console.log(Math.pow(2, 10)) // 1024</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、ES8新特性（2017）"><a href="#二、ES8新特性（2017）" class="headerlink" title="二、ES8新特性（2017）"></a>二、ES8新特性（2017）</h1><h2 id="1-Async-Await"><a href="#1-Async-Await" class="headerlink" title="1. Async/Await"></a>1. Async/Await</h2><p>Async是一个通过异步执行并隐式返回Promise作为结果的函数。</p>
+<h2 id="2-Object-values-和-Object-entries"><a href="#2-Object-values-和-Object-entries" class="headerlink" title="2. Object.values() 和 Object.entries()"></a>2. Object.values() 和 Object.entries()</h2><p><code>entries()</code>相当于把对象转换为二维数组。</p>
+<p>ES5 引入了Object.keys方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。ES8引入了跟Object.keys配套的Object.values和Object.entries，作为遍历一个对象的补充手段，供for…of循环使用。 它们都用来遍历对象，它会返回一个由给定对象的自身可枚举属性（不含继承的和Symbol属性）组成的数组，数组元素的排列顺序和正常循环遍历该对象时返回的顺序一致。</p>
+<h2 id="3-padStart-和-padEnd"><a href="#3-padStart-和-padEnd" class="headerlink" title="3. padStart 和 padEnd"></a>3. padStart 和 padEnd</h2><p>用于补齐字符串的长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x27;x&#x27;.padStart(4, &#x27;ab&#x27;) // &#x27;abax&#x27;</span><br><span class="line">&#x27;x&#x27;.padEnd(5, &#x27;ab&#x27;) // &#x27;xabab&#x27;</span><br><span class="line"></span><br><span class="line">&#x27;12&#x27;.padStart(10, &#x27;YYYY-MM-DD&#x27;) // &quot;YYYY-MM-12&quot;</span><br><span class="line">&#x27;09-12&#x27;.padStart(10, &#x27;YYYY-MM-DD&#x27;) // &quot;YYYY-09-12&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Object-getOwnPropertyDescriptors"><a href="#4-Object-getOwnPropertyDescriptors" class="headerlink" title="4. Object.getOwnPropertyDescriptors()"></a>4. Object.getOwnPropertyDescriptors()</h2><p>该方法的引入目的，主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。</p>
+<h2 id="5-ES8规定函数的参数列表的结尾可以为逗号："><a href="#5-ES8规定函数的参数列表的结尾可以为逗号：" class="headerlink" title="5. ES8规定函数的参数列表的结尾可以为逗号："></a>5. ES8规定函数的参数列表的结尾可以为逗号：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function person( name, age, sex, ) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要作用是方便使用git进行多人协作开发时修改同一个函数减少不必要的行变更。</p>
+<h1 id="三、ES9新特性（2018）"><a href="#三、ES9新特性（2018）" class="headerlink" title="三、ES9新特性（2018）"></a>三、ES9新特性（2018）</h1><h2 id="1-for-await…of"><a href="#1-for-await…of" class="headerlink" title="1. for await…of"></a>1. for await…of</h2><p>该方法称为异步迭代器，主要用来遍历异步对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Gen (time) &#123;</span><br><span class="line">  return new Promise((resolve,reject) =&gt; &#123;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">       resolve(time)</span><br><span class="line">    &#125;,time)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function test () &#123;</span><br><span class="line">   let arr = [Gen(2000),Gen(100),Gen(3000)]</span><br><span class="line">   for await (let item of arr) &#123;</span><br><span class="line">      console.log(Date.now(),item)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Promise-prototype-finally"><a href="#2-Promise-prototype-finally" class="headerlink" title="2. Promise.prototype.finally()"></a>2. Promise.prototype.finally()</h2><h2 id="3-新的正则表达式特性"><a href="#3-新的正则表达式特性" class="headerlink" title="3. 新的正则表达式特性"></a>3. 新的正则表达式特性</h2><h2 id="4-对象的扩展运算符（ES6只为数组引入了扩展运算符）"><a href="#4-对象的扩展运算符（ES6只为数组引入了扩展运算符）" class="headerlink" title="4. 对象的扩展运算符（ES6只为数组引入了扩展运算符）"></a>4. 对象的扩展运算符（ES6只为数组引入了扩展运算符）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;a: 1, b: 2, c: 3&#125;;</span><br><span class="line">const &#123;a, ...rest&#125; = obj;</span><br><span class="line">console.log(rest);    // 输出 &#123;b: 2, c: 3&#125;</span><br><span class="line"></span><br><span class="line">(function(&#123;a, ...obj&#125;) &#123;</span><br><span class="line">  console.log(obj);    // 输出 &#123;b: 2, c: 3&#125;</span><br><span class="line">&#125;(&#123;a: 1, b: 2, c: 3&#125;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-对象的Rest"><a href="#5-对象的Rest" class="headerlink" title="5. 对象的Rest"></a>5. 对象的Rest</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123;foo: 1, bar: 2, baz: 3&#125;;</span><br><span class="line">const &#123;foo, ...rest&#125; = obj;</span><br><span class="line"></span><br><span class="line">console.log(rest); // &#123;bar: 2, baz: 3&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在函数参数中，rest表示所有剩下的参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function func(&#123;param1, ...rest&#125;) &#123;</span><br><span class="line">    return rest;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">console.log(func(&#123;param1:1, b:2, c:3, d:4&#125;))  // &#123;b: 2, c: 3, d: 4&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在对象字面量中，rest运算符只能放在对象的最顶层，并且只能使用一次，要放在最后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const &#123;...rest, foo&#125; = obj; // Uncaught SyntaxError: Rest element must be last element</span><br><span class="line"></span><br><span class="line">const &#123;foo, ...rest1, ...rest2&#125; = obj; // Uncaught SyntaxError: Rest element must be last element</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、ES10新特性（2019）"><a href="#四、ES10新特性（2019）" class="headerlink" title="四、ES10新特性（2019）"></a>四、ES10新特性（2019）</h1><h2 id="1-Array-prototype-flat-多维数组扁平化"><a href="#1-Array-prototype-flat-多维数组扁平化" class="headerlink" title="1. Array.prototype.flat() 多维数组扁平化"></a>1. Array.prototype.flat() 多维数组扁平化</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const array = [ 1, [ 2, [ 3, [ 4, [ 5 ] ] ] ] ]</span><br><span class="line">const flatAll = array.flat(Infinity) // [ 1, 2, 3, 4, 5 ]</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Array-prototype-flatMap"><a href="#2-Array-prototype-flatMap" class="headerlink" title="2. Array.prototype.flatMap()"></a>2. Array.prototype.flatMap()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3]</span><br><span class="line">console.log(arr.map(item =&gt; [item * 2]).flat()) // [2, 4, 6]</span><br><span class="line">console.log(arr.flatMap(item =&gt; [item * 2])) // [2, 4, 6]</span><br></pre></td></tr></table></figure>
+
+<p>flatMap综合了map和flat的操作</p>
+<h2 id="3-Object-fromEntries"><a href="#3-Object-fromEntries" class="headerlink" title="3. Object.fromEntries()"></a>3. Object.fromEntries()</h2><p><code>Object.fromEntries</code> 这个新的API实现了与<code>Object.entries</code>相反的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const object = &#123; x: 23, y:24 &#125;;</span><br><span class="line">const entries = Object.entries(object); // [[&#x27;x&#x27;, 23], [&#x27;y&#x27;, 24]] 相当于对象转换数组</span><br><span class="line">const result = Object.fromEntries(entries); // &#123; x: 23, y: 24 &#125; 相当于将数组转换为对象</span><br></pre></td></tr></table></figure>
+
+<p>同时也能将map转换为对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const entries = new Map([</span><br><span class="line">  [&#x27;foo&#x27;, &#x27;bar&#x27;],</span><br><span class="line">  [&#x27;baz&#x27;, 42]</span><br><span class="line">])</span><br><span class="line">Object.fromEntries(entries)  //  &#123; foo: &quot;bar&quot;, baz: 42 &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-String-trimStart-和-String-trimEnd"><a href="#4-String-trimStart-和-String-trimEnd" class="headerlink" title="4. String.trimStart 和 String.trimEnd"></a>4. String.trimStart 和 String.trimEnd</h2><p>在ES10之前，JavaScript提供了<code>trim()</code>方法，用于移除字符串首尾空白符。</p>
+<p>现在提供这两个特性，用于移除字符串开头和结尾的空白符（包括空格、制表符tab、换行符等其他空白符等）。之前我们需要用正则表达式来实现，现在ES10新增了两个新特性，让这变得更简单！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const s = &#x27;  abc  &#x27;;</span><br><span class="line"></span><br><span class="line">s.trimStart()   // &quot;abc  &quot;</span><br></pre></td></tr></table></figure>
+
+<p>trimStart() 和 trimEnd()方法的行为与trim()一致，不过会返回一个从原始字符串开头或结尾删除了空白的新字符串，不会修改原始字符串；</p>
+<h2 id="5-catch"><a href="#5-catch" class="headerlink" title="5. catch"></a>5. catch</h2><p>在ES10中，<code>try-catch</code>语句中的参数变为了一个可选项。以前我们写catch语句时，必须传递一个异常参数。这就意味着，即便我们在catch里面根本不需要用到这个异常参数也必须将其传递进去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// ES10之前</span><br><span class="line">try &#123;</span><br><span class="line">  // tryCode</span><br><span class="line">&#125; catch (err) &#123;</span><br><span class="line">  // catchCode</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">这里 err 是必须的参数，在 ES10 可以省略这个参数：</span><br><span class="line">// ES10</span><br><span class="line">try &#123;</span><br><span class="line">  console.log(&#x27;Foobar&#x27;)</span><br><span class="line">&#125; catch &#123;</span><br><span class="line">  console.error(&#x27;Bar&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Symbol-prototype-description"><a href="#6-Symbol-prototype-description" class="headerlink" title="6. Symbol.prototype.description"></a>6. Symbol.prototype.description</h2><p>我们知道，Symbol 的描述只被存储在内部的 [[Description]]，没有直接对外暴露，我们之前只有调用 Symbol 的 toString() 或使用String()方法来读取这个属性，现在添加了description来直接访问描述：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Symbol(&#x27;desc&#x27;).description;  // &quot;desc&quot;</span><br><span class="line">Symbol(&#x27;&#x27;).description;      // &quot;&quot;</span><br><span class="line">Symbol().description;        // undefined</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-Function-prototype-toString"><a href="#7-Function-prototype-toString" class="headerlink" title="7. Function.prototype.toString()"></a>7. Function.prototype.toString()</h2><p>ES2019中，<code>Function.toString()</code>发生了变化。之前执行这个方法时，得到的字符串是去空白符号的。而现在，得到的字符串呈现出原本源码的样子，会保留注释、空格等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function sayHi() &#123;</span><br><span class="line">  /* dog */</span><br><span class="line">  console.log(&#x27;wangwang&#x27;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHi.toString();  // 将输出和上面一样的原始代码</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a70b5091/">Object.keys、Object.getOwnPropertyNames区别</a>
+            
+            
+            <a class="next" rel="next" href="/3fdf11ef/">一文读懂CSS单位</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a70b5091/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/3fdf11ef/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

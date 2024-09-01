@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>异步（四、Async/Await） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">异步（四、Async/Await）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2021&nbsp;&nbsp;16:49:00</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、async-await的概念"><a href="#一、async-await的概念" class="headerlink" title="一、async/await的概念"></a>一、async/await的概念</h1><p>ES7 新增了两个关键字： async和await，代表异步JavaScript编程范式的迁移。它改进了生成器的缺点，提供了在不阻塞主线程的情况下使用同步代码实现异步访问资源的能力。其实 async/await 是 Generator 的语法糖，它能实现的效果都能用then链来实现，它是为优化then链而开发出来的。</p>
+<p>从字面上来看，async是“异步”的简写，await则为等待，所以 async 用来声明异步函数，这个关键字可以用在函数声明、函数表达式、箭头函数和方法上。因为异步函数主要针对不会马上完成的任务，所以自然需要一种暂停和恢复执行的能力，使用await关键字可以暂停异步代码的执行，等待Promise解决。async 关键字可以让函数具有异步特征，但总体上代码仍然是同步求值的。</p>
+<p>它们的用法很简单，首先用 async 关键字声明一个异步函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">async function httpRequest() &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以在这个函数内部使用 await 关键字了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">async function httpRequest() &#123;</span><br><span class="line">  let res1 = await httpPromise(url1)</span><br><span class="line">  console.log(res1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里，await关键字会接收一个期约并将其转化为一个返回值或一个抛出的异常。通过情况下，我们不会使用await来接收一个保存期约的变量，更多的是把他放在一个会返回期约的函数调用面前，比如上述例子。这里的关键就是，await关键字并不会导致程序阻塞，代码仍然是异步的，而await只是掩盖了这个事实，这就意味着任何使用await的代码本身都是异步的。</p>
+<p>下面来看看async函数返回了什么：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">async function testAsy()&#123;</span><br><span class="line">   return &#x27;hello world&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">let result = testAsy();</span><br><span class="line">console.log(result)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402061650963.png"></p>
+<p>可以看到，async 函数返回的是 Promise 对象。如果异步函数使用return关键字返回了值（如果没有return则会返回undefined），这个值则会被 Promise.resolve() 包装成 Promise 对象。异步函数始终返回Promise对象。</p>
+<h1 id="二、await到底在等啥？"><a href="#二、await到底在等啥？" class="headerlink" title="二、await到底在等啥？"></a>二、await到底在等啥？</h1><p>一般我们认为 await 是在等待一个 async 函数完成。不过按语法说明，await 等待的是一个表达式，这个表达式的结果是 Promise 对象或其它值。</p>
+<p>因为 async 函数返回一个 Promise 对象，所以 await 可以用于等待一个 async 函数的返回值——这也可以说是 await 在等 async 函数。但要清楚，它等的实际是一个返回值。注意，await 不仅用于等 Promise 对象，它可以等任意表达式的结果。所以，await 后面实际是可以接普通函数调用或者直接量的。所以下面这个示例完全可以正确运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function getSomething() &#123;</span><br><span class="line">    return &quot;something&quot;;</span><br><span class="line">&#125;</span><br><span class="line">async function testAsync() &#123;</span><br><span class="line">    return Promise.resolve(&quot;hello async&quot;);</span><br><span class="line">&#125;</span><br><span class="line">async function test() &#123;</span><br><span class="line">    const v1 = await getSomething();</span><br><span class="line">    const v2 = await testAsync();</span><br><span class="line">    console.log(v1, v2);</span><br><span class="line">&#125;</span><br><span class="line">test(); // something hello async</span><br></pre></td></tr></table></figure>
+
+<p>await 表达式的运算结果取决于它等的是什么：</p>
+<ul>
+<li>如果它等到的不是一个 Promise 对象，那 await 表达式的运算结果就是它等到的内容；</li>
+<li>如果它等到的是一个 Promise 对象，await 就就会阻塞后面的代码，等着 Promise 对象 resolve，然后将得到的值作为 await 表达式的运算结果。</li>
+</ul>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function testAsy(x)&#123;</span><br><span class="line">   return new Promise(resolve=&gt;&#123;setTimeout(() =&gt; &#123;</span><br><span class="line">       resolve(x);</span><br><span class="line">     &#125;, 3000)</span><br><span class="line">    &#125;</span><br><span class="line">   )</span><br><span class="line">&#125;</span><br><span class="line">async function testAwt()&#123;    </span><br><span class="line">  let result =  await testAsy(&#x27;hello world&#x27;);</span><br><span class="line">  console.log(result);    // 3秒钟之后出现hello world</span><br><span class="line">  console.log(&#x27;cuger&#x27;)   // 3秒钟之后出现cug</span><br><span class="line">&#125;</span><br><span class="line">testAwt();</span><br><span class="line">console.log(&#x27;cug&#x27;)  //立即输出cug</span><br></pre></td></tr></table></figure>
+
+<p>这就是 await 必须用在 async 函数中的原因。async 函数调用不会造成阻塞，它内部所有的阻塞都被封装在一个 Promise 对象中异步执行。await暂停当前async的执行，所以’cug’’最先输出，hello world’和 cuger 是3秒钟后同时出现的。</p>
+<h1 id="三、async-await的优势"><a href="#三、async-await的优势" class="headerlink" title="三、async/await的优势"></a>三、async/await的优势</h1><p>async/await对比Promise的优势：</p>
+<ul>
+<li>代码读起来更加同步，Promise虽然摆脱了回调地狱，但是then的链式调⽤也会带来额外的理解负担；</li>
+<li>Promise传递中间值很麻烦，⽽async/await⼏乎是同步的写法，⾮常优雅；</li>
+<li>错误处理友好，async/await可以⽤成熟的try/catch，Promise的错误捕获比较冗余；</li>
+<li>调试友好，Promise的调试很差，由于没有代码块，不能在⼀个返回表达式的箭头函数中设置断点，如果在⼀个.then代码块中使⽤调试器的步进(step-over)功能，调试器并不会进⼊后续的.then代码块，因为调试器只能跟踪同步代码的每⼀步。</li>
+</ul>
+<h1 id="四、async-await的异常处理"><a href="#四、async-await的异常处理" class="headerlink" title="四、async/await的异常处理"></a>四、async/await的异常处理</h1><p>利用 async/await 的语法糖，可以像处理同步代码的异常一样，来处理异步代码，这里还用上面的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const exe = (flag) =&gt; () =&gt; new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    console.log(flag);</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        flag ? resolve(&quot;yes&quot;) : reject(&quot;no&quot;);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const run = async () =&gt; &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    await exe(false)();</span><br><span class="line">    await exe(true)();</span><br><span class="line">  &#125; catch (e) &#123;</span><br><span class="line">    console.log(e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">run();</span><br><span class="line">// 用try...catch来处理reject()</span><br></pre></td></tr></table></figure>
+
+<p>这里定义一个异步方法 run，由于 await 后面需要直接跟 Promise 对象，因此通过额外的一个方法调用符号 () 把原有的 exe 方法内部的 Thunk 包装拆掉，即执行 exe(false)() 或 exe(true)() 返回的就是 Promise 对象。在 try 块之后，使用 catch 来捕捉。运行代码会得到这样的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">false</span><br><span class="line">no</span><br></pre></td></tr></table></figure>
+
+<p>这个 false 就是 exe 方法对入参的输出，而这个 no 就是 setTimeout 方法 reject 的回调返回，它通过异常捕获并最终在 catch 块中输出。就像我们所认识的同步代码一样，第四行的 exe(true) 并未得到执行。</p>
+<h1 id="五、其他细节问题"><a href="#五、其他细节问题" class="headerlink" title="五、其他细节问题"></a>五、其他细节问题</h1><h2 id="1、async函数在抛出返回值时，会根据返回值类型开启不同数目的微任务："><a href="#1、async函数在抛出返回值时，会根据返回值类型开启不同数目的微任务：" class="headerlink" title="1、async函数在抛出返回值时，会根据返回值类型开启不同数目的微任务："></a>1、async函数在抛出返回值时，会根据返回值类型开启不同数目的微任务：</h2><ul>
+<li>return结果值：非thenable、非promise（不等待）</li>
+<li>return结果值：thenable（等待 1个then的时间）</li>
+<li>return结果值：promise（等待 2个then的时间）</li>
+</ul>
+<h2 id="2、await右值类型区别："><a href="#2、await右值类型区别：" class="headerlink" title="2、await右值类型区别："></a>2、await右值类型区别：</h2><ul>
+<li><p>接非 thenable 类型，会立即向微任务队列添加一个微任务then，但不需等待</p>
+</li>
+<li><p>接 thenable 类型，需要等待一个 then 的时间之后执行</p>
+</li>
+<li><p>接Promise类型(有确定的返回值)，会立即向微任务队列添加一个微任务then，但不需等待</p>
+</li>
+<li><ul>
+<li>TC 39 对await 后面是 promise 的情况如何处理进行了一次修改，移除了额外的两个微任务，在早期版本，依然会等待两个 then 的时间</li>
+</ul>
+</li>
+</ul>
+<h1 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a>六、总结</h1><ol>
+<li><p>async/await 是 Generator 的语法糖。</p>
+</li>
+<li><p>async/await对比Promise的优势：</p>
+</li>
+</ol>
+<ul>
+<li>代码读起来更加同步，Promise虽然摆脱了回调地狱，但是then的链式调⽤也会带来额外的理解负担；</li>
+<li>错误处理友好，async/await可以⽤成熟的try/catch，Promise的错误捕获比较冗余；</li>
+</ul>
+<ol start="3">
+<li>滥用 await 可能会导致性能问题，因为 await 会阻塞代码，也许之后的异步代码并不依赖于前者，但仍然需要等待前者完成，导致代码失去了并发性。</li>
+</ol>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fa43536d/">异步（五、前端请求库：从 XHR 到 Ajax 再到 axios）</a>
+            
+            
+            <a class="next" rel="next" href="/41e965dc/">异步（三、generator）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fa43536d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/41e965dc/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

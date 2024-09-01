@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>CSS Houdini | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CSS Houdini</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2023&nbsp;&nbsp;22:34:57</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、Houdini-是什么"><a href="#一、Houdini-是什么" class="headerlink" title="一、Houdini 是什么"></a>一、Houdini 是什么</h1><p>Houdini(/huːˈdiːni/)的出现最直接的目的是为了解决浏览器对新的CSS特性支持较差以及Cross-Browser的问题。 我们知道有很多新的CSS特性虽然很棒，但它们由于不被主流浏览器广泛支持而很少有人去使用。</p>
+<p>随着CSS规范在不断地更新迭代，越来越多有益的特性被纳入进来，但是一个新的CSS特性从被提出到成为一个稳定的CSS特性，需要经过漫长地等待，直到被大部分浏览器支持时，才能被开发者广泛地使用。</p>
+<p>而 Houdini 的出现正是洞察和解决了这一痛点，它将一系列CSS引擎API开放出来，让开发者可以通过JavasScript创造或者扩展现有的CSS特性，甚至创造自己的CSS渲染规则，给开发者更高的CSS开发自由度，实现更多复杂的效果。</p>
+<blockquote>
+<p>Houdini的名称与一位著名美国逃脱魔术师Harry Houdini的名称一样，也许正是取逃脱之意，让CSS新特性逃离浏览器的掌控。</p>
+</blockquote>
+<p>简单来说：CSS Houdini是一组新的低级API，它们使开发者能够更直接地与浏览器的CSS引擎进行交互。简单地说，Houdini试图”开放”浏览器的CSS引擎，让开发者能够扩展CSS，并将其能力推向前所未有的境地。对于自己想用的CSS功能不用必须等到浏览器支持之后了。</p>
+<h1 id="二、JS-Polyfill-vs-Houdini"><a href="#二、JS-Polyfill-vs-Houdini" class="headerlink" title="二、JS Polyfill vs Houdini"></a>二、JS Polyfill vs Houdini</h1><p>有人会问，实际上很多新的CSS特性在被浏览器支持之前，也有可替代的JavaScript Polyfill可以使用，为什么我们仍然需要Houdini呢？这些Polyfill不是同样可以解决我们的问题吗？</p>
+<p>要回答这个问题也很简单，JavaScript Polyfill相对于Houdini有三个明显的缺陷：</p>
+<ol>
+<li>不一定能实现或实现困难。</li>
+</ol>
+<p>CSSOM开放给JavaScript的API很少，这意味着开发者能做的很有限，只能简单地操纵DOM并对样式做动态计算和调整，光是去实现一些复杂的CSS新特性的Polyfill就已经很难了，对于更深层次的Layout、Paint、Composite等渲染规则更是无能为力。所以当一个新的CSS特性被推出时，通过JavaScript Polyfill不一定能够完整地实现它。</p>
+<ol start="2">
+<li>实现效果差或有使用限制。</li>
+</ol>
+<p>JavaScript Polyfill是通过JavaScript来模拟CSS特性的，而不是直接通过CSS引擎进行渲染，通常它们都会有一定的限制和缺陷。例如，大家熟知的css-scroll-snap-polyfill就是针对新的CSS特性Scroll Snap产生的Polyfill，但它在使用时就存在使用限制或者原生CSS表现不一致的问题。</p>
+<ol start="3">
+<li>性能较差。</li>
+</ol>
+<p>JavaScript Polyfill可能造成一定程度的性能损耗。JavaScript Polyfill的执行时机是在DOM和CSSOM都构建完成并且完成渲染后，通常JavaScript Polyfill是通过给DOM元素设置内联样式来模拟CSS特性，这会导致页面的重新渲染或回流。尤其是当这些Polyfill和滚动事件绑定时，会造成更加明显的性能损耗。</p>
+<h1 id="三、Houdini-APIs"><a href="#三、Houdini-APIs" class="headerlink" title="三、Houdini APIs"></a>三、Houdini APIs</h1><p>上文提到CSS Houdini提供了很多CSS引擎相关的API，根据Houdini提供的规范说明文件，API共分为两种类型：<code>high-level APIs</code> 和 <code>low-level APIs</code> 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402032238087.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402032238095.png"></p>
+<h2 id="1-high-level-APIs"><a href="#1-high-level-APIs" class="headerlink" title="1. high-level APIs"></a>1. high-level APIs</h2><p>顾名思义是高层次的API，这些API与浏览器的渲染流程相关。</p>
+<h3 id="（1）Paint-API"><a href="#（1）Paint-API" class="headerlink" title="（1）Paint API"></a>（1）Paint API</h3><p>提供了一组与绘制（Paint）过程相关的API，我们可以通过它自定义的渲染规则，例如调整颜色（color）、边框（border）、背景（background）、形状等绘制规则。</p>
+<h3 id="（2）Animation-API"><a href="#（2）Animation-API" class="headerlink" title="（2）Animation API"></a>（2）Animation API</h3><p>提供了一组与合成（composite）渲染相关的API，我们可以通过它调整绘制层级和自定义动画。</p>
+<h3 id="（3）Layout-API"><a href="#（3）Layout-API" class="headerlink" title="（3）Layout API"></a>（3）Layout API</h3><p>提供了一组与布局（Layout）过程相关的API，我们可以通过它自定义的布局规则，类似于实现诸如flex、grid等布局，自定义元素或子元素的对齐（alignment）、位置（position）等布局规则。</p>
+<p>（这边高低API的划分还有待考究）</p>
+<h2 id="2-low-level-APIs"><a href="#2-low-level-APIs" class="headerlink" title="2. low-level APIs"></a>2. low-level APIs</h2><p>低层次的API，这些API是high-level APIs的实现基础。</p>
+<h3 id="（1）Typed-Object-Model-API"><a href="#（1）Typed-Object-Model-API" class="headerlink" title="（1）Typed Object Model API"></a>（1）Typed Object Model API</h3><p>在Houdini出现以前，我们通过JavaScript操作CSS Style的方式很简单:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const size = 30</span><br><span class="line">const imgUrl = &#x27;https://www.exampe.com/sample.png&#x27;</span><br><span class="line">target.style.cssText = &#x27;font-size:&#x27; + size + &#x27;px; background: url(&#x27;+ imgUrl +&#x27;)&#x27;  </span><br><span class="line">// &quot;font-size:30px; background: url(https://www.exampe.com/sample.png)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到CSS样式在被访问时被解析为字符串返回，设置CSS样式时也必须以字符串的形式传入。开发者需要手动拼接数值、单位、格式等信息，这种方式非常原始和落后，很多开发者为了节省性能损耗，会选择将一长串的CSS Style字符串传入cssText，可读性很差，而且很容易产生隐蔽的语法错误。<br>相比于上面晦涩的传统方法，Typed Object Model将CSS属性值包装为Typed JavaScript Object，让每个属性值都有自己的类型，简化了CSS属性的操作，并且带来了性能上的提升。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 要访问和操作CSSStyleValue还需要借助两个工具，分别是attributeStyleMap和computedStyleMap()，前者用于处理内联样式，可以进行读写操作，后者用于处理非内联样式（stylesheet），只有读操作。</span><br><span class="line">// 获取stylesheet样式</span><br><span class="line">target.computedStyleMap().get(&quot;font-size&quot;); // &#123; value: 30, unit: &quot;px&quot;&#125;</span><br><span class="line">// 设置内联样式</span><br><span class="line">target.attributeStyleMap.set(&quot;font-size&quot;, CSS.em(5));</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）CSS-Properties-amp-Values-API"><a href="#（2）CSS-Properties-amp-Values-API" class="headerlink" title="（2）CSS Properties &amp; Values API"></a>（2）CSS Properties &amp; Values API</h3><p>根据MDN的定义，CSS Properties &amp; Values API也是Houdini开放的一部分API，它的作用是让开发者显式地声明自定义属性（css custom properties），并且定义这些属性的类型、默认值、初始值和继承方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">--my-color: red;</span><br><span class="line"></span><br><span class="line">// 在被声明之后，这些自定义属性可以通过var()来引用，例如：</span><br><span class="line"></span><br><span class="line">// 在:root下可声明全局自定义属性</span><br><span class="line">:root &#123;</span><br><span class="line">  --my-color: red;</span><br><span class="line">&#125;</span><br><span class="line">#container &#123;</span><br><span class="line">  background-color: var(--my-color)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们能否通过自定义属性来帮助我们完成一些过渡效果呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// DOM</span><br><span class="line">&lt;div id=&quot;container&quot;&gt;container&lt;/div&gt;</span><br><span class="line">// Style</span><br><span class="line">:root &#123;</span><br><span class="line">  --my-color: red;</span><br><span class="line">&#125;</span><br><span class="line">#container &#123;</span><br><span class="line">  transition: --my-color 1s;</span><br><span class="line">  background-color: var(--my-color)</span><br><span class="line">&#125;</span><br><span class="line">#container:hover &#123;</span><br><span class="line">  --my-color: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在鼠标hover经过container的时候，红色的背景色并没有自动修改为蓝色。原因是浏览器不知道该如何去解析--my-color这个变量（因为它并没有明确的类型，只是被当做字符串处理）</span><br></pre></td></tr></table></figure>
+
+<p>但是，通过CSS Properties &amp; Values API提供的CSS.registerProperty()方法就可以做到，就像这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// DOM</span><br><span class="line">&lt;div id=&quot;container&quot;&gt;container&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">// JavaScript</span><br><span class="line">CSS.registerProperty(&#123;</span><br><span class="line">  name: &#x27;--my-color&#x27;, // 变量的名字，不允许重复声明或者覆盖相同名称的变量，否则浏览器会给出相应的报错。</span><br><span class="line">  syntax: &#x27;&lt;color&gt;&#x27;, // 告诉浏览器如何解析这个变量。它的可选项包含了一些预定义的值等。此处是syntax告诉浏览器把--my-color当做color去解析</span><br><span class="line">  inherits: false, // 告诉浏览器这个变量是否继承它的父元素。</span><br><span class="line">  initialValue: &#x27;#c0ffee&#x27;, // 设置该变量的初始值，并且将该初始值作为fallback。</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// Style</span><br><span class="line">#container &#123;</span><br><span class="line">  transition: --my-color 1s;</span><br><span class="line">  background-color: var(--my-color)</span><br><span class="line">&#125;</span><br><span class="line">#container:hover &#123;</span><br><span class="line">  --my-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）Worklets"><a href="#（3）Worklets" class="headerlink" title="（3）Worklets"></a>（3）Worklets</h3><p>Worklets是轻量级的 Web Workers，它提供了让开发者接触底层渲染机制的API，Worklets的工作线程独立于主线程之外，适用于做一些高性能的图形渲染工作。并且它只能被使用在HTTPS协议中（生产环境）或通过localhost来启用（开发调试）。</p>
+<p>Worklets不像Web Workers，我们不能将任何计算操作都放在Worklets中执行，Worklets开放了特定的属性和方法，让我们能处理图形渲染相关的操作。我们能使用的Worklet类型暂时有如下几种：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1、PaintWorklet - Paint API</span><br><span class="line">Paint API允许开发者通过Canvas 2d的方法来绘制元素的背景、边框、内容等图形，这在原始的CSS规则中是无法做到的。</span><br><span class="line"></span><br><span class="line">2、LayoutWorklet - Animation API</span><br><span class="line">在过去，当我们想要对DOM元素执行动画时，通常只有两个选择：CSS Transitions和CSS Animations。这两者在使用上虽然简单，也能满足大部分的动画需求，但是它们有两个共同的缺点：</span><br><span class="line">（1）仅仅依赖时间来执行动画（time-driven）：动画的执行仅和时间有关。</span><br><span class="line">（2）无状态（stateless）：开发者无法干预动画的执行过程，获取不到动画执行的中间状态。</span><br><span class="line">Animation API在功能方面，它是CSS Transitions和CSS Animations的扩展，它允许用户干预动画执行的过程，例如结合用户的scroll、hover、click事件来控制动画执行，像是为动画增加了进度条，通过进度条控制动画进程，从而实现一些更加复杂的动画场景。</span><br><span class="line">在性能方面，它依赖于AnimationWorklet，运行在单独的Worklet线程，因此具有更高的动画帧率和流畅度，这在低端机型中尤为明显</span><br><span class="line"></span><br><span class="line">3、AnimationWorklet - Layout API</span><br><span class="line">Layout API允许用户自定义新的布局规则，创造类似flex、grid之外的布局。</span><br><span class="line"></span><br><span class="line">4、AudioWorklet - Audio API（处于草案阶段，暂不介绍）</span><br></pre></td></tr></table></figure>
+
+<p>Worklets提供了唯一的方法Worklet.addModule()，这个方法用于向Worklet添加执行模块，具体的使用方法，我们在后续的Paint API、Layout API、Animation API中介绍。</p>
+<h3 id="（4）Font-Metrics-API"><a href="#（4）Font-Metrics-API" class="headerlink" title="（4）Font Metrics API"></a>（4）Font Metrics API</h3><p>目前处于草案阶段，但未来Font Metrics API 将会提供一系列API，允许开发者干预文字的渲染过程，创建文字或者动态修改文字的渲染效果等。</p>
+<h3 id="（5）CSS-Parser-API"><a href="#（5）CSS-Parser-API" class="headerlink" title="（5）CSS Parser API"></a>（5）CSS Parser API</h3><p>它将会提供更多CSS解析器相关的API，用于解析任意形式的CSS描述。</p>
+<h1 id="四、利用Houdini实现一个动态波浪纹效果"><a href="#四、利用Houdini实现一个动态波浪纹效果" class="headerlink" title="四、利用Houdini实现一个动态波浪纹效果"></a>四、利用Houdini实现一个动态波浪纹效果</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=en&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=utf-8&gt;</span><br><span class="line">  &lt;meta http-equiv=X-UA-Compatible content=&quot;IE=edge&quot;&gt;</span><br><span class="line">  &lt;meta name=viewport content=&quot;width=device-width,initial-scale=1&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">  #wave &#123;</span><br><span class="line">    width: 20%;</span><br><span class="line">    height: 70vh;</span><br><span class="line">    margin: 10vh auto;</span><br><span class="line">    background-color: #ff3e81;</span><br><span class="line">    background-image: paint(wave); /* CSS 中使用的时候，只需要调用 paint 方法 */</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;wave&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    /* HTML 中通过 Worklets 载入样式的自定义代码</span><br><span class="line">    Worklets 也是 Houdini 提供的 API 之一，负责加载和执行样式的自定义 JS 代码。</span><br><span class="line">    它类似于 Web Worker，是一个运行于主代码之外的独立工作进程，但比 Worker 更为轻量，负责 CSS 渲染任务最为合适。</span><br><span class="line">    */</span><br><span class="line">    if (&quot;paintWorklet&quot; in CSS) &#123;</span><br><span class="line">      CSS.paintWorklet.addModule(&quot;paintworklet.js&quot;); // 加载 paintworklet.js</span><br><span class="line">      const wave = document.querySelector(&quot;#wave&quot;);</span><br><span class="line">      let tick = 0;  </span><br><span class="line">      requestAnimationFrame(function raf(now) &#123;</span><br><span class="line">        tick += 1;</span><br><span class="line">        wave.style.cssText = `--animation-tick: $&#123;tick&#125;;`;</span><br><span class="line">        requestAnimationFrame(raf);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// paintworklet.js</span><br><span class="line">registerPaint(&#x27;wave&#x27;, class &#123;</span><br><span class="line">  static get inputProperties() &#123;</span><br><span class="line">    return [&#x27;--animation-tick&#x27;];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /* 定义了一个wave的paint类，当 wave 被使用时，会实例化 wave 并自动触发 paint 方法执行渲染。*/</span><br><span class="line">  paint(ctx, geom, properties) &#123; // ctx 参数是一个 Canvas 的 Context 对象，因此 paint 的逻辑跟 Canvas 的绘制方式一样。</span><br><span class="line">    let tick = Number(properties.get(&#x27;--animation-tick&#x27;)); // 获取节点 CSS 定义的 --animation-tick 变量</span><br><span class="line">    const &#123;</span><br><span class="line">      width,</span><br><span class="line">      height</span><br><span class="line">    &#125; = geom;</span><br><span class="line">    const initY = height * 0.4;</span><br><span class="line">    tick = tick * 2;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ctx.beginPath();</span><br><span class="line">    ctx.moveTo(0, initY + Math.sin(tick / 20) * 10);</span><br><span class="line">    for (let i = 1; i &lt;= width; i++) &#123;</span><br><span class="line">      ctx.lineTo(i, initY + Math.sin((i + tick) / 20) * 10);</span><br><span class="line">    &#125;</span><br><span class="line">    ctx.lineTo(width, height);</span><br><span class="line">    ctx.lineTo(0, height);</span><br><span class="line">    ctx.lineTo(0, initY + Math.sin(tick / 20) * 10);</span><br><span class="line">    ctx.closePath();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = &#x27;rgba(255, 255, 255, 0.5)&#x27;;</span><br><span class="line">    ctx.fill();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h1><p>Houdini是CSS开放的一组新的底层API，作用是让开发者扩展现有的CSS特性，或者实现一些CSS原生没有或浏览器不支持的一些效果。JS Polyfill也可以实现浏览器不支持的一些CSS效果，但是缺点是polyfill不是直接通过CSS引擎进行渲染，效率低。常用的Houdini的特性就是CSS中自定义属性，然后通过var()来引用。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/b36c86db/">如何用一行 CSS 实现 10 种现代布局</a>
+            
+            
+            <a class="next" rel="next" href="/5bf51b95/">如何在CSS中使用变量</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/b36c86db/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/5bf51b95/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

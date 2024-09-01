@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>前端代码风格指南 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">前端代码风格指南</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 24, 2020&nbsp;&nbsp;11:46:03</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 24, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">性能优化与代码规范 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">7.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">34 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、命名规范"><a href="#一、命名规范" class="headerlink" title="一、命名规范"></a>一、命名规范</h2><p>市面上常用的命名规范：</p>
+<ul>
+<li><code>camelCase</code>（小驼峰式命名法 —— 首字母小写）</li>
+<li><code>PascalCase</code>（大驼峰式命名法 —— 首字母大写）</li>
+<li><code>kebab-case</code>（短横线连接式）</li>
+<li><code>Snake</code>（下划线连接式）</li>
+</ul>
+<h3 id="1-1-项目文件命名"><a href="#1-1-项目文件命名" class="headerlink" title="1.1 项目文件命名"></a>1.1 项目文件命名</h3><h4 id="1-1-1-项目名"><a href="#1-1-1-项目名" class="headerlink" title="1.1.1 项目名"></a>1.1.1 项目名</h4><p>全部采用小写方式， 以<strong>短横线</strong>分隔。 例：<code>my-project-name</code>。</p>
+<h4 id="1-1-2-目录名"><a href="#1-1-2-目录名" class="headerlink" title="1.1.2 目录名"></a>1.1.2 目录名</h4><p><strong>参照项目命名规则，有复数结构时，要采用复数命名法</strong>。例：docs、assets、components、directives、mixins、utils、views。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">my-project-name/</span><br><span class="line">|- .<span class="property">husky</span>         <span class="comment">// 操作 git 钩子的工具，主要用来规范commit内容</span></span><br><span class="line">|- .<span class="property">vscode</span>         <span class="comment">// vscode 针对当前项目的一些个性化配置</span></span><br><span class="line">    |- extensions.<span class="property">json</span> <span class="comment">// 当前项目下推荐的一些vscode插件</span></span><br><span class="line">    |- settings.<span class="property">json</span>   <span class="comment">// vscode 工作区设置</span></span><br><span class="line">|- build          <span class="comment">// 打包相关的一些配置</span></span><br><span class="line">|- <span class="title class_">BuildScript</span>    <span class="comment">// 流水线部署文件目录</span></span><br><span class="line">|- docs           <span class="comment">// 项目的细化文档目录（可选）</span></span><br><span class="line">|- deploy         <span class="comment">// 部署在容器上前端项目代理文件目录</span></span><br><span class="line">    |- nginx.<span class="property">conf</span> <span class="comment">// nginx 配置</span></span><br><span class="line">|- dist           <span class="comment">// 打包文件（可根据实际情况自定义）</span></span><br><span class="line">|- node_modules   <span class="comment">// 下载的依赖包</span></span><br><span class="line">|- public         <span class="comment">// 静态页面目录</span></span><br><span class="line">    |- index.<span class="property">html</span> <span class="comment">// 项目入口</span></span><br><span class="line">|- src            <span class="comment">// 源码目录</span></span><br><span class="line">    |- api        <span class="comment">// http 请求目录</span></span><br><span class="line">    |- assets     <span class="comment">// 静态资源目录，这里的资源会被wabpack构建</span></span><br><span class="line">        |- icon   <span class="comment">// icon 存放目录</span></span><br><span class="line">        |- img    <span class="comment">// 图片存放目录</span></span><br><span class="line">        |- js     <span class="comment">// 公共 js 文件目录</span></span><br><span class="line">        |- scss   <span class="comment">// 公共样式 scss 存放目录</span></span><br><span class="line">            |- frame.<span class="property">scss</span>   <span class="comment">// 入口文件</span></span><br><span class="line">            |- <span class="variable language_">global</span>.<span class="property">scss</span>  <span class="comment">// 公共样式</span></span><br><span class="line">            |- reset.<span class="property">scss</span>   <span class="comment">// 重置样式</span></span><br><span class="line">    |- components     <span class="comment">// 组件</span></span><br><span class="line">    |- plugins        <span class="comment">// 插件</span></span><br><span class="line">    |- router         <span class="comment">// 路由</span></span><br><span class="line">    |- routes         <span class="comment">// 详细的路由拆分目录（可选）</span></span><br><span class="line">        |- index.<span class="property">js</span></span><br><span class="line">    |- store          <span class="comment">// 全局状态管理</span></span><br><span class="line">    |- utils          <span class="comment">// 工具存放目录</span></span><br><span class="line">        |- request.<span class="property">js</span> <span class="comment">// 公共请求工具</span></span><br><span class="line">    |- views          <span class="comment">// 页面存放目录</span></span><br><span class="line">    |- <span class="title class_">App</span>.<span class="property">vue</span>        <span class="comment">// 根组件</span></span><br><span class="line">    |- main.<span class="property">js</span>        <span class="comment">// 入口文件</span></span><br><span class="line">    |- tests          <span class="comment">// 测试用例</span></span><br><span class="line">    |- .<span class="property">browserslistrc</span><span class="comment">// 浏览器兼容配置文件</span></span><br><span class="line">    |- .<span class="property">editorconfig</span>  <span class="comment">// 编辑器配置文件</span></span><br><span class="line">    |- .<span class="property">eslintignore</span>  <span class="comment">// eslint 忽略规则</span></span><br><span class="line">    |- .<span class="property">eslintrc</span>.<span class="property">js</span>   <span class="comment">// eslint 规则</span></span><br><span class="line">    |- .<span class="property">gitignore</span>     <span class="comment">// git 忽略规则</span></span><br><span class="line">    |- babel.<span class="property">config</span>.<span class="property">js</span> <span class="comment">// babel 规则</span></span><br><span class="line">    |- <span class="title class_">Dockerfile</span>      <span class="comment">// Docker 部署文件</span></span><br><span class="line">    |- jest.<span class="property">config</span>.<span class="property">js</span></span><br><span class="line">    |- package-lock.<span class="property">json</span></span><br><span class="line">    |- package.<span class="property">json</span>    <span class="comment">// 依赖</span></span><br><span class="line">    |- <span class="variable constant_">README</span>.<span class="property">md</span>       <span class="comment">// 项目 README</span></span><br><span class="line">    |- vue.<span class="property">config</span>.<span class="property">js</span>   <span class="comment">// webpack 配置</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-3-图像文件名"><a href="#1-1-3-图像文件名" class="headerlink" title="1.1.3 图像文件名"></a>1.1.3 图像文件名</h4><p>全部采用小写方式， 优先选择单个单词命名，多个单词命名以<strong>下划线</strong>分隔。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">banner_sina.gif</span><br><span class="line">menu_aboutus.gif</span><br><span class="line">menutitle_news.gif</span><br><span class="line">logo_police.gif</span><br><span class="line">logo_national.gif</span><br><span class="line">pic_people.jpg</span><br><span class="line">pic_TV.jpg</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-4-HTML-文件名"><a href="#1-1-4-HTML-文件名" class="headerlink" title="1.1.4 HTML 文件名"></a>1.1.4 HTML 文件名</h4><p>全部采用小写方式， 优先选择单个单词命名，多个单词命名以<strong>下划线</strong>分隔。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|- error_report.html</span><br><span class="line">|- success_report.html</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-5-CSS-文件名"><a href="#1-1-5-CSS-文件名" class="headerlink" title="1.1.5 CSS 文件名"></a>1.1.5 CSS 文件名</h4><p>全部采用小写方式， 优先选择单个单词命名，多个单词命名以<strong>短横线</strong>分隔。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|- normalize.less</span><br><span class="line">|- base.less</span><br><span class="line">|- <span class="built_in">date</span>-picker.scss</span><br><span class="line">|- <span class="built_in">input</span>-number.scss</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-1-6-JavaScript-文件名"><a href="#1-1-6-JavaScript-文件名" class="headerlink" title="1.1.6 JavaScript 文件名"></a>1.1.6 JavaScript 文件名</h4><p>全部采用小写方式， 优先选择单个单词命名，多个单词命名以<strong>短横线</strong>分隔。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">|- index<span class="selector-class">.js</span></span><br><span class="line">|- plugin<span class="selector-class">.js</span></span><br><span class="line">|- util<span class="selector-class">.js</span></span><br><span class="line">|- date-util<span class="selector-class">.js</span></span><br><span class="line">|- account-model<span class="selector-class">.js</span></span><br><span class="line">|- collapse-<span class="attribute">transition</span><span class="selector-class">.js</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述规则可以快速记忆为“静态文件下划线，编译文件短横线”。</p>
+</blockquote>
+<h3 id="1-2-Vue-组件命名"><a href="#1-2-Vue-组件命名" class="headerlink" title="1.2 Vue 组件命名"></a>1.2 Vue 组件命名</h3><h4 id="1-2-1-单文件组件名"><a href="#1-2-1-单文件组件名" class="headerlink" title="1.2.1 单文件组件名"></a>1.2.1 单文件组件名</h4><p>文件扩展名为 <code>.vue</code> 的 <code>single-file components</code> (单文件组件)。单文件组件名应该始终是<strong>单词大写开头</strong> (PascalCase)。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- MyComponent.vue</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-2-单例组件名"><a href="#1-2-2-单例组件名" class="headerlink" title="1.2.2 单例组件名"></a>1.2.2 单例组件名</h4><p><strong>只拥有单个活跃实例的组件应该以 The 前缀命名，以示其唯一性。</strong></p>
+<p>这不意味着组件只可用于一个单页面，而是<em>每个页面</em>只使用一次。这些组件永远不接受任何 prop，因为它们是为你的应用定制的。如果你发现有必要添加 prop，那就表明这实际上是一个可复用的组件，<em>只是目前</em>在每个页面里只使用一次。</p>
+<p>比如，头部和侧边栏组件几乎在每个页面都会使用，不接受 prop，该组件是专门为该应用所定制的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- TheHeading.vue</span><br><span class="line">|- TheSidebar.vue</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-3-基础组件名"><a href="#1-2-3-基础组件名" class="headerlink" title="1.2.3 基础组件名"></a>1.2.3 基础组件名</h4><blockquote>
+<p>基础组件：不包含业务，独立、具体功能的基础组件，比如<strong>日期选择器</strong>、<strong>模态框</strong>等。这类组件作为项目的基础控件，会被大量使用，因此组件的 API 进行过高强度的抽象，可以通过不同配置实现不同的功能。</p>
+</blockquote>
+<p>应用特定样式和约定的基础组件(也就是展示类的、无逻辑的或无状态、不掺杂业务逻辑的组件) 应该全部以一个特定的前缀开头 —— Base。<strong>基础组件在一个页面内可使用多次，在不同页面内也可复用，是高可复用组件。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- BaseButton.vue</span><br><span class="line">|- BaseTable.vue</span><br><span class="line">|- BaseIcon.vue</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-4-业务组件"><a href="#1-2-4-业务组件" class="headerlink" title="1.2.4 业务组件"></a>1.2.4 业务组件</h4><blockquote>
+<p>业务组件：它不像基础组件只包含某个功能，而是在业务中被多个页面复用的（具有可复用性），它与基础组件的区别是，业务组件只在当前项目中会用到，不具有通用性，而且会包含一些业务，比如数据请求；而基础组件不含业务，在任何项目中都可以使用，功能单一，比如一个具有数据校验功能的输入框。</p>
+</blockquote>
+<p><strong>掺杂了复杂业务的组件（拥有自身 data、prop 的相关处理）即业务组件</strong>应该以 <code>Custom</code> 前缀命名。业务组件在一个页面内比如：某个页面内有一个卡片列表，而样式和逻辑跟业务紧密相关的卡片就是业务组件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- CustomCard.vue</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-5-紧密耦合的组件名"><a href="#1-2-5-紧密耦合的组件名" class="headerlink" title="1.2.5 紧密耦合的组件名"></a>1.2.5 紧密耦合的组件名</h4><p><strong>和父组件紧密耦合的子组件应该以父组件名作为前缀命名。</strong>  因为编辑器通常会按字母顺序组织文件，所以这样做可以把相关联的文件排在一起。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- TodoList.vue</span><br><span class="line">|- TodoListItem.vue</span><br><span class="line">|- TodoListItemButton.vue</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-6-组件名中单词顺序"><a href="#1-2-6-组件名中单词顺序" class="headerlink" title="1.2.6 组件名中单词顺序"></a>1.2.6 组件名中单词顺序</h4><p><strong>组件名应该以高级别的 (通常是一般化描述的) 单词开头，以描述性的修饰词结尾。</strong> 因为编辑器通常会按字母顺序组织文件，所以现在组件之间的重要关系一目了然。如下组件主要是用于搜索和设置功能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- SearchButtonClear.vue</span><br><span class="line">|- SearchButtonRun.vue</span><br><span class="line">|- SearchInputQuery.vue</span><br><span class="line">|- SearchInputExcludeGlob.vue</span><br><span class="line">|- SettingsCheckboxTerms.vue</span><br><span class="line">|- SettingsCheckboxLaunchOnStartup.vue</span><br></pre></td></tr></table></figure>
+
+<p>还有另一种多级目录的方式，把所有的搜索组件放到“search”目录，把所有的设置组件放到“settings”目录。我们只推荐在非常大型 (如有 100+ 个组件) 的应用下才考虑这么做，因为在多级目录间找来找去，要比在单个 components 目录下滚动查找要花费更多的精力。</p>
+<h4 id="1-2-7-完整单词的组件名"><a href="#1-2-7-完整单词的组件名" class="headerlink" title="1.2.7 完整单词的组件名"></a>1.2.7 完整单词的组件名</h4><p><strong>组件名应该倾向于完整单词而不是缩写。</strong> 编辑器中的自动补全已经让书写长命名的代价非常之低了，而其带来的明确性却是非常宝贵的。不常用的缩写尤其应该避免。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">components/</span><br><span class="line">|- StudentDashboardSettings.vue</span><br><span class="line">|- UserProfileOptions.vue</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-代码参数命名"><a href="#1-3-代码参数命名" class="headerlink" title="1.3 代码参数命名"></a>1.3 代码参数命名</h3><h4 id="1-3-1-name"><a href="#1-3-1-name" class="headerlink" title="1.3.1 name"></a>1.3.1 name</h4><p><strong>组件名应该始终是多个单词，应该始终是 PascalCase 的。</strong> 根组件 App 以及 <code>&lt;transition&gt;</code>、<code>&lt;component&gt; </code>之类的 Vue 内置组件除外。这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML 元素名称都是单个单词的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;ToDoList&#x27;</span>,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-2-prop"><a href="#1-3-2-prop" class="headerlink" title="1.3.2 prop"></a>1.3.2 prop</h4><p><strong>在声明 prop 的时候，其命名应该始终使用 camelCase，而在模板和 JSX 中应该始终使用 kebab-case</strong>。我们单纯的遵循每个语言的约定，在 JavaScript 中更自然的是 camelCase。而在 HTML 中则是 kebab-case。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">WelcomeMessage</span> <span class="attr">greeting-text</span>=<span class="string">&quot;hi&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &#x27;MyComponent&#x27;,</span><br><span class="line">  // ...</span><br><span class="line">  props: &#123;</span><br><span class="line">    greetingText: &#123;</span><br><span class="line">      type: String,</span><br><span class="line">      required: true,</span><br><span class="line">      validator: function (value) &#123;</span><br><span class="line">        return [&#x27;syncing&#x27;, &#x27;synced&#x27;,].indexOf(value) !== -1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-3-router"><a href="#1-3-3-router" class="headerlink" title="1.3.3 router"></a>1.3.3 router</h4><p><strong>Vue Router Path 命名采用 kebab-case 格式。</strong> 用 Snake（如：<code>/user_info</code>）或 camelCase（如：<code>/userInfo</code>)的单词会被当成一个单词，搜索引擎无法区分语义。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/user_info&#x27;</span>, <span class="comment">// user_info 当成一个单词</span></span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;UserInfo&#x27;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="title class_">UserInfo</span>,</span><br><span class="line">  <span class="attr">meta</span>: &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27; - 用户&#x27;</span>,</span><br><span class="line">    <span class="attr">desc</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">path</span>: <span class="string">&#x27;/user-info&#x27;</span>, <span class="comment">// 能解析成 user info</span></span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;UserInfo&#x27;</span>,</span><br><span class="line">  <span class="attr">component</span>: <span class="title class_">UserInfo</span>,</span><br><span class="line">  <span class="attr">meta</span>: &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27; - 用户&#x27;</span>,</span><br><span class="line">    <span class="attr">desc</span>: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-4-模板中组件"><a href="#1-3-4-模板中组件" class="headerlink" title="1.3.4 模板中组件"></a>1.3.4 模板中组件</h4><p><strong>对于绝大多数项目来说，在单文件组件和字符串模板中组件名应该总是 PascalCase 的，但是在 DOM 模板中总是 kebab-case 的。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在单文件组件和字符串模板中 --&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">MyComponent</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 在 DOM 模板中 --&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-5-自闭合组件"><a href="#1-3-5-自闭合组件" class="headerlink" title="1.3.5 自闭合组件"></a>1.3.5 自闭合组件</h4><p><strong>在单文件组件、字符串模板和 JSX 中没有内容的组件应该是自闭合的——但在 DOM 模板里永远不要这样做。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在单文件组件和字符串模板中 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MyComponent</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 在所有地方 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-component</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-6-变量"><a href="#1-3-6-变量" class="headerlink" title="1.3.6 变量"></a>1.3.6 变量</h4><ul>
+<li>命名方法：camelCase</li>
+<li>命名规范：类型 + 对象描述或属性的方式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">var</span> getTitle = <span class="string">&quot;LoginTable&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="keyword">let</span> tableTitle = <span class="string">&quot;LoginTable&quot;</span></span><br><span class="line"><span class="keyword">let</span> mySchool = <span class="string">&quot;我的学校&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-7-常量"><a href="#1-3-7-常量" class="headerlink" title="1.3.7 常量"></a>1.3.7 常量</h4><ul>
+<li>命名方法：全部大写下划线分割</li>
+<li>命名规范：使用大写字母和下划线来组合命名，下划线用以分割单词</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="variable constant_">MAX_COUNT</span> = <span class="number">10</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">URL</span> = <span class="string">&#x27;http://test.host.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-8-方法"><a href="#1-3-8-方法" class="headerlink" title="1.3.8 方法"></a>1.3.8 方法</h4><ul>
+<li>命名方法：camelCase</li>
+<li>命名规范：统一使用动词或者动词 + 名词形式</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1、普通情况下，使用动词 + 名词形式</span></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">go、nextPage、show、open、login</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">jumpPage、openCarInfoDialog</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2、请求数据方法，以 data 结尾</span></span><br><span class="line"><span class="comment">// bad</span></span><br><span class="line">takeData、confirmData、getList、postForm</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line">getListData、postFormData</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3、单个动词的情况</span></span><br><span class="line">init、refresh</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>动词</th>
+<th>含义</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>can</td>
+<td>判断是否可执行某个动作 (权 )</td>
+<td>函数返回一个布尔值。true：可执行；false：不可执行；</td>
+</tr>
+<tr>
+<td>has</td>
+<td>判断是否含有某个值</td>
+<td>函数返回一个布尔值。true：含有此值；false：不含有此值；</td>
+</tr>
+<tr>
+<td>is</td>
+<td>判断是否为某个值</td>
+<td>函数返回一个布尔值。true：为某个值；false：不为某个值；</td>
+</tr>
+<tr>
+<td>get</td>
+<td>获取某个值</td>
+<td>函数返回一个非布尔值</td>
+</tr>
+<tr>
+<td>set</td>
+<td>设置某个值</td>
+<td>无返回值、返回是否设置成功或者返回链式对象</td>
+</tr>
+</tbody></table>
+<h4 id="1-3-9-自定义事件"><a href="#1-3-9-自定义事件" class="headerlink" title="1.3.9 自定义事件"></a>1.3.9 自定义事件</h4><p><strong>自定义事件应始终使用 kebab-case 的事件名。</strong></p>
+<p>不同于组件和 prop，事件名不存在任何自动化的大小写转换。而是触发的事件名需要完全匹配监听这个事件所用的名称。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.$emit(<span class="string">&#x27;my-event&#x27;</span>)</span><br><span class="line"></span><br><span class="line">&lt;<span class="title class_">MyComponent</span> @my-event=<span class="string">&quot;handleDoSomething&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>不同于组件和 prop，事件名不会被用作一个 JavaScript 变量名或 property 名，所以就没有理由使用 camelCase 或 PascalCase 了。并且 <code>v-on</code> 事件监听器在 DOM 模板中会被自动转换为全小写 (因为 HTML 是大小写不敏感的)，所以 <code>v-on:myEvent</code> 将会变成 <code>v-on:myevent</code>——导致 <code>myEvent</code> 不可能被监听到。</p>
+<ul>
+<li><a href="https://link.juejin.cn/?target=https://developer.mozilla.org/zh-CN/docs/Web/Events">原生事件参考列表</a></li>
+</ul>
+<p>由原生事件可以发现其使用方式如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">blur</span>=<span class="string">&quot;toggleHeaderFocus&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">focus</span>=<span class="string">&quot;toggleHeaderFocus&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">click</span>=<span class="string">&quot;toggleMenu&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.esc</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.enter</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.up.prevent</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.down.prevent</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.tab</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">keydown.delete</span>=<span class="string">&quot;handleKeydown&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">mouseenter</span>=<span class="string">&quot;hasMouseHoverHead = true&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">mouseleave</span>=<span class="string">&quot;hasMouseHoverHead = false&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>而为了区分<em>原生事件</em>和<em>自定义事件</em>在 Vue 中的使用，建议除了多单词事件名使用 kebab-case 的情况下，命名还需遵守为 <strong>on + 动词</strong> 的形式，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 父组件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">on-search</span>=<span class="string">&quot;handleSearch&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">on-clear</span>=<span class="string">&quot;handleClear&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">on-clickoutside</span>=<span class="string">&quot;handleClickOutside&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// 子组件</span><br><span class="line">export default &#123;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleTriggerItem () &#123;</span><br><span class="line">      this.$emit(&#x27;on-clear&#x27;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-10-事件方法"><a href="#1-3-10-事件方法" class="headerlink" title="1.3.10 事件方法"></a>1.3.10 事件方法</h4><ul>
+<li>命名方法：camelCase</li>
+<li>命名规范：handle + 名称（可选）+ 动词</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">div</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">click.native.stop</span>=<span class="string">&quot;handleItemClick()&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    @<span class="attr">mouseenter.native.stop</span>=<span class="string">&quot;handleItemHover()&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    handleItemClick () &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">//...</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    handleItemHover () &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="comment">//...</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">  &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二、代码规范"><a href="#二、代码规范" class="headerlink" title="二、代码规范"></a>二、代码规范</h2><h3 id="2-1-Vue"><a href="#2-1-Vue" class="headerlink" title="2.1 Vue"></a>2.1 Vue</h3><h4 id="2-1-1-代码结构"><a href="#2-1-1-代码结构" class="headerlink" title="2.1.1 代码结构"></a>2.1.1 代码结构</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;my-component&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">DemoComponent</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> <span class="title class_">DemoComponent</span> <span class="keyword">from</span> <span class="string">&#x27;../components/DemoComponent&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">name</span>: <span class="string">&#x27;MyComponent&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="title class_">DemoComponent</span></span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">mixins</span>: [],</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">props</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">  data () &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;&#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">computed</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">watch</span>: &#123;&#125;</span></span><br><span class="line"><span class="language-javascript">  created () &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">  mounted () &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">  destroyed () &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">  <span class="attr">methods</span>: &#123;&#125;,</span></span><br><span class="line"><span class="language-javascript">&#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;scss&quot;</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line">#my-component &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-2-data"><a href="#2-1-2-data" class="headerlink" title="2.1.2 data"></a>2.1.2 data</h4><p><strong>组件的 data 必须是一个函数。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// In a .vue file</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-3-prop"><a href="#2-1-3-prop" class="headerlink" title="2.1.3 prop"></a>2.1.3 prop</h4><p><strong>Prop 定义应该尽量详细。</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">props</span>: &#123;</span><br><span class="line">    <span class="attr">status</span>: &#123;</span><br><span class="line">      <span class="attr">type</span>: <span class="title class_">String</span>,</span><br><span class="line">      <span class="attr">required</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">validator</span>: <span class="keyword">function</span> (<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">          <span class="string">&#x27;syncing&#x27;</span>, </span><br><span class="line">          <span class="string">&#x27;synced&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;version-conflict&#x27;</span>,</span><br><span class="line">          <span class="string">&#x27;error&#x27;</span></span><br><span class="line">        ].<span class="title function_">indexOf</span>(value) !== -<span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-4-computed"><a href="#2-1-4-computed" class="headerlink" title="2.1.4 computed"></a>2.1.4 computed</h4><p><strong>应该把复杂计算属性分割为尽可能多的更简单的属性。</strong> 小的、专注的计算属性减少了信息使用时的假设性限制，所以需求变更时也用不着那么多重构了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="attr">computed</span>: &#123; </span><br><span class="line">  <span class="attr">price</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> basePrice = <span class="variable language_">this</span>.<span class="property">manufactureCost</span> / (<span class="number">1</span> - <span class="variable language_">this</span>.<span class="property">profitMargin</span>) </span><br><span class="line">    <span class="keyword">return</span> ( </span><br><span class="line">      basePrice - </span><br><span class="line">      basePrice * (<span class="variable language_">this</span>.<span class="property">discountPercent</span> || <span class="number">0</span>) </span><br><span class="line">    ) </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">  <span class="attr">basePrice</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">manufactureCost</span> / (<span class="number">1</span> - <span class="variable language_">this</span>.<span class="property">profitMargin</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">discount</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">basePrice</span> * (<span class="variable language_">this</span>.<span class="property">discountPercent</span> || <span class="number">0</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">finalPrice</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">basePrice</span> - <span class="variable language_">this</span>.<span class="property">discount</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-5-为-v-for-设置键值"><a href="#2-1-5-为-v-for-设置键值" class="headerlink" title="2.1.5 为 v-for 设置键值"></a>2.1.5 为 <code>v-for</code> 设置键值</h4><p><strong>在组件上必须用 key 搭配 v-for</strong>，以便维护内部组件及其子树的状态。甚至在元素上维护可预测的行为，比如动画中的<a href="https://link.juejin.cn/?target=https://bost.ocks.org/mike/constancy/">对象固化 (object constancy)</a>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">&quot;todo in todos&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">&quot;todo.id&quot;</span>&gt;</span></span><br><span class="line">      &#123;&#123; todo.text &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-6-v-if-和-v-for-互斥"><a href="#2-1-6-v-if-和-v-for-互斥" class="headerlink" title="2.1.6 v-if 和 v-for 互斥"></a>2.1.6 <code>v-if</code> 和 <code>v-for</code> 互斥</h4><p><strong>永远不要把 v-if 和 v-for 同时用在同一个元素上。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bad：控制台报错 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">&quot;user in users&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-if</span>=<span class="string">&quot;shouldShowUsers&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">&quot;user.id&quot;</span>&gt;</span></span><br><span class="line">      &#123;&#123; user.name &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一般我们在两种常见的情况下会倾向于这样做：</p>
+<ul>
+<li>为了过滤一个列表中的项目 (比如 <code>v-for=&quot;user in users&quot; v-if=&quot;user.isActive&quot;</code>)。在这种情形下，请将 <code>users</code> 替换为一个计算属性 (比如 <code>activeUsers</code>)，让其返回过滤后的列表。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">  <span class="attr">activeUsers</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">users</span>.<span class="title function_">filter</span>(<span class="function">(<span class="params">user</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> user.<span class="property">isActive</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">li</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">v-for</span>=<span class="string">&quot;user in activeUsers&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">    <span class="attr">:key</span>=<span class="string">&quot;user.id&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;&#123; user.name &#125;&#125;</span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为了避免渲染本应该被隐藏的列表 (比如 <code>v-for=&quot;user in users&quot; v-if=&quot;shouldShowUsers&quot;</code>)。这种情形下，请将 <code>v-if</code> 移动至容器元素上 (比如 <code>ul</code>, <code>ol</code>)。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">&quot;user in users&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-if</span>=<span class="string">&quot;shouldShowUsers&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">&quot;user.id&quot;</span>&gt;</span></span><br><span class="line">      &#123;&#123; user.name &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-if</span>=<span class="string">&quot;shouldShowUsers&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">&quot;user in users&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">&quot;user.id&quot;</span>&gt;</span></span><br><span class="line">      &#123;&#123; user.name &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-7-多个-attribute-的元素"><a href="#2-1-7-多个-attribute-的元素" class="headerlink" title="2.1.7 多个 attribute 的元素"></a>2.1.7 多个 attribute 的元素</h4><p><strong>多个 attribute 的元素应该分多行撰写，每个 attribute 一行。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;https://vuejs.org/images/logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Vue Logo&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">foo</span>=<span class="string">&quot;a&quot;</span> <span class="attr">bar</span>=<span class="string">&quot;b&quot;</span> <span class="attr">baz</span>=<span class="string">&quot;c&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">&quot;https://vuejs.org/images/logo.png&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">alt</span>=<span class="string">&quot;Vue Logo&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">MyComponent</span></span></span><br><span class="line"><span class="tag">  <span class="attr">foo</span>=<span class="string">&quot;a&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">bar</span>=<span class="string">&quot;b&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">baz</span>=<span class="string">&quot;c&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-8-模板中简单的表达式"><a href="#2-1-8-模板中简单的表达式" class="headerlink" title="2.1.8 模板中简单的表达式"></a>2.1.8 模板中简单的表达式</h4><p><strong>组件模板应该只包含简单的表达式，复杂的表达式则应该重构为计算属性或方法。</strong></p>
+<p>复杂表达式会让你的模板变得不那么声明式。我们应该尽量描述应该出现的<strong>是什么</strong>，而非<strong>如何</strong>计算那个值。而且计算属性和方法使得代码可以重用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line">&#123;&#123;</span><br><span class="line">  fullName.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>).<span class="title function_">map</span>(<span class="function">(<span class="params">word</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> word[<span class="number">0</span>].<span class="title function_">toUpperCase</span>() + word.<span class="title function_">slice</span>(<span class="number">1</span>)</span><br><span class="line">  &#125;).<span class="title function_">join</span>(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更好的做法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 在模板中 --&gt;</span></span><br><span class="line">&#123;&#123; normalizedFullName &#125;&#125;</span><br><span class="line"></span><br><span class="line">// 复杂表达式已经移入一个计算属性</span><br><span class="line">computed: &#123;</span><br><span class="line">  normalizedFullName: function () &#123;</span><br><span class="line">    return this.fullName.split(&#x27; &#x27;).map(function (word) &#123;</span><br><span class="line">      return word[0].toUpperCase() + word.slice(1)</span><br><span class="line">    &#125;).join(&#x27; &#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-9-带引号的-attribute-值"><a href="#2-1-9-带引号的-attribute-值" class="headerlink" title="2.1.9 带引号的 attribute 值"></a>2.1.9 带引号的 attribute 值</h4><p><strong>非空 HTML 特性值应该始终带双引号。</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">text</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">AppSidebar</span> <span class="attr">:style</span>=<span class="string">&#123;width:sidebarWidth+</span>&#x27;<span class="attr">px</span>&#x27;&#125;&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">AppSidebar</span> <span class="attr">:style</span>=<span class="string">&quot;&#123; width: sidebarWidth + &#x27;px&#x27; &#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-1-10-指令缩写"><a href="#2-1-10-指令缩写" class="headerlink" title="2.1.10 指令缩写"></a>2.1.10 指令缩写</h4><ul>
+<li><strong>用 : 表示 v-bind:</strong></li>
+<li><strong>用 @ 表示 v-on:</strong></li>
+<li><strong>用 # 表示 v-slot:</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:value</span>=<span class="string">&quot;newTodoText&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">:placeholder</span>=<span class="string">&quot;newTodoInstructions&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">input</span>=<span class="string">&quot;onInput&quot;</span></span></span><br><span class="line"><span class="tag">  @<span class="attr">focus</span>=<span class="string">&quot;onFocus&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> #<span class="attr">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Here might be a page title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span> #<span class="attr">footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Here&#x27;s some contact info<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-HTML"><a href="#2-2-HTML" class="headerlink" title="2.2 HTML"></a>2.2 HTML</h3><h4 id="2-2-1-文件模板"><a href="#2-2-1-文件模板" class="headerlink" title="2.2.1 文件模板"></a>2.2.1 文件模板</h4><p>HTML5 文件模板：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>HTML5标准模版<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>移动端：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;format-detection&quot;</span> <span class="attr">content</span>=<span class="string">&quot;telephone=no&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>移动端HTML模版<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S DNS预解析 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E DNS预解析 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S 线上样式页面片，开发请直接取消注释引用 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- #include virtual=&quot;&quot; --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E 线上样式页面片 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S 本地调试，根据开发模式选择调试方式，请开发删除 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/index.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /本地调试方式 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://srcPath/index.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /开发机调试方式 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E 本地调试 --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>PC 端：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;zh-CN&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;keywords&quot;</span> <span class="attr">content</span>=<span class="string">&quot;your keywords&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;description&quot;</span> <span class="attr">content</span>=<span class="string">&quot;your description&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;author&quot;</span> <span class="attr">content</span>=<span class="string">&quot;author,email address&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;robots&quot;</span> <span class="attr">content</span>=<span class="string">&quot;index,follow&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=Edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;ie-stand&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>PC端HTML模版<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S DNS预解析 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;dns-prefetch&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E DNS预解析 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S 线上样式页面片，开发请直接取消注释引用 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- #include virtual=&quot;&quot; --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E 线上样式页面片 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- S 本地调试，根据开发模式选择调试方式，请开发删除 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/index.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /本地调试方式 --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://srcPath/index.css&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /开发机调试方式 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- E 本地调试 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-元素及标签闭合"><a href="#2-2-2-元素及标签闭合" class="headerlink" title="2.2.2 元素及标签闭合"></a>2.2.2 元素及标签闭合</h4><p>HTML 元素共有以下5种：</p>
+<ul>
+<li>空元素：area、base、br、col、command、embed、hr、img、input、keygen、link、meta、param、source、track、wbr</li>
+<li>原始文本元素：script、style</li>
+<li>RCDATA 元素：textarea、title</li>
+<li>外来元素：来自 MathML 命名空间和 SVG 命名空间的元素</li>
+<li>常规元素：其他 HTML 允许的元素都称为常规元素</li>
+</ul>
+<p>为了能让浏览器更好的解析代码以及能让代码具有更好的可读性，有如下约定：</p>
+<ul>
+<li>所有具有开始标签和结束标签的元素都要写上起止标签，某些允许省略开始标签或和束标签的元素亦都要写上。</li>
+<li>空元素标签都不加 “/” 字符。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是h1标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>我是一段文字，我有始有终，浏览器能正确解析<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="tag">&lt;<span class="name">br</span> <span class="attr">data-tomark-pass</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是h1标题<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>我是一段文字，我有始无终，浏览器亦能正确解析</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-3-代码嵌套"><a href="#2-2-3-代码嵌套" class="headerlink" title="2.2.3 代码嵌套"></a>2.2.3 代码嵌套</h4><p>元素嵌套规范，每个块状元素独立一行，内联元素可选。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>段落元素与标题元素只能嵌套内联元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- good --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- bad --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-CSS"><a href="#2-3-CSS" class="headerlink" title="2.3 CSS"></a>2.3 CSS</h3><h4 id="2-3-1-样式文件"><a href="#2-3-1-样式文件" class="headerlink" title="2.3.1 样式文件"></a>2.3.1 样式文件</h4><p>样式文件必须写上 <code>@charset</code> 规则，并且一定要在样式文件的第一行首个字符位置开始写，编码名用 <code>“UTF-8”</code>。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@charset</span> <span class="string">&quot;UTF-8&quot;</span>;</span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* @charset规则不在文件首行首个字符开始 */</span></span><br><span class="line"><span class="keyword">@charset</span> <span class="string">&quot;UTF-8&quot;</span>;</span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* @charset规则没有用小写 */</span></span><br><span class="line"><span class="keyword">@CHARSET</span> <span class="string">&quot;UTF-8&quot;</span>;</span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 无@charset规则 */</span></span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-2-代码格式化"><a href="#2-3-2-代码格式化" class="headerlink" title="2.3.2 代码格式化"></a>2.3.2 代码格式化</h4><p>样式书写一般有两种：一种是紧凑格式 （Compact），一种是展开格式（Expanded）。</p>
+<ul>
+<li>推荐：展开格式（Expanded）</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：紧凑格式 （Compact）</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123; <span class="attribute">display</span>: block; <span class="attribute">width</span>: <span class="number">50px</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-3-代码大小写"><a href="#2-3-3-代码大小写" class="headerlink" title="2.3.3 代码大小写"></a>2.3.3 代码大小写</h4><p>样式选择器，属性名，属性值关键字全部使用小写字母书写，属性字符串允许使用大小写。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.JDC</span> &#123;</span><br><span class="line">  <span class="attribute">DISPLAY</span>: BLOCK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-4-代码易读性"><a href="#2-3-4-代码易读性" class="headerlink" title="2.3.4 代码易读性"></a>2.3.4 代码易读性</h4><ol>
+<li>左括号与类名之间一个空格，冒号与属性值之间一个空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span>&#123;</span><br><span class="line">  <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>逗号分隔的取值，逗号之后一个空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">#333</span>, <span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span> <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">1px</span> <span class="number">1px</span> <span class="number">1px</span> <span class="number">#333</span>,<span class="number">2px</span> <span class="number">2px</span> <span class="number">2px</span> <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>为单个 CSS 选择器或新声明开启新行。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span>, <span class="selector-class">.jdc_logo</span>, <span class="selector-class">.jdc_hd</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#ff0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.nav</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span>, <span class="selector-class">.jdc_logo</span>, <span class="selector-class">.jdc_hd</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#ff0</span>;</span><br><span class="line">&#125;<span class="selector-class">.nav</span>&#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>颜色值 <code>rgb()</code> <code>rgba()</code> <code>hsl()</code> <code>hsla()</code> <code>rect()</code> 中不需有空格，且取值不要带有不必要的 0。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,.<span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">rgba</span>( <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.5</span> );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>属性值十六进制数值能用简写的尽量用简写。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#ffffff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>不要为 <code>0</code> 指明单位。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0px</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-5-属性值引号"><a href="#2-3-5-属性值引号" class="headerlink" title="2.3.5 属性值引号"></a>2.3.5 属性值引号</h4><p>CSS 属性值需要用到引号时，统一使用单引号。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&#x27;Hiragino Sans GB&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;Hiragino Sans GB&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-6-属性书写建议"><a href="#2-3-6-属性书写建议" class="headerlink" title="2.3.6 属性书写建议"></a>2.3.6 属性书写建议</h4><p>建议遵循以下顺序：</p>
+<ol>
+<li>布局定位属性：display / position / float / clear / visibility / overflow</li>
+<li>自身属性：width / height / margin / padding / border / background</li>
+<li>文本属性：color / font / text-decoration / text-align / vertical-align / white- space / break-word</li>
+<li>其他属性（CSS3）：content / cursor / border-radius / box-shadow / text-shadow / background: linear-gradient …</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: Arial, <span class="string">&#x27;Helvetica Neue&#x27;</span>, Helvetica, sans-serif;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,.<span class="number">5</span>);</span><br><span class="line">  -webkit-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -moz-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -o-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -ms-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-7-CSS3-浏览器私有前缀"><a href="#3-3-7-CSS3-浏览器私有前缀" class="headerlink" title="3.3.7 CSS3 浏览器私有前缀"></a>3.3.7 CSS3 浏览器私有前缀</h4><p>CSS3 浏览器私有前缀在前，标准前缀在后。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  -webkit-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -moz-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -o-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  -ms-<span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-JavaScript"><a href="#2-4-JavaScript" class="headerlink" title="2.4 JavaScript"></a>2.4 JavaScript</h3><h4 id="2-4-1-单行代码块"><a href="#2-4-1-单行代码块" class="headerlink" title="2.4.1 单行代码块"></a>2.4.1 单行代码块</h4><p>在单行代码块中使用空格。</p>
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span> () &#123;<span class="keyword">return</span> <span class="literal">true</span>&#125;</span><br><span class="line"><span class="keyword">if</span> (foo) &#123;bar = <span class="number">0</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span> () &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;</span><br><span class="line"><span class="keyword">if</span> (foo) &#123; bar = <span class="number">0</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-2-大括号风格"><a href="#2-4-2-大括号风格" class="headerlink" title="2.4.2 大括号风格"></a>2.4.2 大括号风格</h4><p>在编程过程中，大括号风格与缩进风格紧密联系，用来描述大括号相对代码块位置的方法有很多。在 JavaScript 中，主要有三种风格，如下：</p>
+<ul>
+<li><strong>【推荐】One True Brace Style</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (foo) &#123;</span><br><span class="line">  <span class="title function_">bar</span>()</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="title function_">baz</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Stroustrup</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (foo) &#123;</span><br><span class="line">  <span class="title function_">bar</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="title function_">baz</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Allman</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (foo)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="title function_">bar</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="title function_">baz</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-3-代码中的空格"><a href="#2-4-3-代码中的空格" class="headerlink" title="2.4.3 代码中的空格"></a>2.4.3 代码中的空格</h4><ol>
+<li>逗号前后的空格可以提高代码的可读性，团队约定在逗号后面使用空格，逗号前面不加空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>, bar = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>,bar = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span> , bar = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span> ,bar = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>对象字面量的键和值之间不能存在空格，且要求对象字面量的冒号和值之间存在一个空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="string">&#x27;foo&#x27;</span>: <span class="string">&#x27;haha&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="string">&#x27;foo&#x27;</span> : <span class="string">&#x27;haha&#x27;</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>代码块前要添加空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a) &#123;</span><br><span class="line">  <span class="title function_">b</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span> () &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a)&#123;</span><br><span class="line">  <span class="title function_">b</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">a</span> ()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>函数声明括号前要加空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func</span> (x) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">func</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在函数调用时，禁止使用空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fn</span>()</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fn ()</span><br><span class="line"></span><br><span class="line">fn</span><br><span class="line">()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>在操作符前后都需要添加空格。</li>
+</ol>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="number">1</span> + <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="number">1</span>+<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、注释规范"><a href="#三、注释规范" class="headerlink" title="三、注释规范"></a>三、注释规范</h2><p><strong>注释的目的：</strong></p>
+<ul>
+<li><strong>提高代码的可读性，从而提高代码的可维护性</strong></li>
+</ul>
+<p><strong>注释的原则：</strong></p>
+<ul>
+<li><strong>如无必要，勿增注释 ( As short as possible )</strong></li>
+<li><strong>如有必要，尽量详尽 ( As long as necessary )</strong></li>
+</ul>
+<h3 id="3-1-HTML-文件注释"><a href="#3-1-HTML-文件注释" class="headerlink" title="3.1 HTML 文件注释"></a>3.1 HTML 文件注释</h3><h4 id="3-1-1-单行注释"><a href="#3-1-1-单行注释" class="headerlink" title="3.1.1 单行注释"></a>3.1.1 单行注释</h4><p><strong>一般用于简单的描述，如某些状态描述、属性描述等。</strong></p>
+<p>注释内容前后各一个空格字符，注释位于要注释代码的上面，单独占一行。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Comment Text --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span><span class="comment">&lt;!-- Comment Text --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="comment">&lt;!-- Comment Text --&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-2-模块注释"><a href="#3-1-2-模块注释" class="headerlink" title="3.1.2 模块注释"></a>3.1.2 模块注释</h4><p><strong>一般用于描述模块的名称以及模块开始与结束的位置。</strong></p>
+<p>注释内容前后各一个空格字符， <code>&lt;!-- S Comment Text --&gt;</code>表示模块开始， <code>&lt;!-- E Comment Text --&gt;</code>表示模块结束，模块与模块之间相隔一行。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- S Comment Text A --&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_a&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text A --&gt;</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">&lt;!-- S Comment Text B --&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_b&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text B --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- S Comment Text A --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_a&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text A --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- S Comment Text B --&gt;</span>	</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_b&quot;</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text B --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-3-嵌套模块注释"><a href="#3-1-3-嵌套模块注释" class="headerlink" title="3.1.3 嵌套模块注释"></a>3.1.3 嵌套模块注释</h4><p>当模块注释内再出现模块注释的时候，为了突出主要模块，嵌套模块不再使用。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- S Comment Text --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>而改用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- /Comment Text --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注释写在模块结尾标签底部，单独一行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- S Comment Text A --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_a&quot;</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_b&quot;</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /mod_b --&gt;</span></span><br><span class="line">    	</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;mod_c&quot;</span>&gt;</span></span><br><span class="line">    	...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- /mod_c --&gt;</span></span><br><span class="line">		</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- E Comment Text A --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-CSS-文件注释"><a href="#3-2-CSS-文件注释" class="headerlink" title="3.2 CSS 文件注释"></a>3.2 CSS 文件注释</h3><h4 id="3-2-1-单行注释"><a href="#3-2-1-单行注释" class="headerlink" title="3.2.1 单行注释"></a>3.2.1 单行注释</h4><p>注释内容第一个字符和最后一个字符都是一个空格字符，单独占一行，行与行之间相隔一行。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Comment Text */</span> </span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">/* Comment Text */</span> </span><br><span class="line"><span class="selector-class">.jdc</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*Comment Text*/</span></span><br><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.jdc</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;<span class="comment">/*Comment Text*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-模块注释"><a href="#3-2-2-模块注释" class="headerlink" title="3.2.2 模块注释"></a>3.2.2 模块注释</h4><p>注释内容第一个字符和最后一个字符都是一个空格字符，<code>/*</code> 与 模块信息描述占一行，多个横线分隔符 <code>-</code> 与 <code>*/</code> 占一行，行与行之间相隔两行。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Module A</span></span><br><span class="line"><span class="comment">---------------------------------------------------------------- */</span></span><br><span class="line"><span class="selector-class">.mod_a</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Module B</span></span><br><span class="line"><span class="comment">---------------------------------------------------------------- */</span></span><br><span class="line"><span class="selector-class">.mod_b</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Module A ---------------------------------------------------- */</span></span><br><span class="line"><span class="selector-class">.mod_a</span> &#123;&#125;</span><br><span class="line"><span class="comment">/* Module B ---------------------------------------------------- */</span></span><br><span class="line"><span class="selector-class">.mod_b</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-3-文件注释"><a href="#3-2-3-文件注释" class="headerlink" title="3.2.3 文件注释"></a>3.2.3 文件注释</h4><p>在样式文件编码声明 <code>@charset</code> 语句下面注明页面名称、作者、创建日期等信息。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@charset</span> <span class="string">&quot;UTF-8&quot;</span>;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @desc File Info</span></span><br><span class="line"><span class="comment"> * @author Author Name</span></span><br><span class="line"><span class="comment"> * @date 2015-10-10</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-JavaScript-文件注释"><a href="#3-3-JavaScript-文件注释" class="headerlink" title="3.3 JavaScript 文件注释"></a>3.3 JavaScript 文件注释</h3><h4 id="3-3-1-单行注释"><a href="#3-3-1-单行注释" class="headerlink" title="3.3.1 单行注释"></a>3.3.1 单行注释</h4><p>单行注释使用 <code>//</code>，注释应单独一行写在被注释对象的上方，不要追加在某条语句的后面。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// is current tab</span></span><br><span class="line"><span class="keyword">const</span> active = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> active = <span class="literal">true</span> <span class="comment">// is current tab</span></span><br></pre></td></tr></table></figure>
+
+<p>注释行的上方需要有一个空行（<strong>除非注释行上方是一个块的顶部</strong>），以增加可读性。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getType</span> () &#123;  </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fetching type...&#x27;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// set the default type to &#x27;no type&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> type = <span class="variable language_">this</span>.<span class="property">type</span> || <span class="string">&#x27;no type&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> type</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注释行上面是一个块的顶部时不需要空行</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getType</span> () &#123;  </span><br><span class="line">  <span class="comment">// set the default type to &#x27;no type&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> type = <span class="variable language_">this</span>.<span class="property">type</span> || <span class="string">&#x27;no type&#x27;</span>			</span><br><span class="line">  <span class="keyword">return</span> type</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getType</span> () &#123;  </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;fetching type...&#x27;</span>)</span><br><span class="line">  <span class="comment">// set the default type to &#x27;no type&#x27;</span></span><br><span class="line">  <span class="keyword">const</span> type = <span class="variable language_">this</span>.<span class="property">type</span> || <span class="string">&#x27;no type&#x27;</span></span><br><span class="line">  <span class="keyword">return</span> type</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-2-多行注释"><a href="#3-3-2-多行注释" class="headerlink" title="3.3.2 多行注释"></a>3.3.2 多行注释</h4><p>多行注释使用 <code>/** ... */</code>，而不是多行的 <code>//</code>。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * make() returns a new element</span></span><br><span class="line"><span class="comment"> * based on the passed-in tag name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">make</span> (tag) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// make() returns a new element</span></span><br><span class="line"><span class="comment">// based on the passed in tag name</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">make</span> (tag) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-3-注释空格"><a href="#3-3-3-注释空格" class="headerlink" title="3.3.3 注释空格"></a>3.3.3 注释空格</h4><p>注释内容和注释符之间需要有一个空格，以增加可读性。eslint: <code>spaced-comment</code>。</p>
+<ul>
+<li>推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// is current tab</span></span><br><span class="line"><span class="keyword">const</span> active = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * make() returns a new element</span></span><br><span class="line"><span class="comment"> * based on the passed-in tag name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">make</span>(<span class="params">tag</span>) &#123;  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不推荐：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//is current tab</span></span><br><span class="line"><span class="keyword">const</span> active = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *make() returns a new element</span></span><br><span class="line"><span class="comment"> *based on the passed-in tag name</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">make</span>(<span class="params">tag</span>) &#123;  </span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> element</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-4-特殊标记"><a href="#3-3-4-特殊标记" class="headerlink" title="3.3.4 特殊标记"></a>3.3.4 特殊标记</h4><p>有时我们发现某个可能的 bug，但因为一些原因还没法修复；或者某个地方还有一些待完成的功能，这时我们需要使用相应的特殊标记注释来告知未来的自己或合作者。常用的特殊标记有两种：</p>
+<ul>
+<li><code>// FIXME</code> : 说明问题是什么</li>
+<li><code>// TODO</code> : 说明还要做什么或者问题的解决方案</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Calculator</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Abacus</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span> () &#123;</span><br><span class="line">    <span class="variable language_">super</span> ()</span><br><span class="line"></span><br><span class="line">      <span class="comment">// <span class="doctag">FIXME:</span> shouldn’t use a global here</span></span><br><span class="line">      total = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// <span class="doctag">TODO:</span> total should be configurable by an options param</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">total</span> = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-5-文档类注释"><a href="#3-3-5-文档类注释" class="headerlink" title="3.3.5 文档类注释"></a>3.3.5 文档类注释</h4><p>文档类注释，如函数、类、文件、事件等；都使用 jsdoc 规范。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Book类，代表一个书本.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@constructor</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">title</span> - 书本的标题.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">author</span> - 书本的作者.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Book</span> (title, author) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">title</span> = title</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">author</span> = author</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Book</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 获取书本的标题</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@returns</span> &#123;<span class="type">string|*</span>&#125;</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="attr">getTitle</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">title</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 设置书本的页数</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> pageNum &#123;number&#125; 页数</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="attr">setPageNum</span>: <span class="keyword">function</span> (<span class="params">pageNum</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">pageNum</span>=pageNum</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-6-注释工具"><a href="#3-3-6-注释工具" class="headerlink" title="3.3.6 注释工具"></a>3.3.6 注释工具</h4><p><code>ESLint</code> 是当下最流行的 JS 代码检查工具，<code>ESLint</code> 中有一些注释相关的规则，用户可选择开启：</p>
+<ul>
+<li><code>valid-jsdoc</code></li>
+<li><code>require-jsdoc</code></li>
+<li><code>no-warning-comments</code></li>
+<li><code>capitalized-comments</code></li>
+<li><code>line-comment-position</code></li>
+<li><code>lines-around-comment</code></li>
+<li><code>multiline-comment-style</code></li>
+<li><code>no-inline-comments</code></li>
+<li><code>spaced-comment</code></li>
+</ul>
+<h2 id="四、其它"><a href="#四、其它" class="headerlink" title="四、其它"></a>四、其它</h2><ul>
+<li>缩进换行请使用两个空格。</li>
+<li>大型团队多人协作项目推荐 JavaScript 代码末尾加分号。</li>
+<li>小型个人创新练手项目可尝试使用 JavaScript 代码末尾不加分号的风格，更加清爽简练。</li>
+</ul>
+<p>作者：鱼酱<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6987349513836953607">https://juejin.cn/post/6987349513836953607</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"># 性能优化与代码规范</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fbb5b988/">在 CSS 中隐藏元素的 10 种方法</a>
+            
+            
+            <a class="next" rel="next" href="/b54ebf02/">从今以后，我就是一个没有外公的孩子了</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fbb5b988/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b54ebf02/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

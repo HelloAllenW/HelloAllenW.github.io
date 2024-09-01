@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>使用PurgeCSS来删除未使用的CSS代码 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用PurgeCSS来删除未使用的CSS代码</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">七月 8, 2023&nbsp;&nbsp;15:40:44</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        七月 8, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">性能优化与代码规范 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>随着前端项目的不断迭代，就可能出现部分 CSS 代码未使用的情况。这些未使用代码就可能影响应用性能。</p>
+<p>那么，如何有效地删除未使用的 CSS 代码呢？本文将介绍一种强大的工具——PurgeCSS，它可以自动检测和删除未使用的 CSS 代码。无论是在 Vue、React 还是其他前端框架中，PurgeCSS 都能轻松集成。</p>
+<p>接下来，让我们一起探索如何配置和使用 PurgeCSS，以及一些高级配置选项，帮助我们根据项目需求定制删除未使用的 CSS 代码的过程！</p>
+<h2 id="一、未使用的-CSS"><a href="#一、未使用的-CSS" class="headerlink" title="一、未使用的 CSS"></a>一、未使用的 CSS</h2><p>使用 Chrome 浏览器的 Coverage 面板，就可以看到当前页面所有CSS 文件的使用情况（打开Coverage面板方式：Ctrl+Shift+P，搜索 Coverage）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081541159.png"></p>
+<p>这里显示了每个文件的总大小、未使用的CSS 的大小、未使用的 CSS 所占比例。可以看到，文件中未使用的 CSS 占大多数。</p>
+<p>点开一个文件，就可以看到这个文件中有哪些样式使用了（蓝色），有哪些样式未使用（红色）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081542835.png"></p>
+<p>默认情况下，浏览器必须下载、解析和处理它遇到的所有外部样式表，然后才能将内容渲染到用户屏幕。每个外部样式表都必须从网络下载。这些额外的网络任务会显着增加用户在屏幕上看到任何内容之前必须等待的时间。</p>
+<p>未使用的 CSS 还会减慢浏览器构建渲染树的速度。渲染树类似于 DOM 树，不同之处在于它还包含每个节点的样式。要构建渲染树，浏览器必须遍历整个 DOM 树，并检查哪些 CSS 规则适用于每个节点。未使用的 CSS 越多，浏览器可能需要花费更多的时间来计算每个节点的样式。</p>
+<h2 id="二、PurgeCSS-是什么？"><a href="#二、PurgeCSS-是什么？" class="headerlink" title="二、PurgeCSS 是什么？"></a>二、PurgeCSS 是什么？</h2><p>PurgeCSS 是一个用于删除未使用的 CSS 的工具。它对于优化应用通常很有用。当使用 Bulma、Bootstrap 或 Tailwind 等 CSS 框架时，就会有很多未使用的 CSS。这就是 PurgeCSS 的用武之地。它会分析内容和 CSS 文件，以确定哪些样式未使用，并将其删除。PurgeCSS 可以与最常见的 JavaScript 库/框架配合使用，例如 Vue.js、React、Gatsby 等。</p>
+<p>虽然 PurgeCSS 并不是删除未使用的 CSS 的唯一工具，但它因其模块化、易用性和广泛的自定义选项而脱颖而出。模块化使开发人员能够为特定用例和框架创建模块提取器。提取器是读取文件内容并提取所使用的 CSS 选择器列表的函数。</p>
+<p>PurgeCSS 提供了一个非常可靠的默认提取器，可以处理多种文件类型。但是，默认情况下，PurgeCSS 会忽略包含 @、:和 / 等特殊字符的未使用 CSS 代码。因此，PurgeCSS 可能无法完全适配你正在使用的文件类型或 CSS 框架。</p>
+<p>此外，PurgeCSS 还有很多配置项，可以根据需求自定义其行为。例如，PurgeCSS 包括针对 fontFace、keyframes、extractors、CSS 等选项。定制化可以改善 PurgeCSS 的性能和效率。PurgeCSS 很容易上手，并提供了详细的文档。截至撰写本文时，PurgeCSS 在 npm 上每周下载量超过 90 万次，GitHub[1] 上获得了 7.4k+ Star。</p>
+<h2 id="三、PurgeCSS-是如何工作的？"><a href="#三、PurgeCSS-是如何工作的？" class="headerlink" title="三、PurgeCSS 是如何工作的？"></a>三、PurgeCSS 是如何工作的？</h2><p>PurgeCSS 适合在生产环境使用，可以分析内容和 CSS 并删除未使用的样式。在开发过程中运行 PurgeCSS 是没必要的，因为在开发过程中，可能会经常创建未使用的样式，这意味着每次都必须运行 PurgeCSS。</p>
+<p>相反，可以仅针对生产构建运行它。这样，就不必重新创建已删除的样式。因此，当应用准备好投入生产时，可以运行 PurgeCSS 一次。在开始将 PurgeCSS 与流行的库/框架一起使用之前，先来看一下它如何与普通 JavaScript 一起使用。代码如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081542399.png"></p>
+<p>这里将 index.html 指定为内容之一，将style.css指定为 CSS 之一，可以包含更多的内容和 CSS 文件，并且内容不限于 HTML 文件。上面的代码会返回已清除样式的数组。</p>
+<p>除了 content 和 css 之外，还有更多配置项可以准确指定想要它做什么以及如何做。上面的例子可以用于任何普通 JavaScript 项目。要使用 PurgeCSS，就需要有一个单独的 JavaScript 文件，其将运行一次以删除未使用的样式。</p>
+<p>可以通过以下代码让清除的样式替换当前样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081542172.png"></p>
+<h2 id="四、与JS库-框架结合使用"><a href="#四、与JS库-框架结合使用" class="headerlink" title="四、与JS库/框架结合使用"></a>四、与JS库/框架结合使用</h2><p>PurgeCSS 与流行的 JavaScript 库/框架是兼容的，如 React、Vue、Gatsby、Next.js、Nuxt.js 等。下面来看看如何将 PurgeCSS 与 React 和 Vue 一起使用。</p>
+<h3 id="1、React-PurgeCSS"><a href="#1、React-PurgeCSS" class="headerlink" title="1、React + PurgeCSS"></a>1、React + PurgeCSS</h3><p>首先需要安装 PurgeCSS 及其依赖项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i --save-dev @fullhuman/postcss-purgecss</span><br></pre></td></tr></table></figure>
+
+<p>打开 App.js 文件并粘贴以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import &quot;./App.css&quot;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">  return &lt;div className=&quot;App&quot;&gt;&lt;/div&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们创建了一个名为 App 的函数组件，并返回了一个类名为 App 的 div。App.css 保持不变，因此它包含以下未使用的 CSS 代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">.App &#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.App-logo &#123;</span><br><span class="line">  height: 40vmin;</span><br><span class="line">  pointer-events: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (prefers-reduced-motion: no-preference) &#123;</span><br><span class="line">  .App-logo &#123;</span><br><span class="line">    animation: App-logo-spin infinite 20s linear;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.App-header &#123;</span><br><span class="line">  background-color: #282c34;</span><br><span class="line">  min-height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-direction: column;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  font-size: calc(10px + 2vmin);</span><br><span class="line">  color: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.App-link &#123;</span><br><span class="line">  color: #61dafb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@keyframes App-logo-spin &#123;</span><br><span class="line">  from &#123;</span><br><span class="line">    transform: rotate(0deg);</span><br><span class="line">  &#125;</span><br><span class="line">  to &#123;</span><br><span class="line">    transform: rotate(360deg);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打开 package.json 文件并在 script 下添加以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;postbuild&quot;: &quot;purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css&quot;</span><br></pre></td></tr></table></figure>
+
+<p>post 是一个前缀，可以添加到任何 npm 脚本中，并在运行主脚本时自动运行。在这个例子中，postbuild 在执行构建脚本后运行。postbuild 执行的命令包含三个选项。</p>
+<ul>
+<li>–css 选项：指定 PurgeCSS 应处理的 CSS 文件，它可以是文件名数组或全局变量。</li>
+<li>–content 选项：指定 PurgeCSS 应分析哪些内容。</li>
+<li>–output 选项：指定应将纯化的 CSS 文件写入哪个目录。默认情况下，它将结果放置在控制台中。</li>
+</ul>
+<p>本质上，postbuild 执行的命令执行以下操作：</p>
+<ol>
+<li>检查 build/static/css 中的每个 CSS 文件</li>
+<li>匹配文件中使用的选择器并删除任何未使用的 CSS</li>
+<li>在 build/static/css 中输出新的 CSS 文件</li>
+</ol>
+<p>现在，只需要运行 npm run build 来运行 React 应用的构建。要确认是否成功，可以打开 build/static/css 中的 CSS 文件。输出类似于下面的代码，仅包含使用的 CSS：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,</span><br><span class="line">    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">code &#123;</span><br><span class="line">  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;</span><br><span class="line">&#125;</span><br><span class="line">.App &#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line">@-webkit-keyframes App-logo-spin &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    -webkit-transform: rotate(0deg);</span><br><span class="line">    transform: rotate(0deg);</span><br><span class="line">  &#125;</span><br><span class="line">  to &#123;</span><br><span class="line">    -webkit-transform: rotate(1turn);</span><br><span class="line">    transform: rotate(1turn);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@keyframes App-logo-spin &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    -webkit-transform: rotate(0deg);</span><br><span class="line">    transform: rotate(0deg);</span><br><span class="line">  &#125;</span><br><span class="line">  to &#123;</span><br><span class="line">    -webkit-transform: rotate(1turn);</span><br><span class="line">    transform: rotate(1turn);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、Vue-PurgeCSS"><a href="#2、Vue-PurgeCSS" class="headerlink" title="2、Vue + PurgeCSS"></a>2、Vue + PurgeCSS</h3><p>可以通过以下方式在 Vue 中安装 PurgeCSS：</p>
+<p>vue add @fullhuman/purgecss</p>
+<p>这将生成一个 postcss.config.js 文件，在这个文件中已经设置了适合 Vue 应用的PurgeCSS 配置。可以根据需要更改这些配置。</p>
+<p>下面来更新一些应用的内容，看看 PurgeCSS 在 Vue 中的工作原理。转到 HelloWorld.vue 并用以下代码替换其中的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;a href=&quot;#&quot;&gt;Hello world&lt;/a&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line"></span><br><span class="line">  name: &#x27;HelloWorld&#x27;,</span><br><span class="line"></span><br><span class="line">  props: &#123;</span><br><span class="line"></span><br><span class="line">    msg: String,</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">h3 &#123;</span><br><span class="line"></span><br><span class="line">  margin: 40px 0 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">ul &#123;</span><br><span class="line"></span><br><span class="line">  list-style-type: none;</span><br><span class="line"></span><br><span class="line">  padding: 0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">li &#123;</span><br><span class="line"></span><br><span class="line">  display: inline-block;</span><br><span class="line"></span><br><span class="line">  margin: 0 10px;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">a &#123;</span><br><span class="line"></span><br><span class="line">  color: #42b983;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">span &#123;</span><br><span class="line"></span><br><span class="line">  color: red;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里减少了内容并添加了一些未使用的样式。现在，在终端中运行 npm run build 来构建应用并查看最终构建的 CSS。最后，在 dist/css 目录中打开 CSS 文件，就可以找到只包含已使用样式的 CSS 输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">a[data-v-70cf4e96] &#123;</span><br><span class="line">  color: #42b983;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#app &#123;</span><br><span class="line">  font-family: Avenir, Helvetica, Arial, sans-serif;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  text-align: center;</span><br><span class="line">  color: #2c3e50;</span><br><span class="line">  margin-top: 60px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、高级配置选项"><a href="#五、高级配置选项" class="headerlink" title="五、高级配置选项"></a>五、高级配置选项</h2><p>上面只看到了三个配置选项：content、css 和 outline，下面来看看如何通过其他配置选项来自定义 PurgeCSS。</p>
+<h3 id="1、keyframes-和-fontfaces"><a href="#1、keyframes-和-fontfaces" class="headerlink" title="1、keyframes 和 fontfaces"></a>1、keyframes 和 fontfaces</h3><p>在 PurgeCSS v2.0 之前，默认删除未使用的字体和关键帧代码。然而，当这些功能使用不当时，代码就会崩溃。未使用的字体和关键帧代码现在默认保持不变。可以通过将 keyframes 和 fontfaces 选项设置为 true 来更改此默认行为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(async () =&gt; &#123;</span><br><span class="line">  const purgecss = await new PurgeCSS().purge(&#123;</span><br><span class="line">    content: [&#x27;index.html&#x27;],</span><br><span class="line">    css: [&#x27;style.css&#x27;],</span><br><span class="line">    keyframes: true,</span><br><span class="line">    fontFaces: true,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  console.log(purgecss);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<p>也可以在 purgecss.config.js 配置文件中修改这些配置项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// purgecss.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  content: [&#x27;index.html&#x27;],</span><br><span class="line">  css: [&#x27;style.css&#x27;],</span><br><span class="line">  keyframes: true,</span><br><span class="line">  fontFaces: true,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">  const purgecss = await new PurgeCSS().purge(&#x27;./purgecss.config.js&#x27;);</span><br><span class="line">  console.log(purgecss);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、content-和-css"><a href="#2、content-和-css" class="headerlink" title="2、content 和 css"></a>2、content 和 css</h3><p>可以直接传入 content 和 css 的值，而无需链接一个文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// purgecss.config.js</span><br><span class="line">module.exports = &#123;</span><br><span class="line">  content: [</span><br><span class="line">    &#123;</span><br><span class="line">      raw: &#x27;&lt;html&gt;&lt;body&gt;&lt;p&gt;Hello world&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&#x27;,</span><br><span class="line">      extension: &#x27;html&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  css: [</span><br><span class="line">    &#123;</span><br><span class="line">      raw: &#x27;p &#123; color: red &#125;&#x27;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、extractors"><a href="#3、extractors" class="headerlink" title="3、extractors"></a>3、extractors</h3><p>在极少数情况下，PurgeCSS 可能无法删除未使用的 CSS 或删除已使用的 CSS。在这种情况下，必须使用自定义提取器。PurgeCSS 依赖提取器来获取文件中使用的选择器列表。</p>
+<p>有些软件包为特定扩展提供了提取器。例如，purgecss-from-js 特定于 .js 扩展名。使用特定的提取器进行扩展可以提供最佳的准确性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// purgecss.config.js</span><br><span class="line">import purgeJs from &#x27;purgecss-from-js&#x27;</span><br><span class="line">import purgeHtml from &#x27;purgecss-from-html&#x27;</span><br><span class="line"></span><br><span class="line">const options = &#123;</span><br><span class="line">  content: [&#x27;index.html&#x27;],</span><br><span class="line">  css: [&#x27;style.css&#x27;],</span><br><span class="line">  extractors: [</span><br><span class="line">    &#123;</span><br><span class="line">      extractor: purgeJs,</span><br><span class="line">      extensions: [&#x27;js&#x27;]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      extractor: purgeHtml,</span><br><span class="line">      extensions: [&#x27;html&#x27;]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">export default options</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、variables"><a href="#4、variables" class="headerlink" title="4、variables"></a>4、variables</h3><p>默认情况下，不会删除未使用的 CSS 变量。如果要删除它们，则必须在 purgecss.config.js 文件中将变量指定为 true：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    content: [&#x27;index.html&#x27;],</span><br><span class="line">    css: [&#x27;style.css&#x27;],</span><br><span class="line">    variables: true,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、safelist-和-comments"><a href="#5、safelist-和-comments" class="headerlink" title="5、safelist 和 comments"></a>5、safelist 和 comments</h3><p>PurgeCSS 支持指定哪些选择器可以安全地保留在最终的 CSS 中。可以通过两种方式来完成此操作：PurgeCSS 的 safelist 选项或特殊的 CSS 特殊注释。使用 safelist：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    content: [&#x27;index.html&#x27;],</span><br><span class="line">    css: [&#x27;style.css&#x27;],</span><br><span class="line">    safelist: [&#x27;random&#x27;, &#x27;button&#x27;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，.random、#random、button、.button 和 #button 都将被忽略，不会被 PurgeCSS 删除。其支持使用正则表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">    content: [&#x27;index.html&#x27;],</span><br><span class="line">    css: [&#x27;style.css&#x27;],</span><br><span class="line">    safelist: [/red$/, /^bg/],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这种情况下，任何以 red 结尾（例如，bg-red、btn-red）或以 bg 开头（例如，bg-blue、bg-red）的选择器都不会被删除。默认情况下，PurgeCSS 不会删除注释，仅删除旨在自定义 PurgeCSS 行为的特殊注释。</p>
+<p>一组常见的特殊注释用于指定哪些选择器可以安全地保留在最终 CSS 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* purgecss start ignore */</span><br><span class="line">h1 &#123;</span><br><span class="line">  color: pink;</span><br><span class="line">  font-size: 2rem;</span><br><span class="line">&#125;</span><br><span class="line">/* purgecss end ignore */</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"># 性能优化与代码规范</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5fb72a09/">2023 年 CSS 现状调查结果新鲜出炉，带你看看 CSS 生态圈最新技术趋势！</a>
+            
+            
+            <a class="next" rel="next" href="/81b7bb6b/">什么是高中物理？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5fb72a09/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/81b7bb6b/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>重新认识老子（介聂） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">重新认识老子（介聂）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 11, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 11, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">10.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">33 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo4BiakwXrVDCicbvre5G2K3cqUIKOiaVFZw9KZl87thXcxdRO0Z7Cs1nibHmklxNbKv6KYYT4ichU2j0A/640?wx_fmt=jpeg&wxfrom=13&tp=wxpic" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+作者 | 介聂
+</div>
+
+
+
+<p>《老子》一书产生于公元前500年的春秋末期，虽然仅有5000余言，却是我们祖先无与伦比的智慧结晶。可以说，它是世界最早的一部正确认识自然与社会的哲学经典，因而早在16世纪就已传入西方，成为历代不少西方智者奉若神明的启悟之书。而我们由于种种复杂的原因，对这部自己的祖传宝典，始终既觉经典却不知何以为经典，既极珍视却并不明确何以要珍视。其中的迷雾所在，就是没有将老子的哲思给予准确的定位和定性，因而也就不可能真切认识老子哲学的玄妙而深邃的内涵。</p>
+<h2 id="精神世界的拓荒者"><a href="#精神世界的拓荒者" class="headerlink" title="精神世界的拓荒者"></a>精神世界的拓荒者</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo4BiakwXrVDCicbvre5G2K3cvFnrScITrIj56c7ytOsSu5AKtenRdfB2krK6tvbqR7DnlVDIY6ibriaw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>任何一种新理论的产生都与社会历史有密切关系。《老子》之所以产生于春秋末期，也与当时的社会现实状况互相关联。</p>
+<p>我国历史进入西周晚期，由“商周间大变革”(王国维)的历史趋势已渐入社会矛盾变得尖锐复杂的历史阶段。王室和诸侯国的贵族们对于周礼规制和生活物欲的要求有增无减，而士以下的庶民因无限繁劳却使他们的贫弱不断加深。他们被榨取的赋税和劳役，无休止地用于国家和宗主的贡献、军备、建设、丧祭，社会也随之走向畸形发展。</p>
+<p>东周王室衰落至极，相应地出现长期的诸侯间的战争兼并，国土四分五裂，被分割成无数碎片似的大大小小的王国。战争频仍，生灵涂炭。仅据《春秋》鲁史中的记载，列国间的战争次数就有483次之多(范文澜)。在这种极度兵荒马乱的社会状况下，天下百姓的疾苦已至无以复加的地步，而贵族们却依然过着荒淫无耻、尽情享乐的生活，《老子》文中揭露说，“朝甚除(宫室豪华)，田甚芜，仓甚虚，服文彩，带利剑，厌饮食，财货有余”(第五十三章)，表述很生动，今日读之可视作穿越历史的真实写照。</p>
+<p>面临这种历史现状，必然会引起思想家们怔忪后的冷静思考。这种思考是必然的，是无数次反复思虑积压已久而突然迸发出的崭新思绪。</p>
+<p>我国思想的质性嬗变，都是发生在历史的低谷期。春秋战国正是第一个历史的低谷，其间新思想的出现最主要且具有代表性的便是老子的道学和孔子的儒学。老子思想是对社会现实反思后的根本性纠正和理想性向往，他以大爱开垦精神世界的一片荒芜，以求得清新、质朴的人性复元，以无为而治摒弃世俗的观念和行动，以求得一个太平和谐的理想世界。孔子则是完全立足于现实，从混乱中寻求厘清的方法，从无序中思考整理的规则，因而以中庸的等次明确伦理，以礼教的规定制约人的行为。很显然，一个是偏重于现实世界的治理，一个是偏重于精神世界的开辟和营造。因此，就学术内涵的性质和作用衡量，可以称老子是思想家、哲学家，而对孔子可称其为思想家、伦理家、政治家，但不能称其哲学家。</p>
+<p>对于道学与儒学的学术类型的不同，一般是可以理解的，但对于道学在社会意识形态中的合理性，人们却至今茫然无识，因而也难以深入理解道学产生并存在的社会意义。为解决这一问题，就须要把认识意识形态结构知识，作为进而探索道学，也即老子哲学真义的理论性前提。</p>
+<p>长期以来，我们没有认识到社会意识形态，也就是精神形式，是按照社会的不同需要，以不同的产生方式形成，并在社会发展中起着不同的作用，因而也就不明确它们虽统归于精神领域，却处于不同位置。其实，意识形态的类型不同，它们在精神领域构成的层次中也不同。大体来说，一类为认识型意识形态，如政治、法律、道德、科学等等，它们是现实存在的直接反映，处于精神领域的下层;另一类为感悟型意形态，如哲学、宗教、艺术(包括文学)，它们位于精神领域的上层，是现实存在的间接的复杂的反应。早在黑格尔那里，他已经把哲学、宗教、艺术三者归为“绝对精神”(《哲学全书》)。到马克思和恩格斯论述社会总结构时，恩格斯为社会意识形态进而解释说:“更高的即远离物质基础的意识形态，采取哲学、宗教的形式。在这里，观念与自己的物质存在条件的联系，越来越错综复杂，越来越被一些中间环节弄模糊了。但是，这一联系是存在的。”(《马克思恩格斯选集》)，他在给友人的信中还强调说:“那些更高的悬浮于高空的意识形态领域，即宗教、哲学等等。”(《致康•施米特》)两文中虽没有直接指出艺术(包括文学)，但显然包含在等等中，因为他与马克思在意识形态的排列时，都是最后把哲学、宗教、文学、艺术排在一起。</p>
+<p>由此我们应该把我国最早出现的系统性哲学理论《老子》，依照其特性，归于精神领域的顶层位置，并明确它存在的意义和作用，是对人的蒙昧的启悟和精神的开拓，并以纯正的精神力量潜入社会影响现实。</p>
+<p>事物的性质和职能决定它的位置，反过来说，不同的位置具有其特有的性能和作用，这是不能混淆的。因此，不能因为老子哲学以精神领域的开辟与营造为其直接功能，强调不得、居下为善，朴实无华为德，哀兵必胜，无为而治，便认为与现实脱节，是不切实际的空想;也不能因不懂意识形态的位置功用各不相同，便在显学的强势影响和主观意识的指配下，用儒学的观念解释道学的理念，混乱道学独特的哲理思维，甚至把《老子》原本是道与德统一的哲学体系，无知地分裂为《道经》和《德经》两卷，并改称为《道德经》。这些不正确的解经意识和方式，不仅有违于意识形态的结构理论，而且也有损于《老子》这部中国宝典的意义的发明和作用的广施。</p>
+<p>事实上道学和儒学在实际社会的应用中各有自己的天地，在许多观念的核心内容和面向社会对象的实施方式也各不相同。儒学以现实的需求为其立论的基点，而道学则以精神的要求为其立论的基点。因此，刻板地以绝对现实的观念分析、解说道学是徒劳的。</p>
+<p>从道学对儒学的几个基本观点的驳论中，我们将双方理念对照审视，也许有助于对意识形态位置论的深刻理解。从中可以清楚地看出，正是由于它们所处的意识形态的位置不同，因而判别社会问题的视角也截然相异。</p>
+<p>在老子看来，儒家的核心思想“仁”，并不能从根本上实现人与人本应有的自然而和谐的关系。所以，他疾呼“天地不仁(不讲仁)”，“圣人(秉道守德的人)不仁”，明确反对仁，并主张“绝仁去义”(第十九章)。他认为真正需要的是“道”广行博施的大爱，“圣人常善救人，故无弃人;常善救物，故无弃物”(第二十七章)。老子对儒家亲亲有术、尊贤有等的亲疏尊卑观念也不屑一顾，认为应按“天道无亲，常与善人(助人完善)”(第七十九章)的“道”义实现人人平等。对此，后来的道家庄子则更明确地强调“至仁无亲”(《庚桑楚》)，指出道家的仁与儒家的仁有本质区别，道家不讲“仁”，而讲“至仁”。而对于儒家极力推行的“礼”，老子则看作是人间的“乱之首”(第三十八章)。到庄子，对此分析得更为透彻:“礼者，世俗之所为也。真者，所以受于天也，自然不可易也。故圣人法天贵真，不拘于俗。”(《渔夫》)</p>
+<p>不难看出，道学的根本意义只在于以“上善若水”的最高境界，点化人们“利万物(包括人)而不争”，“见素抱朴”(第十九章)，追求“其精甚真，其中有信”(第二十一章)，去努力恢复人的本真。</p>
+<p>同时，道学在另一方面，则对君临天下的统治者，哓喻“无为而治”，以纯化的理念纠正世俗治理中出现的繁政苛刑的负面，并提出“以正治国”(第五十七章)的理想性的从政原则和施政方式。</p>
+<p>细读《老子》全书，我们就会发现，在许多章节中老子把国君和长官虚拟为秉道守德的“圣人”，说他们应该也能够“以百姓心为心”，讲究“德善”、“德信”(第四十九章);他们应该也能够“自知不自见(表现)，自爱不自贵”(第七十二章)，“为而不恃，功成而不处”(第七十七章);在物质生活精神生活上一定要“去甚，去奢，去泰”(第二十九章);在治理手段上要“长而不宰”(第十章)，即有权后不能实行宰制，甚至还为他们提供了“大制不割”(第二十八章)的最高领导艺术。</p>
+<p>老子就是这样心执道慈，悲天悯人，广施大爱，默默地而悠然自得地开垦着精神世界的一片片荒秽，然后撒下一粒粒本真的种子。</p>
+<h2 id="辩证唯物论的开山始祖"><a href="#辩证唯物论的开山始祖" class="headerlink" title="辩证唯物论的开山始祖"></a>辩证唯物论的开山始祖</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo4BiakwXrVDCicbvre5G2K3ckOwmhPQ8Ma2tKWnav91BhIYxubRYyzhISibo7J0kSFIXumw5TWxiaP7Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>德国哲学家卡尔•雅斯贝尔斯曾经说过，公元前5世纪左右是人类文化突破的“轴心时代”，中西方先后出现了一批伟大的思想家和哲学家。他说的文化突破，最为显著的是关于宇宙本原的理性认识，而在这方面的伟大的哲学家中就有我国的老子。</p>
+<p>老子是世界最早以辩证唯物论思想解释宇宙本原、本体及运行现律的哲人之一。他认为，宇宙的本原是不知该如何称谓的混沌物质，“有物混成，先天地生”，是演化天地万物的根源，“可以为天下母”。而且它具有自己的“独立”性，“周行而不殆”，周而复始地不停地依照自己的规律运行(以上第二十五章)。这种宇宙本原的物质属“常无”(第一章)，是人的感官感觉不到的，所以不知该叫它什么，只好“字之曰道”，用一个“道”字代称。它虽然“视之不足见，听之不足闻”(第三十五章)，但“其中有物”，“其中有精，其精甚真”(第二十一章)，那是一种质性的永恒无际的“常无”。他也指出了万物演化过程“大曰逝，逝曰远，远曰反(返)”(以上第二十五章)的规律，并在第十六章中生动地写道:“万物并作，吾以观复。夫物芸芸，各复归其根。”老子还在人们遥望星月一脸茫然的时候，便能自发地唯物地做出这样的宇宙描述，确实令人为之惊叹。</p>
+<p>考查同属“轴心时代”探索宇宙本原的世界哲学家中，只有古希腊的阿那克西曼德可以与老子比肩。阿那克西曼德认为，宇宙的本原是“阿派朗”(无限定物)，它分裂成冷、热、干、湿，从而产生万物。他说(别人的记载):“阿派朗”是“万物所由之而生的东西，万物消灭后复归于它，这是命运规定了的。”</p>
+<p>西方的研究者给予阿那克西曼德极高的评价，称“阿派朗”说是西方最早出现的朴素唯物主义宇宙观。这种评价是不过份的。然而就他与老子所述的宇宙观理念的全面比较来看，虽然都已确定了本原是更“素”性的物质，都揭示了物质运动的必然性，事物演化的形态，且其中含有的一与多、生与灭的辩证法思想，但就宇审演化的内因的理解看，老子的理解更为纯粹而透彻，他直接说“道(即宇宙本源)法自然”(第二十五章)，在演化过程也是“莫之命而常自然”(第五十一章)，无论原质还是转化都是按照自然规律而存在和变化的。</p>
+<p>老子哲学系统的唯物主义属性，不仅表现在他的自然观，同时也贯穿于他的历史观。</p>
+<p>然而在这方面争议最大。试翻开现有的有关老子的论文或出版物，基本上都认为老子是唯心主义或客观唯心主义。笔者以为，这是没有将老子哲思的产生与历史条件的必然联系深入考察的误判。</p>
+<p>深读《老子》，我们会发现，作为一部纯哲学著述，出于论理的需要，也时有现实社会矛盾状况的真实而无情地展现。这可以看作是老子哲思所依赖的历史背景的例证。他在第七十五章中写道:“民之饥，以其上食税之多，是以饥”，“民之轻死，以其上求生之厚，是以轻死”，并在第五十三章愤慨地称这些贪得无厌剝削广大庶民的贵族是“盗夸(大盗)”。第七十二章中，则反映了百姓因劳役、军役之苦和苛刑压制，不得安居，不得安生的无奈控诉，“无狎其所居，无厌(压)其所生。夫唯不厌(压)，是以不厌(才不会感受到压迫)”。而老子就此严肃指出，“民不畏威，则大威至”，到百姓不再忍受威胁时，统治者反而受到的大威胁也就到来了。这种警告在第七十四章中说得更明确而严厉:“民不畏死，奈何以死惧之?”</p>
+<p>春秋战国时期，社会最凸显的负面就是战争，老子站在生民的立场上是反战的，他指出:“以道佐人主者，不以兵强天下……师之所处，荆棘生焉;大军之后，必有凶年”(第三十章)。“夫唯兵者不祥之器，物(指众人)或恶之。”(第三十一章)他还指出:天下有道时，马是用来耕田施肥的，天下无道时，则耕田的马却变成了战马，什么原因呢?“祸莫大于不知足，咎莫大于欲得。”(第四十六章)</p>
+<p>老子不仅指出当时社会的种种负面，暗示出现实中的不公对人反向产生的自我戕害，而且作为哲人他还以无限敏锐的洞察力和超人的睿智，揭示了社会之所以不公的根由——社会与自然相反的损益规律:“天之道损有余而补不足，人之道则不然，损不足而奉有余。”(第七十七章)。</p>
+<p>老子这部哲学著述，其主体当然是关于他主张的“道”和道用的“德”的论说，直接对现实的展现不可能占据很多篇幅。但应知道，这正是引起老子哲思的起因和以此锻造精神武器的原料，并且也是回身奋击的目标。</p>
+<p>或许有人会问，老子的“小国寡民”不过是凭空想象的乌托邦，这能是唯物主义?</p>
+<p>这种疑问和看法，其实是对哲人特有的哲理逻缉的不甚理解。</p>
+<p>不错，老子确实多次强调对于国家的管理要用无为之法，他在第十七章中还明确把国家管理的类型分为四种:“太上”、“亲而誉之”、“畏之”、“侮之”，翻译过来就是理想国、仁义国、法制国、暴政国。毫无疑问，他肯定的就是排在第一的“太上”，而且在第八十章具体地把这“太上”描写了一番，称之为“小国寡民”。</p>
+<p>若与现实“对号”，这理想国的确与社会现实错位，但如果我们更客观而理性地加以分析思考，问题就会变得明白一层。应当知道，任何事理都不是由单一因素构成，就以所谓的“乌托邦”理想国而言，其超然性虽然与现实错位，然而它的产生却又是对社会现实不合理性反思的结果，而且内含有社会发展和人类进步的引领因素。如此理解，才能将理想信念包括理想国的一个个蓝图准确地放置于思想理念中的应有位置上，给予它们合理的解释。对老子哲思中的浓厚理想色彩也应当这样解读。</p>
+<p>哲学是对社会的最根本性证伪，而证伪的同时，必然会生出理想的探索，老子笔下的无为而治的理想王国正是对商、周文明负面的证伪，其作用是为推动历史发展提供了内在的精神动力，哲学家老子的伟大之处正在于此。</p>
+<p>对于老子强调的“无为”，也应当有正确的理解。这对扭正关于老子世界观的误解同样很有必要。</p>
+<p>“无为”是道学的重要概念之一。若望文生义，往往认为它就是无所作为。其实不然，道学特有的无为理念中，含有贯串宇宙到人类的一条主线——自然，因此无为便成为符合道学要求的合理而积极的玄德之行，以此相对于世俗往往在由“利”及“贪”蛊惑下背离自然的短视之行。两厢对照比较，才能析出无为的全部内涵，其本义应该是无为而为，正如老子在《第三十七章》中指明的“道常无为而无不为”。</p>
+<p>老子对“三宝”的论述是对这一问题最好的说明。他说:“我有三宝，持而保之——一曰慈，二曰俭，三曰不敢为天下先。慈，故能勇，俭，故能广，不敢为天下先，故能成器长。”(第六十七章)三者的作用都针对现实本应有的需要，而三种行为也是正面的积极的，由此可以说明老子的无为实是无不为，或者辩证地说，彼无为，此有为。</p>
+<p>我们简约地检阅一番老子的自然观和历史观，从中可以看出，它的产生和对社会的反馈，并没有割断与社会基础的联系，只不过是间接的复杂的联系罢了。所以，老子哲学的根本观点是唯物主义——这应该是对道学体系的总的客观的定性。</p>
+<h2 id="贯通中国文化的精神经脉"><a href="#贯通中国文化的精神经脉" class="headerlink" title="贯通中国文化的精神经脉"></a>贯通中国文化的精神经脉</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo4BiakwXrVDCicbvre5G2K3cibtepp979r29z1YcllQ9HA26vibrrHcCxibBGIaL1Fdju13PZ3zibYibMfg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>老子哲学是一种特珠的社会反应的精神形式，反过来它的社会功能也具有别的精神形式不可替代的作用。</p>
+<p>哲学的意义，过去一般地强调到世界观和方法论的层面，实际上它更渗入到历史的深层。正确的认识是对事理的通透，而真正的通透，不止于聪明机智，需要上升为有益于人的完善的大智。《老子》通篇讲的就是这个道理，其目的也是以这一道理用不言之教的方式来来影响人们。</p>
+<p>在思想方面——</p>
+<p>从我国古代思想发展史考察，老子道学在行世过程中所发挥的作用，最根本的，就是贯彻“常与善人”的宗旨，而且这一职能贯穿于我国历史的始终。</p>
+<p>再早不必说。历史进入西汉，《老子》曾以显学的地位被汉初的封建统治者极为重视。出于恢复经济、休养生息的需要，他们以老子的无为而治精神简政轻法，减免赋税，鼓励农耕，藏富于民，出现了历史上有名的“文景之治”。那时，上下思想领域都尊崇黄老之说。黄老学说实质上就是老子的哲学精神。皇族淮南王刘安及其门客编写的《淮南子》，其主线即继承先秦的道家学说，从此书的核心思想“韬虚守静，为而不争，功而不居”，便可看出，这与《老子》的基本思想及表述别无二致。</p>
+<p>魏晋时期，思想界兴起一股狂暴的玄学之风，主要代表人物有何宴、王弼、阮籍、嵇康、向秀，都是当时的名士。这说明社会思想的震荡非同平时，是我国第二个历史低谷期催动思想嬗变的社会反映。玄学的思想之源也出自老子的哲学理念，玄取之于《老子》首章中的“玄之又玄，众妙之门”。玄学主要探求幽深、玄远的问题，对思想解放和精神扩大具有空前的积极作用，但其中也有偏离道的真义而衍生出荒诞、夸张、立异等精神异变。</p>
+<p>至唐，李姓王朝特将老子尊奉为“太上玄元皇帝”，对老子思想的传播有积极作用。本朝的道学理论家司马承祯，重点发挥“无欲”、“无智”、“无为”思想，提出只有进入虚无境界，才能把持万物根本，只有“虚静至极，才可以得道永生。”</p>
+<p>宋明时期，虽然儒、佛、道各教义更为融合相兼，但人们思想的深层依然是道学理论据上游，甚至在儒学中，佛学中，都有道学思想的渗透。宋代周敦颐，理学的创始人，他的理学内容主要有两个方面，一是研究自然界的宇宙观，一是研究人性世界的伦理观。在论述宇宙本原时，他把《老子》的“无极”(其实《老子》中的这个“无极”是指德的无限性)、《易》的“太极”，中庸的“诚”熔造而成为自己的体系，其中无极和太极的合而为一，即“无极而太极”，显然采取了老子宇宙本原的质而无形，有无统一的观点。周敦颐的宇宙观的全部内容，还突出地提出要由太极推及到“立人极”，让圣人与天地合为德。这也是将老子“道生之，德蓄之”(第五十一章)，道与道用应为有机整体观念的活用。同时代的新儒派理学家张载，在其关学理论中，受老子道学的影响更加明显，无论是“气本论”的宇宙本原的探索，还是人性观方面的主张，都吸收了不少道学观念(可详见拙作《张载思想考辨》)</p>
+<p>在宗教方面——</p>
+<p>老子创立的道家与后来产生的我国土生土长的宗教——道教有着直接的联系。</p>
+<p>道教最早出现于东汉末期，它的出现虽有社会现实条件，但道家思想的演化对于道教来说却是内在的成因。道教尊老子为道主，奉老子著述为《道德真经》，是道教的主要经典。道教的思想理论同样以“道”为最高范畴，主张尊道贵德，效法自然。修练的主旨以清静无为，去情去欲，忍耻含辱等为“内修真功”;以传道济世度人为“外修真行”，这与老子道学中的清心寡欲，不弃人，不弃物，天道无亲，常与善人的理念息息相通。而修炼的方法中特别讲究“守一”，这也是老子“抱一”、“得一”论在道教的应用。</p>
+<p>尤为值得注意的是，道教得道学中崇尚自然，思想倾向客观的遗传，形成了一种与其他宗教显著的不同点，即把生命看得极为重要，“我命在我不在天”是修练的精神指导，所谓“得道成仙”，其实质是为延长生命的长度。</p>
+<p>在此需要说明，道教与道家虽然有直接的联系，但两者并不等同，简单而概括地说，道教是宗教，道家是学术派别，其学术学科门类归哲学。</p>
+<p>在文艺方面——</p>
+<p>老子哲学的许多理念，同样对我国的文学艺术发生了十分重要的影响。</p>
+<p>略举几例。道学中最高范畴的“道”即是一例。道的原理，道即无，而无中有“象”，有“物”，有“精”，有与无在互相转化中得到统一，从而实现了道演化万物的本质意义。文学艺术“意蕴”的形成确实与道的原理有相通之处。后来的庄子在《天地》篇中又以“象罔得玄珠”的寓言说明这个道理，更具备了文艺象征的启发性。美学大师宗白华在《美学散步》中解读“象罔”说:“非无非有，不皦(明)不昧(暗)，这正是艺术形象的象征作用，象是境象，罔是虚幻，艺术家们创造虚幻的境象以象征宇宙人生的实际。”</p>
+<p>老子哲学中的“虚”、“实”观念，同样在文学艺术创作和欣赏中得到多种应用，南朝的刘勰在其《文心雕龙•神思篇》中，特别强调了虚在艺术中的作用，说道:“陶钧文思，贵在虚静”。</p>
+<p>老子的“自然”思想同样引起文艺家们的共鸣，另一位南朝的文艺批评家钟嵘，在其《诗品》中提出了“自然英旨(美味)”的创作主张，唐代李白用诗歌唱道:“清水出芙蓉，天然去雕饰。”同朝的美术评论家张彦远，在《历代名画记》中指出:“自然者，为上品也。”</p>
+<p>道学中特有的“玄远”观在文艺中的影响也不可小觑，其表现是以虚写实，追求一种飘逸而空灵的美，这在传统的诗歌、音乐、美术中是常见的艺术特色。</p>
+<p>老子哲学对文学艺术的影响还很多，不能一一列举。要旨是文艺的审美作用和哲学的启迪作用本质上是相通的，都是开发大智，促使精神完善。</p>
+<p>老子的哲学思想同样也贯穿在我国传统的武术强身和医学保健之中，不再赘述。</p>
+<h2 id="历久弥真的哲理内涵"><a href="#历久弥真的哲理内涵" class="headerlink" title="历久弥真的哲理内涵"></a>历久弥真的哲理内涵</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo4BiakwXrVDCicbvre5G2K3cwYY2mW86mHr03I2yCvu2O5pL4xHsRiccgWOpCL0z5EQ9Rxmdn4C7WzQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>老子哲学之所以成为我国乃至世界非同一般的精神财富，受到人们越来越高的评价和重视，除了因为它具有精神领域的特珠位置，反馈社会的悟性作用之外，还因为老子的哲思表现出超越时空的非常智慧。</p>
+<p>老氏的哲理阐述，认识精深，析义透辞，寄托悠远。纵观全篇，一个个阐明的道学理念，犹如一颗颗宝石镶嵌在系统的框架中，既有隐逸哲理的玄妙色彩，又有洞悉一切的澄澈和透明，其蕴意还赋予与道义同质的历久弥真的奇异特性。</p>
+<p>《老子》中处处闪现的辩证思想早已为人们共知，如祸福相隨的“祸兮，福之所倚，福兮，祸之所伏”，如一切都不是绝对的非此即彼的“有无相生，难易相成，长短相形，高低相倾，音声相和，前后相隨”，如思辨更加高超的加以人的主观能动性条件，促使事物加快转化的“将欲歙之，必固张之。将欲弱之，必固强之。将欲废之，必固兴之。将欲夺之，必固与之”，等等，已被历代世人津津乐道，口口相传，在此不必多言。</p>
+<p>老子辩证唯物论的宇宙观观，虽然我们都称之为是自发的，朴素的，但如果对此静笃研读，加深探究，又会发现其中的哲学论断是那么神妙而精当。他表达宇宙的本原、本体时，感到无法命名(现在任何命名也很难完全准确，因为宇宙永远被探索中)，想来想去，便选用了一个“道”字。为什么选择它?道的本义是人所往所归之经由，那宇宙万物演化的过程不也同样有它们所往所归的经由?因而确定为“道”。试想，这思维何其微妙之致!</p>
+<p>正因为这个质性而不可直感的“道”理论，包藏着“常有”的真理性内核，所以现代不少自然科学家在获得新的认识成果后，却从老子的思想处突然惊奇地发现，原来同一命题早在两千多年前已有超然智慧的先知!耗散结构理论创始人，诺奖得主普利高津指出:它的这一理论对自然界描述，“非常接近中国道家关于自然界的自组织与和谐的传统观点。”华人物理学家，诺奖得主李政道说:“量子力学中测不准原理，与老子所说的道可道非常道的思想，也有吻合之处。”大物理学家，也是诺奖得主的玻尔，是量子力学中互补原理的创立者，他却说:“我不是互补理论的创立者，我是得道者。”</p>
+<p>在老子的哲学体系里，道是总领，是总纲，由它把自然与社会有机地联系在一起，人与自然才有了同一的最大的概括性。老子就是以如此宏观的大视角观察并体悟事物(包括人的行为)，认识到万物终究要走向它们的归宿，因而提出了过程中必然要遵循一定的最正最真的规则，这就是书中所谓的“道生之，德育之，物形之，势成之”(第五十一章)。人们为此把万物道化过程中隐匿其中的“无”称之为道体，把承接道，显形于职能和作用的德称之为道用。道体和道用的有机结合，是老子哲学独树一帜的鲜明标志。</p>
+<p>老子以自然和社会关系一体论为指导，在历史观中同样提出了许多玄妙而含真的哲学论断。</p>
+<p>譬如，他秉持宇宙观中“常”与“恒”的哲学理念，认真剖析社会出现畸形发展并混乱不堪的緣由，从而认定在无限的人类历史过程中，最后取得胜利的力量是“弱”，而不是“强”，因为弱代表的是利而不害，利而不争，是正义的力量。所以他写道:“天下莫弱于水，而攻强者莫之能胜。”(第七十八章)“天下之至柔，驰骋天下之至强。无有入无间。”(第四十三章)意思是天下最柔弱的，能在最强的东西中自由穿梭，看不见的，也能钻入实体的空隙，以此说明“弱”与“柔”内含的优势，攻强者都不能战胜它，何况强者。</p>
+<p>再如，在同样的思想指导下，他把人的行为限制在有力有为而不能越界的范围之内，如“勇于敢则杀，勇于不敢则活，此两者或利或害。”(第七十三章)这里的“敢”为侵犯义，勇到侵犯他人时就最终一定会死亡。对于勇，老子其实是很赞成的，他持而保之的三宝之一的“慈”，首先就是为了能有勇，不然怎能施行慈的行动，因而他解释“慈故能勇”。但是，这个勇绝不能超越“慈”的限定，否则这件宝贝就失掉了。</p>
+<p>在老子的历史观中，最能反映他非凡智慧的，是那句“天之道，损有余而补不足，人之道则不然，损不足而奉有余”(第七十七章)。这个关于“天道”、“人道”的思想判断，是他哲学中最光辉之点。远在春秋时代的人，就能有如此重大而带有根本性的社会思考，特别是能把人与人的关系看得无比透彻，从而揭示了人类历史产生负面的根源，无论从判断的精准度讲，还是从结论的意义上讲，这一哲学思考都可称得上旷世烁今的精神探索典范。</p>
+<p>以上可以这样概括:老子哲学不是指导局限，而是指导无限;不是指导目下，而是指导宏观，不是指导一时，而是指导永远。从这个意义上讲，老子哲学是“常”学，是“恒”学。</p>
+<p>哲理既有“常”与“恒”的属性，它就必具无限的概括，纯真的内涵，永远的指导意义。《老子》中的许多玄妙之至的警言警句，确有这样的理性高度。</p>
+<p>如，“大音稀声”一语，此中所含的哲理是和谐大于一切。《乐记》解释音与声，音为合奏之音，声是独响之声。合奏起来才有悦耳动听的音乐之美，在合奏中，所组成合奏的各个声部就显得稀薄而微弱了。以此晓喻，无论自然还是社会都以广大而和谐为美。</p>
+<p>又如，“大象无形”一语，其含义同样幽深。大象象征无边无际的映象，其中有物吗?当然有，只是此物非定形之物，所以只见象而不见形，若见形，此物也就不再发展，其生命也就相应完结了。任何事物，尽量保持它的“大象”阶段，才可以充分发挥它的生命力，这也就是他说的“大成若缺，其用不弊”(第四十五章)的道理。</p>
+<p>再如，“有之以为利，无之以为用”，这是讲世间普遍存在的一个道理:某种事物的独立性(包括性能)消失的同时，也就转化为别物或别物部分了。这里“利”为性能，“用”代另物。现在的概念中还有“利用”一词，也是把别的具有一定性能的事或物，用到要形成或制成的新事物中(它们有同性)。</p>
+<p>有的哲理不但含意深远，而且随着时间推移显得越来越真切。老子的思想里特别强调“啬”。啬同穑，本义为收禾，后有收获、储藏、积蓄连续义，老子这一哲理则是取——余而少出以保存长久之用的复杂而丰富的内容。这与我们现在说的“节约”相近。在我们没有深入认识节约意义的时候，并不看重它的重要性，最多上升为一种修养和美德。但当我们认识到我们地球家园的矿藏、能源、水资源都是有限的，而且已变得越来越少，已联系到人类自己的生死存亡的时候，才突然惊悟这个节约的意义原来大如天!以此反观老子的啬，他强调“治人事天，莫若啬”，竟然早有这样的智慧内存其中，足见其哲思有超越历史的永恒价值。</p>
+<p>老子的“和光同尘”说，虽然文中是表述道之潜行，但引伸的哲理之意确有如道一样的恒久性。世人很欣赏老子的这一洒脱而自然的行为准则，但未必深解这一行为准则的大义所指。从人的本质讲，凡是人都不能游离大众之外，否则就是对自己这个人的否定。但是，在现实中人又几乎不能真的遵循这个准则，口说人怕出名猪怕壮，实际上有谁抗拒了名利的诱惑和招唤?有谁能既得名利而急流勇退让自己不异于大众?如此又怎能和光同尘，甘当一个普普通通的人?所以和光同尘不是附庸风雅的座右铭，而是永远警示人利而不得，功而不居，名而不显的一面历史明镜。</p>
+<p>老子说他的道学只施行”不言之教”。若以字面肤浅解释，会认为这不过是一句玄虚式的表达。其实，老子此言隐含一个极其深刻的与精神净化相联系的教育方式的暗示。我们的教育(只指人性方面)，无论是言教还是身教，其实都是有言之教，结果如何?世人的悖理逆行且不论，仅从现实的违纪犯罪考察，其效果也不言自明。人真正的觉悟，必须最终要经过悟性意识形态的感悟，而这种教化方式不是言教，也不是身教，而是像宗教的潜心修炼，或艺术的心灵感染，或哲学的蒙昧启悟，三者都是不言之教。由此可见，“不言之教”一语深藏有人性复元漫长过程的警示。</p>
+<p>领悟这些微言大义，我们不能不由衷地感激老子，他以先哲先知的彻悟，以道常无名的精神，无私地矜慈地把许多具有深奥哲理的警言警句赠予我们后人，让我们的精神在反复诵读中得到升华。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>老子哲学是春秋时期百家争鸣中出现的中国古代最高哲思的结晶，它与世界同时代最高哲学思想比肩而立，且可居之首，是中国的骄傲，也是世界的骄傲。哲学是直接耕耘精神世界的，而老子早在二千五百年前，就开始以自发而朴素的辩证唯物论思想，勤耕我们的这片精神家园了，称誉他是伟大的哲人先知实不过分。老子的哲学体例和特色，完全是中国式的，哲理的阐发寓于形象的表述之中，增添了可读性和高雅感，更善于借助无言之教随着“袭明”的潜流不断润泽人们的心田。谈老子，不必否定孔子创立的儒学在条理社会现实秩序起到的作用，而且长期成为中国封建社会的显学。但即使如此，道学也并不寂寞，无论对我国精神领域的直接作用，还是对世界人文的影响，道学始终没有停歇自己的职能。而且随着历史的发展，显学的位置也会转换。相信人们面对现实的多元思想的出现，和世界局势变幻时的纷繁复杂，对老子哲学的求知欲和信任度会越来越强，越来越高。</p>
+<div style="color:gray;font-size:0.9em;">
+作者：介聂，诗人，学者，原全国政协人民政协报华夏副刊主编
+</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a91d2227/">金刚经说了什么</a>
+            
+            
+            <a class="next" rel="next" href="/f39d80f5/">重估一切价值</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a91d2227/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f39d80f5/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

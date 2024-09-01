@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>现代CSS样式重置最佳实践！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">现代CSS样式重置最佳实践！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2023&nbsp;&nbsp;22:33:22</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>当开始一个新的前端项目时，首要任务就是重置 CSS 中的一些默认样式。下面就来看看在现代 CSS 中如何进行样式重置。本文将深入研究每条规则，以了解它的作用和使用它的原因！</p>
+<p>下面是自定义的 CSS 重置代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  1. 使用更直观的 box-sizing 模型</span><br><span class="line">*/</span><br><span class="line">*, *::before, *::after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  2. 移除默认 margin</span><br><span class="line">*/</span><br><span class="line">* &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  3. 在应用中允许基于百分比的高度</span><br><span class="line">*/</span><br><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  排版调整</span><br><span class="line">  4. 添加无障碍行高</span><br><span class="line">  5. 改进文本渲染</span><br><span class="line">*/</span><br><span class="line">body &#123;</span><br><span class="line">  line-height: 1.5;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  6. 改进媒体默认设置</span><br><span class="line">*/</span><br><span class="line">img, picture, video, canvas, svg &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  7. 删除内置表单排版样式</span><br><span class="line">*/</span><br><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font: inherit;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  8. 避免文字溢出</span><br><span class="line">*/</span><br><span class="line">p, h1, h2, h3, h4, h5, h6 &#123;</span><br><span class="line">  overflow-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">  9. 创建根层叠上下文</span><br><span class="line">*/</span><br><span class="line">#root, #__next &#123;</span><br><span class="line">  isolation: isolate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的代码不多，但是这个小样式表中包含了很多内容。下面将逐条介绍！</p>
+<blockquote>
+<p>从历史上看，CSS 重置的主要目标是确保浏览器之间的一致性，并撤消所有默认样式。这段 CSS 重置代码并没有真正做这些事情。</p>
+<p>如今，浏览器在布局或间距方面没有太大的差异。总的来说，浏览器准确的实现了 CSS 规范，并且一切都如你期望的那样，所以它不再是必要的了。</p>
+<p>这里的 CSS 重置可能不符合“CSS重置”的经典定义，但更具创造性！</p>
+</blockquote>
+<h2 id="1-box-sizing-模型"><a href="#1-box-sizing-模型" class="headerlink" title="1. box-sizing 模型"></a>1. box-sizing 模型</h2><p>先来看一段代码，假设没有应用其他 CSS，以下场景中的 <code>.box</code> 元素有多宽？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .parent &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">  &#125;</span><br><span class="line">  .box &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    border: 2px solid hotpink;</span><br><span class="line">    padding: 20px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;parent&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>.box</code> 元素的宽度为：100%。因为它的父级宽度为 200px ，所以 100% 将解析为 200px。但是它在哪里应用了 200px 的宽度呢？默认情况下，它将该大小应用于内容区域，即下图中白色的区域：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YssibzqPccUr3uhVFuqU5H3vIIiafAC6Vn5HO1tDXsPhqW0njsia3Fmz7dQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><code>width: 100%</code> 声明会将 <code>.box</code> 的内容框设置为 200px。而 <code>padding</code> 将增加额外的 40 px（每边 20 px）。border 将增加额外的 4px（每边 2px）。当进行计算时，粉红色矩形的宽度将是 244 px。</p>
+<p>当尝试将 244px 的框放入宽度为 200px 的父级时，就会发生溢出：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsuBmcTichsP28XX8jkPk8BcT0B1nib1Mt2heeWJ5rkldvsTY8XXC0aL6Q/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我们可以通过设置以下规则来更改这种奇怪的行为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*, *::before, *::after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应用此规则后，百分比将根据 border-box 进行解析。在上面的例子中，粉色框宽度为 200 px，内部内容框的宽度将缩小到 156 px（200 px - 40 px - 4 px）。</p>
+<p>这是一条必须具备的规则，它使 CSS 更好用。这里使用通配符选择器 (*) 将它应用于所有元素和伪元素。与人们普遍的看法相反，这对性能来说并不坏。</p>
+<p>网络上有一些人建议改为执行以下操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">*, *:before, *:after &#123;</span><br><span class="line">  box-sizing: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果i正在尝试迁移一个大型的已经存在的项目以使用 border-box，这可能是一个有用的策略。如果要从头开始一个全新的项目，这就是没有必要的。为了简单起见，上面的 CSS 重置中省略了它。</p>
+<p>那在什么时候，这是有用的呢？下面来看一个可能有用的示例。如果您正在尝试迁移一个大型的预先存在的项目以使用 border-box，这可能是一个有用的策略。如果您要从头开始一个全新的项目，则没有必要。为了简单起见，我在 CSS 重置中省略了它。</p>
+<p>展开以查看何时可能有用的示例。首先，将 <code>legacy</code> 的 <code>box-sizing</code> 属性设置为 <code>content-box</code>，即 <code>box-sizing</code> 属性的默认值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.legacy &#123;</span><br><span class="line">  box-sizing: content-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，当应用有一部分尚未迁移到使用 border-box 时，可以将类这样放：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;header class=&quot;legacy&quot;&gt;</span><br><span class="line">    &lt;nav&gt;</span><br><span class="line">      &lt;!-- 遗留的内容在这里 --&gt;</span><br><span class="line">    &lt;/nav&gt;</span><br><span class="line">  &lt;/header&gt;</span><br><span class="line">  &lt;main&gt;</span><br><span class="line">    &lt;section&gt;</span><br><span class="line">      &lt;!-- 现代的内容在这里 --&gt;</span><br><span class="line">    &lt;/section&gt;</span><br><span class="line">    &lt;aside class=&quot;legacy&quot;&gt;</span><br><span class="line">      &lt;!-- 遗留的内容在这里 --&gt;</span><br><span class="line">    &lt;/aside&gt;</span><br><span class="line">  &lt;/main&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里，<code>&lt;header&gt;</code> 被赋予了 <code>legacy</code> 类，因此它使用 <code>box-sizing: content-box</code>。它的子元素 <code>&lt;nav&gt;</code> 具有 <code>box-sizing: inherit</code>。因为它的父级设置为 <code>content-box</code>，所以 nav 也将设置为 <code>content-box</code>。</p>
+<p><code>&lt;main&gt;</code> 标签没有 <code>legacy</code> 类，因此它继承自其父类 <code>&lt;body&gt;</code>。<code>&lt;body&gt;</code> 继承自 <code>&lt;html&gt;</code>。<code>&lt;html&gt;</code> 被设置为了 <code>border-box</code>。</p>
+<p>本质上，每个元素现在都会从其父元素中找出其 box-sizing 的行为。如果它有一个设置 <code>legacy</code> 类的祖先，它将是 <code>content-box</code>。否则，最终会继承 html 标签，即使用 <code>border-box</code>。</p>
+<h2 id="2-移除默认-margin"><a href="#2-移除默认-margin" class="headerlink" title="2. 移除默认 margin"></a>2. 移除默认 margin</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通常，浏览器会围绕 margin 做出常识性假设。例如，默认情况下，h1 将包含比 p 更多的边距。这些假设在处理文档文字的上下文中是合理的，但对于现代 Web 应用而言可能并不准确。</p>
+<p>我们可能通常希望元素默认是没有任何边距的，所以就把默认的边距全部删除了。当确实想为特定标签添加一些边距时，可以在自定义样式中来添加。通配符选择器 (*) 的特异性极低，因此很容易覆盖此规则。</p>
+<h2 id="3-基于百分比的高度"><a href="#3-基于百分比的高度" class="headerlink" title="3. 基于百分比的高度"></a>3. 基于百分比的高度</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你有没有试过在 CSS 中使用基于百分比的高度，却发现它似乎没有效果？下面来看一个例子：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsJ0u9ZCuQBoSyl5CNrmHvguaeabErZHjEfJvvMHdFP9NbpFHia5MPA2A/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这里 main 元素具有 100% 的高度，但是元素根本没有变长。这是行不通的，因为在流式布局（CSS 中的主要布局模式）中，高度和宽度的操作原理完全不同。元素的宽度是根据其父元素计算的，而元素的高度是根据其子元素计算的。</p>
+<p>当应用这条规则时，<code>main</code> 元素就可以增长：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsousX6J1NRXyhRiaefyHq2Q6soCvl8AY2TGMSO1pZje2qv8CpbnRia47w/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>如果使用的是像 React 这样的 JavaScript 框架，可能还希望在此规则中添加第三个选择器：<strong>框架使用的根级的元素</strong>。</p>
+<p>例如，在 Next.js 项目中，将规则更新如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">html, body, #__next &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那为什么要设置基于百分比的 height，而不改用 vh 单位呢？问题就在于 vh 单元在移动设备上无法正常工作；100vh 将占据超过 100% 的屏幕空间，因为移动浏览器会在浏览器 UI 出现和消失的地方做这件事。未来，新的 CSS 单位将解决这个问题。在那之前，可以使用基于百分比的高度。</p>
+<h2 id="4-调整行高"><a href="#4-调整行高" class="headerlink" title="4. 调整行高"></a>4. 调整行高</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  line-height: 1.5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>line-height 控制段落中每行文本之间的垂直间距。默认值因浏览器而异，通常在 1.2 左右。这个没有单位的数字是基于字体大小的，就像 em 单位。行高为 1.2 时，每行高度将比元素的字体大小大 20%。</p>
+<p>这就是问题所在：对于有阅读障碍的人来说，这些行挤得太紧了，很难阅读。WCAG 标准规定行高应至少为 1.5。这个数字确实倾向于在标题和其他大字体元素上产生相当大的行：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsNiaeWGetlV0CF5VaSG5Du6V6DBxEN9fwJQBtDMXibjD47kriaPn3F4bicQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>你可能希望在标题上覆盖此值。我的理解是 WCAG 标准适用于“正文”文本，而不是标题。</p>
+<h2 id="5-平滑字体"><a href="#5-平滑字体" class="headerlink" title="5. 平滑字体"></a>5. 平滑字体</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 MacOS 电脑上，浏览器默认使用“亚像素抗锯齿”。这是一种旨在通过利用每个像素内的 R/G/B 光使文本更易于阅读的技术。过去，这被视为可访问性的胜利，因为它提高了文本对比度。</p>
+<p>在 2018 年发布的 MacOS Mojave 中，Apple 禁用了整个操作系统的亚像素抗锯齿功能。然而，像 Chrome 和 Safari 这样的 MacOS 浏览器默认情况下仍然使用子像素抗锯齿。我们需要通过将 <code>-webkit-font-smoothing</code> 设置为 <code>antialiased</code> 来关闭它。</p>
+<p>下图中，左侧是关闭之后的效果：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsYIRBAAqD0uAMVSpicv7dpyibmyZcaynbx7gc2w5ick0QZK3NwgfeDldaQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>MacOS 是唯一使用子像素抗锯齿的操作系统，因此此规则对 Windows、Linux 或移动设备并没有影响。如果使用的是 MacOS 计算机，则可以比较两者的实时渲染（没有使用CSS重置）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">  -webkit-font-smoothing: subpixel-antialiased;</span><br><span class="line">  font-family: sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.antialiased &#123;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsH9NXTpyx4CNrdZib5484ntNjQBmgHWC3vEonoMAuTgXLf0RW7Pfo4PA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="6-媒体默认值"><a href="#6-媒体默认值" class="headerlink" title="6. 媒体默认值"></a>6. 媒体默认值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">img, picture, video, canvas, svg &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 HTML 中，图像被认为是内联元素。这意味着它应该用在段落中间，像<code>&lt;em&gt;</code> 或 <code>&lt;strong&gt;</code>一样。这与大多数时候使用图像的方式不一致。通常，对待图像的方式与对待段落、标题的方式相同，都是布局元素。</p>
+<p>但是，如果尝试在布局中使用内联元素，就会发生奇怪的事情。如果你曾经有过一个神秘的 4px 间隙，它不是<code>padding</code>、<code>margin</code>或<code>border</code>，它可能是浏览器用行高添加的内联空间。</p>
+<p>通过给图片设置 display: block 就避免了这种问题。除此之外，还设置了<code>max-width: 100%</code>。这样做是为了防止大图溢出，如果它们被放置在了一个不够宽的容器中。大多数块级元素会自动增长/收缩以适应其父元素，但像 <code>&lt;img&gt;</code> 这样的媒体元素很特殊：它们被称为替换元素，并且它们不遵循这些规则。</p>
+<p>如果图像的原始尺寸为 800×600，即使将其放入宽度为 500px 的父元素中，其宽度也将是 800px。这条规则将防止该图像超出其容器，这可能是更明智的默认行为。</p>
+<h2 id="7-继承表单控件的字体"><a href="#7-继承表单控件的字体" class="headerlink" title="7. 继承表单控件的字体"></a>7. 继承表单控件的字体</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，按钮和输入框不会从其父元素继承排版样式。相反，它们有自己的怪异风格。例如，<code>&lt;textarea&gt;</code> 将使用系统默认的等宽字体。<code>input</code> 输入将使用系统默认的无衬线字体。两者都将选择很小的字体大小（在 Chrome 中为 13.333px）。在移动设备上阅读 13 px 的文本会很困难。当聚焦一个小字体的 input 时，浏览器会自动放大，让文本更容易阅读。</p>
+<p>这是一个不太好的体验：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_gif/EO58xpw5UMPnK8MB7x8HyZUd46yMn2Ys6nIglmCvxAe7FPFActJUeeCWMibzu5GjjWv5tRbMXvOhOkqibcNUoJdA/640?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>如果想要避免这种自动缩放行为，输入的字体大小至少需要 1rem / 16px。下面是解决该问题的一种方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font-size: 1rem;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这的确解决了自动缩放问题，但这这是表面上的。这个问题的根本原因是：<strong>表单输入不应该有自己的排版样式</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font: inherit;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>font 是一种很少使用的速记，它设置了一些与字体相关的属性，如 <code>font-size</code>、<code>font-weight</code>、<code>font-family</code>。通过将其设置为 <code>inherit</code>，就指定这些元素与其周围环境中的排版相匹配。只要不为正文设置很小的字体，这样做就可以解决这些问题。</p>
+<h2 id="8-自动换行"><a href="#8-自动换行" class="headerlink" title="8. 自动换行"></a>8. 自动换行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p, h1, h2, h3, h4, h5, h6 &#123;</span><br><span class="line">  overflow-wrap: break-word;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 CSS 中，如果一行中没有足够的空间容纳所有字符，文本将自动换行。默认情况下，算法会寻找“软换行”的机会，这些是算法可以拆分的字符。在英语中，唯一的软换行机会就是空格和连字符，但这因语言而异。</p>
+<p>如果一行中没有任何软换行机会，并且它不适合换行，就会导致文本溢出：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsEEb8Loqic2FcuZexBHwb0AIQ9YmYbLveFu9RLnYl0LubF16oMRDUs8g/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这可能会导致出现水平滚动条，也可能会导致文本与其他元素重叠，或者滑到图像/视频后面。</p>
+<p><code>overflow-wrap</code> 属性可以调整换行算法，并允许它在找不到软换行机会时使用硬换行：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMPnK8MB7x8HyZUd46yMn2YsMUEnf9f0uWVNibeoqbLt8N5vqBBnNXPb8CZ9RhfImC5MbOHicLD0K3nA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>除此之外，还可以尝试添加 hyphens 属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">  overflow-wrap: break-word;</span><br><span class="line">  hyphens: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hyphens: auto 使用连字符（在支持它的语言中）来指定硬换行，它使硬换行更加普遍。如果文本列非常窄，这可能是值得的，但它也可能有点分散注意力。所以并没有将其包含在重置中，但值得一试！</p>
+<h2 id="9-根层叠上下文"><a href="#9-根层叠上下文" class="headerlink" title="9. 根层叠上下文"></a>9. 根层叠上下文</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#root, #__next &#123;</span><br><span class="line">  isolation: isolate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这一项是是可选的。通常只有在使用像 React 这样的 JavaScript 框架时才需要它。isolation 属性允我们创建一个新的层叠上下文，而无需设置 z-index。这就可以保证某些高优先级元素（例如模态框、下拉菜单、tooltip）将始终显示在应用中的其他元素之上。</p>
+<p>我们需要根据使用的框架来调整选择器，该选择器选择的是应用中渲染的顶级元素。例如，<code>create-react-app</code> 使用的是 <code>&lt;div id=&quot;root&quot;&gt;</code>，所以应该使用选择器<code>#root</code>。</p>
+<p>最后，再来看一下这些重置样式的完整代码，可以将其复制/粘贴到自己的项目中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">*, *::before, *::after &#123;</span><br><span class="line">  box-sizing: border-box;</span><br><span class="line">&#125;</span><br><span class="line">* &#123;</span><br><span class="line">  margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">body &#123;</span><br><span class="line">  line-height: 1.5;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">&#125;</span><br><span class="line">img, picture, video, canvas, svg &#123;</span><br><span class="line">  display: block;</span><br><span class="line">  max-width: 100%;</span><br><span class="line">&#125;</span><br><span class="line">input, button, textarea, select &#123;</span><br><span class="line">  font: inherit;</span><br><span class="line">&#125;</span><br><span class="line">p, h1, h2, h3, h4, h5, h6 &#123;</span><br><span class="line">  overflow-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line">#root, #__next &#123;</span><br><span class="line">  isolation: isolate;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>参考文章：</strong><a target="_blank" rel="noopener" href="https://www.joshwcomeau.com/css/custom-css-reset/">https://www.joshwcomeau.com/css/custom-css-reset/</a></p>
+</blockquote>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d0dd4b40/">现代CSS颜色指南</a>
+            
+            
+            <a class="next" rel="next" href="/8b82db42/">Sass 完整指南</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d0dd4b40/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/8b82db42/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

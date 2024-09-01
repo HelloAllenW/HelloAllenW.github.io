@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Nodejs实战之三（使用 eventproxy 控制并发） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Nodejs实战之三（使用 eventproxy 控制并发）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 9, 2021&nbsp;&nbsp;23:17:19</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 9, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/NodeJs/">NodeJs </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>建立一个 lesson3 项目，在其中编写代码。</p>
+<p>代码的入口是 app.js，当调用 node app.js 时，它会输出 CNode(<a target="_blank" rel="noopener" href="https://cnodejs.org/">https://cnodejs.org/</a> ) 社区首页的所有主题的标题，链接和第一条评论，以 json 的格式。</p>
+<p>输出示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;【公告】发招聘帖的同学留意一下这里&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/541ed2d05e28155f24676a12&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;呵呵呵呵&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;title&quot;: &quot;发布一款 Sublime Text 下的 JavaScript 语法高亮插件&quot;,</span><br><span class="line">    &quot;href&quot;: &quot;http://cnodejs.org/topic/54207e2efffeb6de3d61f68f&quot;,</span><br><span class="line">    &quot;comment1&quot;: &quot;沙发！&quot;</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>1、体会 Node.js 的 callback hell 之美<br>2、学习使用 eventproxy 这一利器控制并发</p>
+<h1 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h1><p><em>注意，cnodejs.org 网站有并发连接数的限制，所以当请求发送太快的时候会导致返回值为空或报错。建议一次抓取3个主题即可。文中的40只是为了方便讲解</em></p>
+<p>这一章我们来到了 Node.js 最牛逼的地方——异步并发的内容了。</p>
+<p>上一课我们介绍了如何使用 superagent 和 cheerio 来取主页内容，那只需要发起一次 http get 请求就能办到。但这次，我们需要取出每个主题的第一条评论，这就要求我们对每个主题的链接发起请求，并用 cheerio 去取出其中的第一条评论。</p>
+<p>CNode 目前每一页有 40 个主题，于是我们就需要发起 1 + 40 个请求，来达到我们这一课的目标。</p>
+<p>后者的 40 个请求，我们并发地发起，而且不会遇到多线程啊锁什么的，Node.js 的并发模型跟多线程不同，抛却那些观念。更具体一点的话，比如异步到底为何异步，Node.js 为何单线程却能并发这类走近科学的问题，我就不打算讲了。对于这方面有兴趣的同学，强烈推荐 @朴灵 的 《九浅一深Node.js》： <a target="_blank" rel="noopener" href="http://book.douban.com/subject/25768396/">http://book.douban.com/subject/25768396/</a> 。</p>
+<p>有些逼格比较高的朋友可能听说过 promise 和 generator 这类概念。不过我呢，只会讲 callback，主要原因是我个人只喜欢 callback。</p>
+<p>这次课程我们需要用到三个库：superagent cheerio eventproxy(<a target="_blank" rel="noopener" href="https://github.com/JacksonTian/eventproxy">https://github.com/JacksonTian/eventproxy</a> )</p>
+<p>手脚架的工作各位自己来，我们一步一步来一起写出这个程序。</p>
+<p>首先 app.js 应该长这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">var eventproxy = require(&#x27;eventproxy&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">// url 模块是 Node.js 标准库里面的</span><br><span class="line">// http://nodejs.org/api/url.html</span><br><span class="line">var url = require(&#x27;url&#x27;);</span><br><span class="line"></span><br><span class="line">var cnodeUrl = &#x27;https://cnodejs.org/&#x27;;</span><br><span class="line"></span><br><span class="line">superagent.get(cnodeUrl)</span><br><span class="line">  .end(function (err, res) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">      return console.error(err);</span><br><span class="line">    &#125;</span><br><span class="line">    var topicUrls = [];</span><br><span class="line">    var $ = cheerio.load(res.text);</span><br><span class="line">    // 获取首页所有的链接</span><br><span class="line">    $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">      var $element = $(element);</span><br><span class="line">      // $element.attr(&#x27;href&#x27;) 本来的样子是 /topic/542acd7d5d28233425538b04</span><br><span class="line">      // 我们用 url.resolve 来自动推断出完整 url，变成</span><br><span class="line">      // https://cnodejs.org/topic/542acd7d5d28233425538b04 的形式</span><br><span class="line">      // 具体请看 http://nodejs.org/api/url.html#url_url_resolve_from_to 的示例</span><br><span class="line">      var href = url.resolve(cnodeUrl, $element.attr(&#x27;href&#x27;));</span><br><span class="line">      topicUrls.push(href);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    console.log(topicUrls);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>OK，这时候我们已经得到所有 url 的地址了，接下来，我们把这些地址都抓取一遍，就完成了，Node.js 就是这么简单。</p>
+<p>抓取之前，还是得介绍一下 eventproxy 这个库。</p>
+<p>用 js 写过异步的同学应该都知道，如果你要并发异步获取两三个地址的数据，并且要在获取到数据之后，对这些数据一起进行利用的话，常规的写法是自己维护一个计数器。</p>
+<p>先定义一个 var count = 0，然后每次抓取成功以后，就 count++。如果你是要抓取三个源的数据，由于你根本不知道这些异步操作到底谁先完成，那么每次当抓取成功的时候，就判断一下 count === 3。当值为真时，使用另一个函数继续完成操作。</p>
+<p>而 eventproxy 就起到了这个计数器的作用，它来帮你管理到底这些异步操作是否完成，完成之后，它会自动调用你提供的处理函数，并将抓取到的数据当参数传过来。</p>
+<p>假设我们不使用 eventproxy 也不使用计数器时，抓取三个源的写法是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 参考 jquery 的 $.get 的方法</span><br><span class="line">$.get(&quot;http://data1_source&quot;, function (data1) &#123;</span><br><span class="line">  // something</span><br><span class="line">  $.get(&quot;http://data2_source&quot;, function (data2) &#123;</span><br><span class="line">    // something</span><br><span class="line">    $.get(&quot;http://data3_source&quot;, function (data3) &#123;</span><br><span class="line">      // something</span><br><span class="line">      var html = fuck(data1, data2, data3);</span><br><span class="line">      render(html);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上述的代码大家都写过吧。先获取 data1，获取完成之后获取 data2，然后再获取 data3，然后 fuck 它们，进行输出。</p>
+<p>但大家应该也想到了，其实这三个源的数据，是可以并行去获取的，data2 的获取并不依赖 data1 的完成，data3 同理也不依赖 data2。</p>
+<p>于是我们用计数器来写，会写成这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">(function () &#123;</span><br><span class="line">  var count = 0;</span><br><span class="line">  var result = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  $.get(&#x27;http://data1_source&#x27;, function (data) &#123;</span><br><span class="line">    result.data1 = data;</span><br><span class="line">    count++;</span><br><span class="line">    handle();</span><br><span class="line">    &#125;);</span><br><span class="line">  $.get(&#x27;http://data2_source&#x27;, function (data) &#123;</span><br><span class="line">    result.data2 = data;</span><br><span class="line">    count++;</span><br><span class="line">    handle();</span><br><span class="line">    &#125;);</span><br><span class="line">  $.get(&#x27;http://data3_source&#x27;, function (data) &#123;</span><br><span class="line">    result.data3 = data;</span><br><span class="line">    count++;</span><br><span class="line">    handle();</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  function handle() &#123;</span><br><span class="line">    if (count === 3) &#123;</span><br><span class="line">      var html = fuck(result.data1, result.data2, result.data3);</span><br><span class="line">      render(html);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>丑的一逼，也不算丑，主要我写代码好看。</p>
+<p>如果我们用 eventproxy，写出来是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var ep = new eventproxy();</span><br><span class="line">ep.all(&#x27;data1_event&#x27;, &#x27;data2_event&#x27;, &#x27;data3_event&#x27;, function (data1, data2, data3) &#123;</span><br><span class="line">  var html = fuck(data1, data2, data3);</span><br><span class="line">  render(html);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.get(&#x27;http://data1_source&#x27;, function (data) &#123;</span><br><span class="line">  ep.emit(&#x27;data1_event&#x27;, data);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">$.get(&#x27;http://data2_source&#x27;, function (data) &#123;</span><br><span class="line">  ep.emit(&#x27;data2_event&#x27;, data);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">$.get(&#x27;http://data3_source&#x27;, function (data) &#123;</span><br><span class="line">  ep.emit(&#x27;data3_event&#x27;, data);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>好看多了是吧，也就是个高等计数器嘛。</p>
+<p>ep.all(‘data1_event’, ‘data2_event’, ‘data3_event’, function (data1, data2, data3) {});</p>
+<p>这一句，监听了三个事件，分别是 data1_event, data2_event, data3_event，每次当一个源的数据抓取完成时，就通过 ep.emit() 来告诉 ep 自己，某某事件已经完成了。</p>
+<p>当三个事件未同时完成时，ep.emit() 调用之后不会做任何事；当三个事件都完成的时候，就会调用末尾的那个回调函数，来对它们进行统一处理。</p>
+<p>eventproxy 提供了不少其他场景所需的 API，但最最常用的用法就是以上的这种，即：</p>
+<p>先 var ep = new eventproxy(); 得到一个 eventproxy 实例。<br>告诉它你要监听哪些事件，并给它一个回调函数。ep.all(‘event1’, ‘event2’, function (result1, result2) {})。<br>在适当的时候 ep.emit(‘event_name’, eventData)。<br>eventproxy 这套处理异步并发的思路，我一直觉得就像是汇编里面的 goto 语句一样，程序逻辑在代码中随处跳跃。本来代码已经执行到 100 行了，突然 80 行的那个回调函数又开始工作了。如果你异步逻辑复杂点的话，80 行的这个函数完成之后，又激活了 60 行的另外一个函数。并发和嵌套的问题虽然解决了，但老祖宗们消灭了几十年的 goto 语句又回来了。</p>
+<p>至于这套思想糟糕不糟糕，我个人倒是觉得还是不糟糕，用熟了看起来蛮清晰的。不过 js 这门渣渣语言本来就乱嘛，什么变量提升（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/damonlan/archive/2012/07/01/2553425.html">http://www.cnblogs.com/damonlan/archive/2012/07/01/2553425.html</a> ）啊，没有 main 函数啊，变量作用域啊，数据类型常常简单得只有数字、字符串、哈希、数组啊，这一系列的问题，都不是事儿。</p>
+<p>编程语言美丑啥的，咱心中有佛就好。</p>
+<p>回到正题，之前我们已经得到了一个长度为 40 的 topicUrls 数组，里面包含了每条主题的链接。那么意味着，我们接下来要发出 40 个并发请求。我们需要用到 eventproxy 的 #after API。</p>
+<p>大家自行学习一下这个 API 吧：<a target="_blank" rel="noopener" href="https://github.com/JacksonTian/eventproxy#%E9%87%8D%E5%A4%8D%E5%BC%82%E6%AD%A5%E5%8D%8F%E4%BD%9C">https://github.com/JacksonTian/eventproxy#%E9%87%8D%E5%A4%8D%E5%BC%82%E6%AD%A5%E5%8D%8F%E4%BD%9C</a></p>
+<p>我代码就直接贴了哈。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">// 得到 topicUrls 之后</span><br><span class="line"></span><br><span class="line">// 得到一个 eventproxy 的实例</span><br><span class="line">var ep = new eventproxy();</span><br><span class="line"></span><br><span class="line">// 命令 ep 重复监听 topicUrls.length 次（在这里也就是 40 次） `topic_html` 事件再行动</span><br><span class="line">ep.after(&#x27;topic_html&#x27;, topicUrls.length, function (topics) &#123;</span><br><span class="line">  // topics 是个数组，包含了 40 次 ep.emit(&#x27;topic_html&#x27;, pair) 中的那 40 个 pair</span><br><span class="line"></span><br><span class="line">  // 开始行动</span><br><span class="line">  topics = topics.map(function (topicPair) &#123;</span><br><span class="line">    // 接下来都是 jquery 的用法了</span><br><span class="line">    var topicUrl = topicPair[0];</span><br><span class="line">    var topicHtml = topicPair[1];</span><br><span class="line">    var $ = cheerio.load(topicHtml);</span><br><span class="line">    return (&#123;</span><br><span class="line">      title: $(&#x27;.topic_full_title&#x27;).text().trim(),</span><br><span class="line">      href: topicUrl,</span><br><span class="line">      comment1: $(&#x27;.reply_content&#x27;).eq(0).text().trim(),</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  console.log(&#x27;final:&#x27;);</span><br><span class="line">  console.log(topics);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">topicUrls.forEach(function (topicUrl) &#123;</span><br><span class="line">  superagent.get(topicUrl)</span><br><span class="line">    .end(function (err, res) &#123;</span><br><span class="line">      console.log(&#x27;fetch &#x27; + topicUrl + &#x27; successful&#x27;);</span><br><span class="line">      ep.emit(&#x27;topic_html&#x27;, [topicUrl, res.text]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>完整的app.js代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">var eventproxy = require(&#x27;eventproxy&#x27;);</span><br><span class="line">var superagent = require(&#x27;superagent&#x27;);</span><br><span class="line">var cheerio = require(&#x27;cheerio&#x27;);</span><br><span class="line">var url = require(&#x27;url&#x27;);</span><br><span class="line"></span><br><span class="line">var cnodeUrl = &#x27;https://cnodejs.org/&#x27;;</span><br><span class="line"></span><br><span class="line">superagent.get(cnodeUrl)</span><br><span class="line">  .end(function (err, res) &#123;</span><br><span class="line">    if (err) &#123;</span><br><span class="line">      return console.error(err);</span><br><span class="line">    &#125;</span><br><span class="line">    var topicUrls = [];</span><br><span class="line">    var $ = cheerio.load(res.text);</span><br><span class="line">    $(&#x27;#topic_list .topic_title&#x27;).each(function (idx, element) &#123;</span><br><span class="line">      var $element = $(element);</span><br><span class="line">      var href = url.resolve(cnodeUrl, $element.attr(&#x27;href&#x27;));</span><br><span class="line">      topicUrls.push(href);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    var ep = new eventproxy();</span><br><span class="line"></span><br><span class="line">    ep.after(&#x27;topic_html&#x27;, topicUrls.length, function (topics) &#123;</span><br><span class="line">      topics = topics.map(function (topicPair) &#123;</span><br><span class="line">        var topicUrl = topicPair[0];</span><br><span class="line">        var topicHtml = topicPair[1];</span><br><span class="line">        var $ = cheerio.load(topicHtml);</span><br><span class="line">        return (&#123;</span><br><span class="line">          title: $(&#x27;.topic_full_title&#x27;).text().trim(),</span><br><span class="line">          href: topicUrl,</span><br><span class="line">          comment1: $(&#x27;.reply_content&#x27;).eq(0).text().trim(),</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      console.log(&#x27;final:&#x27;);</span><br><span class="line">      console.log(topics);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    topicUrls.forEach(function (topicUrl) &#123;</span><br><span class="line">      superagent.get(topicUrl)</span><br><span class="line">        .end(function (err, res) &#123;</span><br><span class="line">          console.log(&#x27;fetch &#x27; + topicUrl + &#x27; successful&#x27;);</span><br><span class="line">          ep.emit(&#x27;topic_html&#x27;, [topicUrl, res.text]);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/NodeJs/"># NodeJs</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1afe2189/">Nodejs实战之二（使用 superagent 与 cheerio 完成简单爬虫）</a>
+            
+            
+            <a class="next" rel="next" href="/9979d009/">Nodejs实战之四（使用 async 控制并发）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/1afe2189/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/9979d009/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

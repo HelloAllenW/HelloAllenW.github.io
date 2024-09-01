@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>电车难题 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">电车难题</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 6, 2024&nbsp;&nbsp;21:57:42</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 6, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">9.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">33 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+    文章来源：《大问题：电车难题有解吗？》<br />
+    作者： 大问题Dialectic<br />
+    有更改
+</div>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>学习道德哲学和政治哲学，大多会从这个电车难题入手。<strong>电车难题确实是一个经典的道德困境，因为它是一个难以抉择的、看似无解的场景，怎么选都有bug</strong>。那么本文的目的，就是来尝试为这个著名的道德困境找到一个适合的解决方案。</p>
+<p>简单介绍一下电车难题这个经典的思想实验：<strong>有一辆行驶中的有轨电车突然刹车失灵了，而此时前方的铁轨上绑着5个无辜的人，眼看这辆电车就要轧死这5个人了，这时候司机发现前方有另外一条轨道可以拐弯，但这条岔道上也绑着1个无辜的人，他的名字叫张三，请问，这时候如果你是电车的司机，你会不会拐这个弯呢？</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoBhL9BVdQd4YzMzBCHHLLpPB9FZxUiaVTFmTB261b5ZH77E2JsgtSEFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>对于上述场景设定，有不少学者组织了众多被试者做了个调查，让人们凭直觉投票到底应不应当拐弯。<strong>参与投票的大部分人的直觉是认为，这时候司机应当拐弯，因为两害相权取其轻。</strong>如果非得死人，死1个人总比死5个人要更好。</p>
+<p>上述这样的两害相权取其轻的思路，是一种典型的<strong>后果论（Consequentialism）</strong>的思路。简言之，<strong>一件事情是不是应当做的，取决于它造成什么样的后果，造成好的后果的就是应当做的，造成不好后果的就是不应当做的。</strong>在电车的场景中，按照后果论的原则我们就应当选择拐弯，因为死1个人这个后果要比死5个人这个后果要更好。</p>
+<p>与上述后果论针锋相对的另一种道德原则叫做<strong>义务论（Deontology）</strong>，<strong>义务论判断一件事是不是应当做的标准不是根据后果来取舍，而是要讲原则、讲规矩的。有些原则和规矩，无论后果怎么样都是不应当打破的，它们是一种绝对义务。</strong>比如杀死无辜的人，这种事情无论如何都是不应当做的。其实老百姓的日常道德很多都是义务论式的，我们觉得有些坏事儿不应该做，并不是出于我们时时刻刻都在权衡利弊，而是觉得坏事儿就是不应该做的。所以在电车的场景中，义务论者会选择不拐弯，因为前方的5个人被轧死虽然从后果上看很不好，但是一旦司机选择拐弯，那就相当于他主动选择去杀死了一个无辜的人，这就违反了不杀死无辜的人这么一条义务。</p>
+<p>在电车难题的场景中，多数人的直觉是赞成后果论的，而义务论在这里就显得有点僵化死板，毕竟在现实世界中当人们在进行道德问题的思考时，是很难不将行为的结果纳入考量的。</p>
+<p>那是不是后果论原则就完胜义务论了呢？是不是我们今后面临道德抉择的时候，只需要按照造成的后果的好坏来行事，一切行动都可以因为造成了好的后果而得到辩护了呢？并不是，因为后果论也是有众多bug的。</p>
+<p>现在将这个原初版本的电车难题的场景设定修改一下，现在的你不是电车里的司机了，你现在站在一个桥上，电车将会从桥洞底下经过。同样地，前方铁轨上绑着5个人。<strong>不过这时候，前方没有另一条轨道可以拐弯了，这辆刹车失灵的电车会径直轧死前方铁轨上的5个人。除非，你把同在桥上的另一个胖子给推到桥底下去，由于这个胖子的体重很大，他足以挡住这辆疾驰的电车，让电车停下来，但是这个胖子会被撞死。</strong></p>
+<p>那么请问，你会推这个胖子一把吗？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6nSf8HvzdhywF9WbvmmZUcPx6r8LPKIZ1DzvqqibS6oMcwlPcbpE7DQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>按照后果论的原则，你应当毫不犹豫地推胖子。因为这同样是拿1条命换5条命，从后果上来考量这是利大于弊的。但推胖子这个举动很违反我们的道德直觉，调查发现，大部分人直觉上并不能接受推胖子这么一个举动。</p>
+<p><strong>这就使得后果论在案例中出现了前后不一致。</strong>按照后果论，同样是拿1条命换5条命，在之前拐不拐弯的原初版本的场景中，多数人的直觉会选择拐弯，<strong>但是到了推胖子这个场景中，多数人的直觉却会认为推胖子这事是不应当做的。</strong>这种前后不一致的情况的出现，就说明了后果论的原则也是有bug的。</p>
+<p>如把场景再变换一下，后果论的bug会更加明显。下述场景和推胖子是类似的，不过这回不是在电车场景中了，而是转换到了医院里。现在的你是一名医生，手术台上躺着5个人，他们各自都因为器官衰竭因而急需做器官移植，一个人心坏了，一个人肝坏了，一个人脾坏了，一个人肺坏了，一个人肾坏了。<strong>如果这5个人不赶紧做器官移植手术的话他们会立即死亡，但是这个时候器官库里面并没有可供移植的备用器官。</strong>这时候急诊室里来了一个名叫李四的小伙子，他因为踢足球把脚给踢骨折了，<strong>他的心肝脾肺肾都是健全的。你作为那个医生，会不会为了救那5个器官衰竭的患者，而给李四来一管麻醉剂，然后把他全身的器官取出来供给那5个人，这也是拿1条命换5条命，你会不会这么做呢？</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6z1UcQd9V2TTxgiahJalRUBZLMVGMTE8TviaeRiajIS6NqI1EPnQLpoFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>医生要真是拿李四的1条命去换5条命的话，这简直就是丧尽天良了。<strong>根据调查，多数人的道德直觉对此没有什么纠结，都认为不应当杀死李四。</strong>所以后果论也是有众多bug的，它也不能圆满地解决一些道德困境。</p>
+<p>在上述版本中，义务论无法适应人们在原始问题中的直觉，后果论无法适应人们在修订版本中的直觉，陷入了左右为难的处境。电车难题之所以会被称作是一个道德困境，就是你怎么选择都有bug，看似是一个无解的难题。</p>
+<p>道德哲学家在探究道德哲学、道德理论或者道德原则的时候，有一个基本要求：<strong>道德原则要能够很好地处理道德困境，在困境中得出的结论不能和人们的道德直觉直接冲突。</strong>如果发明了一套道德原则，然后它遭遇到现实中一些极端状况的时候就宕机了，该道德原则就是不及格的。</p>
+<p>之所以义务论和后果论都没能解决电车难题这个道德困境，是因为之前提到的义务论和后果论都太简单粗糙、太朴素了，不够精巧。如果要想解决电车难题这个道德困境，道德哲学家们必须升级这种朴素版本的道德原则，给它们加补丁、加buff，从而能够应对这些极端的道德困境。</p>
+<p>本文将会介绍四位哲学家给出的升级版的解决方案，这四位哲学家分别是：<strong>主张一种行为区分说的菲利帕·福特，主张一种情绪排除说的彼得·辛格，主张一种双重效应学说的托马斯·阿奎那，以及主张一种道德障碍说的杰哈德·奥弗兰。</strong></p>
+<p><strong>开题末尾再补充两点说明：</strong></p>
+<p>第一，今天介绍的这四种方案，它的看点不在于最后的结论是拐弯还是不拐弯、推胖子还是不推胖子，得出什么结论并不是关键。<strong>关键在于你能不能为你得出的结论给出令人信服的论证过程。</strong>用英文说，就是能不能justify这个结论。这是第一点说明，关键不在于结论，关键在于论证。</p>
+<p>第二，<strong>今天关于电车难题的探讨，看似是个纯粹的智力游戏，但其实它跟我们现实生活是紧密相关的。</strong>因为现实生活中也难免会碰到电车难题式的道德困境，比如如果投核弹能够立即结束一场战争，从而挽救更多生命，但核弹会造成一些无辜平民的死亡，你作为最高决策者会不会做出投核弹的决策呢？这就是一种电车难题式的道德困境，再比如，如果刑讯逼供一个嫌疑犯，很可能会逼他说出炸弹安装在了什么地方，从而挽救更多无辜市民的生命，那么你会赞成对嫌犯进行刑讯逼供甚至把他折磨致死吗？如果你认为投核弹或者打击恐怖主义这种大事儿轮不到咱们普通老百姓来操心的话，那例如你老婆或者你女儿怀孕难产了，到底是保大还是保小，这也是一个电车难题式的困境。我们都希望我们自己的生活中永远不会遭遇这种道德困境，但如果真的遭遇到了，或者你认识的人遭遇到了，你在道德困境中做出的抉择能不能从道理上得到辩护？你能不能justify这个抉择？这便是本文想给读者们带来的启发。</p>
+<h2 id="1-菲利帕·福特：行为区分说"><a href="#1-菲利帕·福特：行为区分说" class="headerlink" title="1. 菲利帕·福特：行为区分说"></a>1. 菲利帕·福特：行为区分说</h2><p><strong>不同的行为性质会附带不同的道德属性，制造死亡就比放任死亡要恶劣得多。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJVgb8Jz3mMib0aibkBbeE39E6IrvXNnJVRJYPhKy9kWk74SfrGtaSnqNic1yFIFSDMg30a7IvlGXhzlQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>电车难题这个场景最初就是由我开脑洞构想出来的，然后才引发了后续其他学者的不断争论。甚至如今都发展成一门电车学了，名叫Trolleyology。</p>
+<p>我本人挖了这个坑，也是自己尝试填了坑的。 <strong>我的方案，是做出了一个重要的区分，即kill和let die之间的区分，也就是制造死亡和放任谁谁死亡之间的区别。</strong></p>
+<p>我认为，死人当然是不好的，但是造成死亡的具体方式还是在道德上有区别的。直接制造一个人的死亡比起坐视不理放任一个人死亡是更恶劣的。非洲饥民千千万，如果有人愿意的话，可以捐出其家产解救他们于饥寒之中；但如果这个人没有倾家荡产去解救他们，以至于造成他们有人饿死了，这个人也不至于被指责说道德有多败坏。但是如果有人直接去杀死一个非洲饥民，那他就可以直接被判刑了对不对。</p>
+<p>我认为有了kill和let die的区分后就可以很好地处理电车难题了。<strong>对于原初版本的拐弯或不拐弯的困境，应当选择拐弯。</strong>原因在于，<strong>无论走哪条轨道，都是在直接制造死亡，都是kill，都是轧死了被绑在铁轨上的人。</strong>区别就是轧死5个人还是轧死1个人，也就是<strong>kill 5 vs kill 1</strong>的区别。两害相权取其轻，<strong>在行为性质相同的情况下，死1个人是最不坏的选项，所以应当选择拐弯。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoBhL9BVdQd4YzMzBCHHLLpPB9FZxUiaVTFmTB261b5ZH77E2JsgtSEFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>对于是否要推胖子的问题，<strong>我认为不应当推胖子</strong>。因为身处桥上的你眼看着铁轨上的5个人被轧死，这是let die，这5个人的死不是你制造的。但如亲手推胖子下去，这就是kill了，这是你制造的死亡。<strong>所以这可就不是kill 5 vs kill1的区别了，而是Let 5 die vs Kill 1的区别了，两种性质就完全不一样了。</strong>放任死亡的优先级要原则性地高于制造死亡，所以你宁可选择放任那五个人死去，也不应该选择制造胖子的死亡。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6nSf8HvzdhywF9WbvmmZUcPx6r8LPKIZ1DzvqqibS6oMcwlPcbpE7DQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>对于医院的问题和胖子的问题也是一样的道理，<strong>你作为医生，眼看着那5个患者因为器官衰竭而死去，是let die，而你如果把李四杀死那就是kill了。</strong>同理，你宁可选择放任那5个人死去，也不应当选择制造李四的死亡。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6z1UcQd9V2TTxgiahJalRUBZLMVGMTE8TviaeRiajIS6NqI1EPnQLpoFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我的论证在原则上是很简单的，kill和let die的性质是不同的，在行为性质相同的情况下，两害相权取其轻；但如果行为性质不同，那就不能做轻重的权衡了。<strong>let die的优先级要原则性地高于kill。</strong>我的方案还是能分别对三种场景都给出自圆其说的解答的，并且都能和人们的道德直觉相符合。</p>
+<p><strong>对行为区分说的批评</strong></p>
+<p>对福特的批评就集中在她的kill和let die之间的区分是否总是奏效？是不是做了这么一个区分以后就能完全解决困境了？如果把把这个电车难题的场景设定再小小修改一下，福特的解决方案是否也会遭遇到bug？有一位叫<strong>朱迪斯·贾维斯·汤姆逊</strong>的哲学家就把原版的场景再次修改了一下，试图揭示出福特论证中存在的问题。</p>
+<p>汤姆逊修改了原初版本中电车难题的设定，现在你不是电车里的司机了，这个刹车失灵的电车是无人驾驶的。<strong>你是一个身处铁轨边上的一个路人，手边有一个能够控制电车拐弯的扳杆。只要拨动这个扳杆，电车就会拐弯从而轧死岔道上的张三。</strong>按照原版里的抉择，你作为司机会拐弯，现在的场景只不过是从你原本在车里操控电车，变成你在车外操控电车了。按道理你应当还是选择拐弯。<strong>对于这个新场景，学者也进行了调查，多数人的道德直觉依然是选择扳杆。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEofuHibPyvURmvwsgUAnyqLeZ975ibqlGCpNhgT6UibtXiaGZg9txft1d4YA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>但按照福特的区分，在上述修改后的场景中就不是kill 5 vs kill 1的区别了。因为路边的你可以选择什么都不做，那么不拐弯的电车轧死5个人不是你直接造成的，你是let 5 die，放任这5个人死亡。而如果选择拨动扳杆，那就是制造了张三的死亡了，那就是kill了。<strong>所以这是let 5 die vs kill 1的区别了。</strong></p>
+<p><strong>按照福特主张的原则，在行为性质不同的情况下，我们应当坚决选择let die而不是kill，也就是不应当扳杆。而这就和刚刚提到的多数人的道德直觉相悖了，这说明福特的这个区分也是有bug的。</strong></p>
+<p>对于医院的场景，汤姆逊也做了相似的修改。在原版场景里，福特认为医生不应当杀死李四，因为杀死李四是kill，而那5个人因为器官衰竭而死是let die。汤姆逊就变换了一下设定，<strong>这5个人还是面临即将死亡的危险，但并不是因为器官衰竭，而是因为你作为医生本来想要给他们服用阿司匹林，结果拿药的时候一不留神给拿错了，你给他们服用了毒药。</strong>这个毒药造成了这5个人一个人心坏了，一个人肝坏了，一个人脾坏了，一个人肺坏了，一个人肾坏了，于是这5人即将器官衰竭身亡了。这时候李四来看急诊了，请问，这个时候你会不会杀死李四用他的器官来救那5个人呢？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoYzq8BBgQ34aHOmtWWWibOudLjQOnfMIwzcD5OKFY73WriaT21mHQlzQA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这时候医生面临的就不是let 5 die vs kill 1的区别了，而是kill 5 vs kill 1的区别，因为那5个人中毒也是医生制造的。<strong>按照福特的原则，在行为性质相同的情况下，两害相权取其轻，你作为医生应当毫不犹豫地杀死李四。</strong></p>
+<p><strong>但这一抉择是违反多数人的道德直觉的，就像原版场景里的医生选择杀死李四一样地违反我们的直觉。所以福特的这个方案依然是有bug的。</strong></p>
+<h2 id="2-彼得·辛格：情绪排除说"><a href="#2-彼得·辛格：情绪排除说" class="headerlink" title="2. 彼得·辛格：情绪排除说"></a>2. 彼得·辛格：情绪排除说</h2><p><strong>电车难题很难吗？只要秉持功效主义的原则，把你们的不适情绪排除掉即可。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJVgb8Jz3mMib0aibkBbeE39E6HyfBrvpiczGKdoba2fLmicJmet0gWt1FKGFVOjNWuEkLicLMNTaBC62JA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>作为一名功效主义哲学家，我对于电车难题这个问题所主张的方案自然是基于功效主义的。</p>
+<p>功效主义是一种讲求后果论的哲学派别，一件事情是不是应当做的，要看它造成了什么样的功效。不要搞什么kill和let die之间的区分，什么故意和无意之间的区分，这些区分都没有太大的意义。<strong>一切都看造成什么样的后果，造成好后果的就是好事，造成不好后果的就不是好事，就是这么简单直接。</strong></p>
+<p>听说你们认为功效主义有bug，<strong>它虽然能解决原初版本的电车难题，但却解决不了胖子版本以及医院版本的难题。</strong>我跟你们说，这三种版本从道理上讲没有任何分别，都是选择是否要拿1条命换5条命的问题，因而后果论完全可以逻辑一致地处理这三种场景。<strong>有人说后两种场景用后果论来解决违反人们的道德直觉。这只能说明你的直觉是有问题的。</strong></p>
+<p>你们认为一定要符合道德直觉，无非是因为<strong>当今做道德哲学的通用方法论**</strong>是这样要求的，**<strong>即根据一种道德哲学或者道德理论推理出来的结论，它需要和我们多数人的道德直觉相符合。</strong>因此上文中才会提到有很多学者做了调查（poll），来调查人们的道德直觉。为何道德哲学的结论要符合直觉？主流观点认为人们不愿意接受一种特别拧巴的道德理论，人们不希望道德理论和我们的本能直觉拧着来。道德理论是要指导或者至少解释人们的生活实践的，所以需要符合直觉的道德哲学。</p>
+<p>我为什么敢站出来公然挑战这种方法论，来告诉你们把道德直觉引起的情绪给排除掉呢？这其中有脑科学和进化心理学的论据。</p>
+<p>有心理学家找了一帮人来做这个电车难题的抉择，并同时运用脑成像技术对被试的大脑活动进行观测。<strong>实验表明，当被试在做要不要拐弯的原初版本的电车难题时，被试大脑中和认知与推理相关的脑区会被激活；而当被试面临推胖子版本的电车难题时，被试大脑中被激活的区域是与情绪反应相关的脑区。</strong></p>
+<p>当人们在原初版本中选择拿1条命换5条命的时候，动用的是理性相关的脑区；而当人们在胖子版本中选择不拿1条命换5条命的时候，动用的是情绪相关的脑区。<strong>所以，人们基于情绪而做出的抉择有时候是非理性的，因而是前后不一致的，因而是不合理的。</strong></p>
+<p>人类本能性的情绪反应，往往是为了适应原始的狩猎-采集时代的生存环境。在原始社会中，我们基于情绪反应而做出的快决策往往都是合理的，比如说我们身上有一种强烈的情绪本能，我们会非常厌恶亲手去杀死一个人。因为原始社会的时候没有热兵器，那时候杀人是很暴力很残忍的，你得亲手杀人。而且，原始部落都是封闭社会，你能接触到的人都是熟人，或者就是有血缘关系的亲属，你怎么能下得去手？</p>
+<p>在漫长的狩猎-采集时代，我们人类身上就演化出这么一种本能，就是非常厌恶亲手杀人。我们现代人身上依然保有着这种原始本能，<strong>所以这就能解释在原初版本的电车难题场景中，设定不是亲手杀人，而是操作方向盘拐弯，那么人们不会受到非理性的情绪的干扰，做出拿1条命换5条命的理性判断。而到胖子版本的时候，依然是拿1条命换5条命，但是由于你要亲手推胖子，这时候你的情绪就上头了，干扰了你做出理性的判断。</strong></p>
+<p>我并不是说亲手杀人这种情绪本能是错的，在日常生活中这种本能肯定是对的。但问题在于，我们面临的是电车难题这种极端状况，我们的日常本能因此就无法正确应对。这时候就不能感情用事，而需要排除本能给我们造成的不适感，坚决用理性来决策。比如我们应当忍着不适感坚决地推胖子下桥，以及坚决地取出李四的全身器官移植给那5个人，因为这从理性上讲都是拿1条命换5条命。作为一个决策者应当理性，要真让你做了总统，在该投核弹立即结束战争的时候，结果你却情绪上头，不忍伤及无辜，当断不断，那就坏事了。</p>
+<p><strong>对情绪排除说的批评</strong></p>
+<p>辛格认为，我们在推胖子和医生的案例中会有明显不适的道德直觉是因为要亲手杀人。那我们现在将上述两个场景改成不用亲手杀人的版本，看看辛格的方案是否还能站得住脚。</p>
+<p>在胖子的版本中，你不用亲手去推胖子了。此时的你，是在桥下的铁轨边上，<strong>你手边有一个扳杆，只要轻轻拨动一下这个扳杆，这个桥上的胖子脚下的洞就会打开，那这个胖子就会掉到桥下挡住电车。</strong>请问你会拨动这个扳杆吗？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEosP7gjGF9ibCEicwNP0yutOyfIaNxGWHbx4G8iaeU6SJ8IaxxUibn8A9ZAA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在医院的版本中，你作为医生也不用亲手去给李四来一管麻醉剂然后给他开膛破肚了。你办公室里有一台AI人工智能，所有事情都可以让这个AI去做。众所周知，旧时上海黑帮老大杀人的时候，都不会亲自动手，而是在戏园子里面悠悠地对手下说一句「乃伊组特」。<strong>这一版的医院场景也是一样，你只要在办公室里对那个AI说一句：「小爱同学，乃伊组特」，然后所有事情，如麻醉，器官移植手术，都可以全部由AI搞定。</strong>请问，你会说出「小爱同学，乃伊组特」这个指令吗？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoBUtGJo71SLwLAk7VuLL6BWicyZX19enczWEsPPHszxdPCEC4J8k4cibw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在上述两个修改版的情境中，你都不用亲手杀人了，这就很好地避免了辛格说的亲手杀人会让人情绪上头从而做出非理性判断的局面。<strong>但即便排除了亲手杀人，我们依然会认为，不应当拨动这个扳杆，也不应当对AI下达杀人的指令。</strong>这就说明，这些事情不应当做，不单单是我们情绪上头的结果，这其中肯定有超越于情绪的更为坚实的理由，所以辛格找的点就找错了。</p>
+<h2 id="3-托马斯·阿奎那：双重效应说"><a href="#3-托马斯·阿奎那：双重效应说" class="headerlink" title="3. 托马斯·阿奎那：双重效应说"></a>3. 托马斯·阿奎那：双重效应说</h2><p><strong>一个行为可以产生两种效果，一种是有意为之，另一种仅是附带的。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJVgb8Jz3mMib0aibkBbeE39E6RRE0YTFmhAOk6coclrYg7yxJmvKibT9OmDJbZDNXiaiaxvlvk95BTfPjw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在我所撰写的《神学大全》里有一种学说，叫做双重效应学说，可以直接运用到对电车难题的处理上。</p>
+<p>我之所以要提出双重效应学说，是要处理关于正当防卫的问题，因为我的前辈神学家奥古斯丁说过，就算是在自我防卫的情况下杀人也是不被允许的。</p>
+<p>我是不同意奥古斯丁这个说法的，我认为如果是为了保护自己，那杀人可以是正当的。所以我就需要为这个正当防卫的正当性做辩护。</p>
+<p><strong>双重效应学说认为，一种行为会产生两种效果，一种是行为主体有意为之的，而另一种则是与行为者意图无关而附带出来副效应。</strong>在自我防卫的问题中，自卫行为产生了两种后果：一种是保全了自己的生命，这是行为者有意为之的后果，另一种是杀害了袭击者，这是与行为者意图无关而附带出来的副效应。自卫的正当性之所以能够得到辩护，是因为行为者的意图并不是有意要杀害他人，他并不是主观上故意追求要把对方给弄死，他是为了保卫自己的生命。<strong>杀人也只是为了保卫自己生命而造成的一个可以预见到，但并非有意为之的一种副效应，也就是一种foreseen, but unintended的后果。</strong></p>
+<p>一种行为如果造成了一定的坏的后果，如果这个行为同时满足以下三个条件，就可以用双重效应学说为这种行为做辩护：</p>
+<p><strong>第一，你的动机是为了达到一个善的目的。</strong></p>
+<p><strong>第二，你的行为造成的坏的后果，是作为一种预见到的副效应而遗憾地发生的，并不是你故意要追求这种恶果，也就是说这是一种foreseen, but unintended的后果。</strong></p>
+<p><strong>第三，你尽量将坏的效果降到了最低，也就是说，这是你能选择的最不坏的选项了。</strong></p>
+<p>如果满足了这三个条件，那么这个行为就是可以得到辩护的。</p>
+<p><strong>在原初版本的电车难题中，双重效应说会主张拐弯。</strong>第一，拐弯是为了造成更小的伤亡，是出于好的动机。第二，如果把岔道上的张三轧死了，我们并不是故意要轧死张三。<strong>相反，我们的内心会希望张三没有被绑在岔道上，如果我们拐弯以后，绑在岔道上的张三挣脱逃跑了，我们反而会拍手叫好，所以如果张三没能逃脱而被轧死了，只是我们能预见到但并不希望发生的副效应。</strong>第三，没有其它更不坏的选项了。同时满足了这三个条件，拐弯的抉择是能够被双重效应学说所辩护的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoBhL9BVdQd4YzMzBCHHLLpPB9FZxUiaVTFmTB261b5ZH77E2JsgtSEFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>再看胖子版本的电车难题。第一，如果说你推胖子的动机是为了减小伤亡，是为了达到一个善的目的，可以说第一个条件是满足的。<strong>但是第二个条件就不满足了，因为你是希望胖子在桥上的，胖子要是不在桥上，反而就救不了轨道上被绑住的五个人了。在你的主观意图上，你是想要胖子在那里并且被你推下去的，所以胖子被推下去并不是foreseen, but unintended的副效应了，而是你有意为之的行动了。</strong>所以第二个条件不满足，只要有一个不满足双重效应学说就无法为推胖子的举动做辩护。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6nSf8HvzdhywF9WbvmmZUcPx6r8LPKIZ1DzvqqibS6oMcwlPcbpE7DQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>所以按照双重效应学说，在推胖子版本的电车难题中，能够得到辩护的抉择是，不去推胖子。</p>
+<p><strong>在医院版本的难题中，杀死李四也是得不到辩护的。</strong>因为同推胖子一样，你是希望李四出现在急诊室里的，因为没他的话你就无法救那5个人了，所以杀死李四是你有意为之的，得不到双重效应学说的辩护，所以你不应当杀死李四。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6z1UcQd9V2TTxgiahJalRUBZLMVGMTE8TviaeRiajIS6NqI1EPnQLpoFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>双重效应学说能够比较自圆其说、逻辑一致地处理这三种版本的电车难题，并且也符合人们的直觉。</strong>双重效应学说在某种意义上是对义务论和后果论的一种综合，义务论只讲求动机，讲求做事要出于好心，而后果论不讲求好心，只讲求要办好事儿。当遇到复杂情况的时候，这两种一根筋的道德原则就会遭遇bug，而双重效应学说要解决的，就是在复杂情况下，也就是在可能会出现一些坏的后果的情况下，怎么样贯彻既要有好心又要办好事的原则。</p>
+<p><strong>对双重效应说的批评</strong></p>
+<p>对双重效应学说的批评依然是出自于之前提到的哲学家朱迪斯·汤姆逊，她的招数依然是小小修改一下场景设定，让双重效应学说遭遇bug。</p>
+<p>这次汤姆逊给原初的电车场景做了一点小小的修改，依然是刹车失灵的电车，你依然是身处电车里的司机，依然前方铁轨上绑着5个人，岔道上绑着1个张三，你依然要面临要不要拐弯的抉择。<strong>但是唯一的区别就是，这个铁轨，是一个环形的铁轨，如果你选择拐弯，而岔道上没有绑着张三的话，这辆电车依然会绕回来轧死这5个人。而岔道上绑着的张三，他被电车轧死以后，就能挡住电车，电车就停下了，那5个人就能得救了。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEolDW2zePSVicuFoXoGDF84AgYhfwHzZU3TDicmaCjYoxfhtaSe0joKsmQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>只是这么一个环形铁轨的小小的变动，根据调查，学界中多数人的直觉依然是应当拐弯，但是这时候直觉和原则出现矛盾了。</strong></p>
+<p>如果你选择拐弯的话，你是希望张三出现在岔道上的，这样他就能挡住电车从而救下那5个人。如果这时候张三挣脱逃跑了，你不会拍手叫好，你会感到失望，因为那5个人就没法得救了。张三的死就不是你可以预见到、但并非有意为之的后果了，而就是你有意想要达成的后果，所以双重效应学说就不能为这种直觉选择做辩护了，所以双重效应学说还是会遭遇到bug。</p>
+<p><strong>对于汤姆逊的批评，学界也有不少人站出来进行反对，其中的代表人物就是伦敦政经学院的哲学教授迈克尔·大冢。</strong></p>
+<p>他对汤姆逊的反驳提出的第一层质疑是，<strong>在环形铁轨的版本中，学界中多数人支持拐弯的直觉是受到了先前种种电车难题版本的影响。</strong>因为当学者在调查未接触过各种变形案例的普罗大众对于环形铁轨难题的道德直觉时，有一半的人认为不可以扳杆，所以在这个案例中首先并没有一个明显占大多数的压倒意见。</p>
+<p>第二层质疑是，<strong>环形铁轨的版本是不能和原始版本进行类比的，因为被绑在岔道上的那个人所起到的作用是完全不一样的。</strong>大冢教授用了一个新的变形版本来帮助我们厘清正确的道德直觉，我们称之为桥上环形版本。</p>
+<p>电车在经过桥下之前，可以扳动一个道岔，效果有两个，1.会让电车沿着左下角的环形铁轨绕一圈然后继续行驶；2.桥上会打开一个洞。如果桥上没人的话，那无论扳不扳杆，被绑在轨道上的五个人都会被撞死。唯一救这五个人的方式是桥上需要有一个人，然后扳杆让桥上的洞打开，这个人落在铁轨上挡住电车，但这个人会被撞死。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuAq01ytxJUF2gGs07V2rg6DYOBYGRqacC0s6CkXrqGcrfV6emsond8RiayQ3lCAmibVKQP34F7N3WOBicibf0gq1Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>大冢教授说，在上面这个桥上环形版本中，显然大多数人会认为不能让这个人掉下来挡住电车。<strong>而如果对比桥上环形版本和汤姆逊所提出的环形版本，实质上并没有任何区别，而环形版本和原始版本是有显著区别的。</strong>所以如果在桥上环形版本中我们认为不能撞死桥上的那个人，那么在环形版本中秉持着一致性的原则，我们以应该认为不能撞死岔道上的那个人，而这和双重效应学说的论证就相契合了。</p>
+<h2 id="4-杰哈德·奥弗兰：道德障碍说"><a href="#4-杰哈德·奥弗兰：道德障碍说" class="headerlink" title="4. 杰哈德·奥弗兰：道德障碍说"></a>4. 杰哈德·奥弗兰：道德障碍说</h2><p><strong>电车难题之所以难，是因为道德障碍物的出现，这个障碍物本身就得背锅。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJVgb8Jz3mMib0aibkBbeE39E6LWmSDEzx7vrX2FRO4NRgd2kGeZxSgdHJ8j7Bib4o1Q6ibQ0aL1IffMGQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我认为上面几位针对电车难题所提出的解决方案都想太多了，尤其是双重效应学说。我提出这样一个问题：</p>
+<p><strong>为什么行为人主观上的想法能影响到最后的道德判断？</strong>人心隔肚皮，你们怎么知道行为人心里是怎么想的？任何做出恶行的人都会诉诸类似于＂我不是故意的，我也不想这样。＂的理由来为自己进行辩护，但行为人心里的真实想法是我们永远不可能完全得知的。我们只有可能通过外在可观测的行为进行推断，但既然是推断那一定就无法完全确保准确性了。<strong>我认为像双重效应学说这样讲求主观动机的理论就不具备可操作性了。</strong></p>
+<p>让我来提出一种直接明了的解决电车难题的方案，叫做<strong>道德障碍说。</strong></p>
+<p>我给道德障碍下的定义是，Moral Obstacle: Someone whose presence makes it the case that someone must now bear a cost, compared to their absence. <strong>简言之，如果道德障碍没有出现的话，就无须面临道德困境了。道德障碍的出现增加了救人的道德成本，所以作为道德障碍的人就有责任承担一部分因为其出现而多出来的道德成本。</strong></p>
+<p>在原初版本的电车难题中，我会主张拐弯。<strong>因为被绑在岔道上的张三增加了救5个人的道德成本，张三就是一个道德障碍。因为如果岔道上没有张三的存在，救这5个人就是一件轻松愉快的事情了。</strong>结果张三偏偏出现在了岔道上，他的出现就让我们救人平添了道德成本。我们非得以杀死张三为代价才能救那5个人，我们并不想杀死张三，但张三的出现确实让救人变得更加麻烦了，<strong>张三自己需要为增加的这些道德成本承担一定的责任。所以我们决定拐弯轧死张三从而挽救那5个人。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoBhL9BVdQd4YzMzBCHHLLpPB9FZxUiaVTFmTB261b5ZH77E2JsgtSEFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在胖子版本的电车难题中，我的结论是不应当推胖子，<strong>因为胖子的出现并没有增加任何救那5个人的道德成本。</strong>胖子如果不出现的话，反而还救不了那5个人，胖子的出现反而使得救人成为可能，胖子不是道德障碍。他无需承担任何道德成本，所以我们不应当推胖子。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6nSf8HvzdhywF9WbvmmZUcPx6r8LPKIZ1DzvqqibS6oMcwlPcbpE7DQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在医院版本的难题中，同理，我的结论还是不应当杀死李四。<strong>因为李四和胖子一样，都没有增加救那5个人的道德成本，如果没有李四的话，还救不了那5个人。</strong>李四不是道德障碍，李四无须承担任何道德成本，所以我们不应当杀死李四。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEo6z1UcQd9V2TTxgiahJalRUBZLMVGMTE8TviaeRiajIS6NqI1EPnQLpoFA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>对道德障碍说的批评</strong></p>
+<p>对道德障碍说的批评简言之即为：这种方案本身就可能和我们的日常道德直觉相冲突。那个被绑在岔道上的张三并不是自己选择被绑在岔道上的，它完完全全就是一个受害者，<strong>如果受害者还要承担自己被轧死的责任，那就类似于受害者有罪论了。</strong></p>
+<p>在原版医院场景中，医生要选择是否要杀死李四，把他的全身器官移植给那5个器官衰竭的人，按照奥弗兰的道德障碍说，我们不应当杀死李四，因为李四不是道德障碍。</p>
+<p>现在修改一下设定，现在这5个人依然是面临即将死亡的情境，<strong>不过不是因为器官衰竭，而是中了某种毒。</strong>解毒的方式是需要在手术室里立即释放另一种有毒的气体，类似于以毒攻毒。<strong>但这种气体不可避免地会蔓延到隔壁房间，而隔壁房间正躺着因为骨折而来看急诊的李四。</strong>这时候这五个人眼看就要死了，已经来不及转移了，也来不及通知隔壁的李四挪地方了。<strong>如果释放气体，这5个人会得救，而李四会被毒死。</strong>请问你作为医生，要不要立即在手术室里释放这种有毒气体？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/tuAq01ytxJXNib5KaCIqGMUUL31XsCuEoD2UJQtcDg4FicL52ZogTcjFvOCzBEYHrfWLtw01sVGyqbpCNejRp63Q/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>按照奥弗兰主张的道德障碍说，我们应当立即释放有毒气体，哪怕这会毒死隔壁的李四。因为李四为救这5个人增加了道德成本，他如果不出现在隔壁房间，那么救这5个人就是轻松愉快的事情了，李四是一个道德障碍，他需要为他增加的道德成本承担一定责任，所以毒死李四是可以被辩护的。</p>
+<p><strong>这个结果就十分违反直觉了。这属于是受害者有罪论了。奥弗兰搞了一通道德障碍的论证，说受害者也必须承担一定的道德成本，得出这么一种反直觉的结论。</strong>这样的论证显然是不能被我们接受的。</p>
+<div style="position: relative; width: 80%; height: 0; padding-bottom: 75%;margin-bottom:-15%;">
+    <iframe src="//player.bilibili.com/player.html?isOutside=true&aid=251003879&bvid=BV1Uv411g7Sj&cid=424988055&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 80%; Left: 10%; top: 0;"></iframe>
+</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ba4eb63d/">Python一键下载公众号所有文章，导出文件支持PDF，HTML，Markdown，Excel，chm等格式</a>
+            
+            
+            <a class="next" rel="next" href="/a5a88f17/">如何看待死亡？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ba4eb63d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/a5a88f17/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>什么是范式 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">什么是范式</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 16, 2017&nbsp;&nbsp;21:17:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 16, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/">哲学与宗教 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">10.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">36 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTeq1jnyQJoVgPhFeDIqibdvML7OryAyWw1TjJRn6oNve5rQDoTnluEQ9SpJcZkvViaJPCWicMN6E5crkA/640?wx_fmt=jpeg&wxfrom=13" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">[意]吉奥乔·阿甘本 | 文 <br />王立秋 | 译</div>
+
+
+
+<center><font face="黑体"><b>一</b></font></center>
+
+<p>在我的研究过程中，我已经就某些形象写了许多，如牲人，穆斯林人，例外状态和集中营。尽管这些都是现实的历史现象，但我是把它们当作范式来处理的，其角色和功用在于构成某种更加广阔的历史-问题式语境并使之在智识上可以理解。因为这种研究进路已经引起了一些误解，尤其是对那些或多或少出于善意认为我的意图是提供纯粹的史料学主题或史料学重构的人而言，这里我必须停下来对哲学和人文科学中范式之使用的意义与功能进行反思。</p>
+<p>福柯在他的著作中经常使用“范式”这个词，尽管他从未为它给出精确的定义。尽管如此，在《知识考古学》及其后的作品中，为区别其探究的对象与历史学科的研究对象，福柯用像“积极性（positivity）”，“问题化（problematization）”，“论述型构/话语形构（discursive formation）”，“装置（apparatus）”以及更普遍地，“知识（knowledge）”那样的术语来命名他研究的那些对象。在1978年五月于法国哲学协会（Société Française de Philosophie）的讲座上，他这样定义“知识”：“知识（savoir）这个词的使用……涉及在某个给定的时间点和某个特定的领域中被接受的认识（connaissance）的所有程序和（产生的）一切效果。”为澄清知识概念与权力概念之间的必然联系，福柯加上了这些评论：“因为没有什么能够作为知识的要素而存在，如果一方面，它不符合，比如说，某个给定时期的给定的科学话语类型的特征性的法则与限制集合的话，以及如果，另一方面，它不具备为科学上有效或仅仅是理性的或得到普遍接受的东西所特有的威迫（coercion）或仅仅是刺激（incentive）的话。”</p>
+<p>正如其他人已经指出的那样，这些概念类似于托马斯•S.库恩在他的著作《科学革命的结构》中引进的“科学范式”的观念。比如说，休伯特•德雷福斯（Hubert L.Dreyfus）和保罗•拉比诺（Paul Rabinow）已经指出，尽管福柯从未使范式的功能主题化，“但他当前的著作显然遵循使用这些洞见的航线，如果不是这些词语本身的话。现在他通过对作为范式之历史表达的话语的描绘，继续前进并趋近某种方式上深刻依赖于对社会范式及其实践上的应用的孤立和描述的分析。”</p>
+<p>然而福柯，宣称自己在完成《事物的次序》（即《词与物》）后才读到库恩那本“令人赞赏的权威性”著作的他，却几乎没有提到这本书，甚至看起来还刻意保持与库恩之间的距离（使自己远离库恩）。在1978年为乔治•康吉兰（Georges Canguilhem）的著作《正常与病变》（The Noemal and the Pathological）美国版所撰写的导论中，福柯写道：“这种规范不能被认同为某个神学的结构或某种现实的范式，因为今天的科学真理本身只是它的一个片断——我们最多能说有限的（一个部分）。人们能否返回过去并有效地追溯其历史，并不取决于某种T.S.库恩意义上的‘规范科学’：而是要重新发现‘规范’的进程，而关于这种进程的实际知识，只是其中的片刻而已。”</p>
+<p>因此首先对这两种不同方法之间的类似之处是否并不相当于不同的问题、策略和调查以及福柯考古学的“范式”是否不仅仅是某种标志科学革命出现的东西——根据库恩——的同音异义词进行反思，是必要的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LICJU6pgjMw52dniabLBPRjJcMV7mJ0iaeTicUheLibd2e4ZibeefEsVcHTow/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">米歇尔·福柯</center>
+
+
+
+<center><font face="黑体"><b>二</b></font></center>
+
+<p>库恩承认他在两个不同的意义上使用“范式”这个概念。“范式”的第一个意义——库恩提议用“学科基质（disciplinary matrix）”这个术语来取代这个意义上的“范式”——指的是某个特定科学共同体的共有物（common possessions），也即，群体成员或多或少有意识地坚持的那些技术、模型和价值的集合。第二个意义指的是这个集合中的一个单一的元素，比如艾萨克•牛顿的《原理》（Principia）或托勒密的《天文学大成》（Almagest），这种元素起到了通例（common example）的作用并因此而取代明示的法则并使某个特定而自洽的研究传统得以形成。</p>
+<p>在库恩阐释卢德维克•弗莱克的“思维样式/思想风格（thought style, Denkstil）”概念以及在某个“思想集体（thought collective, Denkkollektiv）”内中肯（pertinent）与不中肯的东西之间的区别的时候，他力图通过范式的概念，来检视使规范科学，也即，一种有能力在特定的共同体中决定问题是否科学的科学的构成成为可能的那种东西。规范科学并不意味着某种为精确和自洽的法则系统所统治的科学。相反，如果法则源于范式的话，那么，范式就能够——甚至在法则缺席的情况下——“决定规范科学”。这就是范式概念的第二个意义，库恩认为，这种意义是“最新颖的：“范式只是一个例子，一个个案，通过它的可重复性来获得依照惯例充当科学家的行为和研究实践之模范的能力。这样，范式的绝对统治就取代了被理解为科学性总则（canon）的法则之帝国；法则的普世逻辑也就为例子的特定而非凡的逻辑所取代。一个旧的范式为一个先前范式不能再与之比肩的新范式所取代的时候时，根据库恩的说法，（这时）也就发生了一场科学革命。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LIQDpKoOAtmycJ1IJxNWrNLgMVoBuxavn0iaMjXPg1lBGiapFoJn0m9lrg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">托马斯·库恩</center>
+
+
+
+<center><font face="黑体"><b>三</b></font></center>
+
+<p>福柯一直力图放弃传统的权力分析，这种分析既基于司法和制度的模式，也基于普世的范畴（法律，国家，主权理论）。相反，他聚焦于具体的机制，通过这些机制，权力渗透到主体/臣民的身体并以此来治理他们（多种多样）的生命形式。这里，与库恩范式的类似看起来找到了一个重要的证据。就像库恩把构成规范科学的法则之认同及检视防到一边，以便聚焦与决定科学家行为的范式那样，福柯质疑了权力理论的司法模式的传统的首要性，为的是凸显多样的规训和政治技术，通过这些规训和治理的技术，国家把对个体生命的关注并入它的界限。也正如库恩使规范科学与界定这种科学的法则系统分离那样，福柯也经常区分“规范化/正常化”——它以规训的权力为特征——与法律程序的司法系统。</p>
+<p>如果这两种方法的接近看起来还算清楚的话，那么，在谈到库恩的著作时福柯为什么要保持沉默以及看起来在《知识考古学》中谨慎地避开“范式”术语的使用就更加神秘了。当然，福柯沉默的原因可能是个人的。在给乔治•斯坦纳（George Steiner）——他责备福柯没有提到库恩的名字——的回复中，福柯解释道，他直到完成《事物的秩序》后才读到库恩的著作并补充道：“因此我并没有引用库恩，但我确实引用了那位塑造并激发库恩思想的科学历史学家：乔治•康吉兰。”</p>
+<p>这个陈述是令人震惊的，至少可以这么说，因为库恩，确实在《科学革命的结构》的前言中承认他要对两位法国的知识学家，亚历山大•柯瓦雷（Alexandre Koyré）和埃米尔•梅耶松（Émile Meyerson）表示感谢，但他却不曾在书中提到康吉兰的名字。既然福柯必然言有所指，也许是他与康吉兰的亲密关系，促使他为此无礼而报复库恩。然而，就算福柯没有超越对个人怨恨的执念，单是这样，也不能解释他对库恩的沉默。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LIAl4jX9hv4zialrw15zBibQteOhxibBKh754hIywVjqayU8rxtIfP3XNfg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">乔治·康吉莱姆</center>
+
+
+
+
+
+<center><font face="黑体"><b>四</b></font></center>
+
+<p>对福柯的作品进行更加细致的阅读，我们会发现，甚至在不提这位美国知识学家的情况下，福柯也不止一次地抓住了库恩的范式概念。在福柯1976年与阿莱桑德罗•冯塔纳（Alessandro Fontana）和帕斯夸里•帕斯奎诺（Pasquale Pasquino）的访谈《真理与权力》中，在回答一个与不连续性（discontinuity）的问题的时候，他清楚地把他“论述政制（discursive regime，或译话语机制，话语罗网）”的概念与范式的概念对立起来：</p>
+<p>这样，它就不是内容的变化（以往的错误的辩驳，古老的真理的复原），也不是理论形式的变化（某种范式的更新，系统组合[systematic ensembles]的变更/修正[modification]）。这是一个什么在治理（governs）陈述，以及这些尘世以何种方式相互治理以构建一组在科学上可被接受并因此而能够为科学程序所证实或证伪的命题和主张。简言之，这里存在一个政制的问题，也即，科学陈述的政治问题。在这个层面上说，与其说问题是何种外在的力量把自己强加到科学身上，不如说，问题在于，权力在科学陈述间散布的影响与效果为何，某种程度上说，构成这些科学陈述的内部权力政制为何，以及何以且为何在一些特定的时刻，这种政制会经历全球性的变更。</p>
+<p>稍后，在谈到《事物的次序》的时候，他坚持话语政制（一种本真的政治现象）和范式（科学真理的一个标准）之间的距离：“这里缺乏的，就是这个‘话语政制’的，为陈述的游戏所特有的权力效果的问题。我过分地把它混同于系统性（systematicity），理论的形式，或某种类似范式的东西。”接下来，在某个地方，福柯确实承认这种与库恩范式的接近；但这种接近并非某种实际上的亲和力的产生的效果，相反，它是某种混同的结果。对福柯来说，决定性的，是范式从认识论向政治的运动，是范式向陈述和话语政制的政治学平台的转变，在这个平台上，它倒不太是被思虑为“内部的权力政制”的“理论形式的变化”，而这种“内部的权力政制”，决定了陈述相互治理以构成某种组合的方式。</p>
+<p>从这个角度来看，这点是很清楚的：甚至在福柯没有点名道姓地在《知识考古学》中提到这些东西的时候，他也经常准备好在他自己的研究主题和库恩的范式之间作出区分。对福柯来说，话语形成并没有在时间中某个给定的时刻定义知识的状态：话语的形成并没有为那些，从那时候起，就被证明为真并对确切取得的知识状态进行假设的东西，以及那些，另一方面，无需证据或足够的证明就被接受，或那些被接受为公共的信念或某种为想象的力量所要求的信念的东西拟定清单。分析实证性（positivities）就是展示根据这类实证性，一种话语实践可用成组的客体，宣言（enunciations），概念或理论的选择形成的法则。</p>
+<p>再稍后不久，福柯描述了某种看起来与库恩的范式一致，但他更喜欢称之为“认识论的形态（epistemological figures）”或“认识论化的界限（thresholds of epistemologization）”。因此，他写道：“当话语形成处于运作中，陈述群得到结合/表达，声称证实（甚至是不成功地）证明和自洽原则的时候，当它（陈述群）对知识行使支配功能（作为一种模式，一种批判或一种证实）的时候，我们就说，话语形成越过了认识论化的界限。当以此方式得到表达的认识论的形态服从许多形式标准的时候……”</p>
+<p>术语的变化不仅是形式的：以与《知识考古学》前设完全一致的方式，福柯把注意力从使与主体（某个科学共同体的成员）有关的规范科学之构成成为可能的标准，转移到独立于一切对主体（“陈述群得到结合/表达”，“认识论的形态以此方式得到表达”）的指涉的“陈述群”和“形态”的纯粹事件（occurrence）之上。而在一个关于科学史的不同类型的提议中，当福柯定义他自己的知识型（episteme）概念的时候，问题不再是定义类似某种世界观或某种把普遍的假定和规范强加于主体之上的思维结构的问题。相反，知识型是“在一给定时期统一引起认识论的形态，科学以及可能形式化的系统的话语实践的诸种关系的总体集合。”不想库恩的范式，知识型并没有定义在一既定时期的只是为何，但事实上显而易见的是，一种给定的话语或知识的形态是存在的：“在科学话语之谜中，知识型分析质疑的并不是它成为科学的权利，而是它存在这个事实。”</p>
+<p>《知识考古学》被读作历史书写的非连续性（historiograghical discontinuity）的宣言。无论这种描述是否正确（福柯多次对此提出质疑），确定的是，在这本书中，福柯看起来最感兴趣的是，在“形态”和序列的实证性存在中，使文本和群组分类的构成成为可能的那些东西。他感兴趣的只是，这些文本与一种完全独特的认识论模式一致出现，这种认识论模式既不与那些在历史研究中得到普遍接受的模式相符，也不与库恩的范式们契合——因此，这种模式，正是我们必须着手辨认的那种模式。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LIeAupiaWSF5voSb1eA1MF3ew0pJKfNUOS2HoUiadsq7TyrYuUibEibiaZIrQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">米歇尔·福柯《词与物》</center>
+
+
+
+
+
+<center><font face="黑体"><b>五</b></font></center>
+
+<p>让我们来考虑福柯在《规训与惩罚》第三部分中呈现的全景敞视主义（panopticism）。圆形监狱/全景敞视建筑（panopticon）是一个独特的历史现象，杰里米•边沁在1791年于都柏林出版的，题为《圆形监狱/全景敞视建筑；或，检查房：包含适用于任何种类机构，其中任何种类的描述都被保持在检查之下的一种新的建筑原则》（Panopticon；or, The Inspection-House：Containing the Idea of a Now Principle of Construction, Applicable to Any Sort of Establishment, in Which Persons of Any Description Are to Be Kept Under Inspection.）中写到的一个建筑模型。福柯重新描述了圆型监狱/全景敞视建筑的基本形态：</p>
+<p>其构造的基本原理是大家所熟知的：四周是一个环形建筑，中心是一座瞭望塔。瞭望塔有一圈大窗户，对着环形建筑。环形建筑被分成许多小囚室，每个囚室都贯穿建筑物的横切面。各囚室都有两个窗户，一个对着里面，与塔的窗户相对，另一个对着外面，能使光亮从囚室的一端照进另一端。然后，所需要做的就是在中心瞭望塔安排一名监督者，在每个囚室里关进一个疯人或一个病人、一个罪犯、一个工人、一个学生。通过逆光效果，人们可以从瞭望塔的与光源恰好相反的角度，观察四周囚室里被囚禁者的小人影。这些囚室就像是许多小笼子、小舞台。</p>
+<p>然而对福柯来说，圆形监狱/全景敞视建筑既是一种“可普遍化的功能模式”，也即“全景敞视主义”，也就是说，一种“组合”的原则，又是“权力的全景展示形式（panoptic modality of power）”。如此，它是一种“能够和应该独立于任何具体用途的政治技术的形态（figure，中译作象征——中译注）”，它不纯粹是一种“梦幻建筑”，而是“被还原到理想形态的权力机制的示意图。”简言之，圆形监狱/全景敞视建筑在严格意义上起到了范式的作用：它是一个独特的客体，对同一种类的其他客体来说，它都有着同等的代表力（standing equally for all others of the same class），它定义了那个它即作为其中一部分，同时又在构成的组类（group）的可理解性。任何读过《规训与惩罚》的人都知道，圆型监狱/全景敞视建筑——在关于规训的章节末尾——是如何为理解权力的规训形式（modality）而履行一种决定性的策略性功能的，而且，他们也知道，它是何以成为某种类似认识论形态的东西，这种东西，在界定现代性的规训宇宙的时候，也标志着这样的界限，跨越这个界限，它也就进入了控制的社会。</p>
+<p>这在福柯的作品中并不是孤立的一例。相反，人们可以说，在这个意义上，范式界定了福柯方法最具特征的姿势。大禁闭，忏悔，审讯，检查，对自我的关注：这些都是被福柯当作范式（来处理的）独特的历史现象，这也就是构成他对历史书写领域的特定干预的那种东西。范式建立了一个更加宽阔的问题语境——范式既构成这一语境，又使这个语境可理解。</p>
+<p>达尼埃尔•米罗（Daniel S. Milo）评论道，福柯展示了与那些只通过编年史中断（chronological caesurae）才被创造的语境相反的，为隐喻领域所生产的语境的关联性。最随诸如马克•布洛赫（Marc Bloch）《御触》（Royal Touch），恩斯特•康特洛维茨（Ernst Kantorowicz）《国王的两个身体》（King’s Two Bodies），以及吕西安•费弗尔（Lucien Febvre）《十六世纪的无信仰问题》（Problem of Unbelief in the Sixteenth Century）那样的著作，据说，福柯也把历史书写从转喻式的语境——比如说，十八世纪或法国南部——的独占支配中解放出来，二者，为的是使隐喻性的语境回归首要地位。只有在人们牢记，对福柯来说，问题不在于隐喻，而在于上面指出的那种意义上的范式的时候，这个观察才是正确的。范式不服从意义的隐喻转换逻辑，而只服从于例子的类推逻辑（the analogical of the exemple）。这里我们面对的，不是借助一个同一个语义结构得到延展从而指示同质性现象的能指；相反，与隐喻相比，范式更近似于寓言，就范式通过展示自身的独特性，使一个新的组合——这个组合的同质性是为范式本身所构成的——可理解而言，它是一个从语境中孤立出来的独特的案例。也就是说，举例，也就是一个复杂的行动，它假设像范式一样作用的术语受到了它的规范/正常用法的去活化（使不活动，失去规范用法中的活力），为的不是移进另一个语境，而是，相反，使那种用法的总则——法则——呈现，后者无法以其他方式显现。</p>
+<p>瑟斯特斯•庞培•菲斯特斯（Sextus Pompeius Festus）告诉我们，罗马人在exemplar和exemplum之间作出了区分。exemplar可为感官（sense, oculis conspicitur）所观察，指人们必须模仿的东西（exemplar est quod simile aestimatur）。另一方面，则要求某种更加复杂的评价（evaluation）（而这，不仅仅是可感的：animo aestimatur）；它的意义超乎于一切道德和智识之上。福柯式的范式同为二者：不仅是强加某种规范科学之构成的范例或模式，还是且首先是一种exemplum，后者允许陈述和话语实践向一种新的智性组合和一种新的问题语境聚合。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LITW5ejhTEkCtcQxXR9RYB1vDTL4mMNvcTxcgoQDvHvQRic7foZgGRRQQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">康特洛维茨《国王的两个身体》</center>
+
+
+
+<center><font face="黑体"><b>六</b></font></center>
+
+<p>（关于范例的认识论）最著名或最具有权威的文句[章节] （locus classicus；standard passage）是亚里士多德的《前分析篇》（Prior Analytics）。那里，亚里士多德区分了取道范式的程序，和归纳与演绎。“很显然”，他写道，“当两者都属于同一个词项，其中一个被知道时，则一个例证（paradigm，即范式）所代表的不是部分与整体[hōs meros pros holon]，或整体与部分的联系[hōs holon pros meros]，而是一个部分于另一个部分的联系[hōs meros pros meros]。”也就是说，在归纳从特殊走向普遍，而演绎从普遍走向特殊的时候，范式确实为第三种矛盾型的运动所界定的，这种运动，从特殊走向特殊。范例构成了一种特定的知识形式，这种知识不是通过结合/表达普遍与特殊来前进，相反，看起来，它寓居于特殊的平面。亚里士多德对范式的处理并没有超出这些简略的观察，而止于特殊的知识状态也没有得到进一步的检视。看起来，亚里士多德不但（依然）坚持特殊之前有公共类型（common type, 或一般型）存在，而且，他也没有定义术语范例的那种“更大的可知性（greater knowability）”（gnōrimōteron）状态。</p>
+<p>只有在我们理解——这使亚里士多德的主体变得更加激进——这种范式的认识论状态对特殊和普遍之间的二分对立——我们习惯于认为这种二分对立与认识程序是不可分割的——发起质疑，并相反呈现出一种不可还原为二分术语中的任何一个的那种独特性的情况下，这种范式的认识论状态才变得明显。亚里士多德话语的领域不是逻辑而是类推（analogy），恩佐•梅兰德尼（Enzo Melandri）在一本现在已经成为经典的著作中重构了类推的理论。而这种理论生成的类例（analogon），则既非普遍亦非特殊。因此也就有了它独特的价值，以及我们理解它的任务。</p>
+<center><font face="黑体"><b>七</b></font></center>
+
+<p>在《线与圆》（La linea e il circolo）中，梅兰德尼表明，类推与支配西方逻辑的二分原则截然相反。与剧烈（斗争的二元）选项“A或B”——这种选择排除了第三项——相反，类推强加自己的排中律（tertium datur），其顽固的“非A非B”。换言之，类推对逻辑的二分（特殊/普遍；形式/内容；依法[lawfulness]/特例[exemplarity]；等等）进行干涉，它没有把这些二分带到更高层次的综合，而是把它们转变为一种极性张力所贯彻的强力场，这里（就像在电磁场中那样）它们潜在的同一性不复存在。但这里第三项在何种意义上，以何种方式被给定呢？当然不是作为一种与前二者——此二者的同一性翻过来可谓某种二元的逻辑所界定——同质的项了。只有从二分的观点来看，类推（或范式）才显现为第三者标准（tertium comparationis）。类推的第三项是这种不可分辨性，而如果有人试图通过二价的中断来把握这个第三项的话，他就会遭遇一种不可决定的东西。因此，要把一个范例的范式特征——它对一切案例的代表性——与它是诸案例之一这个事实清晰地分离，是不可能的。就像在电磁场中那样，我们处理的不是广延的和可称量的量（magnitudes），而是矢量的强烈程度。</p>
+<center><font face="黑体"><b>八</b></font></center>
+
+<p>也许，没有一个地方像在《判断力批判》中那样，对范式和通用性（generality）之间的矛盾关系进行了如此有力的表达——在《判断力批判》中，康德构想了以范例形式（出现的）审美判断的必要性，对于这种判断来说，要陈述其法则，是不可能的：</p>
+<p>而这里这种必然性具有特殊的类型：不是一个理论的客观必然性，在那里能先天地认识到每个人在我称之为美的那个对象上将感到这种愉悦；也不是一个实践的必然性，在那里这种愉悦能够通过充当自由行动的存在者们的规则的某个纯粹理性意志的概念而成了一条客观规律的必然结果，并只是意味着我们应当绝对地（不带别的意图地）以某种方式行动。相反，这种必然性作为在审美判断中所设想的必然性只能被称之为示范性[exemplarisch]，即一切人对于一个被看作某种无法指明[produce；angeben]的普遍规则之实例[Beispiel]的判断加以赞同的必然性。</p>
+<p>正如对康德来说的审美判断那样，范式实际上也预设了这种法则的不可能性；但如果法则缺失或不能得到表达，范例又从什么地方证明自己的价值呢？为未赋值（unassignable）的法则提供范例又何以可能？</p>
+<p>只有在我们理解范式意味着对作为逻辑指涉模式的普遍-特殊组的总体放弃的时候，这个难题才可能得到解决。法则（如果这里还可能谈论法则的话）不是某种先于独特的案例存在，可应用于这些案例的通用性，也不是某种通过穷举特定案例得出的东西。相反，它是只是一种范式性案例的展示，这种范式性的案例构成了一种法则，而这种法则本身不能被应用也不能被陈述。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LIfWon2xXzpdcn0Fk1qUHDzebW9UQMSe2JHAVPDSaMf3PBsFFTw7zTeg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">康德《判断力批判》</center>
+
+
+
+<center><font face="黑体"><b>九</b></font></center>
+
+<p>任何熟悉修道院（生活）次序之历史的人都知道，至少就最初的几个世纪而言，要理解文献称之为指导（regula）的那种东西是非常困难的。在最古老的箴言中，指导仅仅意味着兄弟生活（conversatio fratrum），某个既定修道院中的僧侣生活。它常被等同于（修道院）奠立者被想象为生命形式（forma vitae）——也即，有待追随的范例——的生活方式。而奠立者的生活反过来又出于福音书里叙述的基督的生活（作为基督生活的后继）。随着修道院（生活）次序的逐渐发展，以及罗马库里亚会堂（Roman Curia）不断增长的掌控修道院生活次序的需要，指导这个术语越来越倾向于假设保存在修道院里的，某个写定文本的意义，而这个文本必须为已经接受修道院生活，愿意服从其中蕴含的处方（prescriptions）和禁律的人所阅读。无论如何，至少直到圣本笃，法则指的，才不是某种普遍的规范，而是活生生的共同体（koinos bios[common life，共同的生活]，cenobio [commune，公社]），这个共同体是范例的结果，其中，每个僧侣的生活都极力成为典范（paradigmatic，亦即范式性的）——也即，把自身建构为生命形式（forma vitae）。</p>
+<p>因此，结合亚里士多德与康德的观察，我们可以说，范式引起一场从特殊到特殊的运动，在不抛弃独特性的同时，把一切独特的案例变成某种普遍法则的一个范例，而这种法则，永远不可能得到先验的陈述。</p>
+<center><font face="黑体"><b>十</b></font></center>
+
+<p>1947年，维克托•戈德施米特（Victor Goldschmidt），一位福柯看起来也知道且尊敬的作者，出版了《柏拉图哲学辩证中的范例》（Le paradigme dans la dialectique platonicienne，paradigme这个词即“范式”，考虑到对柏拉图文本的忠实，这里仍译作范例，在后面的分析中，paradigme一律译为“范式”，examplar则一律译为“范例”。——中译注）。就像在这位杰出哲学史家的作品中经常发生的那样，这对一个显然是边缘的问题——柏拉图辩证中范例的使用——的检视，从新的角度对柏拉图思想的整体进行了理解，特别是理念与可感物之间的联系，而范式，则被揭示为这种联系的技术性表达。惹尔日•罗迪埃（Georges Rodier）已经观察到，有时，理念在对话中，对可感的客体来说，起到了范式的作用，但同时在其他时候，可感的客体则被呈现为理念的范式。如果在《欧迪弗罗篇/游叙弗伦》（Euthyphro）中，敬神/敬虔的理念为理解相关的可感客体而被当作范式来使用；相反，在《政治家》（Statesman）中，可感的范式——编织——则通往对理念的理解。为了解释范例何以能够生产知识，柏拉图在这里引用了儿童能够在不同的字词中认出音节来作“为范式（服务）的范式”：“当一个实体——一个在另一个实体中的有别且与之分离（separated）[diespasmenōi；这个希腊术语有“撕裂（torn）”，“割裂（lacerated）”的意思]的某物中能够被找到的实体——得到正确的判断并被承认为同一物，且二者彼此已然重新连接（这个事实）生成一种既与其中每一个相关又（同时）与二者相关的真实且独特的意见的时候，一个范式就生成了。”</p>
+<p>在对这个定义进行评论的时候，戈德施米特表明，在这里，看起来存在一个矛盾的结构，既是可感的又是精神的（mental），这个结构，戈德施密特称之为“元素-形式（element-form）”。换言之，即使它是一个独特可感的现象，范式也以某种方式包含着理型（eidos），即那个有待界定的形式。它不是一个在两个不同的地方在场的，单纯可感的元素，相反，范式是某种类似于可感物与精神，元素与形式之间的关系的东西（“范式性的元素本身就是一种关系”）。正如在回忆——柏拉图常把回忆当作一个知识的范式来使用——（的案例）中，可感的现象被置入与自身的非可感的联系，并以这样的方式在他者中（得到）重新-认识（re-cognized）那样，在范式中，问题不是证实某种特定的可感的相似性（likeness），问题在于，借助某种运作来生产这种相似性。出于这个原因，范式绝不是既定（已经给定）的，相反，它是通过“并列/放在一起（placing alongside）”，“结为一体（conjoining together）”且首先通过“显示（showing）”和“暴露（exposing）”（paraballontas…paratithemena… endeiknynai…deichthēi…deichthenta）而被生成和生产（paradeigmatos…genesis；paradeigmata…gignomena）出来的。范式关系不仅仅发生在可感客体之间或这些客体与某个普遍的法则之间；相反，它发生在某种独特性（这种独特性因此而成为一个范式）及其阐释/暴露（其可理解性）之间。</p>
+<center><font face="黑体"><b>十一</b></font></center>
+
+<p>想想语法范例这个相关的简单案例。语法只有通过例证的实践，借助语言上的范例才能构成并陈述其法则。但界定语法实践的语言的用法是什么？语法的范例又是如何生成的？让我们来看拉丁语法中说明名词词形变化的那些范式。通过其示范性的展示（rosa，ros-ae，ros-ae，ros-am…），“rose”这个术语的标准的用法及其外延特征遭到了悬置。因此，这个术语也就使“第一格阴性名词”这个词群的构成和可理解性成为可能，而“rose”这个词，即使这个词群的一部分，又是这个词群的一个范式。这里关键的问题在于指涉与规范用法的悬置。如果，为了解释定义行为句种类的法则，语言学家说出“我发誓”的例子的话，那么，显然，这个语段并不被理解为真正的誓言的讲述。要具备作为一个范例来行动的能力，语段必须停用其规范的功能（就必须使语段的规范功能悬置），但是，正因为非功能和悬置，它才能展示语段是如何运作的并能够使（相关的）法则得到陈述。现在，如果我们自问法则能否应用于这个范例的话，要作出回答并不那么容易。事实上，范例被排除在法则之外，这不是因为它不属于规范的案例，相反，这好似因为，它展示了它对规范案例的归属。那么，范例，也就是例外的对称的反面（symmetrical opposition）：在例外通过被排除而被包含的时候，范例通过展示其被包含（的状态）而被排除出去。无论如何，通过这样的方式，根据希腊术语的认识论意义，范例（也就是范式）“在身旁/在身外（beside itself）”（para-deiknymi）同时显示了自身的可理解性和它构成的那个门类的可理解性。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7ZCwABmjIqnvRc9F3NS9LIEIiboZP4MFo7a3xTy391zcRDSmyIzaoyiaK2CK8ufZib1VcYZal6GKykw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">柏拉图“洞穴喻”</center>
+
+
+
+<center><font face="黑体"><b>十二</b></font></center>
+
+<p>在柏拉图那里，范式在辨证中有自己的位置，而辨证，通过接合/表达智性与感性次序之间的关系而使知识成为可能。“这两种次序之间的关系可以通过两种方式来构想：作为一种（摹本[copy]与样板[model]之间的）相似关系，或作为一种比例（proportion）的关系。”（对）这些概念中的每一个，根据戈德施密特，都有某种对应的辩证程序存在：对前者来说，是回忆（柏拉图在《美诺篇》[Meno]和《泰阿泰德篇》[Theatetus]中对此作出了定义）；对后者来说，则是范式，而这，在《智者篇》（Sophist）和《政治家》中得到了讨论。继续戈德施密特的分析，现在，我们必须尝试理解辩证中范式的特定意义与功能。在被理解为（对）范式方法的阐述/暴露的时候，《理想国》第六卷那整个（关于）辩证的棘手讨论也就变得一清二楚了。柏拉图区分了在科学的出现（emergence）中的两个阶段或时刻——科学被表征围殴一条直线上两个连续的部分。前一个部分，定义了“研究几何学、算学以及这一类学问的人”的程序，这一部分科学，把探究建立在假设的基础之上。这部分科学预设（这是希腊术语hypothesis的含义，这个词源自hypotithēmi，“我把它放到下面当作基础”）了一些被视作已知原则的给定/已知事物（givens），这些一直事物的明证性无需解释。第二部分则属于辩证：“在这里假设不是被用作第一原则（first principles）[archai,本原]，而是真的被当作假设来使用——即，被用作（认识）出发的垫脚石（stepping stones,），使之能够抵达非假设的（unhypothetical）[anypotheton]万物的第一原则。在触及这个原则之后，在坚持随此原则而来的一切的同时，它又下降到结论，在这过程中，它不使用任何可感的事物，而只用理念本身，从一个理念向另一个理念移动，且最后以理念告终。”</p>
+<p>把假设（预设）当作假设而非原则来使用，这意味着什么？不被预设却如此暴露的假设又是什么？如果我们回想，范式的可认识性（knowability）从来就不是假设的，相反，它特定的运作（方式）就在于悬置和解除（deactivating）其经验给定的活力，以便仅仅展示出一种可理解性的话，那么，把假设当作假设，就意味着把它们当作范式（来使用）。</p>
+<p>这里，亚里士多德和现代评注家都观察到的难题——在柏拉图那里理念是可感物的范式而可感物又是理念的范式——得到了解决。理念不是为可感物所预设的或与可感物相契的另一种存在：它就是被思虑为范式的可感物——也就是说，理念，就在可感物可理解性的中介（medium）之中。这就是为什么柏拉图能够陈述，甚至像艺术那样的辩证，也是从假设开始的（ex hypotheseōs iousa），但与（第一种科学）不同的是，它把假设当作假设而不是原则。换句话说，辩证把假设当作范式来使用。非-假设之物——辩证能够接近/进入它们——首先是为可感物范式性的使用所开启的。我们正应当在这个意义上理解后面的篇什，在那里，辩证的方法被定义为“去掉假设”：“辩证法是唯一一种以此方式行进的方法，去掉假设[tas hypotheseis anairousa]同时企及第一原则本身。”Anaireō，就像其对应的拉丁术语tollere（以及德语的aufheben，黑格尔把它放到自己辩证法的中心），兼具“取、拿（to take）”，“提升，拔高（to raise）”，“带走，移除（to take away）”，“抹除，消灭（eliminate）”之意。正如先前指出的那样，这里作为范式运作的东西，退出了它的规范用法，同时又得到如是的暴露。非-假设之物乃在假设被“移除”，也即，同时被提升和抹除的那点上揭露自身的东西。可理解性——在可理解性中，辩证于走近“朝向终结的下降/沦落”——正是可感物范式性的可理解性。</p>
+<center><font face="黑体"><b>十三</b></font></center>
+
+<p>只有从范式方法的角度，阐释学循环——而界定人文科学中知识之程序的，正是阐释学循环——才获得其真实的意义。在弗里德里希•达尼埃尔•恩斯特•施莱尔马赫（Friedrich Daniel Ernst Schleiermacher）之前，格奥尔格•安东•弗里德里希•阿斯特（Georg Anton Friedrich Ast）就已经观察到，在哲学科学中，一个单个现象的知识，就预设了整体的知识，而且，反之亦然，整体的知识同时也预设了单个现象的知识。马丁•海德格尔在《存在与时间》中通过把这个阐释学循环建立在关于此在先行存在结构的前理解（pre-understanding）的基础之上，帮助人文科学摆脱了这种困难，也确实确保了人文科学知识的“更为原始/创（original）”的特征。从那时起，格言“决定性的事情不是从循环中脱身，而是依照正确的方式进入这个循环”就已经成为一个允许研究者把恶性循环变成良性循环的魔法公式了。</p>
+<p>无论如何，这样的保证却没有它一眼看上去的那么有力。如果阐释的行动总是为已经有难以捉摸的前理解所先行的话，那么，“依照正确的方式进入[这个循环]”又意味着什么？海德格尔暗示，问题在于，决不允许前理解为“偶发奇想（fancies）”或“流俗概念（popular concepts）”所呈现（vorgeben，这个德文词有“把……拿到前面”，“预定、规定”，“假装，假托”的意思——中译注），相反，必须“从事物本身来解决[它]”。[31]这只能意味着——而循环因此而显得更加“恶性”——研究者必须具备在现象中辨认某一前理解之签名的能力，而这个前理解，正依赖于现象本身的存在结构。</p>
+<p>如果我们理解到这点，即阐释学循环实际上是一种范式循环的话，这个难题也就得到了解决。就像在阿斯特和施莱尔马赫那里一样，这里，“单个的现象”与“整体”之间并不存在二元性：整体不过是个体案例的范式性阐述/暴露的结果。也就像在海德格尔那里那样，在“前”与“后”，在前理解与阐释之见，也不存在什么循环性（circularity）。在范式中，可理解性并不先于现象；可以说，可理解性就立（并置于）在现象“身边（beside）”（para）。根据亚里士多德的定义，范式的姿势不是从特殊到整体也不是从整体到特殊而是从特殊到特殊。在自身可知性的中介中暴露的现象，恰恰表明它作为范式所代表的那个整体。对于现象来说，这并非某种预设（某种“假设”）：作为一种“非-预设的原则”，它既不在过去也不在现在，而置身于现象范例的星丛（in their exemplary constellation）。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%93%B2%E5%AD%A6%E4%B8%8E%E5%AE%97%E6%95%99/"># 哲学与宗教</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2a7b9c8d/">阿甘本的美学思想梳理</a>
+            
+            
+            <a class="next" rel="next" href="/72dc6a36/">阿甘本：上帝没有死，他化身为金钱</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2a7b9c8d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/72dc6a36/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

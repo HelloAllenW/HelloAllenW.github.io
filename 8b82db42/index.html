@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Sass 完整指南 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Sass 完整指南</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2023&nbsp;&nbsp;23:10:37</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>Sass 是一个 CSS 预处理器，完全兼容所有版本的 CSS。实际上，Sass 并没有真正为 CSS 语言添加任何新功能。只是在许多情况下可以可以帮助我们减少 CSS 重复的代码，节省开发时间。下面就来看看 Sass 中常用的功能吧！</p>
+<h2 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a>1. 注释</h2><p>在 Sass 中支持两种类型的注释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 注释一</span><br><span class="line"></span><br><span class="line">/* 注释二 */</span><br></pre></td></tr></table></figure>
+
+<p>需要注意，当 Sass 编译成CSS时，第一种注释不会编译到CSS中（只在Sass文件中可见），第二种注释会编译到CSS中。</p>
+<h2 id="2-嵌套"><a href="#2-嵌套" class="headerlink" title="2. 嵌套"></a>2. 嵌套</h2><p>嵌套的写法是Sass的一大特点，通过嵌套这些代码，可以得到类似HTML结构的CSS代码，使代码更具可读性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">nav &#123;</span><br><span class="line">    background : #C39BD3;</span><br><span class="line">    padding : 10px;</span><br><span class="line">    height: 50px;</span><br><span class="line">  </span><br><span class="line">    ul &#123;</span><br><span class="line">        display: flex;</span><br><span class="line">        list-style : none;</span><br><span class="line">        justify-content: flex-end;</span><br><span class="line"></span><br><span class="line">        li &#123;</span><br><span class="line">            color: white;</span><br><span class="line">            margin-right: 10px;</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那为什么要使用嵌套呢？在CSS中，如果想为其父元素的继承元素定义样式，就必须每次都选择父元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">html #root, body #root &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">html .div-with-button, body .div-with-button &#123;</span><br><span class="line">    background-color: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">html .div-with-button button, body .div-with-button button &#123;</span><br><span class="line">    background-color: #e4c681;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">html .div-with-button button:hover, body .div-with-button button:hover &#123;</span><br><span class="line">    background-color: #ffe082;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Sass中就可以这样写，这样写就会使代码更加清晰、条理和简洁：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">  height: 100%;</span><br><span class="line"></span><br><span class="line">  #root &#123;</span><br><span class="line">    height: 100%;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .div-with-button &#123;</span><br><span class="line">    background-color: black;</span><br><span class="line"></span><br><span class="line">    button &#123;</span><br><span class="line">      background-color: #e4c681;</span><br><span class="line"></span><br><span class="line">      &amp;:hover &#123;</span><br><span class="line">        background-color: #ffe082;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，在编写Sass时，要嵌套嵌套太深，尽量不要超过三层，超过之后就会导致代码难以维护，并且在编译为CSS时就会出现不必要的选择器，就会导致CSS文件变大。</p>
+<p>我们还可以在嵌套中使用 <code>&amp;</code>，比如鼠标在按钮上悬浮时，改变颜色。在CSS中是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">button &#123;</span><br><span class="line">  background-color: #535353;</span><br><span class="line">  color: #000;</span><br><span class="line">&#125;</span><br><span class="line">button:hover &#123;</span><br><span class="line">  background-color: #000;</span><br><span class="line">  color: #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在Sass中就可以这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">button &#123;</span><br><span class="line">  background-color: #535353;</span><br><span class="line">  color: #000;</span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    background-color: #000;</span><br><span class="line">    color: #fff;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通常，&amp; 总是指向它上面的元素，可以用于伪类和伪元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  &amp;:focus&#123;&#125; </span><br><span class="line">  &amp;:hover&#123;&#125;</span><br><span class="line">  &amp;:active&#123;&#125;</span><br><span class="line">  &amp;:first-child&#123;&#125; </span><br><span class="line">  &amp;:nth-child(2)&#123;&#125;</span><br><span class="line">  &amp;::after&#123;&#125; </span><br><span class="line">  &amp;::before&#123;&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的CSS代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.box:focus&#123;&#125; </span><br><span class="line">.box:hover&#123;&#125;</span><br><span class="line">.box:active&#123;&#125;</span><br><span class="line">.box:frist-child&#123;&#125;</span><br><span class="line">.box:nth-child(2)&#123;&#125;</span><br><span class="line">.box::after&#123;&#125;</span><br><span class="line">.box::before&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此外，如果类以相同的词开头（比如<code>box-yellow</code>和<code>box-red</code>），就可以嵌套它们：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.box &#123;</span><br><span class="line">  &amp;-yellow &#123;</span><br><span class="line">    background: #ff6347;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;-red &#123;</span><br><span class="line">    background: #ffd700;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;-green &#123;</span><br><span class="line">    background: #9acd32;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译成CSS就是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.box-yellow &#123;</span><br><span class="line">  background: #ff6347;</span><br><span class="line">&#125;</span><br><span class="line">.box-red &#123;</span><br><span class="line">  background: #ffd700;</span><br><span class="line">&#125;</span><br><span class="line">.box-green &#123;</span><br><span class="line">  background: #9acd32;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Sass还支持使用<code>:</code>来嵌套属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add-icon &#123;</span><br><span class="line">  background : &#123;</span><br><span class="line">    image: url(&quot;./assets/arrow-right-solid.svg&quot;);</span><br><span class="line">    position: center center;</span><br><span class="line">    repeat: no-repeat;</span><br><span class="line">    size: 14px 14px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码编译为如下CSS：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.add-icon &#123;</span><br><span class="line">  background-image: url(&quot;./assets/arrow-right-solid.svg&quot;);</span><br><span class="line">  background-position: center center;</span><br><span class="line">  background-repeat: no-repeat;</span><br><span class="line">  background-size: 14px 14px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-变量"><a href="#3-变量" class="headerlink" title="3. 变量"></a>3. 变量</h2><p>变量是用来储存数据的，在Sass中，我们可以将任何有效的CSS值保存在变量中。变量使用<code>$</code>符号定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$red: #ee4444;</span><br><span class="line">$black: #222;</span><br><span class="line">$bg-color: #3e5e9e;</span><br><span class="line">$link-color: red;</span><br><span class="line">$p-color: #282A36;</span><br><span class="line"></span><br><span class="line">$font-p: 13px;</span><br><span class="line">$font-h1: 28px;</span><br><span class="line"></span><br><span class="line">$base-font: &#x27;Noto Sans KR&#x27;, sans-serif;</span><br></pre></td></tr></table></figure>
+
+<p>变量的使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    background-color : $bg-color;</span><br><span class="line">    font-size : $font-p;</span><br><span class="line">    font-family : $base-font;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1 &#123;</span><br><span class="line">    font-size: $font-h1;</span><br><span class="line">    color: $black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p &#123;</span><br><span class="line">    font-size: $font-p;</span><br><span class="line">    color: $black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a &#123;</span><br><span class="line">    color: $link-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当Sass编译成CSS时，所有的变量都会被替换为定义的变量值。变量可以减少重复、进行复杂的数学运算等。</p>
+<p>需要注意，CSS变量是有范围的，位于顶层的变量都是全局变量，在块中定义的变量都是局部变量。全局变量可以在任何地方使用，局部变量只能在变量定义的块中使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$my-global-variable: &quot;global&quot;;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  $my-local-variables: &quot;local&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>变量值是可以覆盖的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$color: #fefefe;</span><br><span class="line">.content &#123;</span><br><span class="line">  background-color: $color;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$color: #939393;</span><br><span class="line">.footer &#123;</span><br><span class="line">  background-color: $color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，<code>content</code>的背景颜色是<code>#fefefe</code>，而<code>footer</code>的背景颜色是<code>#939393</code>。要想改变全局变量，就需要添加<code>!global</code>修饰符：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$color: #111;</span><br><span class="line">.content &#123;</span><br><span class="line">  $color: #222;</span><br><span class="line">  background-color: $color;</span><br><span class="line">&#125;</span><br><span class="line">.footer &#123;</span><br><span class="line">  $color: #333 !global;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，Sass变量是可以指定默认值的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$message-color: blue !default;</span><br><span class="line"></span><br><span class="line">.message &#123;</span><br><span class="line">    color: $message-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译成的CSS代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.message &#123;</span><br><span class="line">  color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以在 @import 之前覆盖模块默认值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$message-color: black;</span><br><span class="line">@import &#x27;my-module&#x27;;</span><br><span class="line"></span><br><span class="line">.message &#123;</span><br><span class="line">    color: $message-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译成的CSS代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p.message &#123;</span><br><span class="line">  color: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，带有 <code>!default</code> 的变量只有在没有值的情况下才会生效。</p>
+<h2 id="4-Mixins-和-Include"><a href="#4-Mixins-和-Include" class="headerlink" title="4. Mixins 和  Include"></a>4. Mixins 和  Include</h2><p><code>mixin</code> 是一组可以重用的 CSS 声明，语法类似于JavaScript中的函数，使用 <code>@mixin</code> 指令来代替 <code>function</code> 关键字。调用 <code>mixin</code> 是通过 <code>@include</code> 语句完成的。</p>
+<p>以下是用 <code>mixins</code> 使元素水平垂直居中的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@mixin absolute-center() &#123;</span><br><span class="line">  position:absolute;</span><br><span class="line">  left:50%;</span><br><span class="line">  top:50%;</span><br><span class="line">  transform:translate(-50%,-50%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.element &#123;</span><br><span class="line">  @include absolute-center();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，mixin也是支持传递参数的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@mixin square($size) &#123;</span><br><span class="line">  width:$size;</span><br><span class="line">  height:$size;</span><br><span class="line">&#125;</span><br><span class="line">div &#123;</span><br><span class="line">  @include square(60px);</span><br><span class="line">  background-color:#000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数可以是可选的，可选参数的定义和Sass变量的定义形式是一样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@mixin square($width: 50px) &#123;</span><br><span class="line">  width:$size;</span><br><span class="line">  height:$size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以将 CSS 规则传递给 mixins。这些规则可以在使用 @content 的 mixin 中使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@mixin hover-not-disabled &#123;</span><br><span class="line">  &amp;:not([disabled]):hover &#123;</span><br><span class="line">    @content;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">.button &#123;</span><br><span class="line">  border: 1px solid black;</span><br><span class="line">  @include hover-not-disabled &#123;</span><br><span class="line">    border-color: blue;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样<code>mixin</code>中的<code>@content</code>在编译后就会变成<code>border-color: blue;</code>这样写有助于减少&amp;<code>:not([disabled]):hover</code>部分的重复。</p>
+<h2 id="5-import-和-use"><a href="#5-import-和-use" class="headerlink" title="5. @import 和 @use"></a>5. @import 和 @use</h2><p>在CSS中我们通常会创建多个CSS文件并在需要时引入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/1&quot;&gt;&lt;/link&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/2&quot;&gt;&lt;/link&gt; </span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/path/to/css/3&quot;&gt;&lt;/link&gt; </span><br></pre></td></tr></table></figure>
+
+<p>这样做会使浏览器发出多个HTTP请求，从而在一定程度上降低应用的速度。而Sass会在代码发动到浏览器之前进行代码组合，这样只需要请求一个CSS文件。</p>
+<p>下面来看看如何使用 @import 将文件分块并导入到一个父文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  padding:0;</span><br><span class="line">  margin:0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body, html &#123;</span><br><span class="line">  width:100%;</span><br><span class="line">  min-height:100%;</span><br><span class="line">&#125;</span><br><span class="line">@import &#x27;normalize&#x27;;</span><br><span class="line"></span><br><span class="line">content &#123;</span><br><span class="line">  max-width:660px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假设 <code>normalize.scss</code> 和 <code>styles.scss</code> 都在同一个文件夹中，可以将一个导入另一个，如上所示。在使用<code>@import</code>时，所有变量、mixin 等都可以全局访问，因为一切都是全局的，所以库必须为其所有成员添加前缀以避免命名冲突。因此不建议使用 @import。</p>
+<p>可以使用 @use 来代替，它的基本用法与@import 相同：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@use &#x27;normalize&#x27;;</span><br><span class="line"></span><br><span class="line">content &#123;</span><br><span class="line">  max-width:660px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>@use</code> 导入的文件称为模块。要使用这些模块的 mixin 或变量，必须使用命名空间来调用它们。默认情况下，命名空间是文件名（不带扩展名）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$accent-color: #535353;</span><br><span class="line">@mixin dark-background &#123;</span><br><span class="line">  background-color:#000;</span><br><span class="line">  color:#fff;</span><br><span class="line">&#125;</span><br><span class="line">@use &#x27;src/colors&#x27;;</span><br><span class="line">body &#123;</span><br><span class="line">  color: colors.$accent-color;</span><br><span class="line">&#125;</span><br><span class="line">.dark-region &#123;</span><br><span class="line">  @include colors.dark-background;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用 as 来使用自定义命名空间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@use &#x27;src/colors&#x27; as c;</span><br><span class="line">body  &#123;</span><br><span class="line">  color: c.$accent-color;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当 <code>_</code> 被添加到 SCSS 文件的文件名前时，解析器知道它是一个部分文件并且它仅用于导入。导入时，<code>_</code> 部分是可选的。注意，这里使用 <code>src/colors</code> 来导入 <code>src/_colors.scss</code>。</p>
+<h2 id="6-算术运算符"><a href="#6-算术运算符" class="headerlink" title="6. 算术运算符"></a>6. 算术运算符</h2><p>在CSS中可以使用calc()进行数学计算，Sass 支持直接使用+、-、/、*、% 操作符对值和变量进行计算：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$content-width: 600px;</span><br><span class="line">content &#123;</span><br><span class="line">  width:$content-width;</span><br><span class="line">&#125;</span><br><span class="line">.inner-content &#123;</span><br><span class="line">  width: $content-width - 60px; </span><br><span class="line">&#125;</span><br><span class="line">.outer-content &#123;</span><br><span class="line">  width: $content-width + 60px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-流程控制"><a href="#7-流程控制" class="headerlink" title="7. 流程控制"></a>7. 流程控制</h2><p>在 Sass 中有四种类型的流程控制规则：<code>@if</code> /<code>@else</code>、<code>@each</code>、<code>@for</code> 和<code>@while</code>。其中 @if 和 @else 类似于 JavaScript 中的 if 和 else。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@mixin theme($is-dark: false) &#123;</span><br><span class="line">  @if $is-dark &#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  @else &#123;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>@each</code> 类似于 JavaScript 中的 <code>for of</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$sizes: 40px, 50px, 80px;</span><br><span class="line">@each $size in $sizes &#123;</span><br><span class="line">  .icon-#&#123;$size&#125; &#123;</span><br><span class="line">    font-size: $size;</span><br><span class="line">    height: $size;</span><br><span class="line">    width: $size;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：#{$size} 表示法用于使用变量制作动态属性名称和选择器，这称为插值。</p>
+<p><code>@for</code> 类似于 JavaScript 中的 <code>for</code> 循环：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@for $i from 1 through 4 &#123;</span><br><span class="line">  .bubble-#&#123;$i&#125; &#123;</span><br><span class="line">    transition-delay: .3 * $i;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@while（不常用）类似于 JavaScript 中的 while 循环。</p>
+<h2 id="8-扩展-继承"><a href="#8-扩展-继承" class="headerlink" title="8. 扩展/继承"></a>8. 扩展/继承</h2><p>有时需要编写一个仅用于扩展的样式规则。在这种情况下，可以使用占位符选择器，它看起来像以 <code>%</code> 而不是 <code>.</code> 开头的类选择器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">%flex &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.some-class &#123;</span><br><span class="line">  height: 50%;</span><br><span class="line">  background-color: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">%flex_with_color &#123;</span><br><span class="line">  @extend %flex;</span><br><span class="line">  @extend .some-class;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">%button_styles &#123;</span><br><span class="line">  height: 50px;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  @extend %flex_with_color;</span><br><span class="line"></span><br><span class="line">  button &#123;</span><br><span class="line">    @extend %button_styles;</span><br><span class="line">    color: #424242;</span><br><span class="line">    background-color: #d966fb;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码编译成CSS之后将是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.some-class, div &#123;</span><br><span class="line">  height: 50%;</span><br><span class="line">  background-color: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div button &#123;</span><br><span class="line">  height: 50px;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div button &#123;</span><br><span class="line">  color: #424242;</span><br><span class="line">  background-color: #d966fb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-媒体查询"><a href="#9-媒体查询" class="headerlink" title="9. 媒体查询"></a>9. 媒体查询</h2><p>在Sass中可以这样来使用媒体查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    article &#123;</span><br><span class="line">        p &#123;</span><br><span class="line">            font-size: 100%;</span><br><span class="line">            color: black;</span><br><span class="line">            padding: 10px;</span><br><span class="line"></span><br><span class="line">            @media (max-width: 768px) &#123;</span><br><span class="line">                font-size: 150%;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译成的CSS代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">body article p &#123;</span><br><span class="line">  font-size: 100%;</span><br><span class="line">  color: black;</span><br><span class="line">  padding: 10px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (max-width: 768px) &#123;</span><br><span class="line">  body article p &#123;</span><br><span class="line">    font-size: 150%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>媒体查询是支持嵌套的，并将所有适用的查询与 and 运算符结合起来：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">    @media (max-width: 768px) &#123;</span><br><span class="line">        font-size: 150%; </span><br><span class="line">        @media (orientation: landscape) &#123;</span><br><span class="line">            line-height: 75%; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译成的CSS代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: 768px) &#123;</span><br><span class="line">  p &#123;</span><br><span class="line">    font-size: 150%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (max-width: 768px) and (orientation: landscape) &#123;</span><br><span class="line">  p &#123;</span><br><span class="line">    line-height: 75%;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e6e3ffb5/">现代CSS样式重置最佳实践！</a>
+            
+            
+            <a class="next" rel="next" href="/b36c86db/">如何用一行 CSS 实现 10 种现代布局</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e6e3ffb5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b36c86db/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

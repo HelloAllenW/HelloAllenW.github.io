@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>柏拉图美学思想梳理 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">柏拉图美学思想梳理</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">六月 14, 2015&nbsp;&nbsp;19:11:55</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        六月 14, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/">文学与艺术 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>柏拉图出身于奴隶主又是较显赫的贵族家庭，从小就受到过良好的教育。成年后喜欢艺术和哲学，又受到奴隶制政治的影响。在他成长的年代中，当时正是古代希腊奴隶主民主政治创建时期，也是奴隶主头子间争权夺利，相互间血腥较量，垂死斗争的时期。漫长的伯罗奔尼苏战争就是这一斗争现实的体现。残酷的斗争现实，给柏拉图的思想留下了深刻影响。由于他成年热爱诗歌和戏剧等艺术，所以古希腊以神话为题材的史诗和戏剧，也在柏拉图幼小的心灵中播下了审美的种子。</p>
+<p>总起来说，对柏拉图思想影响最为深刻的还是古希腊早期的哲学。其中对柏拉图思想影响最深的为毕达哥拉斯的数的和谐理论，苏格拉底以善为主的哲学与伦理学。因苏格拉底是柏拉图的老师，又是执友，所以可以这样说，苏格拉底的学说和品德，基本上就成为柏拉图学说建立最为主要的理论基础。以上这些就是形成柏拉图思想较为直接的现实基础和原因。柏拉图的美学思想具有最高的人类价值和深远的美学意义。下面我们以柏拉图的一些公认的著作为例，从理念论来透视柏拉图的美学思想。</p>
+<h2 id="一、理念论"><a href="#一、理念论" class="headerlink" title="一、理念论"></a>一、理念论</h2><p>理念论是柏拉图哲学思想的核心，是其美学思想的立足点。柏拉图认为除了我们所能知觉到、感觉到的现实世界外，还有存在一个理念世界，这个理念世界才是真实的世界。理念是宇宙中第二个真实的存在，是一个永恒的不变的实在。柏拉图称它们都是一个个单个独立的实体，排列在整个宇宙自然中，供神创世使用。在柏拉图看来，理念就是神创造万物时所要用到的模型、标准样子。如在《蒂迈欧》篇中讲到神用型与数来塑造它们，这个型就是理念的意思。由于型与数有关，所以理念又可以用我们现在理解的事物的本质规律的角度去理解，它是形成事物的内在原因。如某种物质材料，在按某种加工程序、基本结构的加工制作下，就一定会形成某种事物。在柏拉图看来，宇宙形成之初，理念的实体与物质的实体是分离的，是分存于两个不同的世界。因为神要创造一个美好的世界，这两种实体才在神的手里结合在一块，理念为模型，物质为材质，就如揉好的面粉按进模具中做成为各种各样的饼子一样，神用此方法就创造了有模有样的万事万物。实际上，理念就是事物的本质规律。从柏拉图的理念论还可以了解，具有美的属性的具体实物的美并不是一种真正的美。真正的美应该是超出了一般具体事物的美，是美本身，是一种理念美，达到一种精神层面的东西。</p>
+<h2 id="二、美学思想"><a href="#二、美学思想" class="headerlink" title="二、美学思想"></a>二、美学思想</h2><p>柏拉图以理念论为核心的美学思想包含完整的美学价值论框架。他坚信理性能够获得真知，把追求“真”“善”“美”当作哲学探索和冥思的目的。柏拉图在谈论客观和主观世界的真与善的同时，总是要和美感和美联系一起来谈论，真、善、美在柏拉图的思想体系中是一体统一的。柏拉图是真、善、美三位一体的创造者，它具有最高的人类价值和深远的美学意义。关于美的议论，主要可大致归为两个类，一是美的本质问题，二是真善美的统一。</p>
+<p><strong>其一是对美的本质问题的研究。</strong>首先柏拉图肯定美是真实的存在。但在真实的美的存在中，许多现象的美又是说不清楚的。在这许许多多美的现象面前，相比较而言之，究竟推断什么是美时，就说不清了，因而感到在讨论现象中的美时，美是难的。因为现象中的美会因人而异，因时因地而异。它不是绝对的，本有的，不变的，而是相对的、非本有的、变化的。在柏拉图的思想中，他始终这样认为美的事物中具有美的本身的原因，是因为美的现象分有了美的本身。柏拉图认为美是永恒的，无始无终，不生不灭，不增不减的。因为这种美不会因人而异，因地而异，因时而异，它对一切美的崇拜者都相同。它不存在于其它别的事物中，它自存自在，是永恒的，而其他一切美好的事物都是对它的分有。关于美的本质为何会给美的事物带来美，在柏拉图看来，主要是它和谐的本性。</p>
+<p>关于柏拉图美的和谐观的形成，有两个来源：一是来源于古希腊毕达哥拉斯数的和谐；二是来源于苏格拉底善的和谐。在柏拉图思想中，宇宙的生成除了按神的善意，善的理念所创造的一个和谐的宇宙外，另一个是在方法上，神用了数的规则来整理、规划世界，是数的规则、和谐，才使宇宙生成后有和谐统一的秩序。从柏拉图的宇宙观来看，和谐的对立面就是不统一、不和谐和无序混乱，它们就是丑恶，它是神未创造出世界之前一个真实存在的物的世界。而今日的和谐有序的世界是神按照尽善尽美的目的创造之后才有的，因此，和谐与真实存在的神，真实存在的善的理念、美的理念是一致的，又由于美善的统一，所以和谐既是善的目的，又是美的本质。</p>
+<p>关于美的和谐本质，柏拉图在《会饮》篇中谈论爱神一节中说得最为清楚。首先爱神年轻，相貌秀美众所周知；其次，爱神具有正义、勇敢和节制等各种美德。因此爱神的心灵美与身体美是和谐一致的，是美的最高境界的化身。爱神不仅本身美，而且还引导人类，引导诸神去爱美，去创造一个和谐美的世界。爱神在人类世界播下了各种幸福的种子。这种幸福的种子就是各种美德。它们是大地上的和平，海洋上的宁静，狂风暴雨的平息，还有甜蜜的芳香，让我们安然入睡。总之，美就是由爱神带来的一种和谐和幸福。关于美的和谐的本质，这似乎是一个很简单的问题，但是，这样一个最简单不过的问题，在柏拉图的思想中认为，对于一个普通人来说是很难理解到的，而且也很难看到，它是一个很高境界的存在。美的真相，并不是任何人，任何时间都可以见到的，而只有有智慧的高等级的哲人，在一定的时候才能看到。作为普通人，在现实生活里所见到的美，都是经验的、相对的、比较而言的美。这些都是美的现象，并不是美的本质。 从美的本质而言，柏拉图道出了客观美的规律发展的实质。无论是自然还是社会，其事物的发展，属于美好的东西，就是完善的东西，它们总是按对立统一，多样统一，形成和谐的系统或整体。美的东西总是符合规律性，符合目的性，为人所喜爱。</p>
+<p><strong>其二是对真善美统一的问题的探讨。</strong>由于柏拉图有客观唯心主义理念论的基础，因而他认为真、善、美的内容是统一的，真实的东西，就美与善的东西。美的东西也就是善的东西，美与善没有根本的区别。柏拉图认为这种美本身的关照是一个人最值得过的生活境界。柏拉图把爱、美、善等，最终都还原到人的生活本身中，与不朽相关，也可以说，不朽是人的最终目的。在柏拉图的思想中，美的概念不仅仅与审美和艺术相关，更主要的是一种人的生活方式和理想，是一种哲学的最高境界之一。当人类社会实现求真、向善、爱美这三大主题，并完成三者有机统一之时，再回头审视柏拉图美学研究视野的开放性和纵深性，人们也许更会惊讶柏拉图美学思想的丰富与深邃。先说美与真的关系。在柏拉图的理念论中，美的理念，美的本身就是真实的存在。因而相反那些经验中许多美的现象，在柏拉图看来倒属于不真实的了，因为它们都属于理念的影子，是从理念中摹仿或分有出来的东西。又由于艺术是社会生活的反映，艺术作品只是对社会生活的描绘，用柏拉图的话来说，艺术只是镜子里的影子或人物的肖像。因此，艺术美只能是社会生活美的影子，艺术的美对于美的理念而言，隔了两层，比起社会生活中的美还要更加虚假，因为它是影子的影子。基于这样一个原因，所以柏拉图对于以诗为代表的艺术和艺术家的存在是极不欢迎的，而且提出要将诗的艺术赶出理想国家的家园。再说美与善的关系。柏拉图在《国家》篇中讲到：真理和知识都是美的，但善的理念比这两者更美。在《蒂迈欧》篇提及凡善的事物都是美的。在这些言谈中表明美与善是同一的。在柏拉图的宇宙观中，他认为善的理念又是理念世界中至高无上者，因而美的理念就必须从属于善的理念，为善的理念所支配。</p>
+<p>基于这样一个原因，所以在柏拉图在审美分析中，始终都认为灵魂的美要高于一切形式的美。如他在《会饮》篇中就谈到要使人认识到灵魂的美的要比形体的美更高贵。在《国家》篇中就说到，一般的普通人都是声色爱好者，因此他们都只关注美的声调，美的色彩，美的形状等，只有哲学家，爱智者，才能看到和理解到和善同类的美本身。因此，心灵的快乐要高于一切感官所拥有的快乐。</p>
+<p>柏拉图以其深远的思想、卓越的才情在西方哲学史和文化史上树立了一个无法回避的高峰。柏拉图美学思想的贡献主要可分为三个方面。它首先是开始了有意识地探索美的规律，其次是有利于对审美实践的规范，最后是美学思想对审美实践的肯定。美学思想在柏拉图的哲学体系中占有重要的地位，它为西方美学规定了一种先在范式的逻辑即美是什么。换言之，两千年来的西方美学就是不断重答柏拉图之问的历史。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6%E4%B8%8E%E8%89%BA%E6%9C%AF/"># 文学与艺术</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cfa342c2/">北京的老城墙（梁思成的眼泪）</a>
+            
+            
+            <a class="next" rel="next" href="/ccd01794/">《中国书法在西方》（白谦慎）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cfa342c2/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/ccd01794/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

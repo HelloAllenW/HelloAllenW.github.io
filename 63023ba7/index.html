@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>9 个帮你提高开发效率的现代CSS框架 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">9 个帮你提高开发效率的现代CSS框架</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 3, 2022&nbsp;&nbsp;21:30:44</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 3, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>今天来分享 GitHub 上一些热门的 CSS 框架！</p>
+<h2 id="1-Bootstrap"><a href="#1-Bootstrap" class="headerlink" title="1. Bootstrap"></a>1. Bootstrap</h2><p>Bootstrap是 Twitter 推出的基于HTML、CSS、JavaScript 开发的简洁、直观、强悍的CSS开发框架，使得 Web 开发更加快捷。Bootstrap 提供了优雅的HTML和CSS规范，它由动态CSS语言Less写成。Bootstrap 推出后颇受欢迎，一直是GitHub上的热门开源项目。</p>
+<p>Bootstrap 的优点：</p>
+<ul>
+<li>流行框架： Bootstrap 是最流行的开源项目之一。在遇到问题时可以很容易的找到解决方案。</li>
+<li>功能齐全： 它不仅是一个开发框架，还是一个预构建的动态模板，包含很多现成的组件。这可以使任何开发人员，即使没有前端经验，也可以更轻松地开发结构良好的页面。</li>
+<li>可定制： 可以轻松定制 Bootstrap。可以使用 npm 安装项目，导入需要的部分，并使用 CSS 变量自定义几乎所有内容。</li>
+<li>成熟且受支持： Bootstrap 最初由 Twitter 退出，现在由数百名开发人员组成的社区维护，确保稳定发布和长期支持。</li>
+</ul>
+<p>Bootstrap 的缺点：</p>
+<ul>
+<li>难以覆盖： Bootstrap 具有非常具体的设计和外观，如果想要不同的风格，就很难覆盖。由于它广泛的使用 CSS 中的!important规则，因此可能很难覆盖默认值。</li>
+<li>依赖 jQuery： 与其他仅支持 CSS 的框架不同，Bootstrap 4 的许多交互功能都依赖于 jQuery。这使得将它与 React 或 Vue 等 JavaScript 框架一起使用变得更加困难，但也不是不可能。不过，在 Boostrap 5 中删除了 jQuery 依赖项。</li>
+<li>依赖繁重： Bootstrap 在项目中非常繁重，尽管可以只导入需要的部分，但它不像其他框架那样轻量级或模块化。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/twbs/bootstrap">https://github.com/twbs/bootstrap</a></p>
+<h2 id="2-Foundation"><a href="#2-Foundation" class="headerlink" title="2. Foundation"></a>2. Foundation</h2><p>Foundation 是一个用于开发响应式的 HTML, CSS 和 JavaScript 框架。它是一个易用、强大而且灵活的框架，用于构建基于任何设备上的 Web 应用，是一个移动优先的流行框架。</p>
+<p>实际上，Foundation 不仅仅是一个 CSS 框架，而是一系列前端开发工具。这些工具可以一起使用，也可以完全独立使用。</p>
+<p>Foundation 的优点：</p>
+<ul>
+<li>通用风格： 与 Bootstrap 不同，Foundation 没有为其组件使用独特的风格。其广泛的模块化和灵活的组件具有最小的样式，并且可以轻松定制。</li>
+<li>功能齐全： Foundation  提供了很多内置组件。还可以访问由开发团队或社区创建的预定义的 HTML 模板，可以根据需求去使用这些模板。</li>
+<li>电子邮件设计： oundation for Emails 可以为任何客户端创建响应式电子邮件模板，包括旧版本的 Microsoft Outlook。</li>
+<li>动画： Foundation 可以轻松地与 ZURB 的 Motion UI 库集成，让我们可以使用内置效果来创建过渡和动画。</li>
+</ul>
+<p>Foundation 的缺点：</p>
+<ul>
+<li>学习成本高： Foundation 有很多特性，比其他框架复杂得多。在进行前端布局时，它提供了很大的自由度，所以我们就需要了解这一切是如何工作的。</li>
+<li>依赖 Javascript： Foundation 的许多功能都依赖于 Javascript，使用 jQuery 或 Zepto。Zepto 是一个与 jQuery 使用相同语法但占用空间更小的库。这使得 Foundation 不太适合 React 或 Angular 项目。Zepto 也是一个鲜为人知的库，没有多少开发人员熟悉。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/foundation/foundation-sites">https://github.com/foundation/foundation-sites</a></p>
+<h2 id="3-Bulma"><a href="#3-Bulma" class="headerlink" title="3. Bulma"></a>3. Bulma</h2><p>Bulma 是一个免费的开源CSS框架，它提供了现成的前端组件，可以轻松地组合这些组件来构建响应式 Web 界面。Bulma 框架最大的特点就是简单好用。所有样式都基于class，只需为 HTML 元素指定class，样式将立刻生效。</p>
+<p>Bulma 的优点：</p>
+<ul>
+<li>美学设计： Bulma 它采用简洁现代的设计，即使不更改默认设置，最终也会得到一个漂亮的网页。</li>
+<li>现代： CSS 的 flexbox 布局使得创建响应式布局变得更加容易，而 Bulma 是最早基于 flexbox 实现的框架之一。</li>
+<li>对开发人员友好： Bulma 旨在为开发人员提供出色的体验。考虑到这一点，Bulma 提供了易于使用和记忆的命名约定。</li>
+<li>易于定制： Bulma 的颜色、填充和许多默认属性都可以使用 SASS 进行定制。这样，可以在几分钟内设置项目的默认值。</li>
+<li>没有 Javascript： Bulma 不包含 JavaScript 功能。由于它是纯 CSS 的，因此可以轻松地与 Vue 或 React 等 Javascript 框架集成。</li>
+</ul>
+<p>Bulma 的缺点：</p>
+<ul>
+<li>独特的风格： Bulma的独特风格是一把双刃剑。由于它非常独特，如果它被过度使用，最终会得到看起来非常相似的网站，就像 Bootstrap 一样。</li>
+<li>不太完整： Bulma 在许多情况下都在与 Boostrap 竞争，但在可访问性和其他企业级功能方面并不完整。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/jgthms/bulma">https://github.com/jgthms/bulma</a></p>
+<h2 id="4-Tailwind"><a href="#4-Tailwind" class="headerlink" title="4. Tailwind"></a>4. Tailwind</h2><p>Tailwind CSS 是一个功能类优先的 CSS 框架，它集成了诸如 flex, pt-4, text-center 和 rotate-90 这样的类，它们能直接在HTML中组合起来，构建出任何设计。</p>
+<p>Tailwind 的优点：</p>
+<ul>
+<li>原子 CSS： Tailwind 通过提供强大的实用程序类使常见的样式易于实现。这种方法有时被称为原子 CSS，其中 HTML 元素的类清楚地描述了它的外观。只需使用指定的class，样式即可生效。</li>
+<li>没有设计： Tailwind 没有预制组件或特定的设计语言。所以不必覆盖现有样式，在自定义设计时可以提高工作效率。</li>
+<li>可重用组件： Tailwind 允许创建自己的自定义组件，可以在整个项目中重用这些组件，还可以在官网上找到一些组件示例。</li>
+<li>强大的 PostCSS/SASS 集成： 要充分利用 Tailwind，需要安装并将其导入 SASS 或 PostCSS 项目。这使可以利用 Tailwind 的所有功能来编写更有效的 CSS。</li>
+</ul>
+<p>Tailwind 的缺点：</p>
+<ul>
+<li>学习成本高： 对于经验不足的开发人员来说，Tailwind 并不是最佳选择。由于它不提供预制组件，因此需要充分了解前端技术的工作原理。Tailwind 的学习成本较高，必须学习相关语法才能使用该框架高效工作。</li>
+<li>不能直接使用： Tailwind 可以作为捆绑的 CSS 文件添加到项目中。但如果这样添加框架，它的许多功能将不可用，并且将无法使用压缩版本（压缩版 27 KB、原始版 348 KB ）。要充分利用 Tailwind，需要知道如何使用 Webpack、Gulp 或其他前端构建工具。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/tailwindlabs/tailwindcss">https://github.com/tailwindlabs/tailwindcss</a></p>
+<h2 id="5-UIkit"><a href="#5-UIkit" class="headerlink" title="5. UIkit"></a>5. UIkit</h2><p>UIkit 是 YOOtheme 团队开发的一款轻量级、模块化的前端框架，可快速构建强大的前端界面。UIKit提供了全面的HTML、CSS、JavaScript组件。它基于LESS开发，代码结构清晰简单，易于扩展和维护，并且具有体积小、反应灵敏的响应式组件，可以根据 UIKit 基本的风格样式，轻松地自定义创建出自己喜欢的主题样式。</p>
+<p>UIkit 的优点：</p>
+<ul>
+<li>数十个组件： UIKit 通过数十个组件，可以实现复杂的前端布局。它包括所有典型的实用程序和组件，并且可以访问高级元素，如导航栏、画布外边栏和视差设计等。</li>
+<li>可扩展： UIKit 可以使用 LESS 或 SASS 预处理器轻松定制和扩展。</li>
+<li>基于 UI 的定制器： UIKit 提供了一个基于 Web 的定制器，可以实时定制设计，然后将 SASS 或 LESS 变量复制到项目中。</li>
+</ul>
+<p>UIkit 的缺点：</p>
+<ul>
+<li>不适合小型项目： 不建议经验不足的开发人员使用 UIKit，因为它是一个复杂的框架，需要深入了解。它非常适合高级应用程序，但对于小型项目可能太复杂了。</li>
+<li>社区较小： 它不像其他框架那样受欢迎，遇到问题可能较难找到答案。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/uikit/uikit">https://github.com/uikit/uikit</a></p>
+<h2 id="6-Milligram"><a href="#6-Milligram" class="headerlink" title="6. Milligram"></a>6. Milligram</h2><p>Milligram 提供了最小的样式设置，以快速和干净为起点。压缩后只有 2kb！它为更好的性能和更高的生产力而设计，需要重置的属性更少，代码更简洁。</p>
+<p>Milligram 的优点：</p>
+<ul>
+<li>极简 CSS 框架： Milligram 易于设置和上手。尽管它提供了强大的功能来提高生产力，但它在压缩后仅有 2 KB。</li>
+<li>无默认样式： 与其他框架不同，Milligram 没有默认样式。在实现自定义样式时，无需重置或覆盖不符合目标的属性。</li>
+<li>易于学习： 上手非常简单，阅读官方文档足以入门。</li>
+</ul>
+<p>Milligram 的缺点：</p>
+<ul>
+<li>无模板： Milligram 没有提供预制的模板。</li>
+<li>社区较小： Milligram 有一个小而紧密的社区。寻找社区的支持并不像使用更流行的 CSS 框架那么容易。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/milligram/milligram">https://github.com/milligram/milligram</a></p>
+<h2 id="7-Pure"><a href="#7-Pure" class="headerlink" title="7. Pure"></a>7. Pure</h2><p>Pure.css是美国雅虎公司出品的一组轻量级、响应式纯CSS模块，适用于任何Web项目。这个框架非常小，在使用所有模块时压缩后只有 3.7 KB。</p>
+<p>Pure 的优点：</p>
+<ul>
+<li>轻量： 每一行 CSS 都经过仔细考虑和编写，以使框架轻量级和高性能。</li>
+<li>可定制： 可以以模块化方式导入 Pure 并仅实现需要的内容。</li>
+<li>支持良好： 与社区项目不同，Pure 得到  Yahoo 的支持，这使得该项目成为长期使用的安全选择。</li>
+<li>现成的组件： Pure 带有响应式和为现代网络构建的预制组件。</li>
+</ul>
+<p>Pure 的缺点：</p>
+<ul>
+<li>不适用于小团队： Pure 不适合经验不足或者小型的团队，因为需要创建自己的设计来使用该框架。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/pure-css/pure">https://github.com/pure-css/pure</a></p>
+<h2 id="8-Tachyons"><a href="#8-Tachyons" class="headerlink" title="8. Tachyons"></a>8. Tachyons</h2><p>Tachyons与其他流行的前端框架不同，Tachyons旨在将CSS规则分解为小型的、可管理的、以及可复用的部件。Tachyons可以帮助开发人员创建出具有高度可读性、能够快速加载和响应的网站，而且无需使用大量CSS代码。</p>
+<p>Tachyons 的优点：</p>
+<ul>
+<li>即用型组件： 尽管 Tachyons 专注于提供出色的实用程序类以提高生产力，但官方文档也包含许多即用型组件。</li>
+<li>多样化： Tachyons 提供可用于不同设置的功能模板，例如静态 HTML、Rails、React、Angular 等。</li>
+<li>可重复使用： Tachyon 是创建可扩展设计系统的绝佳选择。该框架允许创建可重用的属性来构建多样化和灵活的组件。</li>
+</ul>
+<p>Tachyons 的缺点：</p>
+<ul>
+<li>主要用于 PostCSS： PostCSS 是使用 Tachyons 的主要方式，但不像 LESS 或 SASS 那样广泛使用。Tachyons 确实提供了 SASS 的集成，但它并未得到广泛使用和支持。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/tachyons-css/tachyons">https://github.com/tachyons-css/tachyons</a></p>
+<h2 id="9-Materialize"><a href="#9-Materialize" class="headerlink" title="9. Materialize"></a>9. Materialize</h2><p>Materialize是一个使用CSS，JavaScript和HTML创建的UI组件库。实现UI组件有助于构建有吸引力，一致和功能的网页和网络应用程序，同时坚持现代网络设计原则，如浏览器可移植性，设备独立性和优雅的降级。它有助于创建更快，更美观，更灵敏的网站。它的灵感来自Google Material Design。</p>
+<p>Materialize 的优点：</p>
+<ul>
+<li>功能齐全： Materialize CSS 提供了很多预制组件，还带有更高级的 Javascript 功能来支持交互。</li>
+<li>移动友好： 可以使用框架的类似移动设备的组件（例如浮动导航栏和滑动交互）创建渐进式 Web 应用程序。</li>
+</ul>
+<p>Materialize 的缺点：</p>
+<ul>
+<li>严格的设计语言： 如果想做一些不接近材料设计的事情，最好避免使用 Materialise。</li>
+<li>独立项目： Materialise 有一个活跃的社区，但它是一个小型且独立的项目，没有企业支持。</li>
+</ul>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/Dogfalo/materialize">https://github.com/Dogfalo/materialize</a></p>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2><p>这些 CSS 框架在一定程度上有助于提高工作效率。那该如何选择这些框架呢？</p>
+<ul>
+<li>想要更多的功能以及预制的组件，选择 Bootstrap、Bulma、Materialize；</li>
+<li>想要只提供实用程序类而不提供样式的框架，选择 Tailwind、Milligram、Pure；</li>
+<li>想要高水平社区支持的框架，选择 Bootstrap、Foundation；</li>
+<li>想要更轻量的框架，选择 Tailwind、Milligram。</li>
+</ul>
+<p>最后，还是要根据实际需求来选择最合适的CSS框架！</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a82ee336/">洗脚与哲学</a>
+            
+            
+            <a class="next" rel="next" href="/48c7a206/">Hexo 博客的 Next 主题配置</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/a82ee336/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/48c7a206/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>
