@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>从头开始学习Vuex | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从头开始学习Vuex</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十月 6, 2018&nbsp;&nbsp;22:14:01</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十月 6, 2018
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/Vue/">Vue </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>当我们的应用遇到多个组件共享状态时，会需要多个组件依赖于同一状态抑或是来自不同视图的行为需要变更同一状态。以前的解决办法：</p>
+<p><strong>a.将数据以及操作数据的行为都定义在父组件;</strong></p>
+<p><strong>b.将数据以及操作数据的行为传递给需要的各个子组件(有可能需要多级传递)</strong></p>
+<p>传参的方法对于多层嵌套的组件将会非常繁琐，并且对于兄弟组件间的状态传递无能为力。在搭建下面页面时，你可能会对 vue 组件之间的通信感到崩溃 ，特别是非父子组件之间通信。此时就应该使用vuex，轻松可以搞定组件间通信问题。</p>
+<p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/10/1665e8550154fcd5~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp" alt="组件间通信"></p>
+<h2 id="二、什么是Vuex"><a href="#二、什么是Vuex" class="headerlink" title="二、什么是Vuex"></a>二、什么是Vuex</h2><p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。这里的关键在于集中式存储管理。**简单来说,对 vue 应用中多个组件的共享状态进行集中式的管理(读/写)**。</p>
+<h2 id="三、Vuex的原理是什么"><a href="#三、Vuex的原理是什么" class="headerlink" title="三、Vuex的原理是什么"></a>三、Vuex的原理是什么</h2><h4 id="1-简要介绍Vuex原理"><a href="#1-简要介绍Vuex原理" class="headerlink" title="1.简要介绍Vuex原理"></a>1.简要介绍Vuex原理</h4><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/10/1665e855109a947b~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp" alt="image"></p>
+<p>Vuex实现了一个单向数据流，在全局拥有一个State存放数据，当组件要更改State中的数据时，必须通过Mutation进行，Mutation同时提供了订阅者模式供外部插件调用获取State数据的更新。而当所有异步操作(常见于调用后端接口异步获取更新数据)或批量的同步操作需要走Action，但Action也是无法直接修改State的，还是需要通过Mutation来修改State的数据。最后，根据State的变化，渲染到视图上。</p>
+<h4 id="2-简要介绍各模块在流程中的主要功能："><a href="#2-简要介绍各模块在流程中的主要功能：" class="headerlink" title="2.简要介绍各模块在流程中的主要功能："></a>2.简要介绍各模块在流程中的主要功能：</h4><ul>
+<li>Vue Components：Vue组件。HTML页面上，负责接收用户操作等交互行为，执行dispatch方法触发对应action进行回应。</li>
+<li>dispatch：操作行为触发方法，是唯一能执行action的方法。</li>
+<li>actions：<strong>操作行为处理模块,由组件中的$store.dispatch(‘action 名称’, data1)来触发。然后由commit()来触发mutation的调用 , 间接更新 state</strong>。负责处理Vue Components接收到的所有交互行为。包含同步/异步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发。</li>
+<li>commit：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。</li>
+<li>mutations：<strong>状态改变操作方法，由actions中的commit(‘mutation 名称’)来触发</strong>。是Vuex修改state的唯一推荐方法。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等。</li>
+<li>state：页面状态管理容器对象。集中存储Vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新。</li>
+<li>getters：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过该方法读取全局state对象。</li>
+</ul>
+<h2 id="四、什么时候使用Vuex"><a href="#四、什么时候使用Vuex" class="headerlink" title="四、什么时候使用Vuex"></a>四、什么时候使用Vuex</h2><p>虽然 Vuex 可以帮助我们管理共享状态，但也附带了更多的概念和框架。这需要对短期和长期效益进行权衡。 如果您的应用够简单，您最好不要使用 Vuex,因为使用 Vuex 可能是繁琐冗余的。一个简单的 <a href="https://link.juejin.cn/?target=https://cn.vuejs.org/v2/guide/components.html%23%25E9%259D%259E%25E7%2588%25B6%25E5%25AD%2590%25E7%25BB%2584%25E4%25BB%25B6%25E9%2580%259A%25E4%25BF%25A1">global event bus</a> 就足够您所需了。但是，<strong>如果您需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择。</strong></p>
+<h2 id="五、Vuex安装-限定开发环境为-vue-cli"><a href="#五、Vuex安装-限定开发环境为-vue-cli" class="headerlink" title="五、Vuex安装(限定开发环境为 vue-cli)"></a>五、Vuex安装(限定开发环境为 vue-cli)</h2><p>首先要安装vue-cli脚手架，对于大陆用户，建议将npm的注册表源设置为国内的镜像（淘宝镜像），可以大幅提升安装速度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com</span><br><span class="line">npm config get registry // 配置后可通过下面方式来验证是否成功</span><br><span class="line">npm install -g cnpm --registry=https://registry.npmmirror.com</span><br><span class="line">//cnpm安装脚手架</span><br><span class="line">cnpm install -g vue-cli</span><br><span class="line">vue init webpack my-vue</span><br><span class="line">cd my-vue</span><br><span class="line">cnpm install</span><br><span class="line">cnpm run dev</span><br></pre></td></tr></table></figure>
+
+<p>脚手架安装好后，再安装vuex</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install vuex --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、如何使用Vuex"><a href="#六、如何使用Vuex" class="headerlink" title="六、如何使用Vuex"></a>六、如何使用Vuex</h2><h3 id="1-如何通过Vue来实现如下效果？"><a href="#1-如何通过Vue来实现如下效果？" class="headerlink" title="1.如何通过Vue来实现如下效果？"></a>1.如何通过Vue来实现如下效果？</h3><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/10/10/1665e85502859e50~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp" alt="image"></p>
+<p>这个小demo很容易用vue实现，核心代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;p&gt;click &#123;&#123;count&#125;&#125; times,count is &#123;&#123;evenOrOdd&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;incrementIfOdd&quot;&gt;increment if odd&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;incrementAsync&quot;&gt;increment async&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  ......</span><br><span class="line">  export default &#123;</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      count: 0</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    evenOrOdd() &#123;</span><br><span class="line">      return this.count % 2 === 0 ? &quot;偶数&quot; : &quot;奇数&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    increment() &#123;</span><br><span class="line">      this.count = this.count + 1;</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement() &#123;</span><br><span class="line">      this.count = this.count - 1;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 只有是奇数才加1</span><br><span class="line">    incrementIfOdd() &#123;</span><br><span class="line">      if (this.count % 2 === 1) &#123;</span><br><span class="line">        this.count = this.count + 1;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 过两秒才加1</span><br><span class="line">    incrementAsync() &#123;</span><br><span class="line">      setInterval(() =&gt; &#123;</span><br><span class="line">        this.count = this.count + 1;</span><br><span class="line">      &#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-如何通过Vuex来改造上面代码？"><a href="#2-如何通过Vuex来改造上面代码？" class="headerlink" title="2.如何通过Vuex来改造上面代码？"></a>2.如何通过Vuex来改造上面代码？</h3><h4 id="①创建一个store-js文件"><a href="#①创建一个store-js文件" class="headerlink" title="①创建一个store.js文件"></a>①创建一个store.js文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">        count: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;// 包含了多个直接更新state函数的对象</span><br><span class="line">        INCREMENT(state) &#123;</span><br><span class="line">            state.count = state.count + 1;</span><br><span class="line">        &#125;,</span><br><span class="line">        DECREMENT(state) &#123;</span><br><span class="line">            state.count = state.count - 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    getters: &#123;   // 当读取属性值时自动调用并返回属性值</span><br><span class="line">        evenOrOdd(state) &#123;</span><br><span class="line">            return state.count % 2 === 0 ? &quot;偶数&quot; : &quot;奇数&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123; // 包含了多个对应事件回调函数的对象</span><br><span class="line">        incrementIfOdd(&#123; commit, state &#125;) &#123; // 带条件的action</span><br><span class="line">            if (state.count % 2 === 1) &#123;</span><br><span class="line">                commit(&#x27;INCREMENT&#x27;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        incrementAsync(&#123; commit &#125;) &#123; //异步的action</span><br><span class="line">            setInterval(() =&gt; &#123;</span><br><span class="line">                commit(&#x27;INCREMENT&#x27;)</span><br><span class="line">            &#125;, 2000);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">export default store //用export default 封装代码，让外部可以引用</span><br></pre></td></tr></table></figure>
+
+<h4 id="②在main-js文件中引入store-js文件"><a href="#②在main-js文件中引入store-js文件" class="headerlink" title="②在main.js文件中引入store.js文件"></a>②在main.js文件中引入store.js文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import store from &#x27;./store&#x27;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#x27;#app&#x27;,</span><br><span class="line">  router,</span><br><span class="line">  store,//注册上vuex的store: 所有组件对象都多一个属性$store</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &#x27;&lt;App/&gt;&#x27;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="③新建一个模板HelloWorld-vue"><a href="#③新建一个模板HelloWorld-vue" class="headerlink" title="③新建一个模板HelloWorld.vue"></a>③新建一个模板HelloWorld.vue</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">    &lt;p&gt;click &#123;&#123;count&#125;&#125; times,count is &#123;&#123;evenOrOdd&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;button @click=&quot;increment&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;decrement&quot;&gt;-&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;incrementIfOdd&quot;&gt;increment if odd&lt;/button&gt;</span><br><span class="line">    &lt;button @click=&quot;incrementAsync&quot;&gt;increment async&lt;/button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;HelloWorld&quot;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    count() &#123;</span><br><span class="line">      return this.$store.state.count;</span><br><span class="line">    &#125;,</span><br><span class="line">    evenOrOdd() &#123;</span><br><span class="line">      return this.$store.getters.evenOrOdd;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    increment() &#123;</span><br><span class="line">      this.$store.commit(&quot;INCREMENT&quot;);</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement() &#123;</span><br><span class="line">      this.$store.commit(&quot;DECREMENT&quot;);</span><br><span class="line">    &#125;,</span><br><span class="line">    // 只有是奇数才加1</span><br><span class="line">    incrementIfOdd() &#123;</span><br><span class="line">      this.$store.dispatch(&quot;incrementIfOdd&quot;); //触发store中对应的action调用</span><br><span class="line">    &#125;,</span><br><span class="line">    // 过两秒才加1</span><br><span class="line">    incrementAsync() &#123;</span><br><span class="line">      this.$store.dispatch(&quot;incrementAsync&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>由于 store 中的状态是响应式的，当 Vue 组件从 store 中读取状态的时候，若 store 中的状态发生变化，那么相应的组件也会相应地得到高效更新。<strong>在组件中调用 store 中的状态简单到仅需要在计算属性中返回即可。改变store 中的状态的唯一途径就是显式地提交 (commit) mutations。</strong></p>
+<h3 id="3-如何通mapState等辅助函数优化上面代码？"><a href="#3-如何通mapState等辅助函数优化上面代码？" class="headerlink" title="3.如何通mapState等辅助函数优化上面代码？"></a>3.如何通mapState等辅助函数优化上面代码？</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import &#123; mapActions, mapGetters, mapState, mapMutations &#125; from &quot;vuex&quot;;</span><br><span class="line">...</span><br><span class="line"> computed: &#123;</span><br><span class="line">    ...mapState([&quot;count&quot;]),</span><br><span class="line">    ...mapGetters([&quot;evenOrOdd&quot;])</span><br><span class="line">    &#125;</span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions([&quot;incrementIfOdd&quot;, &quot;incrementAsync&quot;]),</span><br><span class="line">    ...mapMutations([&quot;increment&quot;, &quot;decrement&quot;])</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>有点必须要注意</strong>：HelloWorld.vue文件中increment函数名称要跟store.js文件mutations中一致，才可以写成 …mapMutations([“increment”, “decrement”])，同样的道理，incrementIfOdd和incrementAsync也要和store.js文件actions保持一致。</p>
+<h2 id="七、使用Vuex的注意点"><a href="#七、使用Vuex的注意点" class="headerlink" title="七、使用Vuex的注意点"></a>七、使用Vuex的注意点</h2><h3 id="1-如何在Mutations里传递参数"><a href="#1-如何在Mutations里传递参数" class="headerlink" title="1.如何在Mutations里传递参数"></a>1.如何在Mutations里传递参数</h3><p>先store.js文件里给add方法加上一个参数n</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mutations: &#123;</span><br><span class="line">   INCREMENT(state,n) &#123;</span><br><span class="line">     state.count+=n;</span><br><span class="line">   &#125;,</span><br><span class="line">   DECREMENT(state)&#123;</span><br><span class="line">       state.count--;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在HelloWorld.vue里修改按钮的commit( )方法传递的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">increment() &#123;</span><br><span class="line">     return this.$store.commit(&quot;INCREMENT&quot;,2);</span><br><span class="line">   &#125;,</span><br><span class="line">decrement() &#123;</span><br><span class="line">     return this.$store.commit(&quot;DECREMENT&quot;);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-如何理解getters"><a href="#2-如何理解getters" class="headerlink" title="2.如何理解getters"></a>2.如何理解getters</h3><p><strong>getters从表面是获得的意思，可以把他看作在获取数据之前进行的一种再编辑,相当于对数据的一个过滤和加工</strong>。getters就像计算属性一样，getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。</p>
+<p>例如：要对store.js文件中的count进行操作，在它输出前，给它加上100。</p>
+<p>首先要在store.js里Vuex.Store()里引入getters</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getters:&#123;</span><br><span class="line">   count:state=&gt;state.count+=100</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在HelloWorld.vue中对computed进行配置，在vue 的构造器里边只能有一个computed属性，如果你写多个，只有最后一个computed属性可用，所以要用展开运算符”…”对上节写的computed属性进行一个改造。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">   ...mapGetters([&quot;count&quot;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-actions和mutations区别"><a href="#3-actions和mutations区别" class="headerlink" title="3.actions和mutations区别"></a>3.actions和mutations区别</h3><p>actions和上面的Mutations功能基本一样，不同点是，<strong>actions是异步的改变state状态，而Mutations是同步改变状态</strong>。</p>
+<p>同步的意义在于这样每一个 mutation 执行完成后都可以对应到一个新的状态（和 reducer 一样），这样 devtools 就可以打个 snapshot 存下来，然后就可以随便 time-travel 了。如果你开着 devtool 调用一个异步的 action，你可以清楚地看到它所调用的 mutation 是何时被记录下来的，并且可以立刻查看它们对应的状态—-尤雨溪</p>
+<p>作者：浪里行舟<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903689090514958">https://juejin.cn/post/6844903689090514958</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Vue/"># Vue</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/801d5403/">Allen先生</a>
+            
+            
+            <a class="next" rel="next" href="/5fb798d0/">懒加载和预加载</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/801d5403/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/5fb798d0/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

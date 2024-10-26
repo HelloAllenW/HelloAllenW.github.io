@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>【相对论前传】研讨爱因斯坦为什么能够创立相对论 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">【相对论前传】研讨爱因斯坦为什么能够创立相对论</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 2, 2022&nbsp;&nbsp;19:54:02</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 2, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/">自然科学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">11.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">39 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="序章：爱因斯坦和科学哲学思想"><a href="#序章：爱因斯坦和科学哲学思想" class="headerlink" title="序章：爱因斯坦和科学哲学思想"></a>序章：爱因斯坦和科学哲学思想</h2><p>从历史上来看，狭义相对论的提出在那会儿是水到渠成，但是广义相对论在当时既没有来自实验的压力，也没有什么理论的冲突导致非要广义相对论才能调和它们。它仅仅是因为爱因斯坦内心对宇宙统一、美、和谐的一种追求，爱因斯坦希望把相对性原理这种思想贯彻得再彻底一点，于是倒腾出来了广义相对论。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-2339d52c874618c5028467da41195321_720w.webp" alt="img"></p>
+<p>这一点在我再次仔细回想的时候，感觉太震撼了，甚至觉得有点恐怖。印象里，这种仅仅是为了将一种信念贯彻到底而提出一种全新革命性理论的案例，在物理学史上貌似有且仅此一例，这是爱因斯坦显著区别于其他一般物理学家的地方。</p>
+<h3 id="归纳与演绎"><a href="#归纳与演绎" class="headerlink" title="归纳与演绎"></a>归纳与演绎</h3><p>说起来，科学的研究方法主要有两种：归纳和演绎。归纳是从一大堆事实经验里归纳总结出一些规律，而演绎是从一些基本的公理假设出发推导出一些规律。一般来说科学家们都是两者并用，但是仔细分析爱因斯坦的思路历程就会发现：爱因斯坦几乎都是使用演绎而不是归纳。</p>
+<p>许多科学家提出的理论是基于实验的，是为了解决实验带来的不安，比如洛伦兹的电子论，洛伦兹提出的物体在运动方向上会收缩这样的想法，它的根源就是为了去解决类似迈克尔逊-莫雷实验带来的不安，至于这样做有什么实际的物理实在意义，他不知道；但是爱因斯坦不一样，爱因斯坦仿佛有一种惊人的能够窥探上帝的能力，他能从他惊人的物理直觉之中发现隐藏的最深的秘密，然后从中精准的提炼出公理，然后很自然的导出新的结论。</p>
+<p>他从来就不是为了解决实验的矛盾去研究理论，大家仔细看看爱因斯坦的论文就会发现，爱因斯坦的论文经常是在把结论都推导完了以后，在论文的结尾处才附带的说某个实验是对它这个理论的一个验证，或者在文章的末尾根据理论做出一个实验假设让别人去验证。</p>
+<p>大家都知道爱因斯坦在1905年一次性发表了五篇重量级的论文，其中《论动体的电动力学》的发表标志着狭义相对论的正式诞生。可能很多人觉得，这篇论文就是狭义相对论的奠基论文，那么它一定非常艰深难懂吧。可事实正好相反，这篇文章出奇的容易懂，里面涉及的数学公式，一个高中生就能完全搞明白，但是它蕴含的思想却非常的爆炸性。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-f92a2a1138a01586cbda8679974fe812_720w.webp" alt="img"></p>
+<p>庞加莱和洛伦兹是当时除了爱因斯坦以外“看起来”最接近发现狭义相对论的，但是也只是看起来而已，霍夫曼在谈论庞加莱的时候说；“每到关键时刻，他就会精神紧张，败下阵来，转而固守那些旧有的思想习惯和熟知的时空观念，如果这似乎有些奇怪，那是因为我们低估了爱因斯坦在把相对性原理当成公理，从而改变我们的时空观的时候需要多么大的勇气。”</p>
+<p>这句话说的没错，我觉得爱因斯坦在发现狭义相对论的时候最关键最困难也是最伟大的地方不在于推出了多少结论，也不在于那个著名的质能方程，而是在他把决定把光速不变和相对性原理作为公理的时候。天晓得这需要多大的勇气，欧几里得的那些公理起码看起来显而易见，是那么回事，爱因斯坦选的这公理，那是相当的不直观。</p>
+<h3 id="爱因斯坦的科学哲学"><a href="#爱因斯坦的科学哲学" class="headerlink" title="爱因斯坦的科学哲学"></a>爱因斯坦的科学哲学</h3><p>于是我想知道为什么？我想知道爱因斯坦为什么会有这种一眼看透物理现象本质的直觉？是谁给了他勇气让他如此自信的使用演绎法？为什么爱因斯坦的行为跟当时，不，甚至是物理学史上主流的物理学家们如此不一致？</p>
+<p>既然要讲爱因斯坦，我就希把问题说深入说透彻一点，如果我的读者里有人以爱因斯坦为榜样，有人对物理学非常感兴趣，我希望他能学到爱因斯坦更深更本质的东西，而不是浮于表面。</p>
+<p>顺着这个问题慢慢找下去，我发现了问题的关键：爱因斯坦的科学哲学。</p>
+<p>一个人掌握了多少归纳分析的技巧，掌握了多少科学研究的良好思维方法这是科学问题，但是科学研究的对象本身就是宇宙，而一个人如何看待宇宙，这，是个哲学问题。</p>
+<p>爱因斯坦是犹太人，犹太人有一个古老的习俗：邀请一位笃信宗教的穷苦学生在安息日一同进餐。爱因斯坦家邀请的人叫塔尔梅，这个塔尔梅每周来爱因斯坦家的时候会教爱因斯坦一些数学的知识，但是爱因斯坦学得极快，后来当老师的反而被学生超过了，塔尔梅反而赶不上爱因斯坦了。于是塔尔梅给爱因斯坦介绍了康德的哲学，这时候爱因斯坦才13岁，塔尔梅24岁，也就是说爱因斯坦在13岁的时候开始读康德，开始学习《纯粹理性批判》这种让任何哲学系的大学生都头痛不已的大部头巨著。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-f8a600bec0f0a80ce5b1e88a705cfca9_720w.webp" alt="img"></p>
+<p>接着爱因斯坦顺着路开始研读休谟、马赫、庞加莱这些批判大师怀疑大师的著作。从这里爱因斯坦学到了一些非常重要的东西，包括对一切的怀疑，对任何无法直接观测到东西的怀疑（比如绝对空间和以太），以及极强的思想独立性。在这样的过程中，爱因斯坦也逐步建立了自己的哲学世界观。</p>
+<h3 id="哲学家与科学家"><a href="#哲学家与科学家" class="headerlink" title="哲学家与科学家"></a>哲学家与科学家</h3><p>我觉得爱因斯坦跟其他物理学家非常大的不同就在于：爱因斯坦首先是一个哲学家，作为哲学家的他心里有明确的宇宙的样子，上帝的形状，比如上帝喜欢简单的（以太太复杂了），上帝不会偏爱谁（所以按照上帝的脾气不应该制造一个特殊的参考系出来）等等等等。这些上帝的形状在哲学家爱因斯坦眼里是透明的，看透了这些以后，作为科学家的爱因斯坦再把这种东西用物理思想和数学方程的形式表述出来。</p>
+<p>有了这样的概念，前面那些事情就变得顺理成章了。</p>
+<p>我感觉，大多数科学家都忽略了科学哲学的重要性，我们从小到大似乎就没上过什么哲学课，而一般的国人对哲学两个字的误解也特别的大，总感觉就是一群吃饱了撑着没事干的人在说一些鬼话。其实，真不是这样的，因为了解少，所以偏见多。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-bebab87d1d6a20094a3afa6c38fce830_720w.webp" alt="img"></p>
+<p>也因此，我也有了一个大胆的想法：在后面分析爱因斯坦的思想的时候，我想带着大家一起去研读一下这些对爱因斯坦影响极大的哲学著作。我们来看看爱因斯坦到底在想什么，看看他那种独立、深刻、批判的思想到底是怎么钻出来的。看看休谟、马赫、庞加莱当初到底给爱因斯坦灌了什么迷魂汤。</p>
+<p>其实这种事情爱因斯坦也非常喜欢干，不管是大学还是工作的时候，他都喜欢跟好朋友一起研读一些哲学大师（当然是选择性的，跟科学相关的哲学）的著作，然后来相互讨论。我觉得这是个非常好的习惯，对这个感兴趣的可以跟着我们的文章，以后我们一起去研读讨论~</p>
+<h2 id="为何一个罗盘会对爱因斯坦产生如此大的影响？"><a href="#为何一个罗盘会对爱因斯坦产生如此大的影响？" class="headerlink" title="为何一个罗盘会对爱因斯坦产生如此大的影响？"></a>为何一个罗盘会对爱因斯坦产生如此大的影响？</h2><p>历史上很多人在名以后，就会被安上一些“很名人范”的东西：比如牛顿会莫名其妙地被苹果砸中；华盛顿会跑去砍一颗压根就不存在的樱桃树；爱迪生就更厉害，为了能让7岁的爱迪生用他的“聪明才智”救妈妈，硬生生的把世界第一例阑尾炎手术的时间往前推了30多年。</p>
+<h3 id="爱因斯坦的罗盘"><a href="#爱因斯坦的罗盘" class="headerlink" title="爱因斯坦的罗盘"></a>爱因斯坦的罗盘</h3><p>这些故事看起来都很酷，都很有“名人范”，爱因斯坦好像并没有这种故事。他自己后来后来说的比较多的是一个罗盘的故事。</p>
+<p>大概在爱因斯坦四五岁的时候，有一次他生病了躺在床上，他爸爸给了他一个罗盘。用他自己的话说：“那种神秘的力量使他激动得浑身颤抖，罗盘里的小磁针好想被某种神秘的力场牵引着，这与平日里通过接触而起作用的力学方法完全不同。我现在还记得那种体验给我留下了深刻而持久的印象，我想一定有什么东西深深的隐藏在事物背后。”</p>
+<p><img src="https://pic2.zhimg.com/80/v2-386bc4827143a6c4b6f1facec09d64d9_720w.webp" alt="img"></p>
+<p>爱因斯坦终生都被这种惊奇激励着。</p>
+<p>我试着回想了下我第一次接触磁铁和指南针情况。以前家里不知道怎么就有一块磁铁，这块磁铁能把一些铁质的小铁针瓶盖什么的直接吸引过来，我开始觉得很奇怪，很好玩，习惯了这个以后就觉得一切很正常了。</p>
+<p>后来不知道小学几年级的时候，老师在自然课上讲，如果把一根小铁针放在磁铁上反复摩擦，一段时间以后这个小铁针自己也能带磁性，然后如果在一个碗里盛满水，在水上放一块小泡沫，然后把磁化了的小铁针穿在泡沫里，就可以制作一个简易的指南针。然后我照着做了，确实做成了一个小指南针，然后觉得老师说的果然是对的，再然后……</p>
+<p>再然后，就没有然后了~</p>
+<h3 id="和爱因斯坦的区别"><a href="#和爱因斯坦的区别" class="headerlink" title="和爱因斯坦的区别"></a>和爱因斯坦的区别</h3><p>然后我就仔细分析了一下那时候的我和爱因斯坦有什么区别？为什么同样一个事情，爱因斯坦会产生如此大的震动，留下如此深刻的印象，而我只是觉得老师说的果然是对的，并且自己还把它做出来了（小时候能自己倒腾一点东西出来其实还是特别有成就感的一件事）？</p>
+<p>事情的核心是这样一个过程：罗盘（水碗）上的小磁针被一种看不见的东西摆布着，这不应该是很惊奇的一件事么？</p>
+<p><img src="https://pic3.zhimg.com/80/v2-eee8fb6c5211c30879a74bc2a4d6a99e_720w.webp" alt="img"></p>
+<p>然后我开始反思：我平常接触到的一些力学相关的现象都有明显的接触物，小时候玩玩具是我的手在接触玩具，踢球是脚在跟球做接触，这些明显有接触的东西产生的现象似乎很正常，没有什么特别的。另外有一些没有直观接触的：比如苹果落地，苹果起码还和地面接触了；鸟儿在天生飞，起码鸟儿的翅膀在不停的拍，这些现象没有引起小时候我的惊奇也可以理解。再就是日月星辰这些看起来非常玄乎的东西，在小时候我的眼里它们是不可理解的，神话剧看多了以为那些是神管的地盘。</p>
+<p>这样看来这个指南针的事应该还是和其它的现象非常不同的，所以它确实引起了我很大的兴趣，但是并不足以让我感到惊奇震惊，并且去探索它背后的原因。而这个，在我看来就<strong style="border-bottom: 1px green dashed;">是一种科学教育的缺失</strong>。</p>
+<p>爱因斯坦出生在一个思想很开明的犹太家庭，他的父亲对数学有强烈的爱好，他还有个非常优秀的工程师叔叔雅各布，这个叫雅各布的叔叔非常善于引导小爱因斯坦的思考，所以，总的来说，爱因斯坦小时候家里的环境是是非常好的。</p>
+<p>相比之下，我就没这么幸运了，我直到大学才搞明白真正的科学应该是怎么回事，才意识到自己过去在学校里学的数学物理压根就不是数学物理，他们把数学物理里面最精髓的东西给过滤掉了。所以，我觉得学生觉得小学初中高中学的数学物理不好玩，那真不能怪学生。</p>
+<h3 id="永远的好奇心"><a href="#永远的好奇心" class="headerlink" title="永远的好奇心"></a>永远的好奇心</h3><p>人在以出生的时候，对整个世界都充满了好奇心，这个世界里发生的任何事情他都觉得非常的神奇。然后，当事情看多了，他就慢慢觉得习以为常了。这里面又有两种情况：一种是慢慢的看多之后见怪不怪，即便没有理解它们；还有一种是开始不懂，然后慢慢的理解它们背后的原理了，它能理解这些东西之后也会不觉得奇怪了。</p>
+<p>任何一个小孩都会选择后者，也就是试着去理解这些让他好奇的东西，所以小孩子小的时候整天会为什么这，为什么那，似乎有无数的问题，这时候家长和老师的态度就显得非常的关键。</p>
+<p>有的家长会觉得孩子烦，觉得孩子整天问这问那太糟心，叫他别问了。这种态度会让他对这个世界仍然迷惑，但是却不知道怎么办，不知道如何去理解这个世界。如果周围的人都是这种态度，那么他会慢慢对去理解这个世界失去信心，而这恰恰是科学的根基。</p>
+<p>有的家长会回答孩子的问题，但是在不同的问题上都会有一套自己的逻辑，能回答孩子的问题，堵住他那为什么的嘴就行了。这样他能理解这一个个零散的事情，但是无法形成体系。</p>
+<h3 id="形成体系的知识才有价值"><a href="#形成体系的知识才有价值" class="headerlink" title="形成体系的知识才有价值"></a>形成体系的知识才有价值</h3><p><strong style="border-bottom: 1px green dashed;">单独零散的知识并没有太大的价值，但是知识一旦形成了体系，形成了网络，它的价值就会成几何级数的增长</strong>。</p>
+<p>以前电视台里有很多知识问答的节目，像央视的《开心辞典》、《幸运52》，电影《贫民窟的百万富翁》里的《谁想成为百万富翁》之类的，这种东西权当娱乐就行了，千万不要以为所谓的学识渊博就是指能够回答足够多的这种问题。</p>
+<p>所以，我强烈的建议家长和老师们一开始就以这种体系化的思维来处理小孩的疑问。比如我一直用牛顿的体系来回答孩子的疑问，这就相当于在同一个网络里不停的点亮这些网络节点，随着问题在深度和广度上的不停展开，这些节点会慢慢形成一个连通的网络，当孩子通过自己的努力发现了这片连通网络的时候，这种震撼会深入他的骨髓的，就是爱因斯坦说的那种“壮观”的美。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-2fe6ed8b3ae3c42911fa21075914fd17_720w.webp" alt="img"></p>
+<h3 id="不妨这样教孩子"><a href="#不妨这样教孩子" class="headerlink" title="不妨这样教孩子"></a>不妨这样教孩子</h3><p>如果孩子问你为什么河水总是往低处流？苹果熟了为什么要往下落？你直接跟他们解释这是因为地球的引力，这跟为什么自己跳起来总要往下掉，为什么月亮要一直围着地球转是一样的原因。你可以告诉孩子所有的物体动都是有原因的，都是因为有什么力存在，如果没有力物体会保持静止不动（或者匀速直线运动）。</p>
+<p>然后你可以以一种一以贯之的思维跟他解释一切看起来在动的东西：比如树叶为什么往下落？因为地球对它有一个向下的引力。如果他接着问为什么地球会对树叶有引力呢，你可以告诉它任何有质量的物体之间都有引力，质量越大引力越大，距离越近引力越大，我和你之间也有引力，只不过这个力比较小。</p>
+<p>如果孩子还接着问为什么任何有质量的物体之间都会有引力，那恭喜你了，这孩子天资聪颖，是科学的好材料。牛顿力学解释不了万有引力的原因，回答这个问题需要用到广义相对论，因为有质量的物体会弯曲周围的时空，然后物体在弯曲的时空里自由运动（如果孩子能问到这个层次，那就相当不简单了）~</p>
+<p>然后，继续把这个思维体系一以贯之，就继续用这种体系指导孩子思考。我们可以追问：我们拿起玩具是因为我们的手对玩具有一个力，我们在走路的时候在动，自行车汽车在动，那么是有什么力呢？风也在动，那么风是受到了什么力呢？……</p>
+<p>我记得我们那会儿初二才学物理，但是这些简单的概念，我想只要讲的足够耐心，四五岁的小孩子也绝对能理解，而且我也很相信爱因斯坦小时候一定就有这种概念。这样，他才会在看到那个罗盘的时候那么震惊，那不是引力，也没有接触，跟平常理解的东西完全不一样。</p>
+<p><strong style="border-bottom: 1px green dashed;">对爱因斯坦的事情挖掘得越深，就越发觉得爱因斯坦的“天才”更多的都是来自后天的环境和教育，我们应该感到很庆幸，因为这些东西是可以复制的</strong>。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-91fec252cd9a9b7deb0b26dc55c8eda6_720w.webp" alt="img"></p>
+<p>这个罗盘故事发生的时候，爱因斯坦才四五岁，后面我会慢慢跟大家一起继续深挖，看看他的数学物理思维，他那彻底的批判性，那个与旧体系彻底决裂的勇气到底来自哪里。这样可能会让我们更好的理解相对论的诞生和意义。</p>
+<h2 id="四岁才说话，用图像思考的左撇子爱因斯坦的秘密"><a href="#四岁才说话，用图像思考的左撇子爱因斯坦的秘密" class="headerlink" title="四岁才说话，用图像思考的左撇子爱因斯坦的秘密"></a>四岁才说话，用图像思考的左撇子爱因斯坦的秘密</h2><p>很多时候我们没有信心或者恐惧只是因为不了解，这是对未知的一种恐惧。比如古人看到电闪雷鸣就吓得要死，以为是老天发怒，但是我们现在都知道这只是自然现象，我们除了会担心闪电把家里的电器打坏之外，基本上就没什么其他的担心了。一旦我们了解了这些事情背后的原理，我们对它的恐惧也就随之烟消云散了。</p>
+<p>这些属于自然科学范畴的事情我们很好理解，物理定律、数学法则能够非常清晰明确的描述这些事情，但是，那些非自然科学或者心理学这种没有那么明确的数学公式的领域呢？</p>
+<p>比如说，不知道大家有没有这样的体会：从小到大似乎总有一些这样的同学，他们平常呢，该玩的玩该疯的疯，甚至上课在那里看小说甚至睡大觉，但是很奇怪这些人考试的时候成绩还能考的非常好。要是那些平常在你眼里非常认真刻苦的同学考高分，你会觉得很正常，但是这些平常看起来压根就没怎么学习的人，你觉得这些人是“天才”，而这种“天才”就是我们对未知事情的一种解释。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e97ef5043dede3e5b158bbe419313b83_720w.webp" alt="img"></p>
+<p>你想想，古人把无法理解的闪电当做是上天的发怒，而现在我们把那些人无法理解的才能当做是上天赐予的才能（即口中所谓的“天才”），这两种无法理解的东西最后的理由都被归为上天，这两者本质上并没有什么区别。</p>
+<p>而我们现在之所以会对上面这个结论感到惊奇，无非是因为如今解释闪电的物理学已经相当普及，但是解释大脑，解释才能的科学还不那么为公众所知。20世纪人类自然科学和社会科学的知识都发生了爆炸性地增长，因此有一些偏小众的东西不怎么为大众熟知也是非常正常的。比如上面让很多人感觉奇怪的“天才”，在脑科学专家的眼里，这些都不是什么秘密。</p>
+<p>说到天才，我们相对论系列文章的主人公绝对是大家都叹服的天才，爱因斯坦的在20世纪科学界的分量，再怎么说都不为过。我在看爱因斯坦的传记和其他资料的时候发现了一些很有意思的事情，这些事情在一般的眼里顶多只是觉得有点奇怪（不过天才有多少奇怪的事情似乎都不显得奇怪），但是在脑科学专家眼里可能就比较有意思了，这些平常而又不平常的细节可能就暴露了这位天才思考方式的一些秘密。</p>
+<p>我现在立马能够想起来的有三件事情，接下来我会把这三件事写下来，大家看看能不能从这三件事里发现什么共同点，看看能不能发现一些关于爱因斯坦的一些秘密。</p>
+<h3 id="爱因斯坦的三件事"><a href="#爱因斯坦的三件事" class="headerlink" title="爱因斯坦的三件事"></a>爱因斯坦的三件事</h3><p>第一件事：这是一个广为流传的说法，说爱因斯坦直到四岁的时候才会说话，他们爸妈都很着急，生怕自己生了一个白痴出来。可能这个事里有那么点夸张的成分，可能爱因斯坦两三岁的时候就会说话，但是不怎么爱跟别人说话，直到四岁才开口；也可能是爱因斯坦出名了以后，别人故意把这个故事改得让爱因斯坦显得更加“弱智”，这样对比他以后的天才就更显得励志。</p>
+<p>但是不管怎么说，无风不起浪，不管最终的事实到底是不是有这么夸张到四岁，爱因斯坦开口说话比同龄人晚这是可以肯定的。用比较科学一点的话说就是：爱因斯坦的语言能力发展的比较迟缓一些，那这是为什么饿？是偶热还是有什么原因呢？</p>
+<p>第二件事：爱因斯坦后来很多次跟别人说过他“独特”的思考方式：他说他在考虑问题的时候都是用图像思考的。用图像思考，这是什么意思呢？爱因斯坦做了一些解释，比如在思考一个物理过程或者一个物理场景的时候，他都是先用图像的方式在自己的大脑里思考，那些原子电子磁场电场在他脑袋里都是非常生动的原点曲线，他在大脑里用这些图像思考，思考出结果出来之后再“努力的”把这些思考的过程用数学语言描述出来。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-da7299f9a05a20ff89fd16aa9d42f684_720w.webp" alt="img"></p>
+<p>在爱因斯坦的眼里，用图像思考的过程是简单美好的，是他非常擅长的，而后者用数学语言来描述这些图像的过程则相对吃力一些。前者其实是他超强物理直觉的一种表现，而后者则表明他对数学的运用并没有像物理那样得心应手。</p>
+<p>对爱因斯坦这种思考问题的方式大家又有什么看法呢？大家在思考物理问题的时候又是什么样的情况呢？这又意味着什么？</p>
+<p>第三件事：这又是一个广为流传的说法：爱因斯坦是一个左撇子。虽然有时候爱因斯坦在大众面前露面时是用右手写字，但是他本质上依然是一个左撇子，是一个可以用右手写字的左撇子。左撇子的意思是内心更加习惯于用左手，不是说他就不能用右手写字了，就像我们一般的右撇子，依然可以用左手干很多事情一样。</p>
+<p>那么左撇子和右撇子到底又有什么不同呢？他们仅仅只是左右不同而已，但是有什么其他的不同？</p>
+<h3 id="秘密"><a href="#秘密" class="headerlink" title="秘密"></a>秘密</h3><p>所以，就是这么三件事：四岁才会说话、用图像思考、左撇子。这些看起来很随意的事情后面到底有没有隐藏着什么共同的秘密？（你们心里在想肯定是有什么啊，要是没有的话你写这些东西来逗我们玩啊~）</p>
+<p>对，肯定是有的，不然我也不会挑这三件事跑来长篇大论。不过鉴于已经写了这么多了，解释就放到后面一篇再说吧。</p>
+<p>但是，我还是想强调一下我写这篇的主要原因：我想告诉大家有很多的恐惧畏惧都是来自于未知，来自于不了解，因为无法理解这些事，所以感觉害怕恐惧，而科学的精神正是探索这些未知。消灭了这些未知，也就消灭了心里的恐惧，这样会使人从内心深处变得更加自信，更加强大。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-1774805493287b210656ef0521b2542f_720w.webp" alt="img"></p>
+<p>近代的科学革命已经把人格化的上帝赶出了我们的物理世界，但是我们的脑海里依然会有“天才”“天赋异禀”这些“无法理解”的大脑层面的东西。如果能够通过爱因斯坦的例子让大家明白这些事情也都是可以理解，而不是由上天决定的，从而让人不再无谓的的羡慕那些“天才”，那就阿弥陀佛了~</p>
+<h3 id="左脑和右脑"><a href="#左脑和右脑" class="headerlink" title="左脑和右脑"></a>左脑和右脑</h3><p>我们的大脑分为左脑和右脑，这种区分的方式我相信大家多多少少都听过，印象里生物书里也极为简略的介绍过。左脑和右脑的并不是简单的给我们的大脑区分一下左右而已，他们在功能上有非常大的不同。</p>
+<p>简单的说：左脑是负责语言、分析、逻辑之类比较理性的事情，我们一般把左脑称为逻辑脑，左脑发达的人具有很强的逻辑分析能力；右脑负责图像、直觉、想象力、创造力这些比较感性的事情，我们一般把右脑称为图像脑，右脑发达的人具有很强的创造力和艺术特质。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-941b766b81bd65a6b0d171cf633027c2_720w.webp" alt="img"></p>
+<p>我们都知道大脑是我们身体的中心控制器，但是奇怪的是：我们的大脑是交叉控制我们的身体的，也就是说，右脑控制我们身体的左边，左脑控制我们身体的右边。</p>
+<p>也因为如此，在同等情况下，左撇子的右脑会比右撇子稍微发达一些，因为他们在使用左手的时候就是对他右脑的一种刺激。而大脑这种东西是很典型的用进废退的，你越用越灵活，不用就慢慢衰退。</p>
+<h3 id="右脑特质的爱因斯坦"><a href="#右脑特质的爱因斯坦" class="headerlink" title="右脑特质的爱因斯坦"></a>右脑特质的爱因斯坦</h3><p>从上面简单的描述中我们就可以对上面提出的问题做一个简单的回答了。</p>
+<p>为什么爱因斯坦说话比较迟呢？从上面的解释我们可以清楚的看到，说话（也就是语言能力）是很典型的左脑行为。爱因斯坦说话很晚就表明他的左脑发育得相对比较迟缓一些，而这极有可能就是被他自己的右脑给压制住了。也就是说他小时候优先照顾右脑去了，所以他的左脑就显得有点营养不良，然后他的语言能力就跟着受了影响。</p>
+<p>于是，这也能非常好的解释第二个问题：为什么爱因斯坦是用图像思考物理问题了。右脑就是典型的图像脑，爱因斯坦右脑发达，所以他用图像思考问题就再正常不过了。而一般来说，我们潜意识里都会选择自己更加熟悉的思考方式，比如我们习惯于用左脑思考，然后每次思考又都在不停的刺激左脑，左脑变得更加发达，从而更加依赖左脑思考，然后这就进入了一个左脑循环。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-cbb6789012ad44a07bd3a4ce08f5c556_720w.webp" alt="img"></p>
+<p>第三件事就更加容易理解了，人体的左边是由右脑控制的，因此左撇子的右脑原本就被刺激得更多。但是，究竟是一开始爱因斯坦就右脑发达导致他习惯于用左手，还是因为他喜欢用左手刺激了他的右脑，这个因果关系到底是谁先谁后我们不得而知，但是这两者肯定在不停的相互强化是可以肯定的。</p>
+<p>因此，从上面的分析中我们可以得出一个很重要但是没多少人注意到的事实：爱因斯坦的右脑非常的发达，他的思考方法和思维方式也都深深的打上了右脑的印记。这一点，对于解释为什么他有如此强的创造力和物理直觉（爱因斯坦有种令人惊骇的直觉：他能从别人提的公式里一眼看出这后面的物理意义，也因此爱因斯坦经常可以后发制人。比如普朗克和洛伦兹分别提出了量子的概念和洛伦兹变换，但是这两个人都只是把这东西当做数学手段，不认为他们有什么物理意义，但是爱因斯坦却能够从里面发现他们真正的物理意义）非常的重要。</p>
+<h3 id="右脑的衰落"><a href="#右脑的衰落" class="headerlink" title="右脑的衰落"></a>右脑的衰落</h3><p>在远古时代，人类的右脑是强于左脑的，那个时代还没有系统的语言和文字，人类也基本上谈不上什么思辨能力，那是一个非常感性的时代。可以想象，在远古时代，因为没有文字记录，所以很多重要的东西都只能口口相传，凭着记忆力把他们传承下来。这一切，对右脑都是非常利好的。即便到了现在，这一习惯在很多非洲国家的一些古老部落里都还有保存下来。</p>
+<p>后来慢慢的出现了文字，出现了语言，人们可以把思想以文字的形式保存下来，于是人们对记忆力的依赖就没有那么高了。公元前6世纪到公元前4世纪是一个特殊的阶段，这一时期东西方分别出现了老子、孔子、苏格拉德、柏拉图这样大思想家，理性的光辉开始降临人间，人们开始学会了思辨，左脑擅长的逻辑分析开始大放异彩。</p>
+<p>到了近代就更不用说了，从笛卡尔的“我思故我在”开始，西方近代科学的发展史，几乎就是一部理性和神的斗争史。最终人类的理性把虚无的上帝从物理世界里驱逐了出去，而在这个过程中，分析和逻辑推理起了非常关键的作用（想想欧几里得是怎么仅仅通过分析和推理从几个显而易见的公理推导出整个几何学大厦的），这是左脑的巅峰时刻。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-e53a9899f32f7f8f3f927090993d305a_720w.webp" alt="img"></p>
+<p>左脑强大的逻辑分析能力把人类带入了理性时代，它使得人类可以远离最初的混沌状态。但与此同时，人类在一步步依赖左脑，依赖语言和逻辑分析的时候，右脑就不可避免的相对“受冷落”了。根据用进废退的大脑规则，人们对右脑的使用一代不如如一代，所以右脑的那些能力就逐渐慢慢被雪藏起来了。而一旦有些人有意无意之中把右脑的这些能力又开发出来之后，世人便惊呼这些人是天才。</p>
+<h3 id="何为天才？"><a href="#何为天才？" class="headerlink" title="何为天才？"></a>何为天才？</h3><p>天才在不同的时代肯定是有他不同的定义方式的。我们现在以为天才的定义方式是绝对的，比如能过不不忘，一目十行的人是天才，但是这应该是一个相对的过程。</p>
+<p>比如我们现在觉得过目不忘、一目十行的能力非常惊人，那是因为我们现在已经习惯于用左脑思维了，右脑处于被压制的状态。左脑觉得记忆这些材料，高速处理信息是非常困难的事情，但是右脑却非常善于处理这些事情。在那些远古时代，在那些人类还是右脑主导的时代，这种过目不忘的本领是很稀松平常的，那么在那种时代，他们对天才的定义肯定就是那些有非常强大的逻辑分析能力的人。</p>
+<p>天才天才，关键还是在这个天字上面，为什么我们要把这种才能归结于天呢？还不是以为我们自己无法理解，他们的那种“天才”的能力对我们来说是未知的，无法理解的。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-4941185f733bedcc3eb526c583be062b_720w.webp" alt="img"></p>
+<p>如果我们现在知道过目不忘只是右脑很常见的一种功能，而我们在成长的过程中又有意识的在锻炼左脑的时候也锻炼自己右脑的这部分能力，大家都能过目不忘了，你还会觉得这种人是天才么？</p>
+<p>如果你现在知道了我们现在所定义的这些天才只不过是有意无意中发掘了自己的右脑的才能而已，你还会对这些“天才”羡慕嫉妒恨么（当然，科学界的那些创造性天才都是左脑右脑都很厉害的人，如果只有右脑厉害左脑的逻辑分析能力不行，那只能当艺术家当不了科学家了~）？天才的秘密如果突然被揭开了，会不会突然对自己更加有信心了？</p>
+<p>没错，我就是来给你打气的，只不过我使用的是理性的方式：如果天才是可以理解、可以操作的，那么他们能够做的事情，你又为什么不可以呢？</p>
+<h2 id="雅各布和塔尔梅，爱因斯坦的科学启蒙运动"><a href="#雅各布和塔尔梅，爱因斯坦的科学启蒙运动" class="headerlink" title="雅各布和塔尔梅，爱因斯坦的科学启蒙运动"></a>雅各布和塔尔梅，爱因斯坦的科学启蒙运动</h2><p>在爱因斯坦的学生生涯中，他和他老师们的关系似乎都不太好。5岁的时候，爱因斯坦就曾经拿起椅子追着一位家庭女教师打，吓得这个女教师再也不敢露面；爱因斯坦的中小学在德国慕尼黑上的，鉴于爱因斯坦对当时德国机械化军事化的教育方式态度，以及后来不惜试图找医生给他开一个神经极度疲劳的证明来让他离校的做法来看，他跟老师们的关系也好不到哪去；大学的时候，曾经一度非常欣赏爱因斯坦才华的韦伯后来十分讨厌他，数学教授闵可夫斯基（就是后来把狭义相对论几何化的那位）直接骂爱因斯坦是“懒狗”。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-98296cef781930958606d204f78ea5f0_720w.webp" alt="img"></p>
+<p>爱因斯坦个性非常鲜明，非常有自己的主见，极度反感一切教条式机械化的东西，所以作为一个老师想跟爱因斯坦搞好关系是非常困难的。因为你如果只是机械的把课本上的知识拿来给爱因斯坦灌输，比如只是让他记住什么却不能告诉他为什么，这将招致爱因斯坦极大的反感。加上爱因斯坦掌握的数学物理知识远超当时学校要求掌握的水平，但是对法语之类的又非常不感兴趣，所以要跟这样天才而又偏执的人搞好师生关系确实非常困难。</p>
+<p>但是，即便是如此难对付的爱因斯坦，他的科学启蒙之路上却有两个非常重要的人。</p>
+<h3 id="五叔雅各布"><a href="#五叔雅各布" class="headerlink" title="五叔雅各布"></a>五叔雅各布</h3><p>爱因斯坦父亲有兄弟姐妹共5人，雅各布是其中最小的，也就是爱因斯坦的五叔。雅各布是一个受过高等教育的工程师，他在慕尼黑开了一家电气公司。电气公司里的主要科学原理和设备都是电磁相关的，因此爱因斯坦可以非常早的接触这些相关的物理知识，并且能有比较直观的看法。</p>
+<p>雅各布更加重要的是让爱因斯坦体会到了数学的乐趣。</p>
+<p>就我自己而言，我小时候虽然不讨厌数学（相比语文肯定就可以称为喜欢了），但是也绝对称不上喜欢。虽然小时候喜欢贪玩脑袋比较灵活，觉得数学里的算数、方程、几何都比较简单，但是你如果要我放弃打游戏和出去玩的时间跑去自己学数学，那是绝对不可能的。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-0b1dc087c20c9f7abc7b2572941b9e09_720w.webp" alt="img"></p>
+<p>我直到大学才发现数学到底是什么，才知道我自己小学初中高中的数学都学了写啥，才开始被数学之美震撼。而爱因斯坦十来岁的时候就可以体会到这种感觉，可见有一个好叔叔多么的重要~</p>
+<p>雅各布告诉爱因斯坦：“数学是一门给人带来快乐的学科。我们解数学题就像是猎人去打猎，当我们找不到猎物的时候就假设猎物为X，然后继续去追赶，直到将猎物俘获。”</p>
+<p>代数里最为重要的方程思想就这样被雅各布描述出来了，而爱因斯坦显然也领会到了其中的奥义，因为他可以为了数学（没有任何人强迫他的前提下）放弃游戏和玩伴，一个人乐此不疲的求解数学难题。</p>
+<p>雅各布在教爱因斯坦几何的时候，就已经让爱因斯坦懂得了优雅的定理可以从简单的公理推导出来。爱因斯坦后来跟一位记者说：“他12岁的时候就已经发现仅仅通过推理，不需要借助任何外在经验的帮助就可以找到真理，这使我激动不已。我越来越确信，大自然可以作为一种相对简单的数学结构而得到理解。”</p>
+<p>听到爱因斯坦说这些，我内心是充满了羡慕嫉妒，他才12岁啊，12岁的时候就有机会明白这样的道理这是多么的幸运。我在想，如果我们的学生12岁的时候就能明白这样的事情，那么那么年纪的他们会不会跟那时候的爱因斯坦一样，疯狂的爱上数学呢？</p>
+<p>只可惜，我们少了一些像雅各布这样的小学数学老师。</p>
+<p>跟许多人的看法相反，我认为我们应该给小学配最好的老师。因为只有真的好老师，真的懂数学的老师，才能激发起孩提时代对数学的兴趣，而这种兴趣一旦被调动起来了，它的价值是无限的。如果学生在小学的时候能够像爱因斯坦那样体会到数学的乐趣，后面你根本不用去督着教他，他自己就会学，而小学时代是一个一切皆有可能的时代。</p>
+<p>虽然叔叔雅各布对爱因斯坦的科学启蒙起了很大的作用，但是对少年时代爱因斯坦影响最大的确是一位学医的贫苦学生——塔尔梅。</p>
+<h3 id="启蒙导师塔尔梅"><a href="#启蒙导师塔尔梅" class="headerlink" title="启蒙导师塔尔梅"></a>启蒙导师塔尔梅</h3><p>爱因斯坦之所以会认识这么一位比他大11岁的学医的学生，是一个古老的犹太习俗：邀请一位笃行宗教的贫苦学生在安息日（犹太历每周的第七日）一同进餐。这个塔尔梅在21岁的时候受邀每周去爱因斯坦家吃饭，此时爱因斯坦才10岁。</p>
+<p>塔尔梅给爱因斯坦带去了一些科学书籍，其中对爱因斯坦影响非常大的是亚伦·伯恩斯坦写的一本《自然科学大众丛书》。这本书我用百度没搜到它的任何信息，在万能的某宝里也没有找到他的任何信息，后来用德文在亚马逊的官网上找到了这本书。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-51279fd69e3976a00d976b211422bf38_720w.webp" alt="img"></p>
+<p>这本书让我奇怪的地方在于：这到底是一本科学专著还是一本科学书籍？如果是一本科学专著，那么小的爱因斯坦能兴致勃勃的把一本科学专著啃完？如果只是一本普通的科普书籍，而且从他书名里的大众丛书来看，也确实应该是是这样，但是里面写的一些东西包含了非常前沿的科学思想，也包含了许多自己的对待前沿科学问题的看法，这怎么看都不像是普通（或者是我平常感觉的）科普书。</p>
+<p>难道是我们对科普书有什么误解？还是我们自己写的科普书太不亚伦·伯恩斯了？</p>
+<p><img src="https://pic2.zhimg.com/80/v2-63ca2e3dfee2c0f0da358477e9abf765_720w.webp" alt="img"></p>
+<p>亚伦·伯恩斯在这本书里详细介绍了当时正在进行的一些实验，其中包括了许多测光速的实验，然后他居然宣称：“既然事实证明，每一种光的速度都是精确相等的，那么可以说，光速定律是一切自然律中最普遍的定律。”</p>
+<p>对狭义相对论稍微有点理解的都应该能看出这句话包含的重大意义，我不知道后来爱因斯坦把光速不变作为相对论的两大基本公理之一提出来受了他多大的影响，这在那个时候绝对也是非常前沿天才的洞见，但是这样的话居然是写在大众科普丛书里。</p>
+<p>亚伦·伯恩斯跟后来的爱因斯坦一样，同样渴望将所有的力都统一在一起，他写道：我们的知觉所运用的一切概念背后都潜藏着一种统一性和简单性，科学真理在于发现理论来描述这种背后的实在。</p>
+<p>这跟爱因斯坦的科学思想相当一致的，这种所谓背后的实在，就是后来爱因斯坦一直挂在嘴边的上帝。</p>
+<p>多年以后，爱因斯坦成为科学巨星访问纽约的时候碰到了塔尔梅，塔尔梅问他对伯恩斯坦这套书的评价。爱因斯坦说：“这是一套非常好的书，它对我的整个发展产生了很大的影响。”</p>
+<p>可惜这套书现在好像只有德文版，不然真想好好看看伯恩斯坦是怎么写这种大众科普书的。能够写出影响像爱因斯坦这样的科学巨匠的书籍，想必也是所有科普作家的梦想。</p>
+<p>塔尔梅也给爱因斯坦带去了一些教科书，每周四塔尔梅来的时候，爱因斯坦就高兴的给他看他自己这周解决的数学问题。一开始塔尔梅还能帮助他，但是很快他就被这个学生超过了，然后爱因斯坦就自己跑去学更加艰深的数学，他12岁的时候就已经在开始自学微积分。</p>
+<p>这里我们第一要注意到塔尔梅比爱因斯坦大11岁，放在现在这就是一个大学生去教一个小学五六年级的小学生数学，但是大学生的数学很快被小学生超越了。第二要注意，这个塔尔梅是学医的，并不是理工科大学生，因此他们对数学的要求并不是很高。</p>
+<p>总之，就是这样的事情，让大学生塔尔梅在数学上已经没有什么可以教爱因斯坦的了，于是他接下来做了一件对爱因斯坦影响非常大的事情：他开始向爱因斯坦介绍哲学，开始向爱因斯坦推荐康德的哲学。</p>
+<p>13岁的爱因斯坦似乎能理解那些即便对哲学系的大学生来说都非常晦涩艰深的康德哲学，康德的《纯粹理性批判》也促使爱因斯坦开始研读休谟、马赫的著作。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-d0df4e357ac79432c1983a8db4fce151_720w.webp" alt="img"></p>
+<p>许多人忽略了哲学对爱因斯坦的影响，但是我一直觉得这个事情非常非常的重要，正是因为对这些哲学知识的深入理解，让爱因斯坦明显区别于一般的科学家。爱因斯坦一直是站在哲学的高度看待科学的问题，他是站在上帝视角开挂跟其他的物理学家竞争。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/"># 自然科学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/761bb722/">【相对论正传】狭义与广义相对论的发现之旅</a>
+            
+            
+            <a class="next" rel="next" href="/677cc24e/">30部艺术家电影+20部艺术纪录片 【整理收藏】</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/761bb722/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/677cc24e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>异步（三、generator） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">异步（三、generator）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2021&nbsp;&nbsp;16:14:52</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、generator简介"><a href="#一、generator简介" class="headerlink" title="一、generator简介"></a>一、generator简介</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function* Hello() &#123; // 定义generator时，需要使用function*</span><br><span class="line">    yield 100</span><br><span class="line">    yield (function () &#123;return 200&#125;)()</span><br><span class="line">    return 300</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var h = Hello() // 执行Hello()之后，Hello()内部的代码不会立即执行，而是处于一个暂停状态</span><br><span class="line">console.log(typeof h)  // 返回object。 执行var h = Hello()生成一个Generator对象，经验证typeof h发现generator并不是函数，后面会发现它是一个iterator</span><br><span class="line"></span><br><span class="line">// 执行第一个h.next()时，会激活刚才的暂停状态，开始执行Hello内部的语句，但是，直到遇到yield语句。一旦遇到yield语句时，它就会将yield后面的表达式执行，并返回执行的结果，然后又立即进入暂停状态。</span><br><span class="line">// 返回值中的 done: false 表示目前处于暂停状态，尚未执行结束，还可以再继续往下执行。</span><br><span class="line">console.log(h.next())  // &#123; value: 100, done: false &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: 200, done: false &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: 300, done: true &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、generator如何处理异步操作"><a href="#二、generator如何处理异步操作" class="headerlink" title="二、generator如何处理异步操作"></a>二、generator如何处理异步操作</h1><h2 id="1-通过Promise读取多个文件的方式："><a href="#1-通过Promise读取多个文件的方式：" class="headerlink" title="1. 通过Promise读取多个文件的方式："></a>1. 通过Promise读取多个文件的方式：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">readFilePromise(&#x27;some1.json&#x27;).then(data =&gt; &#123;</span><br><span class="line">    console.log(data)  // 打印第 1 个文件内容</span><br><span class="line">    return readFilePromise(&#x27;some2.json&#x27;)</span><br><span class="line">&#125;).then(data =&gt; &#123;</span><br><span class="line">    console.log(data)  // 打印第 2 个文件内容</span><br><span class="line">    return readFilePromise(&#x27;some3.json&#x27;)</span><br><span class="line">&#125;).then(data =&gt; &#123;</span><br><span class="line">    console.log(data)  // 打印第 3 个文件内容</span><br><span class="line">    return readFilePromise(&#x27;some4.json&#x27;)</span><br><span class="line">&#125;).then(data=&gt; &#123;</span><br><span class="line">    console.log(data)  // 打印第 4 个文件内容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-通过generator实现："><a href="#2-通过generator实现：" class="headerlink" title="2. 通过generator实现："></a>2. 通过generator实现：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">co(function* () &#123;</span><br><span class="line">    const r1 = yield readFilePromise(&#x27;some1.json&#x27;)</span><br><span class="line">    console.log(r1)  // 打印第 1 个文件内容</span><br><span class="line">    const r2 = yield readFilePromise(&#x27;some2.json&#x27;)</span><br><span class="line">    console.log(r2)  // 打印第 2 个文件内容</span><br><span class="line">    const r3 = yield readFilePromise(&#x27;some3.json&#x27;)</span><br><span class="line">    console.log(r3)  // 打印第 3 个文件内容</span><br><span class="line">    const r4 = yield readFilePromise(&#x27;some4.json&#x27;)</span><br><span class="line">    console.log(r4)  // 打印第 4 个文件内容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、探究generator是什么？"><a href="#三、探究generator是什么？" class="headerlink" title="三、探究generator是什么？"></a>三、探究generator是什么？</h1><h2 id="1-Iterator遍历器是ES6引入的，它是一个指针对象，-实现类似于单项链表的数据结构，通过next-将指针指向下一个节点。"><a href="#1-Iterator遍历器是ES6引入的，它是一个指针对象，-实现类似于单项链表的数据结构，通过next-将指针指向下一个节点。" class="headerlink" title="1. Iterator遍历器是ES6引入的，它是一个指针对象， 实现类似于单项链表的数据结构，通过next()将指针指向下一个节点。"></a>1. Iterator遍历器是ES6引入的，它是一个指针对象， 实现类似于单项链表的数据结构，通过next()将指针指向下一个节点。</h2><p>在 ES6 中，原生具有[Symbol.iterator]属性数据类型有：数组、某些类似数组的对象（如arguments、NodeList）、Set和Map。</p>
+<h2 id="2-Symbol-iterator是个函数"><a href="#2-Symbol-iterator是个函数" class="headerlink" title="2. Symbol.iterator是个函数"></a>2. Symbol.iterator是个函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype[Symbol.iterator] // 返回的是一个function， 和 slice等数组方法一样。</span><br><span class="line">console.log(Array.prototype.slice)  // [Function: slice]</span><br><span class="line">console.log(Array.prototype[Symbol.iterator])  // [Function: values]</span><br><span class="line"></span><br><span class="line">// 比如：</span><br><span class="line">console.log([1, 2, 3][Symbol.iterator])  // function values() &#123; [native code] &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-具有-Symbol-iterator-属性的对象，都可以一键生成一个Iterator对象。"><a href="#3-具有-Symbol-iterator-属性的对象，都可以一键生成一个Iterator对象。" class="headerlink" title="3. 具有[Symbol.iterator]属性的对象，都可以一键生成一个Iterator对象。"></a>3. 具有[Symbol.iterator]属性的对象，都可以一键生成一个Iterator对象。</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const arr = [100, 200, 300]</span><br><span class="line">const iterator = arr[Symbol.iterator]()  // 通过执行 [Symbol.iterator] 的属性值（函数）来返回一个 iterator 对象</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-遍历Iterator对象有两种方式：next-和-for…of"><a href="#4-遍历Iterator对象有两种方式：next-和-for…of" class="headerlink" title="4. 遍历Iterator对象有两种方式：next 和 for…of"></a>4. 遍历Iterator对象有两种方式：next 和 for…of</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(iterator.next())  // &#123; value: 100, done: false &#125;</span><br><span class="line">console.log(iterator.next())  // &#123; value: 200, done: false &#125;</span><br><span class="line">console.log(iterator.next())  // &#123; value: 300, done: false &#125;</span><br><span class="line">console.log(iterator.next())  // &#123; value: undefined, done: true &#125;</span><br><span class="line"></span><br><span class="line">let i</span><br><span class="line">for (i of iterator) &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">&#125;</span><br><span class="line">// 打印：100 200 300</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Generator返回的也是Iterator对象"><a href="#5-Generator返回的也是Iterator对象" class="headerlink" title="5. Generator返回的也是Iterator对象"></a>5. Generator返回的也是Iterator对象</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 所以：</span><br><span class="line">function* Hello() &#123;</span><br><span class="line">    yield 100</span><br><span class="line">    yield (function () &#123;return 200&#125;)()</span><br><span class="line">    return 300</span><br><span class="line">&#125;</span><br><span class="line">const h = Hello()</span><br><span class="line">console.log(h[Symbol.iterator])  // [Function: [Symbol.iterator]]</span><br><span class="line"></span><br><span class="line">console.log(h.next())  // &#123; value: 100, done: false &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: 200, done: false &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: 300, done: false &#125;</span><br><span class="line">console.log(h.next())  // &#123; value: undefined, done: true &#125;</span><br><span class="line"></span><br><span class="line">let i</span><br><span class="line">for (i of h) &#123;</span><br><span class="line">    console.log(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、Generator的基本用法"><a href="#四、Generator的基本用法" class="headerlink" title="四、Generator的基本用法"></a>四、Generator的基本用法</h1><h2 id="1-next向yield传值"><a href="#1-next向yield传值" class="headerlink" title="1. next向yield传值"></a>1. next向yield传值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function* G() &#123;</span><br><span class="line">    const a = yield 100</span><br><span class="line">    console.log(&#x27;a&#x27;, a)  // a aaa</span><br><span class="line">    const b = yield 200</span><br><span class="line">    console.log(&#x27;b&#x27;, b)  // b bbb</span><br><span class="line">    const c = yield 300</span><br><span class="line">    console.log(&#x27;c&#x27;, c)  // c ccc</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 要想看懂需谨记：next遇到yield函数暂停然后return，下一次next时再接着上一次yield之后继续执行</span><br><span class="line">const g = G()</span><br><span class="line">g.next()    // value: 100, done: false</span><br><span class="line">g.next(&#x27;aaa&#x27;) // value: 200, done: false</span><br><span class="line">g.next(&#x27;bbb&#x27;) // value: 300, done: false</span><br><span class="line">g.next(&#x27;ccc&#x27;) // value: undefined, done: true</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-yield-语句"><a href="#2-yield-语句" class="headerlink" title="2. yield* 语句"></a>2. yield* 语句</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 问题：想要输出a x y b，怎么做？</span><br><span class="line">function* G1() &#123;</span><br><span class="line">    yield &#x27;a&#x27;</span><br><span class="line">    yield &#x27;b&#x27;</span><br><span class="line">&#125;</span><br><span class="line">function* G2() &#123;</span><br><span class="line">    yield &#x27;x&#x27;</span><br><span class="line">    yield &#x27;y&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 解决</span><br><span class="line">function* G1() &#123;</span><br><span class="line">    yield &#x27;a&#x27;</span><br><span class="line">    yield* G2()  // 使用 yield* 执行 G2()</span><br><span class="line">    yield &#x27;b&#x27;</span><br><span class="line">&#125;</span><br><span class="line">function* G2() &#123;</span><br><span class="line">    yield &#x27;x&#x27;</span><br><span class="line">    yield &#x27;y&#x27;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 此处使用 for...of 而不是 next</span><br><span class="line">for (let item of G1()) &#123;</span><br><span class="line">    console.log(item)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>yield后面接一个普通的 JS 对象，而yield* 后面会接一个Generator。</p>
+<h1 id="五、generator异步实例"><a href="#五、generator异步实例" class="headerlink" title="五、generator异步实例"></a>五、generator异步实例</h1><h2 id="1-封装Thunk-函数（其实就是函数柯里化）"><a href="#1-封装Thunk-函数（其实就是函数柯里化）" class="headerlink" title="1. 封装Thunk 函数（其实就是函数柯里化）"></a>1. 封装Thunk 函数（其实就是函数柯里化）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 读取文件的函数</span><br><span class="line">fs.readFile(&#x27;data1.json&#x27;, &#x27;utf-8&#x27;, (err, data) =&gt; &#123;</span><br><span class="line">    // 获取文件内容</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 将其封装成一个Thunk函数</span><br><span class="line">const thunk = function (fileName, codeType) &#123;</span><br><span class="line">    // 返回一个只接受 callback 参数的函数称为Thun函数</span><br><span class="line">    return function (callback) &#123;</span><br><span class="line">        fs.readFile(fileName, codeType, callback)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">const readFileThunk = thunk(&#x27;data1.json&#x27;, &#x27;utf-8&#x27;)</span><br><span class="line">readFileThunk((err, data) =&gt; &#123;</span><br><span class="line">    // 获取文件内容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>我们经过对传统的异步操作函数进行封装，得到一个只有一个参数的函数，而且这个参数是一个callback函数，那这就是一个thunk函数。当然，可以使用第三方库生成thunk函数：thunkify</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// npm i thunkify --save</span><br><span class="line">const thunk = thunkify(fs.readFile)</span><br><span class="line">const readFileThunk = thunk(&#x27;data1.json&#x27;, &#x27;utf-8&#x27;)</span><br><span class="line">readFileThunk((err, data) =&gt; &#123;</span><br><span class="line">    // 获取文件内容</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-generator异步"><a href="#2-generator异步" class="headerlink" title="2. generator异步"></a>2. generator异步</h2><p>（1）在generator中使用thunk函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const readFileThunk = thunkify(fs.readFile)</span><br><span class="line">const gen = function* () &#123;</span><br><span class="line">    const r1 = yield readFileThunk(&#x27;data1.json&#x27;)</span><br><span class="line">    console.log(r1)</span><br><span class="line">    const r2 = yield readFileThunk(&#x27;data2.json&#x27;)</span><br><span class="line">    console.log(r2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）挨个读取两个文件的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const g = gen()</span><br><span class="line"></span><br><span class="line">// 试着打印 g.next() 这里一定要明白 value 是一个 thunk函数 ，否则下面的代码你都看不懂</span><br><span class="line">// console.log( g.next() )  // g.next() 返回 &#123;&#123; value: thunk函数, done: false &#125;&#125;</span><br><span class="line"></span><br><span class="line">// 下一行中，g.next().value 是一个 thunk 函数，它需要一个 callback 函数作为参数传递进去</span><br><span class="line">g.next().value((err, data1) =&gt; &#123;</span><br><span class="line">    // 这里的 data1 获取的就是第一个文件的内容。下一行中，g.next(data1) 可以将数据传递给上面的 r1 变量，此前已经讲过这种参数传递的形式</span><br><span class="line">    // 下一行中，g.next(data1).value 又是一个 thunk 函数，它又需要一个 callback 函数作为参数传递进去</span><br><span class="line">    g.next(data1).value((err, data2) =&gt; &#123;</span><br><span class="line">        // 这里的 data2 获取的是第二个文件的内容，通过 g.next(data2) 将数据传递个上面的 r2 变量</span><br><span class="line">        g.next(data2)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>（3）优化2，实现自驱动流程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 自动流程管理的函数</span><br><span class="line">function run(generator) &#123;</span><br><span class="line">    const g = generator()</span><br><span class="line">    function next(err, data) &#123;</span><br><span class="line">        const result = g.next(data)  // 返回 &#123; value: thunk函数, done: ... &#125;</span><br><span class="line">        if (result.done) &#123;</span><br><span class="line">            // result.done 表示是否结束，如果结束了那就 return 作罢</span><br><span class="line">            return</span><br><span class="line">        &#125;</span><br><span class="line">        result.value(next)  // result.value 是一个 thunk 函数，需要一个 callback 函数作为参数，而 next 就是一个 callback 形式的函数</span><br><span class="line">    &#125;</span><br><span class="line">    next() // 手动执行以启动第一次 next</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 定义 Generator</span><br><span class="line">const readFileThunk = thunkify(fs.readFile)</span><br><span class="line">const gen = function* () &#123;</span><br><span class="line">    const r1 = yield readFileThunk(&#x27;data1.json&#x27;)</span><br><span class="line">    console.log(r1.toString())</span><br><span class="line">    const r2 = yield readFileThunk(&#x27;data2.json&#x27;)</span><br><span class="line">    console.log(r2.toString())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 启动执行</span><br><span class="line">run(gen)</span><br></pre></td></tr></table></figure>
+
+<p>（4）使用co库实现自助流程管理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 定义 Generator</span><br><span class="line">const readFileThunk = thunkify(fs.readFile)</span><br><span class="line">const gen = function* () &#123;</span><br><span class="line">    const r1 = yield readFileThunk(&#x27;data1.json&#x27;)</span><br><span class="line">    console.log(r1.toString())</span><br><span class="line">    const r2 = yield readFileThunk(&#x27;data2.json&#x27;)</span><br><span class="line">    console.log(r2.toString())</span><br><span class="line">&#125;</span><br><span class="line">const c = co(gen)</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、generator的应用：Koa"><a href="#六、generator的应用：Koa" class="headerlink" title="六、generator的应用：Koa"></a>六、generator的应用：Koa</h1><p>1、koa 是一个 nodejs 开发的 web 框架，所谓 web 框架就是处理 http 请求的。开源的 nodejs 开发的 web 框架最初是 express。</p>
+<p>我们此前说过，既然是处理 http 请求，是一种网络操作，肯定就会用到异步操作。express 使用的异步操作是传统的callback，而 koa 用的是我们刚刚讲的Generator（koa v1.x用的是Generator，已经被广泛使用，而 koa v2.x用到了 ES7 中的async-await）</p>
+<p>koa 是由 express 的原班开发人员开发的，比 express 更加简洁易用，因此 koa 是目前最为推荐的 nodejs web 框架。阿里前不久就依赖于 koa 开发了自己的 nodejs web 框架 egg。</p>
+<p>2、koa 中如何应用Generator</p>
+<p>3、<a target="_blank" rel="noopener" href="https://github.com/wangfupeng1988/js-async-tutorial/blob/master/part4-generator/06-generator-for-koa.md">koa 的这种应用机制是如何实现的</a></p>
+<h1 id="七、生成器的原理"><a href="#七、生成器的原理" class="headerlink" title="七、生成器的原理"></a>七、生成器的原理</h1><p>其实，在生成器generator内部，如果遇到 yield 关键字，那么 V8 引擎将返回关键字后面的内容给外部，并暂停该生成器函数的执行。生成器暂停执行后，外部的代码便开始执行，外部代码如果想要恢复生成器的执行，可以使用 result.next 方法。</p>
+<p>那 V8 是怎么实现生成器函数的暂停执行和恢复执行的呢？</p>
+<p>它用到的就是协程，协程是—种比线程更加轻量级的存在。我们可以把协程看成是跑在线程上的任务，一个线程上可以存在多个协程，但是在线程上同时只能执行一个协程。比如，当前执行的是 A 协程，要启动 B 协程，那么 A 协程就需要将主线程的控制权交给 B 协程，这就体现在 A 协程暂停执行，B 协程恢复执行; 同样，也可以从 B 协程中启动 A 协程。通常，如果从 A 协程启动 B 协程，我们就把 A 协程称为 B 协程的父协程。</p>
+<p>正如一个进程可以拥有多个线程一样，一个线程也可以拥有多个协程。每一时刻，该线程只能执行其中某一个协程。最重要的是，协程不是被操作系统内核所管理，而完全是由程序所控制（也就是在用户态执行）。这样带来的好处就是性能得到了很大的提升，不会像线程切换那样消耗资源。</p>
+<h1 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h1><p>1、定义generator时，需要使用function*。generator返回的不是函数而是一个iterator。</p>
+<p>2、iterator有两种遍历方式：next和for…of。next遇到yield函数暂停然后return。</p>
+<p>3、V8引擎实现yield机制：它用到的就是协程（协程是—种比线程更加轻量级的存在），比如，当前执行的是 A 协程，要启动 B 协程，那么 A 协程就需要将主线程的控制权交给 B 协程，这就体现在 A 协程暂停执行，B 协程恢复执行。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3fd85a53/">异步（四、Async/Await）</a>
+            
+            
+            <a class="next" rel="next" href="/d83b64c2/">异步（二、Promise）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3fd85a53/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d83b64c2/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

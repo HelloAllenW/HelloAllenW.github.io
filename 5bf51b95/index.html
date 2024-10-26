@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>如何在CSS中使用变量 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何在CSS中使用变量</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2023&nbsp;&nbsp;21:49:54</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>CSS变量即自定义属性，它包含的值可以在整个文档中重复使用。下面来看看CSS变量是如何定义和使用的。</p>
+<h1 id="一、CSS原生的-root-和-var-方式"><a href="#一、CSS原生的-root-和-var-方式" class="headerlink" title="一、CSS原生的 :root 和 var() 方式"></a>一、CSS原生的 :root 和 var() 方式</h1><p>首先，我们要声明一个自定义属性，属性名以两个减号（–）开始，属性值可以是任何有效的CSS值，并且这个属性和其他属性一样可以写在规则集之内：</p>
+<h2 id="1-CSS-全局变量"><a href="#1-CSS-全局变量" class="headerlink" title="1. CSS 全局变量"></a>1. CSS 全局变量</h2><p>通常，最佳实践是将CSS变量定义在根伪类:root下，这样就可以在HTML文档的任何地方访问到它了。在使用CSS变量时，使用 var() 函数包裹所需变量的变量名即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  --primary-color: #000;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1 &#123;</span><br><span class="line">  color: var(--primary-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了变量名之外，var() 还有第二个参数——备用值。在发现变量值不可访问的情况下，将使用备用值来代替它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: var(--main-bg-color, red);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-CSS-局部变量"><a href="#2-CSS-局部变量" class="headerlink" title="2. CSS 局部变量"></a>2. CSS 局部变量</h2><p>要在局部范围声明变量，只需要在选择器中定义变量即可，这样声明的变量只能在该选择器中使用，如果尝试在其他地方使用，它不会有任何效果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">h2 &#123;</span><br><span class="line">  --h2-color: #999;</span><br><span class="line">  color: var(--h2-color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h3 &#123;</span><br><span class="line">  color: var(--h2-color);  /* 不生效 */</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-优先级和继承"><a href="#3-优先级和继承" class="headerlink" title="3. 优先级和继承"></a>3. 优先级和继承</h2><p>现在我们知道了，如果在根目录中定义变量，它将是全局变量，如果在选择器中定义变量，它将是局部变量。那如果在两个地方都声明了同一变量，谁的优先级更高呢？</p>
+<p>（1）实际上，CSS变量和JavaScript变量类似，CSS 变量中的局部作用域优先于全局作用域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  --color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h2 &#123;</span><br><span class="line">  --color: orange;</span><br><span class="line">  color: var(--color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里<code>&lt;h2&gt;</code>标签的内容将是橙色的，因为局部变量的优先级比全局变量的优先级更高。</p>
+<p>（2）在CSS中是存在继承的概念的，对于CSS变量也是如此，如果没有为元素找到变量，它会从其父元素继承变量值。下面的<code>&lt;h2&gt;</code>标签的内容也将是橙色的，因为<code>&lt;h2&gt;</code>在其选择器中没有找到 –color 变量，所以就会在其父级逐级往上查找这个变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">:root &#123;</span><br><span class="line">  --color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">  --color: orange;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h2 &#123;</span><br><span class="line">  color: var(--color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-注意事项"><a href="#4-注意事项" class="headerlink" title="4. 注意事项"></a>4. 注意事项</h2><p>（1）CSS变量区分大小写</p>
+<p>在定义CSS变量时需要注意，CSS变量的变量名（即属性名）对大小写是敏感的，–my-color 和 –My-color 会被认为是两个不同的CSS变量。</p>
+<p>（2）避免循环依赖</p>
+<p>在定义CSS变量时不能出现循环依赖关系，这会导致页面无法加载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--variable_name_1 : var(variable_name_2, fallback);</span><br><span class="line">--variable_name_2 : var(variable_name_1, fallback);</span><br></pre></td></tr></table></figure>
+
+<p>（3）CSS 变量不能是属性名</p>
+<p>不能使用 CSS 中的现有属性作为 CSS 的变量名。例如，我们不能使用名称“font-size”来初始化变量。</p>
+<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><p>（1）我们甚至可以在媒体查询中重新设置变量，这些重新设置的值可以在任何地方使用，这是预处理器变量无法实现的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line">&lt;div&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">:root &#123;</span><br><span class="line">  --width: 25%;</span><br><span class="line">  --margin: 20px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media (max-width: 400px) &#123;</span><br><span class="line">  :root &#123;</span><br><span class="line">    --width: 50%;</span><br><span class="line">    --margin: 10px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">body &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  flex-wrap: wrap;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  flex: 1;</span><br><span class="line">  height: 220px;</span><br><span class="line">  flex-basis: calc(var(--width) - (var(--margin) * 3));</span><br><span class="line">  background: #ccc;</span><br><span class="line">  margin: var(--margin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）CSS 变量使重用和自定义 CSS 代码成为了可能，因为它们使封装成为可能。假如我们有一个按钮，它的 class 为 flat，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">button.flat &#123;</span><br><span class="line">    border: 1px solid black;</span><br><span class="line">    background: transparent;</span><br><span class="line">    color: black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button.flat:hover &#123;</span><br><span class="line">    background: black;</span><br><span class="line">    color: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>假如我们想要不同的按钮有不同的操作，比如红色的按钮用于危险操作，那么我们就可以使用 danger 类来覆盖对应的样式声明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">button.flat.danger &#123;</span><br><span class="line">    border-color: red;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button.flat.danger:hover &#123;</span><br><span class="line">    background: red;</span><br><span class="line">    color: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有很多种颜色和操作，那就需要多次定义样式来覆盖之前的样式。我们可以使用变量来替换颜色：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">button &#123;</span><br><span class="line">    --color-initial: black;</span><br><span class="line">    border: 1px solid var(--color, var(--color-initial));</span><br><span class="line">    background: transparent;</span><br><span class="line">    color: var(--color, var(--color-initial));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button:hover &#123;</span><br><span class="line">    background: var(--color, var(--color-initial));</span><br><span class="line">    color: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在想要主题化这个按钮，只需要定义–color变量即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.flat.danger &#123;</span><br><span class="line">    --color: red; // 局部声明的变量--color，只在当前选择器button.flat下生效</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就相当于将CSS代码进行了封装，代码简洁了很多~</p>
+<h2 id="6-在JavaScript中读取变量"><a href="#6-在JavaScript中读取变量" class="headerlink" title="6. 在JavaScript中读取变量"></a>6. 在JavaScript中读取变量</h2><p>（1）使用 CSS 变量的一大好处就是可以在 JavaScript 中访问它。</p>
+<p>假如我们通过内联样式来设置 CSS 变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p style=&quot;--color: red&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过以下代码来获取变量值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 获取 &lt;p&gt; 元素</span><br><span class="line">const element = document.querySelector(&#x27;p&#x27;);</span><br><span class="line"></span><br><span class="line">// 检索CSS变量 --color</span><br><span class="line">element.style.getPropertyValue(&#x27;--color&#x27;); // &#x27;red&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>如果在CSS文件中设置CSS变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p &#123;</span><br><span class="line">  --color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就需要通过以下形式来获取变量值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 获取 &lt;p&gt; 元素</span><br><span class="line">const element = document.querySelector(&#x27;p&#x27;);</span><br><span class="line"></span><br><span class="line">// 获取CSS变量 --color</span><br><span class="line">getComputedStyle(element).getPropertyValue(&#x27;--color&#x27;); // &#x27;red&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>（2）可以通过以下形式使用JavaScript来设置CSS变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 获取 &lt;p&gt; 元素</span><br><span class="line">const element = document.querySelector(&#x27;p&#x27;);</span><br><span class="line"></span><br><span class="line">// 将 --color 变量设置为 blue</span><br><span class="line">element.style.setProperty(&#x27;--color&#x27;, &#x27;blue&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、预处理器SASS中的变量："><a href="#二、预处理器SASS中的变量：" class="headerlink" title="二、预处理器SASS中的变量：$"></a>二、预处理器SASS中的变量：$</h1><p>下面来看看 CSS 变量出现之前都是如何做的。在CSS变量出现之前开发人员会使用 SASS 变量，它们的目的是相似的，但是不够流畅和灵活。</p>
+<p>SASS 变量在定义时需在变量名前加上“$”，在使用变量时直接使用变量名即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$main-bg-color: #C92E33;</span><br><span class="line">background-color: $main-bg-color;</span><br></pre></td></tr></table></figure>
+
+<p>SASS 的问题就在于它是一个预处理器，所以，任何在 SASS 中声明的变量都需要经过编译才能执行。上面的代码就会编译成这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-color: #C92E33;</span><br></pre></td></tr></table></figure>
+
+<p>这样才是有效的CSS，代码经过编译后，变量也就消失了。因此，我们不能在 CSS 运行时更改变量值。</p>
+<p>预处理器中的变量范围归结为嵌套的大括号块。然而，因为 CSS 变量是属性，所以它们的作用域是基于 DOM 的。这意味着 CSS 变量是按元素解析的，而不是按作用域解析的，来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  --shadow-color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button &#123;</span><br><span class="line">  box-shadow: 1px 1px 1px var(--shadow-color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button:hover &#123;</span><br><span class="line">  --shadow-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们将鼠标悬停在按钮上时，按钮的红色变为了蓝色。那使用预处理器语言 SASS 会是什么结果呢，来看代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">    $shadow-color: gray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button &#123;</span><br><span class="line">    box-shadow: 1px 1px 1px $shadow-color;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">button:hover &#123;</span><br><span class="line">    $shadow-color: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就会出现语法错误，第六行使用了未定义的变量。因为SASS不知道 <code>&lt;button&gt;</code> 在 <code>&lt;body&gt;</code> 里面（因为它不是使用 CSS 在浏览器中的 HTML 上下文执行的），也不知道button:hover 是一个按钮，所以两个定义的变量都没有被识别到。</p>
+<p>所以，CSS 变量与预处理器变量最重要的区别就是CSS变量是动态分配的。它们在页面的整个生命周期中保持活动状态，当更新它们时，所有引用它们的地方都会更新。因为它们是属性，所以可以通过任何更新 CSS 属性的机制来更新它们：样式表、内联样式，甚至 JavaScript。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/47810aac/">CSS Houdini</a>
+            
+            
+            <a class="next" rel="next" href="/6a6b3205/">强大的 CSS 选择器 :has()</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/47810aac/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/6a6b3205/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

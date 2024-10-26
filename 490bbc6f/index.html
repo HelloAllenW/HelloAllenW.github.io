@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>为什么中国书法能成为艺术？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">为什么中国书法能成为艺术？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">六月 14, 2016&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        六月 14, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E4%B9%A6%E6%B3%95/">书法 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">8.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">30 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <center><font color=red size=5>书法美的现象学分析</font></center>
+
+<center><font face="黑体"><b>作者：张祥龙</b></font></center>
+
+<p>书法是将文字写得好看或有味道的技巧。中国书法自古以来就被视为最重要的艺术之一，书法家或书法作品的地位绝不在画家、音乐家及其作品的地位之下。“书画同源”早已是被人公认的见解。与此相对，西方文化中的书法却只被看作构造美术字的技巧，更多地与实用相关，而与正经的艺术如绘画、雕塑、音乐等不可同日而语。为什么会出现这种差异？换言之，为什么中国书法能够成为一种原本艺术？</p>
+<h2 id="文字与绘画的关系"><a href="#文字与绘画的关系" class="headerlink" title="文字与绘画的关系"></a>文字与绘画的关系</h2><p>文字是一种可视图像，交通标志是图像，(传统的)绘画也是一种图像。它们都与自然的物理图像，比如一块岩石的纹理结构、一棵古树的形状、鸟的足迹不同，因为它们是人构造出来的，尽管两者都有意义，或可以都有意义。这其中，文字与绘画又有独特之处，即它们可能唤出深刻的美感。交通指示图像可以被表现得正确不正确、端正或不端正，甚至漂亮或不漂亮，但是没有美不美的问题。可是，文字(如果考虑到中文的话)和绘画就有这个问题。</p>
+<p>文字与绘画的差异何在呢？从表面上看，绘画直接去描画或表现某个东西，或某个状态，而文字只要是文字，就不仅仅是象形了。不管它的前身与象形可能有什么联系，一旦它成为语言的书面形式，象形就要退居边缘，尽管还可能在某些文字里起作用。语言、包括文字首先有语意(linguistic meaning, sprachliche Bedeutung)，而不是直接从表现某个东西来得到意义。通过语意，它表达、指称或暗示某个东西、某种状态。胡塞尔说：</p>
+<blockquote>
+<p>如果我们将兴趣首先转向自在的符号，例如转向被印刷出来的语词本身，……那么我们便具有一个和其它外感知并无两样的外感知(或者说，一个外在的、直观的表象)，而这个外感知的对象失去了语词的性质。如果它又作为语词起作用，那么对它的表象的性质便完全改变了。尽管语词(作为外在的个体)对我们来说还是当下的，它还显现着；但我们并不朝向它，在真正的意义上，它已经不再是我们”心理活动”的对象。我们的兴趣、我们的意向、我们的意指――对此有一系列适当的表述――仅仅朝向在意义给予行为中被意指的实事。</p>
+<p>(胡塞尔，1998：42)</p>
+</blockquote>
+<p>这也就是说，文字作为单纯的物理符号，与一般的外感知对象或者说是物理图像那样的对象没有什么区别；但如果它作为语词或文字起作用，那么对于它的表象方式或意向行为的方式就“完全改变了”。这时，意向行为不再朝向它，但也不是完全没有它，而是通过它但不注意它本身，获得意指的能力、意义给予的能力，并凭借这能力来意指向某个东西或事态。胡塞尔这里对于文字的语词化的现象学描述是不是完整和合适，我们以后会讨论，但他的这个看法是成立的，即作为单纯物理图像的文字与作为语词的文字有重大的不同。由此可见，文字要比绘画多一层，即语意的构造层。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9ECx7hPMbpG1R4myPKqZW7ibRDqr2FTGapdbD3ZkpPTic2NwsA6ZuA16A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>但不管怎么说，两者都要去表现某种状态，而且两者都有一个表现得美不美的问题。这也就意味着，它们的表现方式的不同会产生重大后果。在分析这种不同及其后果之前，很明显，我们必须先说清楚本文在什么意义上使用”美”这个字。</p>
+<h2 id="什么是美？"><a href="#什么是美？" class="headerlink" title="什么是美？"></a>什么是美？</h2><p>这是一个巨大的、被古今中外的哲学家们、美学家们争论不休的问题。由于本文所做的是现象学分析，所以就仅在这个视野中来给出一个简略的提示或说明。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9pJyaqzB6cntScZibFervgA4ibwMn4SMB4r4nohrgHaxLYyJ5zRMmVurg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 胡塞尔</center>
+
+<p>胡塞尔在他致德国诗人霍夫曼斯塔尔的一封信(1907年1月12日)中写道：“现象学的直观与‘纯粹’艺术中的美学直观是相近的。”(胡塞尔，1997：1202)两者都“要求严格排除所有存在性的执态”。(胡塞尔，1997：1203)其含义是：美学直观与现象学直观都要排除任何对于现象的存在预设，比如认定这个现象是个物理对象，那个是个心理对象；或这个只是个体，那个是个普遍者，等等；而是只就现象的纯粹显现方式来直接地观察它、理解它。所以他又写道： “一部艺术作品从自身出发对存在性表态要求得越多(例如，艺术作品甚至作为自然主义的感官假象：摄影的自然真实性)，这部作品在美学上便越是不纯。”(胡塞尔，1997：1202)</p>
+<p>总结胡塞尔的意思，就是艺术美一定要摆脱任何纯显现之外的存在预定，也就是说，美不是任何纯显现之外的对象，不管是物理对象、精神对象，还是波普尔(Karl Popper)讲的 “世界3”中的对象。美只能在人的显现体验之中出现或被当场构成。那么，美可能是在这种纯体验之中被构成的意向对象(noema)吗？或者说，可能通过这种意向对象或意向观念被直接体验到吗？胡塞尔没有讨论。他的现象学思想中，既有非对象的(objektlos)重要学说，比如内时间意识流和后期发生现象学的被动综合的学说，又有意向对象式的，即所有有认知意义的构成都要以意向对象为客体化成果的学说。他之所以很少对于美学问题发表意见，其中的一个原因可能就是他在这两种倾向间的犹豫不定。</p>
+<p>海德格尔完全赞同胡塞尔的这样两个主张，即：首先，美不来自心理现象，而是来自意义和现象的原本被构成态；其次，美的出现一定不能落实到现成存在的对象上。而且，海德格尔将后一个思路大大彻底化或存在论化了；对于他，美感也不能落实到任何意向对象上来。所以，他在《林中路·艺术作品的本源》中认为：</p>
+<blockquote>
+<p>艺术就是真理的生成和发生(Dann ist die Kunst ein Werden und Geschehen der Wahrheit)。</p>
+<p>(海德格尔，1996：292)(Martin Heidegger, 1977: 59)</p>
+</blockquote>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9icjle0ViaJIYEzqO1KEhufnWy8uIoKKKdYtxstW8o99cDWgiagBNjBUuA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我们知道，海德格尔反对真理的符合论(即主张真理是命题与其表达对象――比如事态――的符合)，认为真理是揭开遮蔽(a-letheia)的当场发生：</p>
+<blockquote>
+<p>真理唯作为在世界与大地的对抗中的澄明与遮蔽之间的争执[遭遇、二对生]而现身。</p>
+<p>(海德格尔，1996：283)</p>
+</blockquote>
+<blockquote>
+<p>争执被带入裂隙，因而被置回到大地之中并且被固定起来，这种争执乃是形态(Gestalt)。……形态乃是构造(Gefuege)，裂隙作为这个构造而自行嵌合。被嵌合的裂隙乃是真理之闪耀的嵌合(Fuge)。</p>
+<p>(海德格尔，1996：284-285)</p>
+</blockquote>
+<p>这种真理出现的途径是，艺术作品创造和保留了某种裂隙(Riβ)或形态(Gestalt，格式塔构形)，而这裂隙引起了两极――比如大地与世界、遮蔽与敞开，或阴与阳――的争执与对抗，于是一个生动的敞开领域(Offene)或澄明(Lichtung)在深黑的隐藏背景中出现了。所以，凡·高画鞋的油画，就它是一件真正的艺术品而言，既不只是引出心理的遐想，也不只是在道出鞋的有用性，而首先是开启出这鞋的原本真理。“凡·高的油画揭开了这器具即一双农鞋真正是什么。这个存在者进入它的存在之无蔽之中。希腊人称存在者之无蔽为aletheia。”(海德格尔，1996：256)</p>
+<p>这种从遮蔽中闪现出来的澄明之光就是美。海德格尔写道：</p>
+<blockquote>
+<p>如此这般形成的光亮，把它的闪耀嵌入作品之中。这种被嵌入作品之中的闪耀(Scheinen)就是美。美是作为无蔽的真理的一种现身方式。</p>
+<p>(海德格尔，1996：276)</p>
+</blockquote>
+<p>美既然是由艺术作品引发的真理现身方式，即去蔽时的澄明闪耀，那么它绝不可能被落实为任何意向对象，也跟胡塞尔讲的先验主体性、柏拉图讲的美理念或经验主义者们讲的由经验对象形式引起的愉悦感无关。美是人体验到的原初真理喷发出的辉煌光彩。</p>
+<p>总结胡塞尔和海德格尔的观点，可以看出美的这样几个特点：(1)它在艺术作品制造的裂隙处闪现。(2)它是真理的现身方式，或真理出现时的光辉；让人认同，让人被它征服。(3)它是彻底非对象的，纯境域发生的；也就是说，它永远超出可对象化的概念思维或形象思维，不可被确定为某一个意义，而是那让人被充溢的丰富意义的同时涌现。(4)它是居中(Zwischen)的，处于遮蔽与敞开、大地与世界、阴与阳之间。后期海德格尔称这种原引发的居中为 “自身的缘发生”(Ereignis)，它就是存在的真理及其表现方式。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9wIMVpgjhZUflRicHnRaaHMTl0IlnN9RPuDmFoDUQPR2PicHJEKIOplJA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 古希腊字母</center>
+
+
+
+<h2 id="汉字字形与西文字母的不同"><a href="#汉字字形与西文字母的不同" class="headerlink" title="汉字字形与西文字母的不同"></a>汉字字形与西文字母的不同</h2><p>西方的拼音文字以字母为基本单元，而字母以造成经济的辨别形式、以便代现语音为目的，所以其笔画很简单。以英语或德语为例，字母一共不超过三十个，每个字母由一至三笔写成，手写体笔画更少，近乎一笔书。一个单词由一些字母按线性排列组成。中文汉字则由笔画组成，  “永”字八法显示最基本的八种笔画，但它们的组合方式极其多样，是非线性的，构造一种类似《易》卦象那样的、但又更丰富得多的空间。一个汉字，可以由一笔到三十来笔构成，因为汉字有构意(指事、象形、会意等)和代现语音(形声字的一半)的功能。可见，汉字与西方拼音文字的笔画丰富性不可同日而语。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9z43ITZpRvmNIB0T0sNKfZDVShh5QvaFeYRHlFUFkfbCSHq6KFbgIhg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 永字八法</center>
+
+<p>而且，笔画的组合方式，字母要呆板得多。字母的笔画关系大多只是接触，交叉较少，分离的更少(似乎只有  “j”与  “i”的那一点)。汉字笔画的结合和组合方式，可谓千变万化。而且，字母用来表音，用来组词，本身无意义，所代表的单音一般也无意义。汉字笔画本身就可能有意(如 “一”、  “乙”)，其组合更是既构意(如“木”、“林”、“森”；“火”、“炎”、“焱”)，又构音(如“城”、“枫”)。</p>
+<p>所以，汉字笔画与组成字母的笔划不同，与组成词的字母也不同，也不等同于由字母组成的、有意义的词，它是根本不同的另一种构意方式，更近乎语音学上讲的 “区别性特征”(distinctive features)。这种区别性特征是一对对的发音特征，比如送气还是不送气、阻塞还是不阻塞、带声还是不带声。汉字笔画从根本上讲也是一对一对的，横对竖、撇对捺、左勾对右勾、点对提，等等。正是由于这种根本的“对交”性，当我们看前人的书论，在它们讲到字的形势、结体乃至篇章行间的安排时，常常会看到如阴阳般相对互补而构势取象的表述。比如汉代蔡邕的《九势》讲：</p>
+<blockquote>
+<p>夫书肇于自然，自然既立，阴阳生矣，阴阳既生，形势出矣。……凡落笔结字，上皆覆下，下以承上，使其形势递相映带，无使势背。转笔，宜左右回顾，无使节目孤露。藏锋，点画出入之迹，欲左先右，至回左亦尔。</p>
+<p>(《汉魏六朝书画论》，1997：45)</p>
+</blockquote>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9Eb0f4SvtcxEfK7U2xwdT4opqxTOflUA6gEbA2icHUO3Y93ExbcunNsQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>唐人欧阳询《八诀》则有 “分间布白，勿令偏侧。……不可头轻尾重，无令左短右长，斜正如人，上称下载，东映西带”(《初唐书论》，1997：3)之类的对交制衡的建议，以及《三十六法》的 “穿插”、“向背”、 “相让”、 “粘合”、 “救应”等结构考虑。(《初唐书论》，1997：13-15)唐代大书论家张怀瓘在《书断序》中写道：“固其发迹多端，触变成态，或分锋各让，或合势交侵，亦犹五常之于五行，虽相克而相生，亦相反而相成。”(《张怀瓘书论》，1997：57)</p>
+<p>因此，汉字有内在的动态冲动和构造空间。比如 “宝”的上部(宝盖)一旦写出，就引动着下部的出现与应合；“北”的左边引发右边。这样，当我们看一个已经写成的字时，就有上下左右的呼应感和结构感，所谓 “上称下载，东映西带”也。字母内部没有或很缺少这种阴阳构势，倾向于静态。一旦写出字母的形状，如 “a”、“b ”、 “c ”，它就落定在那条水平横线，既不吸引什么，也不追求什么。汉字却有性别和性感，相互吸引，有时也相互排斥。嘀嘀咕咕，参差左右，里边含有无数氤氲曲折。如 “女”字， “人”字，本身就是字，但一旦处于左边或上边，则邀请另一边或下边。所以汉字的构形本身就有构意的可能。许慎讲汉字的“六书”构字法，以 “指事”为首，比如 “上下”，因为“指事者，视而可识，察而可见”(《说文解字记》)，有直接的显意性，而象形(如日月)、形声(如江河)、会意(如武信)、转注(如考老)、假借(如令长)都在其次。</p>
+<h2 id="文字的书法美与文字的意义有关吗？"><a href="#文字的书法美与文字的意义有关吗？" class="headerlink" title="文字的书法美与文字的意义有关吗？"></a>文字的书法美与文字的意义有关吗？</h2><p>汉字本身有天然的构意冲动，但是，汉字书法之美与汉字的意义有关吗？或广而言之，文字的书法与文字的意义有关吗？看来是有关的。一个完全不懂汉语的人，或虽听得懂汉语但不识汉字的人，能欣赏汉字的书法美吗？似乎是不可能的。那样的话，汉字对于他只是一种奇怪的形状，就像阿拉伯字、满文对于一个清朝的儒士那样。我上个世纪八十年代中期到美国留学时，虽然早已在电影中见过外国人，在北京的大街上偶然见过外国人，但在初到美国的头一年，完全不能欣赏校园里的 “漂亮的”美国女学生，看谁都差不多。这样说来，文字的书法美与文字的意义有内在的相关性，我们欣赏书法时并不是将它们只当作一种纯形式来欣赏。这一点与欣赏绘画就有所不同，尽管欣赏绘画也不只是在欣赏其纯粹的物理形式，也有文化的潜在意域的托持。</p>
+<p>可是，书法的美与文字的观念化意义，或“可道”出的意义却没有什么关系。从来没有听到古今的书法家或书论家讲，某个字因其字义而多么美，某个字又因此而多么丑。即便 “美”字也不一定美， “丑”字也不一定丑。但繁体字与简体字却有书法上的后果。减少笔画，影响了汉字的书法美，所以主张汉字改革 “必须走世界文字共同的拼音方向”(《第一次全国文字改革会议文件汇编》，1957：14)的毛泽东，他写自己诗词的书法体时，终身用繁体字或正体字，从来不用他提倡的简体字。而拼音化后的汉字，无疑将完全失去其书法艺术。到目前为止，还没有见过成功的简体字书法作品，尽管中国人历史上的书写，也用行书、草书和某些简体，但那是出自历史与书写脉络本身的风气所致，与行政颁布的硬性简体字系统大大不同。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R97s83wJfXxBMHxrGUpsHYibRbMJdPJ5dCbsA9ia89l7eEWaViayUrbRLtA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲《说文解字》</center>
+
+<p>可见，书法家在创作时，或人们在欣赏书法作品时，他们必须既懂汉语、识汉字，但又绝不只是在观念对象化、语义(semantic)和语法(syntactic)层次上的懂。反过来，书法肯定与汉字的结构讲究有关，很多书论家都讨论 “结体”、 “书势”的问题，但又绝不只与这结构的可对象化的纯形式有关。汉字字体的变异或变更(Variation)的可能性极大，虞世南《笔髓论》曰：“故兵无常阵，字无常体矣；谓如水火，势多不定，故云字无常定也。”(《初唐书论》，1997：75)因此，无法确认一种理想美的汉字形式，就像毕达哥拉斯(Pythagoras)确认“一切立体图形中最美的是球形，一切图形中最美的是圆形”(《古希腊罗马哲学》，1961：36)那样。</p>
+<p>这样的话，汉字之美就既与它的语义和字形内在有关，但又都不能在任何对象化、观念化的意义上来理解这义与形。汉字美与其义相关，也就隐含着与这语言、特别是这文字的真理性相关，但这真理如海德格尔所言，不可首先作符合某个对象或事态来理解，而要作非对象化的 “揭蔽”式的理解，而这样的真理就与语言的原本的创构(dichten，诗化)式的语境意义无何区别了。汉字与其形相关，表明它与空间相关，但这不是去描摹某个对象、甚至是理想对象的线条和构架，所以它既不是西方绘画的素描，也不是字母美术字的线条，而是与时间不可分的 “势多不定”的时­空完形(Gestalten)，起到海德格尔讲的裂隙(Riβ)的作用，引发出阴阳相对的争斗和全新感受的当场生成。</p>
+<h2 id="汉字书写如何导致居中体验？"><a href="#汉字书写如何导致居中体验？" class="headerlink" title="汉字书写如何导致居中体验？"></a>汉字书写如何导致居中体验？</h2><h3 id="（一）引发构意时的边缘存在"><a href="#（一）引发构意时的边缘存在" class="headerlink" title="（一）引发构意时的边缘存在"></a>（一）引发构意时的边缘存在</h3><p>除了以上所涉及的美感体验的前三个特点(裂隙处闪现、真理之光、非对象化)之外，汉字如何使美感经验所须要的 “居中”性实现出来的呢？要说明它，可以从以上第一节引用的胡塞尔《逻辑研究》中的那段话入手。胡塞尔认为人们打量文字的方式有两种，一种是将文字当作物理对象来打量，就像我们这些不懂阿拉伯文的人看那些 “奇怪的图符”(我小时候，随母亲多次去一家清真饭馆，门上的招牌中就有这种图像)一样，这时这文字就是与其它物理对象并无两样的东西。另一种打量方式是将文字当作语词来看，“那么对它的表象的性质便完全改变了”(胡塞尔，1998：42)，即从一个寻常的物理对象转换成了一个激发语意的文字现象。它一下子丧失了它的直接对象性，退居到意识的边缘，“它还显现着；但我们并不朝向它，在真正的意义上，它已经不再是我们‘心理活动’的对象。我们的兴趣、我们的意向、我们的意指……仅仅朝向在意义给予行为中被意指的实事。”(胡塞尔，1998：42)这时候，这文字的可辨识结构只起到一个引出赋意行为，从而让语意和意向对象出现于意识之中的作用。它成了意识的垫脚石，踩着它去朝向语意的对象。在这种情况下，这文字结构本身的表现特点就完全不被注意了。如果情况是这样，那么这文字的书法美就几乎不可能被体验到。</p>
+<p>那么，如果我们回到打量文字的第一种形态，即关注它本身的物理特点、形式特点，美的体验有可能出现吗？还是不可能，因为按照胡塞尔，那时这文字与其它物理对象无何区别，也就是与它的语符身份无关；而按我们前面的分析，这种对象化的东西，这种非语符或者这种为观看者所不懂的外国字，无法引出书法美感来。“水”不是对水的绘画，它的物理形式本身与美感无涉。可见，胡塞尔向我们描述的文字被意识体验的两种形态，都达不到书法美，因为它们或者是物理对象化的，或者是物理销象(image-demolishing)化的。所谓 “销象”指物理对象性在注意力中被销去，原来构成物理对象的形式降为参与语义构成的意向要素，其自身的象(image, Bild)结构完全不被注意。这种 “销象”与美感要求的 “非对象化”不同，它是注意力中的 “对象”的正反面，即对象形态的无 “痕迹”(Spur，trace, 德里达)的退场，实际上成为了 “被立义”意义上的边缘对象(即材料，hyle或Stoff)；而非对象化是指该对象被现象学还原，其存在执态或确定形态被悬置，从而暴露出它的各种表现可能。它介于被直接注意的物理对象和不被注意的感觉材料之间，实际上是一种更原初的状态，可大致比拟于康德和海德格尔讲的“纯象”(reines Bild, pure image)状态。(Immanuel Kant, 2003: 243; A142/B182)(MartinHeidegger, 1929: §20-22, §32-35)</p>
+<p>这里的要害是，要让文字的书法美出现，就必须在将文字当作有意义的语符时，不让它完全消失在对于意指功能的激发上；而是让它本身的形式结构的特点还有存在的余地，并以非对象化的方式被保留在文字的语词形态中。也就是说，文字即便在作为文字、而非仅仅的物理对象引起我们的注意时，也不止是一堆引发意向行为和相应的意向对象的垫脚材料，而是与意义一起被共同构成者，一种非对象化的被构成者。西方文字的书法之所以不能成为重要艺术，就是因为西方文字的特点以及西方人的思维方式(这方式与其语言和文字的特点有内在关系)，使得文字本身在参与构意时，其象结构的非对象化的显身不可能，或相当微弱，充其量只能在一会儿是物理对象、一会儿是构意材料的“一仆二主”两栖变更中达到美术字的程度。而汉字，由于上两节所阐发的那些特点，就可能在作为语符起作用时仍保有自己的活的身体(lebendiger Leib, living body)，而不只是一个物理对象、文字躯体(Kőrper, physical body)的消失。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AufquRAtrPBdbuBL9IWQ3GakZUQfC9R9lq1RpcUHqkibkAo95wKAIk1MVkAoY4VZVuezYfeVmNXB7ke3t7kIhoA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 赵孟頫两版临作《兰亭序》</center>
+
+<p>汉字笔划的构意性，使得汉字在 “阅读眼光”中也有自身的存在，尽管是边缘化的。比如 “一”、 “二”、 “三”， “木”、 “林”、“森”，其字形的象结构在阅读中也要参与意义的构成；“政者正也”(《论语·颜渊》)， “仁也者人也”(《孟子·尽心下》)，“道可道，非常道”(《老子》一章)， “王道通三”(《春秋繁露·王道通三》)，其字形甚至可能在构意时暂时突显一下；等等。而且，这种自身存在不是对象化的，或者起码可以成为非对象化的。以上讲到的汉字笔画的阴阳本性，使其更多地作为互补对生的区别性特征而非构字原子而起作用，所以“木”、 “林”、 “森”的笔画不是在绘画般地象形，而也是“指事”和 “会意”，其中有动态的生成。我们的注意即便在转向它们的字形本身时，也不是转向这些笔画的物理对象形式，而是转向它们正在参与构成的意义形成过程。换言之，汉字的阴阳化的笔画，其本身就既不是对象化的，因为它本身总在隐匿,但又不是销象的，因为它的结体方式在影响着意义的构成。笔画的裂隙性就在于此，它总在无形有象之间，引出赋意，包括对于自身的赋意。字母却没有这种裂隙式的居中性，因为它本身追逐语音，代替语音，没有直接赋意功能，也就不可能在赋意时有反身的赋意。所以，当它们被当作对象打量时，就是物理形式的对象；而被当作语音符号时，就是被销象化了的材料。</p>
+<h3 id="（二）汉字全方位的语境化"><a href="#（二）汉字全方位的语境化" class="headerlink" title="（二）汉字全方位的语境化"></a>（二）汉字全方位的语境化</h3><p>1.汉字的境象性、气象性。</p>
+<p>汉语的非屈折语的(non-inflectional)或“单字形式不变”(character-formal-invariability)的特点，使汉字获得语境的整体意义生命。西方语言比如希腊语、拉丁语、德语、俄语等是屈折语，它们的词形会随词性、词类、单复数、语态、人称、时态等改变，有时是相当繁复的改变，比如希腊语的动词变化，由此而传达出语法乃至语义上的信息。由于这种单词词形层次上的形式变换，造成了一定程度上的单词独立性，减少了语境或上下文对于句义乃至篇义的影响。比如一个由冠词和词根形式变化定位了的名词，可以放在句子中的不同位置上(例如句末或句首)，而不改变句子的基本含义。又比如，词性的形式区别使得词与句有原则区别，无动词不能成句，系动词构成判断句；句子与篇章也有原则区别，句子被不少语言哲学家认为有自身的意义，等等。这些都减少了单词、句子的语境融入能力，增大了单词、句子的形式独立性，由此也增加了对于标点符号的依靠，因为语境本身无法有效地决定句读的节奏。</p>
+<p>汉语没有所有这些形式上的变换，所以汉字对于语境的依赖和融入是全方位的。汉字不是 “单词”，它们都是意义不饱和的构意趋势，从根本上等待语境来完形成意。一个 “红”字、 “道”字，可以是西方语法分类中的动词、形容词、副词、名词等，由不同语境构成不同的表现型。一个字就可以是一个句子，似乎只是名词词组，也可成句，如“枯藤老树昏鸦”。所以，对于汉语，语境就是一切。字的顺序、句子的阴阳对仗结构等等，都实质性地参与意义和句子的构成。无须标点符号，因为语境本身就有自己的构意节奏。“推敲”一字，或可使一整篇焕然一新。尽管汉语表述的意思可以非常恢宏、诗意，但也可以非常准确仔细。只有外行人，如黑格尔，才会怀疑汉字说不清道理。从汉字书写的角度看，则一笔可以是一字，一字也可以有二十多笔；一字(如“竹”)可以由不同部分组成，而它又可以是其它字的部分(如“簇”)。</p>
+<p>总之，汉字无论是就它的构成方式，还是由汉语赋予的特色，都是全语境化的(radically contextualized)。这样，单个汉字的物理形式的对象性就被大大淡化。尽管如上所言，汉字在构意时不销象，而是以自身的结构特点参与语意的构成，并且同时也被构成，但这种参与构意的象结构，还要被更充分地语境化、篇章化。《念奴娇·赤壁怀古》起头的 “大江”两字，只是一个牵引和造势，其书体与后边全词全篇的书体一气相通，而好的书法作品必是全篇风波相荡，左右映带，上下感激的。正是由于汉字本身这种语境化特性，才会有那充分体现此特性的草书境界。如窦冀形容怀素：“粉壁长廊数十间，兴来小豁胸中气。然后绝叫三五声，满壁纵横千万字。”(《中晚唐五代书论》，1997：232)杜甫《八仙歌》形容张旭：“张旭三杯草圣传，脱帽露顶王公前，挥毫落纸如云烟。”这与西方那种经营于一个个字母的线条装饰的“书法”，完全是两个天地。以这些特点，汉字书法的确能够在才者手中成为居中风行的畅游，在物理形象与完全无象之间获得境象、气象，以真、行、草等变化无端的显现方式来“云行雨施，品物流形”(《易传·干·彖》)</p>
+<p>2.毛笔的书法效应：构造内在之势及时机化的揭示。</p>
+<p>最后，汉字书法的美感生成与毛笔书写亦有内在关系。硬笔书写，静则一点，动则一线一形；其点其线本身无内结构，只是描摹成形而已。毛笔则不同，笔端是一束有韧性的软毛，沾水墨而书于吸墨之纸，所以充满了内在的动态造势和时机化的能力。蔡邕的《九势》讲：“阴阳既生，形势出矣。藏头护尾，力在其中，下笔用力，肌肤之丽。故曰：势来不可止，势去不可遏，惟笔软则奇怪生焉。”(《汉魏六朝书画论》，1997：45)让毛笔藏头护尾，含笔锋于点划书写之内，委曲转折，则所书之点划，有 “力在其中”。就像卫夫人《笔阵图》所言，每书一横， “如千里阵云，隐隐然其实有形”；每书一点，“如高峰坠石，磕磕然实如崩也”；每写一竖，如 “万岁枯藤”之悬临；每作一钩，如“百钧弩发”；等等。(《汉魏六朝书画论》，1997：95)之所以能这样，其重要原因之一就是 “笔软”：“惟笔软则奇怪生焉”，其笔划中可含绝大势态，并让人有“肌肤之丽”这样的感受。这是硬笔书法做梦也想不到的。而且，此含墨之毛笔与吸墨之纸张风云际会、阴阳相生，片刻不可迟疑，不可反思重来，唯乘时造势而开出一番新天地不可，不然便成墨猪污迹。笔墨之时义大矣哉！</p>
+<p> “故知多力丰筋者圣，无力无筋者病，一一从其[即笔墨]消息而用之，由是更妙。”(《汉魏六朝书画论》，1997：51)由此钟繇(三国时魏国人)知用笔势之妙，也就是让笔墨在乘势、构势的运用之中，牵引激发出只有当时即刻(Jeweiligkeit)才能揭示者。于是他说：“故用笔者天也，流美者地也。”(《汉魏六朝书画论》，1997：51)笔如游龙行于天，则有美感涌流于地。</p>
+<p>这种书写就是真正的时机化(zeitigen)创作(dichten)，让人的天才在当场实时的挥洒中发挥出来。张怀瓘这样来说此创作：“及乎意与灵通，笔与冥运，神将化合，变出无方，……幽思入于毫间，逸气弥于宇内；鬼出神入，追虚捕微：则非言象筌蹄所能存亡也。”(《张怀瓘书论》,1997：60)这样的 “时中”笔意就先行于反思之前，挣脱 “言象筌蹄”的物理形式束缚，达到去蔽传神的黎明境界。“范围无体，应会无方，考冲漠以立形，齐万殊而一贯，合冥契，吸至精，资运动于风神，颐[养]浩然于润色。尔其终之彰也，流芳液于笔端，忽飞腾而光赫。”(《张怀瓘书论》,1997：54)钟繇则写道：“点如山摧陷，摘[钩]如雨骤；[牵带出的痕迹]纤如丝毫，轻如云雾；去若鸣凤之游云汉，来若游女之入花林，灿灿分明，遥遥远映者矣。”(《汉魏六朝书画论》，1997：51)运笔的势与时，构造出让风云际会的裂隙，让真理在阴阳相合中来临，闪发出 “灿灿……远映”的曙光。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上讲到的这些汉字及汉字书写的特征，相互内在关联。比如汉字笔画的特征，像阴阳相对的构意性，构意方式的多维丰富性、变换性等，与汉语的非屈折语的或语境化特征，就既不同，又有某种相须相持的关联。而且，像我们这个缺少构词和语法的形式变化指标的语言，如果像文字改革主义者们主张的，用拼音来书写，就必面临大量的同音异义字，使得那种拼音化的汉语文字不堪卒读，只能表达最日常口语化的东西。又比如，汉字笔画的多维丰富性和可变换性，只有通过水墨毛笔的书写，才能发挥到无微不至和充满生机灵气的程度。</p>
+<p>由于这些特征的有机共存，终使得汉字书写在才子手中成为艺术，他们的书法作品揭示出了汉字的真理，就像凡高的画揭示出一双鞋子的真理所在。汉字的原发丰富的构意能力使它能在扮演语符的角色时，隐藏或保存住了自身的边缘存在，总能留下语境化和势态化的痕迹，总在进行潜在构势的“被动综合”。而毛笔水墨与宣纸遭遇，以纯时机化方式泄露出汉字的匿名隐藏，笔与冥运，追虚捕微，牵带挥洒出非对象化的字晕书云，迎来汉字真理的喷薄日出。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%B9%A6%E6%B3%95/"># 书法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cf3c2c58/">书法与舞蹈</a>
+            
+            
+            <a class="next" rel="next" href="/e81c0ff7/">中国书法最高境界：狂草</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cf3c2c58/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e81c0ff7/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

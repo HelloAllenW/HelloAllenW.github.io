@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>艺术的本质（介聂） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">艺术的本质（介聂）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 17, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 17, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%BE%8E%E5%AD%A6/">美学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3nPAdbia2EPSgNKxmuhxibK6ePr6BhWKqmueaD5gicrhSAbwQQX04Kd9I6Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">图：蔡国强作品</center>
+
+<center><font color=red size=5>关于艺术的深层思考</font></center>
+
+<center><font face="黑体"><b>作者 | 介聂</b></font></center>
+
+<center><font face="黑体"><b>（《艺术本质和精神完善》摘要）</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3nia5ibiapD7N1wFwn4j6hn4S4vXFgoCUdc9k6CgnSOmYQrQnMrfVsrDplw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="艺术的本质特性"><a href="#艺术的本质特性" class="headerlink" title="艺术的本质特性"></a>艺术的本质特性</h2><p>1</p>
+<p>艺术既不是无由的绝对精神的反映，也不是简单的甚至是机械的生活的反映，而是一种人类精神反应的特殊形式，或者直白地说，它是形象化了的精神反应。</p>
+<p>艺术具有与社会现实并存发展的统一性，但它与社会的内在联系只表现在现实完善与精神完善相济为功的辩证统一之中。这种联系是复杂的、潜在的，绝不是所谓的直接作用和反作用。</p>
+<p>2</p>
+<p>艺术是人类精神完善过程的显示器。每个历史阶段，艺术作品都会显现出精神完善工程的阶段性成效，诸如人类的人生自由和独立性发生了怎样的变化，自身的力量增长到怎样的强度，对命运的掌控达到何种地步等。从这一意义上讲，艺术史就是一部别具特色的人类精神完善史。</p>
+<p>3</p>
+<p>艺术的这种特性是由它与生俱来的职能决定的。</p>
+<p>社会生活是人类文明的出发点和归宿处，也是作为社会人由人性异化到人性复元的物质载体。每一次文明都会给社会带来较前的繁富，使人们的生活条件得到改善，而同时，每一次文明又不可避免地带来如影随形的负面。人类初始阶段，其负面主要表现于自然环境的巨大威胁，到社会形态不断发展并完善后，则主要表现为社会恶性因素借助文明的膨胀和滋长。这种负面影响不仅存在于物质的现实世界，在人们的精神世界里也会引起强烈反应。物质世界的问题主要由物质的力量解决，而精神世界的问题，从根本上讲，只能依靠由感悟性的意识形态组成的精神力量解决。艺术正是具有这一职能作用的意识形态。</p>
+<p>4</p>
+<p>艺术作为精神世界里的积极而热情的建设者，它与人间血脉相通，总是敏感异常地将社会负面引起的精神反应，转化为创作动机和主题指向，以艺术理想为蓝图，以形象化为艺术手段，不停地分期分批地辛勤施工，每一件成功的精神构筑就是我们所说的艺术作品。这些精神构筑格调极高，与人类的命运相应等价。而另有一些肯定认识经验的作品，或者以完美观念理想化的作品，则归于精神建筑群中引人注目的华丽装饰部分，同样在艺术渊薮中不可或缺。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3nMQG0aZXlXSuDT0C9FfDVfOVNKILES10VdH5ChLD9MKN765QsxW9ACw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="艺术功能的内观"><a href="#艺术功能的内观" class="headerlink" title="艺术功能的内观"></a>艺术功能的内观</h2><p>5</p>
+<p>艺术的创作过程和存在方式，形成艺术特有的统一的精神活动。我们直接感受到的作家写作、画家绘画、作曲家谱曲，只是艺术前精神活动的外化。同样的，我们眼中的欣赏者读文学、听音乐、观赏美术，也只是艺术后精神活动物质化的表象反映。其实，艺术内在精神始终是流动的，是一条意识的河，有它形成的阶段，一旦形成，便穿过社会的山川，滋润精神两岸的田野、草地、树木、村庄、花园……最后归入精神的渊薮。这一动态的艺术精神形式，就构成了互相连接的两个过程：艺术的前精神活动和艺术的后精神活动。</p>
+<p>6</p>
+<p>艺术的前精神活动，是诗人、作家、艺术家特有的精神营造行为。艺术内含的形象创造，艺术内容与形式的相应形成，浑然一体，共同发生在艺术创作的整个过程中。</p>
+<p>7</p>
+<p>关于艺术的动因，人们往往以为（连作者自己也往往表白）是诗人、作家和其他艺术家自己的思想感情的冲动。这种认识实际上并不符合艺术本身。不否认艺术家们的心灵反应有其特别容易精神谐振的敏感性，而且社会负面和客观环境引起的精神反应，归根到底也是通过艺术家们的心灵感受输入到艺术的。但是，我们不要忘记，各个艺术家和他同时同地域（如有世界性交流，地域的界限还会打开）的人们是生活在同一现实环境中的，精神反应也应当具有共时、共境性。况且，精神反应不是简单的机械反应，而是由情感经过经验筛选的结果，而认识经验，即人们认识的有效积累，当然也是共有的。所以，无论如何，艺术的精神反应不仅仅具有个性，而且是特殊性和普遍性的统一。</p>
+<p>8</p>
+<p>艺术“工程”的主体部分，即精神反应的具象化。前精神活动在此显现出艺术创作的真正功夫，而这种功夫只有特殊艺术才能才会具有。它为了与读者的心灵相衔接，调动与主题色调一致的感性材料创造出能激起生命波澜的情感形象；在艺术想象力和真实性抑扬联手的构筑下，加入能引起联想的既超验又合理的多种象征因素，将已经形成的思想内容渐渐丰富起来，衍化开来，在最高审美价值的昭示下，最后从真实而完满的艺术内含中升华出发人深省的哲思和令人向往的理想。当然，这些艺术化了的精神要素，随之也隐含到成功的艺术形象中。</p>
+<p>9</p>
+<p>艺术的后精神活动即艺术欣赏，它是前精神活动的继续。这两种精神活动既各自独立，又相互联结，形成一个统一而完整的艺术精神体系。没有前精神活动，也就没有后精神活动；没有后精神活动，也就失掉了前精神活动的意义。</p>
+<p>10</p>
+<p>艺术的前精神活动和后精神活动既然是一个前后统一的精神体系，那么两者实现互相衔接就必须有它们的联接方式。从精神活动内部分析，它们确实有自己特殊的联接方式，即欣赏客体和主体双方恰好能生成或业己存在相应的三个对接点：一个是同一的审美趣味，一个是同一的心理情境，一个是契合的艺术真实和现实真实。三个对接点的具备，是实现艺术后精神活动的关键：相同的审美趣味，才能引起欣赏主体的兴趣；相同的心理情境，表明已具备认可的意识环境，主体的精神活动才愿进入艺术作品的客体；相同的真实性，精神反应被艺术提炼后的艺术真实才能被欣赏主体的现实感受所接受，才能有欣赏主体被感悟的可能。三个对接点既是前后精神活动互相联接的“扣件”，也是两者互相进入对方的通道。</p>
+<p>11</p>
+<p>艺术后精神活动是艺术价值得以充分体现的根本环节。艺术后精神活动由心理层面上升为理性层面，艺术后精神活动也随之发生质的变化。此时，欣赏主体与客体既已结为有机整体，彼此心灵沟通的渠道既已畅通，欣赏主体就会即时意识到艺术作品中隐含的精神因素脱然而出，进而向自己的心灵猛然碰撞，因此受到强烈的震动和感染，并在那封闭的精神环境里发生共鸣、反思，最后将艺术性的超然理念转化为感悟。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3nKhnMY42IfqagPU4MMYlIjxk59ic8JWkZ1lf2A3PWFa6cPTXiadskR8Bg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="艺术在社会系统中的相应位置"><a href="#艺术在社会系统中的相应位置" class="headerlink" title="艺术在社会系统中的相应位置"></a>艺术在社会系统中的相应位置</h2><p>12</p>
+<p>作用决定地位，位置匹配职能。艺术的特殊功能必然反映在社会总系统相应位置的安排中。</p>
+<p>在黑格尔的《哲学全书》里，他把“‘精神哲学”分为三大部门，即主观精神，客观精神和绝对精神，艺术、宗教、哲学就归于绝对精神之中。虽然黑格尔的这一思考与他的总哲学体系一样，也在唯心主义的框架之中，但明晰的思辨却能把不同性质的精神形式加以区分，并悟到艺术与宗教、哲学别具一格，具有与其它精神形式不同的质的规定性，因而它们在精神领域应有一个特殊的位置。</p>
+<p>13</p>
+<p>19世纪50年代，马克思和恩格斯在研究政治经济学的过程中，客观地提出了一个社会的结构模型。他们清晰地勾勒出一幅简明的社会结构图：由三个层次组成，最下面是经济，是结构中支撑其它一切构成的“基础”;基础之上是上层建筑;再上就是与物质层面相适应的精神层面，马克思把它定义为“意识形态”，即观念性的政治、法权、哲学、宗教、文学、艺术等。这是一个人类社会层次分明、功能完备的系统性结构。</p>
+<p>14</p>
+<p>尤为详备的是恩格斯还及时地为其中的意识形态内的层次结构做了意义重大的说明。综合马克思和恩格斯在这一时期的著述或与朋友通信中的有关说法，他们把意识形态层又做了如下不同的层次分离:政治、法权、道德、科学等处在与现实直接接触的下层，而艺术和宗教、哲学三者则在顶层。并说明后三者是更高的悬浮在最上空的即更远离物质基础的意识形态形式，在这里，观念与自己的物质存在条件的联系，越来越错综复杂，越来越被一些中间环节弄模糊了，但是，这一联系是存在着的。他们这些对社会结构、层次，以及隐藏其内的复杂关系的揭示，为我们准确认识艺术本质和艺术存在的根本意义提供了可靠的哲学依据。</p>
+<p>15</p>
+<p>我们从综观结构中得知，艺术“高高悬浮”在系统的精神层面的顶层位置，这样的排列，使艺术与社会现实层面的联系有了复杂的间隔，互相之间的联系和作用也就产生了微妙的间接功效。具体说，现实对艺术的所谓的“作用”是间接性的，而现实对直接接触的政治、法律、道德、科学等意识形态的作用则是直接性的。直接作用具有物质性，表现为一种具体的“质感”反映，其本质是一种信息传达；间接作用的物质性变型形态，在经过下层意识形态的传递中已精神化，表现为完全抽象的“纯精神性”的为心灵接受的反应，其实质是信息感应。反过来，艺术对社会现实的所谓的“反作用”，也不是以一般的认识型精神形式直接传递给现实，而是以感悟型的精神形式，经二度，甚至三度传递方式反馈给现实层面的人。这样在社会系统整体性的操纵下，既恰如其分地展现了艺术的性能，又充分满足了社会现实层面不断增加新的悟性精神因素的要求。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3nDvbUQhxN8SwDNyHOxYrsibmAXXk5kFcKfRuCwdrr4yClvUiaPXmMctOA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="艺术价值和艺术理想"><a href="#艺术价值和艺术理想" class="headerlink" title="艺术价值和艺术理想"></a>艺术价值和艺术理想</h2><p>16</p>
+<p>关于艺术的实际功能和作用，至今仍没有一致的意见。然而，许多著名的文艺家一生置身于艺术之中，对艺术的形成和艺术的社会实践深有体会，因而在谈及这一问题时，都会心领神会地脱口而出：艺术是“无用之大用”。</p>
+<p>这是极明智的回答，诙谐中内藏着真知灼见。所谓“无用”，是指艺术没有直接作用于现实的功能，它既没有能满足人们物质生活需要的使用价值，对社会的反馈也是一种间接的悠长的视而不见的效应。特别是每到科技新发明催动现实社会进入新的文明阶段，功利主义的目光更会把艺术及它的创造者看作无足轻重的社会等外物。</p>
+<p>但是，艺术却是一种与社会发展同质共进的，于人类的进步不可或缺的精神力量，直接联系到人类的精神完善和人性的复元。这样说来，它对社会的用处又是多么重大，所以又称它有“大用”。</p>
+<p>17</p>
+<p>终极价值是艺术的标的，醒目地高高树立在艺术精神天地的远方。它是艺术为之奋斗的目标，是艺术完美的标志，是艺术性能被核准并确定的根本依据。</p>
+<p>艺术终极价值具有的标的性，实际上就是艺术这一事物的极限性。艺术终极价值在艺术的创造和发展中所起到的也正是这一重要作用。无论是单一的艺术品，还是艺术的整体，终极价值都在向艺术暗施一种诱导力量，并把艺术规范的尺度时时闪现在艺术创作者眼前。</p>
+<p>18</p>
+<p>艺术理想是艺术终极价值的集中表现。理解艺术终极价值原理，由抽象化到具体化，不能不引出艺术精神内含的理想性。这种艺术特性，在终极价值理论中占有十分重要的地位，因为它是艺术由有限到达无限的桥梁，精神超越时的唯一的真实的凭借，没有艺术的理想性，艺术的现实意义就不可能上升为艺术的真实性，艺术若没有真实性还谈什么艺术价值？</p>
+<p>19</p>
+<p>艺术的理想性是在艺术实践中自然形成的，既因现实而产生，又进而超越现实，遂使艺术的精神内含实现了主观与客观的统一，感性与理性的统一，个性与共性的统一，特殊性与普遍性的统一，一句话，理想使艺术成为一种趋于人类精神完善的具有真正功效的精神力量。</p>
+<p>20</p>
+<p>由艺术理想体现的终极价值，其实就是人的价值。理想与人类的命运相连，与社会发展方向一致，是人类进步台阶的无限延伸，所有这些表征人类精神完善的思想意识构成了艺术理想的全部内容，也是艺术终极价值产生的唯一源泉。</p>
+<p>21</p>
+<p>如果把精神完善引入艺术与现实间接联系的社会层面中，艺术理想实现的终极价值的意义就更加深刻。启迪觉悟是精神完善的根本要求，是诗人、作家、艺术家苦心孤旨创作的艺术指归，也是在后精神活动中艺术功能发挥的最佳效果。艺术作用间接进入现实，将已被启迪的觉悟转化为一种社会的正面力量，这就为社会现实的完善增添了理想的永恒性因素。社会现实完善和精神完善相济为功的道理正在这里。（摘编：郑风 ）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTepEmBgIlx2icibibQ0icg7lXf3ngUia7sXRln8tkRj1edZBLDLrCmia5DSNBnN4lT557UIWibWRlIQKdsFww/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;">
+作者: 介聂，诗人，学者，原全国政协人民政协报华夏副刊主编
+</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BE%8E%E5%AD%A6/"># 美学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d1767d16/">艺术的三个敌人（米兰·昆德拉）</a>
+            
+            
+            <a class="next" rel="next" href="/a62a536a/">艺术到底有什么用？答案很简单，为了幸福！</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d1767d16/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/a62a536a/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

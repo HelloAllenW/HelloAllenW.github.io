@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>ES6（2015）核心特性 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES6（2015）核心特性</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 5, 2016&nbsp;&nbsp;20:01:00</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 5, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">18 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>自 2015 年以来，TC39 团队成员每年都会一起讨论可用的提案，并发布已接受的提案。 对于一个提案，从提出到最后被纳入ES新特性，TC39的规范中分为五步：</p>
+<ul>
+<li>stage0（strawman），任何TC39的成员都可以提交。</li>
+<li>stage1（proposal），进入此阶段就意味着这一提案被认为是正式的了，需要对此提案的场景与API进行详尽的描述。</li>
+<li>stage2（draft），演进到这一阶段的提案如果能最终进入到标准，那么在之后的阶段都不会有太大的变化，因为理论上只接受增量修改。</li>
+<li>state3（candidate），这一阶段的提案只有在遇到了重大问题才会修改，规范文档需要被全面的完成。</li>
+<li>state4（finished），这一阶段的提案将会被纳入到ES每年发布的规范之中</li>
+</ul>
+<p>提案的功能将在达到第 4 阶段后被添加到新的ECMAScript标准中，这意味着它们已获得 TC-39 的批准，通过了测试，并且至少有两个实现。</p>
+<p>ES6 虽提供了许多新特性，但我们实际工作中用到频率较高并不多，根据二八法则，我们应该用百分之八十的精力和时间，好好专研这百分之二十核心特性，将会收到事半功倍的奇效！</p>
+<h1 id="一、开发环境配置"><a href="#一、开发环境配置" class="headerlink" title="一、开发环境配置"></a>一、开发环境配置</h1><p>使用babel编译ES6语法，使用webpack实现模块化。（具体配置可查看文章结尾的链接）</p>
+<h1 id="二、块级作用域"><a href="#二、块级作用域" class="headerlink" title="二、块级作用域"></a>二、块级作用域</h1><p>ES5只有全局作用域和函数作用域。ES6通过let和const实现了块级作用域。</p>
+<h2 id="1-const-关键字声明的变量是“不可修改”的。"><a href="#1-const-关键字声明的变量是“不可修改”的。" class="headerlink" title="1. const 关键字声明的变量是“不可修改”的。"></a>1. const 关键字声明的变量是“不可修改”的。</h2><p>其实，const 保证的并不是变量的值不能改动，而是变量指向的那个内存地址不能改动。对于基本类型的数据（数值、字符串、布尔值），其值就保存在变量指向的那个内存地址，因此等同于常量。但对于引用类型的数据（主要是对象和数组），变量指向数据的内存地址，保存的只是一个指针，const只能保证这个指针是不变的，至于它指向的数据结构就不可控制了。</p>
+<p>因此实际开发过程中，我们发现const 定义一个对象，后面可以正常修改对象的值就是因为这个原因。</p>
+<h2 id="2-var的弊端："><a href="#2-var的弊端：" class="headerlink" title="2. var的弊端："></a>2. var的弊端：</h2><p>（1）内层变量覆盖外存变量、循环变量泄露为全局变量</p>
+<p>（2）存在变量提升</p>
+<p>变量提升的本质是JavaScript引擎在执行代码之前会对代码进行编译分析，这个阶段会将检测到的变量和函数声明添加到 JavaScript 引擎中名为 Lexical Environment 的内存中，并赋予一个初始化值 undefined。然后再进入代码执行阶段。所以在代码执行之前，JS 引擎就已经知道声明的变量和函数。</p>
+<p>这种现象就不太符合我们的直觉，所以在ES6中，let和const关键字限制了变量提升，let 定义的变量添加到 Lexical Environment 后不再进行初始化为 undefined 操作，JS 引擎只会在执行到词法声明和赋值时才进行初始化。而在变量创建到真正初始化之间的时间跨度内，它们无法访问或使用，ES6 将其称之为暂时性死区：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 暂时性死区 开始</span><br><span class="line">a = &quot;hello&quot;;     //  Uncaught ReferenceError: Cannot access &#x27;a&#x27; before initialization</span><br><span class="line">let a;   </span><br><span class="line">//  暂时性死区 结束</span><br><span class="line">console.log(a);  // undefined</span><br></pre></td></tr></table></figure>
+
+<p>所以，let和const解决var变量提升的本质并不是说不会在编译阶段进行变量提升，而是提升之后不进行初始化操作。</p>
+<blockquote>
+<p> ESlint开启规则：<code>&quot;no-var&quot;: 0; </code>来保证项目中没有var声明的变量。</p>
+</blockquote>
+<h1 id="三、数组的扩展"><a href="#三、数组的扩展" class="headerlink" title="三、数组的扩展"></a>三、数组的扩展</h1><h2 id="1-Array-from"><a href="#1-Array-from" class="headerlink" title="1. Array.from()"></a>1. Array.from()</h2><p>Array.from() 将类数组对象（arguments对象、DOM元素集）或迭代器对象转换为数组。</p>
+<p>Array.from的第二个参数可以像<code>[].map</code>一样使用 Array.from 方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const array3 = Array.from(array, (num) =&gt; num * 2) // [2, 4, 6]</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Array-of"><a href="#2-Array-of" class="headerlink" title="2. Array.of()"></a>2. Array.of()</h2><p>Array.of() 可以将一系列值转换成数组，引入这个是为了解决new Array()构造器使用单个参数或多个参数返回值混乱的问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new Array(2) // 表示创建一个长度为2的数组</span><br><span class="line"></span><br><span class="line">new Array(1, 2) // 表示创建一个元素为1 2的数组</span><br></pre></td></tr></table></figure>
+
+<p>而 Array.of() 无论传入一个参数还是多个参数都会当作数组的元素处理。</p>
+<h2 id="3-数组实例的-find-和-findIndex"><a href="#3-数组实例的-find-和-findIndex" class="headerlink" title="3. 数组实例的 find() 和 findIndex()"></a>3. 数组实例的 find() 和 findIndex()</h2><p><code>Array.prototype.find()</code> 找出第一个符合条件的数组成员，返回符合条件的值。</p>
+<p><code>Array.prototype.findIndex()</code> 找出第一个符合条件的数组成员的位置，返回符合条件的值的index，如果都不符合返回-1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 4, -5, 10].find(n =&gt; n &lt; 5) // -5</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-（ES7）数组实例的-includes"><a href="#4-（ES7）数组实例的-includes" class="headerlink" title="4. （ES7）数组实例的 includes()"></a>4. （ES7）数组实例的 includes()</h2><p>为了解决indexOf()的两个缺点，一是不够语义化，二是它内部严格相等运算符进行判断会导致对NaN的误判。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[NaN].indexOf(NaN) // -1</span><br><span class="line">[NaN].includes(NaN) // true</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-数组实例的-entries-keys-和-values"><a href="#5-数组实例的-entries-keys-和-values" class="headerlink" title="5. 数组实例的 entries(), keys() 和 values()"></a>5. 数组实例的 entries(), keys() 和 values()</h2><p>entries() 是对键值对的遍历，keys()是对键名的遍历，values() 是对键值的遍历。返回的都是一个迭代器对象，使用for…of循环进行处理。</p>
+<h2 id="6-reduce"><a href="#6-reduce" class="headerlink" title="6. reduce()"></a>6. reduce()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.reduce(callback,[initialValue])</span><br></pre></td></tr></table></figure>
+
+<h3 id="（1）没有-initialValue-参数时"><a href="#（1）没有-initialValue-参数时" class="headerlink" title="（1）没有 initialValue 参数时"></a>（1）没有 initialValue 参数时</h3><p>prev: 上一次调用回调返回的值，或者是提供的初始值(initialValue)</p>
+<p>currentValue: 数组中当前被处理的元素</p>
+<p>index: 当前元素在数组中的索引</p>
+<p>array: 调用reduce的数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4]</span><br><span class="line">let sum = arr.reduce((prev, cur, index, arr) =&gt; &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(arr, sum); // [1,2,3,4] 10</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）initialValue"><a href="#（2）initialValue" class="headerlink" title="（2）initialValue"></a>（2）initialValue</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4]</span><br><span class="line">let sum = arr.reduce((prev, cur, index, arr) =&gt; &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;, 5)</span><br><span class="line"></span><br><span class="line">console.log(arr, sum); // [1,2,3,4] 15</span><br></pre></td></tr></table></figure>
+
+<p>得出结论： 如果没有提供 initialValue，reduce 会从索引1的地方开始执行 callback 方法，跳过第一个索引。如果提供initialValue，从索引0开始。</p>
+<h2 id="7-filter"><a href="#7-filter" class="headerlink" title="7. filter()"></a>7. filter()</h2><p>过滤数组，传入一个callback，返回一个数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let arr = [1, 2, 3, 4, 5]</span><br><span class="line">arr.filter(item =&gt; item &gt; 2)</span><br><span class="line">// 结果：[3, 4, 5]</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-fill"><a href="#8-fill" class="headerlink" title="8. fill()"></a>8. fill()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.fill(value, start, end)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const arr = [0, 0, 0, 0, 0];</span><br><span class="line"></span><br><span class="line">// 用5填充整个数组</span><br><span class="line">arr.fill(5);</span><br><span class="line">console.log(arr); // [5, 5, 5, 5, 5]</span><br><span class="line">arr.fill(0);      // 重置</span><br><span class="line"></span><br><span class="line">// 用5填充索引大于等于3的元素</span><br><span class="line">arr.fill(5, 3);</span><br><span class="line">console.log(arr); // [0, 0, 0, 5, 5]</span><br><span class="line">arr.fill(0);      // 重置</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、扩展运算符…"><a href="#四、扩展运算符…" class="headerlink" title="四、扩展运算符…"></a>四、扩展运算符<code>…</code></h1><h1 id="五、解构赋值"><a href="#五、解构赋值" class="headerlink" title="五、解构赋值"></a>五、解构赋值</h1><h2 id="1-嵌套对象解构"><a href="#1-嵌套对象解构" class="headerlink" title="1. 嵌套对象解构"></a>1. 嵌套对象解构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let node = &#123;</span><br><span class="line">    loc: &#123; start: &#123;&#125; &#125;</span><br><span class="line">&#125;;</span><br><span class="line">let &#123; loc: &#123; start &#125; &#125; = node;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-数组解构"><a href="#2-数组解构" class="headerlink" title="2. 数组解构"></a>2. 数组解构</h2><p>具有 Iterator 接口的数据结构，都可以采用数组形式的解构赋值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">const names = [&#x27;Hnery&#x27;, &#x27;Allen&#x27;];</span><br><span class="line">const [name1, name2] = names;</span><br><span class="line"></span><br><span class="line">const [foo, [[bar], baz]] = [1, [[2], 3]];</span><br><span class="line">console.log(foo, bar, baz) // 输出结果：1 2 3</span><br><span class="line"></span><br><span class="line">const [x, y] = [1, 2, 3];   // 提取前两个值</span><br><span class="line">const [, y, z] = [1, 2, 3]  // 提取后两个值</span><br><span class="line">const [x, , z] = [1, 2, 3]  // 提取第一三个值</span><br><span class="line"></span><br><span class="line">// 对应的位置没有值就会将变量赋值为undefined</span><br><span class="line">const [x, y, z] = [1, 2];</span><br><span class="line">console.log(z）  // 输出结果：undefined</span><br><span class="line"></span><br><span class="line">// 使用rest操作符来捕获剩余项</span><br><span class="line">const [x, ...y] = [1, 2, 3];   </span><br><span class="line">console.log(x);  // 输出结果：1</span><br><span class="line">console.log(y);  // 输出结果：[2, 3]</span><br><span class="line"></span><br><span class="line">// 支持默认值的解构</span><br><span class="line">const [x, y, z = 3] = [1, 2];</span><br><span class="line">console.log(z）  // 输出结果：3</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-其他解构赋值"><a href="#3-其他解构赋值" class="headerlink" title="3. 其他解构赋值"></a>3. 其他解构赋值</h2><h3 id="（1）字符串解构"><a href="#（1）字符串解构" class="headerlink" title="（1）字符串解构"></a>（1）字符串解构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const [a, b, c, d, e] = &#x27;hello&#x27;;</span><br><span class="line">console.log(a, b, c, d, e)  // 输出结果：h e l l o</span><br><span class="line"></span><br><span class="line">let &#123;length&#125; = &#x27;hello&#x27;;    // 输出结果：5</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）数值和布尔值解构赋值"><a href="#（2）数值和布尔值解构赋值" class="headerlink" title="（2）数值和布尔值解构赋值"></a>（2）数值和布尔值解构赋值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let &#123;toString: s&#125; = 123;</span><br><span class="line">s === Number.prototype.toString // 输出结果：true</span><br><span class="line"></span><br><span class="line">let &#123;toString: s&#125; = true;</span><br><span class="line">s === Boolean.prototype.toString // 输出结果：true</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）函数参数或返回值解构赋值"><a href="#（3）函数参数或返回值解构赋值" class="headerlink" title="（3）函数参数或返回值解构赋值"></a>（3）函数参数或返回值解构赋值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function add([x, y])&#123;</span><br><span class="line">  return x + y;</span><br><span class="line">&#125;</span><br><span class="line">add([1, 2]);   // 3</span><br><span class="line"></span><br><span class="line">function example() &#123;</span><br><span class="line">  return [1, 2, 3];</span><br><span class="line">&#125;</span><br><span class="line">let [a, b, c] = example();</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-混合解构"><a href="#4-混合解构" class="headerlink" title="4. 混合解构"></a>4. 混合解构</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">const people = [</span><br><span class="line">  &#123;name:&quot;Henry&quot;,age:20&#125;,</span><br><span class="line">  &#123;name:&quot;Bucky&quot;,age:25&#125;,</span><br><span class="line">  &#123;name:&quot;Emily&quot;,age:30&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">// es5 写法</span><br><span class="line">var age = people[0].age;</span><br><span class="line">console.log(age);</span><br><span class="line"></span><br><span class="line">// es6 解构</span><br><span class="line">const [age] = people;</span><br><span class="line">console.log(age);// 第一次解构数组 &#123;name:&quot;Henry&quot;,age:20&#125;</span><br><span class="line">const [&#123;age&#125;] = people;// 再一次解构对象</span><br><span class="line">console.log(age);//20</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、模板字符串（反引号标识）"><a href="#六、模板字符串（反引号标识）" class="headerlink" title="六、模板字符串（反引号标识）"></a>六、模板字符串（反引号标识）</h1><p>如果在字符串中使用反引号，需要使用\来转义；</p>
+<p>如果在多行字符串中有空格和缩进，那么它们都会被保留在输出中；</p>
+<h1 id="七、Class"><a href="#七、Class" class="headerlink" title="七、Class"></a>七、Class</h1><p>从概念上讲，在 ES6 之前的 JS 中并没有和其他面向对象语言那样的“类”的概念。长时间里，人们把使用 new 关键字通过函数（也叫构造器）构造对象当做“类”来使用。由于 JS 不支持原生的类，而只是通过原型来模拟，各种模拟类的方式相对于传统的面向对象方式来说非常混乱，尤其是处理当子类继承父类、子类要调用父类的方法等等需求时。</p>
+<p>ES6提供了更接近传统语言的写法，引入了Class（类）这个概念，作为对象的模板。通过class关键字，可以定义类。但是类只是基于原型的面向对象模式的语法糖。</p>
+<h2 id="1-对比在传统构造函数和-ES6-中分别如何实现类："><a href="#1-对比在传统构造函数和-ES6-中分别如何实现类：" class="headerlink" title="1. 对比在传统构造函数和 ES6 中分别如何实现类："></a>1. 对比在传统构造函数和 ES6 中分别如何实现类：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 传统构造函数</span><br><span class="line">function MathHandle(x,y)&#123;</span><br><span class="line">  this.x=x；</span><br><span class="line">  this.y=y；</span><br><span class="line">&#125;</span><br><span class="line">MathHandle.prototype.add =function（）&#123;</span><br><span class="line">  return this.x+this.y；</span><br><span class="line">&#125;；</span><br><span class="line">var m = new MathHandle(1,2）；</span><br><span class="line">console.log(m.add()）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// class语法</span><br><span class="line">class MathHandle &#123;</span><br><span class="line">  constructor(x,y) &#123;</span><br><span class="line">    this.x=x；</span><br><span class="line">    this.y=y；</span><br><span class="line">  &#125;</span><br><span class="line">  add() &#123;</span><br><span class="line">    return this.x+this.y；</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const m=new MathHandle(1,2);</span><br><span class="line">console.log(m.add()）</span><br></pre></td></tr></table></figure>
+
+<p>这两者有什么联系？其实这两者本质是一样的，只不过是语法糖写法上有区别。所谓语法糖是指计算机语言中添加的某种语法，这种语法对语言的功能没有影响，但是更方便程序员使用。比如这里class语法糖让程序更加简洁，有更高的可读性。</p>
+<h2 id="2-对比在传统构造函数和-ES6-中分别如何实现继承："><a href="#2-对比在传统构造函数和-ES6-中分别如何实现继承：" class="headerlink" title="2. 对比在传统构造函数和 ES6 中分别如何实现继承："></a>2. 对比在传统构造函数和 ES6 中分别如何实现继承：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">// 传统构造函数继承</span><br><span class="line">function Animal() &#123;</span><br><span class="line">  this.eat = function () &#123;</span><br><span class="line">    alert(&#x27;Animal eat&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Dog() &#123;</span><br><span class="line">  this.bark = function () &#123;</span><br><span class="line">    alert(&#x27;Dog bark&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dog.prototype = new Animal() // 绑定原型，实现继承</span><br><span class="line">var hashiqi = new Dog()</span><br><span class="line">hashiqi.bark() // Dog bark</span><br><span class="line">hashiqi.eat() // Animal eat</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// ES6继承</span><br><span class="line">class Animal &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    this.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  eat() &#123;</span><br><span class="line">    alert(this.name + &#x27; eat&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Dog extends Animal &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    super(name) // 有extend就必须要有super，它代表父类的构造函数，即Animal中的constructor</span><br><span class="line">    this.name = name</span><br><span class="line">  &#125;</span><br><span class="line">  say() &#123;</span><br><span class="line">    alert(this.name + &#x27; say&#x27;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const dog = new Dog(&#x27;哈士奇&#x27;)</span><br><span class="line">dog.say()//哈士奇 say</span><br><span class="line">dog.eat()//哈士奇 eat</span><br></pre></td></tr></table></figure>
+
+<p>Class之间可以通过extends关键字实现继承，这比ES5的通过修改原型链实现继承，要清晰和方便很多。</p>
+<h2 id="3-Class-和传统构造函数有何区别："><a href="#3-Class-和传统构造函数有何区别：" class="headerlink" title="3. Class 和传统构造函数有何区别："></a>3. Class 和传统构造函数有何区别：</h2><ul>
+<li>Class 在语法上更加贴合面向对象的写法</li>
+<li>Class 实现继承更加易读、易理解，对初学者更加友好</li>
+<li>本质还是语法糖，使用prototype</li>
+</ul>
+<h1 id="八、Promise"><a href="#八、Promise" class="headerlink" title="八、Promise"></a>八、Promise</h1><h2 id="1-Promise引入的原因"><a href="#1-Promise引入的原因" class="headerlink" title="1. Promise引入的原因"></a>1. Promise引入的原因</h2><p>在JavaScript的世界中，所有代码都是单线程执行的。由于这个“缺陷”，导致JavaScript的所有网络操作，浏览器事件，都必须是异步执行。Promise 是异步编程的一种解决方案，比传统的解决方案(回调函数和事件)更合理和更强大。</p>
+<p>ES6中的promise的出现给我们很好的解决了回调地狱的问题。</p>
+<h2 id="2-Promise原理"><a href="#2-Promise原理" class="headerlink" title="2. Promise原理"></a>2. Promise原理</h2><p>Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。promise 对象初始化状态为 pending ；当调用resolve(成功)，会由pending =&gt; fulfilled ；当调用reject(失败)，会由pending =&gt; rejected。</p>
+<h2 id="3-Promise的使用流程"><a href="#3-Promise的使用流程" class="headerlink" title="3. Promise的使用流程"></a>3. Promise的使用流程</h2><h3 id="（1）new-Promise一个实例，而且要-return"><a href="#（1）new-Promise一个实例，而且要-return" class="headerlink" title="（1）new Promise一个实例，而且要 return"></a>（1）new Promise一个实例，而且要 return</h3><h3 id="（2）new-Promise-时要传入函数，函数有resolve-reject-两个参数"><a href="#（2）new-Promise-时要传入函数，函数有resolve-reject-两个参数" class="headerlink" title="（2）new Promise 时要传入函数，函数有resolve reject 两个参数"></a>（2）new Promise 时要传入函数，函数有resolve reject 两个参数</h3><h3 id="（3）成功时执行-resolve，失败时执行reject"><a href="#（3）成功时执行-resolve，失败时执行reject" class="headerlink" title="（3）成功时执行 resolve，失败时执行reject"></a>（3）成功时执行 resolve，失败时执行reject</h3><h3 id="（4）then-监听结果"><a href="#（4）then-监听结果" class="headerlink" title="（4）then 监听结果"></a>（4）then 监听结果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function loadImg(src)&#123;</span><br><span class="line">  const promise=new Promise(function(resolve,reject)&#123;</span><br><span class="line">    var img=document.createElement（&#x27;img&#x27;）</span><br><span class="line">    img.onload=function() &#123;</span><br><span class="line">      resolve(img)</span><br><span class="line">    &#125;</span><br><span class="line">    img.onerror=function（）&#123;</span><br><span class="line">      reject()</span><br><span class="line">    &#125;</span><br><span class="line">    img.src=src</span><br><span class="line">  &#125;)</span><br><span class="line">  return promise//返回一个promise实例</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var src=&quot;http://www.imooc.com/static/img/index/logo_new.png&quot;</span><br><span class="line">var result=loadImg(src)</span><br><span class="line">result.then(function(img) &#123;</span><br><span class="line">  console.log(img.width) //resolved(成功)时候的回调函数</span><br><span class="line">&#125;,function() &#123;</span><br><span class="line">  console.log(&quot;failed&quot;) //rejected(失败)时候的回调函数</span><br><span class="line">&#125;)</span><br><span class="line">result.then(function(img) &#123;</span><br><span class="line">  console.log(img.height)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>（详细讲解Promise见：深入理解JavaScript异步二、Promise）</p>
+<h1 id="九、Iterator-和-for…of-循环"><a href="#九、Iterator-和-for…of-循环" class="headerlink" title="九、Iterator 和 for…of 循环"></a>九、Iterator 和 for…of 循环</h1><p>JavaScript 原有的表示“集合”的数据结构，主要是数组（Array）和对象（Object），ES6 又添加了Map和Set。这样就需要一种统一的接口机制，来处理所有不同的数据结构。遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）。</p>
+<h2 id="（1）Iterator的作用"><a href="#（1）Iterator的作用" class="headerlink" title="（1）Iterator的作用"></a>（1）Iterator的作用</h2><ul>
+<li>为各种数据结构，提供一个统一的、简便的访问接口；</li>
+<li>使得数据结构的成员能够按某种次序排列</li>
+<li>ES6创造了一种新的遍历命令for…of循环，Iterator接口主要供for…of消费。</li>
+</ul>
+<h2 id="（2）原生具备Iterator接口的数据（可用for-of-遍历）"><a href="#（2）原生具备Iterator接口的数据（可用for-of-遍历）" class="headerlink" title="（2）原生具备Iterator接口的数据（可用for of 遍历）"></a>（2）原生具备Iterator接口的数据（可用for of 遍历）</h2><ul>
+<li>Array</li>
+<li>set容器</li>
+<li>map容器</li>
+<li>String</li>
+<li>函数的 arguments 对象</li>
+<li>NodeList 对象</li>
+</ul>
+<h2 id="（3）几种遍历方式的比较"><a href="#（3）几种遍历方式的比较" class="headerlink" title="（3）几种遍历方式的比较"></a>（3）几种遍历方式的比较</h2><ul>
+<li>for of 循环不仅支持数组、大多数伪数组对象，也支持字符串遍历，此外还支持 Map 和 Set 对象遍历。（不能遍历对象）</li>
+<li>for in 循环可以遍历字符串、对象、数组，不能遍历Set/Map。（主要用来遍历对象）</li>
+<li>forEach 循环不能遍历字符串、对象, 可以遍历Set/Map</li>
+</ul>
+<h1 id="十、ES6模块化"><a href="#十、ES6模块化" class="headerlink" title="十、ES6模块化"></a>十、ES6模块化</h1><p>import和export旨在成为浏览器和服务器通用的模块解决方案。</p>
+<h1 id="十一、函数默认参数"><a href="#十一、函数默认参数" class="headerlink" title="十一、函数默认参数"></a>十一、函数默认参数</h1><p>ES6之前，函数不支持默认参数。ES6实现了对此的支持，并且只有不传入参数时才会触发默认值。</p>
+<p>函数length属性通常用来表示函数参数的个数。当引入函数默认值后，length表示的就是第一个有默认值参数之前的普通参数个数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const funcA = function(x, y) &#123;&#125;;</span><br><span class="line">console.log(funcA.length);  // 输出结果：2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const funcB = function(x, y = 1) &#123;&#125;;</span><br><span class="line">console.log(funcB.length);  // 输出结果：1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const funcC = function(x = 1, y) &#123;&#125;;</span><br><span class="line">console.log(funcC.length);  // 输出结果 0</span><br></pre></td></tr></table></figure>
+
+<h1 id="十二、箭头函数"><a href="#十二、箭头函数" class="headerlink" title="十二、箭头函数"></a>十二、箭头函数</h1><h2 id="1-箭头函数没有自己的this"><a href="#1-箭头函数没有自己的this" class="headerlink" title="1. 箭头函数没有自己的this"></a>1. 箭头函数没有自己的this</h2><p>箭头函数不会创建自己自己的this，所以它没有自己的this，它只会在自己作用域的上一次继承this。所以箭头函数中this的指向在它定义时已经确定了，之后不会改变。这就解决了function()中this需要在调用时才会被确定的问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const funcA = function(x, y) &#123;&#125;;</span><br><span class="line">console.log(funcA.length);  // 输出结果：2</span><br><span class="line"></span><br><span class="line">const funcB = function(x, y = 1) &#123;&#125;;</span><br><span class="line">console.log(funcB.length);  // 输出结果：1</span><br><span class="line"></span><br><span class="line">const funcC = function(x = 1, y) &#123;&#125;;</span><br><span class="line">console.log(funcC.length);  // 输出结果 0</span><br></pre></td></tr></table></figure>
+
+<p>对象obj的方法b是使用箭头函数定义的，这个函数中的this就永远指向它定义时所处的全局执行环境中的this，即便这个函数是作为对象obj的方法调用，this依旧指向Window对象。需要注意，定义对象的大括号{}是无法形成一个单独的执行环境的，它依旧是处于全局执行环境中。</p>
+<p>同样，使用call()、apply()、bind()等方法也不能改变箭头函数中this的指向。</p>
+<h2 id="2-不可作为构造函数"><a href="#2-不可作为构造函数" class="headerlink" title="2. 不可作为构造函数"></a>2. 不可作为构造函数</h2><p>构造函数 new 操作符的执行步骤如下：</p>
+<ul>
+<li>创建一个对象</li>
+<li>将构造函数的作用域赋给新对象（也就是将对象的__proto__属性指向构造函数的prototype属性）</li>
+<li>指向构造函数中的代码，构造函数中的this指向该对象（也就是为这个对象添加属性和方法）</li>
+<li>返回新的对象</li>
+</ul>
+<p>实际上第二步就是将函数中的this指向该对象。但是由于箭头函数时没有自己的this的，且this指向外层的执行环境，且不能改变指向，所以不能当做构造函数使用。</p>
+<h2 id="3-不绑定arguments"><a href="#3-不绑定arguments" class="headerlink" title="3. 不绑定arguments"></a>3. 不绑定arguments</h2><p>箭头函数没有自己的arguments对象。在箭头函数中访问arguments实际上获得的是它外层函数的arguments值。</p>
+<h1 id="十三、扩展运算符"><a href="#十三、扩展运算符" class="headerlink" title="十三、扩展运算符"></a>十三、扩展运算符</h1><p>扩展运算符…就像是rest参数的逆运算，将一个数组转为用逗号分割的参数序列，对数组进行解包。（ES9给对象也引入了扩展运算符）</p>
+<h2 id="1-将数组转化为用逗号分隔的参数序列"><a href="#1-将数组转化为用逗号分隔的参数序列" class="headerlink" title="1. 将数组转化为用逗号分隔的参数序列"></a>1. 将数组转化为用逗号分隔的参数序列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function  test(a,b,c)&#123;</span><br><span class="line">    console.log(a); // 1</span><br><span class="line">    console.log(b); // 2</span><br><span class="line">    console.log(c); // 3</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var arr = [1, 2, 3];</span><br><span class="line">test(...arr);</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-拼接数组"><a href="#2-拼接数组" class="headerlink" title="2. 拼接数组"></a>2. 拼接数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr1 = [1, 2, 3,4];</span><br><span class="line">var arr2 = [...arr1, 4, 5, 6];</span><br><span class="line">console.log(arr2);  // [1, 2, 3, 4, 4, 5, 6]</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-将字符串转为逗号分隔的数组"><a href="#3-将字符串转为逗号分隔的数组" class="headerlink" title="3. 将字符串转为逗号分隔的数组"></a>3. 将字符串转为逗号分隔的数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var str=&#x27;JavaScript&#x27;;</span><br><span class="line">var arr= [...str];</span><br><span class="line">console.log(arr); // [&quot;J&quot;, &quot;a&quot;, &quot;v&quot;, &quot;a&quot;, &quot;S&quot;, &quot;c&quot;, &quot;r&quot;, &quot;i&quot;, &quot;p&quot;, &quot;t&quot;]</span><br></pre></td></tr></table></figure>
+
+<h1 id="十四、字符串方法"><a href="#十四、字符串方法" class="headerlink" title="十四、字符串方法"></a>十四、字符串方法</h1><h2 id="1-includes"><a href="#1-includes" class="headerlink" title="1. includes()"></a>1. includes()</h2><h2 id="2-startsWith"><a href="#2-startsWith" class="headerlink" title="2. startsWith()"></a>2. startsWith()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let str = &#x27;Hello world!&#x27;;</span><br><span class="line"></span><br><span class="line">str.startsWith(&#x27;Hello&#x27;) // 输出结果：true</span><br><span class="line">str.startsWith(&#x27;Helle&#x27;) // 输出结果：false</span><br><span class="line">str.startsWith(&#x27;wo&#x27;, 6) // 输出结果：true，索引为6的位置以wo开头</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-endsWith"><a href="#3-endsWith" class="headerlink" title="3. endsWith()"></a>3. endsWith()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let str = &#x27;Hello world!&#x27;;</span><br><span class="line"></span><br><span class="line">str.endsWith(&#x27;!&#x27;)       // 输出结果：true</span><br><span class="line">str.endsWith(&#x27;llo&#x27;)     // 输出结果：false</span><br><span class="line">str.endsWith(&#x27;llo&#x27;, 5)  // 输出结果：true, 前5个字符以llo结尾</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-repeat"><a href="#4-repeat" class="headerlink" title="4. repeat()"></a>4. repeat()</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x27;x&#x27;.repeat(3)     // 输出结果：&quot;xxx&quot;</span><br><span class="line">&#x27;hello&#x27;.repeat(2) // 输出结果：&quot;hellohello&quot;</span><br><span class="line">&#x27;na&#x27;.repeat(0)    // 输出结果：&quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果参数是小数，会向下取整；</p>
+<p>如果参数是负数或Infinity会报错；</p>
+<p>如果参数是0到-1之间的小数等同于0；</p>
+<p>如果参数是NaN等同于0；</p>
+<p>如果参数是字符串，会先转换成数字；</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ljianshu/Blog/issues/10">https://github.com/ljianshu/Blog/issues/10</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/KsoSwA73PzGwYMqZOwUvNQ">https://mp.weixin.qq.com/s/KsoSwA73PzGwYMqZOwUvNQ</a></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9c481d2b/">JavaScript 的数据类型及其检测</a>
+            
+            
+            <a class="next" rel="next" href="/1dd2fa27/">ES6中的Symbol基本数据类型</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9c481d2b/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1dd2fa27/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

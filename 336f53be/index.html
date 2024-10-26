@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>2022年了，你还没用pnpm吗？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">2022年了，你还没用pnpm吗？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 8, 2022&nbsp;&nbsp;14:58:15</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 8, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">18 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>关于软件包的管理工具，大家比较熟知的是 <code>npm</code> 和 <code>Yarn</code>，今天给大家介绍一个新的包管理工具<a target="_blank" rel="noopener" href="https://pnpm.io/zh/">pnpm</a>。</p>
+<p>pnpm是高性能的npm，通过内容可寻址存储(CAS)、符号链接(Symbolic Link)、硬链接(Hard Link)等管理依赖包，达到多项目之间依赖共享（节省存储空间），减少安装时间（安装快速）。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>pnpm</code>代表<code>performant npm</code>（高性能的npm），同<code>npm</code>和<code>Yarn</code>，都属于<code>Javascript</code>包管理安装工具，它较<code>npm</code>和<code>Yarn</code>在性能上得到很大提升，被称为快速的，节省磁盘空间的包管理工具。</p>
+<p>当使用 <code>npm</code> 或 <code>Yarn</code> 时，如果你有 100 个项目使用了某个依赖（dependency），就会有 100 份该依赖的副本保存在硬盘上，而在使用 <code>pnpm</code> 时，依赖会被存储在内容可寻址的存储中，所以：</p>
+<ol>
+<li>如果你用到了某依赖项的不同版本，只会将不同版本间有差异的文件添加到仓库。 例如，如果某个包有100个文件，而它的新版本只改变了其中1个文件。那么 <code>pnpm update</code> 时只会向存储中心额外添加1个新文件，而不会因为仅仅一个文件的改变复制整新版本包的内容。</li>
+<li>所有文件都会存储在硬盘上的某一位置。 当软件包被安装时，包里的文件会硬链接到这一位置上对应的文件，而不会占用额外的磁盘空间。 这允许你跨项目地共享同一版本的依赖。</li>
+</ol>
+<p>因此，您在磁盘上节省了大量空间，这与项目和依赖项的数量成正比，并且安装速度要快得多！</p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>通过<code>npm</code>安装：<code>npm install -g pnpm</code>；</p>
+<p>通过 <code>pnpm -v</code> 命令查看已安装的<code>pnpm</code>的版本。</p>
+<h3 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h3><p>执行命令 <code>pnpm init</code> 进行初始化，生成<code>package.json</code>文件；</p>
+<p>安装依赖：<code>pnpm install xxx</code>；</p>
+<p>使用命令 <code>pnpm run xxx</code> 运行<code>package.json</code>中定义的<code>scripts</code>脚本，启动服务即可。</p>
+<h3 id="3-示例：创建一个vue3项目"><a href="#3-示例：创建一个vue3项目" class="headerlink" title="3. 示例：创建一个vue3项目"></a>3. 示例：创建一个vue3项目</h3><p>通过<code>pnpm create</code>使用<code>vite</code>套件新建一个<code>vue3</code>的项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用pnpm create 启动套件（vite，只有存在的套件才可以）创建模板项目</span></span><br><span class="line">pnpm create vite &lt;project-name&gt; -- --template vue</span><br><span class="line"><span class="built_in">cd</span> &lt;project-name&gt;</span><br><span class="line">pnpm install</span><br><span class="line">pnpm dev</span><br></pre></td></tr></table></figure>
+
+<p>通过上述操作，我们学到了<code>pnpm</code>项目的初始化、安装依赖、启动服务等，可以运行起来，感受一下它和<code>npm</code>运行速度的差异。</p>
+<h3 id="4-常用命令"><a href="#4-常用命令" class="headerlink" title="4. 常用命令"></a>4. 常用命令</h3><p><a target="_blank" rel="noopener" href="https://pnpm.io/zh/cli/add">官网查看更多命令</a></p>
+<p>（1）<strong>设置源</strong></p>
+<ul>
+<li>查看源：<code>pnpm config get registry</code></li>
+<li>切换源：<code>pnpm config set registry https://registry.npmmirror.com</code></li>
+</ul>
+<p>（2）<strong>初始化</strong></p>
+<ul>
+<li><p>初始化package.json：<code>pnpm init</code></p>
+<p>注意：<code>pnpm init</code>只能一键快速生成<code>package.json</code>文件，如果要一步一步填写每个属性的值生成<code>package.json</code>文件，则需要通过<code>npm init</code>生成，如果要一键快速生成，需要增加<code>-y</code>参数<code>npm init -y</code>来生成。</p>
+</li>
+</ul>
+<p>（3）<strong>管理依赖</strong></p>
+<ul>
+<li>安装依赖包到 <code>dependencies</code> ：<code>pnpm add &lt;pkg&gt;</code></li>
+<li>安装依赖包到<code>devDependencies</code>：<code>pnpm add -D &lt;pkg&gt;</code></li>
+<li>安装依赖包到<code>optionalDependencies</code>：<code>pnpm add -O &lt;pkg&gt;</code></li>
+<li>全局安装依赖包：<code>pnpm add -g xxx</code></li>
+<li>安装项目全部依赖：<code>pnpm install，别名pnpm i**</code></li>
+<li>更新依赖包：<code>pnpm update，别名pnpm up</code></li>
+<li>删除依赖包：<code>pnpm remove，别名pnpm rm/uninstall/un</code></li>
+</ul>
+<p>（4）<strong>查看依赖</strong></p>
+<ul>
+<li>查看本地安装的依赖：<code>pnpm list，别名pnpm ls</code></li>
+<li>查看全局安装的依赖：<code>pnpm list --global，别名pnpm ls --g</code></li>
+<li>检查过期的依赖：<code>pnpm outdated</code></li>
+</ul>
+<p>（5）<strong>运行脚本</strong></p>
+<ul>
+<li>运行自定义脚本：<code>pnpm run xxx，别名pnpm xxx</code></li>
+<li>运行<code>test</code>测试脚本：<code>pnpm test</code></li>
+<li>启动套件创建项目： <code>pnpm create</code></li>
+<li>运行<code>start</code>启动命令：<code>pnpm start</code></li>
+</ul>
+<p>（6）<strong>发布依赖包</strong></p>
+<ul>
+<li>发布依赖包：<code>pnpm publish</code></li>
+</ul>
+<p>（7）<strong>管理node环境</strong></p>
+<p>可实现<code>nvm</code>、<code>n</code>等<code>node</code>版本管理工具，安装并切换<code>node.js</code>版本的功能。</p>
+<ul>
+<li>本地安装并使用：<code>pnpm env use &lt;node版本号&gt;</code></li>
+<li>全局安装并使用：<code>pnpm env use --global &lt;node版本号&gt;</code></li>
+</ul>
+<p>（8）<strong>清理缓存</strong><br>有时候，pnpm 的缓存可能会导致问题。你可以尝试清理 pnpm 的缓存然后重新安装依赖。使用 <code>pnpm store prune</code> 来清理缓存。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a791ff6391234ae4a65cb6a711e4efb2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+
+
+<h2 id="原理探究"><a href="#原理探究" class="headerlink" title="原理探究"></a>原理探究</h2><h3 id="1-node-modules"><a href="#1-node-modules" class="headerlink" title="1. node_modules"></a>1. node_modules</h3><blockquote>
+<p>pnpm基于符号链接来创建非扁平化的<code>node_modules</code></p>
+</blockquote>
+<p>对比<code>npm</code>和<code>pnpm</code>安装的<code>node_modules</code>：</p>
+<table>
+<thead>
+<tr>
+<th>npm</th>
+<th>pnpm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/80a9ca9bce4643cbaaf9a0dbe2804cba~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp"></td>
+<td><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2a01770346624adf8c4f97e67650ae67~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp"></td>
+</tr>
+<tr>
+<td>所有依赖包平铺在<code>node_modules</code>目录，包括直接依赖包以及其他次级依赖包</td>
+<td><code>node_modules</code>目录下只有<code>.pnpm</code>和直接依赖包（<code>vue、vite、...</code>），没有其他次级依赖包</td>
+</tr>
+<tr>
+<td>没有符号链接</td>
+<td>直接依赖包的后面有符号链接的标识</td>
+</tr>
+</tbody></table>
+<p>那<code>pnpm</code>怎么管理这些依赖包的呢？带着这一问题，我们继续探究。</p>
+<p>详细看一下<code>pnpm</code>生成的<code>node_modules</code>目录如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">▾ node_modules</span><br><span class="line">    ▸ .bin</span><br><span class="line">    ▸ .pnpm</span><br><span class="line">    ▸ @vitejs    -&gt;符号链接</span><br><span class="line">    ▸ vite       -&gt;符号链接</span><br><span class="line">    ▸ vue        -&gt;符号链接</span><br><span class="line">    .modules.yaml</span><br></pre></td></tr></table></figure>
+
+<p><code>node_modules</code> 中只有一个 <code>.pnpm</code> 的文件夹以及三个符号链接<code>@vitejs/plugin-vue</code>、 <code>vite</code> 和 <code>vue</code>。 这是因为我们的项目只安装了<code>@vitejs/plugin-vue</code>、 <code>vite</code> 和 <code>vue</code>三个依赖，<code>pnpm</code>使用符号链接的方式将项目的直接依赖添加到<code>node_modules</code>的根目录下，<strong>也就是说node_modules目录下只有我们项目中依赖的dependencies、devDependencies和一个.pnpm目录</strong>。</p>
+<p>以<code>vite</code>依赖包举例，看一下<code>vite</code>依赖包和<code>.pnpm</code>目录里都有些什么：</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+         src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f4bb297e8d704fddad1cafbd76c24814~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>展开<code>vite</code>依赖包，我们会有两个疑问：</p>
+<ul>
+<li><code>vite</code>是一个符号链接，那它的实际位置在哪里？</li>
+<li>依赖的其他次级依赖在哪里？</li>
+</ul>
+<p>（1）<strong>vite的实际位置</strong></p>
+<p><code>.pnpm</code>称为虚拟存储目录，以平铺的形式储存着所有的项目依赖包，每个依赖包都可以通过<code>.pnpm/&lt;name&gt;@&lt;version&gt;/node_modules/&lt;name&gt;</code>路径找到实际位置。</p>
+<p>即直接依赖的<code>vite</code>包 符号链接到路径：<code>.pnpm/vite@2.9.12/node_modules/vite</code>，<code>vite</code>包中的每个文件都是来自内容可寻址存储的硬链接。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.pnpm/vite@2.9.12/node_modules/vite</span><br><span class="line">▾ node_modules</span><br><span class="line">    ▾ .pnpm</span><br><span class="line">        ...</span><br><span class="line">        ▾ vite@2.9.12</span><br><span class="line">            ▾ node_modules</span><br><span class="line">               ▾ vite                 -&gt; 符号链接到这个位置</span><br><span class="line">                 ...</span><br><span class="line">                 ▾ src</span><br><span class="line">                     client</span><br><span class="line">                 package.json         -&gt; 包中的每个文件都硬链接到pnpm store中的对应文件，即&lt;pnpm store path&gt;/vite</span><br><span class="line">    ▸ vite                            -&gt; 符号链接到.pnpm/vite@2.9.12/node_modules/vite</span><br><span class="line">    .modules.yaml</span><br></pre></td></tr></table></figure>
+
+<p>（2）<strong>vite的次级依赖</strong></p>
+<p>观察上面的目录结构，发现<code>/node_modules/.pnpm/vite@2.9.12/node_modules/vite</code>目录下还是没有次级依赖的<code>node_modules</code>。</p>
+<p><strong>pnpm 的 node_modules设计 ，包的依赖项与依赖包的实际位置位于同一目录级别。</strong></p>
+<p>所以 <code>vite</code> 的次级依赖包不在 <code>.pnpm/vite@2.9.12/node_modules/vite/node_modules/</code>， 而是在 <code>.pnpm/vite@2.9.12/node_modules/</code>，与<code>vite</code>实际位置位于同一目录级别。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">▾ node_modules</span><br><span class="line">    ▾ .pnpm</span><br><span class="line">        ...</span><br><span class="line">        ▾ esbuild@0.14.43           -&gt; esbuild依赖包的实际位置</span><br><span class="line">            ▾ node_modules</span><br><span class="line">               ▸ esbuild</span><br><span class="line">        ▾ vite@2.9.12</span><br><span class="line">            ▾ node_modules</span><br><span class="line">               ▸ esbuild             -&gt; （依赖包）符号链接到.pnpm/esbuild@0.14.43/node_modules/esbuild，次级依赖包与依赖包实际位置同级</span><br><span class="line">               ▸ postcss             ...</span><br><span class="line">               ▸ reslove             ...</span><br><span class="line">               ▸ rollup              ...</span><br><span class="line">               ▾ vite                 -&gt; vite依赖包的实际位置</span><br><span class="line">                  ...</span><br><span class="line">                  ▾ src</span><br><span class="line">                     client</span><br><span class="line">                  package.json        <span class="comment"># 依赖esbuild、postcss、resolve、rollup</span></span><br><span class="line">    ▸ vite                            -&gt; 符号链接到.pnpm/vite@2.9.12/node_modules/vite</span><br><span class="line">    .modules.yaml</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>esbuild</code>等次级依赖包又是一个符号链接，仍符合刚才的逻辑，实际位置在<code>.pnpm/esbuild@0.14.43/node_modules/esbuild</code>，包内的每个文件再硬链接到<code>pnpm store</code>中的对应文件。</p>
+<p>我们再通过官网提供的依赖图，再辅助理解一下<code>node_modules</code>依赖包之间的关系。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 50em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f242df5381f54ea1a0f5a52f8275fcae~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>项目依赖了<code>bar@1.0.0</code>版本，<code>bar</code>依赖了<code>foo@1.0.0</code>版本，<code>node_modules</code>下只有直接依赖包<code>bar@1.0.0</code>符号链接和<code>.pnpm</code>目录。</p>
+<p><code>Node.js</code>解析时，<code>bar@1.0.0</code>就会符号链接到实际位置<code>.pnpm/bar@1.0.0/node_modules/bar</code>，包中的文件（并非包文件夹）都硬链接到<code>.pnpm store</code>中的对应文件，<code>foo@1.0.0</code>做为<code>bar</code>的依赖，与<code>bar</code>的实际位置处于同一层级，符号链接指向实际位置<code>.pnpm/foo@1.0.0/node_modules/foo</code>，包中的文件再硬链接至<code>.pnpm store</code>。</p>
+<p>关于peerDependencies是怎么处理依赖的，可以看官网<a target="_blank" rel="noopener" href="https://pnpm.io/zh/how-peers-are-resolved">这篇文章</a></p>
+<p><strong>总结：pnpm使用符号链接Symbolic link（软链接）来创建依赖项的嵌套结构，将项目的直接依赖符号链接到node_modules的根目录，直接依赖的实际位置在.<code>pnpm/&lt;name&gt;@&lt;version&gt;/node_modules/&lt;name&gt;</code>，依赖包中的每个文件再硬链接（Hard link）到<code>.pnpm store</code>。</strong></p>
+<h3 id="2-包存储store"><a href="#2-包存储store" class="headerlink" title="2. 包存储store"></a>2. 包存储store</h3><blockquote>
+<p><code>pnpm store</code>：<code>pnpm</code>资源在磁盘上的存储位置</p>
+</blockquote>
+<p>一般<code>store</code>在Mac/Linux系统中，默认会设置到<code>&#123;home dir&#125;&gt;/.pnpm-store/v3</code>；windows下会设置到当前盘的根目录下，比如C（<code>C:\.pnpm-store\v3</code>）、D盘（<code>D:\.pnpm-store\v3</code>）。</p>
+<p>可以通过执行<code>pnpm store path</code>命令查看store存储目录的路径</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/81966e99cecf4b96b08190580bc4e1e9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>进入<code>store</code>存储路径，查看存储的内容如下：</p>
+<p><code>files/xx/xxx</code>以文件夹进行分类，每个文件夹内包含重新编码命名后的文件，依赖包硬链接到此处对应的文件。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5ea06564cbaa4bc0a2a5881433ed4ac1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>在项目中执行<code>pnpm install</code>的时候，依赖包存在于<code>store</code>中，直接创建依赖包硬链接到<code>store</code>中，如果不存在，则从远程下载后存储在<code>store</code>中，并从项目的<code>node_modules</code>依赖包中创建硬链接到<code>store</code>中。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/193aadaab51647c8b0058254645e4509~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>上图中提示包从<code>Content-addressable store</code>硬链接到<code>Virtual store</code>，以及<code>Content-addressable store</code>和<code>Virtual store</code>的作用位置。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vibaike.com/106979/">内容寻址存储 — Content-addressable store(CAS)</a></li>
+</ul>
+<p>它是一种存储信息的方式，根据内容而不是位置进行检索信息的存储方式，被用于高速存储和检索的固定内容，如存储。这里的CAS作用于<code>/Users/&lt;username&gt;/.pnpm-store/v3</code>目录。</p>
+<ul>
+<li>虚拟存储 — Virtual store</li>
+</ul>
+<p>指向存储的链接的目录，所有直接和间接依赖项都链接到此目录中，项目当中的.pnpm目录<code>node_modules/.pnpm</code>。</p>
+<p><strong>因为这样的处理机制，每次安装依赖的时候，如果是相同的依赖，有好多项目都用到这个依赖，那么这个依赖实际上最优情况(即版本相同)只用安装一次。如果依赖包存在于pnpm store中，则从store目录里面去hard-link，避免了二次安装带来的时间消耗，如果不存在的话，就会去下载并存储在store中。</strong></p>
+<p><strong>如果是 npm 或 Yarn，那么这个依赖在多个项目中使用，在每次安装的时候都会被重新下载一次。</strong></p>
+<p>对比发现<code>pnpm install</code>安装速度相当之快！必须给个大大的赞！</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bd7e3a43a9ba4e398510e2a81ea00237~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="tempImage1655275072185.gif"></p>
+<p><strong>❓紧接着会有人问，那一直往store里存储依赖包，store会不会越来越大？</strong></p>
+<p>官方提供了一个命令：<a target="_blank" rel="noopener" href="https://pnpm.io/zh/cli/store#prune"><code>pnpm store prune</code></a>，从存储中删除未引用的包。</p>
+<p>未引用的包是系统上的任何项目中都未使用的包。 在大多数安装操作之后，包有可能会变为未引用状态。</p>
+<p>官方举例：在 <code>pnpm install</code> 期间，包 <code>foo@1.0.0</code> 被更新为 <code>foo@1.0.1</code>。 pnpm 将在存储中保留 <code>foo@1.0.0</code> ，因为它不会自动除去包。 如果包 <code>foo@1.0.0</code> 没有被其他任何项目使用，它将变为未引用。 运行 <code>pnpm store prune</code> 将会把 <code>foo@1.0.0</code> 从存储中删除 。</p>
+<p>运行 <code>pnpm store prune</code> 是不会影响项目的。 如果以后需要安装已经被删除的包，pnpm 将重新下载他们。建议清理不要太频繁，以防在切换分支等时pnpm需要重新下载所有删除的包，减慢安装过程。</p>
+<p><strong>pnpm store的其他命令</strong></p>
+<p><code>pnpm store status</code>：查看store中已修改的包，如果包的内容与拆包时时相同的话，返回退出代码0。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/53cf43da67e442dea90a25182ae7028d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p><code>pnpm store add</code>：只把包加入存储中，且没有修改存储外的任何项目或文件</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8874aeaf73e9466f9363abb4bcf5d980~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p><code>pnpm store prune</code>：删除存储中未被引用的包</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9cba437a7cf0438aa4a3ceccdeb084b2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+
+
+<h2 id="monorepo支持"><a href="#monorepo支持" class="headerlink" title="monorepo支持"></a>monorepo支持</h2><p><code>pnpm</code>跟<code>npm</code>和<code>Yarn</code>一样，内置了对<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c10d0b8c5581">单一存储库monorepo</a>的支持，只需要在项目根目录下创建 <a target="_blank" rel="noopener" href="https://pnpm.io/zh/pnpm-workspace_yaml"><code>pnpm-workspace.yaml</code></a> 文件，定义<code>workspace</code>的根目录。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pnpm-workspace.yaml</span><br><span class="line">packages:</span><br><span class="line">  # all packages in subdirs of packages/ and components/</span><br><span class="line">  - &#x27;packages/**&#x27;</span><br><span class="line">  - &#x27;components/**&#x27;</span><br><span class="line">  # exclude packages that are inside test directories</span><br><span class="line">  - &#x27;!**/test/**&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-Workspace协议（workspace-）"><a href="#1-Workspace协议（workspace-）" class="headerlink" title="1. Workspace协议（workspace:）"></a>1. Workspace协议（workspace:）</h3><blockquote>
+<p>workspace：工作空间</p>
+</blockquote>
+<p>默认情况下，如果可用的 <code>packages</code> 与已声明的可用范围相匹配，pnpm 将从工作空间链接这些 <code>packages</code>。</p>
+<p>例如，如果 <code>bar</code> 中有 <code>&quot;foo&quot;：&quot;^1.0.0&quot;</code> 的这个依赖项，则 <code>foo@1.0.0</code> 链接到 <code>bar</code>。 但是，如果 <code>bar</code> 的依赖项中有 <code>&quot;foo&quot;: &quot;2.0.0&quot;</code>，而 <code>foo@2.0.0</code> 在工作空间中并不存在，则将从 npm registry 安装 <code>foo@2.0.0</code> ，这种行为带来了一些不确定性。</p>
+<p><code>pnpm</code> 支持 <code>workspace</code> 协议（写法：<code>workspace:&lt;版本号&gt;</code> ）。 当使用此协议时，pnpm 将拒绝解析除本地 <code>workspace</code> 包含的 <code>package</code> 之外的任何内容。 因此，如果您设置为 <code>&quot;foo&quot;: &quot;workspace:2.0.0&quot;</code> 时，安装将会失败，因为 <code>&quot;foo@2.0.0&quot;</code> 不存在于此 <code>workspace</code> 中。</p>
+<p><strong>接下来，我们使用vue代码库来理解一下Workspace协议：</strong></p>
+<p>代码库地址：<a href="https://link.juejin.cn/?target=https://github.com/vuejs/core">github.com/vuejs/core</a></p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ca7e0eeee1e04b33b8ecead061965701~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>根目录可以看到有这两个文件<code>pnpm-lock.yaml</code>、<code>pnpm-workspace.yaml</code>， 其中lock文件为<code>pnpm install</code>时生成的lock文件，space文件则为<code>monorepo</code>仓库中<strong>必须需要的</strong>定义工作空间目录的文件。</p>
+<p>（1）点开<code>pnpm-workspace.yaml</code>文件：<a target="_blank" rel="noopener" href="https://github.com/vuejs/core/blob/main/pnpm-workspace.yaml">github.com/vuejs/core/…</a></p>
+<p>我们看到文件内容为：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">packages:</span> </span><br><span class="line">    - <span class="comment">&#x27;packages/*&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>也就表示<code>core/packages/*</code>这个目录下面所有的文件为<code>workspace</code>的内容。</p>
+<p>（2）点开<code>package.json</code>文件：<a target="_blank" rel="noopener" href="https://github.com/vuejs/core/blob/main/package.json">github.com/vuejs/core/…</a></p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2d23f92325164965b70c8af480d2391d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fd7a6b35de1e4844bc70db2cdf12d158~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>我们看到用到本地<code>workspace</code>包的都标注了<code>workspace:*</code>协议，这样依赖的就一直是本地的包，而不是从<code>npm registry</code>安装的包。</p>
+<p>（3）我们验证一下到底依赖的是不是本地包</p>
+<p>clone代码库到本地，<code>pnpm install</code>安装依赖</p>
+<p>查看<code>core/node_modules/</code>文件夹，发现<code>package.json</code>文件中依赖的<code>@vue/xxx</code>、<code>vue</code>包都已符号链接的形式存在，如下图：</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/30ffd88dd0ac48a7be327c1f43322231~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>按<code>workspace:*</code>协议，打开<code>packages/reactivity</code>文件夹，做一个测试，在<code>index.js</code>文件中加入<code>console.log(&#39;test&#39;)</code>，如下图：</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/feaeddba260e4310ae904a5c3199490c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>这时候再打开<code>node_modules/@vue/reactivity/index.js</code>文件，可以发现刚才在<code>packages</code>里面改的内容，显示在了<code>node_modules</code>目录下的包里。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/7cd7906cb43d4f959bee8684815426c1~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>打开磁盘上存储（<code>pnpm store path</code>）的依赖包，并没有上面新增的<code>console.log</code>，上面的改动只影响了本地依赖包，而不是远程<code>install</code>下载后存储在磁盘上的包，也就是说<strong>符合workspace:协议引入的依赖包就是本地的workspace目录（即core/packages）下的包</strong>。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e7475de217be4a6eb819fdbde1175752~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<h3 id="2-别名引用"><a href="#2-别名引用" class="headerlink" title="2. 别名引用"></a>2. 别名引用</h3><p>假如工作区有一个名为 <code>foo</code> 的包，可以通过这样引用 <code>&quot;foo&quot;: &quot;workspace:&quot;</code>，如果是其它别名，可以这么引用：<code>&quot;bar&quot;: &quot;workspace:foo@*&quot;</code>。</p>
+<h3 id="3-相对引用"><a href="#3-相对引用" class="headerlink" title="3. 相对引用"></a>3. 相对引用</h3><p>假如<code>packages</code>下有同层级的<code>foo</code>、<code>bar</code>，其中<code>bar</code>依赖于<code>foo</code>，则可以写作<code>&quot;bar&quot;: &quot;workspace:../foo&quot;</code>。</p>
+<h3 id="4-发布workspace包"><a href="#4-发布workspace包" class="headerlink" title="4. 发布workspace包"></a>4. 发布workspace包</h3><p>当<code>workspace</code>包打包发布时，将会动态替换这些<code>workspace:</code>依赖。</p>
+<p>假设我们的 <code>workspace</code> 中有 <code>a</code>、 <code>b</code>、 <code>c</code>、 <code>d</code> 并且它们的版本都是 <code>1.5.0</code>，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;a&quot;</span>: <span class="string">&quot;workspace:*&quot;</span>,</span><br><span class="line">        <span class="string">&quot;b&quot;</span>: <span class="string">&quot;workspace:~&quot;</span>,</span><br><span class="line">        <span class="string">&quot;c&quot;</span>: <span class="string">&quot;workspace:^&quot;</span>,</span><br><span class="line">        <span class="string">&quot;d&quot;</span>: <span class="string">&quot;workspace:^1.5.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将会被转化为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;dependencies&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;a&quot;</span>: <span class="string">&quot;1.5.0&quot;</span>,</span><br><span class="line">        <span class="string">&quot;b&quot;</span>: <span class="string">&quot;~1.5.0&quot;</span>,</span><br><span class="line">        <span class="string">&quot;c&quot;</span>: <span class="string">&quot;^1.5.0&quot;</span>,</span><br><span class="line">        <span class="string">&quot;d&quot;</span>: <span class="string">&quot;^1.5.0&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在很多很受欢迎的开源项目都适用了pnpm的工作空间功能，感兴趣的可以前往<a target="_blank" rel="noopener" href="https://pnpm.io/zh/workspaces#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B">官网</a>查看哦！</p>
+<h2 id="对比npm、Yarn"><a href="#对比npm、Yarn" class="headerlink" title="对比npm、Yarn"></a>对比npm、Yarn</h2><h3 id="1-性能对比"><a href="#1-性能对比" class="headerlink" title="1. 性能对比"></a>1. 性能对比</h3><p>在<code>pnpm</code>官网上，提供了一个<code>benchmarks</code><a target="_blank" rel="noopener" href="https://pnpm.io/benchmarks">基准测试图表</a>，它展示了<code>npm</code>、<code>pnpm</code>、<code>Yarn</code>、<code>Yarn pnp</code>在<code>install</code>、<code>update</code>等场景下的耗时：</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/60c399f1394849c3a6000771d59f77e4~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07ec935c5bf2471e9c29b738730d07e2~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>通过上图，可以看出<code>pnpm</code>的运行速度基本上是<code>npm</code>的两倍，运行速度排名<code>pnpm &gt; Yarn &gt; npm</code>。</p>
+<h3 id="2-功能对比"><a href="#2-功能对比" class="headerlink" title="2. 功能对比"></a>2. 功能对比</h3><p><a target="_blank" rel="noopener" href="https://pnpm.io/zh/feature-comparison">官网链接</a></p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e3c8cd1b78934320a3a246ac0e7b2d61~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>通过上图可以看出<code>pnpm</code>独有的两个功能：</p>
+<ul>
+<li>管理Node.js版本(<code>pnpm env use --global xxx</code>)</li>
+<li>内容可寻址存储（<code>CAS</code>）</li>
+</ul>
+<h3 id="3-竞争"><a href="#3-竞争" class="headerlink" title="3. 竞争"></a>3. 竞争</h3><ul>
+<li><code>Yarn</code></li>
+</ul>
+<p><code>Yarn</code> 在 <a target="_blank" rel="noopener" href="https://dev.to/arcanis/yarn-31-corepack-esm-pnpm-optional-packages--3hak#new-install-mode-raw-pnpm-endraw-">v3.1</a> 添加了 <code>pnpm</code> 链接器。 因此 <code>Yarn</code> 可以创建一个类似于 <code>pnpm</code> 创建的 <code>node_modules</code> 目录结构。</p>
+<p>此外，<code>Yarn</code> 团队计划实现内容可寻址存储，以提高磁盘空间效率。</p>
+<ul>
+<li><code>npm</code></li>
+</ul>
+<p><code>npm</code> 团队决定也采用 <code>pnpm</code> 使用的符号链接的 <code>node_modules</code> 目录结构（相关 <a target="_blank" rel="noopener" href="https://github.com/npm/rfcs/blob/main/accepted/0042-isolated-mode.md">RFC</a>）。</p>
+<h2 id="npm或Yarn-转-pnpm"><a href="#npm或Yarn-转-pnpm" class="headerlink" title="npm或Yarn 转 pnpm"></a>npm或Yarn 转 pnpm</h2><p>可参考<code>vue</code>代码库的这一次升级<a target="_blank" rel="noopener" href="https://github.com/vuejs/core/commit/61c5fbd3e35152f5f32e95bf04d3ee083414cecb#diff-18ae0a0fab29a7db7aded913fd05f30a2c8f6c104fadae86c9d217091709794c">commit log</a></p>
+<h3 id="1-全局安装pnpm"><a href="#1-全局安装pnpm" class="headerlink" title="1. 全局安装pnpm"></a>1. 全局安装<code>pnpm</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g pnpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-删除npm或yarn生成的node-modules"><a href="#2-删除npm或yarn生成的node-modules" class="headerlink" title="2. 删除npm或yarn生成的node_modules"></a>2. 删除<code>npm</code>或<code>yarn</code>生成的<code>node_modules</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目目录下运行或手动物理删除</span></span><br><span class="line"><span class="built_in">rm</span> -rf node_modules</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-pnpm-import从其他软件包管理器的lock-文件生成-pnpm-lock-yaml，再执行pnpm-install-frozen-lockfile（相当于npm-ci）生成依赖，防止没有lock文件意外升级依赖包，导致项目出错"><a href="#3-pnpm-import从其他软件包管理器的lock-文件生成-pnpm-lock-yaml，再执行pnpm-install-frozen-lockfile（相当于npm-ci）生成依赖，防止没有lock文件意外升级依赖包，导致项目出错" class="headerlink" title="3. pnpm import从其他软件包管理器的lock 文件生成 pnpm-lock.yaml，再执行pnpm install --frozen-lockfile（相当于npm ci）生成依赖，防止没有lock文件意外升级依赖包，导致项目出错"></a>3. <code>pnpm import</code>从其他软件包管理器的<code>lock</code> 文件生成 <code>pnpm-lock.yaml</code>，再执行<code>pnpm install --frozen-lockfile</code>（相当于<code>npm ci</code>）生成依赖，防止没有lock文件意外升级依赖包，导致项目出错</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成`pnpm-lock.yaml`</span></span><br><span class="line">pnpm import</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">pnpm install --frozen-lockfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-删除npm或yarn生成的lock文件"><a href="#4-删除npm或yarn生成的lock文件" class="headerlink" title="4. 删除npm或yarn生成的lock文件"></a>4. 删除<code>npm</code>或<code>yarn</code>生成的<code>lock</code>文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除package-lock.json</span></span><br><span class="line"><span class="built_in">rm</span> -rf package-lock.json</span><br><span class="line"><span class="comment"># 删除yarn.lock</span></span><br><span class="line"><span class="built_in">rm</span> -rf yarn.lock</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-项目中的npm命令等修改为pnpm，包括README文档、运行命令等"><a href="#5-项目中的npm命令等修改为pnpm，包括README文档、运行命令等" class="headerlink" title="5. 项目中的npm命令等修改为pnpm，包括README文档、运行命令等"></a>5. 项目中的<code>npm</code>命令等修改为<code>pnpm</code>，包括<code>README</code>文档、运行命令等</h3><p><a target="_blank" rel="noopener" href="https://github.com/eyunhua/code-commit-check/commit/52ca9c0701a13190b4a8ef8a2c690afffe67bf0f">可参考代码库，本人亲测，已成功升级</a></p>
+<h2 id="卸载pnpm"><a href="#卸载pnpm" class="headerlink" title="卸载pnpm"></a>卸载pnpm</h2><h3 id="1-卸载全局安装的包"><a href="#1-卸载全局安装的包" class="headerlink" title="1. 卸载全局安装的包"></a>1. 卸载全局安装的包</h3><p>通过<code>pnpm ls --g</code>查看全局安装的包，只有通过<code>pnpm install/add xxx --global</code>安装的包才为全局包哦！</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2fb4f0cb205a4981a3cfb0b84e59c2f8~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>（1）<code>pnpm rm -g xxx</code>列出每个全局包进行删除</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/845dd3110f3444c2971b7eb3d0126006~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<p>（2）<code>pnpm root -g</code>找到全局目录的位置并手动删除它</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a191ee20e74e4a798301b484fa4ad489~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<h3 id="2-移除pnpm-cli"><a href="#2-移除pnpm-cli" class="headerlink" title="2. 移除pnpm cli"></a>2. 移除pnpm cli</h3><p>（1）通过独立脚本安装的，可以通过<code>rm -rf $PNPM_HOME</code>进行移除（谨慎：删除前确定好删除的内容）</p>
+<p>（2）使用<code>npm</code>安装的<code>pnpm</code>，可以通过<code>npm rm -g pnpm</code>进行移除</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8a0d0593db52406198cc1595c7516530~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<h3 id="3-删除全局内容可寻址存储"><a href="#3-删除全局内容可寻址存储" class="headerlink" title="3. 删除全局内容可寻址存储"></a>3. 删除全局内容可寻址存储</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf $(pnpm store path)</span><br></pre></td></tr></table></figure>
+
+<p>如果您不在主磁盘中使用 <code>pnpm</code> ，您必须在使用 <code>pnpm</code> 的每一个磁盘中运行上述命令。 因为 <code>pnpm</code> 会为每一个磁盘创建一个专用的存储空间。</p>
+<h2 id="一些疑问"><a href="#一些疑问" class="headerlink" title="一些疑问"></a>一些疑问</h2><p>还有一些问题，需要进一步的验证和考究：</p>
+<ol>
+<li><code>webpack</code>打包的时候，<code>pnpm</code>依赖包之间引用是怎么处理的？</li>
+<li>手动修改<code>pnpm store</code>中的包的内容，其他引用地方是不是影响了？</li>
+<li>删除项目文件夹，<code>pnpm prune</code>的机制是什么，能否正确处理？</li>
+</ol>
+<div style="color:gray;font-size:0.9em">
+参考:<br>
+[1] <a target="_blank" rel="noopener" href="https://pnpm.io/zh/motivation">pnpm官方文档</a><br>
+[2] <a target="_blank" rel="noopener" href="https://juejin.cn/post/7053340250210795557">都2022年了，pnpm快到碗里来！</a><br>
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/8697a362/">战争，通胀，经济与中美俄欧的地缘政治博弈【深度解读】</a>
+            
+            
+            <a class="next" rel="next" href="/5d95366e/">什么是量子力学？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/8697a362/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/5d95366e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

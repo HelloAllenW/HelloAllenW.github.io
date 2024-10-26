@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>现代CSS颜色指南 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">现代CSS颜色指南</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2023&nbsp;&nbsp;22:38:16</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">9 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在 CSS 中颜色无处不在，它们可以作为文字、背景、阴影、表格、边框、链接等属性。我们在 CSS 中使用的大多数颜色都是 hex 和 RGB，其实表示颜色的方式有很多，下面就来认识一下 CSS 中的颜色体系！</p>
+<h2 id="1-CSS-命名颜色"><a href="#1-CSS-命名颜色" class="headerlink" title="1. CSS 命名颜色"></a>1. CSS 命名颜色</h2><p>CSS中提供了148个命名颜色，所有浏览器都支持这些名称，这些名称都是被预定义过色值的。下面是部分颜色名称以及对应的十六进制颜色值：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04redA8qcI5HONAZZVkMp0cTsRvMv5Vo3oDsDHIvtkbH04x4QGgTPmCA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>查看所有预定义颜色名称：<a target="_blank" rel="noopener" href="https://www.w3schools.com/colors/colors_names.asp">https://www.w3schools.com/colors/colors_names.asp</a></p>
+<p>下面是使用颜色名称的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: black;</span><br><span class="line">  border: 1px solid blueviolet;</span><br><span class="line">  background: skyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：所有命名颜色都不区分大小写。</p>
+<p>除了颜色名称，还有一些其他命名的颜色和关键字值得一提：</p>
+<h4 id="（1）transparent"><a href="#（1）transparent" class="headerlink" title="（1）transparent"></a>（1）transparent</h4><p>transparent关键字用作rgba(0, 0, 0, 0)的快捷方式，它表示完全透明。该关键字目前在所有浏览器都是支持的。它是background-color属性的默认值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color:transparent;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="（2）currentColor"><a href="#（2）currentColor" class="headerlink" title="（2）currentColor"></a>（2）currentColor</h4><p>currentColor 表示当前的颜色。如果没有指定，就会从父容器继承的文本颜色。所以，以下 CSS 规则是等效的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  background-color: currentColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  background-color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>该属性在SVG中使用时很方便，可以将指定的填充或描边颜色设置为currentColor，以确保SVG颜色与其父级的文本颜色匹配。</p>
+<h4 id="（3）inherit"><a href="#（3）inherit" class="headerlink" title="（3）inherit"></a>（3）inherit</h4><p>inherit 是一个保留字，它不局限于颜色，表示该属性采用与元素父级的属性相同的值。对于继承的属性，主要用途就是覆盖另一个规则。</p>
+<h4 id="（4）系统颜色"><a href="#（4）系统颜色" class="headerlink" title="（4）系统颜色"></a>（4）系统颜色</h4><p>还有一些其他特殊的颜色关键字，它们用来匹配一些系统元素，旨在保持浏览器上应用程序的一致性。系统颜色成对出现：背景颜色-前景颜色。下面是系统颜色相关关键字：</p>
+<table>
+<thead>
+<tr>
+<th><strong>背景颜色</strong></th>
+<th><strong>前景颜色</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>buttonFace</td>
+<td>buttonText</td>
+</tr>
+<tr>
+<td>canvas</td>
+<td>activeText、canvasText、linkText、visitedText</td>
+</tr>
+<tr>
+<td>field</td>
+<td>fieldText</td>
+</tr>
+<tr>
+<td>highlight</td>
+<td>highlightText</td>
+</tr>
+</tbody></table>
+<p>下面是不同浏览器对系统颜色支持：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04sDJ6Upqr93ecEM3icp3iaSEkksMXZc123oCXcRnicv6agZPtqMxWUbUpw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="2-RGB-颜色"><a href="#2-RGB-颜色" class="headerlink" title="2. RGB 颜色"></a>2. RGB 颜色</h2><p>RGB 值也是我们常用的颜色表示方式。RGB 指的就是红-绿-蓝，这个顺序非常重要。每种颜色使用 0 到 255 之间的数字指定。最常见的 RGB 值黑色：rgb(0,0,0) 和白色：rgb(255,255,255)。RGB表示法使我们以更易读的形式来访问与十六进制值相同的颜色范围。</p>
+<p>下面是使用RGB 值表示颜色的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: rgb(0,0,0);</span><br><span class="line">  border: 1px solid rgb(155,55,89);</span><br><span class="line">  background: rgb(255,255,255);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，我们还可以使用名为rgba() 的属性为 rgb 值定义 alpha 值，alpha 值是透明度的百分比。它类似于 rgb，但允许添加第四个值。不透明度范围可以是 0 到 1 之间的任何值，0 是最小值（无不透明度），1 是最大值（完全不透明度）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: rgba(0,0,0,0.5);</span><br><span class="line">  border: 1px solid rgba(255,0,0,0.8);</span><br><span class="line">  background: rgba(0,125,0,0.2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，十六进制颜色值不区分大小写。所以，#ff0000、#FF0000、#Ff0000的显示效果是一致的。</p>
+<h2 id="3-Hex-颜色"><a href="#3-Hex-颜色" class="headerlink" title="3. Hex 颜色"></a>3. Hex 颜色</h2><p>我们还可以使用十六进制值来表示 CSS 中的颜色，这也是我们用的最多的颜色表示方式。十六进制使用 16 个符号表示，使用 0 - 9 表示值 0 到 9，A - F 表示值 10 到 15，如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04ExSYxCdLqu4teDBJfp9WlR8lTbEEAichU9CnhbU8Do6JLTQqtEAlRxQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在 CSS 中，使用 6 个十六进制数字来表示颜色。这意味着分别使用两个数字来表示红色 (R)、绿色 (G) 和蓝色 (B) 分量。例如，#000000表示黑色，它是最小的十六进制值；#FFFFFF表示白色，它是最大的十六进制值。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04WSWckCwmDGXC1zR4T8hLoCSTv8XTTlK9Qz6vm7OwibqDLK8EqYlcxUQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面是使用颜色名称的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123; </span><br><span class="line">  color: #000000;</span><br><span class="line">  border: 1px solid #00FF00;</span><br><span class="line">  background: #FF0000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以使用 3 个值（每种颜色一个）来缩短十六进制值，如果每两位的值相同，就可以缩写一半：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  color: #000;</span><br><span class="line">  border: 1px solid #0F0;</span><br><span class="line">  background: #F00;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以给十六进制颜色定义 alpha 值，alpha 值是透明度的百分比。在十六进制代码中，将另外两位数字添加到六位数字序列中，形成一个八位数字序列。例如，要在十六进制代码中设置黑色#000000，要添加 50% 的透明度，可以将其更改为#00000080。</p>
+<p>可以看到，十六进制颜色值是很难阅读的。我们基本不太可能通过读取十六进制值来猜测元素的颜色。</p>
+<h2 id="4-HSL-颜色"><a href="#4-HSL-颜色" class="headerlink" title="4. HSL 颜色"></a>4. HSL 颜色</h2><p>HSL 全称是 Hue-Saturation-Lightness，分别表示色调、饱和度和亮度。它基于 RGB 色轮的。每种颜色都有一个角度以及饱和度和亮度值的百分比值。下面就先来了解一下这三个概念，</p>
+<ul>
+<li><strong>色调：</strong> 色调描述了色轮上的值，从 0 到 360 度，从红色开始（0 和 360）；</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al041Wagp8oufecH6xh9eTwuAAOME9e5BJxZiaF9lAicfzEN0hklssCXPicSw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><strong>饱和度：</strong> 饱和度是所选色调的鲜艳程度，100% 表示完全饱和的亮色，0% 表示完全不饱和的灰色；</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04MprZg2ASOjdHALia1MS7DOUl5iaWvvcC6icFo08ibrBmwlgSGgJ9l2yyIw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><strong>亮度：</strong> 颜色的亮度级别，较低的值会更暗，更接近黑色，较高的值会更亮，更接近白色。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04mVVbKnwoXOAiciamd09z6RZMotS6Ydrn7t66YkXOmFiceE1uCHpcQH5Ig/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>HSL颜色函数的表示形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hsl(Hue, Saturation, Lightness)</span><br></pre></td></tr></table></figure>
+
+<p>其中Hue是色调值，即在色轮上的位置，可以是 0到360deg之间的任何值，该参数还可以接 角度单位 turn（圈）和无单位。下面三种规则的显式效果是一样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: hsl(180deg, 50%, 50%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  background-color: hsl(0.5turn, 50%, 50%);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  background-color: hsl(180, 50%, 50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一些常见的HSL颜色值：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04ed4hiaCdDpTF7D8KdvhKBLQk3LqA2Qaw9g7xqLnLHyKrt0VoH0z17ew/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>除此之外，HSL颜色值也可以添加alpha值，表示透明度，其使用形式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hsla(Hue, Saturation, Lightness / alpha)</span><br></pre></td></tr></table></figure>
+
+<p>这里就不再需要用逗号分隔值，而使用斜杠，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: hsl(0 100% 50% / 0.5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-HWB-颜色"><a href="#5-HWB-颜色" class="headerlink" title="5. HWB 颜色"></a>5. HWB 颜色</h2><p>HWB 全称为Hue-Whiteness-Blackness，表示色调、白度和黑度。</p>
+<ul>
+<li>色调：色轮中的一个角度；</li>
+<li>白度：表示要混合的白色量的百分比。值越高，颜色越白。</li>
+<li>黑度：表示要混合的黑色量的百分比。值越高，颜色越黑。</li>
+</ul>
+<p>与 HSL 一样，色调可以是 0 到 360 内的任何值。黑度和白度用来控制有多少黑色和白色混合在已选色调中，它们也是0-100%之间的值，当为100%时，就会出现全黑或者全白。如果等量的白色或者黑色混合在一起，颜色就会变得越来越灰。这个函数对于创建单色调色板非常有用：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al044p9TTmwgvjT65RoK8yDacq2ovuNYkSyGY7YbcC1AEy8ys5QxFHGIJg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>hwb()也可以添加alpha值来表示透明度，也使用斜杠来分隔：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hwb(194 0% 0%) </span><br><span class="line">hwb(194 0% 0% / .5) </span><br></pre></td></tr></table></figure>
+
+<p>注意：这种颜色格式目前只在Safari 15上得到了支持，谨慎使用。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04uDd56DR3eOLgCraClMfrg19CWcLKA0gLAHqPrkyKga5PiaClZVkiaxLw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="6-LAB-颜色"><a href="#6-LAB-颜色" class="headerlink" title="6. LAB 颜色"></a>6. LAB 颜色</h2><p>LAB 是一个可以在 Photoshop 等软件中访问的颜色空间，它代表了人类可以看到的整个颜色范围。它使用三个轴表示：亮度、a 轴和b 轴。</p>
+<ul>
+<li><strong>亮度：</strong> 从黑色到白色。值越低，颜色越接近黑色。</li>
+<li><strong>a轴：</strong> 从绿色到红色。较低的值接近绿色，较高的值更接近红色。</li>
+<li><strong>b轴：</strong> 从蓝色到黄色。较低的值接近蓝色，越高的值更接近黄色。</li>
+</ul>
+<p>亮度的值可以是任意百分比，不限于0%和100%，可以超过 100%。超亮白色可以使用高达 400% 的百分比。a和b轴的值可以是正值或者负值。两个负值将导致颜色朝向光谱的绿色/蓝色端，而两个正值可以产生更橙色/红色的色调。所有参数由空格分隔：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: lab(80% 100 50);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  background-color: lab(80% -80 -100);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04qv9wiaTZLjf96ib1hJWUYNfd6LwU4LLOgB47JqM2shqwIk2Ax1t6mVcA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>lab()也可以添加alpha值来表示透明度，也使用斜杠来分隔：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: lab(80% -80 -100 / .5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这种颜色格式目前只在Safari 15上得到了支持，谨慎使用。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04bjKiaXgwORpE6VXmtuEiceffSibBibYkXticnuIfSaYBlRRY7kOKcfOakMA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="7-LCH-颜色"><a href="#7-LCH-颜色" class="headerlink" title="7. LCH 颜色"></a>7. LCH 颜色</h2><p>LCH 代表亮度、色度和色调。它与 Lab 具有相同的 L 值，但不是使用坐标 a* 和 b*，而是使用 C（色度）和 H（色调）。色调可以是 0 到 360 之间的值。色度代表颜色的量，它类似于 HSL 中的饱和度。但是色度值可以超过 100，理论上它是无上限的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: lch(80% 100 50);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于色度值，目前的浏览器和显示器可以显示颜色量是有限的，只有0-230之间的值是有用的，超过之后就和230的差异就不大了：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04ic6u0UliaRNL1vAg7ytVSjuwgqgsvJiaLE4tiaSZOAjdInKNFlicug2RxrA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这个方法也可以添加第四个可选参数 alpha。该函数遵循空格分隔（alpha 带有斜杠）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: lch(80% 100 50 / .5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这种颜色格式目前只在Safari 15上得到了支持，谨慎使用。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOH8cGLt5BAFaNvDRP8al04a0iaCRunQUB3D6B3Rbia0Hs5oSFCV8WG6MibLRD6JicU8yMOzamib91Cs0w/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>那为什么有了 HSL还需要 LAB 和 LCH 呢？因为使用 LAB 或 LCH 可以获得更大范围的颜色。LCH 和 LAB 旨在让我们能够接触到人类视觉的整个范围。除此之外，HSL 和 RGB 在感知上并不均匀，并且在 HSL 中，增加或减少亮度会根据色调产生完全不同的效果。</p>
+<h2 id="8-CMYK-颜色"><a href="#8-CMYK-颜色" class="headerlink" title="8. CMYK 颜色"></a>8. CMYK 颜色</h2><p>CMYK 代表 Cyan、Magenta、Yellow 和 Key，它们与打印机中的墨水颜色相匹配。虽然屏幕通常以 RGB 来显示颜色，而打印机通常使用青色、品红色、黄色和黑色的组合来表示颜色，这些是最常见的墨水颜色。</p>
+<p>可以使用device-cmyk()来指定CMYK颜色，使用空格来分隔参数，也可以添加alpha值来设置透明度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: device-cmyk(1 0 0 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，该方法存在兼容性问题，谨慎使用。</p>
+<h2 id="9-颜色混合"><a href="#9-颜色混合" class="headerlink" title="9. 颜色混合"></a>9. 颜色混合</h2><p>在 CSS Color Module Level 5 提案中提出了颜色混合的概念和相关方法 color-mix()，该方法可以混合了两种颜色，类似于 Sass 中的mix()函数。color-mix() 允许我们指定颜色空间，默认使用 LCH，具有出色的混合效果。可以指定每种颜色混合多少：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  background-color: color-mix(in lch, red, blue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line"> background-color: color-mix(in lch, red 30%, 70% blue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43408904/">关于HTTP协议</a>
+            
+            
+            <a class="next" rel="next" href="/e6e3ffb5/">现代CSS样式重置最佳实践！</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43408904/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e6e3ffb5/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

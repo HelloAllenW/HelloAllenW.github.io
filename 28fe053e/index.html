@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>微前端（single-spa）简介 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微前端（single-spa）简介</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 25, 2023&nbsp;&nbsp;23:15:18</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 25, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">5 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>single-spa</code>是一个用于前端微服务化的<code>JavaScript</code>前端解决方案。<code>single-spa</code>的核心就是定义了一套协议。协议包含主应用的配置信息和子应用的生命周期，通过这套协议，主应用可以方便的知道在什么情况下激活哪个子应用。</p>
+<br />
+
+<h1 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h1><h2 id="1-主应用配置"><a href="#1-主应用配置" class="headerlink" title="1.      主应用配置"></a>1.      主应用配置</h2><p>在<code>single-spa</code>中的配置信息也称为：<code>Root Config</code>，如下就是具体的配置项。需要配置子应用的名称，加载方式以及加载时机。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    name: &quot;subApp1&quot;, // 子应用的名称</span><br><span class="line">    app: () =&gt; // 告诉主应用如何加载子应用的代码，</span><br><span class="line">    System.import(&quot;/a/b/subAPP/code&quot;),</span><br><span class="line">    activeWhen: &quot;/subApp1&quot;,  // 告诉主应用何时激活子应用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>single-spa</code>提供<code>registerApplication</code>将子应用的信息注册到主应用中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">singleSpa.registerApplication(</span><br><span class="line">&#123;</span><br><span class="line">    name: &#x27;appName&#x27;,</span><br><span class="line">    app: () =&gt; System.import(&#x27;appName&#x27;),</span><br><span class="line">    activeWhen: &#x27;/appName&#x27;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中<code>System.import</code>让人比较在意，这是什么呢？</p>
+<p>这个问题要从主应用如何加载子应用说起，在<code>single-spa</code>中子应用要实现生命周期函数，然后导出给主应用使用。关键就是这个“导出”的实现，这涉及到JavaScript的模块化问题，即需要把子应用打包成一个包含生命周期的模块，让主应用引入。</p>
+<h2 id="2-JavaScript的模块化，如何在页面中引入模块？"><a href="#2-JavaScript的模块化，如何在页面中引入模块？" class="headerlink" title="2.      JavaScript的模块化，如何在页面中引入模块？"></a>2.      JavaScript的模块化，如何在页面中引入模块？</h2><p>JavaScript的模块化就是将JavaScript程序拆分为可按需导入的单独模块的机制。Node.js已经提供这个能力很长时间了，还有很多的Javascript库和框架已经开始了模块的使用（例如CommonJS和基于AMD的其他模块系统 如RequireJS，以及最新的Webpack和Babel）。目前最新的浏览器也开始原生支持模块功能。</p>
+<h3 id="（1）在-lt-script-gt-标签上添加type-“module”来实现导入导出"><a href="#（1）在-lt-script-gt-标签上添加type-“module”来实现导入导出" class="headerlink" title="（1）在&lt;script&gt;标签上添加type=“module”来实现导入导出"></a>（1）在<code>&lt;script&gt;</code>标签上添加<code>type=“module”</code>来实现导入导出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;script type=&quot;module&quot;&gt;</span><br><span class="line">    import &#123;test&#125; from &#x27;./test.js&#x27;;</span><br><span class="line">    document.body.innerHTML = test(&#x27;1111&#x27;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）实现import-axios-from-‘axios’还需要借助于importmap"><a href="#（2）实现import-axios-from-‘axios’还需要借助于importmap" class="headerlink" title="（2）实现import axios from ‘axios’还需要借助于importmap"></a>（2）实现<code>import axios from ‘axios’</code>还需要借助于<code>importmap</code></h3><p>第一点虽然可以实现导入，但是每次import都要写入固定的地址，或者在不同的script中多次引入时就要重复书写，这样造成代码的冗余，所以这里可以使用importmap，使变量名和其相应的地址一一映射，允许控制js的import语句或import()表达式获取的库的url，并允许在非导入上下文中重用这个映射，这样就不用重复书写地址了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;importmap&quot;&gt;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;imports&quot;:  &#123;</span><br><span class="line">        &quot;lodash&quot;: &quot;/node_modules/lodash/lodash.js&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;module&quot;&gt;</span><br><span class="line">    import &#123;hello&#125; from &#x27;lodash&#x27;;</span><br><span class="line">    document.body.innerHTML = hello(&#x27;John&#x27;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）SystemJS"><a href="#（3）SystemJS" class="headerlink" title="（3）SystemJS"></a>（3）SystemJS</h3><p><code>import maps</code>的兼容性不好，所以想在生产环境下使用还是需要一些兼容实现方案，<code>SystemJS</code>就是解决这个问题的。</p>
+<p><code>systemjs</code>是一个模块加载器，和<code>requirejs</code>类似，<code>systemjs</code>参考<code>import maps</code>规范实现了自己的alias（类似<code>requirejs-paths</code>或者<code>webpack alias</code>）。具体用法在下面的demo中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/systemjs/6.2.6/system.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">// 通过systemjs来引入别的文件</span><br><span class="line">System.import(&#x27;./test.js&#x27;);</span><br><span class="line">// systemjs也支持通过下面的方式定义资源 ，用来给资源定义一个key</span><br><span class="line">&lt;script type=&quot;systemjs-importmap&quot;&gt;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;imports&quot;:  &#123;</span><br><span class="line">        &quot;vue&quot;: &quot;https://cdn.bootcss.com/vue/2.6.11/vue.js&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">// 直接通过名称引用</span><br><span class="line">System.import(&#x27;vue&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-总结一下single-spa是如何通过以上方法加载子应用的："><a href="#3-总结一下single-spa是如何通过以上方法加载子应用的：" class="headerlink" title="3.      总结一下single-spa是如何通过以上方法加载子应用的："></a>3.      总结一下<code>single-spa</code>是如何通过以上方法加载子应用的：</h2><p>在主应用中注册子应用的配置信息，主应用运行时根据配置信息去请求子应用的<code>manifest.json</code>配置文件，这个文件中是子应用打包出的入口js和js文件的依赖关系，主应用通过动态的构造script标签去加载这些js文件，这里就完成了其注册过程。</p>
+<p>这样在主应用检测路由命中子应用的规则之后就会触发其渲染函数，把子应用挂载到相应的dom下。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252221306.png"></p>
+<br />
+
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p><code>single-spa</code>的另一个关键点就是生命周期，子应用生命周期包含<code>bootstrap，mount，unmount</code>三个回调函数。主应用在管理子应用的时候，通过子应用暴露的生命周期函数来实现子应用的启动和卸载。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252222250.png"></p>
+<ol>
+<li><p>load：当应用匹配路由时就会加载脚本（非函数，只是一种状态）。</p>
+</li>
+<li><p>bootstrap：应用内容首次挂载到页面前调用。</p>
+</li>
+<li><p>Mount：当主应用判定需要激活这个子应用时会调用, 实现子应用的挂载、页面渲染等逻辑。</p>
+</li>
+<li><p>unmount：当主应用判定需要卸载这个子应用时会调用, 实现组件卸载、清理事件监听等逻辑。</p>
+</li>
+<li><p>unload：非必要函数，一般不使用。unload之后会重新启动bootstrap流程。</p>
+</li>
+</ol>
+<br />
+
+<h1 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h1><p>通过以上两点的分析，大致了解了一下sing-spa的主要思想，但是single-spa毕竟是第一个微前端框架，他也有一定的缺点。</p>
+<ol>
+<li><p>single-spa的文档略显凌乱，概念也比较多，在初次学习时上手难度较高。</p>
+</li>
+<li><p>single-spa是通过js文件去加载子应用，当文件名是乱码名时，每次子应用更新，父应用要更新引入配置文件，更新多项目时比较麻烦。</p>
+</li>
+<li><p>single-spa本身缺少js隔离和css隔离，虽然现在已经可以引入其他的包去解决，但是并没有做到开箱即用的程度。</p>
+</li>
+</ol>
+<p>所以在基本了解其思路之后，我们可以不妨看一下其他的方案比如qiankun都是如何实现和优化的。</p>
+<br />
+
+<h1 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://zh-hans.single-spa.js.org/docs/getting-started-overview">官方文档</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/463654743">single-spa 从入门到精通</a></p>
+</li>
+</ol>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"># 微前端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ea44f6b1/">微前端（micro-app）使用手册</a>
+            
+            
+            <a class="next" rel="next" href="/c99665c4/">iframe 实现微前端</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ea44f6b1/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/c99665c4/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

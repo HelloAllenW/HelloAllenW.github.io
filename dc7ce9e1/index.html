@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>JS三大运行时全面对比：Node.js vs Bun vs Deno | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JS三大运行时全面对比：Node.js vs Bun vs Deno</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 8, 2024&nbsp;&nbsp;9:59:32</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 8, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>JavaScript 运行时是指执行 JavaScript 代码的环境。目前，JavaScript 生态中有三大运行时：Node.js、Bun、Deno。老牌运行时 Node.js 的霸主地位正受到 Deno 和 Bun 的挑战，下面就来看看这三个 JS 运行时有什么区别！</p>
+<h2 id="JS-运行时概述"><a href="#JS-运行时概述" class="headerlink" title="JS 运行时概述"></a>JS 运行时概述</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>Node.js 在 2023 年被 Stack Overflow 开发者评为最受欢迎的 Web 技术。Node.js 于 2009 年推出，允许开发人员在浏览器之外使用 JavaScript，彻底改变了服务端编程。它拥有强大的生态系统、庞大的社区，并且经过验证且稳定。为大型应用程序提供 LTS 构建。基于 V8 JavaScript 引擎构建。</p>
+<p>多年来，Node.js 一直是服务端 JavaScript 开发的支柱，通过第三方工具支持了无数功能。其提供了巨大的功能和灵活性。丰富的文档、教程和社区支持使开发者可以更轻松地克服挑战。如果考虑内置工具和与 Web API 的兼容性，它是落后于其他两个运行时的。</p>
+<p>从历史上看，Node.js 因其安全方法（尤其是在包方面）而受到批评。然而，社区和维护者已经显着改善了这一方面。权限模型已经在 Node.js v20 中实现，这使 Node.js 更加安全。</p>
+<h3 id="Deno"><a href="#Deno" class="headerlink" title="Deno"></a>Deno</h3><p>Deno 最初由 Node.js 的原始创建者 Ryan Dahl 于 2018 年创建，旨在解决他认为 Node.js 中存在的一些问题，比如性能、安全性。它专注于安全性、现代 JavaScript 实践和开发人员体验。基于 V8 JavaScript 引擎构建并用 Rust 编写。</p>
+<p>与 Node.js 相比，Deno 具有更全面的功能。它对 Web API 和现代标准有很好的支持，并且还支持大多数 NPM 包。Deno 还提供了出色的开发体验，特别是如果使用 TypeScript，它是开箱即用的。Deno 还具有内置 linting、代码格式化程序等优势，节省一些配置和引导时间。如果你倾向于开箱即用的设置，只需启动编辑器，创建一个main.ts文件，然后就可以开始快乐编码了！</p>
+<h3 id="Bun"><a href="#Bun" class="headerlink" title="Bun"></a>Bun</h3><p>Bun 是 2021 年发布的 JavaScript 运行时，它被设计为 Node.js 的更快、更精简、更现代的替代品。它构建在 JavaScript Core 和 Zig 语言之上。旨在成为一个全功能的运行时环境和工具包，重点关注速度、打包、测试和与 Node.js 包的兼容性。最大的优势之一是它的性能。事实证明，Bun 比 Node.js 和 Deno 都要快。如果 Bun 能够完成这些目标，那么它将成为一个非常有吸引力的选择。Bun使用的是Apple的WebKit引擎，而不是像Node.js和其他运行时一样使用Google的V8引擎。</p>
+<p>Bun 的核心卖点是它的性能，其提供了许多基准测试，显示出令人惊叹的速度。使用 Bun 作为包管理器比使用标准 NPM 命令要快得多。在现实应用中，尤其是 Web 应用，性能差异可能不像基准测试中那么显着。</p>
+<p>Bun 优先考虑简单性和速度。凭借其内置的包管理器，以及与 Node.js 相比改进的开发体验，开发人员可以快速入门，而无需遇到其他运行时可能带来的初始设置障碍。</p>
+<h2 id="认识Bun"><a href="#认识Bun" class="headerlink" title="认识Bun"></a>认识Bun</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Bun 不仅仅是一个运行时。它也是：</p>
+<ul>
+<li>一个包管理器 (类似 Yarn、 NPM、 PNPM)</li>
+<li>一个构建工具 (类似 Webpack、 ESBuild、 Parcel)</li>
+<li>一个测试运行器</li>
+<li>…</li>
+</ul>
+<p>Bun 还可以运行脚本。不管它做什么都比其他工具更快。Bun 在 JavaScript 生态系统的许多方面都有新的尝试，其中的重点是性能。它优先支持标准的 Web API，如 Fetch。它也支持许多 Node.js APIs，使其能与大多数 NPM 包兼容。</p>
+<h3 id="1、Bun是一个全能的工具包"><a href="#1、Bun是一个全能的工具包" class="headerlink" title="1、Bun是一个全能的工具包"></a>1、Bun是一个全能的工具包</h3><p>JavaScript 的工具链在发展过程中，各种工具被逐渐添加进来，但没有一个统一的集中规划，导致工具链缺乏整体性和效率，变得运行缓慢和复杂。Bun的目标很简单，就是要消除JavaScript工具链的缓慢和复杂性。</p>
+<p>为了实现这个目标，可能需要放弃一些在使用Bun之后变得不再必要的工具：</p>
+<ul>
+<li><p>Node.js：Bun 的一个可以直接替代的工具，因此不再需要以下工具：</p>
+</li>
+<li><ul>
+<li>node</li>
+<li>npx：Bun 的 bunx 命令比 npx 快5倍。</li>
+<li>nodemon：Bun 内置了监听模式，无需使用 nodemon。</li>
+<li>dotenv、cross-env：Bun 默认支持读取.env文件的配置。</li>
+</ul>
+</li>
+<li><p>转译器：Bun 可以运行.js、.ts、``.cjs、.mjs、.jsx和.tsx文件，因此不再需要以下工具：</p>
+</li>
+<li><ul>
+<li>tsc：仍然可以保留它用于类型检查！</li>
+<li>babel、.babelrc、@babel/preset-*：不再需要使用 Babel 进行转译。</li>
+<li>ts-node、ts-node-esm：Bun 可以直接运行 TypeScript 文件。</li>
+<li>tsx：Bun可以直接运行 TypeScript 的 JSX 文件。</li>
+</ul>
+</li>
+<li><p>构建工具：Bun 具有一流的性能和与esbuild兼容的插件API，因此不再需要以下工具：</p>
+</li>
+<li><ul>
+<li>esbuild</li>
+<li>webpack</li>
+<li>parcel, .parcelrc</li>
+<li>rollup, rollup.config.js</li>
+</ul>
+</li>
+<li><p>包管理器：Bun 是一个与 npm 兼容的包管理器，可以使用熟悉的命令。它可以读取 package.json文件并将依赖写入node_modules目录，与其他包管理器的行为类似，因此可以替换以下工具：</p>
+</li>
+<li><ul>
+<li>npm, .npmrc, package-lock.json</li>
+<li>yarn,yarn.lock</li>
+<li>pnpm, pnpm.lock, pnpm-workspace.yaml</li>
+<li>lern</li>
+</ul>
+</li>
+<li><p>测试库：Bun是一个支持Jest的测试运行器，具有快照测试、模拟和代码覆盖率等功能，因此不再需要以下测试相关的工具：</p>
+</li>
+<li><ul>
+<li>jest, jest.config.js</li>
+<li>ts-jest, @swc/jest, babel-jest</li>
+<li>jest-extended</li>
+<li>vitest, vitest.config.ts</li>
+</ul>
+</li>
+</ul>
+<p>尽管这些工具都有自己的优点，但使用它们时往往需要将它们全部集成在一起，这会导致开发过程变得缓慢和复杂。而Bun通过成为一个单一的工具包，提供了最佳的开发者体验，从性能到API设计都力求做到最好。</p>
+<h3 id="2、Bun：JavaScript-运行时"><a href="#2、Bun：JavaScript-运行时" class="headerlink" title="2、Bun：JavaScript 运行时"></a>2、Bun：JavaScript 运行时</h3><p>（1）Bun内置了JavaScript转译器，因此可以运行JavaScript、TypeScript甚至JSX/TSX文件，无需任何依赖。因此，Bun的速度非常快，启动速度比 Node.js 快 4 倍。当运行TypeScript文件时，这种差异会更加明显，因为在Node.js中运行TypeScript文件需要先进行转译才能运行。</p>
+<p>（2）Bun 同时支持ESM 和 CommonJS 这两种模块系统。无论是使用CommonJS的.js扩展名、.cjs扩展名，还是使用ES模块的.mjs扩展名，Bun都会进行正确的解析和执行，而无需额外的配置。</p>
+<p>甚至可以在同一个文件中同时使用import和require()</p>
+<p>（3）Bun 内置支持浏览器中可用的Web标准API，如fetch、Request、Response、WebSocket和ReadableStream等。开发者不再需要安装像node-fetch和ws这样的包。</p>
+<h3 id="3、Bun：包管理器"><a href="#3、Bun：包管理器" class="headerlink" title="3、Bun：包管理器"></a>3、Bun：包管理器</h3><p>Bun的安装速度比 npm、yarn 和 pnpm 快好几个数量级。</p>
+<h3 id="4、Bun：测试运行器"><a href="#4、Bun：测试运行器" class="headerlink" title="4、Bun：测试运行器"></a>4、Bun：测试运行器</h3><h3 id="5、Bun：构建工具"><a href="#5、Bun：构建工具" class="headerlink" title="5、Bun：构建工具"></a>5、Bun：构建工具</h3><p>根据esbuild的基准测试，Bun比esbuild快1.75倍，比Parcel 2快150倍，比Rollup + Terser快180倍，比Webpack快220倍。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/63e1a769/">esbuild 简介</a>
+            
+            
+            <a class="next" rel="next" href="/78e191b0/">ES11、ES12、ES13新特性</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/63e1a769/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/78e191b0/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

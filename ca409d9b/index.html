@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>李叔同：从风华才子到水云高僧 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">李叔同：从风华才子到水云高僧</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">九月 11, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        九月 11, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6/">文学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">20 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>“长亭外，古道边，芳草碧连天;晚风拂柳笛声残，夕阳山外山。天之涯，地之角，知交半零落;一杯浊酒尽余欢，今宵别梦寒。”《送别》这首名歌的曲作者，是美国音乐家福斯特，而词作者，便是我国近代艺坛上的一位杰出的先驱人物——李叔同，也就是后来的弘一法师。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2CLiadztYsQj9ZUz0E7KnVbTPjrNfzongsZTS89je9eoOrfmSibdoGxpQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>李叔同：</strong>著名音乐家、美术教育家、书法家、戏剧活动家，是中国话剧的开拓者之一。他从日本留学归国后，担任过教师、编辑之职，后剃度为僧，法名演音，号弘一，晚号晚晴老人，后被人尊称为弘一法师。</p>
+<p>李叔同(原名文涛，别号息霜，法号演音、弘一)曾经是五四新文化运动的创始人之一，正如他的弟子——著名画家丰子恺所说，他是我国最早出国学文艺的留学生之一;是最早提倡话剧，最早研究油画，也是最早研究西方音乐的艺术教育家之一。他终身的“艺事”——书法，更是达到极高的境界，被誉为20 世纪中国十大书法家之一。这位20世纪初瑜亮一时的艺术家，中国现代艺术启蒙教育的先驱者，不啻如流星划过夜空，却想不到于1918年，“五四”运动前夕，斩断世情俗怨，从此芒鞋布衲，托钵空门。由风华才子到云水高僧，由峰而谷，这一极具戏剧性的转折，怎不令人愕然、惘然?在一本“纪念册”里，留有他年轻时饰演“茶花女”的倩影，也印着他安样圆寂于陋室绳床的情景。</p>
+<p>关于李叔同先生皈依佛门的缘起，众说纷纭，但无论在俗、出家，李叔同的“尘缘”实际上从未断过，且十分认真执着和彻底。他传奇般的一生充满诗意和神秘感，今天的人们，观照昔日弘一大师的尘缘萍踪，想必会多一份对人生的感悟和启示!</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2dktTys2gp4icv9zMCCW9UcGNsibD18icibqLTaIIUMALZsxnSiaIy72jPIg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="二十文章惊海内"><a href="#二十文章惊海内" class="headerlink" title="二十文章惊海内"></a>二十文章惊海内</h2><p>李叔同于1880年阴历9月20日生于天津，祖籍浙江平湖。他父亲为李鸿章同年进士，曾官吏部主事。致仕后经营盐业，兴办银行，为津门富豪。李叔同是五姨太所生，当时他父亲已68岁，虽然李叔同五岁即遭父丧，他少年时的生活仍然是极为优裕的。他的兄长和母亲很注重他的教育，延请了天津名士赵幼梅教他诗词，唐静岩先生教他书法，加之他本人极为聪颖好学，小小年纪便积累了非常深厚的国学修养。有道是“《文选》烂，秀才半”，李叔同7岁时便能熟读《文选》，且写得一手像样的书法，被人称为“神童”。</p>
+<p>由于家庭的变故，李叔同14岁陪他的生母南迁上海。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2xBPnwkYwqM4UqEQUMicK2HyiaCjYicr7foWqibsobZDePWH27DWWF9CWtQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>晚清的上海，也是西洋文明和东方文化碰撞的边缘。既有传统文化的底子，又有“欧风东渐”的浸染。李叔同在上海入南洋公学从蔡元培先生受业，与邵力子、黄炎培、谢无量等人同学。这是当时上海最先进的学校。在这里，他一方面接受了较系统的儒家经典教育，一方面又吸纳了“新学”的精华，促发了他积极用功，奋发有为的心态。当时上海文坛有著名的“沪学会”，参加者多为一时俊杰。而李叔同应征的文章，名字屡屡列为第一，从此被上海的名士闻人所青睐，被视为“才子”驰名于上海滩。</p>
+<p>二十岁上下的李叔同，不但是才华横溢的文士，也是一个颇为放浪的富家公子。在天津、上海，他与一些艺界女子甚至风尘女子来往不断，与名坤伶杨翠喜、谢秋云等过从甚密。李叔同早年的诗词有许多与名妓名优唱和的作品，称他“寄情声色”，是一点不过分的。然而，寄情声色亦自有其社会与个人的背景。 1900年前后，中国已被列强“瓜分豆剖”，日渐沦亡。李叔同本人亦经受了科考失败等打击，眼前缺乏前途的光亮，不免追求声色刺激，所谓“奔走天涯无一事。何如声色将情寄，休怒骂，且游戏”。表明他当时的消极情绪。虽然如此，李叔同在上海时期，上有慈祥的母亲、下有贤惠的俞氏夫人和两个孩子，家庭生活却是幸福、祥和的。可以说，这一时期是李叔同充分享受亲情乃至物质利益的时期，这种富家公子生活直到1905年，李叔同丧母之后。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2GYzqDPtF3w4kedduLicRjyEMX0iab0MJ0mZN6PYE8SAn659RJJhlLdmA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1905年，李叔同的母亲王夫人病逝于上海“城南草堂”，李叔同扶柩回津，并依“东西各国追悼会之例”，为母亲举行了丧礼。举哀之时，李叔同在四百多中外来宾面前自弹钢琴，唱悼歌，寄托深深的哀思，此举被视为“奇事”，天津《大公报》称之为“文明丧礼”。</p>
+<p>李叔同很早丧父，教养培育基本靠他的生母王夫人，是以奉母至孝。生母去世，对他刺激很大，认为自己的“幸福时期已过去”，乃东渡日本留学。</p>
+<p>是年，李叔同曾作一首《金缕曲》述志，其词曰：“披发佯狂走。莽中原，暮鸦啼彻，几株衰柳。破碎河山谁收拾，零落西风依旧，便惹得离人消瘦。行矣临流重太息，说相思，刻骨双红豆。愁黯黯，浓于酒。漾情不断淞波溜。恨来年絮飘萍泊，遮难回首。二十文章惊海内，毕竟空谈何有!听匣底苍龙狂吼。长夜西风眠不得，度群生那惜心肝剖。是祖国，忍孤负?”一派豪气，充满了炽盛的爱国热情，却也不乏“当时年少青衫薄”的冲动与柔情，是当年李叔同的自我写照。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2ajtDCysgiaEicwbK3C3rmHHPSNIoQJ2R3GKA0G3kic4eDJBFelMY6s3sA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="丹青与粉墨"><a href="#丹青与粉墨" class="headerlink" title="丹青与粉墨"></a>丹青与粉墨</h2><p>李叔同初到日本，对于明治维新以后的西化成果深感羡慕，对西洋艺术全面研攻。他在上野美术学校西画科从黑田清辉等画家学习，同时又入音乐学校研究乐学与作曲，业余还研究戏剧。</p>
+<p>在日本学习美术，李叔同接受的是西方写实主义教育体系，这与中国传统的以“修身齐家”为目标，“以学致仕”的教育体系是完全不同的。中国传统的绘画，固然有其博大精深的一面，而西方写实主义美术更能表现社会生活的方方面面，更能深入人的精神生活，具有其独特的力量。在上野美术学校，李叔同作为中国第一代美术留学生，受到日本各阶层的广泛关注。日本《国民新闻》记者曾专访这位“清国留学生”的画室，只见四壁悬挂黑田、中村等人的画作和李叔同的油画稿，笔致潇洒，令人赞赏，这篇访问记就被刊于当时的《国民新闻》，很为人所注目。李叔同刻苦学习，勤奋创作，其作品获得了当时日本美术界的很高评价。在日期间，李叔同创作了大量油画、水彩画、国画和版画，回国时仅油画作品就有数十幅。这些艺术珍品，大师在1918年出家前将它们寄赠给北京美术学校作资料，可惜大多失散。1940年，印度诗人泰戈尔邀请李叔同将他的作品送欧洲举办的世界美术展，临时竟一幅都找不到，只好作罢。现今保存的叔同画作不过十幅，但均为艺术瑰宝。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2XRJW3rBeM4Sibr3icRoPlrxMgyCvsQ9Nf4NsfIjorWG4MQmEDicO5CRZQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上野美术学校课程中有裸体写生的内容，李叔同曾雇请一位日本女郎作模特，这一时期创作的人像人体素描，有不少成为美术史的重要文献资料。天长日久，李叔同和这位端庄秀丽的日本女郎发生恋爱，结为异国伴侣，并于1910年一同回到上海。</p>
+<p>在日本学习美术，使李叔同确立了“以美淑世”，“经世致用”的美术教育观念，并在国内培养了众多美术人才。而“裸体写生”也由他引人中国美术教育中。艺术大师刘海粟先生多年后谈到李叔同在我国首创采用裸体写生的贡献时，仍然激动不已，对先生的艺术胆略非常佩服。</p>
+<p>李叔同在南洋公学时英文就学得很好，曾细读原本的《莎士比亚全集》，对西洋戏剧倾心已久。1906年，他与曾孝谷等人创办“春柳社”，提倡话剧，这就是我国最早的研究话剧的团体。这个团体先后演出《茶花女遗事》、《黑奴吁天录》等，李叔同均任主角，一时声誉鹊起。初演《茶花女》时，李叔同为了串演女角，还不惜将小胡子剃去，花重金做了好几身女西装，十分认真。春柳社第一次演剧时李叔同所写的戏单印刷品，也被日本帝国大学图书馆珍藏。由于《黑奴吁天录》中有反对民族压迫的内容，此剧还遭到清政府的禁演，这也说明其影响之大。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2J9kouT4Tk1ZWeE45micib7W5UVG0XRC2nOKpEDrZlaUPAvKcB7p3avmg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="为人师表"><a href="#为人师表" class="headerlink" title="为人师表"></a>为人师表</h2><p>李叔同一贯是坚定执着的爱国者。留日期间，就加入孙中山领导的同盟会，参与反清的革命斗争。1911年回国后，李叔同担任上海《太平洋报》艺术副刊主笔，竭力宣传革命。在上海，他加入文艺革命团体“南社”，创作了《祖国歌》《大中华》等振奋人心的歌曲。作为激进的青年，他不满黑暗的现实，要求改革社会，报效国家。满腔爱国激情，化为澎湃激昂的诗句：“双手裂开鼷鼠胆，寸金铸出民权脑”，“男儿若论收场好，不是将军也断头。”</p>
+<p>然而“辛亥”以后的中国，并非如人们所希望的那样一片光明，清政府被推翻了，却代之以军阀统治，社会的黑暗腐败，理想抱负的难以实现，使李叔同深感苦闷和孤独。在这种心情中，李叔同应浙江第一师范学校之聘，担任音乐、美术教师，实践他早年确立的“以美淑世”、“经世致用”的教育救国理想。</p>
+<p>浙江一师是当时国内有影响的学校，师生中都英才辈出。著名文学家夏丐尊先生就是这里的国文教师。而丰子恺、刘质平等文化名人均就读于此，是李叔同的得意门生。在同事、同学们心目中，这位李先生是怎样一个人呢?一言以敝之曰：“认真”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2U7gzlzu7m7kyGeaZRIibARuTXROAogVwF5dgqL6SHibzbBGkIyXYyUiaw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>夏丐尊先生《平屋杂文》一书中有好几篇是写李叔同的。他对这位“畏友”充满敬佩，认为李叔同是“我们教师中最不会使人忘记”的。夏丐尊多次对学生说：“李先生教图画、音乐，学生对图画、音乐看得比国文、数学等更重。这是有人格作背景的原故。他的诗文比国文先生的更好，他的书法比习字先生的更好，他的英文比英文先生的更好……这好比一尊佛像，有后光，故能令人敬仰。”</p>
+<p>夏丐尊先生任学校舍监的时候，有一事非常困扰：有同学失窃，而始终无人肯承认。李叔同乃献一策：君请书通告一纸，限某日前认错，否则本舍监只有一死谢罪!还强调：必须是准备认真践诺，方有效力。夏先生实行没有，不得而知，但确实感到“骇然”于他认真的精神。</p>
+<p>丰子恺在怀念先师的文章中写道：李叔同做教师，以身作则，不多讲话，但使学生衷心感动，自然诚服。每次上课，他一定先到教室，板书齐整，然后端坐讲台等学生到齐。而对待学生的态度，李先生是“爸爸的教育”，是“温而厉”的态度。</p>
+<p>有一次下音乐课，最后出去的人无心把门一拉，发出很大的声音。他走了数十步之后，李先生出门，和气地叫他进教室来，用很轻但很严肃的声音说：“下次走出教室，轻轻地关门。”然后一鞠躬，送他出门，自己轻轻把门关上。</p>
+<p>由于他的博学和人格魅力，李叔同令师生们敬仰有加。“一师”时期，也是李叔同生命的辉煌时期，在各个艺术领域，诗、音乐、美术、金石书法方面，均达到了那个时候的最高境界，为后人提供了咀嚼不尽的精神食粮。</p>
+<p>然而，这位渐臻于完美之境的大艺术家，却在“五四”运动的前夕、1918年8月19日，在杭州定慧寺出家，正式皈依佛门。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2bL5WwZOg3nMEmA7gwJwL3LoZfJdRxGfEwicP8PYaPS77vFf0NQibRiaIg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="念佛不忘救国"><a href="#念佛不忘救国" class="headerlink" title="念佛不忘救国"></a>念佛不忘救国</h2><p>李叔同原本常读性理方面的书，后来又忽然对道教发生兴趣，案头常放着道藏。据丰子恺回忆，李先生经常把自己不用的东西分赠给弟子们，仿佛即将远行一般。有一天，李叔同由校工闻玉陪同，到大慈山辟谷，断食达十七天。他还将断食的感受详细记录于《断食日志》。这期间，他自感身心灵化，似有仙象。平时以写毛笔字打发时间，笔力丝毫不减，而心气比平时更灵敏、畅达，有脱胎换骨般的感觉。断食之后摄影留念，并制成明信片分送朋友，像下排印着：“某年月日，入大慈山断食十七日，身心灵化，欢乐康强——欣欣道人记。”</p>
+<p>但学道时间很短，“断食”之后即在儒学大师马一浮先生的指引下学佛。出家前一天的晚上，李叔同把丰子恺和另两位同学叫到他的房间里，把房间里所有东西送给这三人。第二天，丰子恺等三人送他到虎跑附近的定慧寺出家，法名演音，号弘一。</p>
+<p>李叔同家人知道他出家的消息后，曾多次要求他还俗。他的夫人携子来劝说他，他拒不会见，后在朋友苦劝下相见一面，但双手合十，口念佛号而已。与他深深相爱的日本侧室专程赶来，他也只是口诵“阿弥陀佛”，再无他言，日本夫人只得痛哭而返。</p>
+<p>李叔同出家后，发愿精研戒律，并且严格依照戒律修持，虔诚得近乎苦行僧。初修净土宗，后来又修律宗。律宗向以戒律森严著名，一举一动，都有规律，严肃认真之极，被称为佛门中最难修的一宗。弘一法师为弘扬律宗，曾立下四誓——</p>
+<p>一，放下万缘，一心系佛，宁堕地狱，不作寺院主持;二，戒除一切虚文缛节，在简易而普遍的方式下，令法音宣流，不开大法，不作法师;三，拒绝一切名利的供养与沽求，度行云流水生涯，粗茶淡饭，一衣一袖，鞠躬尽瘁，誓成佛道;四，为僧界现状，誓志创立风范，令人恭敬三宝，老实念佛，精严戒律，以戒为师。</p>
+<p>二十多年精诚庄严的自律苦修，弘一法师使传统断绝数百年的律宗得以复兴，佛门称弘一为“重兴南山律宗第十一代祖师”。</p>
+<p>著名美学家朱光潜曾说，李叔同是“以出世的精神做着人世的事业”。宗教的虔诚与献身精神并没有使他放弃救国的愿望，反而更加强烈。1941 年，弘一法师还写过一幅横卷：“念佛不忘救国，救国必须念佛”，其跋语写道：“佛者，觉也。觉了真理，乃能誓舍身命，牺牲一切，勇猛精进，救护国家。是故救国必须念佛。”弘一法师皈依佛门之后，依然广结善缘，开导众生，以唤起、提高人们的爱国热情和责任感为己任。或者，这种“宗教救国”的理想，与大师早年 “教育救国”的理想是一脉相承吧!正因为如此，当时许多文化名人都颇为欣慕大师，与之结“方外之友”。</p>
+<p>著名作家郁达夫曾到福建拜访弘一法师，相见之下，郁达夫先生竟产生削发出家的念头，希望追随大师的步履。弘一法师对他说：“你与佛无缘，还是做你愿做的事情去吧!”赠郁氏著作数种而别。郁氏后来因英勇抗日，被日本宪兵残杀于苏门答腊。</p>
+<p>据徐悲鸿夫人廖静文女士的回忆，徐悲鸿先生曾多次访问弘一法师这位艺坛前辈。有一次，徐悲鸿发现山上一棵已枯死多年的树木发出了新芽，颇为吃惊，于是问道：“此树发芽，是因为您——位高僧来到山中，感动这枯树起死回生吗?”大师答道：“不是的。是我每天为它浇水，它才活过来。”徐悲鸿曾为大师作油画象，“以全力诣其极”，颇为深刻地表现了弘一大师的庄严与慈爱。</p>
+<p>柳亚子先生与弘一早年同办过《太平洋报》，弘一出家后，就与柳亚子失去了联系。1939年抗日军兴之际，弘一在福建泉州度60 寿辰，忽然收到柳亚子一首祝寿诗，诗曰：“君礼释迦佛，我拜马克思。大雄大无畏，迹异心岂异。闭关谢尘网，吾意嫌消极。愿持铁禅杖，打杀卖国贼。”</p>
+<p>当时在场祝寿的人见到这首诗，莫不缩颈咋舌，可是弘一读了微微一笑，提笔回诗偈一首，云：“亭亭菊一枝，高标矗劲节。云何色殷红，殉教应流血。”柳亚子读后，不由叹道：“呜呼，洵可谓善知识矣!”并作《怀弘一上人》文。</p>
+<h2 id="绚烂之极，归于平淡"><a href="#绚烂之极，归于平淡" class="headerlink" title="绚烂之极，归于平淡"></a>绚烂之极，归于平淡</h2><p>弘一法师在出家之后，就毅然割断了他曾醉心研究过的话剧、油画、西洋音乐诸艺术。唯独于书法研习不辍，老而弥笃。他认为：“夫耽乐书术，增长放逸，佛所深诫。然研习之者，能尽其美，以是书写佛典，流传于世，令诸生欢喜受持，非无益矣。”(《李叔同临古法书·自序》)。李叔同出家前即以书法名世，有深厚的碑学功底，其书法大都凝重厚实，结构舒展开张，点画方折劲健，富于才气。而他的书法之真正成熟，是在成为佛门弟子之后。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms20Kmo4ribUvhdcZcofLkAF1PyVTh1zADsK6frRiaBhMTlh5iaaxgsLrAEA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>由于外部环境和内心精神世界的改变，李叔同出家以后的书法作品，可以说是充满了宗教所赋予的超脱和宁静，不激不厉，心平气和。在俗时那种点画精到，刻意求工的效果不见了，而代之以圆润含蓄，蕴藉潇洒，给人一种大智若愚，大巧若拙的感觉。正如大师自己所解释的那样：“朽人之字所示者，平淡、恬静、冲逸之致也。”弘一法师的书法，实际上是一种心灵的迹化，是大师一生艺术作品中最宝贵的结晶，深受各阶层人士的景仰。弘一出家后，一直保持着与在俗的朋友、学生的密切联系，而书法则是这种联系的主要媒介。他书写了大量作品，广结墨缘，也留下了一幅幅艺术精品。</p>
+<p>除他的弟子们之外，与弘一结下墨缘的文化名人也很多。文学家如鲁迅、郭沫若、叶圣陶……艺术家如吴昌硕、王一亭等。鲁迅先生曾在日记中详述自己在内山完造家求得弘一法书而为之欣喜不已的事。郭沫若先生亦通过法师在俗弟子转求大师墨宝，加以珍藏，还在致法师的回信中对法师一以贯之的文艺观—— “士先器识而后文艺”，深表服膺。</p>
+<p>据弘一法师弟子刘质平先生回忆，国民党慕弘一法师名，多次派人劝说，请他做国民党的政治和尚，并请他用双款为蒋介石书写对联，软硬兼施，都被法师坚决拒绝，并谢绝会见，始终不给一字。但是普通农民请法师写字，则十分容易，如距寺院较近，有时还亲自送去。于此可见法师伟大人格之一斑!</p>
+<p>弘一法师写经，是以心安神定，高度镇静的功夫，运之于腕，贯之于笔，传之于纸，故有敛神藏锋的气韵，写毕，往往满头大汗，非常疲劳。这样的佛教艺术精品，自然是宝贵的文化财富!日本大学里，就把法师所写的《四分律表记》及《华严经集联》影印本作为研究书法与哲学的资料。</p>
+<h2 id="悲欣交集"><a href="#悲欣交集" class="headerlink" title="悲欣交集"></a>悲欣交集</h2><p>1942年秋，弘一法师在福建泉州不二祠温陵养老院圆寂，遵佛教仪式火化，其舍利分别由泉州清源山弥陀岩，杭州虎跑寺建舍利塔供养。法师垂危时，曾作二偈给夏丐尊等旧友：“君子之交，其淡如水。执象而求，咫尺千里。问余何适，廓尔亡言。华枝春满，天心月圆。”诗境圆融、洒脱、从容，充分表达了大师对生与死的必然，和万物生生不息的自然规律的彻悟。只有具备如此渊博深厚的学养的哲人，才能有如此博大、恢宏、超脱一切、悲悯一切的胸怀，才能如此冷静地、理智地、从容地面对生死之界限。诵其诗，令人起敬。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTepjzStJFJyItqviasrA21ms2yeWicjFQakDCSpiaj2WDWCHEX1a5T49QX36ZGsf47YbWicMZBFBkQuKew/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>大师病重后，拒绝医疗探问，一心念佛。他告诉他的弟子妙莲法师：“你在为我助念时，看到我眼里流泪，这不是留念人间，或挂念亲人，而是在回忆我一生的憾事。”</p>
+<p>10月10日下午，弘一法师索来纸笔，写下“悲欣交集”的绝笔交给妙莲。大师“悲”什么?“欣”什么呢?与婆娑世界离别是悲，往生西方是欣。山川草木、宫室楼台、尊荣富贵乃至亲朋骨肉，在佛家看来，如昙花一现，皆为幻象、梦境。梦中离别，亦有悲情，虽有悲情，实乃空虚之悲。而欣则是真欣!涅磐入寂，成就正觉，岂非最可欣之事?自古无哪位高僧大德往生之时道出这四字，这足以证明弘一大师的无上智慧!</p>
+<p>10月13日(阴历9月4日)晚，弘一法师安详圆寂于陋室板床之上，他的眼角沁出晶莹的泪花。</p>
+<p>一代大师就这样逝去了，连同他渊博的知识，惊人的才华，不凡的经历……像流星划过太空，又如飞蛾扑向星辰。</p>
+<p>然而，弘一法师究竟不同于一般的和尚，他传奇般的一生，乃是不断自我超越、自我升华的一生。即使皈依佛门，也不是“走投无路，遁入空门”，而是痛感于众生疾苦，为了人生之根本问题“行大丈夫事”的。所以我们在法师的尘缘之中，更多看到的是一丝一毫不肯苟且的做人态度，是“救护国家”的火热心肠，是对生命的无限热爱与悲悯……，正如弘一大师的法侣，高僧广洽法师所说：“虽亲近大师有年，但觉其语默动静，无非示教，因不敢以文字赞一词也。”</p>
+<p>“今宵别梦寒”，而弘一法师的一生尘缘，恰似疏林晚钟，在精神的时空中回荡、延伸，帮助我们脱离一切虚妄与苟且，而拯救灵魂于不自觉的“陆沉”，去承担起人生旅途的重任!</p>
+<div style="color:gray;font-size:0.9em;">
+文章来源: 文史天地
+</div>
+
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6/"># 文学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/197efb3e/">柏格森生命美学与梁启超文学思想的转变</a>
+            
+            
+            <a class="next" rel="next" href="/24f6dd4f/">窥探神秘的非洲木雕（图集）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/197efb3e/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/24f6dd4f/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

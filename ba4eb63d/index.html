@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Python一键下载公众号所有文章，导出文件支持PDF，HTML，Markdown，Excel，chm等格式 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Python一键下载公众号所有文章，导出文件支持PDF，HTML，Markdown，Excel，chm等格式</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 8, 2024&nbsp;&nbsp;9:48:12</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 8, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Others/">Others</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%B7%A5%E5%85%B7/">工具 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>今天分享的是用Python一键备份某个公众号的所有文章，原理就是通过抓包抓取微信客户端的接口，用Python请求微信接口获取公众号文章链接再下载。</p>
+<h2 id="1-charles-抓包"><a href="#1-charles-抓包" class="headerlink" title="1. charles 抓包"></a>1. charles 抓包</h2><p>常见的抓包工具有Fiddler，charles，这里用的charles，先去<a target="_blank" rel="noopener" href="https://www.charlesproxy.com/download">官网</a> 下载软件,然后打开微信客户端找到公众号，进入文章列表可以看到发过的文章。<br><img src="https://upload-images.jianshu.io/upload_images/23152173-91217817ab889f5d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>不过charles没安装证书前获取不到https接口数据，显示unknown。<br><img src="https://upload-images.jianshu.io/upload_images/23152173-d6323050d5a76412.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br>安装证书后在 proxy-&gt;ssl proxying settings 添加域名和host 。<br><img src="https://upload-images.jianshu.io/upload_images/23152173-f12ade2adea0aaf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br>再次抓取可以看到公众号文章接口数据了。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/23152173-bc7af8b0553b9c8d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>公众号文章的接口地址 <code>https://mp.weixin.qq.com/mp/profile_ext?action=getmsg&amp;__biz=MjM5ODIzNDEx&amp;f=json&amp;offset=25&amp;count=10&amp;is_ok=1&amp;scene=124&amp;uin=MTU0MTQzNj&amp;key=f57423</code>，参数比较多，其中有用的参数 __biz 是用户和公众号之间的唯一id，uin是用户的id，这个是不变的，key 是请求的秘钥，一段时间就会失效，offset 是偏移量，count 是每次请求的条数，返回值结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;ret&quot;: 0,</span><br><span class="line">	&quot;errmsg&quot;: &quot;ok&quot;,</span><br><span class="line">	&quot;msg_count&quot;: 10,信息条数</span><br><span class="line">	&quot;can_msg_continue&quot;: 1,是否还可以继续获取，1代表可以。0代表不可以，也就是最后一页</span><br><span class="line">	&quot;general_msg_list&quot;: &quot;&#123;\&quot;list\&quot;:[&#123;\&quot;comm_msg_info\&quot;:&#123;\&quot;id\&quot;:1000000182,\&quot;type\&quot;:49,\&quot;datetime\&quot;:1585702800,\&quot;fakeid\&quot;:\&quot;2398234112\&quot;,\&quot;status\&quot;:2,\&quot;content\&quot;:\&quot;\&quot;&#125;,\&quot;app_msg_ext_info\&quot;:&#123;\&quot;title\&quot;:\&quot;张国荣音乐\/演唱会\/电影全集网盘分享\&quot;,\&quot;digest\&quot;:\&quot;#17宠爱张国荣#\&quot;,\&quot;content\&quot;:\&quot;\&quot;,\&quot;fileid\&quot;:0,\&quot;content_url\&quot;:\&quot;http:\/\/mp.weixin.qq.com\/s?__biz=MjM5ODIzNDExMg==&amp;amp;mid=2257484715&amp;amp;idx=1&amp;amp;sn=2fab0a11d62090d5e30e03e334bce636&amp;amp;chksm=a5b70ac492c083d275b6e15f0de85b8baf488ebb76e5429b08f40cdc53ab6e27b0ce5474fb30&amp;amp;scene=27#wechat_redirect\&quot;,\&quot;source_url\&quot;:\&quot;\&quot;,\&quot;cover\&quot;:\&quot;http:\/\/mmbiz.qpic.cn\/mmbiz_jpg\/pchiblEh3tErdgYu06FFVuvnKr9aAkddJLB7pgNhaiav0aYGQKJI0Dwn0kpT4wnmQkIglGH1Nciam5IThX19ibyEag\/0?wx_fmt=jpeg\&quot;,\&quot;subtype\&quot;:9,\&quot;is_multi\&quot;:0,\&quot;multi_app_msg_item_list\&quot;:[],\&quot;author\&quot;:\&quot;苏生\&quot;,\&quot;copyright_stat\&quot;:100,\&quot;duration\&quot;:0,\&quot;del_flag\&quot;:1,\&quot;item_show_type\&quot;:0,\&quot;audio_fileid\&quot;:0,\&quot;play_url\&quot;:\&quot;\&quot;,\&quot;malicious_title_reason_id\&quot;:0,\&quot;malicious_content_type\&quot;:0&#125;&#125;]&#125;&quot;, </span><br><span class="line">	&quot;next_offset&quot;: 37,</span><br><span class="line">	&quot;video_count&quot;: 1,</span><br><span class="line">	&quot;use_video_tab&quot;: 1,</span><br><span class="line">	&quot;real_type&quot;: 0,</span><br><span class="line">	&quot;home_page_list&quot;: []</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到返回数据包括文章标题titile、摘要digest、文章地址content_url、阅读原文地址source_url、封面图cover、作者author ，只要抓取这些有用的数据就行了。</p>
+<h2 id="2-python-抓取公众号文章"><a href="#2-python-抓取公众号文章" class="headerlink" title="2. python 抓取公众号文章"></a>2. python 抓取公众号文章</h2><p>上面分析了接口参数和返回数据，开始用Python请求微信接口就是了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">import requests,json,time</span><br><span class="line">biz = &#x27;MzA5NjYxNDQwNA==&#x27;#随公众号改变（用户和公众号之间的唯一id）</span><br><span class="line">uin = &#x27;MTE3MDQ4MjQ0MQ%3D%3D&#x27;#不变（用户ID）</span><br><span class="line">key = &#x27;b7867b6712aa36fe784e610f7c7fc3a104955a476fa6bf7224e7f96ea3fc7bef0184aef8bd6832abbf4e9f3dfb09b23ead475e5c8aa84d1920618b8faf98820150bd2a001996d55bfc1421bcd2aa12094db071a65ede4c20f97af661292f93800cfa9d7c0e81d908dcebee5afa6a7baa4eb726a85321caaaa1ab3708118dbea4&#x27;</span><br><span class="line">def parse(offset, biz, uin, key):</span><br><span class="line">    # url前缀</span><br><span class="line">    url = &quot;https://mp.weixin.qq.com/mp/profile_ext&quot;</span><br><span class="line">    # 请求头</span><br><span class="line">    headers = &#123;</span><br><span class="line">        &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36 QBCore/4.0.1301.400 QQBrowser/9.0.2524.400 Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2875.116 Safari/537.36 NetType/WIFI MicroMessenger/7.0.5 WindowsWechat&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    proxies = &#123;</span><br><span class="line">        &#x27;https&#x27;: None,</span><br><span class="line">        &#x27;http&#x27;: None,</span><br><span class="line">    &#125;</span><br><span class="line">    # 重要参数https://mp.weixin.qq.com/mp/profile_ext?action=getmsg&amp;__biz=MjM5ODIzNDExMg==&amp;f=json&amp;offset=48&amp;count=10&amp;is_ok=1&amp;scene=124&amp;uin=MTU0MTQzNjQwMw%3D%3D&amp;key=a42654d5f06828b5d9e40deca0ea5f73004fecbf9ae4cfe0d37653465b623e26d82d0948a73d3cdf4fffd5df19bebafed06815f22f05bac0e5679625c86bb429885529cea1973bfb4d9f18481e624a0cea7cd12932fb55e7ed892ccd6dcda141737cf5ed9811d477cd90cdf4d8371a8b1bdd63de15e193787fc75f186cdf41b5&amp;pass_ticket=FjDlSKDCqgdl0E5WNMPJLuBO3eeqP%2FdrlM1Q8%2FzEHxisVbm7ZVemLp6VeXsrLd0i&amp;wxtoken=&amp;appmsg_token=1074_NFjOFA%252FiWPMoGcRLiG7SzMUc-NoJp7QhKSYmYw~~&amp;x5=0&amp;f=json</span><br><span class="line">    param = &#123;</span><br><span class="line">        &#x27;action&#x27;: &#x27;getmsg&#x27;,</span><br><span class="line">        &#x27;__biz&#x27;: biz,</span><br><span class="line">        &#x27;f&#x27;: &#x27;json&#x27;,</span><br><span class="line">        &#x27;offset&#x27;: offset, #偏移量</span><br><span class="line">        &#x27;count&#x27;: &#x27;10&#x27;, #每次请求的条数</span><br><span class="line">        &#x27;is_ok&#x27;: &#x27;1&#x27;,</span><br><span class="line">        &#x27;scene&#x27;: &#x27;124&#x27;,</span><br><span class="line">        &#x27;uin&#x27;: uin,</span><br><span class="line">        &#x27;key&#x27;: key, #请求的秘钥，一段时间就会失效</span><br><span class="line">        &#x27;wxtoken&#x27;: &#x27;&#x27;,</span><br><span class="line">        &#x27;x5&#x27;: &#x27;0&#x27;,</span><br><span class="line">    &#125;</span><br><span class="line">    # 发送请求，获取响应</span><br><span class="line">    response = requests.get(url, headers=headers, params=param, proxies=proxies)</span><br><span class="line">    response_dict = response.json()</span><br><span class="line">    print(response_dict)</span><br><span class="line">    next_offset = response_dict[&#x27;next_offset&#x27;]</span><br><span class="line">    can_msg_continue = response_dict[&#x27;can_msg_continue&#x27;]</span><br><span class="line">    general_msg_list = response_dict[&#x27;general_msg_list&#x27;]</span><br><span class="line">    data_list = json.loads(general_msg_list)[&#x27;list&#x27;]</span><br><span class="line">    htmls = []</span><br><span class="line">    # print(data_list)</span><br><span class="line">    for data in data_list:</span><br><span class="line">        try:</span><br><span class="line">            # 文章发布时间</span><br><span class="line">            date = time.strftime(&#x27;%Y-%m-%d&#x27;, time.localtime(data[&#x27;comm_msg_info&#x27;][&#x27;datetime&#x27;]))</span><br><span class="line">            msg_info = data[&#x27;app_msg_ext_info&#x27;]</span><br><span class="line">            #原创</span><br><span class="line">            if msg_info[&#x27;copyright_stat&#x27;] == 11:</span><br><span class="line">              # 文章标题</span><br><span class="line">              title = msg_info[&#x27;title&#x27;]</span><br><span class="line">              # 文章链接</span><br><span class="line">              url = msg_info[&#x27;content_url&#x27;]</span><br><span class="line">              #文章摘要digest</span><br><span class="line">              #文章封面cover</span><br><span class="line"></span><br><span class="line">              res = requests.get(url,proxies=&#123;&#x27;http&#x27;: None,&#x27;https&#x27;: None&#125;,verify=False, headers=headers)</span><br><span class="line">              content = res.text.replace(&#x27;data-src&#x27;, &#x27;src&#x27;)</span><br><span class="line">              #filename=str(int(time.time()))+&#x27;.html&#x27;</span><br><span class="line">              #生成HTML文件</span><br><span class="line">              #htmls.append(filename)</span><br><span class="line">              with open(date+&#x27;_&#x27;+title+&#x27;.html&#x27;, &#x27;w&#x27;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">                  f.write(content)</span><br><span class="line">              #生成Excel</span><br><span class="line">              #with open(&#x27;wechat2.csv&#x27;, &#x27;a+&#x27;, encoding=&#x27;gbk&#x27;) as f:</span><br><span class="line">              #    f.write(title.replace(&#x27;,&#x27;, &#x27;，&#x27;)+&#x27;,&#x27;+msg_info[&#x27;digest&#x27;].replace(&#x27;,&#x27;, &#x27;，&#x27;)+&#x27;,&#x27; + msg_info[&#x27;cover&#x27;].replace(&#x27;,&#x27;, &#x27;，&#x27;) + &#x27;,&#x27; +url.replace(&#x27;,&#x27;, &#x27;，&#x27;)+&#x27;,&#x27;+str(date)+ &#x27;\n&#x27;)</span><br><span class="line">              #生成markdown</span><br><span class="line">            #   with open(&#x27;wechat.md&#x27;, &#x27;a+&#x27;, encoding=&#x27;utf-8&#x27;) as f:</span><br><span class="line">            #      f.write(&#x27;[&#123;&#125;]&#x27;.format(title) + &#x27;(&#123;&#125;)&#x27;.format(url)+ &#x27;\n&#x27;)</span><br><span class="line">              #生成PDF</span><br><span class="line">              #try:</span><br><span class="line">              #    pdfkit.from_string(content,&#x27;./&#x27; + date + &#x27;_&#x27; + title.replace(&#x27; &#x27;, &#x27;&#x27;)+&#x27;.pdf&#x27;)</span><br><span class="line">              #except Exception as err:</span><br><span class="line">              #    print(err)</span><br><span class="line">              # 部分文章标题含特殊字符，不能作为文件名</span><br><span class="line">                  #f = datetime.datetime.now().strftime(&#x27;%Y%m%d%H%M%S&#x27;) + &#x27;.pdf&#x27;</span><br><span class="line">                  #pdfkit.from_string(content,f)</span><br><span class="line">                  # 自己定义存储路径（绝对路径）</span><br><span class="line">              #finally:</span><br><span class="line">              #    os.remove(filename)</span><br><span class="line">              #pdfkit.from_url(url, &#x27;./&#x27; + date + title + &#x27;.pdf&#x27;) #图片获取不到</span><br><span class="line">              print(url + title + date + &#x27;成功&#x27;)</span><br><span class="line">        except Exception as err:</span><br><span class="line">            print(err)</span><br><span class="line">    #try:</span><br><span class="line">        #pdfkit.from_file(htmls,&#x27;公众号文章备份.pdf&#x27;)</span><br><span class="line">    #except:</span><br><span class="line">    #    pass</span><br><span class="line">    if can_msg_continue == 1:</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        parse(next_offset,biz,uin,key)</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        print(&#x27;爬取完毕&#x27;)</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">parse(0,biz,uin,key)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/23152173-834294997521f48b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<div style="color:gray;font-size:0.9em">
+    参考:<br>
+    [1] <a target="_blank" rel="noopener" href="https://sushengbuhuo.github.io/2020/08/28/Python%E4%B8%80%E9%94%AE%E4%B8%8B%E8%BD%BD%E5%85%AC%E4%BC%97%E5%8F%B7%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%EF%BC%8C%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6%E6%94%AF%E6%8C%81PDF%EF%BC%8CHTML%EF%BC%8CMarkdown%EF%BC%8CExcel%EF%BC%8Cchm%E7%AD%89%E6%A0%BC%E5%BC%8F/">Python一键下载公众号所有文章，导出文件支持PDF，HTML，Markdown，Excel，chm等格式
+</a>
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%B7%A5%E5%85%B7/"># 工具</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/e8195e92/">通过FFmpeg裁剪视频</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+            
+                <a class="next" rel="next" href="/e8195e92/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

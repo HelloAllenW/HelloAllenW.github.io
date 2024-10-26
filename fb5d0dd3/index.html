@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>一文带你快速上手Rollup | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">一文带你快速上手Rollup</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 8, 2024&nbsp;&nbsp;11:44:37</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 8, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>项目中一直用的都是webpack，前一段需要开发几个类库供其他平台使用，本来打算继续用webpack的，但感觉webpack用来开发js库，不仅繁琐而且打包后的文件体积也比较大。正好之前看vue源码，知道vue也是通过rollup打包的。这次又是开发类库的，于是就快速上手了rollup。</p>
+<p>本篇文章是我有了一定的项目实践后，回过来给大家分享一下如何从零快速上手rollup。</p>
+<h2 id="一、什么是rollup？"><a href="#一、什么是rollup？" class="headerlink" title="一、什么是rollup？"></a>一、什么是rollup？</h2><p>系统的了解rollup之前，我们先来简单了解下What is rollup？</p>
+<p>关于rollup的介绍，官方文档已经写的很清楚了：</p>
+<blockquote>
+<p>Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码，例如 library 或应用程序。</p>
+</blockquote>
+<p>与Webpack偏向于应用打包的定位不同，rollup.js更专注于Javascript类库打包。</p>
+<p>我们熟知的Vue、React等诸多知名框架或类库都是通过rollup.js进行打包的。</p>
+<h2 id="二、为什么是rollup？"><a href="#二、为什么是rollup？" class="headerlink" title="二、为什么是rollup？"></a>二、为什么是rollup？</h2><p>webpack我相信做前端的同学大家都用过，那么为什么有些场景还要使用rollup呢？这里我简单对webpack和rollup做一个比较：</p>
+<p>总体来说webpack和rollup在不同场景下，都能发挥自身优势作用。webpack对于代码分割和静态资源导入有着“先天优势”，并且支持热模块替换(HMR)，而rollup并不支持。</p>
+<p>所以当开发应用时可以优先选择webpack，但是rollup对于代码的Tree-shaking和ES6模块有着算法优势上的支持，若你项目只需要打包出一个简单的bundle包，并是基于ES6模块开发的，可以考虑使用rollup。</p>
+<p>其实webpack从2.0开始就已经支持Tree-shaking，并在使用babel-loader的情况下还可以支持es6 module的打包。实际上，rollup已经在渐渐地失去了当初的优势了。但是它并没有被抛弃，反而因其简单的API、使用方式被许多库开发者青睐，如React、Vue等，都是使用rollup作为构建工具的。</p>
+<h2 id="三、快速上手"><a href="#三、快速上手" class="headerlink" title="三、快速上手"></a>三、快速上手</h2><p>我们先花大概十分钟左右的时间来了解下rollup的基本使用以及完成一个hello world。</p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>首先全局安装rollup：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i rollup -g</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-目录准备（hello-world）"><a href="#2-目录准备（hello-world）" class="headerlink" title="2. 目录准备（hello world）"></a>2. 目录准备（hello world）</h3><p>接着，我们初始化一个如下所示的项目目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">├── dist # 编译结果</span><br><span class="line">├── example # HTML引用例子</span><br><span class="line">│ └── index.html</span><br><span class="line">├── package.json</span><br><span class="line">└── src # 源码</span><br><span class="line">└── index.js</span><br></pre></td></tr></table></figure>
+
+<p>首先我们在src/index.js中写入如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&quot;柯森&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>然后在命令行执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rollup src/index.js -f umd -o dist/bundle.js</span><br></pre></td></tr></table></figure>
+
+<p>执行命令，我们即可在dist目录下生成bundle.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(function (factory) &#123;</span><br><span class="line">typeof define === &#x27;function&#x27; &amp;&amp; define.amd ? define(factory) :</span><br><span class="line">factory();</span><br><span class="line">&#125;((function () &#123; &#x27;use strict&#x27;;</span><br><span class="line"></span><br><span class="line">console.log(&quot;柯森&quot;);</span><br><span class="line"></span><br><span class="line">&#125;)));</span><br></pre></td></tr></table></figure>
+
+<p>这时，我们再在example/index.html中引入上面打包生成的bundle.js文件，打开浏览器：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081146526.webp"></p>
+<p>如我们所预料的，控制台输出了柯森。</p>
+<p>到这里，我们就用rollup打包了一个最最简单的demo。</p>
+<p>可能很多同学看到这里对于上面命令行中的参数不是很明白，我依次说明下：</p>
+<ul>
+<li>-f。-f参数是–format的缩写，它表示生成代码的格式，amd表示采用AMD标准，cjs为CommonJS标准，esm（或 es）为ES模块标准。-f的值可以为amd、cjs、system、esm（’es’也可以）、iife或umd中的任何一个。</li>
+<li>-o。-o指定了输出的路径，这里我们将打包后的文件输出到dist目录下的bundle.js</li>
+</ul>
+<p>其实除了这两个，还有很多其他常用的命令（这里我暂且列举剩下两个也比较常用的，完整的<a href="https://link.zhihu.com/?target=https://rollupjs.org/guide/en/%23command-line-flags">rollup 命令行参数</a>）：</p>
+<ul>
+<li>-c。指定rollup的配置文件。</li>
+<li>-w。监听源文件是否有改动，如果有改动，重新打包。</li>
+</ul>
+<h3 id="3-使用配置文件-rollup-config-js"><a href="#3-使用配置文件-rollup-config-js" class="headerlink" title="3. 使用配置文件(rollup.config.js)"></a>3. 使用配置文件(rollup.config.js)</h3><p>使用命令行的方式，如果选项少没什么问题，但是如果添加更多的选项，这种命令行的方式就显得麻烦了。</p>
+<p>为此，我们可以创建配置文件来囊括所需的选项</p>
+<p>在项目中创建一个名为rollup.config.js的文件，增加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/index.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/bundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后命令行执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rollup -c</span><br></pre></td></tr></table></figure>
+
+<p>打开dist/bundle.js文件，我们会发现和上面采用命令行的方式打包出来的结果是一样的。</p>
+<p>这里，我对配置文件的选项做下简单的说明：</p>
+<ul>
+<li><p>input表示入口文件的路径（老版本为 entry，已经废弃）</p>
+</li>
+<li><p>output表示输出文件的内容，它允许传入一个对象或一个数组，当为数组时，依次输出多个文件，它包含以下内容：</p>
+</li>
+<li><ul>
+<li>output.file：输出文件的路径（老版本为 dest，已经废弃）</li>
+<li>output.format：输出文件的格式</li>
+<li>output.banner：文件头部添加的内容</li>
+<li>output.footer：文件末尾添加的内容</li>
+</ul>
+</li>
+</ul>
+<p>到这里，相信你已经差不多上手rollup了。</p>
+<h2 id="四、进阶"><a href="#四、进阶" class="headerlink" title="四、进阶"></a>四、进阶</h2><p>但是，这对于真实的业务场景是远远不够的。</p>
+<p>下面，我将介绍rollup中的几种常用的插件以及external属性、tree-shaking机制。</p>
+<h3 id="1-resolve插件"><a href="#1-resolve插件" class="headerlink" title="1. resolve插件"></a>1. resolve插件</h3><h4 id="（1）为什么要使用resolve插件"><a href="#（1）为什么要使用resolve插件" class="headerlink" title="（1）为什么要使用resolve插件"></a>（1）为什么要使用resolve插件</h4><p>在上面的入门案例中，我们打包的对象是本地的js代码和库，但实际开发中，不太可能所有的库都位于本地，我们大多会通过npm下载远程的库。</p>
+<p>与webpack和browserify这样的其他捆绑包不同，rollup不知道如何打破常规去处理这些依赖。因此我们需要添加一些配置。</p>
+<h4 id="（2）resolve插件使用"><a href="#（2）resolve插件使用" class="headerlink" title="（2）resolve插件使用"></a>（2）resolve插件使用</h4><p>首先在我们的项目中添加一个依赖the-answer，然后修改src/index.js文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import answer from &quot;the-answer&quot;;</span><br><span class="line"></span><br><span class="line">export default function () &#123;</span><br><span class="line">  console.log(&quot;the answer is &quot; + answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行npm run build。</p>
+<blockquote>
+<p>这里为了方便，我将原本的rollup -c -w添加到了package.json的scripts中：”build”: “rollup -c -w”</p>
+</blockquote>
+<p>会得到以下报错：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081147575.webp"></p>
+<p>打包后的bundle.js仍然会在Node.js中工作，但是the-answer不包含在包中。为了解决这个问题，将我们编写的源码与依赖的第三方库进行合并，rollup.js为我们提供了resolve插件。</p>
+<p>首先，安装resolve插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @rollup/plugin-node-resolve</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件rollup.config.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/index.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/bundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve()],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这时再次执行npm run build，可以发现报错已经没有了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081150716.png"></p>
+<p>打开dist/bundle.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  var index = 42;</span><br><span class="line"></span><br><span class="line">  function index$1() &#123;</span><br><span class="line">    console.log(&quot;the answer is &quot; + index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return index$1;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>打包文件bundle.js中已经包含了引用的模块。</p>
+<p>有些场景下，虽然我们使用了resolve插件，但可能我们仍然想要某些库保持外部引用状态，这时我们就需要使用external属性，来告诉rollup.js哪些是外部的类库。</p>
+<h3 id="2-external-属性"><a href="#2-external-属性" class="headerlink" title="2. external 属性"></a>2. external 属性</h3><p>修改rollup.js的配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/index.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/bundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve()],</span><br><span class="line">  external: [&quot;the-answer&quot;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>重新打包，打开dist/bundle.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory(require(&quot;the-answer&quot;)))</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define([&quot;the-answer&quot;], factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory(global.answer)));</span><br><span class="line">&#125;)(this, function (answer) &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  function _interopDefaultLegacy(e) &#123;</span><br><span class="line">    return e &amp;&amp; typeof e === &quot;object&quot; &amp;&amp; &quot;default&quot; in e ? e : &#123; default: e &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var answer__default = /*#__PURE__*/ _interopDefaultLegacy(answer);</span><br><span class="line"></span><br><span class="line">  function index() &#123;</span><br><span class="line">    console.log(&quot;the answer is &quot; + answer__default[&quot;default&quot;]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return index;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这时我们看到the-answer已经是做为外部库被引入了。</p>
+<h3 id="3-commonjs插件"><a href="#3-commonjs插件" class="headerlink" title="3. commonjs插件"></a>3. commonjs插件</h3><h4 id="（1）为什么需要commonjs插件"><a href="#（1）为什么需要commonjs插件" class="headerlink" title="（1）为什么需要commonjs插件"></a>（1）为什么需要commonjs插件</h4><p>rollup.js编译源码中的模块引用默认只支持 ES6+的模块方式import/export。然而大量的npm模块是基于CommonJS模块方式，这就导致了大量 npm模块不能直接编译使用。</p>
+<p>因此使得rollup.js编译支持npm模块和CommonJS模块方式的插件就应运而生：@rollup/plugin-commonjs。</p>
+<h4 id="（2）commonjs插件使用"><a href="#（2）commonjs插件使用" class="headerlink" title="（2）commonjs插件使用"></a>（2）commonjs插件使用</h4><p>首先，安装该模块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @rollup/plugin-commonjs</span><br></pre></td></tr></table></figure>
+
+<p>然后修改rollup.config.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line">import commonjs from &quot;@rollup/plugin-commonjs&quot;;</span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/index.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/bundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve(), commonjs()],</span><br><span class="line">  external: [&quot;the-answer&quot;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-babel插件"><a href="#4-babel插件" class="headerlink" title="4. babel插件"></a>4. babel插件</h3><h4 id="（1）为什么需要babel插件？"><a href="#（1）为什么需要babel插件？" class="headerlink" title="（1）为什么需要babel插件？"></a>（1）为什么需要babel插件？</h4><p>我们在src目录下添加es6.js文件(⚠️ 这里我们使用了 es6 中的箭头函数)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const a = 1;</span><br><span class="line">const b = 2;</span><br><span class="line">console.log(a, b);</span><br><span class="line">export default () =&gt; &#123;</span><br><span class="line">  return a + b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后修改rollup.config.js配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line">import commonjs from &quot;@rollup/plugin-commonjs&quot;;</span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/es6.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/esBundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve(), commonjs()],</span><br><span class="line">  external: [&quot;the-answer&quot;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>执行打包，可以看到dist/esBundle.js文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  const a = 1;</span><br><span class="line">  const b = 2;</span><br><span class="line">  console.log(a, b);</span><br><span class="line">  var es6 = () =&gt; &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return es6;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到箭头函数被保留下来，这样的代码在不支持ES6的环境下将无法运行。我们期望在rollup.js打包的过程中就能使用babel完成代码转换，因此我们需要babel插件。</p>
+<h4 id="（2）babel插件的使用"><a href="#（2）babel插件的使用" class="headerlink" title="（2）babel插件的使用"></a>（2）babel插件的使用</h4><p>首先，安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @rollup/plugin-babel</span><br></pre></td></tr></table></figure>
+
+<p>同样修改配置文件rollup.config.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line">import commonjs from &quot;@rollup/plugin-commonjs&quot;;</span><br><span class="line">import babel from &quot;@rollup/plugin-babel&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/es6.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/esBundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve(), commonjs(), babel()],</span><br><span class="line">  external: [&quot;the-answer&quot;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后打包，发现会出现报错：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081154951.webp"></p>
+<p>提示我们缺少@babel/core，因为@babel/core是babel的核心。我们来进行安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @babel/core</span><br></pre></td></tr></table></figure>
+
+<p>再次执行打包，发现这次没有报错了，但是我们尝试打开dist/esBundle.js：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  const a = 1;</span><br><span class="line">  const b = 2;</span><br><span class="line">  console.log(a, b);</span><br><span class="line">  var es6 = () =&gt; &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return es6;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以发现箭头函数仍然存在，显然这是不正确的，说明我们的babel插件没有起到作用。这是为什么呢？</p>
+<p>原因是由于我们缺少.babelrc文件，添加该文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [</span><br><span class="line">    [</span><br><span class="line">    &quot;@babel/preset-env&quot;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;modules&quot;: false,</span><br><span class="line">        // &quot;useBuiltIns&quot;: &quot;usage&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们看.babelrc配置了preset env，所以先安装这个插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @babel/preset-env</span><br></pre></td></tr></table></figure>
+
+<p>这次再次执行打包，我们打开dist/esBundle.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  var a = 1;</span><br><span class="line">  var b = 2;</span><br><span class="line">  console.log(a, b);</span><br><span class="line">  var es6 = function () &#123;</span><br><span class="line">    return a + b;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return es6;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到箭头函数被转换为了function，说明babel插件正常工作。</p>
+<h3 id="5-json插件"><a href="#5-json插件" class="headerlink" title="5. json插件"></a>5. json插件</h3><h4 id="（1）为什么要使用json插件？"><a href="#（1）为什么要使用json插件？" class="headerlink" title="（1）为什么要使用json插件？"></a>（1）为什么要使用json插件？</h4><p>在src目录下创建json.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import json from &quot;../package.json&quot;;</span><br><span class="line">console.log(json.author);</span><br></pre></td></tr></table></figure>
+
+<p>内容很简单，就是引入package.json，然后去打印author字段。</p>
+<p>修改rollup.config.js配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import resolve from &quot;@rollup/plugin-node-resolve&quot;;</span><br><span class="line">import commonjs from &quot;@rollup/plugin-commonjs&quot;;</span><br><span class="line">import babel from &quot;@rollup/plugin-babel&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  input: [&quot;./src/json.js&quot;],</span><br><span class="line">  output: &#123;</span><br><span class="line">    file: &quot;./dist/jsonBundle.js&quot;,</span><br><span class="line">    format: &quot;umd&quot;,</span><br><span class="line">    name: &quot;experience&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [resolve(), commonjs(), babel()],</span><br><span class="line">  external: [&quot;the-answer&quot;],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>执行打包，发现会发生如下报错：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081149454.webp"></p>
+<p>提示我们缺少@rollup/plugin-json插件来支持json文件。</p>
+<h4 id="（2）json插件的使用"><a href="#（2）json插件的使用" class="headerlink" title="（2）json插件的使用"></a>（2）json插件的使用</h4><p>来安装该插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @rollup/plugin-json</span><br></pre></td></tr></table></figure>
+
+<p>同样修改下配置文件，将插件加入plugins数组即可。</p>
+<p>然后再次打包，发现打包成功了，我们打开生成的dist/jsonBundle目录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">(function (factory) &#123;</span><br><span class="line">  typeof define === &quot;function&quot; &amp;&amp; define.amd ? define(factory) : factory();</span><br><span class="line">&#125;)(function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  var name = &quot;rollup-experience&quot;;</span><br><span class="line">  var version = &quot;1.0.0&quot;;</span><br><span class="line">  var description = &quot;&quot;;</span><br><span class="line">  var main = &quot;index.js&quot;;</span><br><span class="line">  var directories = &#123;</span><br><span class="line">    example: &quot;example&quot;,</span><br><span class="line">  &#125;;</span><br><span class="line">  var scripts = &#123;</span><br><span class="line">    build: &quot;rollup -c -w&quot;,</span><br><span class="line">    test: &#x27;echo &quot;Error: no test specified&quot; &amp;&amp; exit 1&#x27;,</span><br><span class="line">  &#125;;</span><br><span class="line">  var author = &quot;Cosen&quot;;</span><br><span class="line">  var license = &quot;ISC&quot;;</span><br><span class="line">  var dependencies = &#123;</span><br><span class="line">    &quot;@babel/core&quot;: &quot;^7.11.6&quot;,</span><br><span class="line">    &quot;@babel/preset-env&quot;: &quot;^7.11.5&quot;,</span><br><span class="line">    &quot;the-answer&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">  &#125;;</span><br><span class="line">  var devDependencies = &#123;</span><br><span class="line">    &quot;@rollup/plugin-babel&quot;: &quot;^5.2.0&quot;,</span><br><span class="line">    &quot;@rollup/plugin-commonjs&quot;: &quot;^15.0.0&quot;,</span><br><span class="line">    &quot;@rollup/plugin-json&quot;: &quot;^4.1.0&quot;,</span><br><span class="line">    &quot;@rollup/plugin-node-resolve&quot;: &quot;^9.0.0&quot;,</span><br><span class="line">  &#125;;</span><br><span class="line">  var json = &#123;</span><br><span class="line">    name: name,</span><br><span class="line">    version: version,</span><br><span class="line">    description: description,</span><br><span class="line">    main: main,</span><br><span class="line">    directories: directories,</span><br><span class="line">    scripts: scripts,</span><br><span class="line">    author: author,</span><br><span class="line">    license: license,</span><br><span class="line">    dependencies: dependencies,</span><br><span class="line">    devDependencies: devDependencies,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  console.log(json.author);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>完美！！</p>
+<h3 id="6-tree-shaking机制"><a href="#6-tree-shaking机制" class="headerlink" title="6. tree-shaking机制"></a>6. tree-shaking机制</h3><p>这里我们以最开始的src/index.js为例进行说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import answer from &quot;the-answer&quot;;</span><br><span class="line"></span><br><span class="line">export default function () &#123;</span><br><span class="line">  console.log(&quot;the answer is &quot; + answer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改上述文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const a = 1;</span><br><span class="line">const b = 2;</span><br><span class="line">export default function () &#123;</span><br><span class="line">  console.log(a + b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行打包。打开dist/bundle.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  var a = 1;</span><br><span class="line">  var b = 2;</span><br><span class="line">  function index() &#123;</span><br><span class="line">    console.log(a + b);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return index;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>再次修改src/index.js文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const a = 1;</span><br><span class="line">const b = 2;</span><br><span class="line">export default function () &#123;</span><br><span class="line">  console.log(a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再次执行打包，打开打包文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">(function (global, factory) &#123;</span><br><span class="line">  typeof exports === &quot;object&quot; &amp;&amp; typeof module !== &quot;undefined&quot;</span><br><span class="line">    ? (module.exports = factory())</span><br><span class="line">    : typeof define === &quot;function&quot; &amp;&amp; define.amd</span><br><span class="line">    ? define(factory)</span><br><span class="line">    : ((global =</span><br><span class="line">        typeof globalThis !== &quot;undefined&quot; ? globalThis : global || self),</span><br><span class="line">      (global.experience = factory()));</span><br><span class="line">&#125;)(this, function () &#123;</span><br><span class="line">  &quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">  var a = 1;</span><br><span class="line">  function index() &#123;</span><br><span class="line">    console.log(a);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return index;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>发现了什么？</p>
+<p>我们发现关于变量b的定义没有了，因为源码中并没有用到这个变量。这就是ES模块著名的tree-shaking机制，它动态地清除没有被使用过的代码，使得代码更加精简，从而可以使得我们的类库获得更快的加载速度。</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>本文大致向大家介绍了什么是rollup以及如何快速上手rollup。文中提到的这些其实只是冰山一角，rollup能玩的东西还有很多，关于更多可以去<a href="https://link.zhihu.com/?target=https://rollupjs.org/guide/en/">rollup 官网</a>查询</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33872f8c/">关于乌克兰, 我想谈几点看法（哲学泰斗哈贝马斯）</a>
+            
+            
+            <a class="next" rel="next" href="/d1678c62/">使用pnpm workspace管理Monorepo架构</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33872f8c/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d1678c62/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

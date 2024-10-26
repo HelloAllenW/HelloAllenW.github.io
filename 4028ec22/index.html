@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>什么是美学？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">什么是美学？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 9, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 9, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%BE%8E%E5%AD%A6/">美学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>美学</strong>一词来源于希腊语aesthesis，最初的意义是“对感观的感受”。德国哲学家鲍姆加登（Alexader Gottlieb aumgarten,1714-1762年）第一次赋予审美这一概念以范畴的地位，他的《美学（Aesthetica）》一书的出版标志着美学作为一门独立学科的产生，他认为美学即研究感觉与情感规律的学科。</p>
+<p><strong>美学</strong>产生以来的历史表明，给美学下定义而能让大家都同意是困难的，然而，美学，作为一门学科，一种理论，又必须有一个定义。从美学出现之日到今，从西方到东方，对于什么是美学，各种权威性的美学家、美学论著、美学辞典，百科全书，真可谓言人人殊。对各种不同的定义进行归纳，基本的有五：1、美学是关于美的学科；2、美学是艺术哲学；3、美学是以审美经验为中心研究美和艺术的学科；4、美学是关于对美学词汇进行语言分析的学科；5、美学是关于审美价值的学科。</p>
+<h2 id="美学定义"><a href="#美学定义" class="headerlink" title="美学定义"></a>美学定义</h2><p>18世纪1750年由德国哲学家鲍姆嘉登的《美学》一书的出版，美学作为一门独立的学科正式宣告成立。从美学诞生至今，关于美学的定义可谓是众说纷纭。归纳起来，主要的定义有五种：美学是关于美的科学；美学是艺术哲学；美学是以审美经验为中心研究美和艺术的科学；美学是关于对美学词汇进行语言分析的科学；美学是关于审美价值的科学。张法先生说，“美学不是要追求一个统一的定义，而是看历史上各个美学家是怎样下定义的，更为重要的，是美学是被怎样讲述的。”</p>
+<h2 id="经典著作"><a href="#经典著作" class="headerlink" title="经典著作"></a>经典著作</h2><p><strong>四篇对美学范式具有开启作用的文章</strong></p>
+<p>1.柏拉图开启美的哲学的《大希庇阿斯篇》</p>
+<p>2.夏夫兹伯里开启审美心理学的《论特征》</p>
+<p>3.巴托开启艺术哲学的《论美的艺术的界限与共性原理》</p>
+<p>4.维特根斯坦对美学语分析具有影响的《美学讲演录》</p>
+<p><strong>七本对美学体系具有影响的专著</strong></p>
+<p><strong>1.康德《判断力批判》</strong></p>
+<p>康德的《判断力批判》在结构美学上有两大特点：一，从以审美判断力为中心，联系主体与客体的相互关系去探讨审美的本质的。得出一种主体的普遍性（类似于美的本质）是审美的基础。二，划分两类审美判断力，美与崇高，即两类最普遍的审美类型。</p>
+<p><strong>2.黑格尔《美学》</strong></p>
+<p>黑格尔《美学》在结构上有三大特点：一，从美的本质定义出发，美是理念的感性显现。用理念确立了美的核心，用感性区别于理念的其它表现形式，从而解释一切美的现象。二，理念显现在感性上是有等级的，这个等级是与宇宙进化历史相一致的，无机物是感性的最低级，艺术是感性的最高级，美有统一的定义，艺术是美的最高和最典型的形态，美学只须研究艺术就足够了，艺术门类有七，但具有典型的是五，建筑、雕刻、绘画、音乐、诗歌（诗包括史诗、抒情诗、戏剧体诗）；美学只研究这五门艺术就可以获得关于美的普遍法则。三，五门艺术从审美的角度，可以划分为三大类型：象征型（建筑）、古典型（雕刻）、浪漫型（绘画、音乐、诗歌），三大审美类型囊括了一切美的对象。你只要掌握了美的本质、五大艺术、三大类型，就掌握了宇宙间的美。</p>
+<p><strong>3.德索《美学与艺术理论》</strong></p>
+<p>德索《美学与艺术理论》是美的本质消失之后，坚持美学各部分统一性的美学原理著作。德索的本意不是要用此本书建立一个美学体系，而是要想通过这本书建立两个理论体系，一个美学体系，一个艺术体系。首先，他要把艺术科学从美学里独立出去，认为这样做有利于两个学科的明晰；然后，在把艺术独立出去之后，又要看到，美学与艺术学在很多方面是联系在一起，二者经常都在“联合行动”。因此，最后，通过一本书把这两个体系放到一起来讲。这样一来，从实际的效果看，又变成了一个包含审美对象、审美经验、艺术为一体的美学体系。此书又代表了西方美学原理的一个转折，在第一部分不是讲美的本质，而是讲审美对象。</p>
+<p><strong>4.朗费德《审美态度》</strong></p>
+<p>朗费德《审美态度》是美的本质消失后单从审美心理学来结构一个美学原理的典型。朗菲德以三大部分组成了自己的体系：第一，把欧洲的心理美学理论综合起来予以体系化，具体来说，就是把闵斯特堡、普芙，布洛和心理距离理论，浮龙·李，谷鲁斯的内模仿理论，立普斯的移情理论，这三大学说综合起来，构成心理学美学的基本框架。第二，用美国自然主义美学实证性和经验性来规范欧洲的心理美学。美国自然主义是一种泛化的美感论，这样会使欧洲理论失去其优美的结构和逻辑的整一，因此，朗菲德在用美国理论质询欧洲理论的不实之处和空泛之处的同时，把审美心理理论从两个方面进行规范，一是艺术方面，用艺术史的实例去证明欧洲审美心理学原理的正确，二是形式美方面，对欧洲审美心理作了形式美方面的引申，同时，一方面用形式美来完善了欧洲审美心理体系，另方面，形式美即在艺术之中，把美学的艺术方面结合了起来，形式美也在自然和社会之中，把美国自然主义美学的内容逻辑地包括了进来。因此，朗菲德的理论，实际上是由三个部分构成，一，审美主体，这是基础；二，艺术作品，是审美主体的确证和艺术外化，三，形式美法则，是审美主体的广泛外化和逻辑确证。朗费德的《审美态度》还与朱光潜《谈美》形成一种对照，显示了中西美学在写审美心理学美学原理时的同与异。</p>
+<p><strong>5.苏珊·朗格《情感与形式》</strong></p>
+<p>苏珊·朗格《情感与形式》是美的本质消失之后重建艺术哲学型美学原理的典型。此书以卡西尔的象征符号学为主导，承接着罗杰·福莱(Roger Fry)和克莱夫·贝尔的形式主义美学，克罗齐到朗菲德的审美主体美学，桑塔耶纳和杜威的自然主义美学中的思想，把八门艺术——音乐、绘画、建筑、雕塑、舞蹈、文学、戏剧、电影，组成了一个艺术哲学体现。朗格把艺术基本分为四类：时间（造型艺术中的绘画、雕塑、建筑）、空间（音乐）、力（舞蹈）、生活（文学、戏剧、电影）。在朗格对艺术门类的论述中，第一，以幻象作为总的基础，再在各门艺术中显出幻象上的二级乃至三级差异。从这里可知，艺术的自主性和审美的独立性，构成她的艺术哲学的一大主旨。第二，在对每门艺术的不同幻象的论述中，始终把基本幻象、艺术形式、艺术形式中内蕴的情感形式连在一起。</p>
+<p><strong>6.杜夫海纳《审美经验现象学》</strong></p>
+<p>杜夫海纳《审美经验现象学》是美的本质消失之后，把审美心理与艺术结合起来融为一体的美学原理的典型。它在结构上有四大特点：一，从何为审美对象开始，区分了审美对象和非审美对象，在说明了艺术作品与审美对象的联系和区别基础上，把审美对象集中于艺术。二，讲解艺术作品作为审美对象向主体呈现的基本结构。三，讲解审美主体对人为审美对象的艺术作品进行审美知觉时的基本结构。从而不离开审美对象来讲审美主体，也不离开审美主体来讲审美对象。较好地而且辩证地解决了美学的基本问题。四，从哲学上探讨审美是如何可能的，人为什么需要审美。</p>
+<p><strong>7.迪基《美学导论》</strong></p>
+<p>迪基《美学导论》是美的本质被概念分析取代之后，把美的哲学（概念分析）、审美心理、艺术结合起来的典型，同时也是把美学史与美学理论结合起来论述的典型。此书是一个层套结构，而且是一个可逆性的灵活结构，这一结构还是两个层套，只是这两个层套没有主次之分，从古代看过来，是美的理论、审美态度、艺术理论，再以艺术理论为中心展开为艺术制度、艺术作品、艺术评价。从现在望回去，是从艺术制度、艺术作品、艺术评价，凝结为艺术理论，再从艺术理论平向推开，为艺术理论、审美态度、美的理论。六个方面构成整个美学理论的结构，这一结构，有历史，有今天，有在时间上的演化，有在理论上的逻辑，形成了一种美学原理的类型。</p>
+<h2 id="美学的研究对象"><a href="#美学的研究对象" class="headerlink" title="美学的研究对象"></a>美学的研究对象</h2><p><strong>第一种意见认为：</strong>美学的研究对象就是美本身。在持这种意见的人看来，美学要讨论的问题不是具体的美的事物，而是所有美的事物所共同具有的那个美本身，那个使一切美的事物之所以美的根本原因。</p>
+<p><strong>第二种意见认为：</strong>美学的研究对象是艺术，美学就是艺术的哲学。这个观点在西方美学史上得到了相当一批美学家的认同。</p>
+<p><strong>第三种意见认为：</strong>美学的研究对象是审美经验和审美心理。这种意见是随着19世纪心理学的兴起，主张用心理学的观点和方法来解释和研究一切审美现象，把审美心理和审美经验置于美学研究的中心。</p>
+<p><strong>鲍姆嘉通认为，</strong>美学对象就是研究美，就是研究感性认识的完善。他说：“美学的对象就是感性认识的完善（单就它本身来看），这就是美；与此相反的就是感性认识的不完善，这就是丑。”“美，指教导怎样以美的方式去思维，是作为研究低级认识方式的科学，即作为低级认识论的美学的任务。”这就是说，作为低级认识论的美学，它的任务就是研究感性认识的完善，也就是美。虽然鲍姆嘉通认为美学是研究美的，但他却并不排斥艺术，而且以艺术为研究的主要内容，他说：“美学是以美的方式去思维的艺术，是美的艺术的理论。”</p>
+<p><strong>黑格尔认为，</strong>美学对象是研究美的艺术。他说：美学的“对象就是广大的美的领域，说的更精确一点，它的范围就是艺术，或毋宁说，就是美的艺术。”他所说的美并非一般的现实美，而是艺术美。他认为美学的正当名称是“艺术哲学”，更确切的说是“美的艺术的哲学”。根据美学是“美的艺术的哲学”这种名称，就把自然美排除在美学研究的领域之外。但黑格尔也研究自然美，他之所以研究自然美，是因为自然美是心灵美即艺术美的反映形态。</p>
+<p><strong>车尔尼雪夫斯基</strong>在批判黑格尔派美学的同时，非常强调对现实美的研究，强调艺术对现实的美学关系。但他认为美学研究的对象不是美，而是艺术。他在亚里士多德的《诗学》中写道：“美学到底是什么呢？可不就是一般艺术、特别是诗底原则的体系吗？”在对艺术的研究时，应包括美学意义的美，但艺术不局限于美，因为美学的内容应该研究艺术反映生活中一切使人感兴趣的事物。他认为美学如果只研究美，那么像崇高、伟大、滑稽等等，都包括不进去。美学对象大于美，而应该包括整个艺术理论。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BE%8E%E5%AD%A6/"># 美学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7494591d/">寻常事物是如何被赋予“美”的</a>
+            
+            
+            <a class="next" rel="next" href="/b81458da/">摄影眼，对“局部”的迷恋</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/7494591d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b81458da/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

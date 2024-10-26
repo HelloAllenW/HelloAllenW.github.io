@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>包管理器 npm、cnpm | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">包管理器 npm、cnpm</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 8, 2023&nbsp;&nbsp;10:53:43</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 8, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h3 id="1-npm-基本概念"><a href="#1-npm-基本概念" class="headerlink" title="1. npm 基本概念"></a>1. npm 基本概念</h3><p>npm 全称为 <code>Node Package Manager</code>，是一个基于 Node.js 的包管理器，也是 Node.js 社区最流行、支持的第三方模块最多的包管理器。它的初衷就是让开发人员更容易分享和重用代码。npm 提供了命令行工具，其主要功能是管理Node.js包，包括安装、更新、删除、查看、搜索、发布等。</p>
+<p>npm 最初只是Node.js 的包管理器，但随着前端技术的不断发展，它的定位变成了广义的包管理器，可以实现JavaScript、React、Vue、Gulp、移动开发等包管理，是目前最大、生态最为健全的包管理器。</p>
+<p>npm 能解决 Node.js 在模块管理上的很多问题，其常见的应用场景如下：</p>
+<ul>
+<li>从npm镜像服务器下载第三方模块；</li>
+<li>从npm镜像服务器下载并安装命令行程序到本地；</li>
+<li>自己发布模块到npm镜像服务器供他人使用。</li>
+</ul>
+<p>npm 不需要单独安装，在安装 Node.js 时，就会连带着一起安装 npm 了。但是安装的 npm 不一定是最新的版本，可以使用以下命令来查看本地 npm 的版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<p>这里的 -v 是 –version 的缩写，表示版本。如果想升级 npm 版本，可以使用以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install npm@latest -g</span><br></pre></td></tr></table></figure>
+
+<p>这里@latest表示最新的版本，-g 是 –global 的缩写，表示全局安装。</p>
+<p>除此之外，还可以使用help命令来查看npm帮助：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm 命令 --help</span><br></pre></td></tr></table></figure>
+
+<p>比如查看 install 的参数形式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --help</span><br></pre></td></tr></table></figure>
+
+<p>其中–help可以简写为-h。</p>
+<p>常见的npm命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"># 初始化</span><br><span class="line">npm init # 初始化后会出现一个package.json配置文件，可以在后面加上 -y ，快速跳过问答式界面。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 安装与卸载</span><br><span class="line">npm install</span><br><span class="line">npm install 包名 --save-dev（npm install 包名 -D） # 安装的包只用于开发环境，不用于生成环境。会出现在package.json中的devDependencies中。</span><br><span class="line">npm install 包名 --save（npm install 包名 -S） # 安装的包需要发布到生产环境。会出现在package.json中的dependencies中。</span><br><span class="line">npm update 包名 # 更新指定包</span><br><span class="line">npm unintall 包名 # 卸载指定包</span><br><span class="line">npm uninstall --save xxx # 从dependencies中删除 </span><br><span class="line">npm uninstall --save-dev xxx # 从devDependencies中删除</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置相关</span><br><span class="line">npm config list # 查看配置</span><br><span class="line">npm config set registry https://registry.npmmirror.com # 修改包下载源，这里修改为淘宝镜像</span><br><span class="line">npm config get registry # 查看某一项配置</span><br><span class="line">npm config delete registry # 删除某一项配置</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看相关</span><br><span class="line">npm -v # 查看npm版本</span><br><span class="line">npm list # 查看当前目录下已安装的node包</span><br><span class="line">npm list -g # 查看全局已安装的node包</span><br><span class="line">npm --help # 查看帮助命令</span><br><span class="line">npm 指定命令 --help # 查看指定命令的帮助</span><br><span class="line">npm info 指定包名 # 查看远程npm上指定包的所有版本信息</span><br><span class="line">npm root # 查看当前包的安装路径</span><br><span class="line">npm root -g # 查看全局包的安装路径</span><br><span class="line">npm ls 包名 # 查看本地安装的指定包和版本信息</span><br><span class="line">npm ls 包名 -g # 查看全局安装的指定包和版本信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 其他</span><br><span class="line">npm cache clean -f # 清理缓存</span><br></pre></td></tr></table></figure>
+
+<p>说完这些概念，下面就来看看 npm 在使用时有哪些实用的技巧。</p>
+<h3 id="2-初始化-package"><a href="#2-初始化-package" class="headerlink" title="2. 初始化 package"></a>2. 初始化 package</h3><p>凡是使用npm管理的项目，都需要初始化一个package.json文件。</p>
+<p>可以使用以下命令来初始化一个包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>当执行这个命令时，它会通过问答的形式来一步步进行设置。如果不需要修改默认的配置，直接一路回车即可。如果想跳过向导，快速生成一个package.json 文件，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init --yes</span><br></pre></td></tr></table></figure>
+
+<p>其中，–yes可以简写为-y。这时生成的package.json文件的配置项就是 npm 的默认配置。当然这个默认配置也是可以更改的，可以通过类似下面这样的形式来修改 npm 的默认配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set init.author.name YOUR_NAME</span><br><span class="line">npm config set init.author.email YOUR_EMAIL</span><br></pre></td></tr></table></figure>
+
+<p>当执行以上命令之后，之后再执行 npm init 命令时，package.json 的作者姓名和邮箱都会初始化为我们设定的值。</p>
+<h3 id="3-快速了解-package"><a href="#3-快速了解-package" class="headerlink" title="3. 快速了解 package"></a>3. 快速了解 package</h3><p>当要使用一个包时，如果想要了解它是如何使用的，可以使用以下命令来打开这个包的主页，它会自动启动浏览器并打开这个页面，这里以React为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm home react</span><br></pre></td></tr></table></figure>
+
+<p>如果想要查看这个包现存的issue，或者公开的roadmap，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm bugs react</span><br></pre></td></tr></table></figure>
+
+<p>如果想要查看这个包的代码地址，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm repo react</span><br></pre></td></tr></table></figure>
+
+<p>如果想要查看这个包的详细信息，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm info react</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081057551.webp"></p>
+<p>这里返回的是一个JavaScript对象，里面包含react模块的详细信息，可以通过info命令来获取这个对象的成员信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm info react description</span><br></pre></td></tr></table></figure>
+
+<p>执行结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081057503.png"></p>
+<h3 id="4-安装依赖"><a href="#4-安装依赖" class="headerlink" title="4. 安装依赖"></a>4. 安装依赖</h3><p>可以使用npm install命令来安装需要的包，如果想把这个包自动添加到package.json中，可以执行以下命令，这里以安装React为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install react --save</span><br></pre></td></tr></table></figure>
+
+<p>如果想要安装不同版本的包，可以这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 安装最新版本</span><br><span class="line">npm install react@latest// 安装指定版本</span><br><span class="line">npm install react@16.8.0// 安装指定区间版本</span><br><span class="line">npm install react@&quot;&gt;=16.8.0 &lt;17.0.1&quot;</span><br></pre></td></tr></table></figure>
+
+<p>当使用npm安装依赖时，分为本地安装（local）和全局安装（global），它俩的区别就是是否包含-g参数：</p>
+<p>（1）-g 将模块安装到本地node_modules目录下，但不保存在package.json中。 </p>
+<p>（2） –save 或者 -S 将模块安装到本地node_modules目录下，同时保存到package.json中的dependencies配置项中，在生产环境下这个包的依赖依然存在。 </p>
+<p>（3）–sava-dev 或者 -D 将模块安装到本地node_modules目录下，同时保存到package.json中的devDependencies配置项中，仅供开发时使用。 </p>
+<p>（4）–global 或者 -g 安装的模块为全局模块，如果命令行模块，会直接链接到环境变量中。 </p>
+<p>可以使用require关键字来引入本地安装的包。为了避免引用模块消失，保证依赖模块都会出现在package.json中，最好在npm install 时加上–save。</p>
+<p>需要注意，在执行npm install命令时，npm 5 之前只会下载，不会保存依赖信息。如果需要保存，就需要加上 –save 选项， npm 5 以后就可以省略 –save 选项了，它会自动保存。</p>
+<h3 id="5-锁定依赖"><a href="#5-锁定依赖" class="headerlink" title="5. 锁定依赖"></a>5. 锁定依赖</h3><p>当使用–save来安装依赖时，npm 会把这个依赖保存起来，并添加^前缀，他表示，当再次执行 npm install 命令时，会自动安装这个包在此大版本下的最新版本。如果想要修改这个功能，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set save-prefix=&#x27;~&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>执行完该命令之后，就会把^符号改为~符号。当再次安装新模块时，就从只允许小版本的升级变成了只允许补丁包的升级。</p>
+<p>如果想要锁定当前的版本，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set save-exact true</span><br></pre></td></tr></table></figure>
+
+<p>这样每次 npm install xxx –save 时就会锁定依赖的版本号，相当于加了 –save-exact 参数。建议线上的应用都采用这种锁定版本号的方式。</p>
+<p>为了彻底的锁定依赖的版本，让应用在任何机器上都安装同样的版本，可以执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm shrinkwrap</span><br></pre></td></tr></table></figure>
+
+<p>执行这个命令之后，就会在项目的根目录产生一个npm-shrinkwrap.json配置文件，这里面包含了通过node_modules 计算出的模块的依赖树及版本。只要目录下有 npm-shrinkwrap.json 则运行 npm install 时就会优先使用 npm-shrinkwrap.json 中的配置进行安装，没有则使用 package.json 进行安装。</p>
+<h3 id="6-搜索依赖"><a href="#6-搜索依赖" class="headerlink" title="6. 搜索依赖"></a>6. 搜索依赖</h3><p>npm 为我们提供了search 命令，用于搜索npm仓库，它搜索的参数可以是一个字符串，也可以是一个正则表达式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm search react</span><br></pre></td></tr></table></figure>
+
+<p>搜索结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081059409.webp"></p>
+<p>当然，我们也可以去node.js官网去找：<a href="https://link.zhihu.com/?target=https://www.npmjs.com/">https://www.</a><a href="https://link.zhihu.com/?target=https://www.npmjs.com/">npmjs.com/</a> </p>
+<p>想要找到一个合适的依赖包可能并不是一件容易的事。这时，可以使用网站<a href="https://link.zhihu.com/?target=https://npms.io/">https://</a><a href="https://link.zhihu.com/?target=https://npms.io/">npms.io/</a>，这里将各个包的质量、受欢迎度、可维护性等指标做了量化。这些指标包括：是否使用了过时的依赖包、是否有代码检查配置、是否经过测试以及最近的版本是何时发布的等。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081059167.webp"></p>
+<p>不过，更直接方法可能就是去搜索引擎看别人的推荐了~</p>
+<h3 id="7-更新、卸载依赖"><a href="#7-更新、卸载依赖" class="headerlink" title="7. 更新、卸载依赖"></a>7. 更新、卸载依赖</h3><p>npm 为我们提供了更新依赖版本的命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update [package name]</span><br></pre></td></tr></table></figure>
+
+<p>如果想要更新全局安装的模块，需要添加参数 -global：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update -global [package name]</span><br></pre></td></tr></table></figure>
+
+<p>当执行这两个命令时，它会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装。</p>
+<p>如果想要更新该依赖包在package.json中的版本，就需要使用-S或者–save参数。需要注意的是，从npm v2.6.1 开始，npm update只会更新顶层的模块，而不更新依赖的依赖模块，而之前的版本是递归更新的。如果想要这种效果，可以使用以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --depth 9999 update</span><br></pre></td></tr></table></figure>
+
+<p>除了可以更新包之外，还可以删除指定的包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall [package name]</span><br></pre></td></tr></table></figure>
+
+<p>如果想要删除全局的包，需要添加参数 -global：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall [package name] -global</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-查找过时的包"><a href="#8-查找过时的包" class="headerlink" title="8. 查找过时的包"></a>8. 查找过时的包</h3><p>npm 提供了一个命令来查看过时的依赖：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm outdated</span><br></pre></td></tr></table></figure>
+
+<p>在我的项目中执行该命令，输出结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081101825.webp"></p>
+<p>可以看到，这里列出了过时依赖的包名称、当前的版本、希望的版本、最新的版本、依赖在本地路径、依赖这个包的项目名称。</p>
+<p>可以通过以下命令来检查npm包的最新版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 展示包的信息</span><br><span class="line">npm view &lt;package-name&gt;</span><br><span class="line">npm v &lt;package-name&gt;// 展示最新版本</span><br><span class="line">npm v &lt;package-name&gt; version// 展示所有版本</span><br><span class="line">npm v &lt;package-name&gt; versions</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081101641.webp"></p>
+<h3 id="9-执行脚本"><a href="#9-执行脚本" class="headerlink" title="9. 执行脚本"></a>9. 执行脚本</h3><p>npm 不仅可以用于管理模块，还可以用于执行脚本。在package.json文件中有一个scripts字段，可以用于定义脚本命令，功npm 使用。我们除了可以在package.json文件中查看有哪些命令，也可以使用以下命令来查看所有脚本命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run</span><br></pre></td></tr></table></figure>
+
+<p>我的项目中执行该命令之后的结果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081102047.webp"></p>
+<p>可以看到，这里定义了dev、build、build:test等命令，如果需要执行这些命令，只要这样执行即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>这里不在多说，这或许是我们平时用的最多的命令了，可以根据实际开发情况，来定制自己的npm命令。</p>
+<h3 id="10-安装可靠的依赖"><a href="#10-安装可靠的依赖" class="headerlink" title="10. 安装可靠的依赖"></a>10. 安装可靠的依赖</h3><p>可以使用 npm ci 命令来清理、安装依赖项。它通常用于CI/CD等自动化环境，使用它可以获得可靠的依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ci</span><br></pre></td></tr></table></figure>
+
+<p>当执行该命令时，它会先删除本地的node_modules文件，因此它不需要去校验已下载文件版本与控制版本的关系，也不用校验是否存在最新版本的库，所以下载的速度相比npm install会更快。之后它会按照 package-lock.json 文件来安装确切版本的依赖项。并且不会将这个版本写入package.json或者package-lock.json文件。</p>
+<p>使用该命令时，需要注意：</p>
+<ul>
+<li>项目必需有 package-lock.json 或 npm-shrinkwrap.json 文件，如果没有，该命令将不起作用；</li>
+<li>npm ci 是 npm v6 中引入了的新命令，所以使用该命令时需要确保npm版本要&gt;=5.7；</li>
+<li>npm ci 不能用来安装单个依赖，只能用来安装整个项目的依赖；</li>
+<li>npm ci 会安装 dependencies 和 devDependencies；</li>
+<li>整个安装过程不会更新 package.json 或 package-lock.json 文件，整个安装过程是锁死的；</li>
+<li>当package-lock.json中的依赖和package.json中不一致时，npm ci 会退出但不会修改package-lock.json文件。</li>
+</ul>
+<h3 id="11-删除重复的包"><a href="#11-删除重复的包" class="headerlink" title="11. 删除重复的包"></a>11. 删除重复的包</h3><p>我们可以通过运行npm dedupe命令来删除重复的依赖项。该命令通过删除重复包并在多个依赖包之间共享公共依赖项来简化整体的结构。它会产生一个扁平的、去重的树。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm dedupenpm ddp</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-扫描漏洞"><a href="#12-扫描漏洞" class="headerlink" title="12. 扫描漏洞"></a>12. 扫描漏洞</h3><p>可以运行 npm audit 命令来扫描项目，来查找所有依赖项中存在的漏洞：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm audit</span><br></pre></td></tr></table></figure>
+
+<p>来看我的项目扫描结果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081103085.webp"></p>
+<p>可以运行以下命令来自动安装所有易受攻击包的补丁版本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm audit fix</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-列举已安装的包"><a href="#13-列举已安装的包" class="headerlink" title="13. 列举已安装的包"></a>13. 列举已安装的包</h3><p>可以通过以下命令来获取整个项目的包信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm list</span><br></pre></td></tr></table></figure>
+
+<p>npm list命令以树型结构列出当前项目安装的所有模块，以及它们依赖的模块。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081104811.webp"></p>
+<p>如果加上global参数，就会列出全局安装的模块：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm list -global</span><br></pre></td></tr></table></figure>
+
+<p>也可以查看指定包的依赖，比如在我现在做的项目下，执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm list react</span><br></pre></td></tr></table></figure>
+
+<p>还可以使用npm ls 命令来查看指定包的依赖信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ls react</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081105717.webp"></p>
+<p>可以使用–depth参数来限制搜索的深度：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm ls --depth=1</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-测试本地包"><a href="#14-测试本地包" class="headerlink" title="14. 测试本地包"></a>14. 测试本地包</h3><p>当我们在本地开发npm模块时，可以使用npm link命令来将本地的npm模块连接到对用的项目中去，便于对模块进行调试和测试。使用方式也很简单，在项目中执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure>
+
+<p>执行完该命令之后，就会为这个npm包创建到全局，路径是{prefix}/lib/node_modules/<package>，它是一个快捷方式。之后我们就可以使用以下命令来在需要这个模块的项目中链接这个包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link 模块名</span><br></pre></td></tr></table></figure>
+
+<p>这里的模块名就是依赖包的名称，也就是模块包的package.json文件中的name字段值。</p>
+<p>如果不想继续使用了，执行以下命令来解除link即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm unlink 模块名</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-npm安装包位置修改"><a href="#15-npm安装包位置修改" class="headerlink" title="15. npm安装包位置修改"></a>15. npm安装包位置修改</h3><p>（1）修改npm全局安装位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;D:\Users\Allen&#x27;s hp\npm&quot;</span><br></pre></td></tr></table></figure>
+
+<p>（2） 修改npm缓存位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set cache &quot;D:\Users\Allen&#x27;s hp\npm-cache&quot;</span><br></pre></td></tr></table></figure>
+
+<p>（3）修改系统环境变量</p>
+<p>将以上两个路径添加至系统变量Path即可</p>
+<p>（4）检测</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config list # 查看npm相关配置</span><br><span class="line">npm root -g # 查看全局包的安装路径</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-cnpm-和-nrm"><a href="#16-cnpm-和-nrm" class="headerlink" title="16. cnpm 和 nrm"></a>16. cnpm 和 nrm</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装</span><br><span class="line">npm install -g cnpm --registry=https://registry.npmmirror.com</span><br><span class="line"></span><br><span class="line"># 检测是否安装正常</span><br><span class="line">cnpm -v</span><br></pre></td></tr></table></figure>
+
+<p>它的实质是：</p>
+<ul>
+<li>全局安装 cnpm</li>
+<li>并且将安装 ‘ 包 ‘（各种包） 的地址切换到 国内的淘宝镜像</li>
+</ul>
+<p>这里面省略了一个很重要的东西，就是 nrm 的使用，这个包的功能可以让我们随意的切换我们下载包的地址。</p>
+<ul>
+<li><p>如果装好了 cnpm 可以， <code>cnpm i nrm -g</code></p>
+</li>
+<li><p><code>nrm ls</code> 查看所有 包下载路径， 也就是存放包的不同位置，自然就有取包的速度区分</p>
+</li>
+<li><p><code>nrm use</code> 使用包路径， 当然也可以直接用 <code>nrm help</code> 查看 nrm 功能帮助</p>
+</li>
+</ul>
+<h3 id="17-三种方式设置npm的registry"><a href="#17-三种方式设置npm的registry" class="headerlink" title="17. 三种方式设置npm的registry"></a>17. 三种方式设置npm的registry</h3><p>（1）原npm地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry http://registry.npmjs.org</span><br></pre></td></tr></table></figure>
+
+<p>（2）设置国内镜像</p>
+<ul>
+<li>a. 通过config命令</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com</span><br><span class="line">npm info underscore （如果上面配置正确这个命令会有字符串response）</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>b. 命令行指定</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm --registry https://registry.npmmirror.com info underscore</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>c. 编辑 ~/.npmrc 加入下面内容</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registry = https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<p>（3）使用nrm管理registry地址</p>
+<ul>
+<li>a. 下载nrm</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g nrm</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>b. 添加registry地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nrm add npm http://registry.npmjs.org</span><br><span class="line">nrm add taobao https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>c. 切换npm registry地址</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nrm use taobao</span><br><span class="line">nrm use npm</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cdac8766/">哥大校长2023毕业演讲：认识到自己巨大的无知，时刻保持开放的心态！</a>
+            
+            
+            <a class="next" rel="next" href="/e9d5263c/">使用 OPFS 实现高性能本地文件访问</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/cdac8766/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e9d5263c/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

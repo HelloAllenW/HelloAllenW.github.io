@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>有趣且实用的 CSS 小技巧 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">有趣且实用的 CSS 小技巧</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2022&nbsp;&nbsp;16:53:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">14 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>今天来分享一些有趣且实用的 CSS 小技巧！</p>
+<h2 id="1-打字效果"><a href="#1-打字效果" class="headerlink" title="1. 打字效果"></a>1. 打字效果</h2><p>代码实现：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;typing-demo&quot;&gt;</span><br><span class="line">      有趣且实用的 CSS 小技巧</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.typing-demo &#123;</span><br><span class="line">  width: 22ch;</span><br><span class="line">  animation: typing 2s steps(22), blink .5s step-end infinite alternate;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  border-right: 3px solid;</span><br><span class="line">  font-family: monospace;</span><br><span class="line">  font-size: 2em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@keyframes typing &#123;</span><br><span class="line">  from &#123;</span><br><span class="line">    width: 0</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@keyframes blink &#123;</span><br><span class="line">  50% &#123;</span><br><span class="line">    border-color: transparent</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现效果：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031655344.gif"></p>
+<h2 id="2-设置阴影"><a href="#2-设置阴影" class="headerlink" title="2. 设置阴影"></a>2. 设置阴影</h2><p>当使用透明图像时，可以使用 <code>drop-shadow()</code> 函数在图像上创建阴影，而不是使用 box shadow 属性在元素的整个框后面创建矩形阴影：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;mr-2&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;mb-1 text-center&quot;&gt;</span><br><span class="line">      box-shadow</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;img class=&quot;box-shadow&quot; src=&quot;https://markodenic.com/man_working.png&quot; alt=&quot;Image with box-shadow&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;div class=&quot;mb-1 text-center&quot;&gt;</span><br><span class="line">      drop-shadow</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;img class=&quot;drop-shadow&quot; src=&quot;https://markodenic.com/man_working.png&quot; alt=&quot;Image with drop-shadow&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.mr-2 &#123;</span><br><span class="line">  margin-right: 2em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.mb-1 &#123;</span><br><span class="line">  margin-bottom: 1em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.text-center &#123;</span><br><span class="line">  text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box-shadow &#123;</span><br><span class="line">  box-shadow: 2px 4px 8px #585858;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.drop-shadow &#123;</span><br><span class="line">  filter: drop-shadow(2px 4px 8px #585858);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031657079.png"></p>
+<h2 id="3-平滑滚动"><a href="#3-平滑滚动" class="headerlink" title="3. 平滑滚动"></a>3. 平滑滚动</h2><p>无需 JavaScript 即可实现平滑滚动，只需一行 <code>CSS：scroll-behavior: smooth；</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav&gt;</span><br><span class="line">  Scroll to:</span><br><span class="line">  &lt;a href=&quot;#sectionA&quot; class=&quot;link bg-red&quot;&gt;A&lt;/a&gt;</span><br><span class="line">  &lt;a href=&quot;#sectionB&quot; class=&quot;link bg-blue&quot;&gt;B&lt;/a&gt;</span><br><span class="line">  &lt;a href=&quot;#sectionC&quot; class=&quot;link bg-green&quot;&gt;C&lt;/a&gt;</span><br><span class="line">&lt;/nav&gt;</span><br><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">  &lt;div id=&quot;sectionA&quot; class=&quot;section bg-red&quot;&gt;A&lt;/div&gt;</span><br><span class="line">  &lt;div id=&quot;sectionB&quot; class=&quot;section bg-blue&quot;&gt;B&lt;/div&gt;</span><br><span class="line">  &lt;div id=&quot;sectionC&quot; class=&quot;section bg-green&quot;&gt;C&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">html &#123;</span><br><span class="line">  scroll-behavior: smooth;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nav &#123;</span><br><span class="line">  position: fixed;</span><br><span class="line">  left: calc(50vw - 115px);</span><br><span class="line">  top: 0;</span><br><span class="line">  width: 200px;</span><br><span class="line">  text-align: center;</span><br><span class="line">  padding: 15px;</span><br><span class="line">  background: #fff;</span><br><span class="line">  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">nav .link &#123;</span><br><span class="line">  padding: 5px;</span><br><span class="line">  color: white;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.section &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  color: #fff;</span><br><span class="line">  font-size: 5em;</span><br><span class="line">  text-shadow:</span><br><span class="line">    0px 2px 0px #b2a98f,</span><br><span class="line">    0px 4px 3px rgba(0,0,0,0.15),</span><br><span class="line">    0px 8px 1px rgba(0,0,0,0.1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.bg-red &#123;</span><br><span class="line">  background: #de5448;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.bg-blue &#123;</span><br><span class="line">  background: #4267b2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.bg-green &#123;</span><br><span class="line">  background: #4CAF50;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031658392.gif"></p>
+<h2 id="4-自定义光标"><a href="#4-自定义光标" class="headerlink" title="4. 自定义光标"></a>4. 自定义光标</h2><p>可以使用自定义图像，甚至表情符号来作为光标。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;tile&quot;&gt;</span><br><span class="line">    Default</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;tile tile-image-cursor&quot;&gt;</span><br><span class="line">    Image</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;tile tile-emoji-cursor&quot;&gt;</span><br><span class="line">    Emoji</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  display: flex;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  background: #4776e6;</span><br><span class="line">  background: linear-gradient(to right, #4776e6, #8e54e9);</span><br><span class="line">  padding: 0 10px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile &#123;</span><br><span class="line">   width: 200px;</span><br><span class="line">   height: 200px;display: flex;</span><br><span class="line">   align-items: center;</span><br><span class="line">   justify-content: center;</span><br><span class="line">   background-color: #de5448;</span><br><span class="line">   margin-right: 10px;color: #fff;</span><br><span class="line">   font-size: 1.4em;</span><br><span class="line">   text-align: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-image-cursor &#123;</span><br><span class="line">   background-color: #1da1f2;</span><br><span class="line">   cursor: url(https://picsum.photos/20/20), auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-emoji-cursor &#123;</span><br><span class="line">   background-color: #4267b2;</span><br><span class="line">   cursor: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27;  width=&#x27;40&#x27; height=&#x27;48&#x27; viewport=&#x27;0 0 100 100&#x27; style=&#x27;fill:black;font-size:24px;&#x27;&gt;&lt;text y=&#x27;50%&#x27;&gt;🚀&lt;/text&gt;&lt;/svg&gt;&quot;), auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031659608.png"></p>
+<p>除此之外， cursor还内置了很多鼠标样式供我们选择：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031659239.png"></p>
+<h2 id="5-截断文本"><a href="#5-截断文本" class="headerlink" title="5. 截断文本"></a>5. 截断文本</h2><p>一行文本溢出隐藏：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">白日依山尽，黄河入海流。欲穷千里目，更上一层楼。</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">  padding: 15px;</span><br><span class="line">  white-space: nowrap;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">  text-overflow: ellipsis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031700607.png"></p>
+<p>还可以使用<code>-webkit-line-clamp</code>属性将文本截断为特定的行数。文本将在截断的地方会显示省略号：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">div &#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  display: -webkit-box;</span><br><span class="line">  -webkit-box-orient: vertical;</span><br><span class="line">  -webkit-line-clamp: 2;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031700679.png"></p>
+<h2 id="6-自定义选中样式"><a href="#6-自定义选中样式" class="headerlink" title="6. 自定义选中样式"></a>6. 自定义选中样式</h2><p>CSS 伪元素<code>::selection</code>，可以用来自定义用户选中文档的高亮样式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;p&gt;</span><br><span class="line">     默认高亮</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">    &lt;p class=&quot;custom-highlighting&quot;&gt;</span><br><span class="line">      自定义高亮</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">p &#123;</span><br><span class="line">  font-size: 2rem;</span><br><span class="line">  font-family: sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.custom-highlighting::selection &#123;</span><br><span class="line">  background-color: #8e44ad;</span><br><span class="line">  color: #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031701910.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031702903.png"></p>
+<h2 id="7-CSS-模态框（dialog的实现）"><a href="#7-CSS-模态框（dialog的实现）" class="headerlink" title="7. CSS 模态框（dialog的实现）"></a>7. CSS 模态框（dialog的实现）</h2><p>我们可以使用 CSS 中的 <code>:target </code>伪元素来创建一个模态框。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;a href=&quot;#demo-modal&quot;&gt;Open Modal&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div id=&quot;demo-modal&quot; class=&quot;modal&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;modal__content&quot;&gt;</span><br><span class="line">        &lt;h1&gt;CSS Modal&lt;/h1&gt;</span><br><span class="line">        &lt;p&gt;hello world&lt;/p&gt;</span><br><span class="line">        &lt;a href=&quot;#&quot; class=&quot;modal__close&quot;&gt;&amp;times;&lt;/a&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  background: linear-gradient(to right, #834d9b, #d04ed6);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.wrapper a &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">  padding: 15px;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">  border-radius: 3px;</span><br><span class="line">  text-transform: uppercase;</span><br><span class="line">  color: #585858;</span><br><span class="line">  font-family: &#x27;Roboto&#x27;, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.modal &#123;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">  opacity: 0;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 0;</span><br><span class="line">  right: 0;</span><br><span class="line">  bottom: 0;</span><br><span class="line">  left: 0;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  background: rgba(77, 77, 77, .7);</span><br><span class="line">  transition: all .4s;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.modal:target &#123;</span><br><span class="line">  visibility: visible;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.modal__content &#123;</span><br><span class="line">  border-radius: 4px;</span><br><span class="line">  position: relative;</span><br><span class="line">  width: 500px;</span><br><span class="line">  max-width: 90%;</span><br><span class="line">  background: #fff;</span><br><span class="line">  padding: 1em 2em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.modal__close &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  top: 10px;</span><br><span class="line">  right: 10px;</span><br><span class="line">  color: #585858;</span><br><span class="line">  text-decoration: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031702326.gif"></p>
+<h2 id="8-空元素样式"><a href="#8-空元素样式" class="headerlink" title="8. 空元素样式"></a>8. 空元素样式</h2><p>可以使用 <code>:empty</code> 选择器来设置完全没有子元素或文本的元素的样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot;&gt;白日依山尽，黄河入海流。欲穷千里目，更上一层楼。&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  align-items: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  background: #999;</span><br><span class="line">  border: 1px solid #585858;</span><br><span class="line">  height: 200px;</span><br><span class="line">  width: 200px;</span><br><span class="line">  margin-right: 15px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box:empty &#123;</span><br><span class="line">  background: #fff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031703823.png"></p>
+<h2 id="9-创建自定义滚动条"><a href="#9-创建自定义滚动条" class="headerlink" title="9. 创建自定义滚动条"></a>9. 创建自定义滚动条</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;div class=&quot;tile mr-1&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;tile-content&quot;&gt;</span><br><span class="line">          默认滚动条</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">      &lt;div class=&quot;tile tile-custom-scrollbar&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;tile-content&quot;&gt;</span><br><span class="line">          自定义滚动条</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  height: 100vh;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.mr-1 &#123;</span><br><span class="line">  margin-right: 1em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile &#123;</span><br><span class="line">  overflow: auto;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  background-color: #ccc;</span><br><span class="line">  height: 200px;</span><br><span class="line">  width: 180px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-custom-scrollbar::-webkit-scrollbar &#123;</span><br><span class="line">  width: 12px;</span><br><span class="line">  background-color: #eff1f5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-custom-scrollbar::-webkit-scrollbar-track&#123;</span><br><span class="line">  border-radius: 3px;</span><br><span class="line">  background-color: transparent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-custom-scrollbar::-webkit-scrollbar-thumb&#123;</span><br><span class="line">  border-radius:5px;</span><br><span class="line">  background-color:#515769;</span><br><span class="line">  border:2px solid #eff1f5</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tile-content &#123;</span><br><span class="line">  padding: 20px;</span><br><span class="line">  height: 500px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031704827.gif"></p>
+<h2 id="10-动态工具提示（tooltip的实现）"><a href="#10-动态工具提示（tooltip的实现）" class="headerlink" title="10. 动态工具提示（tooltip的实现）"></a>10. 动态工具提示（tooltip的实现）</h2><p>可以使用 CSS 函数 <code>attr()</code> 来创建动态的纯 CSS 工具提示 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;</span><br><span class="line">  HTML/CSS tooltip</span><br><span class="line">&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">  Hover &lt;span class=&quot;tooltip&quot; data-tooltip=&quot;Tooltip Content&quot;&gt;Here&lt;/span&gt; to see the tooltip.</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">  You can also hover &lt;span class=&quot;tooltip&quot; data-tooltip=&quot;This is another Tooltip Content&quot;&gt;here&lt;/span&gt; to see another example.</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">.tooltip &#123;</span><br><span class="line">  position: relative;</span><br><span class="line">  border-bottom: 1px dotted black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tooltip:before &#123;</span><br><span class="line">  content: attr(data-tooltip);</span><br><span class="line">  position: absolute;</span><br><span class="line">  width: 100px;</span><br><span class="line">  background-color: #062B45;</span><br><span class="line">  color: #fff;</span><br><span class="line">  text-align: center;</span><br><span class="line">  padding: 10px;</span><br><span class="line">  line-height: 1.2;</span><br><span class="line">  border-radius: 6px;</span><br><span class="line">  z-index: 1;</span><br><span class="line">  opacity: 0;</span><br><span class="line">  transition: opacity .6s;</span><br><span class="line">  bottom: 125%;</span><br><span class="line">  left: 50%;</span><br><span class="line">  margin-left: -60px;</span><br><span class="line">  font-size: 0.75em;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tooltip:after &#123;</span><br><span class="line">  content: &quot;&quot;;</span><br><span class="line">  position: absolute;</span><br><span class="line">  bottom: 75%;</span><br><span class="line">  left: 50%;</span><br><span class="line">  margin-left: -5px;</span><br><span class="line">  border-width: 5px;</span><br><span class="line">  border-style: solid;</span><br><span class="line">  opacity: 0;</span><br><span class="line">  transition: opacity .6s;</span><br><span class="line">  border-color: #062B45 transparent transparent transparent;</span><br><span class="line">  visibility: hidden;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.tooltip:hover:before,</span><br><span class="line">.tooltip:hover:after &#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">  visibility: visible;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031704418.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031704102.png"></p>
+<h2 id="11-圆形渐变边框"><a href="#11-圆形渐变边框" class="headerlink" title="11. 圆形渐变边框"></a>11. 圆形渐变边框</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box gradient-border&quot;&gt;</span><br><span class="line">  炫酷渐变边框</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.gradient-border &#123;</span><br><span class="line">  border: solid 5px transparent;</span><br><span class="line">  border-radius: 10px;</span><br><span class="line">  background-image: linear-gradient(white, white),</span><br><span class="line">    linear-gradient(315deg,#833ab4,#fd1d1d 50%,#fcb045);</span><br><span class="line">  background-origin: border-box;</span><br><span class="line">  background-clip: content-box, border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.box &#123;</span><br><span class="line">  width: 350px;</span><br><span class="line">  height: 100px;</span><br><span class="line">  display: flex;</span><br><span class="line">  align-items: center;</span><br><span class="line">  justify-content: center;</span><br><span class="line">  margin: 100px auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031705078.png"></p>
+<h2 id="12-灰度图片"><a href="#12-灰度图片" class="headerlink" title="12. 灰度图片"></a>12. 灰度图片</h2><p>可以使用 <code>grayscale()</code> 过滤器功能将输入图像转换为灰度。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031706050.png"></p>
+<h2 id="13-毛玻璃效果"><a href="#13-毛玻璃效果" class="headerlink" title="13. 毛玻璃效果"></a>13. 毛玻璃效果</h2><p>可以使用 CSS 中的 <code>backdrop-filter</code> 属性来实现毛玻璃特效：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.login &#123;</span><br><span class="line">  backdrop-filter: blur(5px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031706620.png"></p>
+<p>backdrop-filter 属性可以为一个元素后面区域添加图形效果（如模糊或颜色偏移）。因为它适用于元素_背后_的所有元素，为了看到效果，必须使元素或其背景至少部分透明。</p>
+<h2 id="14-将文本设为大写或小写"><a href="#14-将文本设为大写或小写" class="headerlink" title="14. 将文本设为大写或小写"></a>14. 将文本设为大写或小写</h2><p>大写或小写字母可以不必在 HTML中设置。可以在 CSS 中使用<code>text-transform</code>属性来强制任何文本为大写或小写。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* 大写 */</span><br><span class="line">.upper &#123;</span><br><span class="line">  text-transform: uppercase;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 小写 */</span><br><span class="line">.lower &#123;</span><br><span class="line">  text-transform: lowercase;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031707555.png"></p>
+<p>text-transform 属性专门用于控制文本的大小写，当值为uppercase时会将文本转为大写，当值为capitalize时会将文本转化为小写，当值为capitalize时会将每个单词以大写字母开头。</p>
+<h2 id="15-实现首字下沉"><a href="#15-实现首字下沉" class="headerlink" title="15. 实现首字下沉"></a>15. 实现首字下沉</h2><p>我们可以使用<code>::first-letter</code>来实现文本首字母的下沉：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p.texts:first-letter &#123;</span><br><span class="line">  font-size: 200%;</span><br><span class="line">  color: #8A2BE2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>:first-letter</code>选择器用来指定元素第一个字母的样式，它仅适用于在块级元素中。效果如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031708771.png"></p>
+<h2 id="16-实现正方形"><a href="#16-实现正方形" class="headerlink" title="16. 实现正方形"></a>16. 实现正方形</h2><p>我们可以通过CSS中的纵横比来实现一个正方形，这样只需要设置一个宽度即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.square &#123;</span><br><span class="line">  background: #8A2BE2;</span><br><span class="line">  width: 25rem;</span><br><span class="line">  aspect-ratio: 1/1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>aspect-ratio</code> 媒体属性可以用来测试视口的宽高比。当然上述例子比较简单，来看看MDN中给出的纵横比的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/* 最小宽高比 */</span><br><span class="line">@media (min-aspect-ratio: 8/5) &#123;</span><br><span class="line">  div &#123;</span><br><span class="line">    background: #9af; /* blue */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 最大宽高比 */</span><br><span class="line">@media (max-aspect-ratio: 3/2) &#123;</span><br><span class="line">  div &#123;</span><br><span class="line">    background: #9ff;  /* cyan */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 明确的宽高比, 放在最下部防止同时满足条件时的覆盖*/</span><br><span class="line">@media (aspect-ratio: 1/1) &#123;</span><br><span class="line">  div &#123;</span><br><span class="line">    background: #f9a; /* red */</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里通过媒体查询在页面视口不同纵横比时，显示不同的背景颜色。关于纵横比，还有很多用途等着你去探索！</p>
+<h2 id="17-图片文字环绕"><a href="#17-图片文字环绕" class="headerlink" title="17. 图片文字环绕"></a>17. 图片文字环绕</h2><p><code>shape-outside</code> 是一个允许设置形状的 CSS 属性。它还有助于定义文本流动的区域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.any-shape &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  float: left;</span><br><span class="line">  shape-outside: circle(50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031709461.png"></p>
+<p>shape-outside 属性定义了一个可以是非矩形的形状，相邻的内联内容应围绕该形状进行包装。默认情况下，内联内容包围其边距框; shape-outside提供了一种自定义此包装的方法，可以将文本包装在复杂对象周围而不是简单的框中。</p>
+<h2 id="18-where-简化代码"><a href="#18-where-简化代码" class="headerlink" title="18. :where() 简化代码"></a>18. :where() 简化代码</h2><p>当对多个元素应用相同的样式时，CSS 可能如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.parent div,</span><br><span class="line">.parent .title,</span><br><span class="line">.parent #article &#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样代码看起来可读性不是很好，:where() 伪类这时就派上用场了。**:where()** 伪类函数接受选择器列表作为它的参数，将会选择所有能被该选择器列表中任何一条规则选中的元素。</p>
+<p>上面的代码使用<code>:where()</code>就可以这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.parent :where(div, .title, #article) &#123;</span><br><span class="line">  color: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19-悬停放大"><a href="#19-悬停放大" class="headerlink" title="19. 悬停放大"></a>19. 悬停放大</h2><p>想要实现图片的悬停方法效果，使用下面的CSS代码即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">img:hover &#123;</span><br><span class="line">  transform: scale(1.5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>transform属性应用于元素的2D或3D转换。这个属性允许将元素旋转，缩放，移动，倾斜等。当值为scale就可以实现元素的 2D 缩放转换。</p>
+<h2 id="20-背景混合模式"><a href="#20-背景混合模式" class="headerlink" title="20. 背景混合模式"></a>20. 背景混合模式</h2><p>在CSS中可以使用 <code>background-blend-mode</code> 来实现元素背景的混合：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.blend-1 &#123;</span><br><span class="line">  background-image: url(https://duomly.nyc3.digitaloceanspaces.com/articles/coding/alps-lake.jpg);</span><br><span class="line">  width: 100vw;</span><br><span class="line">  height: 500px;</span><br><span class="line">  background-size: cover;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.blend-2 &#123;</span><br><span class="line">  background-image: url(https://duomly.nyc3.digitaloceanspaces.com/articles/coding/alps-lake.jpg);</span><br><span class="line">  width: 100vw;</span><br><span class="line">  height: 500px;</span><br><span class="line">  background-color: #20126f;</span><br><span class="line">  background-size: cover;</span><br><span class="line">  background-blend-mode: overlay;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031711453.png"></p>
+<p>上面的图片是单纯的一张图片背景，下面的图片是背景图片和背景颜色混合而成的。background-blend-mode 属性就用于定义了背景层的混合模式（图片与颜色）。支持的背景混合模式：正常|乘法|屏幕|叠加|变暗|变亮|颜色减淡|饱和度|颜色|亮度；</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/20176777/">原生 CSS 嵌套功能的使用</a>
+            
+            
+            <a class="next" rel="next" href="/7132bcd4/">人类智慧的极致，必读4个经典小短篇</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/20176777/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7132bcd4/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

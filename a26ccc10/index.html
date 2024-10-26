@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>26. 一口气读完中国绘画史 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">26. 一口气读完中国绘画史</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 26, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 26, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%BB%98%E7%94%BB/">绘画 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">613 Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">2 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeo8w5o7rtt3WWrdicKiaFsiawIKIkZrHbwsIbOYDibvpsxfC8ukn9fcgyshhK5d1IgzfdiaCu97nByZCFw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="魏晋南北朝"><a href="#魏晋南北朝" class="headerlink" title="魏晋南北朝"></a>魏晋南北朝</h2><p><strong>乱世绝响诞生了中国第一批艺术大师</strong></p>
+<center><font color=red size=5>六朝三杰</font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EFZoHibicIYn1iagvlIUV1iahr0icOxv9xYcOUicrPaSOklopO69ysPtGyXrA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EvDC8vBPOGUnHtPyafjDmFQYj0CFLmQEv0vreFsm4zf5FlEnicTBJpWw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EsqSrIA15rtDUzNicZ9ClecVrfDe8PDiclMpVtGDxo8sfNSsiaPJLrJ35w/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ERSHOV8dQDHkImfWibBvk98QxLJzqiayPiaHEXJetRlG1OgMtv8MhYc9Sg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Es7k5l95dx9QE7hudhPReI7SHp3gWeKaZZpS7JiagMf1qppibGP8z91cQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EVFRkmmFPFaklyshWJicayx5TBTVrKR2BQUdc4hMWmCAvKFa6tbIL52Q/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EzxvHCv4EjnkaRQrRKam5DFu7vTsRFDbicrum35wp5CCWQw2fSgAEiaEw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>还有北朝有“画圣”美誉的</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EjtRSt2B5PQmrU1u7agoZC58ibiciciaqRPLJiau1hDNf4h4PTISB82mtxEg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yhmyeicqtmicaz9u3qiacVEdrwJZFHia8TawuI7Ha7XLicn9qsEOH48F0t3IhDltyp029EZMvcR8FOib2MWjnFnHHGMw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="隋唐时期"><a href="#隋唐时期" class="headerlink" title="隋唐时期"></a>隋唐时期</h2><p><strong>山水画发展成熟，两个人绕不过</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EWus0QOZJ6jibHztjZSlASXzNjfsxUdQuvsFGffS0DiaxwnDjRUeoyiccA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EPpXicfEw8WiabNTWPObSbO91tU4jic2GRhRibflyiawcONYStqKRIwGwolA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EbASB2qpvp4OhxfV66Bias00LGLuvbGDxbic5OVARcncENVNIQjvb3ibpQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>人物画尽显大唐盛世风韵，</strong></p>
+<p><strong>强调丰腴雍容，以胖为美</strong></p>
+<p><strong>最大咖的三位是</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EUnUjyvjrZWzUhEqqYS52w62pQVmUn9ibSL800nrvNpaJeEpWX3gf8SQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EQibVujuVsJ5ZTzWgkKTeYErNksMB3rbcwUA8sTWibQGmAmtNDuyprK8A/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EEjBCRVopBCspuwLGg2ibzagHblcbia0Oqv70qrBhAoUEI34IQT7uVaBQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ERfjHRciayHIGZNBOh3RlXOAT9LX08Boz1QTCDUicukmic58IvTje5x7KQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="五代十国"><a href="#五代十国" class="headerlink" title="五代十国"></a>五代十国</h2><p>上承唐朝余绪，下开宋代新风，这是个承上启下时代。</p>
+<p>山水画呈现自然主义色彩，出现“四大家”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E3bGnV1BGbhqhQhKecicHhZxVGFtojYCjurUyYicNTH3dwR55ZGZL7Eibw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EJlmictoBibJGiaX3kakwokkCUxon3mFdfibKicyGGhBJtF7yLAc9eY2YibicA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EE25hiayOib1eoLsAHCkOmrLXYtajL7KjDmp9TsOicXLTHbcQchkX3KRRg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EJUMicWAvL0Iy1XOs2DWEK65lm0sd6GOPwLLgskro2cZnYvHSicib6WcQA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eznhlc1niab1d1p0aB7ednpcQYBNjbtOGvnEM99nZC1n2nWckTpPnalA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>人物画开始注重心理描写</strong></p>
+<p><strong>最重要的两位是</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Ey26OvBZWhVUPacPU0qtMI7VWdrtetY4ODlOzgs0WEiahJnC8icXbd01g/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EicTYzzEDdwvdnpWaFLG0aFZxujnApDOj1aE32oJNkjRk6sLvjtLqBicQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="宋-代"><a href="#宋-代" class="headerlink" title="宋  代"></a>宋  代</h2><p><strong>绘画艺术空前活跃，画坛百花齐放</strong></p>
+<p><strong>宋初山水画有双峰鼎立</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EaZ3feTddPGhYUxjQWicPoOtIpDA7jNcNDQbygI4icvicNiaNc65pprqtXw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EOw9QVm5f8umQTZMy1ZibiaBhoF8fGs1iaxkQictKFWE0GK6j27tiavHQEMA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EZldClXOAU4lRDXUXbrOsyk50jSdCaYDUHCUwC8QLMheNoVn6wo8wCw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>随后是曾被宋高宗写诗点赞的画家：</strong></p>
+<p><strong>“克明已死道宁逝，郭熙后有新成名”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ES3a6USZYMdyaSc6eRvNaGOHmdDlGmr1v5fNJlECv2aChbEl6LMIWow/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EL8qlT0w2hK9rOibhfewM8y5Cs1ad75se3BKfibD8nl7B07BPVWJ8LG2w/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>南宋山水画提出三远章法：“阔远”、“迷远”、“幽远”</p>
+<p><strong>代表人物是“南宋四大家”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eha0ZQWBgcCeum9VZRGv9H0Xtx9jub7zicjcuRQiay0wfJpiaLGoKxkvuw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EfzDAA7Ybz2eoP9xU2ZCkosA1wO7pSEj3xoclS4tqr1dlEdLu6ZKIdw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eqgshhl1w1T0Po4iaqKjwoIDe7urBsc3sVVbDdmMR7KRibWJBJPLActDA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EYayFaibCicwknWP075Zat5YlsoCtiaY1dwAicXfSMUB1VYyq6uwnIXczYg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eia92iakw06wJsniau5n1xgZ5B75toM3Wibb4wpSSbdHrtgtgEmpeChBRLg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EGuKjCYkYZxnjEAPKmYm2OSy9OfvmdhibtEWXkhkFbW8WnA9vCZ3fOcw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ES3thLl4dAXUib5FuEcDOIkT0YhtIMIQbBVKyvFheslj2LadBBnp0oLQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>人物画到宋代达到顶峰</strong></p>
+<p><strong>最具名声的是被苏轼评价为：</strong></p>
+<p>“不惟画肉兼画骨”的“白描大师”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EKhibQh9hhyyGMhibUvvC97bLzd0gngt07L5dghQlbqkPFbtz0RY46XAw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EUMvP1WLa7qUZkxibu23VqEwWwfhs35dNwia5UIQSQx5Jt2jrd3qefg0w/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>最具个性的是</strong></p>
+<p><strong>笔简意赅、参禅入画、亦佛亦道亦仙的</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EGrriafo6KC59eAJt82ZicZEP2VeemJ6Tev5LSFj7lva6VsypnDTfO4fQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EOULLdibxWWSYFpdouNIiac496LutGs1S3QZZFgDYmVdia9zibr69LPia2RQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>花鸟画名家辈出，数不胜数</p>
+<p>最最重要的是画鹅、蝉、雀堪称三绝的</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Ee5Vsicg7qmMlJAicsBed4kGm0Kf9KTrlpicFh1ILOicXJmEhGEzV919gVg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EXV7jaSVpiaMQDGJytiayQTJ0etCzZtnyBshxavHYwCQjIZtyicArA6Gibg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>和书画双绝艺术家但不幸生于帝王家的宋徽宗</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EEIj1wYZaNCgy1mjm56NhDdbiaPfJawdaTr829gLKr13TJ5zqfpyNzDA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E1t2w42oGqeUaibnLgDItoGsl16hLogPQiar5WLos8MyttelArfiauwfAg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>宋代还有两位大家比较熟悉的</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EnfkRicf23u5heTXmw5H4aNsMqbCnL1FJNV3zQRZxkV4outgZjnW9Evw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Efpy5CpPegft6rq4h1fExYf7twUE3lszHX1ZzNm2eymU0YaR8pW1phQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EWeR3dJ9xANGp9LUopYMJxbV87HozXyc9GYrr9AonlIDkvIFibZ5jPIA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EZx8iactjdT7TVUDNoI5YMhsSRaqYjBGA1hKawciaGaNENMMMr9icsTG2w/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EbXbT6sLaN6OtbWyic6l4awrnfYsPHCCMictF1vP4qv6jmC3v9aHe7RSw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="元-代"><a href="#元-代" class="headerlink" title="元  代"></a>元  代</h2><p>人物画衰退，山水画突进，借景抒情是主旋律</p>
+<p><strong>“元初丹青谁最豪，</strong></p>
+<p><strong>南有赵魏北有高”说的就是元初领衔画坛的</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EI6dZtyU44CDQNVlPeY3Sn9u8ja5U0mQyUm75HhPANgDuPfALUAqp1Q/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E05LSnLCWbtZuxGaoKE4NvYRHrPQtTewEURSKR2UxIUMgicGLhiaPHOPw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EeSicjyswhmLvDmuuCPECHXQGbhrt6slicBDCE7qNq95hE4n7vtoibNfvg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>中后期扛鼎的是“元四家”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ETkEvgrNDM8XOkjxHpsMId0w5Cyqp3234NelKrG5Hrqb56rt5unEKibA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EFVqvEFtUnvdsthq1wPrgYyfOmQDbzCZkzdPCjmpBoYsjoOCAR29cMA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E0g0hSAibWb6Aq4Uics9FN9qL4285e1msibWxRjN4anOsa3A087FAw9mgg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EiauSYicNaBfWqC4yR49j8AEaoBQ6pQP0jD9JGNrXEA78d3IzAbficuwTg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EbxJIsBu1bEQW1ErTMV5uKdeVQhzWBiaxCO6SCGIqBdSRauNwuVCSK9Q/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EHvibK0wQEZVibDicVtPgZv3tZxg1YGOWm6S1Slh0qhqJTzdPkDEFGEvSQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Ep0LVCh3AOaa9h4102DODTQhEeicxBOCwkjv0OJ6NfIVSC9aMAT3d5DQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="明-代"><a href="#明-代" class="headerlink" title="明  代"></a>明  代</h2><p><strong>占统治地位的是文人画，**</strong>严谨中见豪放，精雅中见个性**</p>
+<p><strong>明初有“浙派”代表</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eicnr66gouB6CMxHcgiaqMHKgjRoCzIRuJdxglgu5mVJ1TnKPAnMgl1ibA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EhCRIzRafbXBlA87GLTEibae82F6ibnoo1JGbU7KVrTwd3t8jJeWn3icWg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p><strong>“江夏派”代表</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EfpKkLVAQ9iaCYgLpqCuwobP5NGqbyk97Tfj9NNWBXO9ScLg304QXCUA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EIL9n8EYvB76eEicVYicfG7bnrJnrrUhln8MLyPkjl1vzrcqn05b6GfjA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>中期有来自苏州的鼎鼎大名的吴门四家</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EM5iaibfsicJaQvWtBTGvyxOQoaWd9eQdMuQmicpsVNC7DCZaQUIsCCicYSQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Ew0Z1JtV9IFX84HrgCedfrBW6MsLCOc8VWpcz6FdqQjNXqw7wotlKbQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EncAo0WOZibsxALHia0gcOoJPGDL4kQTIsDTLBp6yynF1cSJOYGJmtrGw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ElOpxMT9txXDx5sFXmuetS8PRIA5JHoibSTic27ibG7UQU8WqaV46Jvwdw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EibSH92814hSBcR280kKMCNtEeIJZ6kLAQkoh7H7U6duyruBM43QKGmg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E24xPUJevcQicfsQLOsZURJazJhGcvqKrwa0AxcFOSRelBUMtJaeflfA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>后期有“华亭派”代表</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Ep6A5Eyd1ibVu6ugWLicTGNPJWDGZSFb0oIzcTibaz2GgYf2gX8b9sObTw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EHea9AX3OZ14xYLbg6LmECcT2g4icsEOLAlRPBXaw1uAjpp7upRKl4QQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>还有一个让郑板桥、齐白石甘当门下走狗的“青藤画派”始祖</strong></p>
+<p><strong>开创泼墨大写意画风的</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E3geiau0k9h0mVc8lfUuUBWfBM2xedBjibLQaicdhPFuprhugqyZTRAHjg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ERLdibbnJrAxX2bpjuLjOFJmFiaapfBPzy68vd3N0H2UOGehyXiaaSAOVQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="清-代"><a href="#清-代" class="headerlink" title="清  代"></a>清  代</h2><p><strong>文人画依然占主流，山水画盛行水墨写意，风格上提倡“士气”、贬“匠气”</strong></p>
+<p><strong>早期正统派是“清四王”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ETn6EoUuPP9w5ZaQ1wvsiad5EiaaqiczLntXLNBU7eQqAN4bWyhK70UXYg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EjCHc486IqfRexoTWeQljjU2Qhqqrb7MlvCjNt69epib049vhANujcYg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EdvVsic1KV6qHJG2obibUSxHsVRuibaXzBynb5R0eySpiaIx1jibgyQxMPHg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EzpQMUw68ksvw9ORdQXJjfrV9FHBZN3MHy6KPq1PfMWfX18n2xdmjfA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78ECoo3HkDORI9983Qvsv8xIG3mGWVBwQ8PQSKib3NFKjDy4S21n6QmczQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EIYH2SuyUYVePp0TZ7dpQunULarsEOWXvrvQqcgpNmG3cxEFuj8sUHg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>革新派是四位个性和尚</strong></p>
+<p><strong>人称“清四僧”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Eibmdd3cMY0rv2YlWYh1KO3dXulrolqNssY4XpU0B1mBfvvGYqRwsDTw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EiaN2YJjLKIEQk5kDmt7D21A8dmDkd12ASLySiajw433vsc6QoqgROUBw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E8Hia0e0O8koLKVbX2CVqTHmn1t3Totx25RBORceYljYQZJ1EXyg76dw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EppMGeeSsercJAB9T1S2sfc5Lhn8n3cDbYRjQuW8iaPw3UYuD4uEZxiaw/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Pggj62a9cceGEvBqAUCsgCD3JHzsboN7Z5RAX4uHT4pdpREWQM2qdz8BZDV61dpfSE0JKhwhb5nZktibYngAEIQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">梅清作品</center>
+
+<p><strong>中期扬州画派崛起，狂放怪异，不拘一格</strong></p>
+<p><strong>代表人物是“扬州八怪”</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E9LMtNKUxhp3icKVVxiceZyAwSupiccpxrVx2bGiad14nQCqjoeUjAmlfuQ/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EqFaoVMmto77WtFlNRR72ibmJJBYTJFgZxr8S5jibh7FdhQPGYJnKffVg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EffficHiczMp0icyAZO0R6SnEZRsdmFaDSuDfQb3iaeelictVkIGUumgUmug/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E9OA23QYibmxZlibneV88V7BTyo6LcPfBfbic7QfB8E703Ee0t0ibmSXfOg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EXATal6YnCcJyxqVtsTFR97yUic13Ln3RsG62X6gU3oXEJiaKz4IB3ZOA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>还有一位意大利友人，画风东西结合</strong></p>
+<p><strong>为康、雍、乾三任皇帝工作，成为清朝宫廷首席大画家</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78E7md71zLgZEgM2xTqgcwUQCMQ1jqr1LPO2ibSibmuFHDWCxEJbx9F8jdA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78Em19zIVzpqiagYcXQmbTYsUoPpkragpJ6oerxy6hWA2fjAibwUvaDZxdA/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/vEs3eZImzQX4pZ2tWByweQkDwiajAm78EvqXAJQJed4FiaibVU8hPyUKh0k6ejelamwBX2OxySvTmicLLH1vdKNVJg/640?wx_fmt=other&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;">文章来自网络，鸣谢作者！</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BB%98%E7%94%BB/"># 绘画</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/789f83fa/">27. 100幅宋代绘画，领略中国艺术精神最高峰</a>
+            
+            
+            <a class="next" rel="next" href="/1051d50d/">25. 31幅中国天价经典写实油画，你喜欢哪一幅？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/789f83fa/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1051d50d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

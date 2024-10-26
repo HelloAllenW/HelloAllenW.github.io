@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>世界上最会画花的人，看他笔下的奇迹 ！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">世界上最会画花的人，看他笔下的奇迹 ！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 19, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 19, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%BB%98%E7%94%BB/">绘画 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">704 Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">2 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa549rMWwzSrsJCPN0JaOTSScZKibgbTP9oiaEv4Iic0mTo9FmUoibeEuTNUYA/640?wx_fmt=jpeg&wxfrom=13&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<p>“除了我，他是世界上画花最好的人。” —— 梵高  </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54CaIiatzbDoGH4aJia75vReic3ckx5Id6wr7ibk6ucduicjpehBDrvgyZlWQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">Odilon  Redon 奥迪隆·雷东</center>
+
+<p>法国, (1840—1916) <strong>奥迪隆·雷东</strong>(Odilon Redon,1840–1916)法国画家，生于波尔多，19世纪末象征主义画派的领军人物。被德尼比作”画坛的乌拉梅”。雷东在美学上主张发挥想象而不依靠视觉印象。19世纪70年代末他开始创作石版画，共创作了近200幅，总标题为《在梦中》。法国作家于斯曼称雷东的画是”病和狂的梦幻曲”。 </p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54Lj5X9f0elHSbct0hsicR4BZ4wMFicvjr2l7x64LswPyq2Ah4UnmUK12A/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></h2><p>雷东的作品可分为两部分，早期主要是黑白画，这些黑白画包括素描和版画。直到1880年以后，他的作品才受到人们的注意，尤其是高更影响下的纳比派艺术家的注意。正是在他们的影响下，从大约1895年起，雷东开始认真对待起色彩来。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54trby4zPtYxfOVVpHt3EDa3CXrEW84oibbzLQpnluCW6W5t3bPutBP6Q/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> 雷东是印象派画家的同时代人，但他在自己的艺术中寻求的却是神秘、想象和情感。高更在谈到雷东的作品时写道：<strong>“他的梦想在他所赋予它们的可能性中变成现实；在他的作品里，所有的植物和处于萌发状的生物在本质上都是有人性的，和我们生活在一起；它们当然也会分担着我们的痛苦……”</strong>  <img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54cMIRmCAbXf3kdpGbdDRoJYaNgQoCQVlDXc2IenSgfwWVbx45bZGmMw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> 他早期的作品主要是黑白版画，描绘出一个充满奇人异草的虚幻世界。而在随后的绘画生涯里，他开始使用浓艳的色彩。<strong>艺术特点从原来的恐怖与幽暗，变成了欢乐与明朗。这些油画中，他将植物学方面的知识表现得淋漓尽致，并使之贯穿在花朵那给人以美的享受的形式和光彩夺目的色彩中。</strong>  <img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54PeDAF1YyiahwPxRvPIUY1hH5MLJEVLUHqicmxkg4WVzhTRe2Nw0poI8A/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> </p>
+<p>雷东有着天生的音乐感受力，又受象征派诗人影响，还对生物学有研究，多方面的修养使他的作品自有一种诗意和典雅的气息。  <img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa546NZPxaASNx8Cw4ZxrBOsRNp0eQ939iaibj8UTd03vM2yuWNhdiaXxvacA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> 他成功地运用神秘的线条和色彩、巧妙的对比，和谐的组成一种纯造型语言，表现出作为其现实一部分的优美和幻想的世界。<strong>他唯一追求的是通过华丽强劲的颜色或最温和的黑白对比来进行自我表现。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54wP8esNMorscBkFso4JoORTes5Oj1WFrGTMqMpnW2wMfMQcgIeU9Zibw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<p> 在雷东的画中，十分喜欢描绘花卉题材。雷东之所以爱画花，这是因为他从花中看到人，他曾说过：<strong>“花朵和人的面孔一样，一朵花就是一个谜”，“它是灵魂的反射”。</strong>  </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trD7juT5yjXzSazUmTnexmgbpeibicCRjOvbxUzp0b8IbuicxWQkrCAY3c9Q/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">奥迪隆·雷东《瓶花》1905年  布面油画  73 x 59cm</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDlLuVia8ZUicX08Evmiaq7dEnfEJvtoUdPNHfCZ9jicctJEXiaiaJGBzz3DrQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa544qibNaBGF1Vomp0wfNO5licgEzQNeVbWPo3PwzgMiaCEUfYbDSscu1ZjA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> <img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDZx5nF0iasAp84L1KZEuKTqnWtcWGAGfibAKsILTeYias3xARaosnoy7Cg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"> </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDFdlUeH8NvYa8TCic8Cr1CnTu0plhqjRPbE4byLJibuJEq1C0iaTibGMBPA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDFnmxxWia0mIF9y0DdMlJJFADA5FkJHlpv00hh5lAF9PbDBFOmtrmkQg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDSIZnSdpndat4VVibBX9FyfM4mPHibOfuG4aAlTGowib3XScUQgrc8A5bg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDlTJJWfTX9lEfsESdUrj4C4Qye138yx2icEI3OHy2jfcaaNicNAhFqrhA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDhjd80JU3B2RYfGjtzZ9Wjw0zVsm4ZzDGmia1MDwLDkDAeslerqmdKdg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"><img src="https://mmbiz.qpic.cn/mmbiz_jpg/vHLjRml6KF3tpLQvuBdns5WN890L6trDn7FxBLxbAV27YsM96KkAz4cJgVsDwB5psUgOxzkamxtGCewIEiaSfQw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tuwXEnNicKVzwjSia5uiashkpxxtl9WCa54q3sN9gFA1RlM6BXiagrafPJgOGSJ8aKBKcJdCyIwB4jxk5VnibfuP1qA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic"></p>
+<div style="color:gray;font-size:0.9em;">文章转载自公众号：国际艺术大观，特此鸣谢！</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BB%98%E7%94%BB/"># 绘画</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e2008025/">一文读懂德国新表现主义</a>
+            
+            
+            <a class="next" rel="next" href="/7634be06/">推荐10部关于"美"的经典纪录片</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e2008025/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7634be06/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

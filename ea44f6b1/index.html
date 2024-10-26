@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>微前端（micro-app）使用手册 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微前端（micro-app）使用手册</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 25, 2023&nbsp;&nbsp;23:22:19</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 25, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><code>micro-app</code> 是借鉴了 <code>Web Component</code> 的思想，通过 <code>Custom Element</code> 结合自定义的 <code>Shadow Dom</code>，将微前端封装成一个类 <code>Web Component</code> 组件，从而实现微前端的组件化渲染。并且由于自定义 <code>Shadow Dom</code> 的隔离特性，<code>micro-app</code> 不需要像 <code>single-spa</code> 和 <code>qiankun</code> 一样要求子应用修改渲染逻辑并暴露出方法，也不需要修改 <code>Webpack</code> 配置，是目前市面上接入微前端成本最低的方案。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312251945684.png"></p>
+<br />
+
+<h1 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h1><h2 id="主应用"><a href="#主应用" class="headerlink" title="主应用"></a>主应用</h2><p>主应用不限技术栈，只需引入 <code>micro-app</code>、配置子应用路由并启动 <code>micro-app</code> 即可。这里以 <code>Vue3</code> 框架为例。</p>
+<h3 id="安装-micro-app"><a href="#安装-micro-app" class="headerlink" title="安装 micro-app"></a>安装 micro-app</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yarn add @micro-zoe/micro-app</span><br><span class="line"></span><br><span class="line">pnpm add @micro-zoe/micro-app</span><br><span class="line"></span><br><span class="line">npm i @micro-zoe/micro-app</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动-micro-app"><a href="#启动-micro-app" class="headerlink" title="启动 micro-app"></a>启动 micro-app</h3><p>在应用入口引入并启动 <code>micro-app</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import microApp from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line"></span><br><span class="line">microApp.start()</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌入子应用"><a href="#嵌入子应用" class="headerlink" title="嵌入子应用"></a>嵌入子应用</h3><p>创建 Vue 页面（如 <code>src/views/SubApp.vue</code>）用于承载子应用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;micro-app name=&#x27;sub-app&#x27; url=&#x27;http://localhost:8381/&#x27; baseroute=&#x27;/sub-app&#x27;&gt;&lt;/micro-app&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;micro-app&gt;</code> 组件配置说明：</p>
+<ol>
+<li><p>name: 子应用名称。必须以字母开头，且不可以带有除中划线和下划线外的特殊符号，每个 name 都对应一个应用，当多个应用同时渲染时，name 不可以重复。</p>
+</li>
+<li><p>url: 子应用地址。会被自动补全，如 <code>http://localhost:3000/index.html</code>。</p>
+</li>
+<li><p>baseroute: 主应用分配给子应用的基础路由。</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zeroing.jd.com/docs.html#/zh-cn/configure">查看更多子应用配置</a></p>
+</li>
+</ol>
+<h3 id="配置子应用路由"><a href="#配置子应用路由" class="headerlink" title="配置子应用路由"></a>配置子应用路由</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import &#123; createRouter, createWebHistory &#125; from &#x27;vue-router&#x27;</span><br><span class="line"></span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line">  history: createWebHistory(import.meta.env.BASE_URL),</span><br><span class="line">  routes: [</span><br><span class="line">    ...,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#x27;/sub-app/*&#x27;,</span><br><span class="line">      component: () =&gt; import(&#x27;../views/SubApp.vue&#x27;)</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<p>path 是子应用路由地址。非严格匹配，<code>/sub-app/*</code> 都指向 <code>SubApp</code> 页面。使用 <code>vue-router@4.x</code> 时写法为：<code>&#39;/sub-app/:page*&#39;</code>。</p>
+<h2 id="Vue2-Webpack-子应用"><a href="#Vue2-Webpack-子应用" class="headerlink" title="Vue2 + Webpack 子应用"></a>Vue2 + Webpack 子应用</h2><h3 id="设置基础路由"><a href="#设置基础路由" class="headerlink" title="设置基础路由"></a>设置基础路由</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  mode: &quot;history&quot;,</span><br><span class="line">  routes,</span><br><span class="line">  base: window.__MICRO_APP_BASE_ROUTE__ || process.env.BASE_URL,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置跨域支持"><a href="#配置跨域支持" class="headerlink" title="配置跨域支持"></a>配置跨域支持</h3><p>修改 <code>vue.config.js</code> 配置跨域支持。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const &#123; defineConfig &#125; = require(&quot;@vue/cli-service&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = defineConfig(&#123;</span><br><span class="line">  ...,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Vue3-Vite-子应用"><a href="#Vue3-Vite-子应用" class="headerlink" title="Vue3 + Vite 子应用"></a>Vue3 + Vite 子应用</h2><p>在嵌入 <code>Vite</code> 子应用时，<code>micro-app</code> 的功能只负责渲染，其它的行为由应用自行决定，这包括如何防止样式、JavaScript 变量、元素的冲突。</p>
+<h3 id="子应用的修改"><a href="#子应用的修改" class="headerlink" title="子应用的修改"></a>子应用的修改</h3><h4 id="1-添加自定义插件"><a href="#1-添加自定义插件" class="headerlink" title="1.      添加自定义插件"></a>1.      添加自定义插件</h4><p>（1）新建插件 <code>vite-plugin-micro-app.js</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import fs from &#x27;fs&#x27;</span><br><span class="line">import path from &#x27;path&#x27;</span><br><span class="line"></span><br><span class="line">function VitePluginMicroApp() &#123;</span><br><span class="line">  let basePath = &#x27;&#x27;</span><br><span class="line">  return &#123;</span><br><span class="line">    name: &#x27;vite:micro-app&#x27;,</span><br><span class="line">    apply: &#x27;build&#x27;,</span><br><span class="line">    configResolved(config) &#123;</span><br><span class="line">      basePath = `$&#123;config.base&#125;$&#123;config.build.assetsDir&#125;/`</span><br><span class="line">    &#125;,</span><br><span class="line">    writeBundle(options, bundle) &#123;</span><br><span class="line">      for (const chunkName in bundle) &#123;</span><br><span class="line">        if (!Object.prototype.hasOwnProperty.call(bundle, chunkName)) &#123;</span><br><span class="line">          continue</span><br><span class="line">        &#125;</span><br><span class="line">        const chunk = bundle[chunkName]</span><br><span class="line">        if (!chunk.fileName?.endsWith(&#x27;.js&#x27;) &amp;&amp; !chunk.fileName?.endsWith(&#x27;.ts&#x27;)) &#123;</span><br><span class="line">          continue</span><br><span class="line">        &#125;</span><br><span class="line">        chunk.code = chunk.code.replace(/(from|import\()(\s*[&#x27;&quot;])(\.\.?\/)/g, (all, $1, $2, $3) =&gt;</span><br><span class="line">          all.replace($3, new URL($3, basePath))</span><br><span class="line">        )</span><br><span class="line">        const fullPath = path.join(options.dir, chunk.fileName)</span><br><span class="line">        fs.writeFileSync(fullPath, chunk.code)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default VitePluginMicroApp</span><br></pre></td></tr></table></figure>
+
+<p>（2）导入插件并配置公共资源基础路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import microAppPlugin from &#x27;./vite-plugin-micro-app&#x27;</span><br><span class="line"></span><br><span class="line">export default defineConfig(&#123;</span><br><span class="line">  ...,</span><br><span class="line">  base: &#x27;/vue3-app/&#x27;,</span><br><span class="line">  plugins: [vue(), microAppPlugin()],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-修改容器元素-id"><a href="#2-修改容器元素-id" class="headerlink" title="2.      修改容器元素 id"></a>2.      修改容器元素 id</h4><p>（1）修改 <code>index.html</code> 中容器元素的 id 值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;my-vite-app&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）使用新的 id 渲染</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createApp(App).mount(&#x27;#my-vite-app&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>当多个vite子应用同时渲染时，必须修改容器元素的id值，确保每个子应用容器元素id的唯一性，否则无法正常渲染。</p>
+<h4 id="3-路由"><a href="#3-路由" class="headerlink" title="3.      路由"></a>3.      路由</h4><p>推荐基座使用 <code>history</code> 路由，Vite 子应用使用 hash 路由，避免一些可能出现的问题。</p>
+<p>子应用如果是 Vue3，在初始化时路由时，<code>createWebHashHistory</code> 不要传入参数，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const router = createRouter(&#123;</span><br><span class="line">  ...,</span><br><span class="line">  history: createWebHashHistory(),</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-静态资源"><a href="#4-静态资源" class="headerlink" title="4.      静态资源"></a>4.      静态资源</h4><p>图片等静态资源需要使用绝对地址，可以使用 <code>new URL(&#39;../assets/logo.png&#39;, import.meta.url).href</code> 等方式获取资源的全链接地址。</p>
+<h3 id="主应用的修改"><a href="#主应用的修改" class="headerlink" title="主应用的修改"></a>主应用的修改</h3><h4 id="1-关闭沙箱并使用内联-script-模式"><a href="#1-关闭沙箱并使用内联-script-模式" class="headerlink" title="1.      关闭沙箱并使用内联 script 模式"></a>1.      关闭沙箱并使用内联 script 模式</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;micro-app</span><br><span class="line">  name=&#x27;child-name&#x27;</span><br><span class="line">  url=&#x27;http://localhost:3001/basename/&#x27;</span><br><span class="line">  disableSandbox // 关闭沙箱</span><br><span class="line">  inline // 使用内联script模式</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-处理子应用静态资源"><a href="#2-处理子应用静态资源" class="headerlink" title="2.      处理子应用静态资源"></a>2.      处理子应用静态资源</h4><p>写一个简易的插件，对开发环境的子应用进行处理，补全静态资源路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">microApp.start(&#123;</span><br><span class="line">  plugins: &#123;</span><br><span class="line">    modules: &#123;</span><br><span class="line">      // appName 即子应用的 name</span><br><span class="line">      appName: [&#123;</span><br><span class="line">        loader(code) &#123;</span><br><span class="line">          if (import.meta.env.MODE !== &#x27;development&#x27;) &#123;</span><br><span class="line">            return code</span><br><span class="line">          &#125;</span><br><span class="line">          // 这里 basename 需要和子应用vite.config.js中base的配置保持一致</span><br><span class="line">          code = code.replace(/(from|import)(\s*[&#x27;&quot;])(\/basename\/)/g, all =&gt; &#123;</span><br><span class="line">            return all.replace(&#x27;/basename/&#x27;, &#x27;子应用域名/basename/&#x27;)</span><br><span class="line">          &#125;)</span><br><span class="line">          return code</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="React-子应用"><a href="#React-子应用" class="headerlink" title="React 子应用"></a>React 子应用</h2><h3 id="设置基础路由-1"><a href="#设置基础路由-1" class="headerlink" title="设置基础路由"></a>设置基础路由</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;React.StrictMode&gt;</span><br><span class="line">    &lt;BrowserRouter basename=&#123;window.__MICRO_APP_BASE_ROUTE__ || &quot;/&quot;&#125;&gt;</span><br><span class="line">      &lt;App /&gt;</span><br><span class="line">    &lt;/BrowserRouter&gt;</span><br><span class="line">  &lt;/React.StrictMode&gt;,</span><br><span class="line">  document.getElementById(&quot;root&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="配置跨域支持-1"><a href="#配置跨域支持-1" class="headerlink" title="配置跨域支持"></a>配置跨域支持</h3><h4 id="1-安装-react-app-rewired-customize-cra-依赖"><a href="#1-安装-react-app-rewired-customize-cra-依赖" class="headerlink" title="1.      安装 react-app-rewired customize-cra 依赖"></a>1.      安装 <code>react-app-rewired customize-cra</code> 依赖</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D react-app-rewired customize-cra</span><br><span class="line"></span><br><span class="line">pnpm add -D react-app-rewired customize-cra</span><br><span class="line"></span><br><span class="line">npm i -D react-app-rewired customize-cra</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-应用根目录添加-config-overrides-js-文件"><a href="#2-应用根目录添加-config-overrides-js-文件" class="headerlink" title="2.      应用根目录添加 config-overrides.js 文件"></a>2.      应用根目录添加 <code>config-overrides.js</code> 文件</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const &#123; overrideDevServer &#125; = require(&quot;customize-cra&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  devServer: overrideDevServer((config) =&gt; (&#123;</span><br><span class="line">    ...config,</span><br><span class="line">    headers: &#123;</span><br><span class="line">      &quot;Access-Control-Allow-Origin&quot;: &quot;*&quot;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-修改-package-json"><a href="#3-修改-package-json" class="headerlink" title="3.      修改 package.json"></a>3.      修改 <code>package.json</code></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-   &quot;start&quot;: &quot;react-scripts start&quot;,</span><br><span class="line">+   &quot;start&quot;: &quot;react-app-rewired start&quot;,</span><br><span class="line">-   &quot;build&quot;: &quot;react-scripts build&quot;,</span><br><span class="line">+   &quot;build&quot;: &quot;react-app-rewired build&quot;,</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="应用间通信"><a href="#应用间通信" class="headerlink" title="应用间通信"></a>应用间通信</h1><p><code>micro-app</code> 提供了一套灵活的数据通信机制，方便主应用和子应用之间的数据传输。</p>
+<p>正常情况下，主应用和子应用之间的通信是绑定的，主应用只能向指定的子应用发送数据，子应用只能向基座发送数据，这种方式可以有效的避免数据污染，防止多个子应用之间相互影响。</p>
+<p>同时 <code>micro-app</code> 也提供了全局通信，方便跨应用之间的数据通信。</p>
+<h2 id="主应用向子应用发送数据"><a href="#主应用向子应用发送数据" class="headerlink" title="主应用向子应用发送数据"></a>主应用向子应用发送数据</h2><p>主应用向子应用发送数据有两种方式。</p>
+<h3 id="1-通过-data-属性发送数据"><a href="#1-通过-data-属性发送数据" class="headerlink" title="1.      通过 data 属性发送数据"></a>1.      通过 data 属性发送数据</h3><p>使用 <micro-app> 组件的 data 给子应用发送数据，此时只接受对象类型，数据变化时会自动重新发送。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;micro-app name=&quot;my-app&quot; url=&quot;http://localhost:8381/&quot; baseroute=&quot;/my-app&quot; :data=&quot;data&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">const data = &#123; msg: &#x27;通过 data 发送给子应用的数据&#x27; &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-手动发送数据"><a href="#2-手动发送数据" class="headerlink" title="2.      手动发送数据"></a>2.      手动发送数据</h3><p>手动发送数据需要通过 name 指定接受数据的子应用，此值和 <micro-app> 元素中的 name 一致。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 发送数据给子应用 my-app，setData第二个参数只接受对象类型</span><br><span class="line">microApp.setData(&#x27;my-app&#x27;, &#123; msg: &#x27;手动发送给子应用的数据&#x27; &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="子应用接收主应用发送的数据"><a href="#子应用接收主应用发送的数据" class="headerlink" title="子应用接收主应用发送的数据"></a>子应用接收主应用发送的数据</h2><p>micro-app 会向子应用注入名称为 microApp 的全局对象，子应用通过这个对象有两种方式获取来自主应用的数据。</p>
+<h3 id="1-直接获取"><a href="#1-直接获取" class="headerlink" title="1. 直接获取"></a>1. 直接获取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获取主应用下发的 data 数据</span><br><span class="line">const data = window.microApp.getData()</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-绑定监听函数"><a href="#2-绑定监听函数" class="headerlink" title="2.      绑定监听函数"></a>2.      绑定监听函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function dataListener(data) &#123;</span><br><span class="line">  console.log(&#x27;来自主应用的数据&#x27;, data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 绑定监听函数，监听函数只有在数据变化时才会触发</span><br><span class="line"> * dataListener: 绑定函数</span><br><span class="line"> * autoTrigger: 在初次绑定监听函数时如果有缓存数据，是否需要主动触发一次，默认为 false</span><br><span class="line"> * !!!重要说明: 因为子应用是异步渲染的，而基座发送数据是同步的，</span><br><span class="line"> * 如果在子应用渲染结束前主应用发送数据，则在绑定监听函数前数据已经发送，在初始化后不会触发绑定函数，</span><br><span class="line"> * 但这个数据会放入缓存中，此时可以设置 autoTrigger 为 true 主动触发一次监听函数来获取数据。</span><br><span class="line"> */</span><br><span class="line">window.microApp.addDataListener(dataListener: Function, autoTrigger?: boolean)</span><br><span class="line"></span><br><span class="line">// 解绑监听函数</span><br><span class="line">window.microApp.removeDataListener(dataListener: Function)</span><br><span class="line"></span><br><span class="line">// 清空当前子应用的所有绑定函数(全局数据函数除外)</span><br><span class="line">window.microApp.clearDataListener()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="子应用向主应用发送数据"><a href="#子应用向主应用发送数据" class="headerlink" title="子应用向主应用发送数据"></a>子应用向主应用发送数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// dispatch只接受对象作为参数</span><br><span class="line">window.microApp.dispatch(&#123; msg: &#x27;子应用发送的数据&#x27; &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="主应用接收子应用发送的数据"><a href="#主应用接收子应用发送的数据" class="headerlink" title="主应用接收子应用发送的数据"></a>主应用接收子应用发送的数据</h2><p>主应用获取来自子应用的数据有三种方式。</p>
+<h3 id="1-直接获取数据"><a href="#1-直接获取数据" class="headerlink" title="1.      直接获取数据"></a>1.      直接获取数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获取指定子应用发送的数据</span><br><span class="line">const childData = microApp.getData(appName)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-监听-datachange-事件"><a href="#2-监听-datachange-事件" class="headerlink" title="2.      监听 datachange 事件"></a>2.      监听 datachange 事件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;micro-app name=&quot;my-app&quot; url=&quot;http://localhost:8381/&quot; baseroute=&quot;/my-app&quot; @datachange=&quot;handleDataChange&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">function handleDataChange(data: any) &#123;</span><br><span class="line">  console.log(data);</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-绑定监听函数"><a href="#3-绑定监听函数" class="headerlink" title="3.      绑定监听函数"></a>3.      绑定监听函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function dataListener(data) &#123;</span><br><span class="line">  console.log(&#x27;来自子应用的数据&#x27;, data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 绑定监听函数</span><br><span class="line"> * appName: 应用名称</span><br><span class="line"> * dataListener: 绑定函数</span><br><span class="line"> * autoTrigger: 在初次绑定监听函数时如果有缓存数据，是否需要主动触发一次，默认为false</span><br><span class="line"> */</span><br><span class="line">microApp.addDataListener(appName: string, dataListener: Function, autoTrigger?: boolean)</span><br><span class="line"></span><br><span class="line">// 解绑监听my-app子应用的函数</span><br><span class="line">microApp.removeDataListener(appName: string, dataListener: Function)</span><br><span class="line"></span><br><span class="line">// 清空所有监听appName子应用的函数</span><br><span class="line">microApp.clearDataListener(appName: string)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="全局数据通信"><a href="#全局数据通信" class="headerlink" title="全局数据通信"></a>全局数据通信</h2><p>全局数据通信会向主应用和所有子应用发送数据，在跨应用通信的场景中适用。</p>
+<h3 id="1-发送全局数据"><a href="#1-发送全局数据" class="headerlink" title="1.      发送全局数据"></a>1.      发送全局数据</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// setGlobalData 只接受对象作为参数</span><br><span class="line">microApp.setGlobalData(&#123; msg: &#x27;全局数据&#x27; &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-获取全局数据"><a href="#2-获取全局数据" class="headerlink" title="2.      获取全局数据"></a>2.      获取全局数据</h3><p>（1）直接获取数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const globalData = window.microApp.getGlobalData()</span><br></pre></td></tr></table></figure>
+
+<p>（2）绑定监听函数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const dataListener = data =&gt; &#123;</span><br><span class="line">  console.log(data)</span><br><span class="line">&#125;</span><br><span class="line">microApp.addGlobalDataListener(dataListener, true)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="关闭沙箱后的通信方式"><a href="#关闭沙箱后的通信方式" class="headerlink" title="关闭沙箱后的通信方式"></a>关闭沙箱后的通信方式</h2><p>沙箱关闭后，子应用默认的通信功能失效，此时可以通过手动注册通信对象实现一致的功能。</p>
+<h3 id="1-注册方式：在主应用中为子应用初始化通信对象"><a href="#1-注册方式：在主应用中为子应用初始化通信对象" class="headerlink" title="1.      注册方式：在主应用中为子应用初始化通信对象"></a>1.      注册方式：在主应用中为子应用初始化通信对象</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import &#123; EventCenterForMicroApp &#125; from &#x27;@micro-zoe/micro-app&#x27;</span><br><span class="line"></span><br><span class="line">// 注意：每个子应用根据 appName 单独分配一个通信对象</span><br><span class="line">window.eventCenterForAppxx = new EventCenterForMicroApp(appName)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-子应用通信方式："><a href="#2-子应用通信方式：" class="headerlink" title="2.      子应用通信方式："></a>2.      子应用通信方式：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 直接获取数据</span><br><span class="line">const data = window.eventCenterForAppxx.getData()</span><br><span class="line"></span><br><span class="line">function dataListener(data) &#123;</span><br><span class="line">  console.log(&#x27;来自主应用的数据&#x27;, data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 绑定监听函数</span><br><span class="line"> * dataListener: 绑定函数</span><br><span class="line"> * autoTrigger: 在初次绑定监听函数时如果有缓存数据，是否需要主动触发一次，默认为 false</span><br><span class="line"> */</span><br><span class="line">window.eventCenterForAppxx.addDataListener(dataListener: Function, autoTrigger?: boolean)</span><br><span class="line"></span><br><span class="line">// 解绑监听函数</span><br><span class="line">window.eventCenterForAppxx.removeDataListener(dataListener: Function)</span><br><span class="line"></span><br><span class="line">// 清空当前子应用的所有绑定函数(全局数据函数除外)</span><br><span class="line">window.eventCenterForAppxx.clearDataListener()</span><br><span class="line"></span><br><span class="line">// 子应用向主应用发送数据，只接受对象作为参数</span><br><span class="line">window.eventCenterForAppxx.dispatch(&#123; msg: &#x27;子应用发送的数据&#x27; &#125;)</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="1-webpack-public-path-无效，静态资源路径错误。"><a href="#1-webpack-public-path-无效，静态资源路径错误。" class="headerlink" title="1.      __webpack_public_path__ 无效，静态资源路径错误。"></a>1.      <code>__webpack_public_path__</code> 无效，静态资源路径错误。</h2><p>将 public-path.js 的导入语句放在应用入口文件的第一行。</p>
+<h2 id="2-TypeScript-cannot-find-name-webpack-public-path-。"><a href="#2-TypeScript-cannot-find-name-webpack-public-path-。" class="headerlink" title="2.      TypeScript cannot find name __webpack_public_path__。"></a>2.      <code>TypeScript cannot find name __webpack_public_path__</code>。</h2><p>在 src 目录新增 <code>global.d.ts</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">declare let __webpack_public_path__: string;</span><br><span class="line"></span><br><span class="line">interface Window &#123;</span><br><span class="line">  __MICRO_APP_BASE_ROUTE__: string;</span><br><span class="line">  __MICRO_APP_PUBLIC_PATH__: string;</span><br><span class="line">  __MICRO_APP_ENVIRONMENT__: boolean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-React18-子应用首次进入展示空白，再次进入正常。"><a href="#3-React18-子应用首次进入展示空白，再次进入正常。" class="headerlink" title="3.      React18 子应用首次进入展示空白，再次进入正常。"></a>3.      <code>React18</code> 子应用首次进入展示空白，再次进入正常。</h2><p>在 <code>React18</code> 项目中使用 <code>@rescripts/cli</code> 修改 Webpack 配置可能会导致 micro-app 首次进入 React18 子应用时展示空白。</p>
+<p>将 <code>@rescripts/cli</code> 替换为 <code>react-app-rewired customize-cra</code> 即可。</p>
+<p><code>configuration.output has an unknown property ‘jsonpFunction’.</code></p>
+<p>将 <code>output.jsonpFunction</code> 更名为 <code>output.chunkLoadingGlobal</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// jsonpFunction: `webpackJsonp_$&#123;name&#125;`,</span><br><span class="line">chunkLoadingGlobal: `webpackJsonp_$&#123;name&#125;`,</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-子应用内部路由跳转后无法切换到主应用或其他子应用且路由栈异常。"><a href="#4-子应用内部路由跳转后无法切换到主应用或其他子应用且路由栈异常。" class="headerlink" title="4.      子应用内部路由跳转后无法切换到主应用或其他子应用且路由栈异常。"></a>4.      子应用内部路由跳转后无法切换到主应用或其他子应用且路由栈异常。</h2><p>（1）Vue 通过路由守卫更新 state</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">router.afterEach(() =&gt; &#123;</span><br><span class="line">  // Vue2</span><br><span class="line">  Object.assign(history.state, &#123; current: location.pathname &#125;);</span><br><span class="line">  // Vue3</span><br><span class="line">  Object.assign(history.state, &#123;</span><br><span class="line">    current: history.state.current === &#x27;/&#x27; ? &#x27;/&#x27; : `$&#123;location.pathname&#125;$&#123;location.hash&#125;`</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>（2）React 通过轮询监听路由变化更新 state</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function listenRouterChange(callback: () =&gt; void) &#123;</span><br><span class="line">  let oldHref = window.location.href;</span><br><span class="line">  const loop = () =&gt; &#123;</span><br><span class="line">    window.requestAnimationFrame(() =&gt; &#123;</span><br><span class="line">      if (window.location.href !== oldHref) &#123;</span><br><span class="line">        oldHref = window.location.href;</span><br><span class="line">        callback();</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        loop();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  loop();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">listenRouterChange(() =&gt; &#123;</span><br><span class="line">  Object.assign(window.history.state, &#123; current: window.location.pathname &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"># 微前端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/eab5c6de/">微前端（qiankun）Hash路由实践</a>
+            
+            
+            <a class="next" rel="next" href="/28fe053e/">微前端（single-spa）简介</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/eab5c6de/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/28fe053e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

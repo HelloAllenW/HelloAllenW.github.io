@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>如何欣赏音乐（爬楼进阶版） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何欣赏音乐（爬楼进阶版）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 7, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 7, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%9F%B3%E4%B9%90/">音乐 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">7.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">25 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">作者 | 阿隆·科普兰（美国作曲家）</div>
+
+<p>没有一个作曲家相信在更好地理解音乐方面有什么捷径可走。对聆听者所能做的唯一的事情就是指出音乐中实际上存在着什么，并合理地解释其原因何在。其它的都必须由聆听者去做了。</p>
+<h2 id="倾听音乐"><a href="#倾听音乐" class="headerlink" title="倾听音乐"></a>倾听音乐</h2><p>我们每个人都根据自己不同的欣赏能力倾听音乐。不过为了便于分析起见，如果我仍把倾听音乐的全过程分成几个组成部分，那就比较清楚了。</p>
+<p>从某种意义上说，我们全是在三种不同的阶段上倾听音乐的。由于缺乏恰当的术语，不妨把这三个阶段称为：<strong>（1）美感阶段，（2）表达阶段；（3 ）纯音乐阶段。</strong>把欣赏过程机械地分为这几种假设的阶段，唯一好处是可以对倾听的方式有个比较清楚的概念。</p>
+<p><strong>倾听音乐的最简单的方法就是纯粹为了对音响的乐趣而倾听，这就是美感阶段。</strong></p>
+<p>在这个阶段听音乐，不需要任何方式的思考，我们在干别的事情时，把收音机打开，便心不在焉地沉浸在音响中了。这时单凭音乐的感染力就可以把我们带到一种无意识的然而又是有魅力的心境中去了。   </p>
+<p>你此刻可能正坐在屋里看这本书。设想钢琴上奏出了一个音，这个音是足可以立即改变房间的气氛——证明音乐的音响成分是一种强大的和神秘的力量，谁嘲笑或小看这点，谁就会显得很愚蠢。   </p>
+<p>令人惊讶的是，不少自从为是合格的音乐爱好者在这个阶段养成了不良的听音乐的习惯。他们去听音乐会是为了忘掉自己，把音乐作为一种安慰或解脱。他们进入了一个理想世界，在这个理想世界中人们无需思考日常生活中的现实。</p>
+<p>当然他们也没有思考音乐。音乐允许他们离开了音乐，把他们带到了一个幻想的境界，这种幻想是由音乐引起的，是关于音乐的，可是他们又不怎么倾听音乐。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTerCORRgQQ25RbOMvyOCy4WCssqc6KQrDMyNC4PSp75aNNFrp7iabYJAZyIiaoMFeVLicu9xOvfwHptcg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>是的，音乐音响的感染力是一种强大的和原始的力量，但你不应让它在你的兴趣中占据不恰当的位置，美感阶段在音乐中占有非常重要的位置，但这并不是全部问题的所在。</strong></p>
+<p>关于美感阶段无需扯得太远。音乐的感染力对每个正常的人来说都是不言而喻的。然而还存在着对不同作曲家使用的不同音响素材更为敏感的问题。因为并不是所有的作曲家都用同一种方法使用音响素材的。不要以为音乐的价值相当于它诉诸美感的程度，也不要以为最好听的音乐是由最伟大的作曲家写的。如果确实如此的话，拉威尔就应该是比贝多芬更伟大的创作家了。问题在于作曲家使用音响要素的方式因人而异，他对音响的使用方式形成了他的风格的一个组成部分，这一点在聆听音乐时是必须加以考虑的。所以，读者可以看到，<strong>即使在聆听音乐的这个初级阶段，也值得采取更有意识的聆听方式。</strong>   </p>
+<p><strong>倾听音乐的第二个阶段即我所说的表达</strong>阶段。</p>
+<p>在这里我们马上会碰到引起争论的问题。<strong>作曲家倾向于回避讨论有关音乐所表现的内容</strong>，斯特拉文斯基自己不是宣称过他的作品是有它本身的生命的“物体”，“东西”，而且除了它本身的纯音乐存在之外一没有任何其它意义了吗？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41Akt8bib5wyLy7W6UiaMib9TV0XTJmHVyQwksK4QrxQM3P8z5yQIJ4eiblRA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">斯特拉文斯基（1882-1971年）</center>
+
+
+
+<p>他的这种不妥协的态度可能是基于这样一种事实：有那么多的人都试图对那么多的作品加以各种不同的解释。天知道要想用自己的解释准确地、明确地、最终地说清楚一首音乐作品的涵义何在从而使每个人都感到满意该有多么困难。但<strong>不应该导致另一个极端，即否认音乐有“表达”的权利。</strong>   </p>
+<p>我自己认为，所有的音乐都有表达能力，有的强一些，有的弱一些，所有的音符后面都具有某种涵义，而这种涵义毕竟构成了作品的内容。全部问题可以用下面的问答式简单地加以说明：“音乐有涵义吗？”我的回答是：“有的”。“你能用言语把这种涵义说清楚吗？”我的回 答是：“不能”。这就是症结所在。</p>
+<p>那些头脑简单的人对第二个问题的回答永远不会感到满意。他们总是希望音乐具有一种涵义，这种涵义愈具体，他们就愈喜爱它。愈能使他们想起一列火车、一场风暴、一次葬礼或任何其它比较熟悉的概念的乐曲，他们就愈觉得富有表现力。<strong>这种对音乐具有涵义的流行概念—-通常是由普通的音乐评论员激发和唆使的—-应该随时随地给以纠正。</strong>有一次一位胆小的女士向我供认，她担心自己的音乐欣赏力有严重的缺陷，因为她不能把音乐与某种明确的东西联系起来。这当然是把整个问题引向倒退了。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AGg6rCiaa7ovzmNwuvrYHhxpU5DJ2LjFsHpVzBAD4N3wicf3A6nSPOyicQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>……</p>
+<p>不过不管专业音乐工作者怎么讲，大多数初学音乐的人还是要制订明确的言词来说明他们对音乐的反应。因此他仍总是觉得“理解”柴科夫斯基要比“理解”贝多芬容易些。首先，为柴科夫斯基的一首乐曲制订内容明确的涵义要比为贝多芬的这样做容易些，容易得多。尤其是，就这位俄国作曲家来说，每当你回到他的一首乐曲上去的时候，它几乎总是向你述说着同一件事情；而你要想说清贝多芬在讲什么却经常是很困难的。任何音乐家都会告诉你，这就是为什么说贝多芬是更伟大的作曲家的缘故。因为<strong>每次都向你述说同样内情的乐曲很快会变成枯燥的乐曲；而每听一次都能有细微不同涵义的乐曲则具有更强的生命力。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41A2pK0GGssVvOeepW0sloqKaiajeljQ1jhVI3Lg4AbHYFo4UaN5J3iborA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">柴科夫斯基（1840年-1893年）</center>
+
+
+
+<p><strong>如果可能的话，你不妨听一下巴赫《平均律钢琴曲集》中的四十八个赋格主题。一个主题接一个主题地听。</strong></p>
+<p><strong>很快你就会意识到每一个主题都反映着一种不同的情绪。你还会很快地意识到，主题愈是动听，就愈难找到能使你完全满意的言词来描述它。是的，你当然知道它是快活的还是悲哀的。换言之，围绕着这个主题可以在自己的头脑中构成一幅感情的框框。现在进一步研究一下悲哀的主题，尽力抓住它的确切的悲哀的性质。是悲观主义的悲哀还是听天由命的悲哀；是致命的悲哀还是带微笑的悲哀？</strong>   </p>
+<p>让我们假定你现在很幸运，你能用许多话把自己选择的主题的确切涵义描述得使自己满意，但是这并不保证使别人满意，别人也不必要满意。重要的是每个人都能使自己感觉到一个主题或整首乐曲所表达的特性。如果那是一首艺术巨作，每当你再听它的时候，本要期望它都意味着完全相同的事物。   </p>
+<p>……</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41ARDm4Oo9iaAVrV00WdiaKK2WCLx2HtRUK9mhaaqicHwHYiaB2Ra2FrxonFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">约翰·塞巴斯蒂安·巴赫（1685年-1750年） </center>
+
+
+
+<p><strong>倾听音乐的第三阶段是纯音乐的阶段。</strong></p>
+<p>音乐除了令人愉快的音响和所表达的感情外，确实存在于音符和对音符的处理之中。大多数听众并不能充分意识到这第三阶段。这里的<strong>主要目的就是要使他们进一步在这个水平上认识音乐。</strong>    </p>
+<p>另一方面，如果稍有区别的话，专业音乐工作者又太注意音符了。他们经常陷入下述错误，即全神贯注于琶者和断奏，从而忘了他们所演奏的乐曲的更深刻的方面。但从外行的角度来看，<strong>提高自己对正在演奏的音符的理解比克服纯音乐阶段的坏习惯更为重要。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41Apc5ib7qesJeSxicgdPlCQ2Zmuw40QFTH8PcKgVWcudRCUVCnVUMInITA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当一个人在街上稍微注意地聆听“音符”时，他很可能会提到这支旋律。他听到的是一支美妙的旋律，或者不是，一般地说，他就不再去想它了。其次他注意到的很可能是节奏，特别是如果这种节奏令人兴奋的话。而和声与音色常常被认为是理所当然的，如果想到它们的话。至于这音乐是否有某种明确的形式，他好像从来没有考虑过。  </p>
+<p>我们大家都应当更多地在纯音乐阶段感受音乐，这一点非常重要。毕竟，人们使用的是实际的音乐素材。明智的聆听者必须准备加强自己对音乐素材及其发展情况的意识。<strong>他必须更有意识地聆听旋律、节奏、和声及音色。尤其重要的是，为了追随作曲家的思路，必须懂得一些</strong>音乐曲式的原理。聆听这一切要素就是在纯音乐的阶段欣赏音乐。</p>
+<p>让我再重复一遍，我们是为了听得更清楚才把聆听音乐机械地分成三种不同的阶段的。实际上，我们从来不单独在一个阶段上聆听音乐。我们所做的是使各个阶段相互联系—-同时以三种方式聆听。这不需要思考，凭直觉就会这样做的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AuJQkVcicf1SbHFpUYe5PbrQnDviao9dncrX4WxgpufrLfv3LLCsyYlkw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>与我们坐在剧院里看到的情况相比较，也许会搞清楚这种直觉的相互联系。在剧院里，你会注意到那些男女演员、服装和道具、音响和动作。这一切都会使人感到剧院是个令人愉快的地方，并构成我们对剧院的反应中的美感阶段。</p>
+<p>从你对舞台上发生的事情的感觉中可以得出在剧院中的表达阶段，你被感动得产生怜悯，兴奋或快活的情绪，这种台词之外的、舞台上的某种令人激动的东西所产生的总的感情，与在音乐中的表情的性质是相类似的。</p>
+<p><strong>剧情与剧情的发展相当于我们所说的纯音乐阶段。剧作家在塑造和发展角色方面与作曲家在创作和发展一个主题方面所采用的手法完全相同。你将根据你对这两种艺术家在处理素材的手法方面的认识程度成为一个更明智的聆听者。</strong></p>
+<p>可以明显地看出，常去剧院的人从来不会分别地意识到这些要素，他同时意识到各个方面。这个道理也适于聆听音乐。我们同时地、不加思考地在这三个阶段上聆听。从某种意义上说，理想的聆听者是同时既能进入音乐又能超脱音乐的，他一方面品评音乐，一方面欣赏音乐，希望音乐向这一方面进行，又注视着音乐向另一方向进行—-就像作曲家在创作音乐时那样；因为作曲家为了谱写自己的乐曲，也必须进出于自己的乐曲，时而为它所陶醉，时而又能对它进行冷静的批评。在创作和欣赏音乐时要同时具有主观的和客观的态度。</p>
+<p>所以，读者应当更积极地去聆听。不管你听的是莫扎特的还是埃林顿公爵的作品，只有当你成为<strong>更自觉的、更有意识的聆听者</strong>——不仅在听，而且在听某些事物的时候—-你才能加深对音乐的理解。</p>
+<h2 id="音乐的创作过程"><a href="#音乐的创作过程" class="headerlink" title="音乐的创作过程"></a>音乐的创作过程</h2><p>大多数人都想知道物品是怎样制作的。不过，每当谈到一首乐曲是怎样写成的时候，他们就爽快地承认自己完全迷惑不解。作曲家是从哪里开始创作的，他怎么能持续地写下去—-也就是说，他如何学会这门手艺的并从哪里学会的完全被一片不可穿透的黑暗所包围。简而言之，对大多数人来说，作曲家是个神秘的人物，而他的创作室则是一座无法接近的象牙塔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AgPPKV6rNXkqN0HckcnDg3WbWhIFKu7rDUf6mq9eaKNg2eD2TyiayibvA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>大多数人希望首先听到的第一个问题是与创作有关的灵感问题。当他们发现作曲家并不像他们所想象的那样整天思考这个问题时，他们感到难以相信。外行总是很难认识到<strong>作曲对作曲家来说是多么自然的事</strong>，他倾向于把自己放在作曲家的位置上，从外行的角度来观察所涉及的问题，包括灵感问题。他忘了对于作曲家作曲就象履行一种天然的职责，像吃饭和睡觉一样，这是作曲家生来就应该做的事；而正因为如此，在作曲家看来作曲就失去了这种特殊的效能。</p>
+<p>因此，面对灵感问题，作曲家不是对自己说：“我现在有灵感吗？”而是说：“我今天想作曲吗？”若是他想，他就去作曲。这多少有点像你对自己说：“我悃吗？”如果你觉得悃，你就去睡，如果不悃，就不睡。假如作曲家不想作曲，他就不作。问题就这么简单。</p>
+<p>当然，你作完曲后，希望每个人 (包括你自己)都承认这首作品是你在灵感激励下写的。不过实际上这是最后添上去的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41ATCtxibWSFLicdhsaTyp7XDeHC0MJficRzQQHUfOXFcg8fywv3AIeSTsPQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>有一次有一个人在公开的讲坛上问我是否等待灵感的到来。我的回答是：“每天都是！”不过这决不是指消极地等待天赐的灵感。这正是专业工作者与浅薄的涉猎者的区别所在。专业作曲家可以一天接一天地坐在那里写出某种类型的乐曲，在某些日子写的无疑会比其它日子写的好一些，但首先是要有创作能力。因为灵感往往只是一种副产品。</p>
+<p>第二个引起大多数人兴趣的问题是：“你作曲时用不用钢琴？”现在流行一种看法，认为用钢琴作曲是不体面的，从而联想到贝多芬在田野里作曲的情景。只要稍加思考就会认识到，在今天不用钢琴作曲已不像莫扎特或或贝多芬时代那么简单了其原因之一是和声学比过去复杂多了，现在很少有作曲家能够一点也不参考钢琴的效果就把整首作品写下来。事实上，斯特拉文斯基在他的《自传》中甚至说过，不用钢琴作曲是错误的，因为作曲家一刻也离不开“音响材料”。这样说未免走到了另一个极端，不过，归根结底，如何写法是作曲家个人的问题。方法并不重要，重要的是结果。</p>
+<p>真正重要的问题是：“作曲家用什么开始创作；从哪里开始创作？”回答是：每个作曲家都从乐思开始创作，要知道，这乐思不是思维的、文字的或超音乐的。突然间来了一个主题（主题作为乐思的同义词使用）。作曲家就从这个主题开始，而这主题是天赐的。他不知道它是从哪里来的——他控制不了它。主题的到来犹如无意识的书写。因此作曲家经常带着小本子，一旦主题到来就记下来，他收集乐思。对这种作曲的要素谁也无能为力。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AcU1ln5FyWFibXiaY2d2PCWgfSmia065pdon6GnniazmlKrlNtkD6GHGntA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">路德维希·凡·贝多芬（1770-1827年）</center>
+
+
+
+<p>乐思可能以不同的形式来临。它可能是一支旋律——只是一支可以哼给自己听的旋律。也可能是以带伴奏的旋律形式出现在作曲家的脑海中。有时他甚至听不到旋律，只是设想一种伴奏音型，然后也许能在这个音型上加上一支旋律。另一种情况是主题可能以纯节奏音型的形式出现。他听到某种特殊的击鼓声，这就足以使他动手了。在击鼓声中，他很快就会听到伴奏和旋律。然而最初想到的只是节奏。另一种类型的作曲家可能以对位的手法把同时听到的两、三支旋律编织在一起。不过产生这种主题的灵感比较罕见。</p>
+<p>所有这些都是乐思在作曲家脑海中出现的不同方式。作曲家有了乐思，并在小本子里记下了若干乐思，然后对它们进行检查，检查的方式与聆听者看到这些乐思时可能对它们进行检查的方式相同。他想知道他都有些什么。他从纯形式美的角度去检查音乐线条。他想看看这支线条的起伏方式，好像这是画的一条线而不是音乐线条似的。他甚至企图对它进行修改，就像在作画时进行修改一样，以便使旋律轮廓的起伏得到改进。</p>
+<p>不过他还想知道这主题的情感意义。如果所有的音乐都具有表情价值的话，作曲家就必须意识到他的主题的表情价值。他可能无法用许多话把它说清楚，但他能感觉到！他凭直觉了解自己的主题是欢乐的还是悲伤的，是崇高的还是邪恶的。有时甚至连他自己也捣不清它的确切性质。不过他迟早会凭直觉判断他的主题的情感性质，因为这正是他要加工的。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41A8krjnq3JXH7156RPCn6MuYr3ZNAL6RsauvpWeoqf1qyQzxxToiaXoeA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>要永远记住主题毕竟只是连续的音符。只要通过力度变化，即响亮和大胆的演奏或柔和和胆怯的演奏，就可以改变同一串连续的音符所表现的情感。通过改变和声可以给主题加上新的强烈的情绪；在节奏处理方面变换手法，则可以把同样的音符变成战斗性的舞曲而不是催眠曲。每个作曲家在自己头脑里都有一套变换自己的一连串音符的手法。首先他力图搞清它的本质，此后力图搞清应该如何处理它——如何在瞬息间改变其性质。</p>
+<p>事实上，大多数作曲家的经验是，主题越是完整，从不同方面观察它的可能性就越小。如果原来的主题已经相当长并且相当完整了，那么作曲家就可能很难改变它，因为它已经存在于固定的形式中了，因此伟大的音乐作品能够根据本身并不重要的主题被创作出来。我们不妨这样说，主题越不完整，越不重要，就越容易赋予它以新的涵义。巴赫的一些最卓越的风琴赋格曲就是根据相对说比较枯燥的主题构成的。</p>
+<p>目前那种认为只要主题优美音乐就会优美的看法在许多情况下是站不住脚的。作曲家当然不能单凭这个标准来判断自己的主题。</p>
+<p>作曲家在对自己的主题素材进行一番思索之后，就必须决定采用哪种音响媒介最合适。它是适用于交响乐的主题呢，还是由于性质上更亲切因而更适于弦乐重奏呢？它是是适合于歌曲的抒情主题呢，还是由于它的戏剧性特性更适于歌剧呢？有时作曲家在弄清楚最恰当的音响媒介之前，创作已经完成了一半。</p>
+<p>到此为止我是在假定一位抽象的作曲家面对一个抽象的主题。不过我认为实际上在音乐史中存在着三种不同类型的作曲家，每一种作曲家都以不太相同的方式构思音乐。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AEjiaZJekj3dogfLWesUkeTDbB7xrkZhCARZ0MoCReiaSsMnJalH81u7g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">弗朗茨·舒伯特（1797-1828年）</center>
+
+
+
+<p>最能激发公众想象力的是自然地富有灵感的作曲家—-换句话说，就是舒柏特类型的。当然，所有的作曲家都富有灵感，但这种作曲家的灵感更为自然。音乐简直就象泉水似地从他内心涌现出来，他甚至来不及把它记下来。这种类型的作曲家可以从他多产的作品中辨认。舒柏特在某些月份每天写一首歌。雨果.沃尔夫也是如此。</p>
+<p>从某种意义上说，这种人的创作与其说是从一个音乐主题开始的，不如说是从一首完整的作品开始的。他们都擅长于写比较短小的作品。即兴创作一首歌曲要比即兴创作一首交响曲容易得多。要持续在长时间内自然地获得灵感是很不容易的。就连舒伯特也是在处理短小的乐曲形式方面更为成功。自然地富有灵感的作曲家只是一种类型的作曲家，他们有自己的局限性。</p>
+<p>贝多芬象征着第二种类型—-不妨称为结构型。这种类型比其它任何类型更便于阐明我的音乐创作过程的理论，因为在这种情况下作曲家确实是从一个音乐主题开始的。毫无疑问，贝多芬就是这样，因为我们拥有当时他记录主题的笔记本。从这些笔记本中可以看到他如何对自己的主题进行加工，不把它们加工到尽善尽美他决不罢休。贝多芬根本不是舒伯特那种自然地富有灵敏的作曲家，而是那种从一个主题开始，使它萌芽，然后在这基础上日以继夜地、不辞辛苦地把它创作成一首音乐作品的作曲家。贝多芬以后的大多数作曲家都属于这种类型。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41Akzhx6ONmOmD2Gy4zfbEibYd2dHL0Ayu0jVDdzUQoebfyKyxic9yG4H6A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">帕勒斯特里那（约1525-1594年）</center>
+
+
+
+<p>由于缺乏恰当的名词，我只能把第三种类型的创作家称为传统主义者，像帕列斯特里那和巴赫之类的作曲象就属于这一范畴。他们是出生于音乐史中正当某种音乐体裁的发展即将达到顶点的特定时期的代表性人物。这种时期的问题在于用大家所熟悉的和公认的体裁作曲，并超越前人。</p>
+<p>贝多芬和舒伯特则从不同的前提开始。他们俩认真地要求独创性！舒伯特实际上是单枪匹马地创造了歌曲的形式；而有了贝多芬之后音乐的面貌全部改观了。巴赫和帕列斯特里那只是对原有的东西作了改进。</p>
+<p>传统主义作曲家与其说是以一个主题开始的，倒不如说是以一种型式开始的。帕列斯特里那的创作与其说是主题的构思，不如说是对某种固定的型式加以个人处理。即使是在《平均律钢琴曲集》中构思四十八个最富于变化和灵感的主题的巴赫，也是事先就掌握了这种总的形式的模型。不消说，我们现在并不是生活在传统主义者的时代。</p>
+<p>为了完整起见，不妨加上第四种类型的作曲家——先锋派：像十六世纪的吉索尔多(Gesualdo)，十九世纪的穆索尔斯基和柏辽兹，二十世纪的德彪西和埃德加?瓦莱土(Edger Varese)。要想对这样不同的作曲家的创作方法进行一番概括是很困难的。可以有把握地说，他们的创作方法与传统主义者是截然相反的。他们显然反对用传统的方法解决音乐问题，在很多方面他们的态度是实验性的—-他们寻求增添新的和声、新的洪亮度、新的形式原则。先锋派在十六世纪末到十八世纪初和二十世纪初是富有特征的，但今天先锋派的特征已经大大逊色了。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AhXY4WtxDz0cSnqV6JJty0aiaU5hic4lQXIQmL0wIibT9Z4IrNey6XUJhg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">克劳德·德彪西（1862-1918年）</center>
+
+
+
+<p>现在还是回到我们的理论作曲家上来吧。我们可以看到他和他的乐思，他对他的乐思的表情性质的具有某种概念，他知道如何应用他的乐思，并且事先想到用那种体裁最适合。但是他还没有写出一首乐曲。乐思并不等于写首乐曲，它只能导致一首乐曲。作曲家很清楚要完成一首作品还需要一些其他的东西。</p>
+<p>首先他力图找到一些看来可以与原来的乐思相配合的乐思。这些乐思可能与原来的乐思具有类似的特点，也可能与它形成对比。这些附加的乐思可能不像原来的乐思那么重要——它们通常只起辅助作用。然而为了完成第一个乐思，这些乐思看来也是很必要的。但这还不够！必须找到从一个乐思到达另一个乐思的方法，这通常是使用“过门素材”来完成的。</p>
+<p>作曲家要想对自己原有的素材进行加工还有其它两种重要的方法。其一是延长法。作曲家常发现需要延长某一特定主题，以便使它具有更鲜明的特点。瓦格纳是使用延长法方面的大师。当我想到作曲家对他的主题的结构变化的可能性进行探讨时，就涉及另一种方法，这就是很多人都写过的素材的发展，这是作曲的很重要的一部分。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41AWKtoSZHgj5njK4ct2gmSoC43X75cUFH9QqRDnQEJpR6asibJAoLMcqg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">阿隆·科普兰（1900-1990年）</center>
+
+
+
+<p>所有这一切对创作一首大型乐曲来说都是必须的—-萌芽状态的乐思、次要乐思的加入、乐思的延长、联接乐思的过门素材、以及这些乐思的充分发展。此后就轮到最难的任务了——把所有的素材都“焊接”起来，使它成为一个连贯的整体。在完成的作品中，一切都必须安排就绪。聆听者必须能够在听这首作品时找到来龙去脉。决不能使它有混淆主要主题与过门素材的机会。作品必须有开始段落、中间段落和结束段落；作曲家的任务是使聆听者始终能意识到自己听到了以上哪个段落。尤为重要的是，必须精心安排整首作品使人看不出“焊接”是从哪里开始的，看不出在什么地方作曲家的自然的创造力停止了而艰难的工作开始了。</p>
+<p>当然，我并不是说作曲家在把素材编织到一起时必须从零开始。相反，作为一种惯用的手段，每个受过良好训练的作曲家都拥有某些正规的结构模型作为他的作品的基本结构。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yPAJsj3Qv9qkTrKvGhWbwC1Po0yOs41A8K0X3UqVlq5BQEychicltle8tozGVusLYpUXOYZdDkUibAAlmYSmGX9A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我所说的这些正规的模型都是通过无数作曲家几百年来共同努力寻找一种能保证他们的作品的连贯性的方法逐渐发展而成的。至于这些形式是什么，作曲家以何种方式确切地依靠这些形式，将在下列章节中谈到。</p>
+<p>不论作曲家决定采取哪种形式，他总有一个迫切的要求：这种形式必须具有在我学生时代听说的“长线”。对外行人来说，这个词的意思很难解释清楚。要恰当地理解“长线”在一首乐曲中的含义, 就必须感觉它，从字面上说，这意味着一首好的乐曲都必须给我们一种流动感——一种从第一个音符到最后一个音符的连续感。每一个低年级的音乐学生都知道这个原理，但如何运用这个原理却向最伟大的音乐家提出了挑战！一首伟大的交响曲就像一条人造的密西西比河，从离岸的时候起我们就不可阻挡地沿着这条河流向遥远的，预见到的终点走去。音乐必须永远是流动的，因为这是它的本质的一部分，然而这种连续性和流动性—-长线—-的创造是决定每个作曲家的胜负的关键。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%9F%B3%E4%B9%90/"># 音乐</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/b81458da/">摄影眼，对“局部”的迷恋</a>
+            
+            
+            <a class="next" rel="next" href="/7fa87dc4/">如何看懂王家卫的电影</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/b81458da/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7fa87dc4/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

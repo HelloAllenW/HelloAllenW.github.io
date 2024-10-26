@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>2. 人类第一个文明 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">2. 人类第一个文明</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 2, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 2, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="人类第一个文明"><a href="#人类第一个文明" class="headerlink" title="人类第一个文明"></a>人类第一个文明</h2><h3 id="地中海简介"><a href="#地中海简介" class="headerlink" title="地中海简介"></a>地中海简介</h3><p>地中海，是欧洲、非洲和亚洲大陆之间的一块海域，由北面的欧洲大陆，南面的非洲大陆和东面的亚洲大陆包围着，西面通过直布罗陀海峡与大西洋相连，是世界最大的陆间海。地中海最西端是直布罗陀海峡，最东端是土耳其东部海岸的伊斯肯德伦，东西全长约3700公里 。地中海的整个面积有近300万平方公里 ，是另一个“地中海“加勒比海的约2倍。</p>
+<p>地中海中间有很多的岛屿与半岛，它们又在地中海中划分出了不同的海，从西到东主要有四个，即第勒尼安海、伊奥尼亚海、亚得里亚海、爱琴海。第勒尼安海由意大利半岛、撒丁岛、科西嘉岛、西西里岛等环绕而成，意大利半岛南端与西西里岛之间有狭窄的墨西拿海峡，自古就是交通要道与兵家必争之地。</p>
+<p>伊奥尼亚海位于意大利半岛与希腊半岛之间，是一片相当开放的海；从伊奥尼亚海往北，过了奥特朗托海峡就是亚得里亚海了。亚得里亚海位于意大利半岛与巴尔干半岛之间，是这几大海中最封闭的海，要往南通过奥特朗托海峡到达伊奥尼亚海，然后才能与地中海相通。</p>
+<p>爱琴海位于欧洲的巴尔干半岛、克里特岛与小亚细亚半岛或者说安纳托利亚半岛之间，也就是位于亚洲与欧洲之间。爱琴海承载着西方文明的始祖—古希腊文明—中最优秀而悠久的分子。古希腊文明中最杰出的两个代表性城邦雅典和斯巴达就位于爱琴海附近 一带。</p>
+<p>地中海是被戏称为“上帝遗忘在人间的脚盆”，它是世界上最古老的海之一，历史比大西洋还要古老，而随之相伴的是人类历史上的那些最古老的文明。地中海沿岸还是古代文明的发祥地之一。这里有古埃及的灿烂文化，有古巴比伦王国和波斯帝国的兴盛，更有欧洲文明的发源地（爱琴文明、古希腊文明以及地跨亚、欧、非三洲的古罗马帝国等）。</p>
+<p>从古代到近代，地中海一直是列强争夺的场所。波斯帝国、阿拉伯帝国、罗马帝国、马其顿帝国、奥斯曼土耳其等都先后部分或全部成为地中海的霸主，18世纪初，英国曾把地中海当作自己的“内湖”。19世纪初，拿破仑横行欧洲时，就曾想夺取英国对地中海的控制权。第一次世界大战期间，地中海成为交战双方海军积极活动的地区。第二次世界大战中，德、意海军同英国的海军在地中海进行过激烈的争夺。时至今日，西方大国正在地中海进行着日趋激烈的争夺。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403150012559.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         地中海两岸国家
+    </div>
+</center>
+
+<h3 id="公元前4500年左右，苏美尔文明诞生"><a href="#公元前4500年左右，苏美尔文明诞生" class="headerlink" title="公元前4500年左右，苏美尔文明诞生"></a>公元前4500年左右，苏美尔文明诞生</h3><p>美索不达米亚（又称两河平原，伊拉克东南部的幼发拉底河和底格里斯河流域）是非洲之外最早的人类活动中心。全世界已知最早的人类文明就诞生于此，是距今约6500年前（约公元前4500年）出现的苏美尔文明。<strong>苏美尔人发明了最早的文字 —— 楔形文字</strong>，这一文字留在泥版书上流传至今，并在距今一两百年前终于被今人破译，使我们对他们有了相当丰富的了解。令人惊讶的是，语言学家们发现苏美尔人的语言是一种孤立的语言，它和我们已知的任何其它语言都不接近。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403142334873.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         美索不达米亚(现今的伊拉克境内)分两个部分，南边叫巴比伦尼亚，北边叫亚述。两河流域文明起源于两河流域南部。
+    </div>
+</center>
+
+<p>苏美尔人是一个历史上的谜：他们既不是<strong>印欧人（今天大部分欧洲民族的祖先）</strong>也不是<strong>闪族人（今天大部分中东民族的祖先）</strong>，最大特点是黑色的头发，倒和我们中国人很像。他们的科技水平远远领先于同时代的其它任何人群，就像黑夜里的一支火炬，照亮了人类文明的起源。苏美尔人具有成熟的农业，种植大麦、小麦、大蒜、洋葱、韭菜等农作物，并兴建了发达的灌溉系统 ，包括水渠、堤坝、水库等，为农业服务。他们蓄养牛、绵羊、山羊和猪等牲畜，还发明了犁、车轮、玻璃、面包和酿酒，并且掌握了冶炼青铜，用于制造工具与武器。他们的星象天文学知识非常发达，发明了阴历，并能设置闰月来调和与阳历的差距。他们发明了一天24小时、一小时60分、一分钟60秒的计时机制，以及一周七天的制度。苏美尔人兴建巨大的建筑和繁荣的城市，在美索不达米亚平原上建立了十数个独立城邦，最大的城邦约有4-5万人。每个城邦的中心矗立着金字塔形的神庙，用于举行宗教仪式。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403142318257.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         通天塔就在两河流域古苏美尔人的某座古城中，传说那是一座可以直达天堂的高塔
+    </div>
+</center>
+
+<h3 id="印欧种族的扩张"><a href="#印欧种族的扩张" class="headerlink" title="印欧种族的扩张"></a>印欧种族的扩张</h3><p>同时在这一时期（约公元前4000年），远在东欧大草原上的原始印欧人驯化了马。这一事件深远地影响了人类世界，因为直到枪炮、汽车和坦克发明之前，马都是人类最强大的生物武器，也是最快速的陆上交通工具。有了马，印欧人虽然文明并不发达（远逊于同期的苏美尔人），但扩张能力极强，在人类文明的早期阶段就迅速扩张到几乎所有适宜生存并且能够进入的地区。同时，由于种族之间的交流变频繁了，文明的传播也大大加快了，印欧人后裔在此过程中发展成为世界上整体实力最强的种族群体，直到今天。</p>
+<p>大约前3000年，印欧人的一部分（R1b型）开始向欧洲西部扩张。这时欧洲西部已有早期农业人群定居，但印欧人似乎很快就取代了他们。<strong>印欧人分成三路前进：一路向西南到达了希腊半岛并演化成古希腊人（迈锡尼人）；一路向西到达多瑙河中游后分为两支，一支从阿尔卑斯山南麓进入意大利成为拉丁人，另一支从北侧绕过阿尔卑斯山进入高卢和不列颠，成为凯尔特人；还有一路北上到了波罗的海沿岸并分成两部，西边的称为日尔曼人、东边的称为斯拉夫人。这就是现今欧洲诸民族的起源。</strong></p>
+<p>约前2500 ~ 2000年，印欧人进一步发明了马拉战车，然后向亚洲方向扩张。约前1900年，印欧人的一支进入安纳托利亚，变成了赫梯人。大约同一时期，另一部分东迁的印欧人（R1a型）从里海北部出发深入亚洲。在战车的威力下，他们在亚洲中部所向披靡，一路（雅利安人）征服了阿富汗、巴基斯坦和印度北部，又分出一支征服了伊朗高原。但另外一路（吐火罗人）从阿尔泰地区进入中国后，大约是遭受当地居民阻挡，在天山一带停下脚步。马和战车也由此传入中国。</p>
+<p>在这一浪潮中，欧亚大陆的中部和西部几乎全被印欧民族占领，古印度、古巴比伦、米诺斯文明等都被征服。在被征服的古文明地区，定居的印欧民族向古文明学习，发展出更璀璨的新一代文明。而留在老家东欧草原一带的印欧人反而落后了，被称为斯基泰人（Scythian，或称塞种人）。</p>
+<h3 id="苏美尔文明的覆灭与阿卡德帝国的建立"><a href="#苏美尔文明的覆灭与阿卡德帝国的建立" class="headerlink" title="苏美尔文明的覆灭与阿卡德帝国的建立"></a>苏美尔文明的覆灭与阿卡德帝国的建立</h3><p>曾经肥沃的美索不达米亚平原被耕种千年之后，过度的农业开发导致土地盐碱化，粮食产量大幅下降，严重恶化了苏美尔人的生存环境。苏美尔城邦之间开始频繁内战，人口减少，北方的闪族乘机入侵。闪族分为多个部落，其中最先在美索不达米亚定居的是阿卡德人。<strong>公元前2334年，阿卡德人征服了苏美尔诸城邦，并且建立了人类历史上第一个帝国：阿卡德帝国。</strong>这个帝国并不长久，大约在公元前2193年就在混乱中毁灭，苏美尔人复兴之后建立了统一王国：乌尔第三王朝（在阿卡德之前，苏美尔人经历了乌尔第一王朝、乌尔第二王朝），人类已知最早的成文法律《乌尔纳姆法典》就在这时产生。乌尔的一些神庙遗迹今日仍然留存，但其国力已经大不如昔。最终，在公元前2006年，苏美尔的都城乌尔城被来自伊朗高原的埃兰人攻陷，此后这个伟大的民族便渐渐消失在历史长河中。苏美尔人创造的知识通过其它民族流传下来，但苏美尔人本身却慢慢被遗忘了，直到近代才被考古学者重新发现。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403142313659.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         苏美尔王国的“乌尔的旗帜” <br /> 约公元前2500年，拉战车的是中亚野驴，不是马 <br /> 战士披挂着原始的甲胄
+    </div>
+</center>
+
+<h3 id="千年战争：地中海霸权与战争"><a href="#千年战争：地中海霸权与战争" class="headerlink" title="千年战争：地中海霸权与战争"></a>千年战争：地中海霸权与战争</h3><p><font color=red>乌尔灭亡之后，闪族人驱逐了入侵的埃兰人，建立了巴比伦王国。赫梯人在公元前1595年南下攻克了巴比伦，北方的亚述则幸存下来。公元前1274年，埃及法老拉美西斯二世终止了赫梯的扩张。公元前900年，亚述灭亡了赫梯，征服了中东、埃及等。公元前612年，闪族迦勒底人建立新巴比伦，并与米底王国联手消灭了亚述。公元前539年，来自东方的波斯国王居鲁士挥师西进，灭亡了米底、吕底亚和巴比伦，占领了整个中东。此后美索不达米亚的闪族人被波斯统治长达一千多年，直到伊斯兰教的兴起之后，两河流域才再度回到闪族后裔阿拉伯人的统治下。</font></p>
+<p>苏美尔文明的末期，中东地区已是列强林立。从两河入海口向北逆流而上，分别是苏美尔人的乌尔、闪族亚摩利人建立的巴比伦（今日伊拉克地区）、闪族塞姆人在底格里斯河上游建立的亚述（今日叙利亚地区）、以及印欧民族在安纳托利亚建立的赫梯。在这一地区的西南方向是繁荣的古埃及，东方则是伊朗的埃兰人。</p>
+<p>乌尔灭亡之后，巴比伦驱逐了入侵的埃兰人，占据了两河平原下游，形成与上游亚述对峙的局面。在巴比伦统治下，残存的苏美尔人彻底消亡了，<strong>闪族人群成为两河平原的主宰</strong>。</p>
+<p>前1650年开始，北方的赫梯强大起来。赫梯堪称古代的科技帝国，他们发明了炼铁，还设计了当时最先进的战车，甚至使用了生物武器（将得了传染病的绵羊放入敌方城市）。凭借科技优势，赫梯人在前1595年南下攻克了巴比伦，亚述则幸存下来。随后赫梯把扩张重点放在地中海东岸，与古埃及帝国展开争夺。前1274年，埃及法老拉美西斯二世率军与赫梯在叙利亚的卡迭石大战。两败俱伤之后，双方签订了互不侵犯条约，终止了赫梯的扩张。</p>
+<p><strong>赫梯于前1180年左右衰落</strong>，具体原因不明，可能是由于海上民族的打击。赫梯的炼铁技术也流传出去。亚述获得了铁器之后大举进攻，灭亡了赫梯，于前900年左右成为中东军事霸主。亚述不断扩张，征服了包括巴比伦、埃及和以色列（北国）的几乎整个中东，但他们的统治极其残暴，引起了普遍的反抗。南方的闪族迦勒底人在巴比伦故址上崛起，建立新巴比伦王国，并和伊朗北部的米底王国联手，于前612年灭亡并瓜分了亚述。新巴比伦占领了从安纳托利亚中部直到两河平原的广大地区，还征服了犹大王国（南国），毁灭了耶路撒冷的第一圣殿，将犹太人掳为奴隶。同一时期，残留在安纳托利亚西部的一群印欧人建立了一个短命的吕底亚王国。</p>
+<p><strong>赫梯、亚述、巴比伦等王国在中东这片狭小舞台上厮杀了一千多年，却不了解外部世界已经天翻地覆。在这一千年里，迈锡尼-希腊文明在西方的爱琴海上发展起来，特洛伊失陷了，罗马城建立了，而雅利安人在不知不觉中占领了东方的印度和波斯，吐火罗人甚至远至中国西域。最终，来自东方的波斯国王居鲁士挥师西进，灭亡了米底、吕底亚和巴比伦（前539年），占领了整个中东。美索不达米亚的闪族人被波斯统治长达一千多年（中间还被马其顿和罗马短暂统治），直到伊斯兰教兴起之后，两河流域才再度回到闪族后裔阿拉伯人的统治下。</strong></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43d9cad8/">3. 巴比伦文明</a>
+            
+            
+            <a class="next" rel="next" href="/899ae3ec/">1.1 人类古代史极简表</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/43d9cad8/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/899ae3ec/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

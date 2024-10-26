@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>你想要的【微前端】都在这里了！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">你想要的【微前端】都在这里了！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 26, 2023&nbsp;&nbsp;0:01:42</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 26, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/">微前端 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">19 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="1-什么是微前端"><a href="#1-什么是微前端" class="headerlink" title="1.      什么是微前端"></a>1.      什么是微前端</h2><p>微前端提供了一种技术：可以将多个独立的Web应用聚合到一起，提供统一的访问入口。一个微前端应用给用户的感观就是一个完整的应用，但从技术角度上来讲它是由一个个独立的、通过某种方式组合而成的应用。</p>
+<h2 id="2-微前端的特点"><a href="#2-微前端的特点" class="headerlink" title="2.      微前端的特点"></a>2.      微前端的特点</h2><p>目前的微前端框架一般都具有以下三个特点：</p>
+<p>（1）技术栈无关：主框架不限制接入应用的技术栈，子应用具备完全自主权。</p>
+<p>（2）独立性强：独立开发、独立部署，子应用仓库独立。</p>
+<p>（3）状态隔离：运行时每个子应用之间状态隔离。</p>
+<h2 id="3-微前端发展历史"><a href="#3-微前端发展历史" class="headerlink" title="3.      微前端发展历史"></a>3.      微前端发展历史</h2><p>（1）2014年：<code>Martin Fowler</code>和<code>James Lewis</code>共同提出了微服务的概念。微服务的主要思路是将应用分解为小的、互相连接的独立服务，每个微服务完成某个特定功能；每个微服务都有自己的业务逻辑和适配器，不同的微服务可以使用不同的技术去实现，最后使用统一的网关进行调用。</p>
+<p>（2）2016年：<code>Micro frontend</code>一词首次出现在<code>ThoughtWorks Technology Radar</code>上。它将微服务的概念扩展到前端世界，简称其为微前端。</p>
+<p>（3）2018年：第一个微前端工具<code>single-spa</code>在<code>github</code>上开源。</p>
+<p>（4）2019年：基于<code>single-spa</code>的<code>qiankun</code>问世。</p>
+<p>（5）2020年：<code>Module Federation(webpack5)</code>把项目中模块分为本地模块和远程模块，远程模块不属于当前构建。当使用远程模块时，这些异步操作将被放置在远程模块和入口之间的下一个chunk的加载操作中，从而实现微前端的构建。</p>
+<p>（6）2021年：基于 <code>WebComponent</code> 的 <code>micro-app</code> 问世。</p>
+<p>（7）2022年：基于 <code>Web Components + iframe</code> 微前端框架无界（<code>wujie</code>）问世。</p>
+<h2 id="4-如何判断自己的项目需要使用微前端？"><a href="#4-如何判断自己的项目需要使用微前端？" class="headerlink" title="4.      如何判断自己的项目需要使用微前端？"></a>4.      如何判断自己的项目需要使用微前端？</h2><p>（1）项目功能逐渐增多，代码规模庞大，导致代码维护和开发效率低下；</p>
+<p>（2）项目需要集成多个不同技术栈的模块或服务；</p>
+<p>（3）团队成员分散，各自负责开发不同的模块或服务，需要实现独立开发和部署；</p>
+<p>（4）项目需要支持独立的生命周期管理和版本控制；</p>
+<p>（5）需要实现高可用性和弹性伸缩；</p>
+<p>（6）需要实现动态加载和卸载子应用等场景。</p>
+<p>所以呢，觉得如果项目具有上面这些特点，那么可以考虑使用微前端来优化项目架构和提升开发效率。</p>
+<br />
+
+<h1 id="微前端框架"><a href="#微前端框架" class="headerlink" title="微前端框架"></a>微前端框架</h1><h2 id="1-iframe"><a href="#1-iframe" class="headerlink" title="1.      iframe"></a>1.      iframe</h2><h3 id="（1）为iframe正名"><a href="#（1）为iframe正名" class="headerlink" title="（1）为iframe正名"></a>（1）为iframe正名</h3><p>任何新技术、新产品都是有一定适用场景的，它可能在当下很流行，但它不一定在任何时候都是最优解。</p>
+<p>最近几年微前端很火，火到有时候项目里面用到了iframe还要偷偷摸摸地藏起来生怕被别人知道了，因为担心被人质疑：你为什么不用微前端方案？直到最近笔者接手一个项目，需要将现有的一个系统整体嵌入到另外一个系统（一共20多个页面），在被微前端坑了几次之后，回过头发现，iframe真香！</p>
+<p>诚然iframe确实存在很多缺点，但是在选择一个方案的时候还是要具体场景具体分析，它可能在当下很流行，但它不一定在任何时候都是最优解：iframe的这些缺点对我来说是否能够接受？它的缺点是否有其它方法可以弥补？使用它到底是利大于弊还是弊大于利？我们需要在优缺点之间找到一个平衡。</p>
+<h3 id="（2）优缺点分析"><a href="#（2）优缺点分析" class="headerlink" title="（2）优缺点分析"></a>（2）优缺点分析</h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252243003.png"></p>
+<h3 id="（3）iframe适合的场景"><a href="#（3）iframe适合的场景" class="headerlink" title="（3）iframe适合的场景"></a>（3）iframe适合的场景</h3><p>由于iframe的一些限制，部分场景并不适合用iframe，比如像下面这种iframe只占据页面中间部分区域，由于父页面已经有一个滚动条了，为了避免出现双滚动条，只能动态计算iframe的内容高度赋值给iframe，使得iframe高度完全撑满，但这样带来的问题是弹窗很难处理，如果居中的话一般弹窗都相对的是iframe内容高度而不是屏幕高度，从而导致弹窗可能看不见，如果固定弹窗top又会导致弹窗跟随页面滚动，而且稍有不慎iframe内容高度计算有一点点偏差就会出现双滚动条。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252244542.png"></p>
+<p>所以：</p>
+<ul>
+<li><p>如果页面本身比较简单，是一个没有弹窗、浮层、高度也是固定的纯信息展示页的话，用iframe一般没什么问题；</p>
+</li>
+<li><p>如果页面是包含弹窗、信息提示、或者高度不是固定的话，需要看iframe是否占据了全部的内容区域，如果是像下图这种经典的导航+菜单+内容结构、并且整个内容区域都是iframe，那么可以放心大胆地尝试iframe，否则，需要慎重考虑方案选型。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252244319.png"></p>
+<p>为什么一定要满足“iframe占据全部内容区域”这个条件呢？可以想象一下下面这种场景，滚动条出现在页面中间应该大部分人都无法接受：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252245128.png"></p>
+<h3 id="（4）利用-iframe-实现微前端实战"><a href="#（4）利用-iframe-实现微前端实战" class="headerlink" title="（4）利用 iframe 实现微前端实战"></a>（4）利用 iframe 实现微前端实战</h3><p><a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/iframe-%E5%AE%9E%E7%8E%B0%E5%BE%AE%E5%89%8D%E7%AB%AF/">iframe 实现微前端</a></p>
+<h2 id="2-single-spa"><a href="#2-single-spa" class="headerlink" title="2.      single-spa"></a>2.      single-spa</h2><p><code>single-spa</code>是第一个微前端框架，当前流行的大量框架都是single-spa的上层封装，但是如果作为生产选型，single-spa提供的是较为基础的api，应用在实际项目中需要进行大量封装且入侵性强，使用起来不太方便。但是如果想学习相关技术或者封装一套更灵活的解决方法还是很值得使用的。</p>
+<p>如果想了解更多关于single-spa，请查看：<a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%88single-spa%EF%BC%89%E7%AE%80%E4%BB%8B/">微前端（single-spa）简介</a></p>
+<h2 id="3-qiankun"><a href="#3-qiankun" class="headerlink" title="3.      qiankun"></a>3.      qiankun</h2><p><code>qiankun</code>是阿里开源的一套框架，基于single-spa的上层封装，社区活跃度较高，在国内的生态较好，中文文档齐全，有大量的先行者铺路，比较适合用于生产环境。</p>
+<h3 id="（1）运行原理"><a href="#（1）运行原理" class="headerlink" title="（1）运行原理"></a>（1）运行原理</h3><p>qiankun 和 single-spa最大的不同，在于single-spa 是基于JS Entry，即通过某一地址引入JS文件来加载整个子应用。 而 qiankun是通过 HTML Entry，规避了JavaScript为了支持缓存而根据文件内容动态生成文件名，造成入口文件无法锁定的问题。</p>
+<p>在qiankun中，当我们拿到了子应用的 HTML 文本时，我们不能直接通过 <code>container.innerHTML = html</code> 方式将文本放到容器内，这样是无法显示的。</p>
+<p>原因是浏览器出于安全考虑，放到页面上的 HTML 如果包含了 JS 脚本，它是不会去执行的。所以我们需要手动处理 script 脚本，qiankun是通过 import-html-entry 包来获取并处理子应用资源的。</p>
+<p>qiankun首先通过URL获取到整个HTML文件，从HTML中解析出HTML，JS和CSS文本。在主应用中创建容器，把HTML更新到容器中。然后动态创建style和script标签，把子应用的css和js赋值在其中，最后把容器放置在主应用中。具体过程如下：</p>
+<ul>
+<li><p>a：qiankun 会用 原生fetch方法，请求微应用的 entry 获取微应用资源，然后通过 response.text 把获取内容转为字符串。</p>
+</li>
+<li><p>b：将 HTML 字符串传入processTpl函数，进行 HTML 模板解析，通过正则匹配 HTML 中对应的 javaScript（内联、外联）、css（内联、外联）、代码注释、entry、ignore 收集并替换，去除 html/head/body 等标签，其他资源保持原样。</p>
+</li>
+<li><p>c：将收集的 styles 外链URL对象通过 fetch 获取 css，并将 css 内容以 <code>&lt;style&gt;</code> 的方式替换到原来 link 标签的位置。</p>
+</li>
+<li><p>d：收集 script 外链对象，对于异步执行的 JavaScript 资源会打上 async 标识 ，会使用 requestIdleCallback 方法延迟执行。</p>
+</li>
+<li><p>e：接下来会创建一个匿名自执行函数包裹住获取到的 js 字符串，最后通过 eval 去创建一个执行上下文执行 js 代码，通过传入 proxy 改变 window 指向，完成 JavaScript 沙箱隔离。</p>
+</li>
+<li><p>f：由于 qiankun 是自执行函数执行微应用的 JavaScript，因此在加载后的微应用中是看不到 JavaScript 资源引用的，只有一个资源被执行替换的标识。</p>
+</li>
+<li><p>g：当一切准备就绪的时候，执行微应用的 JavaScript 代码，渲染出微应用。</p>
+</li>
+</ul>
+<h3 id="（2）局限性"><a href="#（2）局限性" class="headerlink" title="（2）局限性"></a>（2）局限性</h3><p>qiankun不是一个完整的微前端解决方案！！！</p>
+<h4 id="微前端的运行时容器"><a href="#微前端的运行时容器" class="headerlink" title="微前端的运行时容器"></a>微前端的运行时容器</h4><ul>
+<li><p>a：qiankun 所帮你解决的这一块实际上是微前端的运行时容器，这是整个微前端工程化里面其中一个环节。</p>
+</li>
+<li><p>b：从这个角度来讲 qiankun 不算是一个完整的微前端解决方案，而是微前端运行时容器的一个完整解决方案，当你用了 qiankun 之后，你几乎能解决所有的微前端运行时容器的问题，但是更多的一些涉及工程和平台的问题，则需要我们去思考与处理。</p>
+</li>
+<li><p>c：我们的版本管控、配置下发、监控发布，安全检测、等等这些怎么做，都不是 qiankun 作为一个库所能解答的，这些问题得根据具体情况，来选择适合自己的解决方案。</p>
+</li>
+<li><p>d：对于老旧项目的接入，很难做到零成本迁移，在开发的时候要预留足够的踩坑，魔改代码的时间。如果是已经维持几年堆叠的屎山需要做好因为不规范编码，所产生的各种奇怪的兼容性问题，这个时候你甚至会怀疑，“微前端是否真的有必要?”</p>
+</li>
+<li><p>e：微前端的核心不是多技术共存，而是分解复杂度，提升协作效率，支持灵活扩展，能把“一堆复杂的事情”变成“简单的一件事情”，但是也不是无脑使用的，广东话来说“多个香炉多只鬼”，每多一个技术栈都会增加：维护成本，兼容成本，资源开销成本，这些都会无形的拖累生产力。</p>
+</li>
+<li><p>f：基座应用与微应用之间，强烈推荐使用相同的技术栈，相同的技术栈可以实现公共依赖库、UI库等抽离，减少资源开销，提升加载速度，最重要的是：“减少冲突的最好方式就是统一”，通过约束技术栈可以尽可能的减少项目之间的冲突，减少工作量与维护成本。</p>
+</li>
+</ul>
+<h4 id="标准化才能提升生产力"><a href="#标准化才能提升生产力" class="headerlink" title="标准化才能提升生产力"></a>标准化才能提升生产力</h4><ul>
+<li><p>a：混乱的项目会拖累生产效率，同时混乱的微前端也会加剧内耗，所以只有标准化才能提升生产力。</p>
+</li>
+<li><p>b：<strong>解决微前端的接入问题是最简单的，但是微前端接入后的：工程化，应用监控，应用规范，应用管理才是微前端中困难的地方</strong>，如果你只是想简单的嵌入一个应用，我推荐你的使用 <code>iframe</code></p>
+</li>
+</ul>
+<h3 id="（3）微前端（qiankun）实战"><a href="#（3）微前端（qiankun）实战" class="headerlink" title="（3）微前端（qiankun）实战"></a>（3）微前端（qiankun）实战</h3><p>关于qiankun的使用，以及使用过程中的各类问题请查看：<a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%88qiankun%EF%BC%89%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">微前端（qiankun）使用手册</a></p>
+<h2 id="4-MicorApp"><a href="#4-MicorApp" class="headerlink" title="4.      MicorApp"></a>4.      MicorApp</h2><p><code>MicroApp</code>是京东基于类<code>WebComponent</code>进行渲染的微前端框架，不同于目前流行的开源框架，它从组件化的思维实现微前端，旨在降低上手难度、提升工作效率。它是目前市面上接入微前端成本最低的框架，并且提供了JS沙箱、样式隔离、元素隔离、预加载、资源地址补全、插件系统、数据通信等一系列完善的功能。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252246813.png"></p>
+<p>关于microApp实战请查看：<a target="_blank" rel="noopener" href="https://helloallenw.github.io/2023/12/25/%E5%BE%AE%E5%89%8D%E7%AB%AF%EF%BC%88micro-app%EF%BC%89%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">微前端（micro-app）使用手册</a></p>
+<h2 id="5-无界"><a href="#5-无界" class="headerlink" title="5.      无界"></a>5.      无界</h2><p>无界微前端是腾讯基于 <code>Web Components + iframe</code> 开发的微前端框架，具备成本低、速度快、原生隔离、功能强等一系列优点。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252247546.png"></p>
+<h2 id="6-Module-Federation以及EMP"><a href="#6-Module-Federation以及EMP" class="headerlink" title="6.      Module Federation以及EMP"></a>6.      Module Federation以及EMP</h2><p><code>Module Federation</code>是webpack5中的新特性，主要是用来解决多个应用之间代码共享的问题，可以更加优雅的实现跨应用的代码共享，使用这个方法也可以实现微前端。</p>
+<p>这个方案中有两个主体：Remote和Host，可以把Remote理解为想要引入的子应用，把Host理解为主应用（但是一个应用既可以是Remote也可以是Host，并不矛盾）。</p>
+<p>Module Federation的核心在于ModuleFederationPlugin这个插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * name: （必须）唯一ID，作为输出的模块名，使用的时通过name/&#123;expose&#125;的方式使用</span><br><span class="line"> * library：（必须）其中这里的name为作为umd的name</span><br><span class="line"> * remotes：（可选）表示作为Host时，去消费哪些Remote</span><br><span class="line"> * exposes：（可选）表示作为Remote时，export哪些属性被消费</span><br><span class="line"> * shared：（可选）优先用Host的依赖，如果Host没有，再用自己的</span><br><span class="line"> */</span><br><span class="line">new ModuleFederationPlugin(&#123;</span><br><span class="line">  name: &quot;App1&quot;,</span><br><span class="line">  library: &#123; type: &quot;var&quot;, name: &quot;App1&quot; &#125;,</span><br><span class="line">  filename: &quot;remoteEntry.js&quot;,</span><br><span class="line">  remotes: &#123;</span><br><span class="line">    app_02: &#x27;App2&#x27;,</span><br><span class="line">    app_03: &#x27;App3&#x27;,</span><br><span class="line">  &#125;,</span><br><span class="line">  exposes: &#123;</span><br><span class="line">    antd: &#x27;./src/antd&#x27;,</span><br><span class="line">    button: &#x27;./src/button&#x27;,</span><br><span class="line">  &#125;,</span><br><span class="line">  shared: [&#x27;react&#x27;, &#x27;react-dom&#x27;],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>通过以上设置打包之后会生成三种文件：应用主文件：main.js、作为remote时被引用的文件remoteEntry.js和其他的异步加载文件。</p>
+<p>这里通过一个例子简单概括一下其原理：下图是三个项目，在App1中它的remotes是App2和App3，没有exposes，shared是React和ReactDom，它作为host使用了remote的dialog组件和button组件；App2作为host使用了App3的button组件，作为remote导出来dialog组件，在App1中运行时如果需要使用React则会优先把App1中的React导入，这就复用了公共库；App3向外导出了dialog组件，只作为其他项目的remote。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202312252247350.png"></p>
+<p>这个新特性的提出促进了更多工具的发展，EMP就是以此为基础构建出的一个跨应用共享资源的框架，这个框架优化协作，加速开发的同时还可以保持UI的一致性。</p>
+<h2 id="7-选型"><a href="#7-选型" class="headerlink" title="7.      选型"></a>7.      选型</h2><p>（1）考虑系统需要兼容 ie 浏览器场景：<code>wujie &gt; qianku</code></p>
+<p>（2）接入便捷度考虑：<code>wujie &gt; micro-app &gt; qiankun</code></p>
+<p>（3）框架稳定性 (框架成熟度)：<code>qiankun &gt; micro-app &gt; wujie</code></p>
+<br />
+
+<h1 id="微前端意义"><a href="#微前端意义" class="headerlink" title="微前端意义"></a>微前端意义</h1><h2 id="1-化整为零"><a href="#1-化整为零" class="headerlink" title="1.      化整为零"></a>1.      化整为零</h2><p>当下前端领域，单页面应已经成为流行的的项目形态之一，但是随着时间和技术的发展，原本单一的应用具备的功能愈加丰富起来，功能的丰富意味着越来越难以维护，从而变成一个巨石项目。以至于之后改一处而动全身，带来的发版成本也更高。微前端的意义就是将巨石应用进行拆分，化整为零把功能随之解耦，每个部分可以单独进行维护和部署，从而提升团队开发和维护效率。</p>
+<h2 id="2-化零为整"><a href="#2-化零为整" class="headerlink" title="2.      化零为整"></a>2.      化零为整</h2><p>在业务中或多或少会存在一些历史项目，这些项目也会使用不同的框架进行构建，在日常运营中，这些系统已经有固有的用户，但是诸多的应用对于用户来说也是一种成本，为了让旧项目焕发新生，这要求我们在不能抛弃原有项目的同时开发新的功能，把诸多较为零散的入口统一整合起来，从而提高系统的使用率，而微前端就是目前实现这一需求的较好方法。</p>
+<p>综上，微前端不一定是未来发展趋势的收束点，但是它在未来一定会发挥重要作用。</p>
+<br />
+
+<h1 id="你真的需要微前端吗？"><a href="#你真的需要微前端吗？" class="headerlink" title="你真的需要微前端吗？"></a>你真的需要微前端吗？</h1><h2 id="1-微前端是「康威定律」在前端架构上的映射"><a href="#1-微前端是「康威定律」在前端架构上的映射" class="headerlink" title="1. 微前端是「康威定律」在前端架构上的映射"></a>1. 微前端是「康威定律」在前端架构上的映射</h2><p>设计系统的架构受制于产生这些设计的组织的沟通结构。 — M.Conway</p>
+<p>康威定律几乎就是微前端（准确来说是微服务架构）的理论基础了。它指出了组织架构越庞大，其系统间沟通成本越高的问题。而解决这一问题的有效手段就是，将大的系统拆分成一个个微小的，可以独立自治的子系统。一旦系统的依赖限制在了内部，功能上更加内聚，对外部的依赖变少，那么就能显著的减少跨系统之间的沟通成本了。</p>
+<p>简单来说，康威定律的指导思想就是：既然沟通是大问题，那么就不要沟通就好了。</p>
+<p>所以本质上，微前端(微服务架构)关注的是如何解决组织和团队间协作带来的工程问题，而不是单纯的某个技术问题。</p>
+<p>qiankun的作者当初面对的问题是有一些系统都是 4年+、代码 20W行+ 的长尾应用，而产品还在持续的集成迭代，既没精力去给他们做技术栈升级，也没动力(兴趣)去跟一个个前应用 owner 沟通了解一些技术细节。这可间接的引出第二个观点。</p>
+<h2 id="2-微前端的假设是，所有大型系统都逃不过熵增定律"><a href="#2-微前端的假设是，所有大型系统都逃不过熵增定律" class="headerlink" title="2. 微前端的假设是，所有大型系统都逃不过熵增定律"></a>2. 微前端的假设是，所有大型系统都逃不过熵增定律</h2><p>这个假设指的是，所有大型系统都将从有序变为无序，他们背后的 codebase 的归宿都将是「屎山」。</p>
+<p>如果不是，那一定是因为这个系统使用的技术栈更新的不够快，参与系统开发的工程师不够多，产品迭代的时间不够长。</p>
+<p>在潜意识里，微前端的采纳者就不相信一个系统会永远健康的迭代下去。因为熵增永远是自然且轻松的，而对抗熵增，则必须有足够的外力介入、足够的成本投入才行。</p>
+<p>这也是为什么，qiankun 的很大一批用户，都是因为要在一批长尾应用上迭代新功能，最后实在搞不动，才会尝试用微前端的方案来解决了。</p>
+<p>基于此，微前端很多时候是「悲观主义工程师」在工程上的妥协，是一种防御性，有时候甚至是「掩耳盗铃」式的架构策略。</p>
+<p>当然在理想状态下，对于一个有追求的工程师而言，所有的技术问题都应该是被正面修复、正确治理的，而不是起手就来一个 workaround。但同时所有的软件工程原则也都会告诉我们，不遗余力、不计成本的去优化、解决一个技术问题是不可取的，尤其是在这个问题的投入产出比不高的情况下。</p>
+<p>微前端倡导的不是消极的、投降主义的去回避系统中的历史遗留问题，而是告诉我们，很多时候我们可以通过分而治之的手段，让「上帝的归上帝，凯撒的归凯撒」。</p>
+<h2 id="3-满足以下几点，你可能就不需要微前端"><a href="#3-满足以下几点，你可能就不需要微前端" class="headerlink" title="3.       满足以下几点，你可能就不需要微前端"></a>3.       满足以下几点，你可能就不需要微前端</h2><p>基于以上两个观点，我们可以概括出，存在以下场景时，你可能就不需要微前端：</p>
+<p>（1）你/你的团队 具备系统内所有架构组件的话语权</p>
+<p>（2）简单来说就是，系统里的所有组件都是由一个小的团队开发的。你/你的团队 有足够动力去治理、改造这个系统中的所有组件</p>
+<p>（3）直接改造存量系统的收益大于新老系统混杂带来的问题。系统及组织架构上，各部件之间本身就是强耦合、自洽、不可分离的</p>
+<p>（4）系统本身就是一个最小单元的「架构量子」，拆分的成本高于治理的成本。极高的产品体验要求，对任何产品交互上的不一致零容忍。不允许交互上不一致的情况出现，这基本上从产品上否决了渐进式升级的技术策略</p>
+<h2 id="4-满足以下几点，你才确实可能需要微前端"><a href="#4-满足以下几点，你才确实可能需要微前端" class="headerlink" title="4.       满足以下几点，你才确实可能需要微前端"></a>4.       满足以下几点，你才确实可能需要微前端</h2><p>（1）系统本身是需要集成和被集成的 一般有两种情况：</p>
+<ul>
+<li><p>a. 旧的系统不能下，新的需求还在来。</p>
+</li>
+<li><p>b. 没有一家商业公司会同意工程师以单纯的技术升级的理由，直接下线一个有着一定用户的存量系统的。而你大概又不能简单通过 iframe 这种「靠谱的」手段完成新功能的接入，因为产品说需要「弹个框弹到中间」你的系统需要有一套支持动态插拔的机制。</p>
+</li>
+</ul>
+<p>（2）这个机制可以是一套精心设计的插件体系，但一旦出现接入应用或被接入应用年代够久远、改造成本过高的场景，可能后面还是会过渡到各种微前端的玩法。系统中的部件具备足够清晰的服务边界</p>
+<p>通过微前端手段划分服务边界，将复杂度隔离在不同的系统单元中，从而避免因熵增速度不一致带来的代码腐化的传染，以及研发节奏差异带来的工程协同上的问题。还是那个老生常谈的理念，没有银弹，架构本身就是各种 trade–off。</p>
+<p>大部分时候，一个「流行」的东西，你都无法阻止不需要它的人去使用它。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BE%AE%E5%89%8D%E7%AB%AF/"># 微前端</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c198a4d6/">十分钟教会你如何使用VitePress搭建及部署个人博客站点</a>
+            
+            
+            <a class="next" rel="next" href="/554fb506/">微前端（qiankun）使用手册</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c198a4d6/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/554fb506/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

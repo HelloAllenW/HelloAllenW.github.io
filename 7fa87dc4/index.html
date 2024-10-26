@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>如何看懂王家卫的电影 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何看懂王家卫的电影</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 6, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 6, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%94%B5%E5%BD%B1/">电影 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTerLyb21xh5xjLUzCI8vZbFLcHCiaflNMh1CsuCxyKePP3VkmyMILl5qrAmibLTVsE42m6biap29RUSAw/640?wx_fmt=jpeg&wxfrom=13&tp=wxpic" alt="图片"></p>
+<p>王家卫无疑是80年代末期以来香港乃至华人影视最成功的导演之一，王家卫电影的视听语汇总给人以期许与意外，从而带来莫名的观影满足。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVIunadE1YHP7Olmp3Q5lTvK7Q3ntbJ3BMOHBx4ZI3icxSicFiciczPWTUyQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>本文试着解读王家卫电影的视听策略，为大家提供一种欣赏和借鉴的角度 。</p>
+<h2 id="明星：无法抗拒的引诱"><a href="#明星：无法抗拒的引诱" class="headerlink" title="明星：无法抗拒的引诱"></a>明星：无法抗拒的引诱</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVVt1xicrzoAExgcsN7X2VrUicRSJwL20XAE00gIL3yDCq3zIko2lGQUvw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>王家卫的所有影片都启用了大明星，在王家卫的调理下，明星更能彰显其被压抑、被忽略、或者根本不被预期的韵致。如王家卫对张曼玉的改造，完全回避了其花瓶靓女明星的范式，而是把她设计粼旺角卡门冲戴一个大口罩掩病的乡下妹玉袱阿飞正传冲默默无言在底层生存的店女，她们都是作为一个等待者和被选择被忽略的客体，《东邪西毒》中被忽视在家的大嫂、《花样年华》中花样旗袍包裹的丽珍也不例外。</p>
+<p>张曼玉往日形象所具有的优越性和装饰感在这儿全然消失角色的生命也由此诞生，明星可能具有的潜质被挖掘出来，给被泛滥的明星套路充塞的港台片的观众带来一种新的刺激。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVOxvnGicKicR8RlJRHY2ibIwIy7V2ibC9ESRvJeCcocJDnicvDkrU2uwoicibg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>王家卫还不时对明星进行一种另类的包装与重塑，最典型的例子便是素有“东方美女”之称的林青霞在《重庆森林》中面目全非:金发、太阳镜和雨衣包裹得严严实实的女毒袅，怪异的造型却收到了意想不同的效果。类似的角色形象还有《阿飞正传》中的刘德华，《堕落天使》中李嘉欣饰演的杀手经纪人和金城武饰演的哑巴。这些在类型电影的陈规滥套中被模式化的“俊男美女”突然以这样一些另类的面目出现，给了观众以耳目一新之感。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVr77hW8HvR0L1ev8MQvWfvlVWCDqSFyicpSzu8iczR6iaIiamQia5QCyLq8g/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>在王家卫的系列电影中，虽然明星角色气质被王家卫改造，但几乎每个明星与他们饰演的角色间都存在着某种内在的相似和对位。如张国荣演的飞仔（《阿飞正传》）、杀手经纪人（《东邪西毒》）都是既傲气(拒绝别人)又失意(被别人拒绝和伤害)；沉默温和的巡警663（《(重庆森林》)、盲剑客（《东邪西毒》）和周慕云（《花样年华》）颇似梁朝伟个人内敛谦和的性格。这种与明星本身性格和气质有共振性的角色设置和安排使演员在表演中显得游刃有余、轻松自如，充分展示自己的个性魅力。</p>
+<p>影迷进戏院找寻自己偶像在片中的表现，想要得到的是满足，但不一定得到、却得到期许中满满的惊喜，又绝对不是彻底的幻灭与颠覆！让明星在底片上闪闪发光，并且继续被影迷们认同满足观众的视听期待是王家卫最大的本事之一。</p>
+<h2 id="时空：主观的投影"><a href="#时空：主观的投影" class="headerlink" title="时空：主观的投影"></a>时空：主观的投影</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVYX6ibibibukwjh1YwzAWQhX0KV4HL3qm3T1JOgOIWMEj3Ku19SLCxjgPA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>艺术家的生命力不仅仅在于创造一个经典，而且要敢于打破和违反这个经典。王家卫影片主观尝试各种表现手法，总能给观众视听上的惊奇。</p>
+<p>形象元素在王家卫作品中的表意性、引申意味大大加强了。无论是人物的神态，支离的语言片段，亦或阴晦而缺少阳光的陋室，不附座位的快餐店等等空镜，甚而即将过期的凤梨罐头，都在与观者进行一种内在的思想层面的对话。在王家卫看来，用形象元素去意会的目的远胜于言传了。不能言传只能意会的形象元素正好和观众自己内心产生共鸣，从而得到视听上的愉悦与快感。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTerLyb21xh5xjLUzCI8vZbFLE1GKKNuIkqzejZGy2oAShxmLMxdIVsEo5t7un6LGbrib4iaTPLlVYlqw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>位置、面积、角度是摄影构图的三大要素。导演们往往煞费苦心地在面积、位置、视线、朝向等诸多方面设计出种种的愉悦。但在王家卫的电影中为特定的目的，突出一方，打破均衡屡见不鲜。王家卫的时空观更体现了一种主观化时空特征，时空有时成为作品中的参与元素，有时却根本不与人物发生联系，其功能在于使影片呈现一种个人风格的呼吸与律动，也可以说是作者与观众的一种交流，让观众在交流中得到视听上的享受。如《堕落天使》的超广角镜头，给观众绝对新奇的视觉冲击。画面效果的一反常态适时地渲染了主题偏执、矛盾、无奈的心态。</p>
+<p>《堕落天使》中摄影作了极端大胆的尝试，整部片子几乎完全用短焦广角镜头拍成，势必造成变形的效果；近景扭曲失真，远景又虚化遥远。这种新颖的镜头语言的特点正是现代城市的缩影—孤独而渴求，压抑而无奈的心情在超广角的中近景和特写中表露无遗，无家可归，动荡不安的生存状态在极度的夸张中又依稀饱含着最动情的诉说。无意回避现代都市大众文化的俗气和凌乱，而且把这艳俗的世界点化出浓浓的诗意，实在令人叹为观止。</p>
+<h2 id="色彩：心理的印象"><a href="#色彩：心理的印象" class="headerlink" title="色彩：心理的印象"></a>色彩：心理的印象</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVwvWrctpUXa57mAUO0gmicfmK0ib9Rsvng2vfkvTZSu9M1ibe6yPRHMrCw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>色彩在电影的发展史上曾有过不同的见解。现在的导演们认为色彩的真实与否倒在次，最重要的是先根据色调的价值(黑白)和心理含义(冷暖)去运用色彩，如斯皮尔伯格的《辛德勒名单》。</p>
+<p>我们感受的是色彩的价值而非色彩本身。这种夸张的趋势使电影向绘画靠拢，既有象征主义又有戏剧效果，这一点在王家卫的电影中得到了很好的发扬。以《春光乍泄》为例。黑白片占据了片中的前三分之一，光与影的运用，强烈的明暗反差将人物内心的炽热与外表的冷漠刻画得入木三分。</p>
+<p>在彩色片部分，影片共有蓝、红两种基调，以及二者的混合色调。蓝色的街道、湖水渗透着一种沉寂、冷静的感觉，而红色的居室、酒吧则洋溢着激进、热烈和不安。男主角们在一站又一站的旅程里分合，相遇与别离，而这兴奋的红色的火焰和冷凄蓝色的世界也随之交替反复。黎耀辉永远缩在浓重的黑大衣里，而何宝容则满身的靓丽。二者截然不同的色彩是其性格、命运特点所决定的。</p>
+<p>剧情发展到何受伤，黎全心照顾这段高潮戏时，两人感情出现转机，黎换上了亮调的红色衣服。但好景不长。随着隔阂的产生，黎又恢复了以往的冷色调服装。斯坦利•考夫曼曾言：“色彩成为剧中的一个人物”。纵观王家卫作品中的色彩，亦是与人物心理、性格、命运紧密相连，富有表现主义与象征主义手法的重要角色。在充斥着媚俗于模仿的当今影坛。王家卫为我们描绘了一道独特的风景，从而抓住了观众的眼球。</p>
+<h2 id="独语∕旁白：王家卫电影的心灵之匙"><a href="#独语∕旁白：王家卫电影的心灵之匙" class="headerlink" title="独语∕旁白：王家卫电影的心灵之匙"></a>独语∕旁白：王家卫电影的心灵之匙</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVXrtAfwSBzZzwWaoTaZibTHBR55jfmib05Vywq8icQXkGpYeJHCjUv3jxA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>人物独语/旁白的数量之多，分量之重，不仅成了王家卫电影的一种标志性元素或者说是其风格化特征，也是进入王家卫电影世界的最重要的通道。王家卫极大地发掘了电影的视听艺术功能，使得电影的影像与声音的艺术比重更加对称，艺术情致更加饱满，艺术氛围更加独特。</p>
+<p>在一些新锐电影中，人物对话被压缩到最少限度，心理独语/旁白更是几近于无，王家卫电影似乎故意反其道而行之，结果是有目共睹，不仅大大丰富了电影语言，而且也使得电影艺术手段变得灵活多样。王家卫电影的人物独语/旁白，使得以往在电影声音元素中被相对忽视的独白/画外音的艺术魅力得到了前所未有的艺术展现，这种画外心声完全可以作为一个独立元素，与人物对白，电影音乐，电影音响等三大声音元素相提并论，进而这种人物独语/旁白形式兼具叙事描写结构以及抒情写意和象征等诸多功能，可以说大多得益于王家卫的独家发掘及其创造性的运用。</p>
+<p>与此同时大量人物独语/旁白的使用，也使得电影难以描绘无形的心灵之局限获得重大突破。在王家卫电影中，人物心理感受及其精神隐秘能够通过其自由心语而得到直接的呈现。王家卫完全没有把有关电影画外音处理的清规戒律或约定俗成放在眼里，从没有将画外音当成一种固定单一的叙事手段，从不规定画外音的单一叙事视点，而是有意打破成规，解放电影的话语霸权，让人物自由表达，让众声喧哗。王家卫将人物旁白的使用，当成了一种特殊的叙事修饰手段和影片的连接方式，并逐渐演变成一种王家卫电影的技巧常规。</p>
+<p>王家卫电影中这种旁白形式的大量运用，实际上还有更重要的功能意义，那就是直接展示人物心灵感受，传达人物精神信息，刻画人物的心理状态。更为重要的是主人公的自由心语/画外之音，其实并非仅是王家卫电影的一种辅助手段，恰恰相反，王家卫电影常常是以这些心声为导向，最后将作品结构成篇，从而使得王家卫电影真正与众不同。在这一意义上王家卫电影可以说是一种非常独特的心理电影：一种心理状态及其心灵奥妙的艺术展示。</p>
+<p>明乎此，才能真正理解《阿飞正传》中的无脚鸟的故事，才能理解其主人公旭仔，何以如此渴望飞翔，至死不悔。也只有这样才能明白《重庆森林》中人物的神神叨叨，《东邪西毒》中欧阳锋的喋喋不休，才能明白《堕落天使》中人物的那些怪癖夸张的言行举止，与其说那是一种现实人生的模仿，不如说是人物心灵的一种欲望、想象及其伤痛的感应。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVTjiciciarnnPGbvABicBD8PVhxyMHvKNyQEAX4RhVib8f6ZlkbLcEMJ5BQA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>​                                  </p>
+<p>此外，音乐也是王家卫作品魅力感人不可或缺的因素。音乐所执行的是诉说情感的功能，使得王家卫的电影变得异常独特。王家卫的视听阴谋还来源于他对后现代媒介文化特征的把握，这个时代的文化处于一种混杂，快速消费，影像画面代替文字信息的视觉文化时代，因此王家卫的影片在影像风格上类似ＭＴＶ的多变和剪接风格，而现代音乐又辅助着剧情的现代特征：《堕落天使》中拼贴式的人物情节；《春光乍泄》中快速闪动的车流，这些特点无疑增加了影片基调上的现代文化气息，摄影风格的花哨多变，光怪陆离的影调又在视听上呈现出奇特的不同于传统观影经验的吸引。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XPxX57N6mF5h077rXNmunN6ZkGMyUFbVxNxCNA21u9JIECHuEia4FkIdASTmaN4V5znb98AaLBfn1KiastrHQsvg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>总之，王家卫的随意、缀断的时空、主观的影象和以独白做骨干的讲述，往往将正常的叙事进程分解得支离破碎，形成一种强烈的疏离感和失落感。对于那些习惯了传统电影结构的观众而言，看王家卫的电影不啻为一种挑战与引诱。</p>
+<div style="color:gray;font-size:0.9em;">文章转载自公众号：大峰传媒，特此鸣谢！</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%94%B5%E5%BD%B1/"># 电影</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2f43726c/">如何欣赏音乐（爬楼进阶版）</a>
+            
+            
+            <a class="next" rel="next" href="/576eb0cf/">如何看懂当代艺术 ？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2f43726c/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/576eb0cf/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

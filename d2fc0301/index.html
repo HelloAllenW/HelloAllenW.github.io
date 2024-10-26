@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>20. 海外殖民 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">20. 海外殖民</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 20, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 20, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="海外殖民"><a href="#海外殖民" class="headerlink" title="海外殖民"></a>海外殖民</h2><h3 id="1-马来群岛"><a href="#1-马来群岛" class="headerlink" title="1.  马来群岛"></a>1.  马来群岛</h3><p>大约四万年前，海平面较低，马来群岛（又称东印度群岛或南洋群岛）的东部与欧亚大陆相连，一群较古老的智人（矮黑人种）来到这里。冰期结束之后，海平面上升，使这片群岛与大陆隔开。直到新石器时代晚期，另一批技术更先进的智人渡海而来，淘汰了早先的矮黑人种。这些新来的族群属于南岛语系，其先祖可能是在8000年前从东亚大陆进入台湾，然后约5000年前开始南下大洋扩张，约4000年前到达马来群岛。凭借卓越的航海能力，他们广泛分布到辽阔大洋上的诸多岛屿，西至非洲的马达加斯加、东至太平洋上的波利尼西亚（远至夏威夷、新西兰和复活节岛），还有少数生活在中南半岛的沿海地区。（但有趣的是，他们似乎从未到达澳大利亚。）</p>
+<p>大约2000年前，马来群岛与印度已经开展贸易，婆罗门教和佛教随之传入。群岛上逐渐建立起一些贸易城镇乃至小型国家。中国初唐时期，苏门答腊已经形成了一个繁荣的国家三佛齐（又称佛逝国）。三佛齐是群岛的香料贸易中心，也是佛教中心，671年（唐高宗李治时期）即有唐朝僧人到三佛齐取经，此后三佛齐也多次到中国朝贡。宋朝时陆上丝绸之路不畅、海上丝绸之路繁荣，三佛齐借此成为海上的贸易霸主。然而，它的地位不断受到印度东部和爪哇地区其它王国的挑战。1397年（明洪武三十年），爪哇的满者伯夷王国攻灭三佛齐。三佛齐王子拜里米苏拉逃至马来半岛（当时是暹罗属地），建立了满剌加，在暹罗和满者伯夷的夹缝中艰难求存。1403年（明永乐元年），明朝使臣到访满剌加，拜里米苏拉当即派人随使臣至明朝进贡，1405年被明成祖朱棣册封为马六甲国王。马六甲从此摆脱暹罗的控制，成为明朝属国，以及郑和舰队（1405 ~ 1433年间七下西洋）的海外基地。在郑和的扶植下，它迅速崛起为东南亚的国际贸易中心，中国的礼仪文化也传入此地。然而，明朝不久就退回海禁状态，来自印度洋的穆斯林文化反而在马六甲占据上风。马六甲第五任君主开始以“苏丹”自称，奉伊斯兰为国教，马来群岛从此逐渐伊斯兰化。</p>
+<p>明朝刚离开不久，来自遥远西方的殖民者就抵达马来群岛，觊觎这里的贸易利益。1511年，葡萄牙驻印度总督派舰队攻陷马六甲城，马六甲苏丹国灭亡。（马六甲派人向明朝求救，但未得到明朝响应。）马来群岛分裂为众多小国，其中最重要的是马六甲王子建立的柔佛苏丹国（马来半岛南端）和占婆人建立的印尼亚齐王朝（苏门答腊岛）。此后近百年里，葡萄牙人、马来柔佛王朝、印尼亚齐王朝三方持续交战，直到另一个新来者尼德兰加入战团。</p>
+<h3 id="2-荷兰东印度公司"><a href="#2-荷兰东印度公司" class="headerlink" title="2. 荷兰东印度公司"></a>2. 荷兰东印度公司</h3><p>尼德兰（即荷兰）拥有面向大西洋的良好海港，但在地中海时代，其地理价值有限。大洋时代来临后，与伊比利亚半岛相比，尼德兰更靠近欧洲中央，因此更适合成为连接欧洲内陆和辽阔大洋的贸易枢纽。正如威尼斯在中世纪时曾做到的，尼德兰迅速崛起，超过西班牙本土和葡萄牙，成为欧洲新的贸易和金融中心。同时，它还掌握了先进的造船技术。1581年尼德兰共和国宣布独立之后，荷兰人利用从葡萄牙获得的航海地图，很快建立起自己的贸易网络，而1588年西班牙无敌舰队的覆灭更是给予他们天赐良机。</p>
+<p>1602年，荷兰东印度公司成立，将所有荷兰商人在东方（从好望角到麦哲伦海峡之间的辽阔世界）的努力合并到一个旗帜下。这是世界上第一家跨国公司和股份有限公司，第一家股票交易所也在阿姆斯特丹诞生。荷兰东印度公司获得了议会的特许状，不仅从事贸易，同时也具有组织军队、发行货币、建立并统治殖民地、甚至与外国缔结条约等国家职能。荷兰人于1619年在爪哇岛兴建了巴达维亚（今日雅加达）作为东印度公司的东方总部，随后继续北上，1622年进攻澳门，被租住于此的葡萄牙人打败，继而入侵澎湖，又被大明水师逐出，转而占领台湾。（明朝对此持放任态度，直到1662年郑成功才把荷兰人驱逐出去。）1638年开始，荷兰还成为西方与日本贸易的唯一窗口，直到1854年日本结束闭关锁国。1641年，荷兰与柔佛联手从葡萄牙人手中收复马六甲，柔佛获得了马来半岛的宗主权（1786年之后逐渐被英国控制），而荷兰消除了海上的贸易竞争对手。1658年荷兰占领斯里兰卡之后，葡萄牙人在印度洋沿岸的据点几乎全部被荷兰人夺走，仅余东帝汶一地。在此期间，1648年荷兰终于从西班牙赢得独立。</p>
+<p>经过公司的积极扩张，整个东印度群岛都被它纳入势力范围。到1669年时，荷兰东印度公司成为世界上最富有的私人公司，拥有超过150艘商船、40艘战舰、五万名员工、一万名雇佣军，投资回报率高达40%。公司的分红是荷兰政府最主要的收入来源。巅峰时期，荷兰的商船数量超过欧洲所有其它国家之和，被称为“海上马车夫”。在近200年里，它总共向海外派出1772艘船，约有100万人次的欧洲人搭乘4789航次的船班从荷兰前往亚洲地区。</p>
+<h3 id="3-英国东印度公司"><a href="#3-英国东印度公司" class="headerlink" title="3. 英国东印度公司"></a>3. 英国东印度公司</h3><p>1600年，一帮英国商人在伦敦成立了英国东印度公司。（但它在1650年才实行股份制，晚于荷兰东印度公司。）公司派往苏门答腊的第一支船队就带回了103万磅胡椒，大约相当于英国全年消费量的4倍。由于东印度群岛很快成为荷兰的势力范围，英国商人把扩张重点转向印度。他们于1608年到达印度西岸的苏拉特，建立了第一个贸易点。1612年，英国东印度公司在苏拉特附近的海战中击败葡萄牙舰队。1615年，英王詹姆士一世的使臣拜会莫卧儿皇帝沙贾汗（阿克巴之孙，他为爱妻修建了泰姬陵），获得了皇帝的支持，使得英国在印度的地位很快超过了葡萄牙。而对英国更加有利的是，葡萄牙自从1580年被西班牙控制之后，直到1640年才重获独立。为了获得英国的政治支持，1664年葡萄牙将公主凯瑟琳嫁给英王查理二世，并把孟买殖民地作为嫁妆送给英国。这一事件结束了葡萄牙在印度的势力，而英国在孟买、加尔各答、马德拉斯三地建立了殖民据点。</p>
+<p>1670年，仿照荷兰东印度公司的模式，查理二世也授予了英国东印度公司铸造钱币、组织军队、战争和缔约外交条约等多项权利，使之成为一个商人统治的“国家”。此后公司很快就拥有自己的军队，到1689年时已经成为其殖民据点的事实统治者。公司如此强大，以至于它和英国国会之间开始明争暗斗：国会希望限制公司的自主权，同时又从公司获得财富。然而公司在这场争斗中处于上风，其垄断特权一再延长。与此同时，被掏空的莫卧儿帝国日渐衰落，四分五裂。1707年奥朗则布皇帝（沙贾汗之子）去世之后，英国东印度公司已经不再是一个需要皇帝支持的商业组织——它自身已成为印度的真正主宰者。</p>
+<p>英国与荷兰都是新教国家，原本不乏合作的基础，但随着利益冲突的增长，双方开始发生斗争。在克伦威尔时期，荷兰略占上风，但它随后就遭到法国路易十四和英国的联合入侵，损失惨重。光荣革命之后，威廉三世成为英荷两国的共治君主（1688 ~ 1702年），双方自然结成联盟。在他去世后，双方结束共治，再度渐行渐远。</p>
+<p>在香料昂贵的年代，荷兰占据的东印度群岛具有巨大的价值，然而随着香料的普及和价格下跌，荷兰东印度公司也随之虚弱；而英国东印度公司在印度不但获得了香料，还有价廉物美的棉布。印度棉布在英国乃至世界范围内广泛流行，使得英国东印度公司愈加繁荣，逐渐超过荷兰，成为东方贸易中的头号巨鳄。与此同时，法国也在印度半岛东岸建立了殖民地，但其规模和影响都远不能与英国相比。</p>
+<p>值得一提的是，欧洲与中国的贸易格局在两百多年间也不断改变。早期欧洲商船向中国购买的商品主要是丝绸和瓷器，而茶叶虽然在葡萄牙人时期就已传入欧洲，但并未广泛流行。荷兰人是景德镇瓷器的最大买主，数十年间就有约2000万件瓷器由荷兰商船运往欧洲。与此同时，荷兰本土努力仿制中国瓷器，1610年在代尔夫特首次生产出接近青花瓷的蓝白陶器。欧洲不断改进制瓷技术，1710年（康熙四十九年）德国的迈森瓷厂终于研制出了可与中国媲美的白瓷，此后欧洲的瓷器工艺逐渐赶上甚至超越中国，对中国瓷器的需求减弱。另一方面，印度低价棉布在英国流行起来，也抑制了对中国丝绸的需求（并且催生了英国工业革命）。然而有趣的是，葡萄牙的凯瑟琳公主嫁给英王查理二世，把她的喝茶爱好也带到英国，使英国人疯狂迷恋上茶叶。茶叶超过丝绸和瓷器成为中国出口的头号商品，直到1840年鸦片战争之后，英国人从中国取得茶树种并且在印度种植成功，印度逐渐取代中国成为英国最大的茶叶来源。</p>
+<h3 id="4-北美殖民"><a href="#4-北美殖民" class="headerlink" title="4. 北美殖民"></a>4. 北美殖民</h3><p>哥伦布1492年发现美洲之后，首先开始殖民的是西班牙。他们建立的据点主要在中南美洲的墨西哥（阿兹特克帝国故地）、秘鲁（印加帝国故地）以及加勒比海一带，这里土地肥沃，印第安农业发达，易于统治，又有大量金银可供掠夺。而北美大草原相对荒凉，印第安人野蛮落后，因此西班牙人不感兴趣，使这里被后来的英法等国占领。</p>
+<p>法国对美洲的探索起始于1523年，航海家韦拉扎诺考察了佛罗里达至纽芬兰之间的北美海岸。这里物产贫瘠，只能提供一些皮毛贸易，不能激发起王室的积极性。1603年，法国才开始深入北美内陆，沿圣劳伦斯河进入五大湖区，直到1673年才发现了密西西比河，1682年沿着密西西比河南下到达墨西哥湾，并把河口地区命名为路易斯安那，以献给路易十四。至此，阿巴拉契亚山脉以东，从五大湖区到墨西哥湾之间的大片内陆都被法国占据。然而，法国殖民地虽然面积广阔，却因受到中央集权政府的严格管制（例如不允许清教徒殖民）而缺乏活力。直到它最终被政府放弃为止，整个法国殖民地始终人口稀少，经济薄弱，与同期的英国殖民地形成鲜明对比。</p>
+<p>英国虽然有着海洋扩张的传统，但在几乎整个都铎王朝都受制于内部纷扰而无暇他顾。直到伊丽莎白一世登基后，英国才在1587年开辟了第一片北美殖民地，将其命名为弗吉尼亚（Virginia）以献给“童贞女王”，然而这里的首批移民在第一个冬天就神秘消失了。1607年，英国才成功建立第一个永久据点，命名为詹姆斯顿（Jamestown）以献给英王詹姆士一世。与西、法不同，英国的殖民主要是民间行为，商人招募社会底层劳力（包括黑人劳工）到北美种植烟草等作物，使这里的人口和经济都发展起来。1620年，一批英国清教徒为了逃避宗教迫害，乘坐“五月花号”渡海前往弗吉尼亚，然而船只偏航，使他们到达的不是弗吉尼亚，而是东北方的一片荒芜之地，这里被命名为“新英格兰”（今日的马萨诸塞等六州）。在印第安人的援助下，他们在荒野里渡过了一个寒冷的冬天，由此诞生了“感恩节”这一节日。新英格兰地区渐渐发展成追求宗教信仰自由的移民聚居地，而不同教派占据了不同的势力范围，各自为政，演变成今日不同的州。</p>
+<p>这一时期，荷兰也占据了北美的曼哈顿岛一带，将此地命名为“新尼德兰”，而其最重要的港口据点被称为“新阿姆斯特丹”。由于荷兰殖民地正插在弗吉尼亚和新英格兰这两片英国殖民地之间，英国决定拔除这根钉子。1664年，英国约克公爵詹姆士二世（他于两年后继位成为英国国王）率舰队攻占新阿姆斯特丹，并将此地改名为新约克，即纽约（New York）。从此荷兰基本退出了北美殖民地的争夺，从圣劳伦斯河口到佛罗里达北端的几乎整个东海岸都变成英国殖民地。随着英国建立议会民主，殖民地人民享有相当的自治权，本国文化亦鼓励海外扩张，因此其殖民地远比法国更加繁荣。哈佛（1693年）、耶鲁（1701年）等大学都纷纷建立起来。到1750年，英国殖民人口已近200万，而同期法国殖民地人口仅有8万。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9b9936e5/">21. 资本主义之潮</a>
+            
+            
+            <a class="next" rel="next" href="/50cc0188/">19. 大航海时代</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9b9936e5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/50cc0188/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

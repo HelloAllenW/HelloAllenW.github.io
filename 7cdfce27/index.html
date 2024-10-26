@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>全球最具奇思妙想的20座雕塑 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">全球最具奇思妙想的20座雕塑</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十月 22, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十月 22, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BB%BA%E7%AD%91/">建筑 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>想要近距离观察所有这些雕塑，可以计划在世界各地进行一次惊人的旅行。</p>
+<center>..................................................</center>
+
+<p>艺术很重要。它让我们思考，激发我们的感官和想象力。每个城市的路边、广场都有些雕塑，有些普普通通，有些却极具创意，网上国外网友在世界各地收集了一些最有创意的雕塑作品，有些是很久以前的，也有些是新建的。如果你也喜欢艺术，那么下面文章和你一起盘点全球最精彩的20件城市雕塑作品。</p>
+<h2 id="图1-·《游泳》英国伦敦"><a href="#图1-·《游泳》英国伦敦" class="headerlink" title="图1 ·《游泳》英国伦敦"></a>图1 ·《游泳》英国伦敦</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7u9xA5F5brjkU1Inrib6Y2CpSLJWTkOtuBqmjZJm8IGB3A9DUMzCyWI1A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>雕塑是一个国家形象的象征,同时能体现着城市的个性、张扬和幽默，富有创意的城市雕塑让您大饱眼福！有着46英尺长,10英尺高的游泳者雕塑。2007年9月18日，英国伦敦，一座巨型“男子游泳运动员”雕像在泰晤士河的河岸亮相。游自己的泳，让看的人发愣吧。</p>
+<h2 id="图2·《扩张》-美国纽约"><a href="#图2·《扩张》-美国纽约" class="headerlink" title="图2·《扩张》 美国纽约"></a>图2·《扩张》 美国纽约</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_png/sQcGcdqRJkB06WEFhX0bAIJ6Yp4ibYmXf4asTGKRJqiaFgHCJG6UcdMlrAcq4YvA1u22okOyIkMV7TwkqgqnYcNA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>女艺术家Paige Bradley作品，她这样解释雕塑的灵感，“从我们出生的一刻起，世界就好像为我们设定了一个刚好容纳我们的空间：社会保险号码、性别、种族甚至是智商的高低。我觉得人生往往被这些东西所限定，而非由内在的自己所决定。如果我们超越了这些框架，我们是否还能认识自己？如果不被任何所限，我们是否还会存在？”</p>
+<h2 id="图3-·《打结的枪》美国纽约龟背湾"><a href="#图3-·《打结的枪》美国纽约龟背湾" class="headerlink" title="图3 ·《打结的枪》美国纽约龟背湾"></a>图3 ·《打结的枪》美国纽约龟背湾</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7u0MgEC1fp25kzKKX0a74Zjn1r3Zxd7mTM3fO0Cf3hic3TxlYcJzQtw1w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>位于联合国总部大厦入口处，由卢森堡政府赠送的，弯曲打结的枪管表示了人们对和平的向往。</p>
+<h2 id="图4-·《讨论全球变暖的政客》德国"><a href="#图4-·《讨论全球变暖的政客》德国" class="headerlink" title="图4 ·《讨论全球变暖的政客》德国"></a>图4 ·《讨论全球变暖的政客》德国</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uCudMlsDLQyFDFH5qFCOeK3IUtJ6dkkwKrBqibJEsibTk2qKdk2Yw9qmg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>全球变暖是一个全球性的问题，艺术家Isaac Cordal在水中表现了它，意为这一气候问题已经严重威胁了人类生存，到达了不得不解决的最后地步。</p>
+<h2 id="图5-·《挣脱模具》美国费城"><a href="#图5-·《挣脱模具》美国费城" class="headerlink" title="图5 ·《挣脱模具》美国费城"></a>图5 ·《挣脱模具》美国费城</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uxEt98GQc34ZVwgiamgSOkgKmWXfodrDZAeL6uv6Ga2NNBA36U9pa5nQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>雕塑家说：“我想创造一个雕塑几乎每个人，不论其背景。这个雕塑是关于通过创作过程中实现自由的斗争。”任何人都有权从敌对的环境中解脱出来，变成自己喜欢的自己。</p>
+<h2 id="图6-·《爬出布达佩斯广场的巨人》匈牙利"><a href="#图6-·《爬出布达佩斯广场的巨人》匈牙利" class="headerlink" title="图6 ·《爬出布达佩斯广场的巨人》匈牙利"></a>图6 ·《爬出布达佩斯广场的巨人》匈牙利</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uJpX82tIN61naRNhFxp8kdQ5TNeF3uQP5Rgc92GEeWWNjmicGZicZjr5Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>它是由匈牙利艺术家欧文·埃尔韦 - Loranth创建。匈牙利代表自由的象征，挣脱的欲望，好奇心和发展的动力。</p>
+<h2 id="图7-·《援手》瑞士"><a href="#图7-·《援手》瑞士" class="headerlink" title="图7 ·《援手》瑞士"></a>图7 ·《援手》瑞士</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uKvvHk7iaF2zOvoK8WpxzJDY9CXT82BMw7ve6RdjdczcGF5tK8bibTHVA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>从一个大树的根部伸出一直手来，托住了整个大树，创作者伊娃·敖提丽(Eva Oertli)和比特·哈伯(Beat Huber)以示关爱自然和保护自然的重要性。</p>
+<h2 id="图8-·《雨》乌克兰"><a href="#图8-·《雨》乌克兰" class="headerlink" title="图8 ·《雨》乌克兰"></a>图8 ·《雨》乌克兰</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7ur1mUTejAWib7KaQm8N4782qMiconHqE43CCvWHiaaCYGZESjyyw91lNKQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>整件作品有六英尺高，由青铜和玻璃制作而成。雕塑抬头望向天空，仿佛在思索或者渴望着什么。</p>
+<h2 id="图9-·《黑色幽灵》立陶宛克莱佩达"><a href="#图9-·《黑色幽灵》立陶宛克莱佩达" class="headerlink" title="图9 ·《黑色幽灵》立陶宛克莱佩达"></a>图9 ·《黑色幽灵》立陶宛克莱佩达</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uCIkfQForhu2H6gfJdCdOjfibHZHdY9p7vcsd1IvDGWpghIWd2gPApQw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>根据当地的神话，这尊雕像是说从附近的梅梅尔城堡看到一个黑色的，戴着兜帽的身影从水中冒出。民间传说，如果你善待鬼财富会光临你。</p>
+<h2 id="图10-·《铁鞋》布达佩斯"><a href="#图10-·《铁鞋》布达佩斯" class="headerlink" title="图10 ·《铁鞋》布达佩斯"></a>图10 ·《铁鞋》布达佩斯</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uzNIdlZJpFmNNibwllJd5sAib68m3Slwtp7P5atEgVHicnYqtzvsrT5RnQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>导演Can Togay为纪念犹太人大屠杀而创作的作品。1945年1月，受匈牙利“箭十字党”迫害的犹太人，在死前被要求脱下鞋子、跳入河中。这是战争带给人永远的伤痕，触目惊心。</p>
+<h2 id="图11-·《雨中人》意大利"><a href="#图11-·《雨中人》意大利" class="headerlink" title="图11 ·《雨中人》意大利"></a>图11 ·《雨中人》意大利</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7ubvz8UdWNaDaErEXVCWaj8BEIoBrFoIAicLrllT1jMrIYDia7QiatSjWAw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这座巨大雕塑有种很强的孤独感，好像每个都市人都可以从这里看到自己的影子。</p>
+<h2 id="图12-·《过客》波兰华沙"><a href="#图12-·《过客》波兰华沙" class="headerlink" title="图12 ·《过客》波兰华沙"></a>图12 ·《过客》波兰华沙</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7u6AsdBTH3WpBJtID6l92XVhKAhHtj38iarfr82TpsS2E5l0rtT5e42rA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>位于地铁口的著名建筑，这群雕塑是为了纪念波兰于1981年12月13日颁布的戒严令、波兰总统沃依切赫·雅鲁泽尔斯基取缔团结工会并逮捕其领导人。自此公会转入地下行动，从而工人们也逐渐呈现出在地上与地下分裂的形态。</p>
+<h2 id="图13-·《下沉的建筑》澳大利亚墨尔本"><a href="#图13-·《下沉的建筑》澳大利亚墨尔本" class="headerlink" title="图13 ·《下沉的建筑》澳大利亚墨尔本"></a>图13 ·《下沉的建筑》澳大利亚墨尔本</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7u9ZVBSISh6UoB6Usj3iaPVfY6V76UpoD0wnf1MibMliaa0GU8VU8LGeBicg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>州立图书馆外下沉的大楼，随着图书馆下沉的是知识，这究竟是一个知识沦陷的时代，还是一个全民渴求知识的年代？</p>
+<h2 id="图14-·《走进河的子民》新加坡"><a href="#图14-·《走进河的子民》新加坡" class="headerlink" title="图14 ·《走进河的子民》新加坡"></a>图14 ·《走进河的子民》新加坡</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7ua3knXJPmpSlQoPfXibG5Jr6XhiaiaicNQjuge9t9onQGcejy2VeuwA97ug/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>五个赤裸男孩雕像，好象要跳入河中游泳，这是第一代到新加坡移民的孩子常做的体育活动。雕塑叫做《第一代》，是新加坡雕塑家Chong Fah Cheong的作品。</p>
+<h2 id="图15-·《天国的阶梯》澳大利亚"><a href="#图15-·《天国的阶梯》澳大利亚" class="headerlink" title="图15 ·《天国的阶梯》澳大利亚"></a>图15 ·《天国的阶梯》澳大利亚</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uIic2ha8Btq3HywJN6XjKHGicJbBZVicFrL8PBEkbEPBSxic7UAMhZxc3aQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>正面望去，就象是无限向天际延伸的一道通往天国的阶梯。一个无止尽的通天阶梯，蔚为壮观，我们也在问自己，是不是那是永远到达不了的远方？</p>
+<h2 id="图16-·《工作中的男人》斯洛伐克布拉迪斯拉发"><a href="#图16-·《工作中的男人》斯洛伐克布拉迪斯拉发" class="headerlink" title="图16 ·《工作中的男人》斯洛伐克布拉迪斯拉发"></a>图16 ·《工作中的男人》斯洛伐克布拉迪斯拉发</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uXiaMkVVfvcGnxAxWncvCrfeVeZlmialPfbTia2tslA1wvMt5ZfpKFwxbg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这件颇有趣味的街头雕塑，是画家ViktorHulik在1997年完成的作品。不过这个设计有个问题，那个口开得太大，有小孩夜晚走路时掉下去。他的“头”还被偷过两次，以至于到后来警察不得不列一个警示牌来保护他的“休息”。</p>
+<h2 id="图17-·《米哈伊·爱明内斯库》罗马尼亚"><a href="#图17-·《米哈伊·爱明内斯库》罗马尼亚" class="headerlink" title="图17 ·《米哈伊·爱明内斯库》罗马尼亚"></a>图17 ·《米哈伊·爱明内斯库》罗马尼亚</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uJABVibOF0s8WQibEuloS3aHdXo0DmicfM6mCc8kbWx5FkSsIwwNbicCz4Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>爱明内斯库是罗马尼亚国宝级诗人，而这件作品也非常优美，脸孔随着这条路一年四季的景色改变而改变，诗人的眼神却一直明亮有力。如他的长诗《金星》里的诗句：“你们生活在狭隘的人世上/任凭命运的摆布/而我在我的世界里/感到永生不灭和凄凉。”</p>
+<h2 id="图18-·《吊在外面的人》捷克布拉格"><a href="#图18-·《吊在外面的人》捷克布拉格" class="headerlink" title="图18 ·《吊在外面的人》捷克布拉格"></a>图18 ·《吊在外面的人》捷克布拉格</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uWuPV04KyJTErI02kMMdzKydUicLgoQgCm1xaUvs8mxiaKfh2gib0pG7xQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这个被悬在半空、单手死死抓住救命稻草不放的男人，正是著名的精神分析学家弗洛伊德。弗洛伊德一生多次罹患恐惧症，包括对他自己死亡的恐惧。83岁时，他被确诊为口腔癌，因为无法忍受病痛与恐惧，让自己的朋友与医生帮他注射了30毫克吗啡自杀。</p>
+<p>艺术家DavidCerny的这件作品展示的就是弗洛伊德对恐惧死亡的不断抗争。有趣的是，这件作品曾在伦敦、柏林、芝加哥等地巡展，经常被路人或经常当成真实的自杀事件处理，仔细前去一看才发现是虚惊一场。</p>
+<h2 id="图19-·《野马》美国拉斯科利纳斯"><a href="#图19-·《野马》美国拉斯科利纳斯" class="headerlink" title="图19 ·《野马》美国拉斯科利纳斯"></a>图19 ·《野马》美国拉斯科利纳斯</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7ueiaB87sBcC6cYsgCbxP0PicyPh20Jo70BicAJ7kVjVMy2xnNQwcCgxvQQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>Robert Glen作品，是世界上最大的马雕塑，象征着德克萨斯州人自由的精神。</p>
+<h2 id="图20-·《旅人》法国"><a href="#图20-·《旅人》法国" class="headerlink" title="图20 ·《旅人》法国"></a>图20 ·《旅人》法国</h2><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/icXltF40IjYQvEoEvcabGLElnrQYaox7uVEqyQJFPDxdXretPgtQyCaCq3AIvqqtTHH5jdKtLjl7WC3IM26Ykbw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>为了庆祝马赛作为2013年欧洲文化中心，艺术家Bruno Catalano在市区街头摆放了十座与真人等高的雕塑，每尊雕塑的身躯都被镂空，与真人1:1比例的的雕塑。被掏空的旅行者你是否真的理解什么是旅行的意义？</p>
+<p>或者说旅行的道路上我们是为了玩乐还是为了人生的那一份安定？每个人看这组作品时的心境都会不一样。或者喻示着人们内心向往的一个归宿。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BB%BA%E7%AD%91/"># 建筑</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/4d8d1692/">全球最受欢迎的十大导演及其代表作</a>
+            
+            
+            <a class="next" rel="next" href="/9bad9d07/">全球著名的新闻摄影奖：普利策奖摄影+路透社摄影部（镜头下的难民之困）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/4d8d1692/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/9bad9d07/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

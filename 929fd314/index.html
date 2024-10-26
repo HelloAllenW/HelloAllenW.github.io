@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>5. 大宋极简史（完整版） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">5. 大宋极简史（完整版）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 5, 2016&nbsp;&nbsp;19:58:46</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 5, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">320 Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">1 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNtPAGqD2tsuApiaYuIIP5ia2E6vvOqGObY3bicJFTbQgP7w0vFRv0f4w6VA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">（大宋全景地图）▲</center>
+
+<p>中国人对“大宋”有着极其特殊的情感。</p>
+<p>这份情感并不是因为《射雕英雄传》、《神雕侠侣》、《水浒传》、《杨家将》、《岳飞传》等文学和影视作品的渲染；也不是因为宋朝在文学、艺术、儒家理学等方面问鼎巅峰。</p>
+<p>而是因为“崖山海战”大宋灭亡，意味着“中国人”被彻底打败了，曾经辉煌的中华大地从此归于外族统治。这种统治不是身体，而是文化和精神。</p>
+<p>有人说：<strong>“崖山之后无中国”！</strong></p>
+<p>……</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNtibQujZenxT5LoHuf6lmjFRicPKicJ3StwMjBGXRuN2phlDUFprkRJ1WOA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>公元960年，陈桥兵变，赵匡胤称帝，建立宋朝。</p>
+<p>为避免晚唐藩镇割据和宦官专权乱象，太祖重文抑武，加强中央集权。</p>
+<p>太宗继位，全国一统，</p>
+<p>澶渊结盟（1004年），步入治世。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNtNHcU2icWyxfHkWDibUE4aH5066W9eG2icoYbMfCg1ZNnI5Yvh4F0etBvQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1125年金国大举南侵，导致靖康之耻，北宋灭亡。康王赵构于南京应天府即位，建立南宋。</p>
+<p>1234年联蒙灭金，</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNtrEE3sCNpYyvs9lK95R1WVlKZbAkcJGqExIRAf91LFkxwCwiaoxBrBQg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1235年宋元战争，</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNt4bjHDOyRyNNb2Kiayt4p730LOUPicUGy5n1RgicTnmvaKLHlNibVMTj5uw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1276年大元攻占临安，崖山海战后，南宋灭亡。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeof5xdcGQx3eHHTdCbv1uNtY5NrpfTP8iaXU941iaibLia2mZuToQEUCdTecff6s4ug7uZuutE87B0tvQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元朝地图</center>
+
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+以上文中地图来源于知乎平台：历史⑨课的专栏<br />
+以下图文转载自公众号：混知（ID:hey-stone）<br />
+特此鸣谢！
+</div>
+
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYM5RYSKGqibunCjbR8zkI3OTibfXgTqBmGV9mvTMvZaS3JQ0MYJMmZv7w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYyuI8zhrbiaSqpptVwkZYiblmWk05LgHwR19ueibTbQa7zE6RletUWd9fw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYgcIe98P2BNLuC6SibaTzKFVYsohFWQTQk4hTzc4403eKsPjryF5w9CA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmY1bV9vzyPrImFpBkiaI1JyyFTZBelNu3K09Ymicc4BycmmkiabJJMibZV1A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYVnFlbDHTE8nIia9CzeVUMlflNw1pRrnNWuOTLFAWjghE6xNVcGf3jTg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYib3sYLISrAfGaFPUnK84Z3ONMnbrDibvmy6hR3QDT6hjuoxwbNuF0wFw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmY2SrfDWaeBB9zJfqo4T2qP4Hib8XPicsmibNz91BibbhibuCSDSSeQfLb0lQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYL1EuxqDXiayICxFNjP6IPeC0FzCcOxvaDJ9Dzo7yBfURTZOqbIhbEiaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYmiaib7K5MAaYy023G9vDntBTq5eOmhLeiaticlj48HDOTfIbHhm9h45ia5w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYx4Z4fhIr2VOJU3xMrHTyS9sNCGdwc133dguEGxpu5eS50lLEN9KzWA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYzLrj0AyVKMT17dpruQIJvmiaiaNialyNOs2jwDvDUr31Flia0u9mbzxcQg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYyj2E8Pd3q5xpib8JwIxwZFAYL1nn5ljBJgQG7Tz3ou18HNFeduH6FXg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYZCcnARyBSQVryiauBIU0vA2Aa9giabFv23GGulhJ19AUYhvuoico9aVkA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYOuH6k5vBPl4MHV6lJML1s5cEW9epTYiciaoVd1fOMjpxnyZ1MOTHEiaGg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYC7QVKibnYvvHLcJT4RobP5nrcqqLBavrtP7jgx3A3CPbLO7cD7Hf4fw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmY5sEs4u4VFqAHiam0zVkh8BQJ5OUNBQz4yhuhS1EdZpt4xSz7Fw8l8uQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYShrskNv2qibySbQpR0ibFKaT75jphiarl0uOYG9mPvFmozue61u2DqJPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYv9IrSxh1icONDlufnW7EdpUL126q7yOCo28icXqquhzBLpY504neBs5g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYg1qeI9nINcBQICYaNAKa0u3ytiaSAUhbRlpArqxHmuV3AAfNA24sWng/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRsFbekjeX5reZXbZLwLQmYia0G0mBwmvpokZEtXV5DWdjPD6evmnmGicY5jFOzJbyhODqAwKzKmE3w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOsuSLBzQ31vBYyicGHUle7lEaKTsTdclO8mtz99vibmRktOzelVNO7AibA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO5yVNcdIzkOYuzparFp80TTMhXZ1smfXCRGb1Z9Jeef8eT99uhs4lvg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOziaktvT6L1NW2m522pGbzRf1Z6DO8FptzZ8sAnw64d0tx0FtM0JM1uQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO3b6IgFqcNNeaibMxMlxagibhgZZI4zyCgvrFb0TH0qtuoXCZEGrxLnkA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOppFSC4zqliccliaLUiaeCg8ibibMAKTyADGZ9sSibpn7ncAH6kcaAfE4Eo6w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOpqYE7AiaXNic1ELdUfMeUoiaiarrAWCiaGHicEXHwqA2UbzkIAcNCYyJKIWQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOAQu9lonM9IS6J4u7pIuUadJFRHTFYwHNnKZNNJ22ia3FJTXzBYcVvsw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOxWH5O3sibJabEmY6lglgXLMjbl1RavbiacqicDz3QANuEZo9MVs4eKZIg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOcg6svTeQoiahXlB7IccslLjJZB3FbJaWaFl56RESIJsicl7wK3RnII6w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOEFkqdaA4SO0YrQA861ibH4tKicgvBCLUxRIugSwcXFoYCMq06B4ITrXQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOay0icgu7LMHD8QIREk0MiaZGwvZYKj1SbmLkiciahoAUF51JNPfz36G2Ng/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOThq9KODLWheI4rSyQFlzjZ5byMDNV4zQucjB9PzWv6Cibc7wfYuXXxw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO8gibMfzFwEiabuBdpXtkOJxiae10qg8tlHNrk98x9csHUE8VH4r3gzzbg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO6mjcvTtZJJUJ4TkBmibE7pNXc0VTj6wB5CWNMC4QYmiamuqicfY62NdwQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOEv00YAdXiahQ4y8Kicd7JVf4LoHWO0nPAnaAWFcpCILIl0Pykh6doFMA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOQWMSSoPIuM3jgxUVEwjUfUxRmghKPMkvUC4EHg6qIkgDfFP4rqU54A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO2WeS3QggnVASUmIibVNzpKmAxPdVAoluBJ0RjliaZOeCFnsHUNsebo0w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOA1F0dkynic9TeicotJ4AB02jQZXtpfgeWltIAjzibiaAFXcj1cxeVQGaoQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOHspsjwVcdDz7v51ibH9Dk6xccKibD6YprFYBZhs8ubj96aicfChZEBibeg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOLPjHGZ0c6iblVBJ1AGzaibWWAH7ibEqiaAq43086uibqrjUUJYt0S8sK0Ow/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOUia0DhMc5JM15tDGnI4diam5RoBfyELickVw8nmic0ib74EvkNveZ6cS8ibg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOxHamexJMzfnVpm6vYCG8TJnnXKnl0XesRbyCXl23a1blI9OaNCHo8Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOryLxbLQic9SoVm9mYEJfe0ryWqjoMVxWsVcMia5y85Q3CtWyPglZxJwQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO8TbFr2kqajofZbBCv7YFTic2qCAAOcatWOuel8tLaSeeQOOcTbADpPQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOkrLDRiay7EaXwD17A5jEgyz2JIfqt2Cj2pAyYbvZX3ib6G6l9yNyFGibA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bO4oMwwpKahaxGRBcSN3trg1Rgiaia6sIggcC8WlIxiaG3fcgIbFoINRYjA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOibYaCyiccSuiaDRJUydrYIBNopcGSHd0ItmSjxV8D0BWYOJVHge0g3Oicw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOb6VQjYSTia7hKtDYyT0CF0AhZbRDUmFMODicibPOSNr6AP0cQf6c1fz6w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSw7F5Qe38nvOl69o6iag8bOmGkRNAwFtfZ1JQBxgImTW705JJDKiaposFGtkicdHnq5GIicj1hXKSQXg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUd2SpFKYkn2bXhlia5uibsgGiaQKX5eiaqYo7FTkgurMnd2nMB1dbxymGEaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUdA6O4S4ibUicVYuibfzpQjmW8Goiald9314CiaJWXS9icXN2Ghmvu0GljFfcQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUdE9wsoo916fcl0bw9JIPaO3ml3pYTzAa4FXS0Fg6maDficUxxeqXKL5g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUdE7QGOmcicrtoPf1E4mEPlNk6KlNQibJQRIsbhS7ribr1rYDI7E1sfiaJkg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUdmwIn7RS6pAibu33fpiao6Cs7LKN7YwTXI4cALehQ7vpFWiadjQEa3TB9w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTSJYoQFeY4jalV8KmViazRUdcNQufyPTpicibf0vIOK8gmjQStysFSXm7ePiciczzamM2WibCia16YfR53ug/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XDqHF4M7KVaF5PgNHGHSOWLwawyhiccOlWbJItMonF4fxDhWurz5ul8cHeEk1tlXylmic3ZmK23wL3C2mhp4MJmg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="4"><a href="#4" class="headerlink" title="4"></a>4</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEeWPwicvpNgKD9O4JZHq3dJ0JjfqgpSOO3NvaMJ1Ggcx49hafLYAK87Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEibSyibIJwEGb8CspR7ib6ibYuMXn0sILibCg4r7ibzABLQy1LwdibW6dR8WjQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEQFhbFKT3tE8NHFBDScJ1ibhxiabG5t9s4XgaWTWlxT3kaYeXcKb8XCXQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEMmibF1owvNwxXfL8nPP8fE1FK8iaGVBriaIiaqQJXICDicV3z0pI7GhbbBA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADExGEd00ltCj7ZgWW0ng5Pxs6dGiatfFQ0cOt0QhMdZ6FzfPhn4sjAsZg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEYBJsLibzpb7HuYXqeNzXdI2ysFFKdoXn0OMbNqAsia8ZgL6jMmsVLFbg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEkOBRkUK52ohfhriaAjGU4pWGB5knzibqvM0SWQ02IbaRo57vhialRhuhw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADE0RIHGc5jIX5ialK3uZPV2axbbWZDP6uonItmdnd73iaIvDFiaFWuMicibww/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADErLCicGucE4ncvlpPwQG3ibxrq2OqH4ebhGvjUgYsgK9MV3Kcnu7KVzPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEN4bEQ8U2SIQH0mFZS0WUibhJfS8gpLykhySZtLmlI4mSnWHvaa9UEzw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEOoezicBW2Q3nSlb3Cr2B1Z5wR9oicFLZrRyhLCBJD3XK4h9Y0CeSJVSw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADE4ibW3EN3wE9UFVOYLYlgGpsEWxEfD8wN9KaZnpMVfhPFrgGjERSpXuA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEqXhTzcLdJYbmzxWyoy2B19SaPWsnt0YJAaUGq7TOrrjlTBvH30zR8A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEgic62TzvZWjlpn3H8e6PY88Cqk47UfluSlJvWsabSoIBIYtbXvIDIyA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEZW1XSRumyEQ1h6MaicgNkLJ8ZCicicCicRUAXBzJJc5ptOibYYyYfvxDSGQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEAibzrkw4tQd88lZibJYPsqTzYNTHVPjl81ZNcvygsvxuVlGGhjJlIN6g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADElj5wowSEZIItkcqR7ULcShzNGU5RicXXdwYKqfHnamySyACuvremsNQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/tp6GaCh2ZTRPMl9iaqDJPmYCEOK6FEADEurKKy1ddMGWoSB9TxGYahyo6Gb9BdAn1YOp1gwIvNhxJdHdl3o3Ymw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/XDqHF4M7KVaF5PgNHGHSOWLwawyhiccOlJYibnMcba6RtF6ibE3vpVq2azG9qYsmk4iaMw9FCHSxHjaRGYGm89GkqQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33e82116/">6. 大明朝极简史（完整版）</a>
+            
+            
+            <a class="next" rel="next" href="/28d62f9c/">4. 极简三国正史（漫画版）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33e82116/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/28d62f9c/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

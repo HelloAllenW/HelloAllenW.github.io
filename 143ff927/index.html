@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>手把手教你用 VuePress + GitHub Pages 搭建个人博客！ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">手把手教你用 VuePress + GitHub Pages 搭建个人博客！</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 3, 2021&nbsp;&nbsp;22:30:01</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 3, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Others/">Others</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在阅读<a target="_blank" rel="noopener" href="https://juejin.cn/user/712139234359182">冴羽</a>老师的文章时，对VuePress搭建个人博客很感兴趣，于是试着自己搭建了一遍，写了这篇文章记录一下搭建的基本流程，希望对大家有所帮助。</p>
+<h2 id="1-本地搭建"><a href="#1-本地搭建" class="headerlink" title="1. 本地搭建"></a>1. 本地搭建</h2><ol>
+<li>创建并进入一个新目录</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> vuepress-starter</span><br><span class="line"><span class="built_in">cd</span> vuepress-starter</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用你喜欢的包管理器进行初始化</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">init</span> -y</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>将 VuePress 安装为本地依赖</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D vuepress</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建你的第一篇文档</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> docs</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;# Hello VuePress&#x27;</span> &gt; docs/README.md</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在 <code>package.json</code> 中添加一些 <code>scripts</code></li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;docs:dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress dev docs&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;docs:build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;vuepress build docs&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>在本地启动服务器</li>
+</ol>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run docs:dev</span><br></pre></td></tr></table></figure>
+
+<p>VuePress 会在 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> 启动一个热重载的开发服务器</p>
+<p>这时可能会出现文字乱码情况，需要把 <code>README.md</code> 的编码格式改为 <code>UTF-8</code></p>
+<h2 id="2-基础配置"><a href="#2-基础配置" class="headerlink" title="2. 基础配置"></a>2. 基础配置</h2><p>在 <code>docs</code> 文件夹下添加 <code>.vuepress</code> 目录，所有 VuePress 相关的文件都会被放在这里。在 <code>.vuepress</code> 文件夹下添加 <code>config.js</code>，配置网站的标题和描述，方便 SEO，此时你的目录结构可能是这样：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|<span class="comment">-- docs&#x27;,</span></span><br><span class="line">    |<span class="comment">-- README.md&#x27;,</span></span><br><span class="line">    |<span class="comment">-- .vuepress&#x27;,</span></span><br><span class="line">        |<span class="comment">-- config.js&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>config.js</code> 文件的内容如下(标题和描述自定义)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  <span class="attr">description</span>: <span class="string">&#x27;XXX&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-添加导航栏"><a href="#3-添加导航栏" class="headerlink" title="3. 添加导航栏"></a>3. 添加导航栏</h2><p>我们现在在首页的右上角添加导航栏，修改 <code>config.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  <span class="attr">description</span>: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  <span class="attr">themeConfig</span>: &#123;</span><br><span class="line">    <span class="attr">nav</span>: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&quot;首页&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;/&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">text</span>: <span class="string">&quot;codinglin 的博客&quot;</span>,</span><br><span class="line">        <span class="attr">items</span>: [</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;掘金&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://juejin.cn/user/726107228492253&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;Github&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://github.com/coding-lin&quot;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时界面如下：</p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9093f90054b543818a79ebf79007a7b8~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_15-48-31.png"></p>
+<h2 id="4-添加侧边栏"><a href="#4-添加侧边栏" class="headerlink" title="4. 添加侧边栏"></a>4. 添加侧边栏</h2><p>现在我们添加一些 <code>md</code> 文档，内容自行添加，文档的目录结构如下：</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">|<span class="comment">-- docs&#x27;,</span></span><br><span class="line">    |<span class="comment">-- README.md&#x27;,</span></span><br><span class="line">    |<span class="comment">-- .vuepress&#x27;,</span></span><br><span class="line">        |<span class="comment">-- config.js&#x27;</span></span><br><span class="line">    |<span class="comment">-- handbook</span></span><br><span class="line">        |<span class="comment">-- 1.md </span></span><br><span class="line">        |<span class="comment">-- 2.md</span></span><br></pre></td></tr></table></figure>
+
+<p>我们在 <code>config.js</code> 添加如下配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  <span class="attr">description</span>: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  <span class="attr">themeConfig</span>: &#123;</span><br><span class="line">    <span class="attr">nav</span>: [...],</span><br><span class="line">    <span class="attr">sidebar</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;欢迎学习&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">        <span class="attr">collapsable</span>: <span class="literal">false</span>,  <span class="comment">// 是否折叠</span></span><br><span class="line">        <span class="attr">children</span>: [&#123; <span class="attr">title</span>: <span class="string">&quot;博客简介&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/&quot;</span> &#125;],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;基础篇&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span>,</span><br><span class="line">        <span class="attr">collapsable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">children</span>: [</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第一篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第二篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/2&quot;</span> &#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125; </span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时页面如下：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e6f064f8564d4668acca028cc96882e5~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-12-41.png"></p>
+<h2 id="5-更换主题"><a href="#5-更换主题" class="headerlink" title="5. 更换主题"></a>5. 更换主题</h2><p>现在基本的目录和导航功能已经实现，如果还想要 <code>loading</code>效果、切换动画、模式切换（暗黑模式）、返回顶部、评论等功能呢，为了简化开发成本，我们可以直接使用主题，我使用的主题是 <a href="https://link.juejin.cn/?target=https://vuepress-theme-reco.recoluan.com/">vuepress-theme-reco</a>：</p>
+<p>现在我们安装 vuepress-theme-reco：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuepress-theme-reco <span class="attr">--save-dev</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>config.js</code> 中引用该主题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">theme</span>: <span class="string">&#x27;reco&#x27;</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>配置好之后，可以看到自己的博客网站新增了一些功能，例如模式切换：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f1e1b44540b64bbe83ad69962e0c7756~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-24-40.png"></p>
+<h2 id="6-添加文章信息"><a href="#6-添加文章信息" class="headerlink" title="6. 添加文章信息"></a>6. 添加文章信息</h2><p>我们会发现，一篇文章竟然出现了两遍标题，这是因为这个主题自动提取了第一个大标题作为本文的标题，我们可以在每篇文章的 <code>md</code> 文件中添加一些信息修改：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hello</span> <span class="string">VuePress</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">codinglin</span></span><br><span class="line"><span class="attr">date:</span> <span class="string">&#x27;2022-8-28&#x27;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8383425aefc24e4bb9f8aef159229858~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-43-22.png"></p>
+<h2 id="7-设置语言"><a href="#7-设置语言" class="headerlink" title="7. 设置语言"></a>7. 设置语言</h2><p>文章时间，我们写入的格式为 <code>2022-8-28</code> ，但是显示的是 <code>8/28/2022</code>，这是因为 VuePress 默认的 lang 为 <code>en-US</code>，我们修改一下 <code>config.js</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">locales</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;/&#x27;</span>: &#123;</span><br><span class="line">      <span class="attr">lang</span>: <span class="string">&#x27;zh-CN&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>可以发现时间格式发生了变化：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6a82d5143082473a9c2a74825eaa6467~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-46-43.png"></p>
+<h2 id="8-开启目录结构"><a href="#8-开启目录结构" class="headerlink" title="8. 开启目录结构"></a>8. 开启目录结构</h2><p>在原本的主题里，我们发现每篇文章的目录结构在左侧，而 vuepress-theme-reco 将原有的侧边栏的中的多级标题移出，生成子侧边栏，放在了页面的右侧，如果你要全局开启，可在 <code>config.js</code> 中设置开启：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="attr">themeConfig</span>: &#123;</span><br><span class="line">    <span class="attr">subSidebar</span>: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-修改主题颜色"><a href="#9-修改主题颜色" class="headerlink" title="9. 修改主题颜色"></a>9. 修改主题颜色</h2><p>VuePress 基于 Vue，所以主题色用的是 Vue 的绿色，你也可以将主题颜色修改为你自己喜欢的颜色，你可以创建一个 <code>.vuepress/styles/palette.styl</code> 文件，文件代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$accentColor</span> = <span class="comment">#3178c6</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9b0265b5ec3342c0af574571817d59a2~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_16-59-47.png"></p>
+<p>更多颜色的修改请参考 <a href="https://link.juejin.cn/?target=https://vuepress.vuejs.org/zh/config/%23palette-styl">palette.styl</a></p>
+<h2 id="10-自定义修改样式"><a href="#10-自定义修改样式" class="headerlink" title="10. 自定义修改样式"></a>10. 自定义修改样式</h2><p>我们发现用作强调的文字颜色比较暗淡，在暗黑模式下看不清楚，如何修改这个文字的颜色和背景色呢？</p>
+<p>你可以创建一个 <code>.vuepress/styles/index.styl</code> 文件，文件代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.dark</span> <span class="selector-class">.content__default</span> <span class="selector-tag">code</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">58</span>,<span class="number">58</span>,<span class="number">92</span>,<span class="number">0.7</span>);</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要隐藏每篇文章的标题、作者、时间呢，其实也是类似的方式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.page</span> <span class="selector-class">.page-title</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4ddb5ee1a9804012ba138b9d10c09306~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-22-15.png"></p>
+<h2 id="11-部署"><a href="#11-部署" class="headerlink" title="11. 部署"></a>11. 部署</h2><p>到这里，我们的博客网站基本搭建好了，接下来我们将它部署到 Github Pages 上。我们首先在 Github 上新建一个仓库，这里我取名为：<code>interview</code>。</p>
+<p>相应地，我们需要在 <code>config.js</code> 添加一个 <code>base</code> 路径配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// 和仓库名相同</span></span><br><span class="line">  <span class="attr">base</span>: <span class="string">&#x27;/interview/&#x27;</span>,</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终的 <code>config.js</code> 的内容为：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;我的博客&#x27;</span>,</span><br><span class="line">  <span class="attr">description</span>: <span class="string">&#x27;XXX&#x27;</span>,</span><br><span class="line">  <span class="attr">theme</span>: <span class="string">&#x27;reco&#x27;</span>,</span><br><span class="line">  <span class="attr">base</span>: <span class="string">&#x27;/interview/&#x27;</span>,</span><br><span class="line">  <span class="attr">locales</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;/&#x27;</span>: &#123;</span><br><span class="line">      <span class="attr">lang</span>: <span class="string">&#x27;zh-CN&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">themeConfig</span>: &#123;</span><br><span class="line">    <span class="attr">subSidebar</span>: <span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">    <span class="attr">nav</span>: [</span><br><span class="line">      &#123; <span class="attr">text</span>: <span class="string">&quot;首页&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;/&quot;</span> &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">text</span>: <span class="string">&quot;codinglin 的博客&quot;</span>,</span><br><span class="line">        <span class="attr">items</span>: [</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;掘金&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://juejin.cn/user/726107228492253&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">text</span>: <span class="string">&quot;Github&quot;</span>, <span class="attr">link</span>: <span class="string">&quot;https://github.com/coding-lin&quot;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">sidebar</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;欢迎学习&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/&quot;</span>,</span><br><span class="line">        <span class="attr">collapsable</span>: <span class="literal">false</span>,  <span class="comment">// 是否折叠</span></span><br><span class="line">        <span class="attr">children</span>: [&#123; <span class="attr">title</span>: <span class="string">&quot;博客简介&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/&quot;</span> &#125;],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;基础篇&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span>,</span><br><span class="line">        <span class="attr">collapsable</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">children</span>: [</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第一篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/1&quot;</span> &#125;,</span><br><span class="line">          &#123; <span class="attr">title</span>: <span class="string">&quot;第二篇&quot;</span>, <span class="attr">path</span>: <span class="string">&quot;/handbook/2&quot;</span> &#125;,</span><br><span class="line">        ]</span><br><span class="line">      &#125; </span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们在项目 <code>vuepress-starter</code> 目录下创建一个脚本文件 <code>deploy.sh</code>，注意修改一下对应的<strong>用户名</strong>和<strong>仓库名</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 确保脚本抛出遇到的错误</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成静态文件</span></span><br><span class="line">npm run docs:build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入生成的文件夹</span></span><br><span class="line"><span class="built_in">cd</span> docs/.vuepress/dist</span><br><span class="line"></span><br><span class="line">git init</span><br><span class="line">git add -A</span><br><span class="line">git commit -m <span class="string">&#x27;deploy&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</span></span><br><span class="line">git push -f git@github.com:XXX/XXX.git master:gh-pages</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> -</span><br></pre></td></tr></table></figure>
+
+<p>新建一个终端，选择 <code>Git Bash</code>，进入主目录，并执行 <code>sh deploy.sh</code></p>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2bfd8ba7bc4c456dba5711a05ff5eb01~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-47-59.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> vuepress-starter</span><br><span class="line">sh deploy.sh</span><br></pre></td></tr></table></figure>
+
+<p>项目就会开始构建，然后上传到远程仓库上。</p>
+<p>我们可以在仓库的 <code>Settings -&gt; Pages</code> 中看到最后的地址：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e60bed72bed94a67b15fc9216b67ef1f~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp" alt="Snipaste_2022-08-28_18-43-12.png"></p>
+<p>最后生成的地址：<a href="https://link.juejin.cn/?target=https://coding-lin.github.io/interview/">coding-lin.github.io/interview/</a></p>
+<p>至此，我们完成了 VuePress 和 Github Pages 的部署。</p>
+<p>如果大家想要丰富自己的个人博客的话，可以去安装一些插件，地址如下：<a href="https://link.juejin.cn/?target=https://github.com/mqyqingfeng/Blog/issues/261">搭建 VuePress 博客，你可能会用到的一些插件</a></p>
+<p>更新之后的博客：<a href="https://link.juejin.cn/?target=https://coding-lin.github.io/blog/">coding-lin.github.io/blog/</a> ，博客代码已上传到 <a href="https://link.juejin.cn/?target=https://github.com/coding-lin/blog/tree/main">github</a>，欢迎大家 star！</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>以上就是使用 VuePress + GitHub Pages 搭建个人博客的大致流程，如果觉得这篇文章对你有帮助的话，不要忘了点赞哟~</p>
+<p>原文链接：<a href="https://link.juejin.cn/?target=https://github.com/mqyqingfeng/Blog/issues/235">一篇带你用 VuePress + Github Pages 搭建博客</a></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"># 博客搭建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/315f9dcc/">Vue项目中两种文件下载方式</a>
+            
+            
+            <a class="next" rel="next" href="/a0e90bfc/">从光速不变到杨-米尔斯理论</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/315f9dcc/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/a0e90bfc/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>使用Halo搭建个人博客 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用Halo搭建个人博客</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 9, 2020&nbsp;&nbsp;23:11:40</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 9, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Others/">Others</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">博客搭建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Halo-简介"><a href="#Halo-简介" class="headerlink" title="Halo 简介"></a>Halo 简介</h1><p>Halo是一款现代化的个人独立博客系统，是一个优秀的开源博客发布应用。简称 Halo [ˈheɪloʊ]，意为光环。<br>Halo运行包是一个JAVA程序，下载下来启动后便能直接使用。<br>整个Halo博客系统分为以下四个部分：</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>项目名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>halo</td>
+<td>提供整个系统的服务，采用 Spring Boot 开发</td>
+</tr>
+<tr>
+<td>halo-admin</td>
+<td>负责后台管理的渲染，采用 Vue 开发，已集成在 Halo 运行包内，无需独立部署</td>
+</tr>
+<tr>
+<td>halo-comment</td>
+<td>评论插件，采用 Vue 开发，在主题中运行方式引入构建好的 Javascript 文件即可</td>
+</tr>
+<tr>
+<td>halo-theme-*</td>
+<td>主题项目集，采用 Freemarker 模板引擎编写，需要包含一些特殊的配置才能够被 halo 所使用</td>
+</tr>
+</tbody></table>
+<h1 id="在Linux服务器上部署Halo"><a href="#在Linux服务器上部署Halo" class="headerlink" title="在Linux服务器上部署Halo"></a>在Linux服务器上部署Halo</h1><h2 id="安装-Java-运行环境"><a href="#安装-Java-运行环境" class="headerlink" title="安装 Java 运行环境"></a>安装 Java 运行环境</h2><blockquote>
+<p> 若已经存在 Java 运行环境的可略过这一步。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 安装 OpenJRE</span><br><span class="line">sudo yum install java-1.8.0-openjdk -y</span><br><span class="line"></span><br><span class="line"># 检测是否安装成功</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装-Halo"><a href="#安装-Halo" class="headerlink" title="安装 Halo"></a>安装 Halo</h2><h3 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h3><p>考虑到部分用户的需要，可能需要自定义比如端口等设置项，我们提供了公共的配置文件，并且该配置文件是完全独立于安装包的。当然，你也可以使用安装包内的默认配置文件，但是安装包内的配置文件是不可修改的。请注意：配置文件的路径为 ~/.halo/application.yaml。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 下载配置文件到 ~/.halo 目录</span><br><span class="line">curl -o ~/.halo/application.yaml --create-dirs https://dl.halo.run/config/application-template.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>完成上一步操作，我们就可以自己配置 Halo 的运行端口，以及数据库相关的配置了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Vim 工具修改配置文件</span><br><span class="line">vim ~/.halo/application.yaml</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  # 服务端口号</span><br><span class="line">  port: 8090</span><br><span class="line"></span><br><span class="line">  # Response data gzip.</span><br><span class="line">  compression:</span><br><span class="line">    enabled: false</span><br><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    # 默认使用的是 H2 Database 数据库，这是一种嵌入式的数据库</span><br><span class="line">    # H2 database configuration.</span><br><span class="line">    driver-class-name: org.h2.Driver</span><br><span class="line">    url: jdbc:h2:file:~/.halo/db/halo</span><br><span class="line">    username: admin</span><br><span class="line">    password: 123456</span><br><span class="line"></span><br><span class="line">    # MySQL database configuration.</span><br><span class="line">  #    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">  #    url: jdbc:mysql://127.0.0.1:3306/halodb?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</span><br><span class="line">  #    username: root</span><br><span class="line">  #    password: 123456</span><br><span class="line"></span><br><span class="line">  # H2 database console configuration.</span><br><span class="line">  h2:</span><br><span class="line">    console:</span><br><span class="line">      settings:</span><br><span class="line">        web-allow-others: false</span><br><span class="line">      path: /h2-console</span><br><span class="line">      enabled: false</span><br><span class="line"></span><br><span class="line">halo:</span><br><span class="line">  # Your admin client path is https://your-domain/&#123;admin-path&#125;</span><br><span class="line">  admin-path: admin</span><br><span class="line"></span><br><span class="line">  # memory or level</span><br><span class="line">  cache: memory</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行Halo"><a href="#运行Halo" class="headerlink" title="运行Halo"></a>运行Halo</h2><p>Halo 的整个应用程序只有一个 Jar 包，且不包含用户的任何配置，它放在任何目录都是可行的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 启动测试</span><br><span class="line">java -jar halo-latest.jar</span><br></pre></td></tr></table></figure>
+<p>如看到以下日志输出，则代表启动成功.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run.halo.app.listener.StartedListener    : Halo started at         http://127.0.0.1:8090</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo admin started at   http://127.0.0.1:8090/admin</span><br><span class="line">run.halo.app.listener.StartedListener    : Halo has started successfully!</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶配置"><a href="#进阶配置" class="headerlink" title="进阶配置"></a>进阶配置</h2><p>上面我们已经完成了 Halo 的整个配置和安装过程，接下来我们对其进行更完善的配置，比如：需要开机自启？，更简单的启动方式？</p>
+<p>实现以上功能我们只需要新增一个配置文件即可，也就是使用 Systemd 来完成这些工作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 下载 Halo 官方的 halo.service 模板</span><br><span class="line">sudo curl -o /etc/systemd/system/halo.service --create-dirs https://dl.halo.run/config/halo.service</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 修改 halo.service</span><br><span class="line">sudo vim /etc/systemd/system/halo.service</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Halo Service</span><br><span class="line">Documentation=https://halo.run</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">User=halo</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH</span><br><span class="line">ExecStop=/bin/kill -s QUIT $MAINPID</span><br><span class="line">Restart=always</span><br><span class="line">StandOutput=syslog</span><br><span class="line"></span><br><span class="line">StandError=inherit</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>参数：</p>
+<ul>
+<li>-Xms256m：为 JVM 启动时分配的内存，请按照服务器的内存做适当调整，512 M 内存的服务器推荐设置为 128，1G 内存的服务器推荐设置为 256，默认为 256。</li>
+<li>-Xmx256m：为 JVM 运行过程中分配的最大内存，配置同上。</li>
+<li>YOUR_JAR_PATH：Halo 安装包的绝对路径，例如 /www/wwwroot/halo-latest.jar。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 修改 service 文件之后需要刷新 Systemd</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 使 Halo 开机自启</span><br><span class="line">sudo systemctl enable halo</span><br><span class="line"></span><br><span class="line"># 启动 Halo</span><br><span class="line">sudo service halo start</span><br><span class="line"></span><br><span class="line"># 重启 Halo</span><br><span class="line">sudo service halo restart</span><br><span class="line"></span><br><span class="line"># 停止 Halo</span><br><span class="line">sudo service halo stop</span><br><span class="line"></span><br><span class="line"># 查看 Halo 的运行状态</span><br><span class="line">sudo service halo status</span><br></pre></td></tr></table></figure>
+
+<p>完成以上操作即可通过 IP:端口 访问了。不过在此之前，最好先完成后续操作，我们还需要让域名也可以访问到 Halo，请继续看 配置域名访问。</p>
+<h2 id="更新-Halo"><a href="#更新-Halo" class="headerlink" title="更新 Halo"></a>更新 Halo</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 备份数据</span><br><span class="line">cp -r ~/.halo ~/.halo.bak</span><br><span class="line"></span><br><span class="line"># 备份旧的安装包</span><br><span class="line">mv halo-latest.jar halo-latest.jar.bak</span><br><span class="line"></span><br><span class="line"># 下载最新的 Halo 安装包，&#123;&#123;version&#125;&#125; 为版本号，不带 v，更多下载地址请访问 https://halo.run/archives/download.html</span><br><span class="line">wget https://dl.halo.run/release/halo-&#123;&#123;version&#125;&#125;.jar -O halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 测试是否能够正常启动</span><br><span class="line">java -jar halo-latest.jar</span><br><span class="line"></span><br><span class="line"># 重启应用</span><br><span class="line">service halo restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><h2 id="使用Nginx进行反向代理"><a href="#使用Nginx进行反向代理" class="headerlink" title="使用Nginx进行反向代理"></a>使用Nginx进行反向代理</h2><h3 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 添加 Nginx 源</span><br><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br><span class="line"></span><br><span class="line"># 安装 Nginx</span><br><span class="line">sudo yum install -y nginx</span><br><span class="line"></span><br><span class="line"># 启动 Nginx</span><br><span class="line">sudo systemctl start nginx.service</span><br><span class="line"></span><br><span class="line"># 设置开机自启 Nginx</span><br><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
+<h3 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 下载 Halo 官方的 Nginx 配置模板</span><br><span class="line">curl -o /etc/nginx/conf.d/halo.conf --create-dirs https://dl.halo.run/config/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>下载完成之后，我们还需要对其进行修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 使用 vim 编辑 halo.conf</span><br><span class="line">vim /etc/nginx/conf.d/halo.conf</span><br></pre></td></tr></table></figure>
+<p>打开之后我们可以看到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line"></span><br><span class="line">    server_name example.com www.example.com;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST $host;</span><br><span class="line">        proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line"></span><br><span class="line">        proxy_pass http://127.0.0.1:8090/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：请把 example.com 改为自己的域名。</p>
+</blockquote>
+<p>修改完成之后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 检查配置是否有误</span><br><span class="line">sudo nginx -t</span><br><span class="line"></span><br><span class="line"># 重载 Nginx 配置</span><br><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>更多配置详情请查看：<a target="_blank" rel="noopener" href="https://halo.run/">halo官网</a>、<a target="_blank" rel="noopener" href="https://bbs.halo.run/">halo社区</a></p>
+</blockquote>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"># 博客搭建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/daf4c144/">迎接2020年的冬天</a>
+            
+            
+            <a class="next" rel="next" href="/15ddeb28/">在被短视频“投喂”的时代，如何保持清醒，独立思考？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/daf4c144/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/15ddeb28/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

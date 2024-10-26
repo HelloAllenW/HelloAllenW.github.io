@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>14. 蒙古西征 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">14. 蒙古西征</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 14, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 14, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">18 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="蒙古西征"><a href="#蒙古西征" class="headerlink" title="蒙古西征"></a>蒙古西征</h2><p>1219年，蒙古开始第一次西征（因为商队被花剌子模打劫，成吉思汗带领）。蒙古第二次西征，是长子西征。主要去了钦察草原（东欧匈牙利，乌克兰）。第三次蒙古西征，蒙哥马利下令。（蒙哥马利在南京坠亡，第三次西征草草收场）。蒙古20年内连续三次西征，打醒了处于中世纪的欧洲人。西方人称之为the weep of the god上帝之鞭。蒙古西征后给欧洲带来的最直接的影响就是1330年的黑死病。短短十年内带走了欧洲1/3的人口。欧洲人被打，得怪病，每天买赎罪券都没用，开始深刻的反思了。</p>
+<h3 id="1-东胡民族"><a href="#1-东胡民族" class="headerlink" title="1. 东胡民族"></a>1. 东胡民族</h3><p><font color=red>东胡民族契丹族建立辽国。979年宋太宗伐辽失败，签订“檀渊之盟”。1115年女真建立金国，并击败辽军。1126年金国攻破开封，北宋灭亡，史称“靖康之难”，康王赵构逃至临安，建立南宋。1153年金国定都中都（北京），这是北京作为中国首都的开始。</font></p>
+<p>在中国北方的辽阔草原上，先后兴起诸多游牧民族。这些民族的生活习性相似，但并非单一起源，而是不同血缘的种群，在数千年前就已混杂在一起。大体而言，可分成东胡（基因以C型为主，出自东北）和突厥（基因有R/Q等型混杂，出自西北）两大体系。东胡体系包括鲜卑、乌桓、柔然、契丹、蒙古、女真、满族等，从语言又可分为通古斯-满语族和蒙古语族；突厥体系包括突厥、回鹘（维吾尔）、黠戛斯（吉尔吉斯）等，皆为突厥语族。（匈奴未有定论，疑似东胡。）</p>
+<p>相较而言，东胡似乎更容易融入中华文明——鲜卑曾经建立统一中国北方的北魏王朝，但后来渐渐融入华夏民族而消失不见了，后来的契丹、女真、满族也大抵如此，而突厥在历史上从未融入中华。突厥-回鹘在隋唐时期达到极盛，成为草原霸主，但在晚唐840年左右，来自叶尼塞河上游、较为原始落后的突厥部落黠戛斯南下蒙古草原，击败了深受唐朝影响、文化繁荣的回鹘，使回鹘迁徙至西域和中亚定居。此后突厥民族向西扩张，在中华历史上不再扮演重要角色。</p>
+<p>916年，耶律阿保机建立契丹，赶走黠戛斯人，占领了蒙古草原。但此时的草原空虚荒凉，契丹并未重视此地，而是把眼光投向富饶中原。936年，后唐的河东节度使石敬瑭为了反唐自立，割让燕云十六州换取契丹支援。此后契丹多次南下以图中原，并改名辽国。979年，宋太宗赵光义统一中原之后北上伐辽，大败于高粱河（今北京西直门外）。从此宋朝对辽国处于守势，并于1005年签订“澶渊之盟”，以岁贡30万两银绢为代价（一匹绢等于一两银，宋朝鼎盛时的年财政收入约为银绢7000万两，岁贡不到千分之五），换取了一百多年的边境和平。在此期间，辽国逐渐汉化，并同西域诸国保持友好往来，所以在俄罗斯等国语言中，至今仍用“契丹”作为对中国的称呼。1032年，西夏在西北建国，与宋、辽形成三足鼎立之势。</p>
+<p>1115年，东北的女真部落在完颜阿骨打的领导下建立金国，并屡败辽军。宋徽宗得知后，派使者从山东渡海前往金国，相约联手灭辽，史称“海上之盟”。这一政策在史上有较大争议，因为此时宋辽之间已有百年和平，澶渊岁贡也并不沉重，而辽国灭亡（1125年）之后，北宋仅获得被劫掠一空的燕京城，反而背上了更重的岁贡。更重要的是，金军攻辽连战连捷，而宋军一再失利，使金国看清了北宋军事实力孱弱的真相，不久之后就大军南下。1126 ~ 1127年金国攻破开封，宋徽宗、钦宗投降，宗室全被掳入金国，北宋灭亡，史称“靖康之难”。康王赵构逃至临安，建立南宋。</p>
+<p>南宋初年，尚有岳飞等名将北伐抗金，但赵家昏庸无能，朝廷腐败，故而与金国签订绍兴和议，岁贡50万银绢，杀害岳飞等人，留得半壁江山。而金国占领中国北方之后也迅速汉化了，于1153年定都中都（北京），这是北京作为中国首都的开始。然而，他们很快就面临新的草原强敌：蒙古人。</p>
+<h3 id="2-成吉思汗"><a href="#2-成吉思汗" class="headerlink" title="2. 成吉思汗"></a>2. 成吉思汗</h3><p><font color=red>1162～1227年，铁木真统一蒙古，被尊称为成吉思汗。1211年，成吉思汗消灭金国主力，并从归降的金国汉人获得了火药武器。1219年，由于花剌子模杀死蒙古商队和使者，成吉思汗第一次西征，这是他首次和中亚的穆斯林作战。1226年，铁木真病故，三子窝阔台被指定为继承人。</font></p>
+<p>契丹和女真都南下逐鹿中原，北方草原成了蒙古部落的天下。蒙古人在文化上远远落后于契丹和回鹘，甚至此时还没有自己的文字，但性格更加强悍而喜好杀戮。<strong>1206年（十字军攻陷拜占庭之后两年），铁木真（1162～1227年）统一蒙古，被尊称为成吉思汗。</strong>1211年，成吉思汗起兵伐金，在野狐岭一战消灭金国主力军。此战之后，蒙古又从归降的金国汉人获得了火药武器和攻城器械，更是如虎添翼。依靠骁勇的野战骑兵加上火炮器械，蒙古仅四年后就攻占金国中都。但成吉思汗没有继续南下灭金，而是让大将木华黎镇守中都，自己率军西征。</p>
+<p>当初金国灭辽之时，辽国皇族耶律大石率领一支人马离开华北，横穿蒙古草原来到中亚，于1132年建立了西辽（又称哈剌契丹）。凭借耶律大石杰出的政治、军事能力，西辽在中亚称雄一时，使高昌回鹘、喀喇汗国（此时已分裂成东西两部）都成为属国，并于1141年打败塞尔柱突厥，使华夏文化再度主宰中亚。然而，这个国家最后却毁于小人之手——乃蛮本来是蒙古的一个部落，被铁木真打败之后，乃蛮王子屈从律逃亡西辽，被西辽王收留并善待，他却恩将仇报，突袭西辽王并夺取了政权（1211年）。原来在西辽控制下的花剌子模趁机独立建国，消灭了塞尔柱余部，成为亚洲中部的短暂统治者。</p>
+<p>成吉思汗大约得知了中亚变故，率军西征，很快就消灭了乃蛮控制下的西辽（1218年），杀死屈从律。他似乎本无意攻打花剌子模，花剌子模却杀死蒙古商队和使者，于是成吉思汗西进灭亡了花剌子模，这是他首次与中亚的穆斯林作战。成吉思汗继续向南追杀敌人，一度到达印度河畔，然后返回中亚草原休整，并派部将哲别和速不台西征。哲别和速不台原本的任务是寻找逃亡的花剌子模国王，但他们在路上得知国王已死，便决定向西探索未知世界，一路杀到了黑海北岸，击败了当地钦察部落与基辅罗斯的联军，然后胜利归来。</p>
+<p><strong>成吉思汗早年以杀戮为乐事，留下名言：“人生最大之乐，即在胜敌、逐敌、夺其所有，见其最亲之人以泪洗面，乘其马，纳其妻女也”。</strong>到了晚年，才逐渐开始考虑治国。灭金之后，成吉思汗重用契丹文臣耶律楚材，他辅佐成吉思汗父子长达三十多年，劝谏蒙古以和平手段统治汉人，使中原文明得到保存。成吉思汗亦邀请全真教长春真人丘处机见面。丘处机从山东出发，以74岁高龄行程万里，横跨草原和大漠，在阿富汗见到了成吉思汗（1222年）。丘处机进言大汗敬天爱民、去暴止杀，使其统治政策明显和缓。同时，成吉思汗虽然信奉蒙古的原始宗教萨满教，但他对各种宗教信仰保持宽容。蒙古部落原本就有不少人信奉景教（基督教的聂思托里教派，在431年被君士坦丁堡教会斥为异端，信徒们向东方迁徙，唐朝时进入中国），而契丹和汉族有信奉佛教、道教等，这些宗教在蒙古统治下也都和平共处。</p>
+<p>1226年，成吉思汗在攻打西夏的过程中堕马受伤，次年病故（丘处机同年在北京长春宫去世），众将奉其遗命灭亡西夏。成吉思汗留下四个儿子，分别是长子术赤（但由于成吉思汗的妻子早年曾被敌人掳走，术赤的血统一直存疑）、二子察合台、三子窝阔台、四子拖雷。窝阔台被指定为继承人。</p>
+<h3 id="3-世界帝国"><a href="#3-世界帝国" class="headerlink" title="3. 世界帝国"></a>3. 世界帝国</h3><p><font color=red>窝阔台登基次年就发动灭金战争，之后蒙宋战争开始。并派出“长子军团”进行第二次西征，在拔都的统率下，横扫基辅罗斯、匈牙利、立陶宛、波兰等十余国。1241年，窝阔台去世。贵由继位，拔都在伏尔加河畔建立金帐汗国。贵由继位不满两年就去世了，拖雷之子蒙哥在拔都的支持下被选为大汗。此时帝国疆域已极其庞大，蒙哥委派他的三个弟弟分别治理：二弟忽必烈负责中国事务，三弟旭烈兀率军第三次西征，幼弟阿里不哥留守蒙古。1258年，旭烈兀一举灭亡了巴格达的阿拔斯王朝，把伊斯兰的宗教领袖、最后一位哈里发裹在毯子里面用马踏死。次年，旭烈兀灭亡了叙利亚的阿尤布王朝，摧毁大马士革。整个伊斯兰世界几乎都被蒙古踏平，只剩下最后一支军事力量：埃及的马穆鲁克军团（他们在1254年刚打退了第七次十字军东征）。但在这个关键时刻，又传来蒙哥去世的消息，旭烈兀便留下少数兵力驻守，自己率主力回国选汗。走到半路，听说忽必烈已经自立为汗，旭烈兀就停止东归。然而，他的离去给了穆斯林反击之机。马穆鲁克联合北非所有穆斯林军队主动出击，大破驻守蒙军，夺回叙利亚。此役打破了蒙古人不可战胜的神话，还使阿拉伯人缴获了蒙古军中的火药武器，由此掌握了火器技术。1271年，忽必烈将国号从“大蒙古国”改为“大元”，以大都（北京）为首都，真正成为一位中国皇帝。1279年崖山之战，南宋全军覆没，丞相陆秀夫背负少帝跳海，十万军民投海殉国。中华帝国首次完全沦陷于异族。忽必烈时代是蒙古的鼎盛时期，此时的蒙古被分为四大汗国，领土包括中国和蒙古本土，波斯和中东地区，东欧，中亚。从北京到巴格达的陆上商路完全处于蒙古人的保护下，泉州、广州到阿拉伯半岛的海上商路也繁荣起来，丝绸之路的盛景重现，西方欧洲的财富再度源源不断流向东方。当欧洲遭受黑死病袭击而死亡惨重时，东方的元朝成为世界上最强大富裕的国家。蒙古人几乎成为世界之王。</font></p>
+<p>成吉思汗开创了蒙古帝国，但使其发展成世界性帝国的则是窝阔台（1229～1241年在位）。窝阔台登基后次年就发动灭金战争。金国据黄河而守，蒙军借道南宋的汉中之地绕过黄河防线，攻陷金国首都汴京（开封）。金哀宗逃至最后的据点蔡州。窝阔台与南宋协议联合灭金，同意南宋可取得蔡州等地。然而金国灭亡后，南宋不仅占领蔡州，还大举攻入蒙宋协议之前就已被蒙古占据的汴京、洛阳等地，遭到蒙古反击，败退回到南宋境内。蒙宋战争由此开始。</p>
+<p>窝阔台亲自坐镇蒙古和中国战场，并派出两路大军再次西征。前往中东的蒙军征服了波斯北部、高加索一带，随后又迫使安纳托利亚的罗姆苏丹国臣服。而声威更高的是前往欧洲的“长子军团”（术赤次子拔都、察合台长子拜答儿、窝阔台长子贵由、拖雷长子蒙哥共同参与），在拔都的统率下横扫钦察、基辅罗斯、匈牙利、立陶宛、波兰等十余国，弗拉基米尔、基辅、布达佩斯等三十多座城市都被摧毁，欧洲列国一片恐慌。然而这时（1241年）传来了窝阔台去世的消息。根据蒙古传统，需要举行部落选汗大会，拔都遂率军东归，西欧国家逃过一劫。但拔都大军并未原路返回，而是绕道巴尔干半岛，又摧毁了塞尔维亚和保加利亚两国。</p>
+<p>此时成吉思汗的四个儿子都已去世。孙辈之中，拔都作为西征统帅有很高的声望，但术赤的血统问题使他无法成为大汗的候选人。窝阔台遗孀欲推举贵由（他与拔都不和，提前退出西征回到蒙古）为大汗，因此拔都回师到伏尔加河畔就借故不再返回蒙古，在此地成立了钦察汗国（又称金帐汗国）。金帐汗国统治黑海-里海以北的辽阔土地，名义上服从大汗，实际上已是独立国家。</p>
+<p>贵由继位不满两年就去世了，拖雷之子蒙哥在拔都的支持下被选为大汗，使汗位转移到拖雷家族。此时帝国疆域已极其庞大，蒙哥委派他的三个弟弟分别治理：二弟忽必烈负责中国事务，三弟旭烈兀率军第三次西征，幼弟阿里不哥留守蒙古。——值得一提的是，拖雷王妃（蒙哥兄弟的母亲）信奉景教，因此蒙哥兄弟都对景教有好感，尤其是旭烈兀之妻亦信景教，因此他具有明显的亲基督教、反伊斯兰倾向。</p>
+<p>旭烈兀再度展现了蒙古的军事天赋。依靠强大的骑兵和火炮，他一举灭亡了巴格达的阿拔斯王朝（1258年），把伊斯兰的宗教领袖、最后一位哈里发裹在毯子里面用马踏死。次年，旭烈兀灭亡了叙利亚的阿尤布王朝，摧毁大马士革。整个伊斯兰世界几乎都被蒙古踏平，只剩下最后一支军事力量：埃及的马穆鲁克军团（他们在1254年刚打退了第七次十字军东征）。但在这个关键时刻，又传来蒙哥去世的消息，旭烈兀便留下少数兵力驻守，自己率主力回国选汗。走到半路，听说忽必烈已经自立为汗，旭烈兀就停止东归。然而，他的离去给了穆斯林反击之机。马穆鲁克联合北非所有穆斯林军队主动出击，大破驻守蒙军，夺回叙利亚。此役打破了蒙古人不可战胜的神话，还使阿拉伯人缴获了蒙古军中的火药武器，由此掌握了火器技术。接下来，马穆鲁克苏丹又找到了一个特殊的盟友——金帐汗国的大汗别尔哥（拔都之弟）皈依了伊斯兰教，并因旭烈兀杀死哈里发而与他反目为仇。1262年，别尔哥对旭烈兀宣战，使得旭烈兀（1265年去世，其子阿八哈继位）忙于应对金帐汗国而无暇西顾，直到1267年别尔哥去世。旭烈兀和阿八哈都曾试图联合西方基督教国家共同攻击马穆鲁克，但未能得到西方的积极响应。蒙古从此不再西进，伊斯兰世界劫后余生。</p>
+<p>在西征军所向披靡的同时，东部的蒙古大军却受阻于南宋的秦岭-淮河防线。蒙哥决定采取大范围迂回战略，先迫降了四分五裂的吐蕃，然后南取大理（国王段兴智投降），从背面攻入巴蜀。然而，蒙哥本人竟在亲征四川钓鱼城时突然去世。蒙哥并未指定继承人，忽必烈和阿里不哥争夺汗位，而旭烈兀支持忽必烈。忽必烈于1260年自行登基为大汗，然后北上击败了留守蒙古的阿里不哥，此后把主要精力放在中国。<strong>1271年，忽必烈将国号从“大蒙古国”改为“大元”，以大都（北京）为首都，真正成为一位中国皇帝。</strong>1273年忽必烈攻克襄樊，南宋防线随之崩溃。1279年崖山之战，南宋全军覆没，丞相陆秀夫背负少帝跳海，十万军民投海殉国。中华帝国首次完全沦陷于异族。</p>
+<p>忽必烈时代是蒙古的鼎盛时期，此时的蒙古领土被分为四大汗国：拖雷-忽必烈系的元朝统治中国和蒙古本土，拖雷-旭烈兀系的伊尔汗国统治波斯和中东地区，术赤-拔都系的金帐汗国统治东欧，而察合台和窝阔台的后裔组成的察合台汗国占据了中亚地区。由于忽必烈和旭烈兀的兄弟情谊，伊尔汗国和元朝保持友好关系，从北京到巴格达的陆上商路完全处于蒙古人的保护下，泉州、广州到阿拉伯半岛的海上商路也繁荣起来，丝绸之路的盛景重现，西方欧洲的财富再度源源不断流向东方。当欧洲遭受黑死病袭击而死亡惨重时，东方的元朝成为世界上最强大富裕的国家。蒙古人几乎成为世界之王。</p>
+<h3 id="4-帝国覆灭"><a href="#4-帝国覆灭" class="headerlink" title="4. 帝国覆灭"></a>4. 帝国覆灭</h3><p><font color=red>1368年，朱元璋推翻元朝建立明朝，实现了从乞丐到皇帝的神话，也是历史上唯一从南向北统一中国的王朝。在元朝灭亡的同时，西方的三大蒙古汗国也纷纷瓦解。</font></p>
+<p>元朝虽然表面强大，但由于它在征服过程中杀人无数，而且实行歧视汉人（原金国境内汉族、契丹、女真等族）、南人（南宋汉族）的种族制度，因此始终遭到汉族敌视，不满百年就被汉族起义推翻。<strong>起义领袖朱元璋于1368年建立明朝，实现了从乞丐到皇帝的神话，也是历史上唯一从南向北统一中国的王朝。</strong>元廷逃亡至漠北，此后虽然仍作为一个独立国家而存在（史称北元），但已不再被视为中国王朝。朱元璋派诸将数次出击漠北，尤其是1388年蓝玉在捕鱼儿海（贝尔湖）绝杀北元主力，俘虏七万之众，王室几乎全部被擒，只有元末帝率数十骑逃走。<strong>1402年，元末帝被部下杀死，黄金家族（成吉思汗后裔）的统治宣告结束。蒙古回到部落分裂状态。</strong></p>
+<p>在元朝灭亡的同时，西方的三大蒙古汗国也纷纷瓦解。金帐汗国从一开始就给予拔都的兄弟们各有世袭封地，实质上成为一个部落联盟而非集权国家；1335年，伊尔汗国因内乱而分裂成数个小国；1347年，察合台汗国也分裂成东西两部。1370年，突厥军阀帖木儿篡夺了西察合台汗国之位，由此走上帝国征服之路。帖木儿致力于重现成吉思汗的辉煌，并迎娶了黄金家族的一位公主为妻。在数十年征战中，他先击败东察合台汗国，然后西征波斯和两河平原，将伊尔汗国分裂出的小国逐一吞并。帖木儿两次北伐西伯利亚，扫荡金帐汗国，使其从此一蹶不振，走向分裂（这在很大程度上助力了罗斯诸国摆脱蒙古统治），随后又向东击败了印度的德里苏丹国，向西进军叙利亚，打败马穆鲁克。<strong>1402年，帖木儿大破如日中天的奥斯曼帝国。</strong>至此，从帕米尔高原直到安纳托利亚的广阔地域尽在其手。1405年（明永乐三年），帖木儿率军出征明朝，但他还未进入中国境内就于途中病故。</p>
+<p>帖木儿的嗜杀与武功同样惊人。他信奉伊斯兰教，却对大马士革、巴格达、德里等伊斯兰文化名城进行屠城和洗劫，给被征服地区带来巨大破坏。而在他死后不久，他的子嗣们就为了争权夺利而互相厮杀，庞大的帝国随之分裂。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/df0466e/">15. 宗教改革</a>
+            
+            
+            <a class="next" rel="next" href="/94584ee5/">13. 十字军东征</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/df0466e/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/94584ee5/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

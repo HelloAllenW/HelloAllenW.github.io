@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>怀旧是对另一时空美好感觉的记忆 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">怀旧是对另一时空美好感觉的记忆</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 14, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 14, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6/">文学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">11.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">39 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTepBnc6wQyAtSaKIZBrPJVqibvGL20wpzoTySIVnqibGt7xX72ET2UIGPiaJia8mEwCR0eOBuePvdDvFibg/640?wx_fmt=jpeg&wxfrom=13" alt="图片"></p>
+<center><font color=red size=5>怀   旧</font></center>
+
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">文 / 戚  涛</div>
+
+<center><font face="黑体"><b>关键词：怀旧; 归属感; 自我连续性; 时空; 认知; 情感</b>
+
+
+
+<h2 id="略-说"><a href="#略-说" class="headerlink" title="略   说"></a>略   说</h2><p>怀旧（Nostalgia）通常指对故土或过去美好时光的思念之情，是文学作品永恒的主题之一。《荷马史诗》中奥德修斯的漫漫归乡路，是其在西方文学中的较早例证。而在中国，从《诗经》里的乐土乐国，到陶潜笔下的世外桃源，再到1980年代的文化寻根潮，同样俯拾即是。在归乡路不再遥远的当代，怀旧主题不仅未有丝毫衰减，还有向动漫、萌宠、科/魔幻文化蔓延的趋势。有学者因此主张，怀旧是一种居于现代世界核心位置的情感（Boym xvi）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGPEsWvSsvGHPx7gGDGG8LEobf0CKNtMHVhXxsYYDeEqPGJ5s6kM37Hw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">Svetlana Boym著《怀旧的未来》(英文版)</center>
+
+<p>虽然怀旧现象普遍且源远流长，其学术史不过三百年有余。英语nostalgia一词由两个希腊词根nostos和algos构成，前者意为故土，后者表示悲伤，合起来即为“因渴望回家而产生的痛苦”。1688年瑞士医生霍弗（Johannes Hofer）首创这一术语用以描述雇佣兵的思乡病——因归乡心切而出现的厌食、焦虑、失眠等症状，并将其归为大脑的生理疾病。随着认识加深，进入19世纪怀旧开始被视为精神疾患：一种与故乡这一特定因素相关的忧郁症。至19世纪末，怀旧基本被从疾病分类学中剔除。人们倾向于认为它只是一种轻微的神经障碍或身心失调，无关痛痒。虽然成为医学界的弃儿，20世纪后半叶起，怀旧却日益受到营销学、社会学、心理学的重视。尤其在社会学、心理学推动下，怀旧研究近三十年来成就卓著。相比之下，与怀旧息息相关的文学批评领域，对其理解还大体停留在经验层面，亟待加强。</p>
+<h2 id="综-述"><a href="#综-述" class="headerlink" title="综   述"></a>综   述</h2><p>从上文沿革简述可见，自命名以来怀旧常常超脱人们对它的假定，原因在于怀旧现象隐秘而复杂。正如博伊姆（Svetlana Boym）所感叹，“怀旧用谜语和难题来说话……对它的研究任何学科都无法独立胜任”（xvii）。<strong>当代怀旧研究的突破，首先归功于对其复杂性的深刻认知，其次得益于社会科学领域的“认知转向”。</strong></p>
+<p>长期以来，怀旧仅仅被视为一种情感（Wilson 22）。1970年代以来，认知—神经科学的发展令学者们意识到，<strong>复杂情感远非本能的身心反应，而是建立在个体经验基础上的复杂衍生物，总是与人们的动机和认知评判交织在一起</strong>（Weinberg et al. 35-36）。这一理论突破造就了当代学界对怀旧认知的飞跃。以下本文将围绕怀旧的性质与源起、建构机制、建构内容与特征、情感功能、图式—系统性、复杂性与张力等六个方面展开讨论。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGuSNsUqPdxJHiaKJeTj6Z9ml2Yic5NsGcRDMPRQHCibYg1VBvrfotavvicA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影：Gustavo Minas</center>
+
+
+
+<h2 id="性质与源起"><a href="#性质与源起" class="headerlink" title="性质与源起"></a>性质与源起</h2><p>怀旧究竟为何物？<strong>当今主流观念是，怀旧是一种有着复杂内涵的适应性机制</strong>（Batcho, “Bittersweet” 6）；<strong>而对其因何而生，社会学家的答案是环境的急剧变化。学者们多用“断裂”（rupture; discontinuity）、“剧变”（upheaval）来描述触发怀旧的环境因素</strong>，如凯莫伦（C.M.Cameron）等将怀旧视为“适应各种文化急速变迁的心理机制”（30）。戴维斯（Fred Davis）也主张怀旧是“一种适应社会变革的方式以及对身份断裂的回应”，因此在处于危机、动荡、变革中的社会表现得尤为明显（qtd. in Brown 368); 1970年代风行美国的怀旧潮，在他看来便是越战与核武阴云引发的动荡所致（Davis 104）。<strong>因此当代学者倾向于将怀旧与现代性挂钩，因为现代化令社会环境变化加速，传统社区解体，人际关系疏离（distancing），价值多元、流动。这些因素侵蚀了人类一贯珍视的稳定性，给人们带来持续的陌生感</strong>（Pickering et al. 922）。博伊姆认为，在怀旧情绪浓厚的学者眼中，传统社会意味着整体性、密切的人际纽带和超验的世界观，而现代社会意味着破碎感、疏离物化的人际关系和美好真理的消逝。因此，现代生活就是“永恒的流浪”，或如卢卡奇所言是一种“超验的无家可归”（transcendental homelessness）状态（Boym 24）。从这个角度而言，<strong>怀旧背后的社会动机是人类对相对稳定、连续的环境的需求，因为后者是个体自我连续性（self-continuity）的基石</strong>（Russon 264）。作为个体身份的重要一环，自我连续性对个体心理健康、自我认同至关重要，否则个体会产生一种当前自我与过去自我断裂的感觉（Sedikides et al., “Nostalgia Counteracts” 52），引发自我认同危机、焦虑和多种负面情感。因此<strong>怀旧是应对环境断裂和失序感，重建自我连续性的一种努力。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGcUoeBYkZibpyJqr1hswbx0RCqgEdFYyUricYeHG6Wd5iaMURvM4eJicuOQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影：billy dinh</center>
+
+<p>然而置身现代、后现代社会，并非所有人都会出现怀旧反应。不少人选择主动改变自我，在“全新自我”的基础上重拾连续性。例如面对当代物化、疏离的生存环境，选择用“从众”——争相追逐时尚及物质占有——的方式来维护自我连续性。与此同时，也不乏本能的神经症策略，如用“偏执”——拒绝与现实对话——的方式来规避断裂。这说明仅从社会学视角聚焦外部环境对个体的影响，无法了解怀旧的全貌。<strong>为什么面对相似的环境，有人怀旧，有人却不？一个重要的变量是个体对适应策略的选择。这个问题需要心理学来回答。</strong></p>
+<p>瓦尔恰特（T. Wildschut）团队的心理学研究，将怀旧归因于个体“归属感的缺失”。换言之，怀旧的动机在于找寻归属感，及其主要载体——社会纽带。他们认为，作为人类的基本需求之一，归属感得不到满足会引发一系列的补偿（compensation）反应，如在现实中建立新的纽带。若努力无果，则有可能触发怀旧机制。<strong>怀旧是一种通过想象建立社会纽带以获取归属感的方式。</strong>将此观点与社会学观点整合，可以得出如下的因果链条：社会纽带是环境和自我连续性的重要载体；环境剧变或断裂，如客居他乡或重要亲友离世，会使个体失去原有的纽带及归属感，引发自我连续性危机；怀旧借助象征性社会纽带重获归属感，以维护自我连续性。但至此我们看到的依然只是客观因素（环境）和生理因素（本能需求）的决定作用，个体的主观能动性（适应性）何在?</p>
+<p>瓦尔恰特等人发现，即便遭遇连续性危机，并非所有人都会借助怀旧机制。例如具有高度回避倾向的个体，会认为人际纽带不可得而放弃努力。他们主张，<strong>怀旧的独特性在于它是个体“回避”（avoidance）与“亲附”（attachment）两种适应性倾向协同作用的产物，并将这种协同机制称作“亲附关联性回避”</strong>（attachment-relatedavoidance; “Repository” 574, 583）。<strong>也就是说，典型的怀旧者是既有较强回避现实又有较强亲近他人倾向之人。</strong>回避性过强，个体就会放弃对归属感的追寻；亲附性过强，则会千方百计获得现实的归属感，哪怕以牺牲自我为代价。怀旧者介于两者之间——执着于归属感，体现了亲附倾向；于想象中建构，则是回避倾向使然。这种对怀旧是在“想象中建构社会纽带及归属感”的认知，也得到了社会学的认同。如博伊姆认为，怀旧“是一种精神状态，无需基于实际的地点……所向往的对象并非被称为家的那个真实地方，而是与外部世界的亲密联系；指向的也并非实实在在的过去，而是想象中的某个时刻”（251）。</p>
+<p><strong>至此，我们可对怀旧的源起和性质做个初步的界定：</strong>怀旧是同时具有回避、亲附倾向的人群，在环境变故令自我连续性受损的情况下，衍生出来的一种适应性机制；其核心是在象征时空建构理想化（idealization）的社会纽带和归属感，以补偿现实中的缺失，维护自我连续性。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMG43O96qYrYyAAkr4KEAITk84Fic2W2GgjvFjmDl1XJcKovHZUre4ShTA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影：Patrick Clelland</center>
+
+
+
+<h2 id="建构机制"><a href="#建构机制" class="headerlink" title="建构机制"></a>建构机制</h2><p>上述定义表明，<strong>怀旧并非一种在场，只待外部刺激来激活它，而是一个动态的认知进化过程、一种习得的社会适应力。</strong>要描述这一过程，我们首先要确定什么是怀旧建构的标的物，也即怀旧者真正眷恋的对象，即怀旧客体（nostalgic objects）。</p>
+<p><strong>按照传统理解，怀旧是对另一时空美好感觉的记忆。换言之，怀旧的客体是另外的时间或空间。这种对怀旧客体的理解，在社会学界依然广为接受，唯对时间、空间对怀旧者的意义孰轻孰重存有争议。</strong>威尔逊（J. L.Wilson）认为，虽然有学者强调空间更重要，但怀旧更多地指向时间，并引述博伊姆的观点为证：表面上怀旧者心之所向是某个地方，实际上另一个时间才是他们所真正渴望的，如童年时光（22）。事实上，双方观点均存在简化论嫌疑。前文提到，怀旧是个涉及情感和认知加工的复杂系统。认知就是赋予秩序（Nietzsche 280），<strong>人类总是将构成外部世界与自我的要素，以一种我们期待的方式纳入我们的意识</strong>（Heine et al. 89）。<strong>具体而言，就是将自身经验纳入一个蕴含因果关系的时空框架，借造就一个精神景观的方式来维系想法、情感、行为的连续性</strong>（Platoff 24），<strong>这是社会认知的本质。</strong>相应地，怀旧建构也需要找寻一个适宜的时空框架，让怀旧者期许的归属感合理地上演。因此，<strong>时空只是手段，而非目的，怀旧的终极目标是寄寓在时空里的积极社会纽带，及其对归属感、连续性的承诺。</strong>严格说来，怀旧与任何特定时空均无必然联系。无论故乡还是过去，都只是怀旧的经典表象。只要能带来归属感，怀旧可以指向任何时空：过去、现在、未来；故乡、他乡、乌有乡。博伊姆对怀旧客体多样性的考察印证了这一点：“综观怀旧众生相，你会发现很难把握他们究竟渴望什么——神圣的他乡、另一种时间，还是更好的生存状态？”（xiv)</p>
+<p>由此可见，<strong>对怀旧建构机制的探讨，需紧扣其终极客体——象征性归属感。</strong>按照定义，当一个人拥有积极的社会关系，并从中体验到一种安全融洽的感觉时，即可被认为获得了归属感（Lambert et al. 1420）。接下来的问题是，<strong>怀旧者借助何种机制，让他们在现实中难觅的积极社会关系，在象征时空里得以合理地存在。答案是有效的应对策略。</strong>上文的定义表明，<strong>怀旧的根本策略是在远离现实的象征时空里建构理想化的社会纽带，以补偿现实中归属感的缺失，这一根本策略可细分为几个具体策略，包括疏离、理想化、补偿等</strong>（戚涛、朱妤双 68），<strong>尤以前两者为重。</strong>事实上，具有高度回避倾向者（如梭罗）也会采用疏离策略，但他们疏离的对象是人群，而怀旧的疏离体现在时空上。博伊姆与哈钦（Linda Hutcheon）均认为，疏离为怀旧所必需。前者在评价浪漫主义者的怀旧时表示，他们始终将自己的怀旧客体与现实生活保持足够安全的距离，以保证它的异质性；对他们而言，这些客体必须远离现实的空间与经验——在暮色笼罩下的过去的某个地方，或是快乐永远的某个乌托邦小岛上（13）。哈钦等则主张，“疏离具有消毒作用……使得过去给人完美、稳定、一致性和安全感”（Hutcheon and Valdes 20）。可见，离开疏离策略，怀旧便魅力不再。原因在于<strong>疏离一方面让距离产生美，另一方面还可以让这种有距离的美免受现实的侵扰与否定。</strong>这就是为什么在爱伦·坡眼中，美女之死是世上最具诗意的主题。以《安娜贝尔·李》为例，疏离（阴阳两隔）不仅让“我”与安娜贝尔的爱变得永恒，再没什么能从“我”心里夺走她，而且给了“我”足够空间去抒发对完美爱人的激情。而在现实中，金钱、性格、孩子、柴米油盐，任何一项都足以让这份美好消失殆尽。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhowxFR2ANYibyAIYIiaAaIh1fVRicXcvfNDrwM8INdp7K7YsUI68yqwALias6dIQ57MibYibWs9GfXR8WtQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">埃德加·爱伦·坡（Edgar Allan Poe，1809-1849）<br /> 美国诗人、小说家和文学评论家</center>
+
+<p>有了对疏离重要性的认知，便不难理解与怀旧相关的一个有趣现象，即思乡者回到故乡并不能重拾想象中的美好，反而可能更加失落。这也是当代怀旧出现“时间转向”的重要原因：在天涯若比邻的今天，空间距离的疏离效用倍减，怀旧者不得不越来越多地借助时间的距离，在遥远的未来（科幻）或过去（史诗）构建精神家园。需要指出的是，怀旧时空之间并不存在非此即彼的排斥关系。很多时候怀旧者会在时空两个轴线上同时疏离现实，如同某些作品中的人物可以在时间上回到少年时光，空间上远离充满欺诈与纠葛的现实社会。同样怀旧的另一重要相关因素“记忆”，也只是一个经典表象。怀旧常以记忆的面目出现，只因后者有效保证了客体与现实之间的距离。学者们一致同意，<strong>怀旧记忆并不真实，怀旧者头脑里的美好现实可能从未存在过，而是在需求的驱动下“想象性建构”的结果</strong>（Hutcheon and Valdes 20）。</p>
+<p><strong>对记忆的这种认知，将我们指向怀旧的另一重要策略——理想化</strong>。桑蒂索（Aaron Santesso）主张，理想化是怀旧最核心的要素，“如果说怀旧由理想化和对过去的向往两大因素构成，只有理想化是唯一必需的……回顾过去的作品很多，但只有当那个过去是经过理想化处理的过去时，才称得上怀旧”（16）。霍华德（Scott Alexander Howard）也认为，“怀旧借助想象将理想化的特征投射到过去，而不是再现过去所具有的特征”（643）。事实上，理想化见诸所有的适应性机制，但多数机制中理想化的目标是主体本身，如自恋者夸大自身的美貌或智慧；<strong>怀旧的独特性在于，理想化的主要对象是客体，即怀旧时空及其蕴含的社会纽带，例如安适的乌托邦、无私的母爱、永恒的爱情、两肋插刀的兄弟情谊、跨种族的忘年交等。原因不言而喻，怀旧重在归属感、连续性，而非自我建构。</strong></p>
+<p>最后，<strong>怀旧本质上是一种间接补偿策略：用对象征时空的认知建构，补偿现实中的缺失。</strong>问题是，有了策略并不能保证形成有效的建构，怀旧的想象性决定了其建构的社会纽带犹如空中楼阁，只有那些易于维护、让人信以为真的幻象才能形成有效的建构。<strong>人类文化长河中深入人心的怀旧客体，如耶稣、故乡、母爱、兄弟情等，无不经历了岁月的检验，是长期改写、提炼之精华。对个体而言，类似的磨合过程也是必需的。这些成功范例中蕴含的模式，是本文以下重点探讨的对象。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGzwYomBia9KNly3tFic2C69IQ0Wu6foPgnZu7p9ggicibSJVeicKSrepMAzA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影：Patrick Clelland</center>
+
+
+
+<h2 id="建构内容与特征"><a href="#建构内容与特征" class="headerlink" title="建构内容与特征"></a>建构内容与特征</h2><p>虽然德里达的解构让逻各斯中心主义臭名昭著，但不可否认二元对立是人类认知的基本方式之一。捕捉怀旧机制中所包含的多重二元对立，有助于我们更准确地把握其内涵。前文提到，怀旧者期许的归属感，必须在适宜的时空内才能合理存在：亲情需要家来承载，友情在校园、战场才倍感真切。<strong>在很大程度上，对归属感的追寻就是对理想精神家园的求索。</strong>那么，怀旧者的理想家园究竟有着何种景象？我们已经知道，理想的怀旧时空总是远离现实，然而正如哈钦所主张的那样，<strong>在怀旧中当下环境从未真正缺席，两者构成一种认知上的二元对立</strong>：当下环境往往“被定义为复杂、肮脏、无政府主义、困难、丑陋并充满矛盾”，而理想家园则被赋予“简单、纯粹、有序、安逸、美丽、和谐”等特质（Hutcheon 280）。《泰比》对土著伊甸园的建构就是典型例证，在梅尔维尔看来，“处于原始状态的社会中，生活的乐趣虽单纯贫乏，但在很大程度上也是无忧无虑的，而文明不管优越到什么地步，总会夹杂着千百种邪恶——烧心、嫉妒、社会纷争、家庭纠纷，以及千万种生活的困扰，构成了人类不幸生活的方方面面”（143）。其他经典怀旧家园，如人人平等的乌托邦、无政府的世外桃源、密西西比河上的两人世界、姐妹共同体（莫里森《天堂》）、兄弟共同体（《水浒》）等，也莫不以简单、和谐为主要特征。因为这种有序、包容的精神家园，有助于缓解怀旧者对纷扰环境的不适感，维护其自我连续性。值得注意的是，怀旧者钟情的简单并非隐士们所向往的简朴生活，而是以人际关系单纯为特征。现实中常见的社会空间如家庭、职场等，包含剪不断理还乱的纠葛，往往是怀旧者回避的对象。怀旧者理想的社会纽带也往往不是亲情、爱情，而是相对单纯的友情、师徒情等。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGEFngJ2f3gC7BLryxA77ZYOhZNcCH8IWSBib4VpjZwFSOLyXJfxDGpicA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">赫尔曼·梅尔维尔的早期作品《泰比》(中译本) </center>
+
+
+
+<p><strong>较之家园，理想社会纽带才是怀旧者真正心之所向。</strong>对完全疏离社会的隐士而言，人迹罕至的自然就是理想家园，而怀旧者的亲附倾向让他们惧怕孤独，所以“怀旧想象中总是充满着人（peopled）”(Sedikides et al., “Conceptual” 206）。<strong>其理想家园不仅要有人，而且必须寄寓着能给他们以归属感的社会纽带。**</strong>这方面的认知努力主要体现在对“重要他人”<strong>（significant others)[1]、</strong>他者与自我三个身份相互关系的建构中**（戚涛、朱妤双 67）。</p>
+<p><strong>心理学研究表明，怀旧者主要通过与重要他人建立理想化的象征关系，来补偿其归属感的缺失</strong>（Zhou et al. 40）。这种关系可能为怀旧者曾经拥有，但更多情况下是在其内心需求驱动下，借助理想化策略建构出来的。由于其目标在于归属感，所以怀旧者理想的重要他人多为那些“能为个体带来呵护、知遇、温馨归属感的人，无论有求必应的观世音、仗义疏财的晁盖，还是《哈克》中兄长般的吉姆”，其共同特点是“善良、大度、包容、不离不弃”（戚涛、朱妤双 69）。就身份类型而言，这些人多为知音、好兄弟/姐妹、仁慈的权威（神明、圣主、清官、侠客、师父、精神导师）等。<strong>怀旧者建构理想纽带的过程，有时附带着对“他者”</strong>[2]<strong>的建构，后者与重要他人和自我均构成二元对立关系。</strong>可以推断，怀旧他者是那些有损怀旧者自我连续性的人，如高俅、《哈克》中的骗子等。与重要他人的仁慈、大度，怀旧者的纯真、忠厚形成对照，怀旧他者阴险、狡诈且无情；其身份标签无外乎奸臣、小人、骗子、红颜祸水、负心汉等。事实上，由于存在疏离（规避现实破坏性）的需要，怀旧者常常会过滤他们眼中的他者，将其排除在怀旧时空之外，如《桃花源记》《乌托邦》中描述的情形等。</p>
+<p>相比重要他人的温馨与他者的邪恶，怀旧自我往往并无个性、闪光之处，原因同样在于怀旧主要为了应对连续性危机。所以我们发现，<strong>怀旧机制常常是对其他自我建构机制的补充</strong>，如《水浒》《西游记》中怀旧只是对“叛逆”策略的补充；陶潜的怀旧只是对“超然”（归隐）策略的补充。所以在怀旧中，自我处在相对次要、被动的位置。自我与他者（或不利的现实环境）、重要他人构成这样一种伦理关系：自我受到环境/他者的侵害，出现连续性危机；在理想时空中，重要他人为自我提供庇护，让自我重拾归属感、连续性。戴维斯因此主张，怀旧者在进行个体身份建构时，关注的是自我中那些边缘、临时、次要的特性，并通过合理化的过程使其复活（45）。例如，吐温通过塑造一个未染世俗气息的少年哈克，复活了自己失去的纯真，以抢救因屡屡投机失败而断裂的自我。《水浒》则通过复活忠厚、义气等另类价值，来维护叛逆策略造成的自我连续性危机。</p>
+<p>从上述例子可以看出，由于个体与文化差异，怀旧者的自我身份并无固定内涵，但也并非无章可循。由于怀旧的功效在于帮助怀旧者获得一种“适得其所”“终有归属”的感觉，怀旧者的自我往往以自由、随性、忠诚等为特征。在理想家园和重要他人面前，怀旧者可以“自由地做回自己，甚至稍许任性，而不必害怕不良后果。个体需要付出的唯有忠诚（一种强烈的认同感、归属感）。孙悟空无法无天，唯对观音服服帖帖；而哈克为忠于对吉姆的友谊，宁可下地狱”（戚涛、朱妤双69）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGTEUV2g8MLibTb8Knzv2vpIiaavF0bHeug5EQREkj6MWFVKGicWJOmtGDg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马克·吐温的《哈克贝利·费恩历险记》(中译本)</center>
+
+
+
+<p><strong>除却家园、纽带、身份，怀旧建构的另一重心是替代意义（价值）。</strong>在一些学者看来，意义就是关系，是将事物用人们所期待的方式关联在一起的一种范畴，其功能在于将自我的构成要素——想法、行为、欲望、特性、能力、角色、自传式记忆等——连接起来（Heine et al. 90），对自我的重要性不言而喻。失去它，人类便会遁入虚无；而获得牢固的意义认同对维护身份连续性，则有着事半功倍的效果。从这个角度而言，身份断裂意味着生命意义的缺失；怀旧意味着寻找替代价值。例如《水浒》对理想家园、纽带、自我的建构，可以归结为“义气”二字。研究者认为，怀旧是个体生命意义的源泉，它生成并推广多重价值（Sedikides et al., “Finding Meaning” 49），是“意义的圣殿”（Wilson 301）。截至目前学界对怀旧意义具体内涵的研究尚显不足，但从上文对怀旧建构内容分析中，不难梳理出怀旧意义建构的总体方向与内涵特征。</p>
+<p><strong>就方向而言，鉴于怀旧的根本目标在于维护自我的稳定与连续，怀旧者憧憬并努力建构的，必然是那些有利于规避断裂、矛盾，增强统一性、连续性的价值；同时，上述意义的建构必然围绕着理想家园、纽带、身份等三个维度展开。就内涵而言，如前文表明，怀旧者的理想家园往往具有简单、纯粹、有序、安逸、美丽、和谐的特质，理想的重要他人多为善良、大度、包容、不离不弃之人；而在这样的环境下，理想的怀旧自我则表现出随性、忠诚、安逸的状态。三重维度的建构合成起来，就构成了怀旧对生命意义体系的建构。</strong>从中可以看出，怀旧者的意义主张不仅多元，且多为游离于主流价值之外，属于边缘、次要的意义。这再次提示怀旧是一种补偿机制，需借助非主流的价值体系来建构另类时空、另类人际关系下的另类自我。例如，身处一个无视社会责任、唯利是图的动荡社会中，吐温的理想国是“一个没有投机热潮、对一夜暴富没有热望的国度，穷人朴实规矩，富人诚实慷慨，社会处于一种原始的纯真状态”（Havard 104）。这些另类意义之所以令怀旧者神往，只因它们可以让怀旧者免于身份断裂之虞，不必纠结钱财多寡或官阶高低，安然做回自己。由此可见，怀旧建构是个系统工程，需要多个环节之间相互协调，才能让怀旧者找回期许的感觉，就如霍桑描绘的罗马知识圈——那“半认真半开玩笑”的轻松氛围，“把他们从对自己谨思慎言的习惯性责任感中解脱出来”，“带进某种飘渺的境界，在那里飞升……那双沉重的肉体凡胎的脚离开了生命的真实土壤，是何等愉快”（16）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMG9v8p0wziaJpdvcJCQEuMbtCZHicAwyjMR0dhuZB8g69oXht0qCInC2FA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">纳撒尼尔·霍桑 (Nathaniel Hawthorne，1804-1864)<br /> 美国作家，美国心理分析小说的开创者</center>
+
+
+
+<p>正因怀旧作为系统而存在，其中任何环节缺损或薄弱，都可能造成整个体系崩塌、失效。《泰比》的怀旧建构就以失败告终，原因在于作者虽向往原始部落简单和谐的生活方式，却找不到与之匹配的社会纽带。主人公最终拒绝纹身，逃离伊甸园，说明他依然将落后的原始异教徒视为他者，无法真正认同。由此可见，作为一种象征性适应性机制，怀旧的效用并不那么确定可靠，有赖于怀旧者不断创造性地发现、修正与维护。</p>
+<h2 id="情感功能"><a href="#情感功能" class="headerlink" title="情感功能"></a>情感功能</h2><p>正如康西卡（Iuri Conceicao）所强调的，怀旧建构多半在无意识状态下进行（89）。怀旧者往往并不清楚自己是在怀旧，在建构另类意义，或在使用着疏离、理想化策略，这一切都是由怀旧的情感性所决定。进入怀旧者头脑的，更多是对具象时空、人、物的向往或憎恶，而不是（像解构那样）依赖对抽象理念的认知。例如霍桑、华顿（Edith Wharton）皆因曾游历欧洲，对另一种生存状态有了体验，才据此想象自己的理想家园。</p>
+<p>对于怀旧究竟是积极还是消极情感，学界仍存争议。早期学者多认为怀旧是种负面情感，所以将其与忧郁症划等号；随着认识的深入，当代学者多主张怀旧是种苦乐参半（bittersweet）的情感（Wildschut et al.,“Nostalgia”），在他们看来，怀旧起于对现实和自我的负面情感——恐惧、恼怒、失落、不安、孤独等，但经过怀旧机制的调节（防御现实威胁、增加社会联系感、提升自尊、生成意义），可以演化为一种积极的情感（安全、温馨、充实，甚至是幸福感）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGw5dLVpicdjRahJPk3SR6wiaCU2249QBibicDXdfVWXWnLUXPNRqKYln4hA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">摄影：Patrick Clelland</center>
+
+
+
+<h2 id="图式—系统性"><a href="#图式—系统性" class="headerlink" title="图式—系统性"></a>图式—系统性</h2><p>以上本文大体梳理了怀旧的源起、性质、建构机制、内容与功能等，从中可以看出，<strong>怀旧是一种混杂着情感与认知过程的复杂状态</strong>（Hepper et al. 103）。博伊姆因此感叹，怀旧是一种诱惑性存在，始终让人难以把握，我们对怀旧的认知“至今依然不够系统、有机”（13）。这固然与怀旧的复杂性有关，同时与研究者未能采用与其复杂性相适应的理论框架也不无干系。其结果是条块分割的情况严重：心理学倾向于关注怀旧者的微观心理机制——动机、策略，而社会学倾向于关注宏观因素——环境的影响和怀旧的社会意义等。迄今为止，依然“明显缺乏一种公认的有机连贯的方法”（Hepper et al. 103）。</p>
+<p>以序列（sequence）为视角是较为有效的一种尝试，例如研究者认为，怀旧机制包含“怀旧→社会联系→自我连续性→意义”（Sedikides et al., “Finding Meaning” 52）这样的因果序列。但这一简单框架较之怀旧的复杂性依然相形见绌。为弥补这种缺失，有学者主张用系统论和认知建构主义视角来审视怀旧（戚涛、朱妤双 66）。如布迪厄所主张，人们对社会的感知并非简单的机械反映，而是包含了“建构性原则”的认知活动（471）。按照当代认知理论，图式（schema）正是起着为人类感知提供建构性原则的无意识的认知机制，其泛指经过抽象或概括了的背景知识或认知架构，或“人脑中的知识单位”（邵志芳、高旭辰 132）。以此为视角，怀旧现象可被视为认知图式的产物。我们只有清晰、系统地描述这一图式的生成机制、作用机理和系统功能，才能更好理解怀旧现象本身。正是基于这一理念，才有了上文对怀旧相对系统的阐释。将上述阐释抽象为如下系统模型，有助于我们更准确地把握怀旧的实质：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGwDrbNgdPChdZGXqhBBBxMt5jiaW720ZOiav4kibB2H6rEoiaWBbWpMwF9A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>如图所示，怀旧作为一个复杂系统跨越了社会环境系统、人类需求—心理系统、认知—经验系统等三大领域，包含动机、情感、策略、目标、认知建构等五大模块。其中前四大模块构成怀旧图式，属于无意识范畴；而认知建构模块为怀旧图式的表现，部分上升到意识范畴。按照这一系统模型，怀旧的生成源于环境系统与人类需求—心理系统的互动：环境断裂或剧烈冲突会否定人类维护自我连续性和统一性的根本需求；在此情况下，存在疏离和亲附双重秉性的人群，为摆脱强烈的断裂感、失落感，倾向于动用疏离、理想化等策略，在远离现实的象征空间里寻找稳定性和归属感。怀旧的作用机理是：在理想化时空（精神家园）中建构理想化社会纽带（重要他人带来的归属感）及替代生命意义（理想时空与纽带所具备的特性），以补偿现实中归属感的缺失。</p>
+<h2 id="复杂性与张力"><a href="#复杂性与张力" class="headerlink" title="复杂性与张力"></a>复杂性与张力</h2><p>上述模型仅仅勾勒出怀旧机制最典型的、具有共性的过程。怀旧内外“多系统动态嵌套互动”的特性，决定其现实样貌比该抽象模型要复杂得多。怀旧的具体内涵、补偿功能能否实现与多重因素相关联，如怀旧者的处境、经验、与现实话语博弈的能力，及怀旧各要素之间的协调程度等。正是这些因素的参与，让怀旧研究变得愈加复杂。就理想家园而言，怀旧者眼中乐土的形式与样貌千姿百态：既有南大洋原始伊甸园、各类兄弟/姐妹共同体，也有罗马和巴黎的知识分子圈子，及不为人知的世外桃源、乌托邦等。其理想重要他人的种类，按照与怀旧者的关系，可分为“紧密—补足型”“松散—同质型”两大类。前一类型中双方关系紧密，重要他人能补足怀旧者的身份缺损；而后一类型中双方关系松散但习性相近，重要他人可强化怀旧者对自身的认同。</p>
+<p>紧密—补足型理想重要他人又可细分为“仁慈权威型”“善良随从型”“知遇友伴型”等三类。第一类常见于等级社会和集体主义文化的怀旧叙事中。在等级社会，由于极度缺乏归属感、安全感，仁慈权威的庇佑是怀旧者神往的纽带。从这个意义而言，宗教是怀旧的杰出产物。因为仁慈、包容的权威是多数神明——耶稣、观音、济公、妈祖等——的共同特征。相比之下，各种世俗权威如清官、侠客、师父、兄长等，虽然理想化程度略低但现实度更高，具备更好的补偿功效。“善良随从型”多见于现代的、个人主义的叙事，在具有种族主义色彩的帝国叙事中尤为典型。其结晶就是对所谓“高贵的野蛮人”（noble savages）的建构——白人怀旧者远离狭隘势利、精于算计的故土社交圈，在质朴、善良的野蛮人身上找到了纽带感，如鲁滨逊与星期五、邦普与印第安朋友、穆尔夫人与阿齐兹等。重要他人的身份是权威还是随从，一方面体现着传统与现代、集体主义与个人主义的差异，另一方面也反映出怀旧者自我的强弱。倾向建构善良随从的怀旧者，通常有个人主义背景及较强势自我，因而并不局限于帝国叙事，《追风筝的人》中的哈桑就是一例。相比之下，“知遇友伴型”居于两者之间：要么居于传统社会，有较强势自我，如俞伯牙、钟子期的高山流水；要么居于现代社会，有较弱势自我，如《鸽翼》中的苏珊与米莉之关系。共同特征是两者关系相对平等、密切，构成补足关系。从中不难看出，时代、文化、个体差异，会左右怀旧建构的具体内涵。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGTZYvXYflkZBzAd7kncRxTEib2bPpyskejZtvkT6u6GwvMhiaz9qtLF7A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">卡勒德·胡赛尼的小说《追风筝的人》(中译本) </center>
+
+
+
+<p>上述关系特征也体现在松散—同质型重要他人的建构中。此类他人往往不是一两个，而是一群；关系松散（不乏矛盾冲突），但性情、处境相近；构成一种既可交流隐私，又无多少责任牵挂的精神共同体。美国当代不少热播生活剧均是此类建构的产物，如《老友记》《欲望都市》《绝望主妇》《生活大爆炸》等。此类怀旧文化之所以成为当代经典，原因在于后现代社会个体更加独立，人际关系越发疏离，以至于亲密纽带只能是奢望，而松散的联系或可期待。因此，这类建构同样见于非后现代、但身处人际关系高度疏离环境中的怀旧者，如华顿对巴黎知识分子共同体的建构。</p>
+<p>上述分析表明，<strong>虽然疏离策略为怀旧想象开辟了空间，并不意味着可以天马行空。事实上，越脱离现实的怀旧越难以维系，适应性与效能也越差（例如乌托邦）。如果说怀旧的目的在于获得一种稳定的象征性社会纽带，那么对怀旧者而言，越贴近现实、仿佛唾手可得的精神家园才弥足珍贵，给人一种在现实中某个角落可能就存在的感觉。</strong>因而有学者主张，怀旧是富裕、有闲阶层的心理奢侈品，因为怀旧需要时间与资源（Cameron and Gatewood 30）。虽然这一观念流于经验，但从一个侧面说明<strong>怀旧并非易事，始终隐含着怀旧者与现实之间的博弈关系；怀旧内容的品质高下与成败，很大程度上取决于怀旧者的处境、社会资本及其与现实“创造性”博弈的能力。总体而言，怀旧者处境越弱势，怀旧内容越远离现实、越虚幻，越强势则内容越接近现实。</strong>因处境极度不利、怀旧建构失败的例子也不鲜见，除上文提到的《泰比》，《心是孤独的猎手》也是一例。小说以主人公自杀、共同体解体告终，表明作者最终否定了自身的建构。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGbU4qcT4KTS6CkmZjPqfLyISKqsQkiab33D0jKRlZYLiaZmsn7JDn6tIw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">卡森·麦卡勒斯的小说《心是孤独的猎手》(中译本)</center>
+
+
+
+<p>以上仅是怀旧微观层面复杂性的冰山一角，篇幅所限不再展开。宏观层面来看，怀旧与众多文学、文化现象之间存在密切勾连，包括共同体意识、萌宠文化、物文化与伦理意识等，表现出极大的张力。</p>
+<p>理论上说，<strong>共同体与怀旧之间存在天然的联系，都是人类归属感需求的产物，所以两者间存在不小的交集</strong>：一方面，怀旧试图建构的精神家园和社会纽带均为共同体的构成要素；另一方面，传统社区/共同体的消亡是当代怀旧的社会动因之一。但对共同体的向往并不等于怀旧，因为现实中形式各异的共同体无所不在；只有在现实中寻觅无果，于想象时空中建构精神共同体才是怀旧。因此，<strong>怀旧可被视为人类共同体意识的延伸和特区，其特性在于远离现实且更加理想化。</strong></p>
+<p>从距现实远近的视角出发，后现代社会日益盛行的萌宠文化是个介于现实、怀旧两种共同体中间，但更偏向于怀旧的一种存在——虽置身现实但已远离人类，且具有简单、温馨、可控的特征。更为重要的是，宠物被赋予的诸多拟人特性离不开人类的想象和理想化建构，可谓“高贵的野蛮人”的动物版本。这启示研究者，怀旧者疏离现实的方向除了时间、空间，还可能存在第三个维度——种间（跨越物种）。许多学者主张，对宠物的眷恋也是怀旧(Batcho, “Psychological Perspective” 131-43）。种间怀旧的优越性在于，这种纽带可以进入现实：你左右不了自我意识越来越强的人类，却可轻松掌控真实或虚拟的萌宠，因此比典型怀旧更可靠。动漫业的蓬勃发展已证明了这一点，卡通宠物、伴侣正成为众多宅男宅女们唯一可靠的精神纽带。可以想见，随着人工智能的兴起，机器人伴侣将是此类人士的更大福音。<strong>这些大众文化的繁荣折射着当代人类的寂寞与逃避，人们越来越不愿意费心处理复杂、不可靠的人际关系，宁愿选择恋物或寄寓虚拟空间之中。</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMGmbTKZbEYeZFv4rlRltWtNFlcJ0syZPqCvpEgCk46sFEIicGYVYnbibBw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">后现代社会日益盛行的萌宠文化</center>
+
+
+
+<p>怀旧与物之间的密切关联，早为学界所关注并探究。霍克（Derek Hook）认为，相当一部分怀旧具有恋物癖性质（231）。营销学视角的怀旧研究多围绕物展开，目的在于揭示如何借助商品中凝结的怀旧情感，激发消费者的购买欲。社会学者则更关注物作为怀旧客体所蕴含的生命意义，如威尔逊专门探讨了老物件、老爷车收藏的怀旧价值。但总体而言，凝结在“物”中的怀旧以无意识情感因素为主导，缺乏认知建构的维度，因此与文学建构关系较弱，多见于怀旧者的日常行为。</p>
+<p>最后探讨一下怀旧与伦理的关联。所谓伦理是人与人之间的关系，及处理这些关系的准则。努斯鲍姆（Martha Nussbaum）主张，情感是人类伦理推理系统的重要组成部分，是伦理研究无法忽视的要素（1）。怀旧作为一种复杂情感，必然包含着丰富的伦理内涵。从伦理视角出发，怀旧源于人们在现实中的伦理困境，即在人群中难以寻觅安适的位置。怀旧建构可谓一种伦理选择，体现着怀旧者重新定义人际关系的努力，这一点从怀旧的意义建构中可见一斑。怀旧者认同的价值如仁慈、善良、淳朴、大度、和谐、包容等，无不包含浓厚的伦理色彩，寄寓了他们对理想伦理秩序的期待——人与人之间少一些背弃、算计、欺骗，多一些本真、善意、包容。</p>
+<h2 id="结-语"><a href="#结-语" class="headerlink" title="结   语"></a>结   语</h2><p>综上所述，<strong>怀旧并非人们印象中那样，仅仅是对过去美好时光或温馨故土的眷恋之情，而是在人类情感与智慧驱动下衍生出来的、用以应对环境与自我断裂的复杂适应性机制。其根本动力在于人类对连续性、统一性的本能需求。这一需求与环境之间无法调和的矛盾——环境总是以各种冷漠的方式挫败着人类的需求——让所有人或多或少均需借助怀旧的力量，以补偿现实的缺憾。</strong>因此，怀旧几乎无所不在，渗透到人类精神生活的方方面面。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/x1rwIvJwdhpmlHRJ9cBZKvdiaOiaEJmxMG4LF4AD4zEmiaVgkCAj2GbA5wjO91kJRsYKBZiczhADF2IJrs9t8hbdKA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">Svetlana Boym著《怀旧的未来》(中译本)</center>
+
+<p>虽然怀旧复杂、隐秘的特性曾令研究者迷惘，但在认知科学的助力下，社会学、心理学研究不断深入其核心地带。借助认知图式理论的框架，学者们已初步勾勒出怀旧的系统动力学概貌及系统特性，包括动力来源、参与要素、策略体系、认知—情感建构的内容与功能等，为文学批评与文化研究提供了较为坚实的理论架构。就文学批评而言，现有理论可较好支撑以下三方面的研究：一是<strong>怀旧类型学</strong>的研究，包括浪漫主义、边缘群体、科幻、魔幻、史诗、儿童、动物文学等不同文类怀旧主题特征的研究；二是<strong>对不同作家个性化怀旧主题的研究</strong>，包括他们在理想精神家园、身份、意义等方面的独特建构；三是<strong>怀旧视角下相关文学现象研究</strong>，包括空间、共同体、伦理问题等。就文化研究而言，现有理论对探讨宗教、宠物、动漫、收藏、虚拟现实等与怀旧密切勾连的文化现象，也颇具启发价值。</p>
+<p><strong>注      释</strong></p>
+<p>[1]重要他人（significant others）简言之就是在我们的生活中扮演重要角色的人——亲人、友人、爱人、事业伙伴等。有学者认为，人们对身份的建构需要重要他人给予认可，缺乏这种认可极可能对身份造成伤害（Taylor 36）。</p>
+<p>[2]这里所谓他者，指的是在品质方面与重要他人和自我对立的劣等人群。</p>
+<p>原刊于《外国文学》2020年第2期。作者：戚涛，上海外国语大学攻读英语语言文学专业博士，现为安徽大学外语学院教授、博士生导师，主要从事美国文学和文学理论研究。</p>
+<div style="color:gray;font-size:0.9em;">文章转载自公众号：和鸣记，特此鸣谢！</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6/"># 文学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c915328/">将思想、情感和对世界的理解，融入到摄影</a>
+            
+            
+            <a class="next" rel="next" href="/9cb79420/">古龙小说十大经典开篇</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c915328/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/9cb79420/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>从光速不变到杨-米尔斯理论 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从光速不变到杨-米尔斯理论</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 10, 2021&nbsp;&nbsp;22:49:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 10, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/">自然科学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">21 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="狭义相对论假设"><a href="#狭义相对论假设" class="headerlink" title="狭义相对论假设"></a>狭义相对论假设</h2><h3 id="1-狭义相对论的第一个假设：光速不变"><a href="#1-狭义相对论的第一个假设：光速不变" class="headerlink" title="1. 狭义相对论的第一个假设：光速不变"></a>1. 狭义相对论的第一个假设：光速不变</h3><p>牛顿力学认为，凡是速度必定有参考系，脱离参考系而讨论速度没有任何意义。而根据麦克斯韦方程组推导出的光速是一个常数且没有任何参考系。所以<strong style="border-bottom: 1px green dashed;">为了解决牛顿力学和麦克斯韦方程组之间的矛盾，爱因斯坦就假设：真空中的光速在所有参考系中都是一样的，由此构建出了狭义相对论体系</strong>。所以狭义相对论里说的光速不变其实是个假设，而且指的是光速在任何参考系中都是不变的。例如飞速行驶的一辆列车上发射的光它的速度仍然是光速，而不是光速➕车速。</p>
+<h3 id="2-狭义相对论的第二个假设：爱因斯坦相对性原理"><a href="#2-狭义相对论的第二个假设：爱因斯坦相对性原理" class="headerlink" title="2. 狭义相对论的第二个假设：爱因斯坦相对性原理"></a>2. 狭义相对论的第二个假设：爱因斯坦相对性原理</h3><p>（1）古希腊托勒密提出“地心说”：认为地球是静止的，万物绕着地球转。</p>
+<p>（2）1543年，哥白尼发表《天体运行论》，提出日心说。但是地心说的人提出如果地球是绕着太阳运动的，那地球上的人为什么感觉不到地球的运动。</p>
+<p>（3）1632年伽利略出版巨著《关于托勒密和哥白尼两大世界体系的对话》中提出：“<strong style="border-bottom: 1px green dashed;">地恒动而人不知，譬如闭舟而行不觉舟之运也</strong>。”意思就是说在封闭船舱里发生的任何力学现象，都无法确定船是在匀速运动还是在静止不动。现在这个论述就称为<strong style="border-bottom: 1px green dashed;">伽利略相对性原理</strong>或者力学相对性原理。用现代的语言来表述伽利略相对论原理就是：<strong style="border-bottom: 1px green dashed;">力学定律在一切惯性参考系（静止或匀速运动）中都具有相同的形式</strong>，任何力学实验都无法区分静止和匀速直线运动的惯性参考系。或者更加简单的说：力学定律对于一切惯性系都是等价的。</p>
+<p>（4）伽利略的相对性原理有一个非常大的限制条件：力学定律。那么这个原理在其他领域例如电磁学、光学等方面是否适用呢？爱因斯坦假设是适用的，即就是爱因斯坦的相对性原理：<strong style="border-bottom: 1px green dashed;">任何物理学实验都无法区分静止和匀速直线运动的参考系，一切物理学规律在惯性系中等价</strong>。</p>
+<h2 id="通俗解释狭义相对论和广义相对论？"><a href="#通俗解释狭义相对论和广义相对论？" class="headerlink" title="通俗解释狭义相对论和广义相对论？"></a>通俗解释狭义相对论和广义相对论？</h2><p>相对论是对牛顿力学的一个修正而不是革命。牛顿力学的适用范围仅限于低速宏观条件。</p>
+<ol>
+<li><p>狭义相对论是以光速不变和爱因斯坦相对性原理为假设推导出了运动的物体时间会变慢，长度会缩短，质量会增加这一套狭义相对论效应。</p>
+</li>
+<li><p>广义相对论是以等效原理为假设推导出了任何有质量的物体都会引起时空弯曲，然后物体在这个弯曲的时空里继续做他们的“惯性运动”。</p>
+</li>
+</ol>
+<p>等效原理：局部引力场和加速度等效。你在下落的电梯里面做自由落体运动，你是感受不到重力的。意思就是说局部引力场中自由下落的参考系与无引力场的惯性系不可区分。就是说：我悬浮在电梯里，你从里面完全无法区分我是悬浮在太空里（惯性系），还是在一个自由落体运动的电梯里（有地球引力的非惯性系），无法区分就是等价，或者说两者在物理上是一样的。</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37408500">更多了解等效原理</a></p>
+<h2 id="相对论里的速度叠加公式"><a href="#相对论里的速度叠加公式" class="headerlink" title="相对论里的速度叠加公式"></a>相对论里的速度叠加公式</h2><p>假设：两艘光速飞船相向运动（ 指两个物体各自朝对方的方向运动），那么它们俩的相对速度是2倍光速吗？</p>
+<p>我们假设做相向运动的两个物体相对地面的速度分别为v1和v2，他们的相对速度速度为v。</p>
+<p>那么，在牛顿力学里，v=v1+v2，这是我们熟悉的。</p>
+<p>但是，在相对论里，速度叠加公式并不是这样的，而是下面这样：</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102252560.jpg" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        速度叠加公式
+    </div>
+</center>
+
+<p>根据上述速度叠加公式得出：</p>
+<p>（1）仔细看一下这个速度叠加公式，你会发现物体运动的速度越大的时候，分母越大，无论的你的速度怎么接近光速，他们叠加之后的速度都不会超过光速。只有当两个物体的速度本来就是光速，也就是v1=v2=c的时候，叠加速度才等于c。</p>
+<p>（2）假设两个飞船以0.6c的速度相对运动，按照上面相对论的速度叠加公式， 可以看到，两艘0.6c的飞船相对速度不是1.2c，而是0.882c，并没有超光速。</p>
+<p>（3）从上面的式子也可以很简单的看出来，如果物体的速度远小于光速，分母基本上就等于1，这时候相对论的速度叠加公式就退化到牛顿力学的速度叠加公式。</p>
+<p>（4）关注它分母的一个特点：它永远比1大，而且速度越大比1大的越多。这意味这这个叠加速度的值v永远比分子v1+v2要小。这就是说在牛顿力学里，如果给物体一个力F让物体的速度从V1加速到V1+V2，你以为加速到了这个值，但是实际上它加速到的速度永远比V1+V2要小。</p>
+<p>（原因是什么呢？改变物体运动状态的难易程度叫做惯性，而惯性是由物体的质量决定的，这个质量也叫作惯性质量。<strong style="border-bottom: 1px green dashed;">相对论认为，物体运动后惯性质量会变大，从而导致它的叠加速度小于v1+v2</strong>）</p>
+<h2 id="运动物体的质量"><a href="#运动物体的质量" class="headerlink" title="运动物体的质量"></a>运动物体的质量</h2><p>问题：光为什么能达到速度的极值（光速），而其他物体最多无限接近但就是达不到？</p>
+<p>试想：根据牛顿第二定律F=ma，只要有外力就有加速度。那我们假设一直有一个恒力（引力也好，自己提供燃料动力也好）让物体加速，然后坐等物体的速度慢慢加到光速。</p>
+<p>在牛顿力学里，物体的质量是一个固定的值，是物体最基本的属性。但是在相对论里面物体的质量是会变化的，他会随着物体速度的增加而增加，这样当物体的速度越来越大的时候，物体的质量就也会越来越大，质量越大给物体加速所需要的力就越大。</p>
+<p>相对论里运动物体的质量公式是这样的：</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102253625.jpg" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        运动物体的质量公式
+    </div>
+</center>
+
+<p>其中 u 表示物体的速度， m0 表示物体的静止质量， c 代表光速。</p>
+<p>根据上述公式：</p>
+<p>（1）我们看到当物体的速度接近光速的时候，右边式子的分母会趋向于0，所以整个值会趋向于无穷大。也就是说当物体的速度逼近光速的时候，这个物体的质量会慢慢增加到无限大，这时候如果你还想给物体加速，所需要的力或者说能量将会变成无穷大，这显然是不可能的。</p>
+<p>（2）大家再看看这个公式，如果物体的速度真的大于光速，那么根号里面的数值将为负数，而整个分母会出现虚数。虚数在数学里允许存在，但是在我们现在物理里暂时是没有什么意义的（或许有一天我们会发现另外一个虚世界，这个世界里光速是它们的最低速度）。</p>
+<p>（3） 所以，任何有静止质量的物体它的速度都无法达到光速，只有像光这样静止质量为0的物体才能达到光速。</p>
+<h2 id="引力质量和惯性质量"><a href="#引力质量和惯性质量" class="headerlink" title="引力质量和惯性质量"></a>引力质量和惯性质量</h2><p>问题：我们常说质量是物体的固有属性，例如某物体在超市称上称重，然后把这个物体和称拿到月球上（月球引力是地球引力的1/6），它的重量发生了变化。然后拿到太空上，物体悬浮，重量为0了？</p>
+<p>答案：</p>
+<p>显然不对的，其实上面所说的是两个不同的质量，<strong style="border-bottom: 1px green dashed;">固有属性指的是惯性质量，而称重的却是引力质量</strong>。就像牛顿第二定律F=ma中m指的是惯性质量，而万有引力定律中指的是引力重量。</p>
+<p>（1）引力质量是用来表征物体在一个引力场里受引力大小的一个物理量，而惯性质量（物体的惯性大小只跟物体的质量有关）是表征物体运动状态改变的一个物理量。</p>
+<p>（2）爱因斯坦说了一句非常有名的话用来区分引力质量和惯性质量：“<strong style="border-bottom: 1px green dashed;">地球以重力吸引石头而对其惯性质量毫无所知，地球的‘召唤’力与引力质量有关，而石头所‘回答’的运动则与惯性质量有关。</strong>”</p>
+<p>（3）牛顿时代，科学家发现这两个质量是成正比的，成正比在物理学家眼里跟相等是等价的，他们通过调整一下单位制和一些常数就可以让两个城正比的量完全相等。因此很多计算中这两个质量可以看成相等进而约掉。在牛顿眼里，引力重量和惯性质量相等仅仅是一个巧合。</p>
+<p>（4）爱因斯坦认为惯性质量和引力质量的相等绝不是巧合，而是有更深层次的原因。于是爱因斯坦大胆的认为惯性质量和引力质量是等价的，这个表述就跟常见的等效原理的表述（局部引力场和加速度等效）是等效的。</p>
+<h2 id="钟慢效应（时间变慢）和尺缩效应（空间收缩）"><a href="#钟慢效应（时间变慢）和尺缩效应（空间收缩）" class="headerlink" title="钟慢效应（时间变慢）和尺缩效应（空间收缩）"></a>钟慢效应（时间变慢）和尺缩效应（空间收缩）</h2><p>问题：光速是极限，那人生百年就永远被困在100光年以内了？</p>
+<p>答案：</p>
+<p>在思考相对论的时候，一定要摆脱牛顿力学的思维。</p>
+<p>探讨：</p>
+<p>（1）时间膨胀（时间变慢）有两种方式：狭义相对论里运动的物体时间会变慢，广义相对论里引力会使时间变慢。</p>
+<p>假设现在一个人在非常接近光速的飞船上飞行，因为钟慢效应飞船里过了一年地球上已经过了十年。那么，从地球上的人来看，因为他走了10年，而他的速度是接近光速的，所以地球上的人觉得飞行员应该去了将近10光年外的地方。而对于飞船上的人来说，我只过了一年，那如果我真的到了10光年外的地方，那超光速了？</p>
+<p>（2）时空一体：光速是绝对的，时空是相对的</p>
+<p>意思就是说光速是不可能改变的，更不可能有物体运动超过光速。同时， 时空其实是一体的，你时间发生了改变，空间肯定也是要受影响的，你高速运动的时候时间变慢为地球的十分之一，那么与此同时，运动方向上的空间也缩短到了原来的十分之一。 也就是说，在你走上高速飞船的时候，在地球人看起来距离为10光年的地方，在你的眼里骤然缩减到了1光年。然后你在以1年的时间走完，速度依然刚好是接近光速。</p>
+<p>时空是一体的，从地球的参考系来看，宇航员时间变慢发生了体现了钟慢效应，而从宇航员的角度来看，空间发生了收缩，这是尺缩效应的表现。</p>
+<p>（3）尺缩钟慢系数：尺缩系数和钟慢系数是一样的</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102253503.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+
+<p>如果要100年之内冲出银河系（假设地球在银河中央，那么要飞5万光年），那这个钟慢系数最低必须达到0.002。而要达到0.002的钟慢系数，飞行速度要达到0.99998c，这需要多大的能量呢？不敢想象。</p>
+<h2 id="关于科学"><a href="#关于科学" class="headerlink" title="关于科学"></a>关于科学</h2><ol>
+<li><p>欧几里得通过5个显而易见的公理（即就是假设）逻辑严谨地推导出了数百条定理。《几何原本》树立了正确的科学理论的方法论和基本范式。后来牛顿的《自然哲学的数学原理》与《几何原本》风格极其相似，可以说<strong style="border-bottom: 1px green dashed;">《几何原本》奠定了西方科学家的科学精神</strong>。</p>
+</li>
+<li><p><strong style="border-bottom: 1px green dashed;">无条件地相信科学这本身就是一种迷信</strong>。</p>
+</li>
+<li><p>所以，后来牛顿力学、相对论等很多伟大理论的整个体系都是基于几个假设（公理）推导出的。<strong style="border-bottom: 1px green dashed;">科学只是一种假设，它不是真理</strong>。</p>
+</li>
+<li><p><strong style="border-bottom: 1px green dashed;">科学的本质是怀疑，宗教的本质是相信</strong>。</p>
+</li>
+<li><p>一个科学理论，在能够自圆其说并能够解释的通的情况下，它的假设前提越少，包含覆盖范围越多，那它就是一个更好的理论。（假设越多，就像定时炸弹一样，出错的可能性越大）</p>
+</li>
+</ol>
+<h2 id="物理学理论的发展"><a href="#物理学理论的发展" class="headerlink" title="物理学理论的发展"></a>物理学理论的发展</h2><p>（1）1687年牛顿出版了巨著《自然哲学的数学原理》，这代表着经典物理大厦的全面落成。此后的200多年里，没有任何人往这栋大厦里添加了任何实质性的东西，这个过程一直持续到1905年爱因斯坦狭义相对论的提出。</p>
+<p>（2）所以，牛顿之后爱因斯坦之前的有名的物理学家都是避开这个领域的，最典型最成功的就是电磁学的发展。从库伦1785年发现了库仑定律，到法拉第1831年发现了电磁感应，到麦克斯韦跟牛顿一样的完成了电磁学理论大厦，到赫兹发现了电磁波，验证了麦克斯韦的理论，这是避开牛顿走的一条全新的道路。</p>
+<p>（3）在“聪明人都应该避开牛顿”的共识之下，物理学家们即便发现了牛顿力学和麦克斯韦的电磁学有矛盾，他们还是极力想在牛顿的体系内解决问题，但是又解决不了，场面一度非常尴尬，一直到1905年爱因斯坦 《论动体的电动力学的》 （狭义相对论的提出）的发表才扭转这个局面。</p>
+<p>（4）麦克斯韦在1865年预测了电磁波，赫兹在1887-1888年验证了电磁波，这中间经过了20多年；爱因斯坦在1916年根据广义相对论预言了引力波，但是这个引力波一直到2016年，也就是不多不少，刚好整整100年之后才被LIGO探测器发现。 电磁波和引力波分别是麦克斯韦方程组和广义相对论的预言了最为精华的部分。但是，麦克斯韦预言电磁波之后，23年之内赫兹就发现了电磁波，35年之内马可尼和特斯拉就利用电磁波发明了无线电，从此人类进入了无线电时代，通讯方式发生了翻天覆地的改变。而引力波预言之后的100年人类才勉强依靠最先进的仪器发现引力波，要利用引力波，把引力波变成宇宙间的通讯方式还不知道要过多久。</p>
+<p>（5） 我们再来简单的回顾一下物理学理论的发展：首先是牛顿统一了天上和地上的力，然后麦克斯韦统一了电、磁、光，接着爱因斯坦统一了电磁学和经典力学之间的矛盾，并且升级了引力的理论到广义相对论。爱因斯坦在统一电磁力和引力的道路上绞尽脑汁但是没有找到方法，而此时又出现了强力和弱力。杨振宁沿着爱因斯坦的路继续探索，提出了非常重要的非阿贝尔规范场（又叫杨-米尔斯场），此后经过许多物理学的通力合作，终于成功的把电磁力、弱力和强力都统一在杨-米尔斯场里了。</p>
+<p>（6）20世纪物理学爆发了相对论和量子革命，但是量子力学和相对论在深层却是不相容的，但是二者分别在各自的领域（相对论在宏观，量子力学在微观）表现得非常完美，因此，一定有一个更加深刻的理论能够统一协调相对论和量子力学，让相对论和量子力学只是这个理论分别在宏观和微观的不同表现。所以，统一量子力学和相对论，统一引力和其他的力就成了理论物理的一个重点。爱因斯坦穷其后半生也没有解决这个问题，而超弦理论是目前看来希望最大的： 超弦理论说组成我们的世界最基本的元素是一根根一维的弦（非常小，普朗克长度那个级别的），不同的粒子只是弦不同震荡方式的表现；我们生活的宇宙不是四维，而是十一维（按照M理论），只不过只有四个维度展开了，其他几个维度都被压缩在非常小的地方（普朗克长度那个大小），量子力学里面出现的不确定性就是其他几个被压缩维度造成的（看，超弦居然从根本上解释了量子力学的不确定性，虽然无法验证，但是爱因斯坦肯定更喜欢这种假设，这样投骰子的上帝又死了~）</p>
+<h2 id="双生子佯谬问题"><a href="#双生子佯谬问题" class="headerlink" title="双生子佯谬问题"></a>双生子佯谬问题</h2><h3 id="1-双生子佯谬问题说明"><a href="#1-双生子佯谬问题说明" class="headerlink" title="1. 双生子佯谬问题说明"></a>1. 双生子佯谬问题说明</h3><p>现在假设地球上有一对双胞胎（双胞胎就表示年龄一样，先出来的称为哥哥），距离地球30光年的地方有一个相对地球静止的星球S，哥哥驾着飞船以0.995c（10:1）的速度从地球飞向星球S，然后再以同样的速度返回地球，那么弟弟相对于哥哥其实是做了逆向的运动。那么我们的问题就是要分析哥哥回到地球并着陆之后跟弟弟比一比年龄，到底谁大？大多少？</p>
+<h3 id="2-洛伦兹变换"><a href="#2-洛伦兹变换" class="headerlink" title="2. 洛伦兹变换"></a>2. 洛伦兹变换</h3><p>在绝对时空观中，我们采用伽利略变换实现同一时刻，同一物体的坐标从一个坐标系变换到另一个坐标系。</p>
+<p>但狭义相对论中，两个互相做匀速直线运动的参考系，他们之间的时间空间坐标的对应关系就是由洛伦兹变换来完成的。</p>
+<h3 id="3-解释"><a href="#3-解释" class="headerlink" title="3. 解释"></a>3. 解释</h3><p>可以采用闵氏几何来解释：狭义相对论的背景就是闵氏几何，而闵氏几何中，两点之间直线最长。弟弟的时间线是直线所以更长。</p>
+<p>也可以采用洛伦兹变换来解决，不过比较不好理解。</p>
+<h3 id="4-同样类型的问题还有一个：车库佯谬"><a href="#4-同样类型的问题还有一个：车库佯谬" class="headerlink" title="4. 同样类型的问题还有一个：车库佯谬"></a>4. 同样类型的问题还有一个：车库佯谬</h3><h2 id="关于黑洞奇点"><a href="#关于黑洞奇点" class="headerlink" title="关于黑洞奇点"></a>关于黑洞奇点</h2><ol>
+<li><p>黑洞是广义相对论预言的产物，但有意思的是：这个广义相对论自己预言的东西，却会产生一个自己都无法解释的东西——奇点。</p>
+</li>
+<li><p>广义相对论描绘的恒星死亡产生黑洞的过程：当一个大质量恒星燃烧完自己的燃料之后，在引力的作用下它必然要坍缩。如果满足一定的条件，这个恒星可以坍缩成一个黑洞，然后不可避免的产生一个“密度无限大、体积无限小”的奇点。</p>
+</li>
+<li><p>广义相对论虽然石破天惊的把引力解释为时空曲率，认为时空是弯曲的，但是它眼里的时空本质上还是平滑的。但其实量子尺度上，时空已经不是平滑的，因此这时广义相对论就失效，需要采用量子力学来解释。</p>
+</li>
+</ol>
+<h2 id="关于太阳和黑洞"><a href="#关于太阳和黑洞" class="headerlink" title="关于太阳和黑洞"></a>关于太阳和黑洞</h2><p>太阳目前是一颗黄矮星，寿命大概在100亿年（现在年龄是45.7亿年）。如果太阳燃烧殆尽后会发生什么？</p>
+<ol>
+<li><p>太阳能量哪里来？</p>
+<p>太阳质量是地球的33万倍，体积是地球的130万倍。它质量的四分之三都是氢，剩下的基本都是氦。太阳能量来自氢氦热核反应，其实就是核聚变。</p>
+<p>太阳质量这么大，那么它引力也是非常大的，之所以没有发生坍缩是因为目前的太阳热压力和引力平衡了。</p>
+</li>
+<li><p>坍缩的过程</p>
+<p>（1）太阳燃烧完了后，热压力顶不住引力就会发生坍缩。这时电子被压缩到原子核附近很小的范围运动，空间小波长短运动快能量高，产生一种新的抵抗压力叫电子简并压力。如果这个压力能够平衡引力使恒星达到另一个稳定状态，这样的星体叫做白矮星。</p>
+<p>（2）白矮星继续坍缩，电子被压到电子核里面去了，然后和质子中和，变成了不带电的中子，如果此时能够达到平衡就叫做中子星。</p>
+<p>（3）如果引力实在过大，任何简并压力都无法抗衡，就会变成黑洞。</p>
+</li>
+</ol>
+<h2 id="黑洞理论简史"><a href="#黑洞理论简史" class="headerlink" title="黑洞理论简史"></a>黑洞理论简史</h2><ol>
+<li><p>1915年，爱因斯坦给出了引力场方程的最终形式，这正式宣告了广义相对论的诞生。</p>
+</li>
+<li><p>1916年，史瓦西给出了广义相对论的第一个严格解，这个解描述了一种最简单的天体（静止、不带电、球对称的天体）周围的时空弯曲情况。然后，史瓦西发现所有的星体都存在一个史瓦西半径，如果星体的实际半径比它的史瓦西半径要小，那么它就会变成一个黑洞。</p>
+<p>比如太阳的史瓦西半径为3千米，地球的为9毫米。如果我们把太阳的半径压缩到3千米以下，太阳就会变成一个黑洞；如果把地球的半径压缩到9毫以下，地球也会变成了一个黑洞。</p>
+</li>
+<li><p>1939年，年轻的奥本海默根据广义相对论证明了：一个无压力的球体在自身的引力作用下坍缩到史瓦西半径的时候，如果这时候球体的质量比临界质量大，那么引力坍缩之后就不可能达到任何稳定的状态，只能形成黑洞。</p>
+</li>
+<li><p>六七十年代前， 许多人对黑洞的认识仅仅停留在：黑洞是一个密度大到光也无法逃出去的物体，黑洞里面有一个密度无穷大的奇点，这个奇点让物理定律都失效了。</p>
+</li>
+<li><p>彭罗斯和霍金证明了一个奇点定理（凡是黑洞必定存在一个奇点）。 接下来，霍金先是发现了面积定理（两个黑洞融合成一个大黑洞的时候，新黑洞的视界面积一定大于原来两个面积之和），然后证明了霍金辐射。</p>
+</li>
+<li><p>之后大家都去研究弦理论了</p>
+</li>
+</ol>
+<h2 id="关于杨振宁的成就"><a href="#关于杨振宁的成就" class="headerlink" title="关于杨振宁的成就"></a>关于杨振宁的成就</h2><ol>
+<li><p>弱相互作用下宇称不守恒</p>
+<p>杨振宁和李政道在1957年通过宇称不守恒获得了诺贝尔奖。</p>
+<p>（1）自然界的四大基本相互作用力：引力、电磁力、强力、弱力</p>
+<p>强力和弱力发生在电子核里面， 强力简单的说就是粘着质子、中子、夸克不让原子核分崩离析的那种力（不然的话，质子都带正电，它们之间同性电荷产生的排斥力早就把原子核给拆了），弱力是造成放射性原子核衰变的那种力，就是中子变成质子，质子变成中子那个过程中的力。</p>
+<p>（2）宇称，跟镜像反射对称，也就是左右对称相对应的这个守恒量，就是宇称。（可以理解为你和镜子里的你）</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51330777">详情</a></p>
+</li>
+<li><p>杨-米尔斯理论</p>
+<p>要想统一自然界中的各种力，要先能够描述。 引力用广义相对论描述，电磁力用麦克斯韦方程组（量子化之后用量子电动力学QED）描述，强力和弱力都还不知道怎么描述，统一就更别谈了。</p>
+<p>杨-米尔斯理论终于要登场了，我先把结论告诉大家：现在强力就是用杨-米尔斯理论描述的，弱力和电磁力现在已经实现了完全的统一，统一之后的电弱力也是用杨-尔斯理论描述的。也就是说，在四种基本力里，除了引力，其它三种力都是用杨-米尔斯理论描述的，所以你说杨-米尔斯理论有多重要？</p>
+</li>
+</ol>
+<div style="color:gray;font-size:0.9em">
+    来源:<br>
+    [1] <a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_213651246">长尾科学园</a>
+</div>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/"># 自然科学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/143ff927/">手把手教你用 VuePress + GitHub Pages 搭建个人博客！</a>
+            
+            
+            <a class="next" rel="next" href="/addc10d/">世界又站在了一种微妙而动荡的边界线上（茨威格）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/143ff927/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/addc10d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

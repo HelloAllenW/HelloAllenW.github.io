@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>12. 维京的传奇 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">12. 维京的传奇</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 12, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 12, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="维京的传奇"><a href="#维京的传奇" class="headerlink" title="维京的传奇"></a>维京的传奇</h2><h3 id="1-四面之敌"><a href="#1-四面之敌" class="headerlink" title="1. 四面之敌"></a>1. 四面之敌</h3><p>查理曼虽然加冕为“罗马皇帝”，但本质上仍是一位日耳曼君主而非罗马文化的真正继承者，因此他在遗嘱中沿用法兰克传统的土地分割继承制，而不是罗马的帝位继承制度。在他于814年去世之后不久，他的三个孙子把帝国瓜分成东法兰克、西法兰克、中间王国三份，东西两国很快又瓜分了中间王国，此后分别演变成今天德国（东法兰克）和法国（西法兰克）的前身。然而就在此时，刚刚稳定下来的西方世界又遭遇了三拨外族的同时入侵：一拨是来自伊比利亚和北非海岸的穆斯林海盗，一拨是来自斯堪的纳维亚地区的维京人，还有一拨是来自东方草原的马扎尔人。</p>
+<p>相较而言，穆斯林海盗主要是在地中海上和法国、意大利南部的沿海村镇掠夺财物，并且占领了西西里岛，发展成他们在地中海中央的一个基地。法兰克王国们根本没有海军，因此对海上的穆斯林无能为力，但他们守住了陆上的领土，杜绝穆斯林在伊比利亚之外的欧洲大陆定居，因此在欧洲大陆几乎没有造成永久性影响。马扎尔人进入匈牙利之后也被法兰克人挡住而不再前进，使其影响主要局限在中欧地区。只有维京人，他们的冲击几乎遍及整个欧洲，对欧洲的面貌造成了根本性的改变。</p>
+<p>维京人来自遥远的北方，擅长航海，主要以渔猎和贸易维生。他们可能是日耳曼人留在北方的分支，由于缺乏文字记载，其早期历史并不清楚。大约在800年左右，可能是由于人口过剩，并且航海技术进步，维京人开始频繁南下。维京人在扩张时主要通过海洋，因为他们的长船比南方的船舶先进，既能在大洋上航行也能深入内河，并且速度极快（维京长船在海上每天航行40英里，而法兰克骑兵每天只能前进20英里），非常适合从海上发起突袭。依靠海上优势，维京人虽然人数不多，但他们来去如风而又野蛮嗜杀，在欧洲民间传说中留下恐怖的名声。此时维京人的社会形态还较为落后，没有统一的国家，而是由众多部落组成。他们沿着三个方向扩张：丹麦人和一部分挪威人袭击不列颠岛、爱尔兰和西法兰克（但他们反倒不太敢招惹住在家门口的邻居东法兰克）；另一部分挪威人扩张到冰岛、格陵兰，甚至一度到达了北美洲，但因与印第安人产生冲突而未能永久定居；而瑞典人前往波罗的海南岸，然后进入内陆入侵斯拉夫人地区乃至拜占庭。</p>
+<h3 id="2-维京战狼"><a href="#2-维京战狼" class="headerlink" title="2. 维京战狼"></a>2. 维京战狼</h3><p>不列颠岛成为维京海盗的第一个受害者。丹麦人起初主要是劫掠不列颠岛的沿海居民点，尤其是教堂（此时教会聚有大量财富），然后发展到永久性殖民。他们占据了爱尔兰的都柏林，并以此为根据地入侵英格兰。英格兰七国中的六国都沦陷了，伦敦也被占领，最后只剩下西南部的威塞克斯王国。在强敌面前，威塞克斯的几代国王坚持抵抗，终于在878年由阿尔弗雷德国王打败了丹麦入侵者，并与之签订和约：丹麦人退到不列颠岛的东部定居（被称为“丹麦法区”，以约克为中心）并皈依基督教，而威塞克斯成为英格兰本土的唯一王国。此后的几十年间，威塞克斯励精图治，成为一个强大的中央集权国家，收复了大部分领土。而定居的丹麦人接受了英格兰的宗教、风俗，并学会了农业技术。他们被英格兰同化了，变得越来越亲近威塞克斯的基督教王国而不是他们远在北欧的亲戚。952年，丹麦法区的最后一位维京国王被推翻，这一地区从此永久并入英格兰，威塞克斯的统一大业终于完成。</p>
+<p>在英格兰与丹麦人签订和约之后，维京海盗们把入侵的重点转移到海峡对面的西法兰克王国。孱弱的加洛林国王无力抵御海盗，于是贵族们纷纷武装起来保护自己的领土，形成马赛克式的地方割据，由此演化成法国的封建制度。法国的很多城堡都是在这个时期修建起来。911年，一支维京部落占领了塞纳河口地区。“糊涂王”夏尔三世决定将此地封给这个部落，换取他们宣誓效忠国王，成为阻挡其他入侵者的屏障。这一政策遭到贵族们的强烈反对，此后夏尔三世也被赶下王位，但它的确起到了效果，阻止了更多维京人的入侵。从此，这里被称为“北方人（Northman）的土地”，即诺曼底（Normandy），这支部落被称为诺曼人。诺曼人是中世纪欧洲最强悍的武士，他们一方面具有强烈的征服欲，另一方面也非常善于学习，很快就融入了法兰西的基督教文化，在此后的欧洲历史上占据重要的一席之地。</p>
+<p>987年，西加洛林王朝无嗣而亡，法兰西公爵于格·卡佩获得了王位，这成为法兰西王国的开始。卡佩王朝早期尽管名义上是一国之主，实际上只能统治巴黎附近的小块地区（称为“法兰西岛”），诸多的地方贵族各自为政。但与加洛林王朝不同，卡佩王朝的优势是生育能力极强，繁衍了数百年，逐渐击败大小领主而建立了中央集权。一直到卡佩王朝主系于1328年绝嗣后，王位又先后传到卡佩家族的旁系瓦卢瓦家族和波旁家族，到1848年法国大革命才画上句号。而在西班牙，波旁家族今日仍然占据王位。</p>
+<p>当丹麦人和挪威人在海上侵略西欧的同时，瑞典人渡过波罗的海进入斯拉夫人居住的东欧平原。他们被称为“罗斯人”，并和这里的斯拉夫人逐渐融合起来，建立了基辅罗斯国，这就是俄罗斯的前身。罗斯人渡过黑海和南方的拜占庭建立起贸易关系，然后他们就觊觎君士坦丁堡的财富，在860～944年间几次进犯君士坦丁堡，都被拜占庭击败。然而，罗斯人的勇猛也给拜占庭留下了深刻印象。988年，拜占庭皇帝巴西尔二世面临叛军作乱，他与基辅大公弗拉基米尔一世（980 ~ 1015年在位）达成协议，基辅派遣6000名维京战士为皇帝平息叛乱（他们从此成为宣誓效忠于拜占庭皇帝的精锐部队，被称为瓦兰吉卫队），而巴西尔二世则把自己的妹妹嫁给弗拉基米尔，条件是弗拉基米尔皈依东正教。此后的几百年里，以维京人为主的瓦兰吉卫队在拜占庭帝国南征北战，而基辅罗斯（后来演变成俄罗斯）一直以东正教为国教，并与拜占庭结成同盟。1472年，拜占庭亡国之后的末代公主索菲娅嫁给了俄罗斯大公伊凡三世，俄罗斯从此以拜占庭的继承人自居。</p>
+<h3 id="3-草原骑兵"><a href="#3-草原骑兵" class="headerlink" title="3. 草原骑兵"></a>3. 草原骑兵</h3><p>在欧洲东部，黑海北方的草原自古就是东方游牧民族入侵的大门。继匈人之后，阿瓦尔人占据潘诺尼亚平原长达两百多年。在此期间，来自波兰平原的斯拉夫人逐渐南下扩散到巴尔干半岛。阿瓦尔人逐渐衰弱，最终被查理曼的法兰克王国彻底消灭。但在查理曼死后不久，来自乌拉尔山脉的马扎尔人（今日匈牙利人的前身）再度杀入这里。马扎尔人自东向西攻入中欧，仿佛匈人的恐怖重现，给斯拉夫和日耳曼人都带来了巨大的压力。</p>
+<p>891年，东法兰克王国打败了北方的维京人。但他们并没有轻松多久，马扎尔人就从东边袭来。就在此刻，东加洛林王朝于911年（诺曼人占据塞纳河口的同年）绝嗣。为了抵抗马扎尔人的威胁，诸侯们决定以选举一个强大的领袖担任国王，这被视作德意志国家的开端。因此，德意志从一开始就与英、法等国不同，不是一个真正的王国，而是由数百个小诸侯组成的联邦，以选举而非世袭的方式产生国王。随着诸侯家族的力量兴衰，王位也在不同的家族之间流转。</p>
+<p>936年，萨克森公爵奥托一世被选为国王。他在955年率领诸侯们决定性地打败了马扎尔人，使他们从此不再西侵，在匈牙利草原上定居下来。奥托还打败了丹麦国王“蓝牙”哈拉尔德（约958 ~ 985年在位），迫使他皈依了基督教，然后又应教皇请求南下，打败了再度侵扰教皇国的伦巴底人（他们原本受法兰克中间王国统治，在中间王国灭亡后独立出来）。962年（北宋赵匡胤黄袍加身的两年之后），战功累累的奥托受教皇加冕为“罗马皇帝”；而作为回报，奥托颁布法令，承诺维护教皇国的独立。为了终止与拜占庭之间关于皇帝名分的争议，奥托还让儿子奥托二世与拜占庭公主结婚，拜占庭终于承认西方的皇帝称号。从这以后，“罗马皇帝”这一称号在西方便一直被授予德意志国王，德意志国家也以“神圣罗马帝国”自居。（严格来说，相当长一段时间内，被选举出的国王称为“罗马人的国王”，等到教皇加冕后才正式称为“罗马皇帝”。而“神圣罗马帝国”这个国号是1157年才正式确定的。）——讽刺的是，神圣罗马帝国既不神圣，也不罗马，更非帝国：它是一个世俗而并非宗教实体，从未真正统治过罗马，也并非中央集权帝国。然而，这个四不像的实体一直延续到1806年，才在法国拿破仑的胁迫下终止。</p>
+<h3 id="4-千禧欧洲"><a href="#4-千禧欧洲" class="headerlink" title="4. 千禧欧洲"></a>4. 千禧欧洲</h3><p>随着维京人与欧洲诸国的交流日益加深，他们自身的社会形态也发生了很大的变化，不再是多个分散部落，而是逐渐统一起来，最终整合为三个王国：丹麦、挪威和瑞典。天主教也取代了原先崇拜奥丁/托尔的北欧神话，成为维京人的主流信仰。</p>
+<p>千年刚过，丹麦人对英格兰发起了最后一次征服。其起因是1002年威塞克斯国王埃塞尔雷德下令屠杀英格兰境内的所有丹麦人，丹麦国王斯维恩（“蓝牙”的儿子）宣称对此进行报复，渡海进攻英格兰，击败了埃塞尔雷德。不久这两位国王先后去世，两方的儿子、威塞克斯国王埃德蒙二世与丹麦国王克努特签订和议共治英格兰。埃德蒙很快就去世了，克努特成为整个英格兰、丹麦、以及挪威和部分瑞典的统治者，号称“北海帝国”。但这个帝国很快就化为泡影：克努特死后不久，埃德蒙二世之弟“忏悔者”爱德华在1042年复辟了威塞克斯，然后收复了整个英格兰，终结了丹麦人在英格兰的统治。虔诚信仰上帝的爱德华扩建了威斯敏斯特大教堂，它从此作为王室教堂见证英格兰的发展演变，直到今天。</p>
+<p>在英格兰复兴的同时，基督教也传遍了几乎整个欧洲大陆。定居中欧草原的马扎尔人在国王伊什特万一世（1000 ~ 1038年在位）的带领下改信天主教，成立匈牙利王国，完成了由游牧民族向封建国家的转变。此后当欧洲再度面对草原游牧民族进攻时，匈牙利反而起到了屏障作用，被称为“基督之盾”。同时，匈牙利王国从中间隔断了原本南北分布的斯拉夫人，使之分为三部：南部的斯拉夫人演变成克罗地亚（天主教）、塞尔维亚（东正教）等国，以及与突厥人融合产生的保加利亚；西北部的斯拉夫人建立了波兰（天主教）；东北部则是维京人与斯拉夫人融合而成的基辅罗斯（东正教）。</p>
+<p>总之，当欧洲跨入千禧年之时，英、法、德、俄等国家已经基本成形，一度搅局的维京人和马扎尔人也逐渐安定下来，融入到信仰基督教的欧洲大家庭之中。随着基督教成为全欧洲统一信仰，蛮族入侵的威胁渐渐消失了。而在东方，拜占庭这座千年之城挡住了穆斯林一波又一波的进攻，欧洲迎来了宝贵的不受外部威胁的发展环境。全球气候逐渐变得温暖，农业技术进步，饱受战火肆掠的西欧经济慢慢恢复起来，政治稳定，人口增长，开始有能力向外部输出力量。十字军东征的时代即将到来。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/94584ee5/">13. 十字军东征</a>
+            
+            
+            <a class="next" rel="next" href="/99a89139/">11. 黑暗的中世纪</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/94584ee5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/99a89139/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>如何读书？（钱穆） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何读书？（钱穆）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 3, 2015&nbsp;&nbsp;13:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 3, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6/">文学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTera06D5YIxbrq326XKxITSVicA6Oibtrhfzum3OCc7T1RQBvF8oUCK9ZibCyJFwcEhibfjya2OKSk4png/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>本文是钱穆49年后任教香港文商学院院长时的演讲文章。他教谕莘莘学子们要乐于读书，“做高境界的人”。而钱穆先生本人就是一个通过读书终成一代贤者大家的榜样。</p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">文（演讲整理）| 钱穆</div>
+
+
+
+<h2 id="为什么读书便能学得做一个高境界的人呢？"><a href="#为什么读书便能学得做一个高境界的人呢？" class="headerlink" title="为什么读书便能学得做一个高境界的人呢？"></a>为什么读书便能学得做一个高境界的人呢？</h2><p>因为在书中可碰到很多人，这些人的人生境界高、情味深，好做你的榜样。</p>
+<p>目前在香港固然有三百几十万人之多，然而我们大家的做人境界却不一定能高，人生情味也不一定能深。我们都是普通人，但在书中遇见的人可不同；他们是由千百万人中选出，又经得起长时间的考验而保留以至于今日，像孔子，距今已有二千六百年，试问中国能有几个孔子呢？又如耶稣，也快达二千年；他如释迦牟尼、穆罕默德等人。为什么我们敬仰崇拜他们呢？便是由于他们的做人。<strong>当然，历史上有不少人物，他们都因做人有独到处，所以为后世人所记忆，而流传下来了。</strong></p>
+<p>世间决没有中了一张马票，成为百万富翁而能流传后世的。即使做大总统或皇帝，亦没有很多人能流传让人记忆，令人向往。中国历代不是有很多皇帝吗？但其中大多数，全不为人所记忆，只是历史上有他一名字而已。哪里有读书专来记人姓名的呢？做皇帝亦尚无价值，其余可知。中马票固是不足道；一心想去外国留学、得学位，那又价值何在、意义何在呀？当知论做人，应别有其重要之所在。</p>
+<p>假如我们诚心想做一人，“<strong>培养情趣，提髙境界”</strong>，只此八个字，便可一生受用不尽；只要我们肯读书，能遵循此八个字来读，便可获得一种新情趣，进入一个新境界。各位如能在各自业余每天不断读书，持之以恒，那么长则十年二十年，短或三年五年，便能培养出人生情趣，提高了人生境界。那即是人生之最大幸福与最高享受了。</p>
+<h2 id="读哪些书？"><a href="#读哪些书？" class="headerlink" title="读哪些书？"></a>读哪些书？</h2><p>说到此，我们当再进一层来谈一谈读书的选择。究竟当读哪些书好？我认为：业余读书，大致当分下列数类：</p>
+<p>一是修养类的书</p>
+<p>所谓修养，犹如我们栽种一盆花，需要时常修剪枝叶，又得施肥浇水；如果偶有三五天不当心照顾，便决不会开出好花来，甚至根本不开花，或竟至枯死了。栽花尚然，何况做人！当然更须加倍修养。</p>
+<p>中国有关人生修养的几部书是人人必读的。</p>
+<p>首先是论语。切不可以为我从前读过了，现在毋须再读。正如天天吃饭一样，不能说今天吃了，明天便不吃；好书也该时时读。</p>
+<p>再次是孟子。孔孟这两部书，最简单，但也最宝贵。如能把此两书经常放在身边，一天读一二条，不过花上三五分钟，但可得益无穷。此时的读书，是各人自愿的，不必硬求记得，也不为应考试，亦不是为着要做学问专家或是写博士论文；这是极轻松自由的，只如孔子所言“默而识之”便得。只这样一天天读下，不要以为没有什么用；如像诸位毎天吃下许多食品，不必也不能时时去计算在里面含有多少维他命，多少卡路里，只吃了便有益；读书也是一样。这只是我们一种私生活，同时却是一种高尚享受。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><img src="https://mmbiz.qpic.cn/mmbiz/JKVuN4j0uHJ2Qw0u5hHIJjvbrwbicic0VQM4yyEI63TXXib0iaOY4vJIjSibAhA54reEOOb0rs3hbTr1bCsH42kpfYg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">△1949年，钱穆与同仁在香港创办了新亚书院</center>
+
+<p>孟子曾说过：“君子有三乐，而王天下不与存焉。”连做皇帝王天下都不算乐事；那么，看电影、中马票，又算得什么？但究竟孟子所说的那三件乐事是什么？我们不妨翻读一下孟子，把他的话仔细想一想，那实在是有意义的。人生欲望是永远不会满足的；有人以为月入二百元能加至二百五十元就会有快乐；哪知等到你如愿以偿，你始觉得仍然不快乐——即使王天下，也一样会不快乐。我们试读历史，便知很多帝王比普通人活得更不快乐。做人确会有不快乐，但我们不能就此便罢，我们仍想寻求快乐。人生的真快乐，我劝诸位能从书本中去找；只化三两块钱到书店中去，便可买到论语孟子；即使一天读一条，久之也有无上享受。</p>
+<p>还有一部老子，全书只五千字。一部庄子，篇幅较巨，文字较深，读来比较难；但我说的是业余读书，尽可不必求全懂。要知：即是一大学者，他读书也会有不懂的；何况我们是业余读书；等于放眼看窗外风景，或坐在巴士轮渡中欣赏四周景物，随你高兴看什么都好，不一定要全把外景看尽了，而且是谁也看不尽。</p>
+<p>还有一部佛教禅宗的六祖坛经，是用语体文写的，内中故事极生动，道理极深邃，化几小时就可一口气读完，但也可时常精读。其次，还有朱子的近思录与阳明先生的传习录。这两部书，篇幅均不多，而且均可一条条分开读。爱读几条便几条。</p>
+<p>我常劝国人能常读上述七部书。中国传统所讲修养精义，已尽在其内。而且此七书不论你做何职业，生活如何忙，都可读。今天在座年幼的同学们，只盼你们记住这几部书名，亦可准备将来长大了读。如果大家都能毎天抽出些时间来，有恒地去读这七部书，准可叫我们脱胎换骨，走上新人生的大道去。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AibEE72ysabMElEWDI5H3HE4iaCpPdib5qM0ibHTR5eU2MbFsfxmAA2LpEpevUB5Y0Yo8If0pTeSFOzfO8ZCgo6sgg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p>其次便是欣赏类的书。</p>
+<p>风景可以欣赏，电影也可以欣赏，甚至品茶喝咖啡，都可有一种欣赏。<strong>我们对人生本身也需要欣赏，而且需要能从高处去欣赏。</strong></p>
+<p>最有效的莫如读<strong>文学作品，尤要在读诗</strong>。这并非要求大家都做一个文学家；只要能欣赏。</p>
+<p>谚语有云：“熟读唐诗三百首，不会做诗也会吟。”</p>
+<p>诗中境界，包罗万象；不论是自然部分，不论是人生部分，中国诗里可谓无所不包；一年四季，天时节令，一切气候景物，乃至飞潜动植，一枝柳，一瓣花，甚至一条村狗或一只令人讨厌的老鼠，都进入诗境，经过诗人笔下晕染，都显出一番甚深情意，趣味无穷；进入人生所遇喜怒哀乐，全在诗家作品中。当我们读诗时，便可培养我们欣赏自然，欣赏人生，把诗中境界成为我们心灵欣赏的境界。如能将我们的人生投放沉浸在诗中，那真趣味无穷。</p>
+<p>如陶渊明诗：<strong>犬吠深巷中，鸡鸣桑树巅。</strong></p>
+<p>这十个字，岂非我们在穷乡僻壤随时随地可遇到！但我们却忽略了其中情趣。经陶诗一描写，却把一幅富有风味的乡村闲逸景象活在我们眼前了。我们能读陶诗，尽在农村中过活，却可把我们带进人生最高境界中去，使你如在诗境中过活，那不好吗？</p>
+<p>又如王维诗：<strong>雨中山果落，灯下草虫鸣。</strong></p>
+<p>诸位此刻住山中，或许也会接触到这种光景：下雨了，宅旁果树上，一个个熟透了的果子掉下来，可以听到“扑”“扑”的声音；草堆里小青虫经着雨潜进窗户来了，在灯下唧唧地鸣叫着。这是一个萧瑟幽静的山中雨夜，但这诗中有人。上面所引陶诗，背后也有人。只是一在山中，一在村中；一在白天，一在晚上。诸位多读诗，不论在任何境遇中，都可唤起一种文学境界，使你像生活在诗中，这不好吗？</p>
+<p>纵使我们也有不能亲历其境的，但也可以移情神游，于诗中得到一番另外境界，如唐诗：</p>
+<p>松下问童子，言师采药去；只在此山中，云深不知处。</p>
+<p>那不是一幅活的人生画像吗？那不是画的人，却是画的人生。那一幅人生画像，活映在我们眼前，让我们去欣赏。在我想，欣赏一首诗，应比欣赏一张电影片有味，因其更可使我们长日神游，无尽玩味。不仅诗如此，即中国散文亦然。诸位纵使只读一本唐诗三百首、只读一本古文观止也好；当知我们学文学，并不为自己要做文学家。因此，不懂诗韵平仄，仍可读诗。读散文更自由。学文学乃为自己人生享受之用，在享受中仍有提髙自己人生之收获，那真是人生一秘诀。</p>
+<p>第三是博闻类。</p>
+<p>这类书也没有硬性规定；只求自己爱读，史传也好，游记也好，科学也好，哲学也好，性之所近，自会乐读不倦，增加学识，广博见闻，年代一久，自不寻常。</p>
+<p>第四是新知类。</p>
+<p>我们生在这时代，应该随时在这时代中求新知。这类知识，可从现代出版的期刊杂志上，乃至报章上找到。这一类更不必详说了。</p>
+<p>第五是消遣类。</p>
+<p>其实广义说来，上面所提，均可作为消遣；因为这根本就是业余读书，也可说即是业余消遣。但就狭义说之，如小说、剧本、传奇等，这些书便属这一类。如诸位读水浒传、三国演义、红楼梦，可作是消遣。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/AibEE72ysabMElEWDI5H3HE4iaCpPdib5qMQPHEGsOtc6GicST5EzQtmG3dxjdLiacloe4jIK8vf3k35eXpcwnmWDuQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1"></p>
+<p>上面已大致分类说了业余所当读的书。但诸位或说生活忙迫，<strong>能在什么时读呢？</strong>其实人生忙，也是应该的；只在能利用空闲，如欧阳修的三上，即：<strong>枕上、厕上和马上。</strong></p>
+<p>上床了，可有十分一刻钟睡不着；上洗手间，也可顺便带本书看看；今人不骑骡马，但在舟车上读书，实比在马上更舒适。</p>
+<p>古人又说三余：冬者岁之余，夜者日之余，阴者晴之余。现在我们生活和古人不同；但每人必有很多零碎时间，如：清晨早餐前，傍晚天黑前，又如临睡前；一天便有三段零碎时间了。恰如一块布，裁一套衣服以后，余下的零头，大可派作别的用场。</p>
+<p>另外，还有周末礼拜天，乃及节日和假期；尤其是做教师的还有寒暑假。这些都可充分利用，作为业余读书时间的。假如毎日能节约一小时，十年便可有三千六百个小时。又如一个人自三十岁就业算起，到七十岁，便可节余一万四千四百个小时，这不是一笔了不得的大数目吗？现在并不是叫你去吃苦做学问，只是以读书为娱乐和消遣，亦像打麻雀、看电影，哪会说没有时间的！</p>
+<p>如果我们读书也如打麻雀、看电影般有兴趣、有习惯，在任何环境任何情况下都可读书。这样，便有高的享受，有好的娱乐，岂非人生一大佳事！读书只要有恒心，自能培养出兴趣，自能养成为习惯，从此可以提髙人生境界。这是任何数量的金钱所买不到的。</p>
+<p>今日香港社会读书空气实在太不够，中年以上的人，有了职业，便不再想到要进修，也不再想到业余还可再读书。我希望诸位能看重此事，也不妨大家合作，有书不妨交换读，有意见可以互相倾谈。如此，更易培养出兴趣。只消一年时间，习惯也可养成。</p>
+<p>我希望中年以上有职业的人能如此，在校的青年们他日离了学校亦当能如此，那真是无上大佳事。<strong>循此以往，自然人生境界都会高，人生情味都会厚。</strong>人人如此，社会也自成为一好社会。我今天所讲，并不是一番空泛的理论，只是我个人的实际经验。今天贡献给各位，愿与大家都分享这一份人生的无上宝贵乐趣。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6/"># 文学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/35d3d4a7/">如何观看当代艺术？其魅力何在，感动何来？</a>
+            
+            
+            <a class="next" rel="next" href="/fb42e1a6/">人类一切审美，都基于自身体验</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/35d3d4a7/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/fb42e1a6/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

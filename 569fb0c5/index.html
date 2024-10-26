@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>当年柏拉图和孟子一起出发，后来世界大不同 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">当年柏拉图和孟子一起出发，后来世界大不同</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">七月 13, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        七月 13, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6/">文学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">5 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz/sM5SdPkqTephIfusDwpxP6zoFg0Fic8G6ibXFQVPjb59bALNRFkGuk9Nue0bVtibHZ9fJ6h4QqbGfTKjOcYWFEp2g/640?tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>柏拉图的“人皆求善”和孟子的“可欲之谓善”都涉及人类生存的善的问题；但是，前者追问真正的善而走向认识论，后者推论本性之善而走向功夫论。这个差异在思想史上导致了中西哲学的两种完全不同的思维品格，引导着两种相去甚远的生存方式。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><strong>柏拉图：善和真理</strong></p>
+<hr>
+<p>先来分析柏拉图。柏拉图在他的《米诺篇》中论证了一个非常有意思的命题，即“人皆求善”。书中的苏格拉底认为，人没有例外都是求善的。这个命题不是观察命题：在观察上，我们看到的是既有人求善又有人求恶。因此，它不是通过观察归纳出来的；毋宁说，它是一个论证命题，也就是说，苏格拉底是提供一个论证来证明这个命题的正确性。</p>
+<p>苏格拉底的论证并不复杂，但力量却非常强大。这个论证可以称为“排除法”。就观察而言，我们都同意可以把人分为两种：一部分是求善的，一部分是求恶的。这是一个观察事实。从这里出发，苏格拉底说，对于求善的那部分人，他们是求善的；因此，我们不用管这部分人。对于那些求恶的人，他认为还是可以划分为两类：一类是“以恶为善而求恶”，一类是“明知为恶而求恶”。在这两类人中，那些“以恶为善”的人，当他们在追求恶的时候，并不知道那是恶的；相反，他们以为在追求善。之所以会出现这种情况，在于他们善恶不分，把恶判断为善，从而选择并追求恶。他们是在善的判断中追求恶，就其主观愿望而言是求善的。因此，应该把他们归为求善的那一类人。</p>
+<p>另一类“明知为恶而求恶”的人还可以再分为两种：一种是“明知为恶但为利而求恶”，另一种是“明知为恶且无利而求恶”。前一种人如贪污官员，明知贪污不好，但为了自己的利益还是要贪污。分析这种人的动机，可以发现他们在做决定时，不是因为那件事情是恶的，而是因为它有利可图。因此，决定他作恶的那个因素是有利可图。尽管可以说这个“有利可图”不过是暂时的利益，然而在这个时刻主导意识是把这个利益当作最重要的善，并且以此为他的选择根据。可见，他是在善的名义下决定作恶。因此，柏拉图认为这种人是属于求善的。</p>
+<p><strong>孟子：善和本性</strong></p>
+<hr>
+<p>孟子生活在一个礼崩乐坏的时代。对于一个有秩序的社会来说，只要按照社会已定的规范行事，就是善的行为。周朝建立起来之后，中国社会形成一套完整的礼仪制度作为人们的行为规范，称为“周礼”。到了春秋时期，周礼受到严重破坏。从齐桓公九合诸侯开始，各诸侯国追逐自己的利益，无视周礼的约束。从周礼的角度看，各国的做法是不合适的，是一种恶。但是，从各国自身的利益看，他们所做的一切都是善的。在孟子看来，这样的社会是人人都追逐自己利益的社会。</p>
+<p>在孟子的思路中，人生活在社会关系中，应该把着眼点放在人和人的关系上。每个人都有自己的利益，处理人和人的关系实际上也就是处理利益关系。利益关系可以是互利和谐的，也可以是互损冲突的。在实际生活中有各种各样的社会关系：有的社会关系对某些人有利，对其他人有损；有的社会关系对较多人有利，甚至对全体成员都有利；有的社会关系只对少数人有利，对多数人则有损。因此，寻找到一个好的社会关系，让更多人得到益处，就是当务之急。正是在这个思路上，孟子对梁惠王说：“亦有仁义而已矣”。可见，孟子要求梁惠王先谈“仁义”，实际上是在谈论个人生存和社会治理的出发点问题，主张出发点应该是“仁义”，而不是利益。</p>
+<p><strong>二者</strong></p>
+<hr>
+<p>柏拉图的认识论强调对真正的善的认识和把握：人必须把握住真正的善，并从此出发判断选择，只有这样人的生存才能满足对善的追求。问题的关键在于把握真正的善。但是，究竟什么是真正的善？如何判断我们得到了真正的善？在西方思想史上，问题的焦点是如何认识真理(真理之路)，如何判断我们把握住了真理(真理标准)。在柏拉图思想的影响下，古希腊人在真理之路和真理标准问题上欲罢不能，最终在基督教的恩典真理论那里找到落脚点。</p>
+<p>孟子的功夫论承认人们有不同的善知识。但是，孟子强调人的生存必须从“仁义”出发，在修身养性中把握合适的社会关系，并通过“礼”来调整自己的言行(“克己复礼”)。这里，生存的关键点是修身养性的功夫。值得注意的是，这种思路可以和认识论毫不相关。在修身养性中，人们不会提出这样的问题：哪种社会关系才是真正合适的。只要人在修身养性中体验到一种合适的社会关系，他就会按照他所体验到的社会关系去为人处世。当然，他在不同时候可能会有不同的体验，但这并不一定会引导他追问“真正合适”这类认识论问题。</p>
+<p>作为社会关系中的一员，人只需要着眼于当下的社会关系(“由仁义行”)，并在其中体验何为合适的社会关系。人的修养功夫深入到哪个程度，他对合适的社会关系(“仁义”)的认识就达到哪个程度。他在生存中只能按照自己所理解的“仁义”而行。如果他的理解出现了问题，导致他在处理和他人的关系时出现冲突，那么，他就会反求诸己，进一步修身养性，体验何为合适的社会关系。可以看到，功夫论的中心关注不是认识，而是修身养性的功夫，发扬本性中的善性。《中庸》给出了一种相当完整的君子论，即在“诚”中修身养性。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6/"># 文学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9b9e904b/">导演昆汀：我讲故事的6个技巧</a>
+            
+            
+            <a class="next" rel="next" href="/ee63480d/">当代最具影响力摄影师：薇薇安娜·萨森镜头下的色彩迷藏</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/9b9e904b/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/ee63480d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

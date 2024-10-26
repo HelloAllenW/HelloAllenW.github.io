@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>JavaScript中的数组方法 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JavaScript中的数组方法</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 5, 2016&nbsp;&nbsp;23:14:37</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 5, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">9 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍数组常见遍历方法：forEach、map、filter、find、every、some、reduce，它们有个共同点：不会改变原始数组。</p>
+<h2 id="一、forEach：遍历数组"><a href="#一、forEach：遍历数组" class="headerlink" title="一、forEach：遍历数组"></a>一、forEach：遍历数组</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var colors = [&quot;red&quot;,&quot;blue&quot;,&quot;green&quot;];</span><br><span class="line"></span><br><span class="line">// ES5遍历数组方法</span><br><span class="line">for(var i = 0; i &lt; colors.length; i++)&#123;</span><br><span class="line">    console.log(colors[i]);//red blue green</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ES6 forEach</span><br><span class="line">colors.forEach(function(color)&#123;</span><br><span class="line">    console.log(color);//red blue green</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>我们再来看个例子：遍历数组中的值,并计算总和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var numbers = [1,2,3,4,5];</span><br><span class="line">var sum = 0;</span><br><span class="line">numbers.forEach(number=&gt;sum+=number)</span><br><span class="line">console.log(sum)//15</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、map：将数组映射成另一个数组"><a href="#二、map：将数组映射成另一个数组" class="headerlink" title="二、map：将数组映射成另一个数组"></a>二、map：将数组映射成另一个数组</h2><p>map通过指定函数处理数组的每个元素，并返回处理后新的数组，map 不会改变原始数组。</p>
+<p>forEach和map的区别在于，forEach没有返回值。</p>
+<p>map需要返回值，如果不给return，默认返回undefined</p>
+<p>1、使用场景1</p>
+<p>假定有一个数值数组(A),将A数组中的值以双倍的形式放到B数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var numbers = [1,2,3];</span><br><span class="line">var doubledNumbers = [];</span><br><span class="line"></span><br><span class="line">// es5写法</span><br><span class="line">for(var i = 0; i &lt; numbers.length; i++)&#123;</span><br><span class="line">    doubledNumbers.push(numbers[i] * 2);</span><br><span class="line">&#125;</span><br><span class="line">console.log(doubledNumbers);//[2,4,6]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// es6 map方法</span><br><span class="line">var doubled = numbers.map(function(number)&#123;</span><br><span class="line">    return number * 2;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(doubled);//[2,4,6]</span><br></pre></td></tr></table></figure>
+
+<p>2、使用场景2 假定有一个对象数组(A),将A数中对象某个属性的值存储到B数组中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var cars = [</span><br><span class="line">    &#123;model:&quot;Buick&quot;,price:&quot;CHEAP&quot;&#125;,</span><br><span class="line">    &#123;model:&quot;BMW&quot;,price:&quot;expensive&quot;&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var prices = cars.map(function(car) &#123;</span><br><span class="line">    return car.price;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(prices); // [&quot;CHEAP&quot;, &quot;expensive&quot;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、filter：从数组中找出所有符合指定条件的元素"><a href="#三、filter：从数组中找出所有符合指定条件的元素" class="headerlink" title="三、filter：从数组中找出所有符合指定条件的元素"></a>三、filter：从数组中找出所有符合指定条件的元素</h2><p>filter() 检测数值元素，并返回符合条件所有元素的数组。 filter() 不会改变原始数组。</p>
+<p>1、使用场景1：假定有一个对象数组(A),获取数组中指定类型的对象放到B数组中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var porducts = [</span><br><span class="line">    &#123;name:&quot;cucumber&quot;,type:&quot;vegetable&quot;&#125;,</span><br><span class="line">    &#123;name:&quot;banana&quot;,type:&quot;fruit&quot;&#125;,</span><br><span class="line">    &#123;name:&quot;celery&quot;,type:&quot;vegetable&quot;&#125;,</span><br><span class="line">    &#123;name:&quot;orange&quot;,type:&quot;fruit&quot;&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">// es5写法</span><br><span class="line">var filteredProducts = [];</span><br><span class="line">for(var i = 0; i &lt; porducts.length; i++) &#123;</span><br><span class="line">    if(porducts[i].type === &quot;vegetable&quot;) &#123;</span><br><span class="line">        filteredProducts.push(porducts[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(filteredProducts); // [&#123;name: &quot;cucumber&quot;, type: &quot;vegetable&quot;&#125;, &#123;name: &quot;celery&quot;, type: &quot;vegetable&quot;&#125;]</span><br><span class="line"></span><br><span class="line">// es6 filter</span><br><span class="line">var filtered2 = porducts.filter(function(product)&#123;</span><br><span class="line">    return product.type === &quot;vegetable&quot;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(filtered2);</span><br></pre></td></tr></table></figure>
+
+<p>2、使用场景2：假定有一个对象数组(A),过滤掉不满足以下条件的对象</p>
+<p>条件: 蔬菜 数量大于0,价格小于10</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var products = [</span><br><span class="line">    &#123;name:&quot;cucumber&quot;,type:&quot;vegetable&quot;,quantity:0,price:1&#125;,</span><br><span class="line">    &#123;name:&quot;banana&quot;,type:&quot;fruit&quot;,quantity:10,price:16&#125;,</span><br><span class="line">    &#123;name:&quot;celery&quot;,type:&quot;vegetable&quot;,quantity:30,price:8&#125;,</span><br><span class="line">    &#123;name:&quot;orange&quot;,type:&quot;fruit&quot;,quantity:3,price:6&#125;</span><br><span class="line">];</span><br><span class="line">products = products.filter(function(product) &#123;</span><br><span class="line">    return product.type === &quot;vegetable&quot; &amp;&amp; product.quantity &gt; 0 &amp;&amp; product.price &lt; 10</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(products); // [&#123;name:&quot;celery&quot;,type:&quot;vegetable&quot;,quantity:30,price:8&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>3、使用场景3：假定有两个数组(A,B),根据A中id值,过滤掉B数组不符合的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var post = &#123;id:4,title:&quot;Javascript&quot;&#125;;</span><br><span class="line">var comments = [</span><br><span class="line">    &#123;postId:4,content:&quot;Angular4&quot;&#125;,</span><br><span class="line">    &#123;postId:2,content:&quot;Vue.js&quot;&#125;,</span><br><span class="line">    &#123;postId:3,content:&quot;Node.js&quot;&#125;,</span><br><span class="line">    &#123;postId:4,content:&quot;React.js&quot;&#125;,</span><br><span class="line">];</span><br><span class="line">function commentsForPost(post,comments)&#123;</span><br><span class="line">    return comments.filter(function(comment)&#123;</span><br><span class="line">        return comment.postId === post.id;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">console.log(commentsForPost(post,comments)); // [&#123;postId:4,content:&quot;Angular4&quot;&#125;,&#123;postId:4,content:&quot;React.js&quot;&#125;]</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、find：返回通过测试（函数内判断）的数组的第一个元素的值"><a href="#四、find：返回通过测试（函数内判断）的数组的第一个元素的值" class="headerlink" title="四、find：返回通过测试（函数内判断）的数组的第一个元素的值"></a>四、find：返回通过测试（函数内判断）的数组的第一个元素的值</h2><p>它的参数是一个回调函数，所有数组成员依次执行该回调函数，直到找出第一个返回值为true的成员，然后返回该成员。如果没有符合条件的成员，则返回undefined。</p>
+<p>1、使用场景1</p>
+<p>假定有一个对象数组(A),找到符合条件的对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var users = [</span><br><span class="line">    &#123;name:&quot;Jill&quot;&#125;,</span><br><span class="line">    &#123;name:&quot;Alex&quot;,id:2&#125;,</span><br><span class="line">    &#123;name:&quot;Bill&quot;&#125;,</span><br><span class="line">    &#123;name:&quot;Alex&quot;&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">// es5方法</span><br><span class="line">var user;</span><br><span class="line">for(var i = 0; i &lt; users.length; i++)&#123;</span><br><span class="line">    if(users[i].name === &quot;Alex&quot;)&#123;</span><br><span class="line">        user = users[i];</span><br><span class="line">        break;//找到后就终止循环</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(user);// &#123;name:&quot;Alex&quot;,id:2&#125;</span><br><span class="line"></span><br><span class="line">// es6 find</span><br><span class="line">user = users.find(function(user)&#123;</span><br><span class="line">    return user.name === &quot;Alex&quot;;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(user);// &#123;name:&quot;Alex&quot;,id:2&#125;找到后就终止循环</span><br></pre></td></tr></table></figure>
+
+<p>2、使用场景2：假定有一个对象数组(A),根据指定对象的条件找到数组中符合条件的对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var posts = [</span><br><span class="line">    &#123;id:3,title:&quot;Node.js&quot;&#125;,</span><br><span class="line">    &#123;id:1,title:&quot;React.js&quot;&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">var comment = &#123;postId:1,content:&quot;Hello World!&quot;&#125;;</span><br><span class="line">function postForComment(posts,comment)&#123;</span><br><span class="line">    return posts.find(function(post)&#123;</span><br><span class="line">        return post.id === comment.postId;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line">console.log(postForComment(posts,comment));//&#123;id: 1, title: &quot;React.js&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、every-amp-some"><a href="#五、every-amp-some" class="headerlink" title="五、every&amp;some"></a>五、every&amp;some</h2><p>every：数组中是否每个元素都满足指定的条件</p>
+<p>some:数组中是否有元素满足指定的条件</p>
+<p>1、使用场景1：计算对象数组中每个电脑操作系统是否可用，大于16位操作系统表示可用,否则不可用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// ES5方法</span><br><span class="line">var computers = [</span><br><span class="line">    &#123;name:&quot;Apple&quot;,ram:16&#125;,</span><br><span class="line">    &#123;name:&quot;IBM&quot;,ram:4&#125;,</span><br><span class="line">    &#123;name:&quot;Acer&quot;,ram:32&#125;</span><br><span class="line">];</span><br><span class="line">var everyComputersCanRunProgram = true;</span><br><span class="line">var someComputersCanRunProgram = false;</span><br><span class="line">for(var i = 0; i &lt; computers.length; i++)&#123;</span><br><span class="line">    var computer = computers[i];</span><br><span class="line">    if(computer.ram &lt; 16)&#123;</span><br><span class="line">        everyComputersCanRunProgram = false;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        someComputersCanRunProgram = true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">console.log(everyComputersCanRunProgram);//false</span><br><span class="line">console.log(someComputersCanRunProgram);//true</span><br><span class="line"></span><br><span class="line">// ES6 some every</span><br><span class="line">var every = computers.every(function(computer)&#123;</span><br><span class="line">    return computer.ram &gt; 16;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(every);//false</span><br><span class="line">var some = computers.some(function(computer)&#123;</span><br><span class="line">    return computer.ram &gt; 16;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(some);//true</span><br></pre></td></tr></table></figure>
+
+<p>一言以蔽之：Some: 一真即真；Every: 一假即假</p>
+<p>2、使用场景2：假定有一个注册页面,判断所有input内容的长度是否大于0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Field(value)&#123;</span><br><span class="line">    this.value = value;</span><br><span class="line">&#125;</span><br><span class="line">Field.prototype.validate = function()&#123;</span><br><span class="line">    return this.value.length &gt; 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// ES5方法</span><br><span class="line">var username = new Field(&quot;henrywu&quot;);</span><br><span class="line">var telephone = new Field(&quot;18888888888&quot;);</span><br><span class="line">var password = new Field(&quot;my_password&quot;);</span><br><span class="line">console.log(username.validate());//true</span><br><span class="line">console.log(telephone.validate());//true</span><br><span class="line">console.log(password.validate());//true</span><br><span class="line"></span><br><span class="line">//ES6 some every</span><br><span class="line">var fields = [username,telephone,password];</span><br><span class="line">var formIsValid = fields.every(function(field)&#123;</span><br><span class="line">    return field.validate();</span><br><span class="line">&#125;)</span><br><span class="line">console.log(formIsValid);//true</span><br><span class="line">if(formIsValid)&#123;</span><br><span class="line">    // 注册成功</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    // 给用户一个友善的错误提醒</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、reduce：将数组合成一个值"><a href="#六、reduce：将数组合成一个值" class="headerlink" title="六、reduce：将数组合成一个值"></a>六、reduce：将数组合成一个值</h2><p>reduce() 方法接收一个方法作为累加器，数组中的每个值(从左至右) 开始合并，最终为一个值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(function(total, currentValue, currentIndex, arr), initialValue)</span><br></pre></td></tr></table></figure>
+
+<p>1、使用场景1： 计算数组中所有值的总和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var numbers = [10,20,30];</span><br><span class="line">var sum = 0;</span><br><span class="line">//es5 方法</span><br><span class="line">for(var i = 0; i &lt; numbers.length; i++)&#123;</span><br><span class="line">    sum += numbers[i];</span><br><span class="line">&#125;</span><br><span class="line">console.log(sum);</span><br><span class="line"></span><br><span class="line">// es6 reduce</span><br><span class="line">var sumValue = numbers.reduce(function(sum2,number2) &#123;</span><br><span class="line">    console.log(sum2);// 0 10 30 60</span><br><span class="line">    return sum2 + number2;</span><br><span class="line">&#125;,0);//sum2初始值为0</span><br><span class="line">console.log(sumValue);</span><br></pre></td></tr></table></figure>
+
+<p>2、使用场景2：</p>
+<p>将数组中对象的某个属性抽离到另外一个数组中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var primaryColors = [</span><br><span class="line">    &#123;color:&quot;red&quot;&#125;,</span><br><span class="line">    &#123;color:&quot;yellow&quot;&#125;,</span><br><span class="line">    &#123;color:&quot;blue&quot;&#125;</span><br><span class="line">];</span><br><span class="line">var colors = primaryColors.reduce(function(previous,primaryColor)&#123;</span><br><span class="line">previous.push(primaryColor.color);</span><br><span class="line">    return previous;</span><br><span class="line">&#125;,[]);</span><br><span class="line">console.log(colors);//[&quot;red&quot;, &quot;yellow&quot;, &quot;blue&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>3、使用场景3：判断字符串中括号是否对称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function balancedParens(string)&#123;</span><br><span class="line">    return !string.split(&quot;&quot;).reduce(function(previous,char)&#123;</span><br><span class="line">        if(previous &lt; 0) &#123; return previous;&#125;</span><br><span class="line">        if(char == &quot;(&quot;)&#123; return ++previous;&#125;</span><br><span class="line">        if(char == &quot;)&quot;)&#123; return --previous;&#125;</span><br><span class="line">        return previous;</span><br><span class="line">    &#125;,0);</span><br><span class="line">&#125;</span><br><span class="line">console.log(balancedParens(&quot;((())))&quot;));</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、-findLast-和-findLastIndex"><a href="#七、-findLast-和-findLastIndex" class="headerlink" title="七、 findLast() 和 findLastIndex()"></a>七、 findLast() 和 findLastIndex()</h2><p>在 JavaScript 中，可以通过 find() 和 findIndex()  查找数组中的值。不过，这些方法从数组的开始进行遍历：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const array = [&#123;v: 1&#125;, &#123;v: 2&#125;, &#123;v: 3&#125;, &#123;v: 4&#125;, &#123;v: 5&#125;];</span><br><span class="line"></span><br><span class="line">array.find(elem =&gt; elem.v &gt; 3); // &#123;v: 4&#125;</span><br><span class="line">array.findIndex(elem =&gt; elem.v &gt; 3); // 3</span><br></pre></td></tr></table></figure>
+
+<p>如果要从数组的末尾开始遍历，就必须反转数组并使用上述方法。这样做就需要一个额外的数组操作。所以引入了findLast() 和 findLastIndex()</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const array = [&#123;v: 1&#125;, &#123;v: 2&#125;, &#123;v: 3&#125;, &#123;v: 4&#125;, &#123;v: 5&#125;];</span><br><span class="line"></span><br><span class="line">array.findLast(elem =&gt; elem.v &gt; 3); // &#123;v: 5&#125;</span><br><span class="line">array.findLastIndex(elem =&gt; elem.v &gt; 3); // 4</span><br><span class="line">array.findLastIndex(elem =&gt; elem.v &gt; 5); // -1</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、ECMAScript-提案：toReversed-、toSorted-、toSpliced-、with"><a href="#八、ECMAScript-提案：toReversed-、toSorted-、toSpliced-、with" class="headerlink" title="八、ECMAScript 提案：toReversed()、toSorted()、toSpliced()、with()"></a>八、ECMAScript 提案：toReversed()、toSorted()、toSpliced()、with()</h2><p>详见：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/4-nzPTbbAkdVUKAwoOk5aw">https://mp.weixin.qq.com/s/4-nzPTbbAkdVUKAwoOk5aw</a></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/55fb48a0/">JavaScript中的字符串方法</a>
+            
+            
+            <a class="next" rel="next" href="/8bc77391/">JavaScript数据类型转换</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/55fb48a0/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/8bc77391/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

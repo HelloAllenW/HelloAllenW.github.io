@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>23. 英法争霸 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">23. 英法争霸</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 23, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 23, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">14 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="英法争霸"><a href="#英法争霸" class="headerlink" title="英法争霸"></a>英法争霸</h2><h3 id="1-君主制度"><a href="#1-君主制度" class="headerlink" title="1. 君主制度"></a>1. 君主制度</h3><p>宗教改革使天主神权退出欧洲政治舞台，君主们成为国家的最高主宰。他们不再屈从于教皇的旨意，而是为了国家的世俗利益互相争斗。然而此时，君主制本身已面临民主制的挑战。</p>
+<p>与中国不同，西方文明从早期开始就有多种不同的政治体制，其中最典型的是以世袭、终身为特征的君主制，和以选举、任期为特征的民主制（还有介乎两者之间的多种体制）。国家实行何种政体，很大程度上取决于其社会经济形态。</p>
+<p>传统农业经济上的国家普遍采取君主制，通过君主（以及贵族）集权来克服农业生产规模小、社会化协作程度低等痼疾，实现社会资源的集中使用。君主们对内承担着协调社会资源、维护社会秩序等公共职责，对外则代表国家，通过战争或外交手段为本国争取利益。而农民被束缚在土地上，缺乏自由和政治权利，只能被动服从君主意志。与此同时，地中海地区很早就存在另一种经济形态：商业经济。商业依赖于高度的社会协作，通过市场交换来实现财富分配，需要公正平等、自由开放的市场环境。工商业者虽然需要政府维持市场秩序，但排斥以集权手段控制财富，因此更喜好民主制度。然而，早期的民主制度也有所不足，只适于小型城邦而难以治理大型国家。</p>
+<p>在古代欧洲，擅长海洋贸易的古希腊城邦多偏好民主制，而从罗马帝国开始，君主制占据上风。中世纪的日耳曼国家基本都以农业为主，普遍实行君主制度，但民主制度并未消亡，例如威尼斯、佛罗伦萨等商业城市共和国，它们脱离君主统治，依靠市民选举的议会和执政官来实行自治。随着大航海时代来临，商业经济再度兴起，并且重心从地中海转移到北大西洋。在这样的背景下，英国从君主制向民主制转型，成为首个君主立宪制的大型国家。</p>
+<h3 id="2-英国革命"><a href="#2-英国革命" class="headerlink" title="2. 英国革命"></a>2. 英国革命</h3><p>从《大宪章》开始，英国形成了较特殊的封建制度，王权相对较弱，而贵族/平民的权利得到法律保护。英国盛产优质羊毛，在中世纪后期大量出口到欧洲大陆的佛罗伦萨等城市进行纺织，而在百年战争结束、大航海时代开启后，英国积极发展本土的羊毛纺织业，并利用新航路开拓广阔的海外市场。贵族地主纷纷圈占农民的耕地改为养羊，同时投资纺织工场；而失地农民流入城市，又为工业提供了大量劳动力。亨利八世时期，英国已经出现了数千人的大型纺织场，羊毛纺织成为英国的“民族工业”。英国的经济形态逐渐由传统农业经济向工商业转变。部分贵族转变为资本家，主张保护私有财产，支持维护个人自由的新教。而英国王室竭力维持旧的社会秩序，抵制圈地运动。双方矛盾日深。</p>
+<p>伊丽莎白一世之后，斯图亚特王朝的首位国王詹姆士一世（1603～1625年在位）大力宣扬“君权神授”，并组织人员把《圣经》翻译成英文（史称《钦定版圣经》），这对于圣经在英语国家的普及、以及英语本身的发展都有极为重要的意义。当欧洲大陆的三十年战争爆发之时，詹姆士一世努力保持和平，并在王国内部的不同势力之间谨慎地维持平衡。然而，他的儿子查理一世继位之后，局面大为改观。</p>
+<p>英国《大宪章》规定，国王不能在未经议会批准的情况下加税。而查理一世积极参与欧洲三十年战争，为了筹措军费而肆意征税，引起代表贵族利益的议会强烈抗议。同时，他的宗教立场在天主教和新教之间摇摆不定，也使议会不满。双方矛盾愈演愈烈，查理一世数次解散议会，于1629年之后干脆不再召开议会，实行独裁统治。然而，缺乏贵族支持的国王难以筹措到战争经费，只好退出欧洲战争。1638年，苏格兰起义反抗查理一世的统治。查理一世征讨失败，只得于1640年召开久违的议会以筹措军费，而议会却不受国王控制，通过了《大抗议书》，要求建立政府对议会负责的制度。查理一世企图逮捕议员，但整个伦敦都站在议会一方。国王于1642年逃到诺丁汉并宣布起兵讨伐议会，英国内战开始。</p>
+<p>战争进行到1648年（三十年战争结束的同年），查理一世战败被擒。议会通过了与查理一世和解的提案，但是以克伦威尔为首的军队领袖决定彻底推翻国王。军方把保皇派人员逐出议会，残缺议会于次年判处查理一世死刑，他被当众处决。克伦威尔宣布英国成为共和国，并出任国务会议主席。然而仅仅四年后，他就用武力解散议会，自任护国公，英国重新回到独裁统治。</p>
+<p>1658年克伦威尔去世后，政局动荡，议会决定迎回流亡的查理二世（查理一世之子），斯图亚特王朝复辟。查理二世的作风亲民，王权暂时得以稳固。但他的弟弟詹姆士二世继位后，再度爆发信仰危机。詹姆士二世信奉天主教，他不顾大部分国民信仰新教的事实，企图把天主教定为国教，并且强行镇压反对派，解散议会。然而，他的长女玛丽是信仰新教的，并且嫁给了詹姆士二世的外甥、荷兰共和国的执政威廉三世。1688年（大清康熙二十七年），在英国贵族的支持下，威廉三世率军渡海进入英国，詹姆士二世派出的军队纷纷倒戈，威廉不放一枪一弹就占领了伦敦。詹姆士二世逃亡到法国。威廉签署了议会提出的《权利法案》，接受议会高于王权的法则，于是议会同意威廉和玛丽成为英国的共治君主，这标志着英国成为世界上第一个君主立宪制的国家（史称“光荣革命”）。</p>
+<p>威廉和玛丽击败了法国支持的詹姆士二世复辟势力，并借助与荷兰的共治优势，使英国的海上商贸繁荣发展。然而他们没有子嗣，因此在他们于1694年和1702年先后去世之后，王位交给玛丽的妹妹安妮。安妮女王放权给议会和政府，促进了内阁制的发展。在她任内，英国在西班牙王位继承战争中获胜，成为世界头号海上强国。苏格兰和英格兰也于1707年签订法案，成为联合王国。安妮被称为“贤明女王”，但她的独子早夭，使得王位继承再度成为问题。1714年安妮逝世后，英国议会通过法案排除所有天主教徒的继位权，在淘汰了50多名与安妮血缘相近的天主教徒后，终于找到了德国汉诺威选帝侯乔治（他的母亲是英王詹姆士一世的外孙女）来担任英国国王。乔治一世成为英国汉诺威王朝的首位国王，也是历史上第一位无法使用流利英语、以德语为母语的英国国王。乔治一世决定本人不出席内阁会议，而是委派亲信大臣主持，这成为英国首相制度之始。也是自乔治一世开始，英国从未有国王否决议会的决定。英国的政治体制转型基本完成。</p>
+<h3 id="3-路易十四"><a href="#3-路易十四" class="headerlink" title="3. 路易十四"></a>3. 路易十四</h3><p>在英国削弱王权、通过议会实行贵族民主统治的同时，法国朝着另一个相反的方式进行政治改革：君主专制。改革的中心是“太阳王”路易十四，全世界有确切记录的在位时间最长的君王（1643～1715年在位，共72年）。路易十四登基时年仅五岁，直到1661年正式亲政，然后就致力于建立中央集权的绝对君主制。（巧合的是，这段时间东西方有三位强力君主同时在位：除了路易十四之外，俄国彼得大帝1682～1725年在位，清朝康熙皇帝1661～1722年在位。）</p>
+<p>在法国封建历史上大部分时间，国家的权力是分散的，贵族在各自领地内拥有很大的自主权。路易十四的策略是把这些贵族集中到巴黎管理。他在巴黎郊区兴建了欧洲最大、最豪华的宫殿：凡尔赛宫，并于1682年将宫廷迁至这里。（此后凡尔赛宫作为国王居所直到法国大革命。）路易十四迫使贵族们从早到晚都待在宫廷中参加舞会、宴席等各种活动，使他们从地方长官变成了宫廷花瓶，同时悄悄地把地方统治权收归己有。</p>
+<p>在修建凡尔赛宫的同时，路易十四对外发动了多次扩张战争，其中最重要的是对荷兰的入侵。荷兰拥有强大的海外贸易网络，在三十年战争结束后成为欧洲的商业和金融中心。然而，由于国土与人口有限，荷兰的军事力量远逊于其财力，使它成为虎狼眼中的肥肉。1672年，路易十四联合英王查理二世对荷兰开战，一举攻占荷兰七省中的五省。荷兰人在威廉三世的领导下誓死抵抗入侵，甚至不惜决堤以阻挡法军进攻。荷兰舰队打败了英国海军，英国议会也不愿意支持天主教法国进攻新教的荷兰。查理二世在议会的压力下退出战争，并把侄女玛丽嫁给威廉以示和解。哈布斯堡家族的西班牙与奥地利也决定与威廉结盟以抑制法国。在盟军的帮助下，荷兰打退了法国的入侵，奇迹般的幸存下来。然而，路易十四并未就此放弃，于1674年与瑞典结盟，再次进攻荷兰与哈布斯堡的联盟。凭借强大的军事力量，法国迫使荷兰联盟在1678年签订条约，奥地利和西班牙都割让领土给法国，路易十四成为欧洲最强大的“太阳王”。而荷兰在战争中损失惨重，威廉三世与路易十四结下毕生之仇。</p>
+<p>1688年，威廉三世渡海取得英国王位，聚集英荷两国之力，并联合哈布斯堡对抗路易十四。此后的一百多年里，英法争霸成为欧洲政治冲突的主线（或称“第二次英法百年战争”）。法国依靠强大的陆军在欧洲大陆称雄，而英国的策略是依靠海军掌控海外殖民地，同时与欧洲大陆的反法力量结盟。</p>
+<h3 id="4-西班牙王位战"><a href="#4-西班牙王位战" class="headerlink" title="4. 西班牙王位战"></a>4. 西班牙王位战</h3><p>哈布斯堡家族曾经是欧洲霸主，然而可能是由于长期近亲结婚导致的遗传性疾病，这个家族的人丁逐渐衰落。1700年，哈布斯堡家族的西班牙分支首先迎来了命运的终结。</p>
+<p>西班牙哈布斯堡王室的最后一位男性是卡洛斯二世（1665～1700年在位），他身患多种遗传疾病、智障且不能生育，因此谁将继承西班牙王位成为欧洲的一个重要政治问题。奥地利哈布斯堡王室与西班牙系出同源，但法国王室也多次与西班牙联姻，路易十四更是迎娶了卡洛斯二世的姐姐，因此两国都主张自己有继承权。经过复杂的政治斗争，智力低下的卡洛斯二世立下遗嘱传位给路易十四的孙子腓力。因此在他逝世后，法国安茹公爵腓力成为西班牙波旁王朝的首位君主。奥地利的神圣罗马皇帝利奥波德一世旋即联合英国、荷兰（此时威廉三世已故，英国与荷兰的统治者分别是安妮女王和议长海因斯）对路易十四开战。</p>
+<p>有了英国的加入，反法联盟在这场战争中占据上风。在海上，英荷海军联合歼灭了法国和西班牙舰队，而在陆上，反法联盟甚至一度攻陷西班牙首都马德里。然而，在法国的顽强坚持下，战争进入僵持状态，双方都损失惨重。1713～1715年，各方终于签订了一系列停战条约：路易十四保住了腓力的西班牙王位，前提是腓力放弃法国王位的继承权，并且此后法国国王和西班牙国王永不能由同一个人担任。同时，西班牙在本土之外的欧洲属地（包括西属尼德兰、那不勒斯和撒丁岛等）几乎全部划给奥地利，直布罗陀也被割让给英国。西班牙从此退出欧洲一流强国之列，无力再参与争锋。反法同盟中，英国（汉诺威王朝上位）成为新的海上霸主，而奥地利成为陆上最强。德意志诸侯中，勃兰登堡公爵腓特烈一世为皇帝立下汗马功劳而被封为普鲁士国王，从此走上了崛起之路。只有荷兰虽然获胜，但被长年战争耗尽了国力，海外贸易地位也被英国取代，短暂的黄金年代消逝在海风中。</p>
+<h3 id="5-奥地利王位战"><a href="#5-奥地利王位战" class="headerlink" title="5. 奥地利王位战"></a>5. 奥地利王位战</h3><p>英法等国在西方争霸的同时，奥地利仍然在欧洲东部承受奥斯曼土耳其的压力。奥斯曼帝国自从苏莱曼一世逝世后变得江河日下，残酷的王位争夺使家族男丁凋零，1574 ~ 1651年内的大部分时间是由几位苏丹皇太后先后掌权（“苏丹女权时期”），近卫军也频繁叛乱，数次废黜无能的苏丹。1656年苏丹皇太后任命杰出的大臣科普鲁律代为执政，帝国才得以恢复秩序，不久就重燃扩张野心。</p>
+<p>1683年，奥斯曼帝国再度围攻维也纳。奥地利的利奥波德一世皇帝借故溜走，但守军仍然坚守城池。危急时刻，波兰国王约翰三世率领波兰-德意志诸侯联军来援，在维也纳城下击溃奥斯曼大军。这是欧洲历史上具有决定性意义的胜利，伊斯兰与西方的攻守之势从此逆转。奥地利领导西方联军（新兴的俄罗斯也加入进来）开展战略大反攻，到1699年时，已经从土耳其人手中夺回了整个匈牙利和特兰西瓦尼亚（罗马尼亚西北部）。此时西班牙的卡洛斯二世去世，奥地利迅即转身投入西班牙王位战，又从西班牙获得大片领土。这使奥地利的领土面积达到了历史顶峰，然而天命难违，哈布斯堡家族的血脉不久就走到了尽头。</p>
+<p>奥地利哈布斯堡王室的最后一位男性查理六世于1740年去世。他遗诏传位给自己的女儿玛丽亚·特蕾西亚，但周边的虎狼之国们并不把这放在眼里。德意志诸侯们联合法国一起入侵，冲在最前面的正是普鲁士国王腓特烈二世（腓特烈一世之孙，后称为腓特烈大帝）。玛丽亚·特蕾西亚依靠匈牙利和英国的援助进行了顽强抵抗，直到1745年终于同意割让大片领土给普鲁士以换取和平。她的丈夫洛林公爵弗朗茨一世获得了神圣罗马帝国皇帝称号，从此奥地利进入哈布斯堡-洛林王朝，而普鲁士成为德意志地区仅次于奥地利的第二强国。</p>
+<p>奥地利王位战争之后，随着普鲁士的崛起，欧洲的势力格局发生巨变：法国重新成为欧洲大陆头号强国；为了对抗普鲁士，奥地利转而与旧敌法国和俄国结盟；英国延续“欧陆平衡”战略，拉拢普鲁士以遏制法国。哈布斯堡的光芒黯淡下去，英法两强的竞争更加白热化。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d470d988/">24. 革命法兰西</a>
+            
+            
+            <a class="next" rel="next" href="/8aacb810/">22. 工业黎明与英国腾飞</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d470d988/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/8aacb810/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

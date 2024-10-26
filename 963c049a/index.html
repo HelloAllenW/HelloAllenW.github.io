@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>一文读懂什么是 PWA？ | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">一文读懂什么是 PWA？</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 8, 2018&nbsp;&nbsp;9:51:11</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 8, 2018
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">4 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>借助于 App Manifest 和 Service Worker 来实现 PWA 的安装和离线等功能。</p>
+<h1 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h1><p>PWA 是 Google 于 2016 年提出的概念，于 2017 年正式落地，于 2018 年迎来重大突破，全球顶级的浏览器厂商，Google、Microsoft、Apple 已经全数宣布支持 PWA 技术。</p>
+<p>PWA 全称为 Progressive Web App，中文译为渐进式 Web APP，其目的是通过各种 Web 技术实现与原生 App 相近的用户体验。</p>
+<h1 id="二、特性"><a href="#二、特性" class="headerlink" title="二、特性"></a>二、特性</h1><h2 id="1、安全可靠"><a href="#1、安全可靠" class="headerlink" title="1、安全可靠"></a>1、安全可靠</h2><p>使用 Service Work 技术实现即时下载，当用户打开应用后，页面资源的加载不再完全依赖于网络，而是使用 Service Work 缓存离线包存在本地，确保为用户提供即时可靠的体验。</p>
+<h2 id="2、访问更快"><a href="#2、访问更快" class="headerlink" title="2、访问更快"></a>2、访问更快</h2><p>首屏可以部署在服务端，节省网页请求时间，加载速度更快，拥有更平滑的动态效果和快速的页面响应。</p>
+<h2 id="3、响应式界面"><a href="#3、响应式界面" class="headerlink" title="3、响应式界面"></a>3、响应式界面</h2><p>支持各种类型的终端和屏幕。</p>
+<h2 id="4、沉浸式体验"><a href="#4、沉浸式体验" class="headerlink" title="4、沉浸式体验"></a>4、沉浸式体验</h2><p>在支持 PWA 的浏览器和手机应用上可以直接将 Web 应用添加到用户的主屏幕上，无需从应用商店下载安装。从主屏幕上打开应用之后，提供沉浸式的全屏幕体验。</p>
+<h1 id="三、功能"><a href="#三、功能" class="headerlink" title="三、功能"></a>三、功能</h1><p>PWA不是技术只是google提出的一个概念，它是有多种技术合集实现web页面能具备App三大准则（粘性，快速响应，离线可靠）的概念。 </p>
+<h2 id="1、手机应用配置-通过Web-App-Manifest技术实现"><a href="#1、手机应用配置-通过Web-App-Manifest技术实现" class="headerlink" title="1、手机应用配置(通过Web App Manifest技术实现)"></a>1、手机应用配置(通过<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Manifest">Web App Manifest</a>技术实现)</h2><p>可以通过 manifest.json 文件配置，使得可以直接添加到手机的桌面上。</p>
+<h2 id="2、离线加载与缓存-Service-Worker-Cache-API"><a href="#2、离线加载与缓存-Service-Worker-Cache-API" class="headerlink" title="2、离线加载与缓存(Service Worker+Cache API )"></a>2、离线加载与缓存(Service Worker+Cache API )</h2><p>可以通过 Service Worker + HTTPS +Cache Api + indexedDB 等一系列 Web 技术实现离线加载和缓存。</p>
+<h2 id="3、消息推动与通知-Web-Push-amp-Notifications-API"><a href="#3、消息推动与通知-Web-Push-amp-Notifications-API" class="headerlink" title="3、消息推动与通知(Web Push &amp; Notifications API)"></a>3、消息推动与通知(Web Push &amp; <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Notifications_API">Notifications API</a>)</h2><p>实现实时的消息推送与通知</p>
+<h2 id="4、数据及时更新-Background-Sync"><a href="#4、数据及时更新-Background-Sync" class="headerlink" title="4、数据及时更新(Background Sync )"></a>4、数据及时更新(Background Sync )</h2><p>后台同步，数据及时更新</p>
+<p>其中，<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Service_Worker_API">service worker</a> 是实现PWA理念的核心技术支持。 service worker只是一种特殊的web worker，众所周知JavaScript在被设计之初一直被设定为单线程描述性语言，随着功能业务丰富，设计者发现单线程已经很难满足新业务的开展，故引入web worker技术，允许JavaScript在主线程运行外执行同源的worker来实现多线程业务，service worker同样具有这样的特性，作为pwa 核心技术，主要用于构建浏览器worker的服务与web项目通信数据交互。</p>
+<h1 id="四、优势和劣势"><a href="#四、优势和劣势" class="headerlink" title="四、优势和劣势"></a>四、优势和劣势</h1><h2 id="1、优势"><a href="#1、优势" class="headerlink" title="1、优势"></a>1、优势</h2><p>（1） 超简单的安装和下载。</p>
+<p>（2）发布迭代不需要第三方平台审核。</p>
+<p>（3）渐进式：现有的 Web 项目可以通过 PWA 的几个核心技术点一步步转型成一个完整的 PWA 应用。</p>
+<h2 id="2、劣势："><a href="#2、劣势：" class="headerlink" title="2、劣势："></a>2、劣势：</h2><p>（1）因为推出的时间不长，所以现有浏览器的支持还不够全面， 不是每一款浏览器都能100%的支持所有的 PWA 特性。</p>
+<p>（2）对于底层硬件的调用还是需要依赖第三方库才能实现（如打开摄像头，实现语言功能等等）。</p>
+<p>（3）PWA 现在还没那么火，国内一些手机生产商在 Android 系统上做了手脚，似乎屏蔽了 PWA, 但是等 PWA 真正流行起来之后，相信这个问题就不会存在了。</p>
+<p>（4）在ios系统中有50M缓存大小的限制。</p>
+<p>（5）需要做引导才能让客户将网站快捷方式存储到桌面，有流失率。</p>
+<p>（6）流畅度取决于网站的优化水平。</p>
+<h1 id="五、体验"><a href="#五、体验" class="headerlink" title="五、体验"></a>五、体验</h1><p>手机端或PC端都可以通过<a target="_blank" rel="noopener" href="https://squoosh.app/">https://squoosh.app/</a>进行体验。</p>
+<h2 id="1、PC桌面版"><a href="#1、PC桌面版" class="headerlink" title="1、PC桌面版"></a>1、PC桌面版</h2><p>浏览器访问上述地址后，选择在squoosh中打开， 就可以拥有与原生应用媲美的沉浸式体验。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402080955424.png"></p>
+<h2 id="2、手机移动端"><a href="#2、手机移动端" class="headerlink" title="2、手机移动端"></a>2、手机移动端</h2><p>首先在浏览器中输入并打开网址“squoosh.app”。然后点击向上的图标，在弹出的选项中选择“添加到主屏幕”。在弹出的【添加到主屏幕】编辑对话框中可以修改应用名称。然后点击桌面上的图标，就会打开squoosh应用，它不像添加到主屏幕的网页那样打开后仍然是嵌入到浏览器中的网页，而是媲美于一个独立的APP的打开样式。</p>
+<h1 id="六、实践"><a href="#六、实践" class="headerlink" title="六、实践"></a>六、实践</h1><p>1、Lavas是百度开源的基于 Vue 的 PWA 完整解决方案。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/352d21b5/">2012年12月31日，第一条微信动态</a>
+            
+            
+            <a class="next" rel="next" href="/2b9c6a1c/">一双拖鞋</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/352d21b5/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2b9c6a1c/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

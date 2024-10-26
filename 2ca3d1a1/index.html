@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>重新认识《几何原本》 —— 致那些年我们白学的几何 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">重新认识《几何原本》 —— 致那些年我们白学的几何</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 4, 2022&nbsp;&nbsp;17:56:21</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 4, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/">自然科学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">17 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+    来自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36892538">重新认识《几何原本》</a>(长尾科技)
+</div>
+
+<h2 id="我们的几何"><a href="#我们的几何" class="headerlink" title="我们的几何"></a><strong>我们的几何</strong></h2><p>我先请大家回忆一下自己当年是怎么学习几何（我们现在常说的几何都是默指<strong style="border-bottom: 1px green dashed;">欧几里得的几何</strong>）的，记得没错的话我是初一的时候学校开始教几何（如果这里有小学生没有回忆就请展望一下~），我们那时候学几何，老师是先讲了一些基本的几何概念，比如直线、线段、圆、三角形、直角等等等等，然后基于这些基本的概念将一些几何的性质，学习重要的定理，把这些定理记下来，习题做熟了准备考试的时候用，把这些定理公式性质都记熟用熟了就算把这一块几何学好了。</p>
+<p>然后，随着我们的年级不断的升高，我们认识的几何图形越来越复杂，从开始的简单的三角形、矩形、圆慢慢拓展到多边形、圆锥、椭圆、立方体等等等等，但是基本的学习方法没有变：都还是以定理为中心，以证明为中心，能够熟练的掌握一种几何体的各种相关的性质定理，在立体几何里能发现那些不知道为什么要这样划，但是跟神一样一出现就能解决问题的辅助线就算几何学好了。</p>
+<p>这样不断的学习下去，你对几何图形的性质了解的越来越多，你以为你对欧几里得的精髓的把握越来越准，但是，你却忽略了一样非常重要的东西，这样东西令无数大科学家疯狂着迷，伽利略也好，牛顿和爱因斯坦也是。</p>
+<p>爱因斯坦说：“<strong style="border-bottom: 1px green dashed;">一个人当他最初接触欧几里得几何学时，如果不曾为它的明晰性和可靠性所感动，那么他是不会成为一个科学家的。</strong>”我们现在再回过头想想，我们小时候学几何的时候，真的有感受到过这种爱因斯坦说的感动么？</p>
+<p>很少有人会有（如果你有，那么你非常的幸运）这种感动，因为这种欧几里得几何身上最可贵最美的东西，恰恰是我们学校编写几何教材，老师教授几何的时候不会讲，恰恰给忽略了的东西。那么，这种东西到底是什么呢？</p>
+<p><img src="https://pic3.zhimg.com/80/v2-42876a247a58b7000c40d97c43d2eace_720w.webp" alt="img"></p>
+<h2 id="科学的范式"><a href="#科学的范式" class="headerlink" title="科学的范式"></a><strong>科学的范式</strong></h2><p>我先跟大家说5句话，你们判断一下这些话是对的还是错的，还是一看就知道是对是错。</p>
+<p>1、任两点都可以用一条直线相连</p>
+<p>2、线段可以无限延长成一条直线</p>
+<p>3、可以以任意点为顶点，任意长度为半径画一个圆</p>
+<p>4、所有的直角都相等</p>
+<p>5、过直线外一点，有且只能做一条直线与已知直线平行</p>
+<p>好了，我的五句话说完了，你们觉得这些话是对是错，你们认可不认可？可能有人看完之后感到一阵失落，好歹是高能预警了要说的话，想着怎么着也应该是有点难度的命题让我来判断吧，没想到是这样几个只要学了初中几何，不，只要学了初一的几何，阿不，就算没学几何也知道这肯定的对的命题。因为这五句话都太简单太“显而易见”了，而且与生活的经验是如此的相符，谁要觉得这5句话有问题那肯定是脑袋有病。</p>
+<p>没错，在初一学几何的时候，12两条在学直线线段的时候老师是直接这样定义的，学圆的时候默认我们都会用圆规画圆，所以第3条也是默认成立的，第4条老师直接告诉你直角就是90°，大于90°的叫钝角，小于90°的叫锐角，第5条稍微麻烦一点，好像叫什么平行公理，但是一样非常容易理解。</p>
+<p>也就是说，这5句话里说的东西我在初一学几何的就在不同的地方了解了，甚至是没学几何的人也觉得这是显而易见的，但是把他们这样放在一起倒是觉得挺新鲜，为什么要把这5句话放在一起呢？难道我只是随手抓了5句话来逗大家玩？</p>
+<p>如果我告诉你这五句话是并列出现在欧几里得的传世名著，那本影响西方科学两千多年的巨著《几何原本》第一卷的，你会不会感觉到吃惊？</p>
+<p>如果我再告诉你，《几何原本》里的全部几何公设就是这5句话（我对这些话做了通俗处理，第5条换了说法但是跟原来的等价，另外还有五条公理是一般的公理，是不管是不是几何都通用的），没有第6条几何公设了，你会不会觉得吃惊？</p>
+<p>如果我最后再告诉你，欧几里得的几何里的全部定理，你从初中到高中甚至大学学的所有平面几何相关的定理，你用来证明几何题目所需要的所有性质都是从这5句话严密的推导出来的，你会不会感到震惊？</p>
+<p>没错，你没有听错，就是这5句看起来非常简单的5条公理（现在公设公理区别不是那么大了，都习惯叫公理）就是欧式几何的全部假设，<strong style="border-bottom: 1px green dashed;">从这5条假设欧几里得逻辑严密地证明了465个命题</strong>。也就是说，如果你承认最开始的那5条简单得不像话的公理，你就得没有任何异议的接受他后面证明的那465个命题，后面那些命题可能很多不是很直观，有很多甚至跟直觉常理相违背，但是它就是一个十分正确的存在，正襟危坐在那里，严密的逻辑推导足以碾压你的一切怀疑。</p>
+<h2 id="再来泼点冷水"><a href="#再来泼点冷水" class="headerlink" title="再来泼点冷水"></a><strong>再来泼点冷水</strong></h2><p>上面的描述可能让你对欧几里得有种滔滔江水般的敬仰，觉得在两千多年前有这么一个人能够从5个公理出发证明这么多定理实在是太牛掰了。</p>
+<p>但是，如果我告诉你《几何原本》这本书里几乎所有的定理在欧几里得之前就已经知晓了，并且许多证明也是这样，欧几里得做的工作不过是把它们整理在一起，你会不会突然觉得欧几里得没什么，甚至只是个盗用别人劳动成果的骗子？</p>
+<p>但是，我再告诉你这些事情不光我知道，两千多年来西方人一直都知道这个事，但是他们依然把欧几里得把《几何原本》封神，你会不会觉得奇怪？</p>
+<p><img src="https://pic2.zhimg.com/80/v2-dfa13c9e7da0828bdaaade2a5f39a015_720w.webp" alt="img"></p>
+<p>如果你觉得奇怪，说明你还是不太了解真正的西方科学精神。我们回过头来想一想，这些定理，这些三角形圆形的性质难道我们中国古代的科学家们不知道么？中国一样在很早就发现了勾股定理，中国能比欧洲提前1100把圆周率精确到小数点后7位，你觉得那些定理我们的古人会搞不明白？墨家设计那么多机关器械，会不懂这些几何原理？但是，为什么中国就没有诞生近代科学呢？祖冲之把圆周率都算到小数点后7位了，几何原本里的证明的那些定理我相信祖冲之基本上都知道，但是为什么祖冲之写不出《几何原本》？</p>
+<p>有人觉得我在胡搅蛮缠，说欧几里得也没有写出《九章算术》啊。是，这个没错，但是《几何原本》奠定了西方科学的基础，奠定了西方科学研究的范式，有《几何原本》，才有了牛顿的《自然哲学数学原理》，牛顿的这本书基本上就是按照《几何原本》的标准样式写的，伽利略、爱因斯坦都一样，有时候我甚至觉得：如果没有《几何原本》西方也诞生不了近代科学，至少要晚好多年直到有人重新把《几何原本》写出来。</p>
+<h2 id="最重要的事"><a href="#最重要的事" class="headerlink" title="最重要的事"></a><strong>最重要的事</strong></h2><p>所以，《几何原本》里出现的那里定理本身并不是很重要。重要的是：欧几里得通过对前人工作的整理，通过超凡入圣的洞察力和判断力选择了5条显而易见的基本公理作为假设，然后仔细的安排了所有的定理，使所有的定理跟前面的定理逻辑一致，在需要证明的地方给出了补充，然后，欧几里得完成了这样一个工作：把原本看起来零零散散的一些定理通过逻辑严密的绑在了一起，而他们需要承认的地方仅仅只有5个显而易见的公理。</p>
+<p>那些定理就像是一个个零散的部件，在欧几里得这里形成了一个完整的体系系统；就像一堆各自为王的草寇被整编成了正规军；就像一颗颗散落的珍珠被串成了一条项链。</p>
+<p>从此，西方的科学里有了体系一说，西方的科学家们惊叹于欧几里得发明的这套方法，于是纷纷将这一套东西引入到自己的研究领域，从此这种方式成为了西方科学研究的基本范式，任何人研究一个全新的领域，都先先做几个最基本的假设作为公理，然后从这些假设出发推导出一些定理，当然，他必须保证自己推到的这些定理前后不矛盾（这就需要很强的逻辑能力，《几何原本》就是对逻辑能力最好的训练教材），然后他会以这些推到出来的定理为基础，利用严密的逻辑一步步的扩大领地，直到最终把这个领域内的一切都包含进来，直到最终解决所有的问题。因为他们知道如果公理可靠，那么推出来的定理也一定是可靠的，那么我再基于这些定理推出来的其他定理也一定是可靠的，所以我的领地只会增加不会减少，但是，这同时也意味着这里所有的定理都有连带责任，只要有一条定理跟事实不符，那么整个体系就会垮掉。</p>
+<p>对于任何一套体系，如果我假设的公理越简单越基本，那么显然他出现漏洞的可能性就会越小，被人接受理解的可能性也越大。如果需要的前提假设越多，就跟武林高手练功一样，留的罩门就越多，就越容易被人找出破绽。</p>
+<p>光速不变就是爱因斯坦在狭义相对论里提出的一条假设（另一条是相对性原理，说物理定律在一切惯性参考系中都具有相同的数学表达形式）</p>
+<p><img src="https://pic2.zhimg.com/80/v2-24747c1d6c0f30c53e7088d6d4e5af05_720w.webp" alt="img"></p>
+<h2 id="如果我是几何老师"><a href="#如果我是几何老师" class="headerlink" title="如果我是几何老师"></a><strong>如果我是几何老师</strong></h2><p>写下这个小标题之后突然发现一个几何老师在我们这个教育体系里决定不了什么，只能按照学校发的教材按部就班的给学生讲，给学生出各种题目让他熟悉考试。那就假设把权限放大一点，假设学习国外的教授治校，让老师自己可以决定要怎么教教什么。那我会毫无疑问的抛弃人教版的几何教材，选择《几何原本》作为学生学习几何的教材，我会告诉我的学生：<strong>学习几何最重要的不是掌握了几个定理，会做几条辅助线，而是你自己能够从那几个最简单的公理出发，一步一步推导出那么多看起来不那么直观的定理，这些定理看起来好像很玄乎很不可思议，但是你回顾自己推导的过程，每一步都走的那么坚实，每一个推理步骤都无懈可击，所以这个定理无论看起来怎么不可思议，但是绝对是正确的。</strong></p>
+<p>这时候你会由衷的感叹逻辑的伟大，科学的伟大，许多年后你可能会忘了《几何原本》里的那些定理，但是推导那些定理的那些过程和那种思维的范式都会深深的印在你的脑海里，而这些东西，才是《几何原本》留下来最珍贵的东西。</p>
+<p>掌握了《几何原本》精髓，你才会面对未知领域的时候有信心去构建一个系统，有信心去研究并掌握这一领域背后的全部秘密。如果你没有这种科学逻辑系统化的概念，就算你的想象力洞察力再丰富，也只能发现一些零散的东西，或者解决一些别人留下来的问题。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-ee03b9033082d031b2ddfb87b5355afc_720w.webp" alt="img"></p>
+<p>牛顿的伟大在哪里？伽利略和开普勒其实已经做了很多零散前瞻性的研究工作，但是，只有牛顿能够从这些零散的结论实验数据中看出他们内在的逻辑联系，并且把这些零散的东西整理成一个有机的体系。这种工作，我们想想，和欧几里得整理《几何原本》的事情是不是如出一辙？欧几里得之前人们就已经知道那些几何定理，只不过他们是零散的方式存在的，是欧几里得将他们有机的整合成了一个体系。如果你有机会把《几何原本》和《自然哲学的数学原理》拿来做一个对比，你就会发现牛顿的《自然哲学的数学原理》在风格上跟《几何原本》极其相似。</p>
+<p>可惜，我们的教育里面恰恰把这个最重要的东西给忽略了，我们的数学教育里把定理的熟悉使用看做最为重要的东西，而对从显而易见的公理逻辑严密的推导出这些定理的事情却不是很关注，这种科学范式的方法论是我们数学教育里最缺少的。我对奥数是持反对态度的，因为中国式的奥数与真正的数学精神是想背离的，这种奥数也无法让人体会到真正的数学之美，反而容易因为过度的被迫式投入导致自己对数学失去兴趣，你信不信，把那些钻到牛角尖里去的奥数题给菲尔兹奖（数学界的诺贝尔奖）获得者去做，不见得有几个人能做出来。</p>
+<p>当然，如果是自己因为对数学感兴趣而自发的去解除奥数，那当然没什么，如果只是因为高考加分或者给自己补个特长去学奥数，那就大可不必。如果你的真的对数学感兴趣可以去了解数学的思想史，了解数学的方法论和背后的哲学意义，甚至你可以提早去接触微积分，这比你去做几个奥数题有意义得多。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-be85ce4a0f6a36eba747533656f3c465_720w.webp" alt="img"></p>
+<h2 id="回顾一下历史"><a href="#回顾一下历史" class="headerlink" title="回顾一下历史"></a><strong>回顾一下历史</strong></h2><p>1582年，明神宗万历十年，有一个叫利玛窦的意大利人来到中国，不过，直到18年后他才见到万历皇帝，我们的万历皇帝在宣武门赐给了利玛窦一栋别墅，让他安心的在北京做东西方的科技文化交流工作。不久利玛窦就收了一位好学生徐光启，利玛窦以《几何原本》为教程教授徐光启西方的数学理论，然后两人合作翻译了《几何原本》的中文版，我们现在经常说的三角形、平行线、直角、锐角、相似等等词，都是徐光启发明的。徐光启也绝对是个聪明人，他学习《几何原本》之后就利用这几何知识就精准的预测了一次日食，搞得朝野振动，一时间西方科学名声大振，然后一大波西方科学著作潮水般的被翻译进来了。</p>
+<p>徐光启他意识到了《几何原本》代表的这种西方科学范式的方法论非常的重要，他那时候就意识到了几何学代表的这种严密的逻辑推理方法是科学研究的基础，也就是说，明朝的末期就已经有人看到了《几何原本》最珍贵的地方，那么为什么400多年后的今天，我们在数学基础教育里依然看不到这一点呢？西方数学最为重视的形式逻辑和演绎推理我们的教育里一直极度缺乏，想想我们小时候数学做得最多的题目是什么？是应用题！！！也许我们的潜意识里，直到现在，和古人把这些定义为奇淫技巧并没有什么太大的区别，虽然我们并不想承认。</p>
+<p>徐光启利用《几何原本》预测日食的那一年是1610年，距离科学巨星牛顿的诞生还有33年，那个时候，大量的西方科技著作被引入中国，有介绍托勒密和亚里士多德体的自然哲学、逻辑学和方法论的，有介绍天文仪器地理知识的，有介绍心理学和人体生理解剖学的，有介绍机械学和工程学，基本上，中世纪西方科学被全体系的搬到了中国，你觉得这样的大背景下，如果牛顿的《自然哲学的数学原理》发表之后能不被引入中国？很难想象如果没有满清入关，或者就算即便有满清入关，但是满清对待科学的态度能有明末对待科学态度的三分之一，中国的科学绝不至于那么落后，那现在也不会有什么“儒学妨碍科学”之类的争论了。最后这算一点感慨一点牢骚，扯远了~</p>
+<p><img src="https://pic4.zhimg.com/80/v2-165a5aa7dcba41d56d20a80a82634a87_720w.webp" alt="img"></p>
+<h2 id="最后的祝福"><a href="#最后的祝福" class="headerlink" title="最后的祝福"></a><strong>最后的祝福</strong></h2><p>如果你是小学生，我希望你明白数学不是只用来做算术做应用题的，你现在用的那些自然数、那些几何图形都是对自然的一种抽象，对世界的一种描述，数学有很深的哲学背景，因为世界很美很奇妙，所以数学很美很奇妙。</p>
+<p>如果你是初中生，我希望有机会你能弄一本《几何原本》来读一读，看看能不能逻辑严密的自己推导出那些定理，并且体会《几何原本》代表的这种方法。如果你能用自己的方法证明勾股定理，作为一个初中生，那给你带来的喜悦将不亚于发现了这样一个定理。</p>
+<p>如果你是高中生，我首先希望你对数学的兴趣还没有被磨灭。如果你有幸还喜欢数学，你不用像我当年一样傻乎乎的去买一堆奥数的书，你可以去了解一下微积分的思想，可以去了解一下数学的思想史、方法论和哲学史。</p>
+<p>如果你是大学生，你要知道《高等数学》或者《数学分析》的那点东西是远远不够的，而很多数学家在这个年龄已经做了很多原创性的工作了。</p>
+<p>如果你是研究工作者，我希望你能深刻体会《几何原本》代表的这种西方科学的思想方法，能够借鉴这种方法构建自己的一套体系。中国不缺范解决单一问题的人，但是极度缺乏能够系统化某个领域的大师。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/"># 自然科学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/8835f80d/">最美的公式：你也能懂的麦克斯韦方程组</a>
+            
+            
+            <a class="next" rel="next" href="/383c5f47/">你也能懂的微积分</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/8835f80d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/383c5f47/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

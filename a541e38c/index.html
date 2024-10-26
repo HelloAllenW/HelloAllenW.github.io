@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>《兰亭序》笔法教程81种（整理收藏） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《兰亭序》笔法教程81种（整理收藏）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">六月 11, 2016&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        六月 11, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E4%B9%A6%E6%B3%95/">书法 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">4 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+   src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTeobcSdNXLIkN04AMxGCq53PFCJwQXSgR55xhCqibrjfQFr4cMfRz9fKiaNcn3HUPeqXl9wB4EwLcAEg/640?wx_fmt=jpeg&from=appmsg&wxfrom=13" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+
+
+<h2 id="第一单元-横的变化（12种）"><a href="#第一单元-横的变化（12种）" class="headerlink" title="第一单元  横的变化（12种）"></a>第一单元  横的变化（12种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3RT4ATp5Hum7CH4nD8Vgc3SAWS1ODJmNficsiambZVCT0A8jdLsNdY7sg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长横 左上露锋入笔，中锋向右运行，回锋向左收笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3B0PHmSCckbOk9CKxDXLIPD8pCyUibEOibRfknwvRbhdAw0J2AibYJ0TPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>短横 中部运笔稍重且沉稳，整个笔画稍短而粗壮。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3ticIGMtbn2CYdCYHQtCGe5whj5iaGJhmIDyMS2CxHcLpjVhSyHianqyaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>细横 头稍上扬，中部微向右上斜，笔画细长。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3rVLMuw2UsAichFrlueb3sUM683VTq2PuAclzO1icDDoaDNJtUBlAAURQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>方头横 写此横的起笔应逆锋方头切入。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3B7ib3PSjttQGIpJDuY7rnRlRT7oPHaIlo7s2gchT8L1hDevKqXIU3Yw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>圆头横 起笔须逆锋向左，笔锋圆转往右运行头呈圆状。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3zKTdxs1oicuMVJYqSf10NCibyVlibpaUKFMnxXU0Cqwauzro9bYgVPulg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>笔锋由左上入笔的横 露锋由轻渐重向右下稍按即往右。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3Xmt8HCAFreCTdfWiafqHL3PgDgrWbe4PMrItNMh9agHeU1iciaicHukgGw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>笔锋由右上入笔的横 起笔须自然，与前笔的收笔呼应。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3dhhgDbkAuLOKZYnu9EQgtyenbjwMvtF79e6HndgdL7N4MjLereKO2w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>笔画由右下入笔的横 顺势而生，切忌粗大。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3Nt7l76m1iaCJKjBaVJ3I755ibZjZGpKDibCUgI6lbTJKcFCe29UYYgQJg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>由细到粗的横 笔画运行应逐渐重按，粗细须明显。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3OaShn8HibI400DlR8V1zvNfibHrJI441KWOXLEoTqLSOxL5btwib3f67Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>由粗至细的横 行笔由重至轻。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3EicFE6blT9A0Q8SnNUJ7y0D1WQxYu8KGhnUAxOGZLhzbibkl1YUrbc3w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>中间细两头粗的横 提按要自然流畅。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3v5lAtwbc7V2XAx7ZgVeuQh90R9RaAPPUQpW9UTsDyiaMaw5g5NxLiaicA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>中间粗两头细的横 笔画粗细不宜过大。</p>
+<h2 id="第二单元-竖的变化（12种）"><a href="#第二单元-竖的变化（12种）" class="headerlink" title="第二单元  竖的变化（12种）"></a>第二单元  竖的变化（12种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa32nSjcC3icmYCrNxNiaGg1mRxOORouFwGMaedK9HGgLFm7iclXRDicNw9MQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长竖 曲头斜顿即向下边行边提运笔，不宜太粗。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3YB3naOgaUNKhjZnqNYd2Q89a33LTys1ibMKt5l5s0aKYl7CibwPPZYhQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>短竖 运笔稍重按，宜短健有力。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3c2yDlYz9uzD5O1CJhtKIV3ZhF6uZtzicNoEpQOMhLncakCcL5ObichJg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>细竖 运笔宜轻提，细长似钢针。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3eNjhqQ65lKQpg14rlw5SWWY9Fs6ICXofmp7iaia4ra2lUpc32oic4jrWw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>粗竖 运笔应粗重，但不臃肿。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3A0GevJrFWIS6DydoIM7ynSp0iajMuznlh5NxXxbag2SibyDZjXjpFTDw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜竖 曲头斜顿后笔毫稍向左下方运行。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3qeFC5cprk3eptIunWdcTaEYLbW7Id1sZTIxj3LKgGTUcUxghOETnkg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>左弯竖 中部向左稍弯，起笔与收笔应对直。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3yyo1OhBUntMTjs010Uia03ONzLjSX10VTSvMogibwjPSzEag6QxnSe2w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>右弯竖 中间向右稍弯，笔画由细渐粗。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3AibMCRvwUcI5QQE6RffrNPiaojFZjlspTjlZAyHiaMrPdJc2L0s7d50qA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>尖头竖 尖锋入笔，笔画不宜粗。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3OXAmabkBOTOZzegaiaFQz3vmcLAYxIqnVBIs3GicvA5GH0OxV5uZj26g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜头竖 露锋入笔，斜势稍顿后即向下运笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3V6oMLcEhHu3EcNBTvFDdGQGEtiaic1qk0E9RmEgW9r5Zjwkj04Vfg4Fg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>方头竖 逆锋起笔，方头切入。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3RqNquiaMvn24jOkONBfZ3Fj7kA7jkDlXgMbcDD0YIy0qlJsXCMPZsQQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>圆头竖 逆锋起笔，圆转向下运行。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3hyrtv21WBdiapd0iaa4iaHxC8G5LoTFj9pm6z6OrGHGEFEFic7d46VzkTA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>曲头竖 由细渐粗，微弯曲露锋，然后往下中锋运行。</p>
+<h2 id="第三单元-撇的变化（15种）"><a href="#第三单元-撇的变化（15种）" class="headerlink" title="第三单元  撇的变化（15种）"></a>第三单元  撇的变化（15种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3LG01tE4u1ibiavPgEf7uDeEBkPlCekwrgtkTzCPAUzOwHXoiakxzvEHwA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长撇 露锋起笔后边行边提，先直后弯向左下出锋，稍长。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3FHhYB87c9UVLKUyna4KZ5bpr0PIDIqWvN3ydVG8DTteicv0YfCOA8oA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>短撇 曲头入笔，粗短壮健，向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa38w02sibNpYcEu5HOhwONHS58IHwRktn0ZZcoBrkQicLv6VmJsYD61zsg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>细撇 运笔应轻细而刚直，切忌弯曲。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa37E491HzrqOa3JUZzPMC4gt8EiaiaqYbL0Q807m3O7hjjYmCAzXOV2EiaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>粗撇 曲头入笔，粗壮有力，向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3OicUTUg3WNHbicm5BJe3NMQiamAG7xanLibDrcgicQjh3q6JjAiaflicx4Pgw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小撇 运笔应细小活泼而有变化。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3icR2POhG4VOPmgXNu1mYfs1l1d7pBjodkrRmBU71kVqlLQPMiah2Cc2w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>竖撇 逆锋入笔，先直后稍弯向下运行，收笔向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa37V4PWwEeibNS3orCoiaRbXOd81zQd5draZaHXSTpqnagb0icD6QOia4VoA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜撇 露锋入笔斜势稍顿，先重后轻，向左下撇出，稍粗。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3FAdxgo3339UWJA14iaFgZUrichabOVSbDQyjPWaoAwd2FqSrgDUicMvicg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>弯撇 逆锋起笔，先向下直行后弯曲向左出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3M7WBuPAw52qQSlPBc35uT479iauibicnbOj1K7iaA7FTZZ0SueSbkGQPRQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>直撇 运笔应平直向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3CTHjMclB9CH5Ds6XJOWSeRibvWloJv841WhTyRoYSHMv165gQvic1IaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>平撇 露锋入笔，销顿后向左粗短有力出锋，腹部应平直。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa33bjQYzanLJnkQRgtOjPeVWiaKmwDYqibXcFSenq8XEyAQb4hhrIyoFpA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜头撇 露锋起笔，斜势顿按，向左下撇出。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3kpwf0hI9iaeypqxHHeHvOsjoLye1oK1C4UknBhq75y4qxfT7u7UBHTw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>尖头撇 尖锋入笔，由细渐粗，弯曲运行，过中部由粗渐细。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3k468AJJaoQlpJUD2BbvDY11LenHJOwGBYw74JoYSsb84mklAbNurng/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>方头撇 逆锋方笔切入，向左下方粗细变化微弯运笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3Y0tIJeqQzkxfPd6sso9PvfgW54N6Yk4d3ZPZ7c2luMva9EBZgMnulQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>头撇 逆锋圆转向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3q5OwjYicgq2XrwYhIiblYwp8N33m9ljtnFBsK9o6gurxNttmk5yB3yVg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>曲头撇 由细到粗稍弯曲起笔，向左下稍弧形运行。</p>
+<h2 id="第四单元-捺的变化（9种）"><a href="#第四单元-捺的变化（9种）" class="headerlink" title="第四单元 捺的变化（9种）"></a>第四单元 捺的变化（9种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa32iaSdCKo3hx7pxHm0VnEhPpSJRMUXrHx1lHziaiaSjrqBPesicoToA0hUw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长捺 笔画宜舒展，一波三折。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3fQ3nSibUWpOud5wwlIn0mJqR5ia3tlV5RruQcQv3ickX63qbRB2UvNAuQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>短捺 短壮有劲，收笔须嘎然而止，往右下微出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3OclxpGrxzogZlhkdpN656urib4wKfk8Uibz0WibIyzK3VGAKHvYclibZsg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>细捺 笔画应轻细活泼，忌平宜。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3zYkWricAlLTAoWxXtJbH1uicI3gkdWqeojy0PB1VRr6zbDWh6oP9PWHg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>粗捺 粗键有力，出锋果断舒展。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3gWXCicaugBFSDj3YmDJBaL9g1K9yMrOiak8DnVzzKxA0LJfLI3dGIF0A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小捺 小尖入纸，笔画细小灵活。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa33GWNHTN0A0YH4iadmib3Db4GCE0vfT4Bx07HibKQvsrAmYwic7U6GxFYGw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜捺 起笔后向右下方斜势运行，并注意粗细变化。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa328n4sHARoqAftQ1vH2ky3RtlJsaWyCOoNq7D8XicCibjEYrN3fysTccg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>平捺 一波三折，有粗有细，向右方平拖出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3g3F83DcQZBs9jgpFicVLb2PTTX8AJzE08NodROpuhV6cBGZv8ehPhdA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>弯捺 弯曲辐度稍大点，捺脚含蓄点。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa30XuWmJOr7ibE29MrVSHxKH6VQJL7p7jNLa1ibrMZYpQ0FFpoOnuhGIEg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>直捺 由细到粗向右下直势运行，宜舒展。</p>
+<h2 id="第五单元-钩的变化（9种）"><a href="#第五单元-钩的变化（9种）" class="headerlink" title="第五单元 钩的变化（9种）"></a>第五单元 钩的变化（9种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3x6dHpq8AYgoia4lsVRgA1pC100muhc7hN5VB76NHSMnTicEJSWvN41lQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长竖钩 劲挺有力，出钩果断利落，力达尖锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3Hc5w0MTsQcicgicP0HpUKKGGMdMfCdHIenkCib2JW1NRsMSlZO3CKxvOA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>短竖钩 短健圆活，出钩沉稳有力度。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3qV6P4EKr0js003eXIQW2xT0pzibBhlnFJ0qiaSBfzoR50taPLAOtiaBibQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>大钩 至钩处，圆转向上，出钩粗大锋利。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3dabtQwIm7YuLAJtwtjw90kJpFPgIKK2k38HdEo0JicQqemZGkbWQwLQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小钩 书写时应沉着轻出，力内蓄。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3LnFRuwyHpNufafoKJfcJqGS3IPRtNA4XuIGgG5WvOWZxo3CFiaj24cg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>细长钩 出锋宜锐利轻松，带势以启下笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3zdFLqcmD28o3X6JrfdWjW1ZZxFFJQ7eicnY9zlxVAa4XEmdTmXmYvtA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>蟹爪钩 向左由粗到细运行，向上出锋应细小，状似蟹爪。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3PojHDHUBTr6dwKOHjiaibibmW0voj4o4yySlx0KHIU0s3yaSCTLD77LaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜钩 斜势下行，弯度不宜大，出钩锋利。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3A3iaibTqOH2AcicvoicobVXkdlogibALzH0q7iaYiapusOXISDwzPG8GiafEZw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜直钩 运笔应直势往右下，弯则无力。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3sv4X3KPvtMHWhGnDabdIStGROkiaP9zf8gXhPXuvOnda0RsSQX4xDRQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>回锋钩 至钩处，向左稍行不钩出，圆转回锋，势启下一笔画。</p>
+<h2 id="第六单元-提的变化（6种）"><a href="#第六单元-提的变化（6种）" class="headerlink" title="第六单元  提的变化（6种）"></a>第六单元  提的变化（6种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3bu3zWo3tic56M9AUctpBqsgo548YnGdhlOpibVlJMwhCibM9NwNRqHpJw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜头提 斜势稍顿，快速向右上方挑出。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3QPuXlCCQESY0e0f54HaIMjDk7ibIash4kZicN3FRBwt1Itw4gqFt00pw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>尖头提 承上笔，尖锋入笔，渐按后向右上运行。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3IibEI6IVIKqhCZBnhFicmx36LdgdcZfcmKuxQEXdp2rUEIDdJ64MvrIA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>方头提 逆锋方笔切入，由粗到细上挑。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3QlVmicxlfsFqeialYk0wKZlK7K561iakrErlTTFhicR0YDhvn6fic609UPQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>圆头提 逆锋圆转向右上方，力内蓄。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3mIW4VfjmApYAeHSUib2TyuTibunmIsd9iaB6gjQyQ1CtPks39bCKUnCFw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>由细到粗的提 露锋入笔，由细渐粗弧势向右上行笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3uW8YM5ribOjRt2UUVRN9FUib4DAkkk19XGxNbUPotejV82U4fzDPMibbQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>由粗到细的提 露锋往下斜顿，向右上急出锋。</p>
+<h2 id="第七单元-折的变化（9种）"><a href="#第七单元-折的变化（9种）" class="headerlink" title="第七单元  折的变化（9种）"></a>第七单元  折的变化（9种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3MYEq9SiauIFTZP3cHkYsLich4WhR2jQAFkLk1wk2fIYPVia5zaooDpJrA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>横折 横画毕，斜顿即往下运笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa32rfTFOqttE1u5iaHP2d2lXpXnt5bgkEEwmrps5GLbQ9kMzVHxQibMibyw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>竖折 竖毕，转折稍顿向右运笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3FGPUjQdht1icV9WLIraHVTefkPx7Dia65GI3qJvZVmF9Vlbd9ezdUiaoQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>笔锋由左入笔的横折 由左至右露锋入纸。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3uicSzVgY1fZVJIhbwV0BNC5SbMYBqnrdGJlD0s4TrPcpxga0YnWf0eg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>撇折 笔画提按不宜太明显，折角须突出，重心要把握。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3jLeLwDUK2J0jTRtZy3pwyibWk4rZ03X0kMlmw6ndrCR3c8bwMfFF8rA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>绞丝折 上折稍小，下折稍大，笔画之间紧凑。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3zauFlg3p5UpL0gW6VXgeBg6x80c4MkibU4UHOfCpZRB8asj08icJOkbQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>连折 多折相叠，须错落有致，参差变化。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3OBBYtrlWYmKrZPZPT4S9z4PCFYFicSFICxkIpKIePQHMvfJCyf1nA1g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>竖斜横斜的折 因横竖均斜势，书写时要注意重心的平衡。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3BlHVlPQbBQt248NNJXlQ7pVzu3icO6VdbXic9WLZicuelWbTGN6aXu68w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上连横的折 横画至尾部即转折斜顿，往下运笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3hicRZSU8XkPBLSoiaPFLItl7H2OnEcQJgZbb0DrhCicwIRub86IHPibGYQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下连横的折 折画到尾部紧连下笔写横画。</p>
+<h2 id="第八单元-点的变化（9种）"><a href="#第八单元-点的变化（9种）" class="headerlink" title="第八单元  点的变化（9种）"></a>第八单元  点的变化（9种）</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3zC1EpDvibicr28DzradOgkBicoTZKqiajvFvWwvt3jAlFT8bMF7C07qzPQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>长点 露锋入笔，向右下行，中间粗两头细，右上弧左下平。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3UtXzP1zOhsSBhtRJar7IBBnY7ee1FiavUxbZcAtEicofYS9v52DYYN7Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>大点 稍粗重有力度，沉稳厚重。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa376wlcpSibCU4A3bru8nXpwnNGRgcoiacAzR5qdTPvDF6xDduJvXNvuyw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小点 露锋入笔，轻转轻收，小巧圆活。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3lI7qdDoR0u20GN7nT4NZ8hHEUHSe8HC5oaUJGiciaRGfeaIqyn2L3ia5w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>斜点 向右下入笔，圆转向左上回锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3sNclKBicoMPNtNrcbbHia9zRBHRlGKvmT4wuZTyGEzGZSgib3C1vrLYqw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>竖点 微弯曲向下运笔，至尾部笔轻提上回，活泼灵动。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa30bYB5jibjiaD3r70o1UZAfOYXNnWWVpoQjWWfOPWwBDPiaXbiaQeMicwy0A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>俯平点 平势，中部向下微凸，出锋与横画的起笔呼应。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3hIsymUkXGwBIIyrlia912PmH8xlVUHMb5mkhYzYywbDcIe9tmFJpaaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>弯点 向右下，稍弧运行，收笔圆转上回向左下出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3wJDlIt9qLygwSUJOMwxozIWOiaomjJTnR1LKsxeQiagPrghemNEMkPQA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>尾部由中间出锋的点 渐铺毫，至尾部提笔由中间出锋。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/RhnK7aR3W1RLcaria8iaPFCTpXmibLtyNa3vyCumJ68GKNXAoD2b13ONicoictGUrF7ibrpbT4ibGEpDL3hgnuokseL8A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>自中部向左下出锋的点 出锋宜轻细，紧启下笔。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%B9%A6%E6%B3%95/"># 书法</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ccd01794/">《中国书法在西方》（白谦慎）</a>
+            
+            
+            <a class="next" rel="next" href="/f1b7ac3d/">10. 王羲之的23封绝美书信</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ccd01794/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f1b7ac3d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

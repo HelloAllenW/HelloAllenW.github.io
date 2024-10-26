@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>25. 铁血德意志 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">25. 铁血德意志</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 25, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 25, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">14 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="铁血德意志"><a href="#铁血德意志" class="headerlink" title="铁血德意志"></a>铁血德意志</h2><h3 id="1-条顿骑士团"><a href="#1-条顿骑士团" class="headerlink" title="1. 条顿骑士团"></a>1. 条顿骑士团</h3><p>第三次十字军东征时期，德意志的贵族和骑士们在以色列的阿卡建立了一个军事团体，命名为条顿骑士团。他们在东方没有取得多少成就，却收到了遥远北方的宗教召唤。这时，<strong>随着北欧诸国、波兰和基辅罗斯纷纷皈依天主教或东正教，欧洲内部只剩下最后一批信仰多神教的原住民，生活在波罗的海东岸的普鲁士-立陶宛一带。</strong>信奉天主教的波兰贵族为了征服异教的普鲁士人，便邀请条顿骑士团前来助战。1226年，骑士团北上进攻普鲁士，并讨得了教皇和神圣罗马皇帝（腓特烈二世）的授权，允许他们将征服的土地据为己有。条顿骑士团经过数十年的征伐，终于占领了整个普鲁士，使之成为骑士团领地。原住民文化逐渐消亡了。</p>
+<p>在条顿骑士团征战普鲁士之时，蒙古的拔都远征军突然从东方杀来，摧毁了东欧的基辅罗斯，也给波兰和条顿骑士团造成严重损失。幸好拔都军团不久就折返东欧，成立金帐汗国。重整旗鼓的骑士团趁机沿波罗的海东岸北上，企图入侵破碎的罗斯领土，却被诺夫哥诺德公国（从基辅罗斯分裂而来）大破于冰湖之战，从而结束了西欧对俄罗斯的首次入侵。</p>
+<p>条顿骑士团继续扩张它的北方领土。<strong>在条顿骑士团和蒙古骑兵的双重威胁下，波罗的海以东的异教部落们联合起来，于1251年成立了立陶宛王国。</strong>立陶宛在东方阻挡了金帐汗国对欧洲的进一步入侵，同时也被迫向天主教靠拢，以缓解条顿骑士团的压力。最终在<strong>1386年，立陶宛正式皈依天主教（这是欧洲最后一个基督化的国家），并通过联姻与波兰组成联邦。</strong>1410年，普鲁士的条顿骑士团被波兰-立陶宛联军击败，被迫把西部大片领土割让给波兰（即“波属普鲁士”），残存部分也沦为波兰的属国。同一时期，他们也失去了在东地中海的据点，骑士团的事业陷入全面低谷。</p>
+<p>1525年，条顿骑士团长阿尔布雷希特受马丁·路德影响，宣布改信新教，并把骑士团改组成为世俗的普鲁士公国。这是欧洲第一个新教国家，但它仍然是波兰的附庸。这时，东方的俄罗斯沙皇国在基辅罗斯的废墟上崛起，取代了蒙古人成为新的东欧霸主。俄罗斯不断蚕食波兰-立陶宛联邦领土，使之逐渐衰落。1618年，普鲁士公爵死后无子，他的女婿、德意志勃兰登堡选帝侯继承了普鲁士。此后勃兰登堡-普鲁士公国合为一体，废除了波兰对普鲁士的宗主权，从政治上纳入德意志。</p>
+<h3 id="2-普鲁士王国"><a href="#2-普鲁士王国" class="headerlink" title="2. 普鲁士王国"></a>2. 普鲁士王国</h3><p>1701年，勃兰登堡公爵腓特烈支持神圣罗马皇帝（奥地利哈布斯堡王朝）参与西班牙王位继承战，因而被皇帝加封为普鲁士国王。他的孙子腓特烈二世（世称腓特烈大帝）发扬条顿骑士团的尚武传统，先是利用哈布斯堡王室绝嗣之机，从奥地利夺取大片领土，然后又与奥地利和俄罗斯联手瓜分波兰，收复波属普鲁士领土，使普鲁士成为德意志境内仅次于奥地利的第二强国。七年战争期间，普鲁士陆军同时迎战奥、法、俄三国，在欧洲赢得了军事强国地位。普、奥、俄三国进而在1795年完全瓜分了波兰，使其彻底灭亡。然而，普鲁士的军事神话在强大的拿破仑（1799年上台执政）面前破灭了。拿破仑横扫欧洲期间，普鲁士数次被其击败，被迫臣服于法国。直到拿破仑兵败俄罗斯之后，普鲁士加入多国联军，终于打败了拿破仑。</p>
+<p>直到此时，普鲁士仍然是一个跨在德意志和波兰之间的混合国家，但这被1815年维也纳会议戏剧性地改变了。鉴于俄国在战胜拿破仑过程中的巨大作用，它获得了普鲁士早先占据的波兰领土作为酬谢，而普鲁士则在德意志范围内获得了大片领土作为补偿（此时的德意志邦国已经由神圣罗马帝国时期的360个剧减为39个）。这产生了一个各方未曾想到的后果：普鲁士成为新的德意志邦联内德语人民最多的国家。传统强国奥地利的领土虽然更庞大，但它包含了匈牙利、捷克、北意大利等多个外部属国，民族组成复杂而缺乏向心力，已经很难被认为是单纯的“德意志民族”的领袖。在民族主义思潮席卷欧洲的背景下，越来越多的人开始希望德意志统一成一个真正的国家，而不仅是一个地理名词。两种方案被提出：一种是由奥地利牵头的“大德意志”，另一种是把奥地利排除在外，建立由其它所有邦国组成的、更加纯粹的“小德意志”。1834年，除了奥地利之外的所有38个邦国都加入到普鲁士创建的“德意志关税同盟”，这使得“小德意志”方案逐渐占据上风。但此时还有一个问题，因为德意志境内的汉诺威公国乃是英国国王的领地。幸运的是，这个问题很快得到解决：1837年英王威廉四世去世，他的侄女维多利亚继承了英国王位，而德意志地区的萨利克法禁止女性继承王位，于是维多利亚把汉诺威交由她的叔叔继承，结束了汉诺威与英国的共主历史，也消除了德意志统一的障碍。</p>
+<h3 id="3-1848年革命"><a href="#3-1848年革命" class="headerlink" title="3.  1848年革命"></a>3.  1848年革命</h3><p>1848年，几乎全欧洲范围内爆发了一系列民众革命运动，给传统的君主制度带来剧烈的冲击。这年1月，西西里岛首先爆发革命，接下来的短短三个月内，狂潮席卷意大利、法国、普鲁士、奥地利、丹麦等各国。在这些国家中，丹麦是唯一取得和平革命成功的：国王弗雷德里克七世同意制定新的宪法并成立两院制议会，使丹麦顺利成为君主立宪国家，直到今天。而在法兰西和德意志，革命虽然未竟全功，但也有力推动了国家体制的发展。</p>
+<p>在法兰西，波旁王朝虽然于拿破仑之后复辟，但已经丧失人心。1830年，议会推翻了波旁王朝的末代国王查理十世，代之以奥尔良公爵路易腓力（“七月革命”）。然而这场革命只是换汤不换药，未解决任何问题。1848年2月，法国民众再次游行示威，路易腓力被迫下台，法国宣布改组为法兰西第二共和国（“二月革命”）。同年12月，拿破仑·波拿巴的侄子、路易-拿破仑·波拿巴当选共和国总统。他在四年后称帝成为拿破仑三世，法兰西的最后一位皇帝。拿破仑三世将自己定位成“开明君主”，对外积极争取国家利益，对内推动经济现代化。在他的治理下，法国成功建立起资本主义经济体系。</p>
+<p>在德意志，古老的封建贵族在拿破仑战争中大量凋零，而随着铁路网络、煤炭和冶金工业的建立，经济发展的形势已经迫切需要形成统一的资本主义国家。普鲁士国王腓特烈·威廉四世陷于矛盾境地，一方面他希望统一德意志，另一方面又抵触议会制度。在革命的压力下，国王于1848年3月召开立宪会议，表态支持成立一个联邦制、拥有民选议会的德意志国家。然而，当1849年国民议会真的通过决议以“小德意志”方案成立君主立宪国家、并授予皇位给腓特烈·威廉四世时，他却拒绝了（一方面是害怕奥地利反对，另一方面是不认可议会高于君权的思想），议会被迫解散。1850年，腓特烈·威廉四世颁布了一个折衷版的普鲁士宪法，通过民选议会来实现法治国家，而国王仍然掌控军队等核心权力，双方矛盾暂时得以缓解。</p>
+<h3 id="4-统一德意志"><a href="#4-统一德意志" class="headerlink" title="4. 统一德意志"></a>4. 统一德意志</h3><p>普鲁士的威廉一世于1861年登基，次年任命俾斯麦担任首相。俾斯麦主张实现“小德意志”方案，并认为只有铁和血才能实现统一。1864年，普鲁士首先联合奥地利对丹麦开战，夺取了丹麦和德意志之间的争议地区。1866年，普鲁士和奥地利这两强终于开战，而德意志各邦国纷纷站队结盟（意大利的撒丁王国亦加入普鲁士一方）。经过仅仅七周的战争，奥地利被击败而被迫议和。奥地利宣布解散德意志邦联，从此被排除在德意志之外，不得再干预德意志内部事务。普鲁士兼并了德意志北部多个邦国，没有被兼并的邦国也加入普鲁士领导下新成立的“北德意志邦联”，只剩下南部几个邦国在法国的影响下保持独立。撒丁王国也趁机从奥地利取回了威尼斯（尽管它在战场上败于奥地利）。——几个小邦国在这次战争中保持中立，其中两个在后来被给予独立地位，它们是列支敦士登和卢森堡。</p>
+<p>为了完全统一德意志，1870年俾斯麦制造争端与法国开战。拿破仑三世皇帝御驾亲征，却在色当陷于普军包围，被迫于9月2日投降并被俘。消息传到巴黎，法国举国哗然。9月4日，巴黎发生政变，推翻帝制，成立新的法兰西第三共和国。这个新政府无力抵御普鲁士的进军，9月19日巴黎就被普军包围。1871年1月18日，普鲁士国王威廉一世在巴黎郊外的凡尔赛宫镜厅宣告德意志帝国成立，并加冕为皇帝。德国统一就此完成。1月28日，德国与法国签订停战协定。愤怒的巴黎市民发动起义，成立巴黎公社并实行自治。流亡在凡尔赛的法国政府与德国签署条约，割让阿尔萨斯-洛林地区并赔款50亿法郎，换取德国撤军并迎回10万法国战俘，然后依靠这支力量消灭了巴黎公社。（阿尔萨斯-洛林地区经过两次世界大战的反复转手，最后于1945年被法国收回。）</p>
+<p>普法战争之后，法国的君主制残余被彻底清除，甚至王室珠宝也在1885年被政府出售。统一的德意志帝国屹立在欧洲中央。帝国内部各邦在名义上保留自己的王公和议会，但宪法规定帝国皇帝由普鲁士国王担任，帝国首相则由普鲁士首相担任，从而确保普鲁士就是德意志帝国的领导核心。在这个复杂的混合体制下，新帝国毕竟实现了德意志地区的经济一体化，生产力与科技水平也随之突飞猛进。</p>
+<p>在英国工业革命的近两百年后，法国和德国的工业化转型至此终于实现。在这个过程中，西方的工业技术发生了第二次飞跃，从蒸汽时代进入电气时代（或称“第二次工业革命”）。英国的法拉第在1831年发现了电磁感应，由此产生了电动机技术；1866年德国的西门子发明了第一台交流发电机，促使电气技术在工业领域普及。而在民用领域，美国的爱迪生于1879年发明了第一种实用型电灯，并推动大规模电网的建设，使电力走进千家万户，照亮了人类的夜晚。与此同时，上千年来被当作照明燃料的石油变成了重要的动力来源——1846年在阿塞拜疆的巴库建立了第一座现代化油井，化学家们很快掌握了石油炼制技术，而德国工程师们发明了以汽油/柴油为燃料的内燃机。依靠内燃机技术，1886年德国的戴姆勒和本茨（即“奔驰”）共同发明了世界第一辆汽车，随后船舶、铁路等行业也纷纷采用石油燃料。石油逐渐超过煤炭成为世界最重要能源，这对未来的世界局势产生了深远的影响。</p>
+<p>与第一次工业革命不同，第二次工业革命是西方多国共同取得的成就，而德国在其中起到了突出作用。德国拥有发达的重工业，成为欧洲大陆的最强力量，有能力挑战此时世界上最强大的国家：大英帝国。</p>
+<h3 id="5-奥匈帝国"><a href="#5-奥匈帝国" class="headerlink" title="5. 奥匈帝国"></a>5. 奥匈帝国</h3><p>普鲁士统一德意志的过程，伴随着传统强国奥地利的衰落。1835年奥地利皇帝弗朗茨一世死后，继位的斐迪南皇帝智力低下，完全任由首相梅特涅（他主导了1815年维也纳会议）掌权。1848年3月，帝国首都维也纳和属国波西米亚（今日捷克）、匈牙利都爆发革命。维也纳人民要求实行民主改革，属国人民则要求民族自治。在国民压力下，斐迪南同意梅特涅下台，自己也让位给年仅18岁的侄子弗朗茨·约瑟夫。年轻的皇帝（他与巴伐利亚的茜茜公主结婚）采取了一系列改革措施，于1849年颁布宪法，承诺组织一个保障帝国统一、民族平等及代议制的国会，并且扩大捷克、匈牙利、克罗地亚、斯洛文尼亚等属国的自治权，形势暂时得到缓解。</p>
+<p>1866年普奥战争失败之后，奥地利帝国再次面临危机。皇帝弗朗茨·约瑟夫为了应对匈牙利的独立呼声，于1867年将奥地利帝国改组为奥匈帝国，允许匈牙利王国享有很大的内政自主权，但对外事务由帝国中央政府统一处理，匈牙利国王也由奥地利皇帝兼任。这一改革再度稳定了帝国的统治。然而在此之后，由于奥地利不能再介入德意志事务，帝国把它的战略发展方向从西方转向东欧，从而越来越深的卷入到东欧地区复杂的民族与宗教矛盾。</p>
+<p>不同于德意志境内的单一民族，东欧地区的民族众多，天主教、东正教、伊斯兰等不同信仰共存。昔日在奥斯曼土耳其的强权下，斯拉夫人和希腊人忍受着被奴役的地位，而随着奥斯曼的衰落，民族主义思潮泛滥，巴尔干半岛烽烟四起。北方的俄罗斯也以斯拉夫人的保护者自居，伺机南下扩张。奥匈帝国的战略转向使得这一地区的问题更加复杂，尤其是在它从奥斯曼手中取得波黑地区的统治权之后，就因此与塞尔维亚产生冲突，从而引发萨拉热窝事件。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/6110a705/">26. 教皇国的黄昏与意大利的建立</a>
+            
+            
+            <a class="next" rel="next" href="/d470d988/">24. 革命法兰西</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/6110a705/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d470d988/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

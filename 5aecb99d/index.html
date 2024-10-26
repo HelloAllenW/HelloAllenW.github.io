@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Grid 网格布局 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Grid 网格布局</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2023&nbsp;&nbsp;18:34:09</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">8.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">32 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
+<p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
+<p><img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" alt="img"></p>
+<p>上图这样的布局，就是 Grid 布局的拿手好戏。</p>
+<p>Grid 布局与 Flex 布局有一定的相似性，都可以指定容器内部多个项目的位置。但是，它们也存在重大区别。</p>
+<p>Flex 布局是轴线布局，只能指定”项目”针对轴线的位置，可以看作是<strong>一维布局</strong>。Grid 布局则是将容器划分成”行”和”列”，产生单元格，然后指定”项目所在”的单元格，可以看作是<strong>二维布局</strong>。Grid 布局远比 Flex 布局强大。</p>
+<p>下面就来看看 CSS Grid 布局是如何使用的！</p>
+<h2 id="1-Grid-布局概述"><a href="#1-Grid-布局概述" class="headerlink" title="1. Grid 布局概述"></a>1. Grid 布局概述</h2><p>在解释 CSS Grid 布局之前，我们先来看看 Grid 布局中一些重要概念。</p>
+<h3 id="（1）网格容器"><a href="#（1）网格容器" class="headerlink" title="（1）网格容器"></a>（1）网格容器</h3><p>网格容器是所有网格项的父元素，网格容器会定义<code>display:grid</code>。下面例子中，类名为 <code>container</code> 的 <code>div</code> 元素就是网格容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line"> display: grid;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;1&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;2&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;3&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;item&quot;&gt;4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）网格项"><a href="#（2）网格项" class="headerlink" title="（2）网格项"></a>（2）网格项</h3><p>网格项是网格容器的子元素，上面例子中类名为<code>item</code>的<code>div</code>元素就是网格项。</p>
+<h3 id="（3）网格线"><a href="#（3）网格线" class="headerlink" title="（3）网格线"></a>（3）网格线</h3><p>构成网格结构的水平和垂直分隔线就是网格线，这些线位于列（列网格线）或行（行网格线）的任一侧。</p>
+<p>下图中的网格有 9 个网格项，有 4 条行网格线和 4 条列网格线：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81Cc8lt6CNLO6WiajmD7QQrDGkwMMRNWoy0vrVLC4Op9Sn70waBofic9gg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（4）网格轨道"><a href="#（4）网格轨道" class="headerlink" title="（4）网格轨道"></a>（4）网格轨道</h3><p>两条相邻网格线之间的区域就是网格轨道。下图紫色区域就是网格轨道（红线圈起来的位置）：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ZsAiapm37bhHzoDw0LuekPSPQvAmL0zsw3sdRicL5WZQ1SdRxbzNBDlA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（5）网格单元"><a href="#（5）网格单元" class="headerlink" title="（5）网格单元"></a>（5）网格单元</h3><p>两条<strong>相邻的列网格线</strong>和两条<strong>相邻的行网格线</strong>组成是的网格单元。它是网格的单个单元，也是最小单元。下图紫色区域就是一个单元网格：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81EWaWcZfZluxg25CS7a30jVU6c3iaQ9IRAKh5VqJDnX6uic2Y3ADxCr8Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（6）网格区域"><a href="#（6）网格区域" class="headerlink" title="（6）网格区域"></a>（6）网格区域</h3><p>网格区域就是网格上的一个矩形区域，由一个或多个网格单元组成。下图中紫色的区域就是网格区域：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP814cybibtMggqagibiaXBl9XmUdWvt4kALDcnwrjAHl9O56866AyhAAttibQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="2-设置基本网格"><a href="#2-设置基本网格" class="headerlink" title="2. 设置基本网格"></a>2. 设置基本网格</h2><p>要想创建 CSS 网格布局，首先需要定义网格容器。可以使用<code>display: grid</code>或者<code>display: inline-grid</code>指定一个容器为网格布局。这样网格容器的所有直接子元素都会隐式转换为网格项。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">  display: inline-grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;box a&quot;&gt;1&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box b&quot;&gt;2&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box c&quot;&gt;3&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box d&quot;&gt;4&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们定义了一个类名为 <code>container</code> 的 <code>div</code> 元素，其有四个子元素。下面来将其设置为网格容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81A2UMvvIGWPPndgicicaiaLf6buFISWABdjhqXhdiaiaGiamcTJcdNYkYxVJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片">当元素设置了网格布局，<code>column</code>、<code>float</code>、<code>clear</code>、<code>vertical-align</code>属性都会失效。</p>
+<h2 id="3-设置行和列宽度"><a href="#3-设置行和列宽度" class="headerlink" title="3. 设置行和列宽度"></a>3. 设置行和列宽度</h2><p>将元素单独设置为网格容器不会立即影响子元素的显示方式，因为我们还没有指定布局的央样式。要更改网格中网格项的布局，就需要明确定义网格的行和列。这就用到了 <code>grid-template-columns</code> 和 <code>grid-template-rows</code> 属性。</p>
+<h3 id="（1）grid-template-columns"><a href="#（1）grid-template-columns" class="headerlink" title="（1）grid-template-columns"></a>（1）grid-template-columns</h3><p>可以使用 <code>grid-template-columns</code> 属性来指定网格容器中所需的列数以及每列的宽度。</p>
+<p>该属性接受一个或多个非负 CSS 长度值，这些值的个数就是网格容器的列数，每个值表示每列（即每个网格轨道）的宽度。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: 400px 400px 400px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81hIWDHAPNNKDdyibKTHNuibU05aoJLKAMeicqpeBKPgteyNVrgDggXOsDw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在这个例子中，我们使用 <code>grid-template-columns</code> 属性将网格容器的布局设置为三列，每列宽 400px。由于网格容器有四个子元素，而我们只给网格指定了三列，所以当网格容器中的网格项数量超过三个时，CSS 会将其他网格项放到新行中以保持容器的布局。</p>
+<h3 id="（2）grid-template-rows"><a href="#（2）grid-template-rows" class="headerlink" title="（2）grid-template-rows"></a>（2）grid-template-rows</h3><p>可以使用 <code>grid-template-rows</code> 属性来指定网格容器中每一行的高度。与 <code>grid-template-columns</code> 属性不同，它并没有指定网格容器的行数，而只用来设置每行的高度。这是因为每当网格项换行时，网格容器都会隐式创建一个新行。因此，我们无法使用 <code>grid-template-rows</code> 属性来控制网格的行数。</p>
+<p>该属性接受一个或多个非负CSS 长度值，其中每个值表示网格容器中每一行的高度，从第一行到最后一行。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: 400px 400px 400px;</span><br><span class="line">  grid-template-rows: 100px 200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们指定了网格容器的第一行高度为 100px，第二行高度为 200px。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ibKhaCyPQEXZjxK47Ug05UqneuNe7EC8ckia2k4DoeTeBfkWrfzkpEicA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上面我们仅设置了网格容器中前两行的高度。如果向网格容器中添加更多的网格项，那么那些隐式创建的行的高度将不是由 <code>grid-template-rows</code> 属性决定，而由其内容的大小决定。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ENLf4sfFrsBzFqJDCPHlbzmV3Yia1Ptmibhia4SFEuvICt7xIQcsO43mQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（3）grid-template-areas"><a href="#（3）grid-template-areas" class="headerlink" title="（3）grid-template-areas"></a>（3）grid-template-areas</h3><p>可以使用<code>grid-template-areas</code>属性来定义网格区域。该属性有以下三个属性值：</p>
+<ul>
+<li><code>grid-area-name</code>：使用<code>grid-area</code>属性设置的网格区域的名称</li>
+<li><code>.</code> ：空网格单元</li>
+<li><code>none</code>：没有定义网格区域</li>
+</ul>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">    grid-template-areas: &quot;header header header header&quot;</span><br><span class="line">                         &quot;main main . sidebar&quot;</span><br><span class="line">                         &quot;footer footer footer footer&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81bVQ6jQq67xRiboX360TRfktCkHcy2quD6cnnBfxjlDgPCMB8gE03tZQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（4）网格线名称"><a href="#（4）网格线名称" class="headerlink" title="（4）网格线名称"></a>（4）网格线名称</h3><p><code>grid-template-columns</code> 和 <code>grid-template-rows</code> 属性还可以使用方括号来指定每一条网格线的名字，方便引用。</p>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  grid-template-columns: [one] 40px [two] 50px [three] auto [four];</span><br><span class="line">  grid-template-rows: [five] 25% [six] 100px [seven] auto [eight];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里定义了一个 3 行 4 列的网格，其中 one、two、three、four是列网格线的名称，five、six、seven、eight 是行网格线的名称。</p>
+<h2 id="4-行和列之间添加间隙"><a href="#4-行和列之间添加间隙" class="headerlink" title="4. 行和列之间添加间隙"></a>4. 行和列之间添加间隙</h2><p>当这样设置完一个基础的网格之后，有时想要在网格项之间有一些距离，就可以通过调整网格线的大小在列和行之间添加间距。这就需要用到 <code>row-gap</code> 和 <code>column-gap</code> 属性。</p>
+<h3 id="（1）column-gap"><a href="#（1）column-gap" class="headerlink" title="（1）column-gap"></a>（1）column-gap</h3><p>可以使用 <code>column-gap</code> 属性来通过调整网格容器中垂直网格线的宽度来增加列之间的间距。它接受一个非负 CSS 长度值，该值用来定义每列之间的网格线的宽度。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line">   display: grid; </span><br><span class="line">   column-gap: 28px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里将网格容器中每条垂直（列）网格线的宽度设置为了 28px。使得网格中每一列之间的距离增加了28px。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81QpRTmIm0o0ib3TMpSialITLRxwZ3Tibzq0s7TAa3mMBbv9A9fONqgMMEA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（2）row-gap"><a href="#（2）row-gap" class="headerlink" title="（2）row-gap"></a>（2）row-gap</h3><p>可以使用 <code>row-gap</code> 属性来通过调整网格容器中所有水平网格线的高度来在网格容器中的行之间添加间距。它接受一个非负 CSS 长度值，该值定义每行之间网格线的大小。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line">   display: grid; </span><br><span class="line">   column-row: 40px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里将网格容器中每条水平（行）网格线的高度设置为 40px。使得网格中每一行之间的距离增加了40px。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP814VvjEWfEymftznuGYicXAEa3mB4CL1DI2kO2teleCGO24txz6HHyG7Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>可以结合 <code>column-gap</code> 和 <code>row-gap</code> 属性来分隔列和行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line">   display: grid; </span><br><span class="line">   column-row: 40px;</span><br><span class="line">   row-gap: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81wQkJibxUVTbygFrg6vbkGD1SNT44arxFc6OqviccIDJfB5PY7hTxgtPQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="5-水平对齐内容"><a href="#5-水平对齐内容" class="headerlink" title="5. 水平对齐内容"></a>5. 水平对齐内容</h2><p>Grid  布局提供了六个属性来控制网格项沿网格容器的行或列的对齐方式。下面就来看看沿网格容器的列水平对齐网格项的属性都是如何使用的。</p>
+<h3 id="（1）justify-items"><a href="#（1）justify-items" class="headerlink" title="（1）justify-items"></a>（1）justify-items</h3><p>可以使用<code> justify-items</code> 属性来控制所有网格项沿水平方向的对齐方式。它被传递给网格容器，其值适用于网格中的所有网格项。它接受四个可能的值：</p>
+<ul>
+<li><code>start</code>：将网格项对齐到所有列的开头，即其单元格的左边缘。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-items: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81RLty8vUtDt1LkwqhfaEP14dWbfvHvyhO1jBqRRmqJqupOib6z8L9w5Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：将网格项对齐到所有列的末尾，即其单元格的右边缘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-items: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ib6NLZ5B8sjAJRc7zLzHmMib9KdKaWD68Bm8q78GmuHlEt71bl5wJRsw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>center</code>：将所有网格项目放在其单元格的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81VibYwk60kOYxfV710kIy5nJTgrrKa9YZ41aL18uOptzZiaWzWBHAtsDQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>stretch</code>：将拉伸网格项目以填充其单元格的整个宽度（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-items: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81nKojwSmCpqrZPmAyhmZ0c5XODJe20QubdyWPlIjpRYMuBPLHLJy4kQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（2）justify-content"><a href="#（2）justify-content" class="headerlink" title="（2）justify-content"></a>（2）justify-content</h3><p>可以使用<code>justify-content</code>属性来设置<strong>网格在网格容器内</strong>沿着水平方向的对齐方式。它接受七个可能的值。</p>
+<ul>
+<li><code>start</code>：将网格与网格容器的左边对齐</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81mYzVdYBkytcycUHeia1Siaww4emMZibeW8WIXhNvGWswZvgKYn0eU0ZAA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：将网格与网格容器的右边对齐</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81E92r6Luf144ve2OzWTMJRPjIM2ZVSDPQd4wo0ic5UxfVnsOoHGjvDjw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>center</code>：将整个网格水平放置在网格容器的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81regqS1n4tjvPficqq72oWibxfsEprGJHr5YqKn6EhsbicnwlfM7ltXnNQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>stretch</code>：调整网格项大小，让宽度填充整个网格容器（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81VpBPtkEj43v8mzI96ngsAOCnJDhCG6nABZBqWKPpv2SibjFAiaU3ianYw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-around</code>：在网格项之间设置均等宽度的空白间隙，其外边缘间隙大小为中间空白间隙宽度的一半</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81SnpdQtujF378gZicTBA9XZdj1ib6y01n7MMpTRFrFQhib85vmiazOy9qbA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-between</code>：在网格项之间设置均等宽度空白间隙，其外边缘无间隙</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: space-between;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81tKPMGRIxEXmjhdAibHSXURNMADJMz4RP5wJSwkoojNZImNprjb6wiavQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-evenly</code>：在每个网格项之间设置均等宽度的空白间隙，包括外边缘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   justify-content: space-evenly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81SnpdQtujF378gZicTBA9XZdj1ib6y01n7MMpTRFrFQhib85vmiazOy9qbA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（3）justify-self"><a href="#（3）justify-self" class="headerlink" title="（3）justify-self"></a>（3）justify-self</h3><p>可以使用 <code>justify-self</code> 属性来设置单元格内容的水平位置，此属性定义在网格项上，它接受四个可能得值。</p>
+<ul>
+<li><code>start</code>：将网格项对齐到列的开头，即其单元格的左边缘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-1 &#123;</span><br><span class="line">   justify-self: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ibQ7xb6ygPia586BKTsJKVD2lVYaovvy5wONGkRdM5z0Br1xYNMEmkVw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：将网格项对齐到列的末尾，即其单元格的右边缘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-2 &#123;</span><br><span class="line">   justify-self: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ZgvGd6QVHPfoVeh27geyep5a9yLyFPmrP4UFtrZdIJ1ibgzMxiaadOKw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>center</code>：单将网格项放置在其单元格的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-3 &#123;</span><br><span class="line">   justify-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP811ICvhCsrYm9ickibCqFTM2PqgLddjfGoxkxqAqPxFwtA8gxvBqbXGicJQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>stretch</code>：将拉伸网格项以填充整个单元格宽度（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-4 &#123;</span><br><span class="line">   justify-self: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81lm6wibgQyoVkpVs68VtXQt5ACmMlbpjVfwUZhia2OU6H8mSG1xjnVBcw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="6-垂直对齐内容"><a href="#6-垂直对齐内容" class="headerlink" title="6. 垂直对齐内容"></a>6. 垂直对齐内容</h2><h3 id="（1）align-items"><a href="#（1）align-items" class="headerlink" title="（1）align-items"></a>（1）align-items</h3><p>可以使用<code>align-items</code> 属性来控制所有网格项沿垂直方向的对齐方式。它被传递给网格容器，其值适用于网格中的所有网格项。它接受四个可能的值：</p>
+<ul>
+<li><code>start</code>：将所有网格项放在所有行的顶部</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-items: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81K42ltmcE1lLWEGGgiaY6ibJMIYktQ6oX3ebibxF5UicY3p4vqJWyNsfianw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：将所有网格项放在所有行的底部。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-items: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81SibFnNo9krltSLGicvER7tnhhmH9ia19jcicZRUluP4hZlZibgrUXblwjvQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>center</code>：将所有网格项目放在其单元格的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-items: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81UQRVEGUyMzm1VF6CpfIiab3E31lmhIH2Th8tawodbqZJyOuGdyFwJVw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>stretch</code>：将拉伸所有网格项目以填充其单元格的整个高度（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-items: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81lm6wibgQyoVkpVs68VtXQt5ACmMlbpjVfwUZhia2OU6H8mSG1xjnVBcw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（2）align-content"><a href="#（2）align-content" class="headerlink" title="（2）align-content"></a>（2）align-content</h3><p>可以使用<code>align-content</code>属性来设置<strong>网格在网格容器内</strong>沿着垂直方向的对齐方式。它接受七个可能的值。</p>
+<ul>
+<li><code>start</code>：将整个网格对齐到网格容器的顶部</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81dU3WCLOV83iasbTfrSffB5ltcPvibCcJhj0Qj5lw4q0VdFuECPeHeWrw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：将整个网格与网格容器的底部对齐</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP816xYJPMJwPvPzpt8yhcKLonTtyPFobqrH7Yc8hPw0nBWF70txiahicNhQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><strong>center</strong>：将整个网格垂直放置在网格容器的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ukvwOB6DwrwdBlNEQ2Avev90VDuKRR7b187l1RGOejNLFp8f15SibGQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>stretch</code>：网格项目拉伸以填充容器网格的整个高度（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81UK9SqibUGaBbWPh6ZZicNaq9hfLkiaGr3OthGylEePFBianGj9cHpl76ug/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-around</code>：在网格项之间设置均等宽度的空白间隙，其外边缘间隙大小为中间空白间隙宽度的一半</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81aXzhrEY9VuVFx5YdeQQT9j5Bf5fllCUEy2CrRhIvgLWs0eGItz9h6Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-between</code>：在网格项之间设置均等宽度空白间隙，其外边缘无间隙</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: space-between;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81rBDM0IYj252TEhMxMRHcuwYpM3NmLdRSybdHyfBEKB1cDNvKqzJ4iag/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>space-evenly</code>：在每个网格项之间设置均等宽度的空白间隙，包括外边缘</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   align-content: space-evenly;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81iac7EOQxSdrcZfSMNTrMAG5xZiavuXE3Q3FribE8vTtIZo51OdeCXSHPQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（3）align-self"><a href="#（3）align-self" class="headerlink" title="（3）align-self"></a>（3）align-self</h3><p>可以使用 <code>align-self</code> 属性来设置单元格内容的垂直位置，此属性定义在网格项上，它接受四个可能得值。</p>
+<ul>
+<li><code>start</code>：在其单元格的顶部放置一个网格项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-4 &#123;</span><br><span class="line">   align-self: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP817AKZpIhnsF1MCLT0N5dUcGtAf4tjPJzy00yXOibFONOG6NxoT7071XQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>end</code>：在其单元格的底部放置一个网格项</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-5 &#123;</span><br><span class="line">   align-self: end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81Vzev885W7Y5iaozJvaxwicCnmvXWvAZOuPNHnhicOhztoXwdfJMdMUMNw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><code>center</code>：将一个网格项放置在其单元格的中心</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-6 &#123;</span><br><span class="line">   align-self: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP814v6dgRAzZmPtQNrL6lsFyCoibX33jyq6eCl8iclqB78hvna3y1W6ib40Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li>stretch：将拉伸网格项目以填充其单元格的整个高度（默认值）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.box-1 &#123;</span><br><span class="line">  align-self: stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81R0ibkcaR0ZRMhCPHibTNBtibbkhhiaibBz0D58C6wGRjyiclZXlRbSica5Zog/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="7-新的测量单位"><a href="#7-新的测量单位" class="headerlink" title="7. 新的测量单位"></a>7. 新的测量单位</h2><p>除了非负CSS 长度值（例如px、rem、vw和百分比 ( %) ）之外，我们还可以使用特殊的大小单位和关键字来控制网格中网格项的大小。</p>
+<h3 id="（1）fr-单位"><a href="#（1）fr-单位" class="headerlink" title="（1）fr 单位"></a>（1）fr 单位</h3><p>fr单位是“fractional”的缩写，是 CSS 网格布局中引入的长度单位。它代表网格容器中可用空间的一部分。这使它成为定义响应列和行的理想单位，这些列和行将随着浏览器的视口缩小和增大而缩放。</p>
+<p>下面来看一个简单的例子，假设我们要创建一个由三列组成的网格布局，其中第一列占网格宽度的 1/6，第二列是第一列宽度的两倍，第三列是第一列宽度的三倍。如果没有fr 单位，我们就需要执行一些数学运算，先用网格的总宽度100%除以6，然后将结果乘以每列的跨度：</p>
+<ul>
+<li>第一列的宽度 = 100% / 6 * 1 —&gt; 15%</li>
+<li>第二列的宽度 = 100% / 6 * 2 —&gt; 30%</li>
+<li>第三列的宽度 = 100% / 6 * 3 —&gt; 45%</li>
+</ul>
+<p>随着布局变得越来越复杂，使用百分比或任何CSS 数学函数将变得不可持续。这时 fr 单位就派上用场了。fr单位通过让我们指定网格容器中的可用空间应如何在其行和列之间进行分配，然后按该顺序分配可用空间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   grid-template-columns: 1fr 2fr 3fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码中，我们将容器宽度的一部分分给第一列，第二列的宽度是第一列的两倍，第三列的宽度是第一列的三倍。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP8167vyvQgvAsbmscqgyH1wskDCYEGBgnep86icDdV4A9I1BJZbpybLamg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（2）min-content"><a href="#（2）min-content" class="headerlink" title="（2）min-content"></a>（2）min-content</h3><p>min-content 是一个用于调整大小的关键字，它将网格轨迹的宽度设置为最小宽度，通常是网格项中最小内容或文本的大小。它的工作原理类似于CSS函数：<code>min()</code>，但被用作间距单位而不是函数。</p>
+<p>当应用于列或行时，它们会变得与轨迹中最长的内容一样窄。这可以获得网格项内内容的最短长度。</p>
+<p>下面来看一个例子；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   grid-template-columns: 1fr min-content 1fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们将第一列和第三列的宽度设置为网格容器的小部分，同时将第二列设置为 <code>min-content</code>，使其缩小到网格项中内容的大小。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81hibJicDR92rMCFIQsmq9qPGdHEUv0ls4qFBerjuGfugpbRM2faQ8CibpQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（3）max-content"><a href="#（3）max-content" class="headerlink" title="（3）max-content"></a>（3）max-content</h3><p><code>max-content</code>关键字的效果与<code>min-content</code>相反，它类似于CSS函数：max()。当应用于列或行时，轨道将变得尽可能宽，以便网格项中的所有内容都显示在一条完整的长行中。</p>
+<p>使用<code>max-content</code>的好处就是，可以让网格项中的内容扩展，而不是将它们包装成新行，这会导致垂直文本溢出。</p>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   grid-template-columns: 1fr max-content 1fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码定义了三列，并将第二列的宽度设置为<code>max-content</code>关键字。如果在第二列的网格项中添加大量内容，这些网格项中的文本将不会溢出。相反，第二列的宽度将增加，第一列和第三列将缩小以适应它。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81huyr4lqtnEnicoxuDFsSuwYql2iaZYBKjFibDKEdrpV7MPR7CmxQgEmWA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="8-CSS函数"><a href="#8-CSS函数" class="headerlink" title="8. CSS函数"></a>8. CSS函数</h2><p>在使用 CSS Grid 进行布局时，一些CSS数学函数可以帮助我们提高效率。比如 <code>repeat()</code> 、<code>minmax()</code>、<code>fit-content()</code>。</p>
+<h3 id="（1）repeat"><a href="#（1）repeat" class="headerlink" title="（1）repeat()"></a>（1）repeat()</h3><p><code>repeat()</code> 函数表示轨道列表的重复片段，允许以更紧凑的形式写入大量显示重复模式的列或行。。</p>
+<p>例如，在使用<code>grid-template-columns</code>和<code>grid-template-rows</code>这两个属性时，可以使用 <code>repeat()</code> 函数更简洁地声明这些重复模式。</p>
+<p>该函数有两个参数：① 第一个参数用来指定行或列的重复模式重复的次数，有三种取值方式：</p>
+<ul>
+<li><code>&lt;number&gt;</code>：整数，确切的重复次数。</li>
+<li><code>&lt;auto-fill&gt;</code>：以网格项为准自动填充。</li>
+<li><code>&lt;auto-fit&gt;</code>：以网格容器为准自动填充。</li>
+</ul>
+<p>② 第二个参数用来指定行或列的重复模式重复的内容，有以下取值方式：</p>
+<ul>
+<li><code>&lt;length&gt;</code>：非负长度。</li>
+<li><code>&lt;percentage&gt;</code>：相对于列轨道中网格容器的内联大小的非负百分比，以及行轨道中网格容器的块长宽。</li>
+<li><code>&lt;flex&gt;</code>：单位为<code>fr</code>的非负长度，指定轨道弹性布局的系数值。</li>
+<li><code>max-content</code>：表示网格的轨道长度自适应内容最大的那个单元格。</li>
+<li><code>min-content</code>：表示网格的轨道长度自适应内容最小的那个单元格。</li>
+<li><code>auto</code>：作为最大值时，等价于<code>max-content</code>。作为最小值时，它表示轨道中单元格最小长宽(<code>min-width</code>/<code>min-height)</code>的最大值。</li>
+</ul>
+<p>假设我们要创建一个具有六个相等列的网格。如果没有 <code>repeat()</code> 函数，我们必须使用 <code>grid-template-columns</code> 属性显式定义每个列。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">     display: grid;</span><br><span class="line">     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，随着列数的增加，这种方法变得不可持续和冗长。我们可以使用<code>repeat()</code>函数将其重写为更紧凑的形式。代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">     display: grid;</span><br><span class="line">     grid-template-columns: repeat(6, 1fr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP813ywgjicdRL9blBc3S3UpMUCoyCRkVALUGCnTrwqgXfeLfqv5rU4q9pg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（2）minmax"><a href="#（2）minmax" class="headerlink" title="（2）minmax()"></a>（2）minmax()</h3><p>定义响应式网格布局时，我们可能希望为每个网格轨道指定最小和最大宽度，以确保它们在视口调整大小时上下缩放以适应其内容。这时 <code>minmax()</code> 就派上用场了。</p>
+<p><code>minmax()</code> 函数允许我们指定网格轨道的最小和最大尺寸，它是一个长宽范围的闭区间。当网格在视口中调整大小时，网格轨道将在该范围内增长和缩小。在较小的屏幕上，它会缩小直到达到最小尺寸。在更大的屏幕上，它会拉伸直到达到最大尺寸。</p>
+<p><code>minmax()</code> 函数接受 CSS Grid 大小单位、关键字、长度和百分比值。其有两个参数：</p>
+<ul>
+<li><code>min</code>：轨道的最小尺寸。</li>
+<li><code>max</code>：轨道的最大尺寸。</li>
+</ul>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">   grid-template-columns: repeat(3, 1fr);</span><br><span class="line">   grid-template-rows: repeat(2, minmax(100px, max-content));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，我们使用 <code>minmax()</code> 函数将网格容器中两行的最小高度设置为 100px，将最大高度设置 <code>max-content</code>。这样就可以确保每一行在超过 100px 时都能伸展并变得尽可能宽，以容纳其内容。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81E1arvmNLGtYRvOiaX1libVNEf30trCPnuqXutw0nibMeMbadkM2t8qf7A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><code>minmax()</code> 函数的一个显著优点就是它减少了对媒体查询的需要。它不依靠媒体查询来控制跨视口的网格轨道（列和行）的大小，而是允许在一定程度上设置网格轨道值的响应式转换。</p>
+<h3 id="（3）fit-content"><a href="#（3）fit-content" class="headerlink" title="（3）fit-content()"></a>（3）fit-content()</h3><p><code>fit-content()</code> 函数的操作类似于 <code>minmax()</code> 函数。不同之处在于，使用<code> fit-content()</code> 时，最小值是网格项中内容的大小，最大值是我们传递给它的值。这样就可以将内容设置为最小值，并根据需要将其放大到某个值。</p>
+<p>当应用于网格轨道时，它将网格轨道的大小设置为最小宽度，这是其网格项目中最小的内容或文本的大小。需要注意的是，最小的内容或文本大小不大于函数中指定的值。</p>
+<p>但是，如果最小宽度的值超过了提供给函数的值，则网格轨道的大小将设置为传递给 <code>fit-content()</code> 函数的值，并且网格项的内容将换行。</p>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   grid-template-columns: fit-content(200px) fit-content(300px) fit-content(400px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码使用 <code>fit-content()</code> 函数分别创建了宽度为 200px、300px 和 400px 的三列。这意味着每列的大小将等于其网格项目中最小的内容或文本的大小，但如果这变得大于提供给 <code>fit-content()</code> 函数的值，则列将设置为传递给 <code>fit-content()</code> 函数的值。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81WJA71g2LmtyyQVVy3wOwVlJo0iclIE2JMCde6w9UKlo0SiaWCPmL3KdQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="9-网格项属性"><a href="#9-网格项属性" class="headerlink" title="9. 网格项属性"></a>9. 网格项属性</h2><p>在网格容器中，每条网格线都根据其在网格上的位置给出一个编号。第一条网格线（行或列）的编号为 1，第二条为 2，依此类推。</p>
+<p>例如，下图在一个三列两行的网格容器上存在的网格线的数量，其中列线是橙色圆圈内从 1 到 4 的数字，而行线是蓝色圆圈内的数字从 1 到 3 圈。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81e9RibVk6sONeCiajJfqjHNYCZzWXztGXuVajGrH0HIFcvIgiakJHvgibIA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>浏览器使用这些网格线来控制网格中项目的布局和位置。CSS Grid 提供了一些属性来控制网格项目沿这些网格线的位置，以及它们在水平和垂直方向上跨越的宽度。</p>
+<p>可用于控制网格项的位置以及它们如何跨越这些行的属性是：</p>
+<ul>
+<li>grid-column-start</li>
+<li>grid-column-end</li>
+<li>grid-row-start</li>
+<li>grid-row-end</li>
+</ul>
+<h3 id="（1）grid-column-start"><a href="#（1）grid-column-start" class="headerlink" title="（1）grid-column-start"></a>（1）grid-column-start</h3><p>可以使用 grid-column-start 属性来指定网格项沿网格容器内的列网格线的水平起始位置。这个开始位置定义了网格项目左边缘的开始。</p>
+<p>使用下面的网格布局，来定位第一个网格项并将其水平起始位置设置为第 2 列。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81FWazuo9xBOEHiaqjk5YBmFiaf2QZWndZiaAI1Htoqgl82icMhj2JB50KiaQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>选择第一个子元素，并定位：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-column-start: 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，所选网格项的水平起始位置将位于第二条垂直网格线（第 2 列）上。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP812gibibNcFXoibkUGEfMdA5I98zXrkJBYicz7DzqXMwxdkP45uCQI2FcLZQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>上图中，第一个网格项现在从第 2 列开始，而其他网格项被移动，换行到了新行或在网格上创建了空白空间。</p>
+<h3 id="（2）grid-column-end"><a href="#（2）grid-column-end" class="headerlink" title="（2）grid-column-end"></a>（2）grid-column-end</h3><p>除了使用 <code>grid-column-start</code> 指定网格项的水平起始位置外，还可以使用 <code>grid-column-end</code> 属性设置网格项的结束位置。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-column-start: 2;</span><br><span class="line">  grid-column-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这使得第一个网格项从第 2 列开始，跨越两条网格线，并在第 4 行结束。使用 <code>grid-column-start</code> 和 <code>grid-column-end</code> 属性，可以有效地控制网格的水平起始位置以及它跨越网格的宽度。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ibW69CCZ9D2FlS1OMTttbWAicCSdF5PRMsQDocaWNY38vQZtjqNeg57g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（3）grid-row-start"><a href="#（3）grid-row-start" class="headerlink" title="（3）grid-row-start"></a>（3）grid-row-start</h3><p>可以使用 grid-row-start 属性来指定网格项沿网格容器内水平（行）网格线的垂直起始位置。它用于设置网格项开始的行。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(2) &#123;</span><br><span class="line">  grid-row-start: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，使用 <code>grid-row-start</code>属性将第二个 <code>div</code> 元素的垂直起始位置设置为第 1 行。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81icibLzZMtOABwLufalicrhIEz2wJic8uaZCsJVuNSO4iaviaSC2mN2He2hqA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（4）grid-row-end"><a href="#（4）grid-row-end" class="headerlink" title="（4）grid-row-end"></a>（4）grid-row-end</h3><p>可以使用 grid-row-end 属性来指定网格项沿网格容器内水平（行）网格线的垂直结束位置。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(2) &#123;</span><br><span class="line">   grid-row-start: 1;</span><br><span class="line">   grid-row-start: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这使得第二个网格项从第一行开始，跨越三个网格线，在第 4 行结束。使用 <code>grid-row-start</code> 和 <code>grid-row-end</code> 属性，可以有效地控制网格项的垂直起始位置及其在网格中的高度。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81GAiadBI0YW2S1W8eL2qqqNwokEsfTkjzibxibcGZ8ibticUUNG6tp8zKFPw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（5）其他"><a href="#（5）其他" class="headerlink" title="（5）其他"></a>（5）其他</h3><p>上面的四个属性使用特定的网格线来确定网格项在网格内的位置，它们的属性值有以下几种：</p>
+<ul>
+<li><code>&lt;line&gt;</code>：可以是一个数字来指代相应编号的网格线，也可使用名称指代相应命名的网格线；</li>
+<li><code>span &lt;number&gt;</code>：网格项将跨越指定数量的网格轨道；</li>
+<li><code>span &lt;name&gt;</code>：网格项将跨越一些轨道 ，直到遇到指定命名的网格线；</li>
+<li><code>auto</code>：自动布局，或者自动跨越，或者跨越一个默认的轨道。</li>
+</ul>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-column-start: span 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用 <code>span</code> 来表示第一个单元格跨越了2个网格。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81qFKOEG9Q5gBa8HS6v9JXmnicYQIUDFiahic7LE935dMndwTeWodsSvrHQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面来结合使用上面的四个属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-column-start: 1;</span><br><span class="line">  grid-column-end: 3;</span><br><span class="line">  grid-row-start: 2;</span><br><span class="line">  grid-row-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81Ep2y3XO2icFMddEn00xHpfSgv1iapjSKpdicShc6IqZs3iaRmSTia2QLjicw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="10-隐式网格轨道"><a href="#10-隐式网格轨道" class="headerlink" title="10. 隐式网格轨道"></a>10. 隐式网格轨道</h2><p>当我们设置的网格不足以放下所有的网格项时，就会自动出现一些网格轨道，这些多出来的行的高度是<code>auto</code>的，可以使用<code>grid-auto-columns</code>和 <code>grid-auto-rows</code> 属性来指定<strong>自动生成的网格轨道</strong>（又称为隐式网格轨道）的大小。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   grid-auto-columns: 100px</span><br><span class="line">   grid-auto-rows: 80px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里， <code>grid-auto-columns</code> 属性指定了隐式创建的网格垂直方向轨道的宽度为 100px，grid-auto-rows 属性指定了隐式创建的网格水平方向轨道的高度为 80px。</p>
+<h2 id="11-速记属性"><a href="#11-速记属性" class="headerlink" title="11. 速记属性"></a>11. 速记属性</h2><p>像大多数 CSS 属性一样，CSS Grid 提供了一些速记属性，它们提供了一种更短、更先进的方式来同时设置多个 CSS Grid 属性的值。使用这些速记属性，我们就可以编写更简洁 更易读的样式，从而节省开发时间。下面就来看看这些属性。</p>
+<h3 id="（1）gap"><a href="#（1）gap" class="headerlink" title="（1）gap"></a>（1）gap</h3><p><code>column-gap</code> 和 <code>row-gap</code> 属性用来设置网格之前的距离，即网格线的宽度。可以通过 <code>gap</code> 属性简写这两个属性，其语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gap: &lt;row-gap&gt; &lt;column-gap&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>&lt;column-gap&gt;</code> 是一个可选值，如果省略，则设置为与 <code>&lt;row-gap&gt;</code> 相同的值。下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">   display: grid;</span><br><span class="line">   gap: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这在网格容器中的所有列和行之间都添加了 20px 的空间，与下面的代码等价：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line"> display: grid; </span><br><span class="line"> column-row: 20px;</span><br><span class="line"> row-gap: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）place-items"><a href="#（2）place-items" class="headerlink" title="（2）place-items"></a>（2）place-items</h3><p><code>place-items</code> 用来设置 <code>align-items</code> 和 <code>justify-items</code> 属性的值，它能够同时控制所有网格项目的水平和垂直对齐。</p>
+<p>它接受两个值：第一个值设置 <code>align-items</code> 属性的值，第二个值设置 <code>justify-item</code>s 属性的值。如果未指定第二个值，则将第一个值指定为两个属性的值。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line"> display: grid; </span><br><span class="line"> place-items: center; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这会将 <code>align-items</code> 和 <code>justify-items</code> 属性的值都设置为 <code>center</code>，将所有网格项放置在其网格区域的中心。</p>
+<h3 id="（3）place-content"><a href="#（3）place-content" class="headerlink" title="（3）place-content"></a>（3）place-content</h3><p><code>place-content</code> 用来设置网格属性 <code>align-content</code> 和 <code>justify-content</code> 的值，它能够同时控制网格容器内整个网格的水平和垂直对齐方式。</p>
+<p>它接受两个值：第一个值设置 <code>align-content</code> 属性的值，第二个值设置 <code>justify-content</code> 属性的值。如果未指定第二个值，则将第一个值指定为两个属性的值。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.container &#123; </span><br><span class="line"> display: grid; </span><br><span class="line"> place-content: center; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就会将 <code>align-content</code> 和 <code>justify-content</code> 属性的值都设置为 <code>center</code>，使整个网格在网格容器中水平和垂直居中。</p>
+<h3 id="（4）place-self"><a href="#（4）place-self" class="headerlink" title="（4）place-self"></a>（4）place-self</h3><p><code>place-items</code> 可以设置 <code>align-self</code> 和 <code>justify-self</code> 属性的值。它能够控制单个网格项目在其网格区域内的水平和垂直对齐方式。</p>
+<p>它接受两个值：第一个值设置 <code>align-self</code> 属性的值，第二个值设置 <code>justify-self</code> 属性的值。如果未指定第二个值，则将第一个值指定为两个属性的值。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.item &#123; </span><br><span class="line">   place-self: end center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面的代码中，<code>align-self</code> 属性的值设置为<code>end</code>，这会将网格项垂直向下推到其网格单元格的底部。<code>justify-self</code> 属性设置为 <code>center</code>，将网格项目水平放置在其单元格的中心。</p>
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81kNB99poiaCicCYunTSdSRGvEqhiaSJ2K1QWibVgmpFX4Gzf5ujicy8nJ5icw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（5）grid-column"><a href="#（5）grid-column" class="headerlink" title="（5）grid-column"></a>（5）grid-column</h3><p><code>grid-column</code> 是 <code>grid-column-start</code> 和 <code>grid-column-end</code> 属性的简写属性。它可以指定网格项沿网格容器内的列网格线的水平起始位置以及网格项应该结束的位置。</p>
+<p><code>grid-column</code>的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-column: column-start / column-end;</span><br></pre></td></tr></table></figure>
+
+<p><code>grid-column</code> 属性接受两个由斜线 (/) 分隔的网格线值，其中：</p>
+<ul>
+<li>第一个值 <code>column-start</code> 是 <code>grid-column-start</code> 属性的值；</li>
+<li>第二个值 <code>column-end</code> 是 <code>grid-column-end</code> 属性的值；</li>
+<li>斜杠 (/) 用作这两个值之间的分界线，因为两者都可以包含一个或多个空格。因此，需要通过斜线来消除错误和歧义。此外，作为最佳实践，建议在斜杠 (/) 的两侧添加一哥空格，以使 CSS 更具可读性。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.gird-item &#123;</span><br><span class="line">  grid-column: 1 / 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码告诉网格项从网格中的第 1 列水平跨越到第 3 列，与下面的代码等价：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.gird-item &#123;</span><br><span class="line">  grid-column-start: 1;</span><br><span class="line">  grid-column-end: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）grid-row"><a href="#（6）grid-row" class="headerlink" title="（6）grid-row"></a>（6）grid-row</h3><p><code>grid-row</code> 属性的工作方式与 <code>grid-column</code> 属性一样。它是 <code>grid-row-start</code> 和 <code>grid-row-end</code> 属性的简写属性。它可以指定网格项沿网格容器中的行网格线的垂直起始位置，以及网格项应该在网格中的何处结束。</p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.gird-item &#123;</span><br><span class="line">  grid-column: 2 / 5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就会使得网格项的高度从网格中的第 2 行向下跨越到第 5 行。</p>
+<p><code>grid-column</code> 和 <code>grid-row</code> 属性中也可以使用 <code>span</code> 关键字，以下两者是等效的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.gird-item &#123;</span><br><span class="line">  grid-column: 1 / 3;</span><br><span class="line">  grid-row: 1 / 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.gird-item &#123;</span><br><span class="line">  grid-column: 1 / span 2;</span><br><span class="line">  grid-row: 1 / span 2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>斜杠后面的部分可以省略，表示跨越第一个网格。</p>
+<h3 id="（7）grid-template"><a href="#（7）grid-template" class="headerlink" title="（7）grid-template"></a>（7）grid-template</h3><p><code>grid-template-columns</code>、<code>grid-template-rows</code>、<code>grid-template-areas</code>这三个属性可以简写在<code>grid-template</code>属性中。</p>
+<p><code>grid-template</code>属性有三个属性值：</p>
+<ul>
+<li><code>none</code>：将三个属性都设置为其初始值，即一行一列一个单元格；</li>
+<li><code>subgrid</code>：把<code>grid-template-columns</code>和<code>grid-template-rows</code>设置为<code>subgrid</code>，并且把<code>grid-template-areas</code>设置为初始值；</li>
+<li><code>grid-template-rows/grid-template-columns</code>：将<code>grid-template-columns</code>和<code>grid-template-rows</code>设为指定值，而<code>grid-template-areas</code>设置为<code>none</code>。</li>
+</ul>
+<h3 id="（8）grid-area"><a href="#（8）grid-area" class="headerlink" title="（8）grid-area"></a>（8）grid-area</h3><p><code>grid-area</code> 属性指定网格元素在网格布局中的大小和位置，它是<code>grid-row-start</code>、<code>grid-column-start</code>、<code>grid-row-end</code>、<code>grid-column-end</code>属性的合并简写形式，其语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-area: &lt;row-start&gt; / &lt;column-start&gt; / &lt;row-end&gt; / &lt;column-end&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>对于下面这段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-column-start: 1;</span><br><span class="line">  grid-column-end: 3;</span><br><span class="line">  grid-row-start: 2;</span><br><span class="line">  grid-row-end: 4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以简写成这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.container div:nth-of-type(1) &#123;</span><br><span class="line">  grid-area: 2 / 1 / 4 / 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，<code>grid-area</code> 属性还可以对网格元素进行命名。命名的网格元素可以通过容器的 <code>grid-template-areas</code> 属性来引用。</p>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.item1 &#123; grid-area: header; &#125;</span><br><span class="line">.item2 &#123; grid-area: main; &#125;</span><br><span class="line">.item3 &#123; grid-area: sideber; &#125;</span><br><span class="line">.item4 &#123; grid-area: footer; &#125;</span><br><span class="line"> </span><br><span class="line">.container &#123;</span><br><span class="line">  grid-template-areas:</span><br><span class="line">    &#x27;header header header&#x27;</span><br><span class="line">    &#x27;menu main sideber&#x27;</span><br><span class="line">    &#x27;footer footer footer&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81bVQ6jQq67xRiboX360TRfktCkHcy2quD6cnnBfxjlDgPCMB8gE03tZQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h3 id="（9）grid"><a href="#（9）grid" class="headerlink" title="（9）grid"></a>（9）grid</h3><p><code>grid</code> 属性可以为每个显式网格容器属性（例如 <code>grid-template-rows</code>、<code>grid-template-columns</code> 和 <code>grid-template-areas</code>）以及每个隐式网格容器属性设置一个值（例如 <code>grid-auto-rows</code>、<code>grid-auto-columns</code> 和 <code>grid-auto-flow</code>）在一个声明中。</p>
+<p><code>grid</code> 属性的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;grid-template&gt; | &lt;grid-template-rows&gt; / [ auto-flow &amp;&amp; dense? ] &lt;grid-auto-columns&gt;? | [ auto-flow &amp;&amp; dense? ] &lt;grid-auto-rows&gt;? / &lt;grid-template-columns&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-CSS-Grid-调试"><a href="#12-CSS-Grid-调试" class="headerlink" title="12. CSS Grid 调试"></a>12. CSS Grid 调试</h2><p>上面我们介绍了如何定义 CSS Grid 布局，那该如何调试呢？Chrome DevTools 支持对 Grid 布局进行提示。如果一个元素是 Grid 布局，在 DevTools 的 Elements 面板中，Grid 布局的容器元素上就会显示一个 grid 的标识，如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81icsDL3W4tJ36HRgZ78WDD1LJGG8qNppn1QokRBUIO42HhDUPgIIFOww/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>点击这个 grid 标志，页面的 grid 网格就会显示数网格区域以及网格线，并且会为网格线进行编号，如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81HtcgMDlTRNY08wViaMjhicibH8zslkCqlRn1coUIWJhvzzxayicjsXr8DA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面切换到 Layout 选项卡，就可以看到 Grid 布局的一些选项，我们可以设置页面上是否显示轨道的宽度/高度，是否展示网格区域的名称，是否显示网格线的延长，是否显示网格线的名称。除此之外，还会显示当前页面上所有使用 Grid 布局的地方，可以进行显示隐藏：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81hKxxvuRfIVIALIiaz7iaMwpZEibxXUOulSibAicbnKSOqGXfw2HMXqdwTXw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>通过这些选项，就可以对 CSS Grid 布局进行调试了。</p>
+<h2 id="13-CSS-Grid-生成器"><a href="#13-CSS-Grid-生成器" class="headerlink" title="13. CSS Grid 生成器"></a>13. CSS Grid 生成器</h2><p>最后来分享几个实用的 CSS Grid 生成器。通过这些生成器，可以可视化得调整 Grid 布局，最终会拿到生成的 Grid 布局代码。</p>
+<h3 id="（1）CSS-Grid-Generator"><a href="#（1）CSS-Grid-Generator" class="headerlink" title="（1）CSS Grid Generator"></a>（1）CSS Grid Generator</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81JHdXPFiciaAWM0E1F8LR3iazLkZvlbOMLN8XKR91fbicicl2wrZJicdjahNA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>在线体验：</strong><a target="_blank" rel="noopener" href="https://cssgrid-generator.netlify.app/">https://cssgrid-generator.netlify.app/</a></p>
+<h3 id="（2）CSS-Layout-Generator"><a href="#（2）CSS-Layout-Generator" class="headerlink" title="（2）CSS Layout Generator"></a>（2）CSS Layout Generator</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP815tCNiaU4SBKsAcpndic8JP3x5HicP3RMvYA5l8yibKyxZZrEFJSfibtibE1Q/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>在线体验：</strong><a target="_blank" rel="noopener" href="https://layout.bradwoods.io/customize">https://layout.bradwoods.io/customize</a></p>
+<h3 id="（3）Grid-LayoutIt"><a href="#（3）Grid-LayoutIt" class="headerlink" title="（3）Grid LayoutIt"></a>（3）Grid LayoutIt</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP816I0icZm5iaiaHzp56micTwQuLopmFLYKgiagG2grddHNAM9QPvdQwoicrymQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>在线体验：</strong><a target="_blank" rel="noopener" href="https://grid.layoutit.com/">https://grid.layoutit.com/</a></p>
+<h3 id="（4）Griddy"><a href="#（4）Griddy" class="headerlink" title="（4）Griddy"></a>（4）Griddy</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81ibe2kPlKfYUserQribbiazbun5Gj7PHbZMRW5MwbvsbbF8AKLmmTtJicRw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>在线体验：</strong><a target="_blank" rel="noopener" href="https://griddy.io/">https://griddy.io/</a></p>
+<h3 id="（5）Cssgr-id"><a href="#（5）Cssgr-id" class="headerlink" title="（5）Cssgr.id"></a>（5）Cssgr.id</h3><p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMMQQ9EoYDlteQsSuMFXhP81NSBb3KVzlVNt90eHZuhSTlQzQFUWPoC53PG8G91ibEUL1QycPjJKdCw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>在线体验：</strong><a target="_blank" rel="noopener" href="https://cssgr.id/">https://cssgr.id/</a></p>
+<h2 id="14-应用实例"><a href="#14-应用实例" class="headerlink" title="14. 应用实例"></a>14. 应用实例</h2><h3 id="（1）一行CSS代码实现特定环境下的响应式布局效果"><a href="#（1）一行CSS代码实现特定环境下的响应式布局效果" class="headerlink" title="（1）一行CSS代码实现特定环境下的响应式布局效果"></a>（1）一行CSS代码实现特定环境下的响应式布局效果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031844754.png"></p>
+<h3 id="（2）实现瀑布流布局"><a href="#（2）实现瀑布流布局" class="headerlink" title="（2）实现瀑布流布局"></a>（2）实现瀑布流布局</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: repeat(4, 1fr);</span><br><span class="line">  grid-template-rows: masonry;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031847239.png"></p>
+<h3 id="（3）实现-3D-骰子"><a href="#（3）实现-3D-骰子" class="headerlink" title="（3）实现 3D 骰子"></a>（3）实现 3D 骰子</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/JKvZJS2yyNjFF4OPFdkQ8g">使用 Flex 和 Grid 布局实现 3D 骰子！</a></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/dQvrijZxOMJjzwuUZGbQGw">图解CSS Grid布局</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">阮一峰CSS网格布局教程</a></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c1c1bd2/">PostCSS</a>
+            
+            
+            <a class="next" rel="next" href="/1ec02f4f/">Flex 布局</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/c1c1bd2/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1ec02f4f/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

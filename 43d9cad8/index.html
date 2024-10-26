@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>3. 巴比伦文明 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">3. 巴比伦文明</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 3, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 3, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="巴比伦文明"><a href="#巴比伦文明" class="headerlink" title="巴比伦文明"></a>巴比伦文明</h2><h3 id="古巴比伦"><a href="#古巴比伦" class="headerlink" title="古巴比伦"></a>古巴比伦</h3><p>古巴比伦文明位于今伊拉克一带，古代巴比伦与古代埃及、古代印度、中国 （另有权威报道描述为古代中国）一并称为“四大文明古国”。</p>
+<h4 id="1-公元前1894年，阿摩利人建立巴比伦王国，史称“巴比伦第一王朝”"><a href="#1-公元前1894年，阿摩利人建立巴比伦王国，史称“巴比伦第一王朝”" class="headerlink" title="1. 公元前1894年，阿摩利人建立巴比伦王国，史称“巴比伦第一王朝”"></a>1. 公元前1894年，阿摩利人建立巴比伦王国，史称“巴比伦第一王朝”</h4><p>乌尔第三王朝后期，一个新的群体进入美索不达米亚平原并逐渐控制了这片土地。他们是又一支脱颖而出的闪族人—阿摩利人。乌尔第三王朝灭亡后，盘踞着乌尔第三王朝各个重镇的，很多都是阿摩利，他们在两河流域建立了许多小国家。这些小国家长期混战，使这一地区，尤其是两河流域南部重新陷入分裂的局面。</p>
+<p>大约在公元前1894年，一支阿摩利人在首领苏穆阿布姆的率领下，占据了巴比伦城并建立了国家，这就是古巴比伦王国，史称 “巴比伦第一王朝“。古巴比伦王国刚开始是一个弱小的城邦，并时常向其他国家称臣。但到了第六代国王汉谟拉比统治时期（约公元前1792-前1750年），古巴比伦逐渐强大起来。</p>
+<h4 id="2-公元前1792年，第六代国王汉谟拉比统一两河流域，颁布《汉谟拉比法典》，古巴比伦王国达到顶峰"><a href="#2-公元前1792年，第六代国王汉谟拉比统一两河流域，颁布《汉谟拉比法典》，古巴比伦王国达到顶峰" class="headerlink" title="2. 公元前1792年，第六代国王汉谟拉比统一两河流域，颁布《汉谟拉比法典》，古巴比伦王国达到顶峰"></a>2. 公元前1792年，第六代国王汉谟拉比统一两河流域，颁布《汉谟拉比法典》，古巴比伦王国达到顶峰</h4><p>汉穆拉比是一位极具军事能力和政治能力的伟大君主。他于公元前1792年即位后，便着手开始发动统一两河流域的战争。他首先击败了衰落的伊辛王朝，转而向东击败了埃兰。接着，汉穆拉比又继续南进，灭亡了拉尔萨王朝，使分裂了近两百年的两河流域再次归于统一。汉穆拉比领导下的巴比伦王国和版图超过了两河流域此前任何一个王朝的最大版图，整个王国的疆域西起幼发拉底河岸，东至底格里斯河岸，囊括了南部的巴比伦尼亚和北部的亚述等广大地区。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162111901.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         古巴比伦王国疆域
+    </div>
+</center>
+
+<p>统一后，汉穆拉比建立了完善的中央集权专制制度。在他即位的第三十年，颁布了举世闻名的《汉穆拉比法典》。《汉穆拉比法典》是世界历史上第一部比较守备的成文法典，它堪称古巴比伦王国时期最著名的成就。整部法典被刻在一块黑色的玄武岩石石柱上。因此，这部法典又被称作《石柱法典》。</p>
+<h4 id="3-汉谟拉比去世，古巴比伦走向衰落。公元前1595年，赫梯人占领巴比伦城。"><a href="#3-汉谟拉比去世，古巴比伦走向衰落。公元前1595年，赫梯人占领巴比伦城。" class="headerlink" title="3. 汉谟拉比去世，古巴比伦走向衰落。公元前1595年，赫梯人占领巴比伦城。"></a>3. 汉谟拉比去世，古巴比伦走向衰落。公元前1595年，赫梯人占领巴比伦城。</h4><p>汉谟拉比死后，古巴比伦王国就瓦解了。正当古巴比伦王国开始走向衰落的时候，位于北方的赫梯王国逐渐地强盛起来。公元前1595年，来自安纳托利亚地区的赫梯国王军队在穆尔西里一世的带领下攻占了巴比伦王国的首都巴比伦城。赫梯人将大批的俘虏以及金银财宝都带回了赫梯王国，甚至把巴比伦的主神马尔杜克神神像也带回了赫梯。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162117191.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         巴比伦主神马尔杜克与魔兽搏斗
+    </div>
+</center>
+
+<h4 id="4-公元前1525年，加喜特人入主巴比伦城，建立了新的王朝，持续五百年，史称“中巴比伦王国”。"><a href="#4-公元前1525年，加喜特人入主巴比伦城，建立了新的王朝，持续五百年，史称“中巴比伦王国”。" class="headerlink" title="4. 公元前1525年，加喜特人入主巴比伦城，建立了新的王朝，持续五百年，史称“中巴比伦王国”。"></a>4. 公元前1525年，加喜特人入主巴比伦城，建立了新的王朝，持续五百年，史称“中巴比伦王国”。</h4><p>赫梯人闪电般地占领巴比伦城后，又因为本国内乱旋风般地撤出，两河流域南部地区处于群龙无首的状态。公元前1525年，一直盘旋于巴比伦边缘的加喜特人有机可乘，他们攻陷了古巴比伦的城堡，入主巴比伦城，建立了新的王朝，史称“中巴比伦王国”。</p>
+<p>从加喜特人接管巴比伦开始，到最后被埃兰人所灭亡，整个加喜特巴比伦王朝持续了将近五百年，这使得加喜特巴比伦王朝成为古代两河流域历史上统治最长的王朝。在这几百年年，加喜特人曾一度控制了亚述人，征服美索不达米亚东南部的埃兰和苏萨两个城邦。最终，加喜特王朝、埃及新王国与赫梯王国发展成近东地区的三大强国。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162145345.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         加喜特巴比伦王国时期的近东强国分布图
+    </div>
+</center>
+
+
+
+<h4 id="5-巴比伦城先后被埃兰人、亚述人占领。直到公元前7世纪，迦勒底人建立新巴比伦王国。"><a href="#5-巴比伦城先后被埃兰人、亚述人占领。直到公元前7世纪，迦勒底人建立新巴比伦王国。" class="headerlink" title="5. 巴比伦城先后被埃兰人、亚述人占领。直到公元前7世纪，迦勒底人建立新巴比伦王国。"></a>5. 巴比伦城先后被埃兰人、亚述人占领。直到公元前7世纪，迦勒底人建立新巴比伦王国。</h4><p>公元前1155年，埃兰国王舒特鲁克那浑二世率军深入巴比伦尼亚地区，一举攻陷了巴比伦城，至此为止，加喜特人建立的中巴比伦王国彻底终结，整个巴比伦尼亚地区又陷入小国林立、诸国纷争的时代。</p>
+<p>公元前729年，亚述帝国强盛的时候，一度将巴比伦地区纳入了其帝国的统治范围。直到公元前7世纪中晚期，在迦勒底人的带领下建立了新巴比伦王国时，整个巴比伦地区才得以再次统一。</p>
+<h3 id="新巴比伦"><a href="#新巴比伦" class="headerlink" title="新巴比伦"></a>新巴比伦</h3><p><strong>公元前600年左右，作为人类文明诞生之地的两河流域开始进入衰退阶段。</strong>先有暴虐无比的亚述帝国崩溃，接着又是埃及、吕底亚和米底等周边强邻的同步崛起。唯有继承前朝大部分遗产的新巴比伦，接过了美索不达米亚平原的最后火种，并继续以世界的中心自居。</p>
+<h4 id="1-公元前626年，迦勒底人领袖那波帕拉沙尔在巴比伦建立迦勒底王国，史称新巴比伦王国。"><a href="#1-公元前626年，迦勒底人领袖那波帕拉沙尔在巴比伦建立迦勒底王国，史称新巴比伦王国。" class="headerlink" title="1. 公元前626年，迦勒底人领袖那波帕拉沙尔在巴比伦建立迦勒底王国，史称新巴比伦王国。"></a>1. 公元前626年，迦勒底人领袖那波帕拉沙尔在巴比伦建立迦勒底王国，史称新巴比伦王国。</h4><p>新巴比伦王国又称迦勒底王国，由迦勒底人建立，迦勒底人是闪族人的一支，他们大概于公元前1000年初来到两河流域南部地区。公元前630年，迦勒底人领袖那波帕拉萨趁亚述内乱之机，逐渐取得对巴比伦尼亚的控制。公元前626 年，亚述人派迦勒底人领袖那波帕拉沙尔率军驻守巴比伦，他到巴比伦后，却发动反对亚述统治的起义，自立为王，建立迦勒底王国，历史上也称为新巴比伦王国。</p>
+<p>公元前614年，那波帕拉沙尔与伊朗高原的米底（也称米堤亚）王国联合，共同对抗亚述。公元前612年，攻陷亚述首都尼尼微，灭亚述帝国。新巴比伦王国与米底王国将前任帝国的辽阔版图进行瓜分，米底王国占据亚述本土和哈兰地区，新巴比伦王国则取得西边半壁江山，将两河流域南部、叙利亚、巴勒斯坦和腓尼基等地收入囊中。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+         src="https://bkimg.cdn.bcebos.com/pic/f9dcd100baa1cd11728bf49f405bdffcc3cec3fd8770" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         俗称迦勒底的新巴比伦帝国 依旧以世界中心自居
+    </div>
+</center>
+
+<h4 id="2-新巴比伦王国在尼布甲尼撒二世统治时国势达到顶峰"><a href="#2-新巴比伦王国在尼布甲尼撒二世统治时国势达到顶峰" class="headerlink" title="2. 新巴比伦王国在尼布甲尼撒二世统治时国势达到顶峰"></a>2. 新巴比伦王国在尼布甲尼撒二世统治时国势达到顶峰</h4><p>公元前604年，尼布甲尼撒二世登基，新巴比伦王国在尼布甲尼撒二世统治时国势达到顶峰。公元前601年，尼布甲尼撒二世率军向埃及边界推进，同埃及发生战斗，双方损失均很惨重。趁新巴比伦军队退回休养时期，一直臣服于新巴比伦王国的犹太国王约雅斤在埃及法老的煽动下，宣布脱离巴比伦，转而投向埃及的怀抱。</p>
+<p>得知这一消息，尼布甲尼撒二世于公元前598年，亲自率领大军向耶路撒冷推进。经过两个月的强势围攻，犹太国王约雅斤宣布投降。10多年后，公元前588年，犹太国王两次起兵反对新巴比伦王国。尼布甲尼撒二世再次围攻耶路撒冷。这次经18个月之久，犹太国王终于投降。尼布甲尼撒二世下令将整个耶路撒冷洗劫一空，神庙、王宫和许多民宅付之一炬，全城居民则全被俘往巴比伦尼亚，史称“<strong>巴比伦之囚</strong>”。 这些“巴比伦之囚”直到波斯皇帝居鲁士灭亡新巴比伦王国之后才得以返回耶路撒冷，并重建自己的家园。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162211825.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         油画《尼布甲尼撒的军队焚毁耶路撒冷》
+    </div>
+</center>
+
+<p>由于尼布甲尼撒二世与巴比伦祭司集团的关系非常密切，他还新建或者修复了许多宗教建筑，其中最著名的莫过于巴比伦的马尔杜克神庙的塔寺，该塔寺在近东地区远近闻名，一度被认为是“<strong>巴别通天塔</strong>”。巴别通天塔是“用鲜蓝色釉烧制的砖”建成。直到希腊史学家希罗多德游览巴比伦城之时，他还对当时所见的被遗弃的巴别通天塔赞叹不已。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162210273.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         巴别通天塔
+    </div>
+</center>
+
+<p>然而，环顾时代风貌和自己的所处位置，巴比伦人的自信就多少要打些折扣。为此，他们选择在底格里斯河与幼发拉底河之间打造防御壁垒，并以主要假想敌为之命名。后世人所知晓的<strong>米底长城</strong>，就是这个特殊阶段的必然产物。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://bkimg.cdn.bcebos.com/pic/cc11728b4710b912c8fc75413ab4eb039245d6888470" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         米底长城的建造 由尼布甲尼撒二世钦定
+    </div>
+</center>
+
+<p>早在继承大位之前，尼布甲尼撒就以皇储身份指挥过许多关键性战役。正因如此，他能有幸见识到周边强国的军事体系，深感他们对自己帝国的潜在威胁。即便是最为保守的埃及，也懂得大量雇佣希腊士兵，提升传统武装风格的不足。而同样以新式骑兵见长的吕底亚和米底，更是在许多层面都达到了领先位置。巴比伦虽然能依靠治下的腓尼基城市补足海军力量，却不可能在缺乏可靠马场的情况下去迅速壮大骑兵部队。</p>
+<p>更要命的是，新巴比伦在此前的反亚述战争中与米底联盟。所以在完成终结老对手的使命后，将两河流域的大部分上游区域都划给盟友管辖。因为在坐拥中下游的他们看来，惨遭战争报复的亚述本土并无太大价值。直到发现米底方面的野心甚大，而自己的上游也成为他们的新战争策源地，才因巨大的恐惧感而悔恨不已。因此，尼布甲尼撒不仅要靠迎娶米底公主来维持联姻关系，还下令动用大量资源去建造米底长城。</p>
+<p>讽刺的是，由于新巴比伦帝国的迅速败亡，这段米底长城很快就因缺乏维护而灰飞烟灭。只留下10-15公里的遗迹，为无数途径此地的旅人所感叹，又在很长时间段内被世界所遗忘。倒是同期开工的<strong>空中花园</strong>，因位于巴比伦城内而得以保留到更晚阶段，成为历史之父希罗多德钦点的世界奇迹。尼布甲尼撒用这座古今罕见的高层园林，为自己的妻子缓解思乡之苦，也稳住了新巴比伦与米底帝国的脆弱和平。反过来让长城在自己的有生之年都没有机会接受实战考验。否则他可能会痛苦的发现，一切都不如自己所幻想的那般美好。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://bkimg.cdn.bcebos.com/pic/50da81cb39dbb6fd52661999f06dbc18972bd4079970" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         随着波斯崛起，米底帝国被完全吞并和取而代之
+    </div>
+</center>
+
+<h4 id="3-尼布甲尼撒二世去世后，公元前539年，波斯居鲁士二世灭亡了新巴比伦王国。"><a href="#3-尼布甲尼撒二世去世后，公元前539年，波斯居鲁士二世灭亡了新巴比伦王国。" class="headerlink" title="3. 尼布甲尼撒二世去世后，公元前539年，波斯居鲁士二世灭亡了新巴比伦王国。"></a>3. 尼布甲尼撒二世去世后，公元前539年，波斯居鲁士二世灭亡了新巴比伦王国。</h4><p>尼布甲尼撒二世统治时期是新巴比伦王国的极盛时期，但是国内阶级矛盾和民族矛盾依然非常尖锐，而且新巴比伦王国没有强大的军队作为支撑。尼布甲尼撒二世死后不久，崛起于伊朗高原西南部的波斯人便入侵了巴比伦尼亚。后者的一世英主居鲁士，先后征服了米底与吕底亚两大帝国，并将势力范围从爱琴海东岸扩张到了印度河流域。</p>
+<p>公元前539年，外敌扣边的警报终于促使巴比伦人进行总动员。但进驻长城沿线的军队并未等到太多米底人，而是需要面对新蹿起不久的波斯帝国。在波斯居鲁士二世军队的强攻下，虽然巴比伦城有两道围墙环绕，还有一条护城河包围，本是十分牢固、固若金汤的，但祭司竟打开大门放波斯军队入城，最终巴比伦城沦陷，国王成为了波斯人的俘虏，新巴比伦王国就此灭亡。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://bkimg.cdn.bcebos.com/pic/b7fd5266d0160924ab185ba42d4e22fae6cd7b899e70" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         巴比伦陷落，也预示着两河文明的黄金时代终结
+    </div>
+</center>
+
+<p>复兴不到百年的新巴比伦帝国就此寿终正寝，标志着巴比伦文明的终结。虽然后来的波斯帝国依然采用了楔形文字的书写形式，并或多或少地继承和接受了两河流域文明与文化，但以苏美尔文明为源头、以巴比伦文明和亚述文明为核心的两河流域古文明实际上已伴随着新巴比伦王国的灭亡而告终，整个两河文明的黄金时代也将一去不返。此后的美索不达平原和巴比伦城，依旧是重要的帝国粮仓与首府级城市，但重要性已大不如前。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403162215013.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         巴比伦城遗址
+    </div>
+</center>
+
+
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/92e68a9e/">4. 波斯文明</a>
+            
+            
+            <a class="next" rel="next" href="/8b5d1b00/">2. 人类第一个文明</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/92e68a9e/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/8b5d1b00/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

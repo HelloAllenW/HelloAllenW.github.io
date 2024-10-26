@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>vue3中ref和reactive的深层原理 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">vue3中ref和reactive的深层原理</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2023&nbsp;&nbsp;22:18:02</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/Vue/">Vue </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>相对于Vue2的defineProperty实现的数据响应式，Vue3对数据响应的处理分工更加明确，通过组合式api中ref与reactive两个暴露给开发者的函数对数据进行包装，从而实现了数据响应式，那么它们有什么区别？下面我们一起来根据例子来学习！</p>
+<p><strong>ref</strong>：<code>定义基本数据类型、引用数据类型的响应式</code>。也就是说ref(value)，这个value类型可以是基本数据类型，也可以是引用数据类型，但是在js中使用时必须以<code>属性.value</code>格式使用，在template中可以直接调用数据。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeValue&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>当前strRef：&#123;&#123; strRef &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>当前objRef：姓名：&#123;&#123; objRef.name &#125;&#125; 爱好：&#123;&#123; objRef.hobboy &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>当前arrRef：&#123;&#123; arrRef &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; defineComponent, ref, shallowRef &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">  setup () &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> strRef = <span class="title function_">ref</span>(<span class="string">&#x27;sapper&#x27;</span>);<span class="comment">// 基本数据类型</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> arrRef = <span class="title function_">ref</span>([<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]);<span class="comment">// 数组类型</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> objRef = <span class="title function_">ref</span>(&#123;  <span class="comment">// 对象类型</span></span></span><br><span class="line"><span class="language-javascript">      <span class="attr">name</span>: <span class="string">&#x27;sapper&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">hobboy</span>: [<span class="string">&#x27;吉他&#x27;</span>, <span class="string">&#x27;原神&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> <span class="title function_">changeValue</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">      strRef.<span class="property">value</span> = <span class="string">&#x27;工兵&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">      arrRef.<span class="property">value</span>[<span class="number">1</span>] = <span class="number">4</span>;</span></span><br><span class="line"><span class="language-javascript">      objRef.<span class="property">value</span>.<span class="property">hobboy</span>[<span class="number">1</span>] = <span class="string">&#x27;滑冰&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;strRef,objRef,arrRef,changeValue&#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>reactive</strong>：<code>定义引用类型数据的响应式，不支持基本数据类型</code>，如果需要写基本数据类型只能是放在对象中，也就是说reactive(value)，这个value类型必须是引用类型。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;changeValue&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>当前objReactive：</span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">        姓名：&#123;&#123; objReactive.name &#125;&#125;<span class="tag">&lt;<span class="name">br</span>/&gt;</span> </span><br><span class="line">        爱好：&#123;&#123; objReactive.hobboy &#125;&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>当前arrReactive：&#123;&#123; arrReactive &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">import</span> &#123; defineComponent, reactive &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span></span><br><span class="line"><span class="language-javascript"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineComponent</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">  setup () &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> arrReactive = <span class="title function_">reactive</span>([<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]);<span class="comment">// 数组类型</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> objReactive = <span class="title function_">reactive</span>(&#123;  <span class="comment">// 对象类型</span></span></span><br><span class="line"><span class="language-javascript">      <span class="attr">name</span>: <span class="string">&#x27;sapper&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">hobboy</span>: [<span class="string">&#x27;吉他&#x27;</span>, <span class="string">&#x27;原神&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> <span class="title function_">changeValue</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">      arrReactive[<span class="number">1</span>] = <span class="number">4</span>;</span></span><br><span class="line"><span class="language-javascript">      objReactive.<span class="property">name</span> = <span class="string">&#x27;工兵&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">      objReactive.<span class="property">hobboy</span>[<span class="number">1</span>] = <span class="string">&#x27;滑冰&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">return</span> &#123;objReactive,arrReactive,changeValue&#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;</span></span><br><span class="line"><span class="language-javascript">&#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面两个例子中我们可以看出不管什么类型数据，ref都需要以<code>.value</code>来调用ref定义的数据，对于引用数据类型来看，我们可以看出代码不美观，所以一般<strong>对于引用类型数据，都推荐使用reactive来定义</strong>；<strong>对于基本数据类型，可以使用ref也可以使用reactive来定义</strong>。既然到了这里我们都了解了ref和reactive的运用区别了，那么我们继续来一起探讨一下它们的响应原理又有什么区别？</p>
+<h3 id="揭秘ref"><a href="#揭秘ref" class="headerlink" title="揭秘ref"></a>揭秘ref</h3><p>从上面的例子，我们先打印看一下基本数据类型（strRef）、引用数据类型（arrRef、ObjRef）的ref内部封装结构是什么样的？如下三图所示</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/87b98315c4ea4ff0b11fba32ae95879b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3fcce76c786e49b58de81838b5410e5e~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<p><img src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b6a30205d8ec407d8fa8bdae1d66c6c9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 从上面图片可以看出，不管是什么类型的数据，对于ref封装数据都是一个<strong>RefImpl对象</strong>，<code>reference implement</code>的简写，是引用实现的意思，每个RefImpl对象都有6个属性：</p>
+<ul>
+<li><p><strong>dep</strong>：是一个Set类型的数据，用来存储当前的ref值收集的依赖。</p>
+</li>
+<li><p><strong>_ v _ isRef</strong> ：标记位，只要被ref定义了，都会标识当前数据为一个Ref，也就是它的值标记为true。</p>
+</li>
+<li><p><strong>_ v _ isShallow</strong>：判断是否是shallowRef定义的数据。</p>
+<blockquote>
+<p>与ref不同的是，当使用shallowRef为引用类型创建响应性时，修改深层属性，不具备响应性。只有对.value的引用时才触发。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> state = <span class="title function_">shallowRef</span>(&#123; <span class="attr">count</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="comment">// 不会触发更改</span></span><br><span class="line">state.<span class="property">value</span>.<span class="property">count</span> = <span class="number">2</span></span><br><span class="line"><span class="comment">// 会触发更改</span></span><br><span class="line">state.<span class="property">value</span> = &#123; <span class="attr">count</span>: <span class="number">2</span> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>_ rawValue</strong>：用于<code>保存当前ref值对应的原始值</code>，如果传递的参数是<code>对象</code>，它就是<code>用于保存转化前的原始值</code>，否则_ value与_ rawValue相同。</p>
+</li>
+<li><p><strong>_ value</strong>：用于<code>保存ref当前值</code>，如果传递的参数是<code>对象</code>，它就是<code>用于保存经过reactive函数转化后的值</code>，否则_ value与_ rawValue相同。从上面例子我们可以发现，对于引用类型的数据，它的值就是一个proxy对象，这其实就是reactive封装数据后对象（后面会说）。我们先看一下下图，发现_ rawValue就是没有做响应性处理的原始值，在看看_ value是一个proxy对象就是做了reactive响应处理的值。</p>
+<blockquote>
+<p><strong>_ rawValue</strong>与<strong>_ value</strong>就是为了区分引用类型数据是否做响应式处理。</p>
+</blockquote>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b66a972c606440f082ba8257db5f6c4b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+</li>
+<li><p><strong>value</strong>：保存的是当前的值。</p>
+</li>
+</ul>
+<p>既然我们清楚了ref给数据封装了什么属性，接下来开始探讨源码究竟给怎么给上面6个属性进行赋值的：</p>
+<ul>
+<li><p><strong>ref函数</strong>：Vue3向开发者暴露的是ref函数，其实它就是封装了一个createRef函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">ref</span>(<span class="params">value?: unknown</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createRef</span>(value, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>createRef函数</strong>：有两个参数，一个是要<code>做响应处理的数据</code>，一个是<code>判断数据是否为shallowRef定义的数据</code>。它主要做的事情就是判断当前rawValue（暂时没有做响应处理的数据）是否为ref类型数据、创建RefImpl实例对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createRef</span>(<span class="params">rawValue: unknown, shallow: boolean</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isRef</span>(rawValue)) &#123;</span><br><span class="line">    <span class="keyword">return</span> rawValue</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RefImpl</span>(rawValue, shallow)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>RefImpl类</strong>：创建RefImpl类给_ rawValue和_ value属性赋值，判断当前定义的ref数据是否为shallowRef定义的数据，然后获取响应性值时对数据依赖进行收集并返回_ value，修改响应式值时修改并通知依赖更新。</p>
+<blockquote>
+<p><strong>ref定义的数据为什么需要带.value调用数据？</strong> 就是<code>因为RefImpl类暴露给实例对象的get、set方法是value</code>，所以在调用的时候，需要带上。</p>
+</blockquote>
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fd68c66b915848b1992512bcf00e0952~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+</li>
+</ul>
+<p>其实，RefImpl实例关键就在于<code>trackRefValue(this)</code>和<code>triggerRefValue(this, newVal)</code>的两个函数的处理，我们大概也知道它们就是依赖收集、依赖更新。这里就不一一探讨。</p>
+<h3 id="揭秘Reactive"><a href="#揭秘Reactive" class="headerlink" title="揭秘Reactive"></a>揭秘Reactive</h3><p>上面也说了reactive封装数据的用法，它只支持传入引用类型数据（数组、对象），如果需要在reactive中使用基础类型只能放在对象中。既然这样我们来探讨一下reactive函数究竟做了什么？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arrReactive = <span class="title function_">reactive</span>([<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]);<span class="comment">// 数组类型</span></span><br><span class="line"><span class="keyword">const</span> objReactive = <span class="title function_">reactive</span>(&#123;  <span class="comment">// 对象类型</span></span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;sapper&#x27;</span>,</span><br><span class="line">  <span class="attr">hobboy</span>: [<span class="string">&#x27;吉他&#x27;</span>, <span class="string">&#x27;原神&#x27;</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">changeValue</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  arrReactive[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">  objReactive.<span class="property">name</span> = <span class="string">&#x27;工兵&#x27;</span>;</span><br><span class="line">  objReactive.<span class="property">hobboy</span>[<span class="number">1</span>] = <span class="string">&#x27;滑冰&#x27;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;arrReactive&#x27;</span>,arrReactive);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;objReactive&#x27;</span>,objReactive);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b274fd77d8624fa198d1400b1fbd3d4d~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"> 从上图可以看出，使用reactive封装的数据返回的都是一个proxy对象，proxy就是代理，如把一个对象代理到另一个对象，好比如房子所有者，代理房子给二手房东销售，二手房东就可以拥有房子销售权利。从上图我们可以看到Proxy对象有三个属性：</p>
+<ul>
+<li><p>**[[Handler]]**： 创建Proxy对象传入的第二个参数，是对当前需要代理的目标target进行一些相关配置处理。</p>
+</li>
+<li><p>**[[Target]]**：需要代理的目标target，也就是被代理的目标。</p>
+</li>
+<li><p>**[[IsRevoked]]**：表示是否可撤销，生成可撤销的proxy对象用Proxy.revocable()方法。 那么Proxy对象可以做什么？我们看看下面例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> houseOwner = &#123;<span class="attr">home</span>:<span class="string">&#x27;房源&#x27;</span>,<span class="attr">price</span>:<span class="number">1200</span>,<span class="attr">type</span>:<span class="string">&#x27;一房一厅&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> proxyOwner = <span class="keyword">new</span> <span class="title class_">Proxy</span>(houseOwner,&#123;</span><br><span class="line">  <span class="attr">get</span>:<span class="keyword">function</span> (<span class="params">target,key</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;key&#125;</span>属性被访问！`</span>)</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">set</span>:<span class="keyword">function</span>(<span class="params">target,key,value</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(target[key]===value)&#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    target[key] = value;</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxyOwner);</span><br><span class="line">proxyOwner.<span class="property">price</span> = <span class="number">1300</span>;<span class="comment">// 对被代理对象的修改</span></span><br><span class="line">proxyOwner.<span class="property">remark</span> = <span class="string">&#x27;采光点好！&#x27;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxyOwner.<span class="property">price</span>);<span class="comment">// price属性被访问</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>从这个例子，可以看出Proxy对象的第二个参数给代理目标带上相关属性：set方法、get方法，再回到reactive封装的数据中，数据的Handler属性给数据带上了五个属性：<code>deleteProperty</code>、<code>get</code>、<code>set</code>、<code>has</code>、<code>ownKeys</code>。这五个属性怎么来的？我们一起探讨一下Vue3的源码实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码位置：core-main/packages/reactivity/src/reactive.ts</span></span><br><span class="line"><span class="comment">// Vue3中暴露给开发者的是reactive方法</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">reactive</span>(<span class="params">target: object</span>) &#123;</span><br><span class="line">  <span class="comment">// 判断target是否只读，是就不做处理</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="title function_">isReadonly</span>(target)) &#123;</span><br><span class="line">    <span class="keyword">return</span> target</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">createReactiveObject</span>(</span><br><span class="line">    target,</span><br><span class="line">    <span class="literal">false</span>,</span><br><span class="line">    mutableHandlers,</span><br><span class="line">    mutableCollectionHandlers,</span><br><span class="line">    reactiveMap</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>createReactiveObject函数主要为了创建Proxy实例对象，参数传了五个属性： <code>target</code>（目标数据）、<code>isReadonly</code>（target是否只读）、<code>mutableHandlers</code>（ProxyHandler）、<code>mutableCollectionHandlers</code>（ProxyHandler类型）、<code>proxyMap</code>（数据集合）。我们先了解一波createReactiveObject函数：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/313fa00b6a634e1c8c6b8bd3c2a9d683~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp" alt="image.png"></p>
+<ul>
+<li><p><strong>ReactiveFlags</strong>：响应式数据标记。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> enum <span class="title class_">ReactiveFlags</span> &#123;</span><br><span class="line">  <span class="variable constant_">SKIP</span> = <span class="string">&#x27;__v_skip&#x27;</span>,<span class="comment">// 标记对象不可进行代理</span></span><br><span class="line">  <span class="variable constant_">IS_REACTIVE</span> = <span class="string">&#x27;__v_isReactive&#x27;</span>,<span class="comment">// 是否是Reactive封装的</span></span><br><span class="line">  <span class="variable constant_">IS_READONLY</span> = <span class="string">&#x27;__v_isReadonly&#x27;</span>,<span class="comment">// 是否只读</span></span><br><span class="line">  <span class="variable constant_">IS_SHALLOW</span> = <span class="string">&#x27;__v_isShallow&#x27;</span>,<span class="comment">// 是否是shallowRef封装的</span></span><br><span class="line">  <span class="variable constant_">RAW</span> = <span class="string">&#x27;__v_raw&#x27;</span><span class="comment">// 是否是proxy原始的target</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>TargetType</strong>：target的数据类型。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> enum <span class="title class_">TargetType</span> &#123;</span><br><span class="line">  <span class="variable constant_">INVALID</span> = <span class="number">0</span>,</span><br><span class="line">  <span class="variable constant_">COMMON</span> = <span class="number">1</span>,<span class="comment">// Array、Object类型</span></span><br><span class="line">  <span class="variable constant_">COLLECTION</span> = <span class="number">2</span> <span class="comment">// Set、Map、WaekMap、WeakSet类型</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>baseHandlers</strong>：对于Array、Object类型数据，Proxy实例的第二个参数。传入的baseHandlers就是<code>mutableHandlers</code>。这个函数主要是为了给Proxy对象带上五个属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码位置：core-main/packages/reactivity/src/baseHandlers.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">mutableHandlers</span>: <span class="title class_">ProxyHandler</span>&lt;object&gt; = &#123;</span><br><span class="line">  <span class="comment">// createGetter() 主要实现依赖收集和Reflect.set(target, key, value, receiver)</span></span><br><span class="line">  get,</span><br><span class="line">  <span class="comment">// createSetter() 主要实现通知依赖更新和Reflect.get(target, key, receiver)</span></span><br><span class="line">  set,</span><br><span class="line">  <span class="comment">// deleteProperty() 主要是删除target的指定key的属性Reflect.deleteProperty(target, key)</span></span><br><span class="line">  deleteProperty,</span><br><span class="line">  <span class="comment">// has() 主要是判断target是否存在指定key的属性，Reflect.has(target, key)</span></span><br><span class="line">  has,</span><br><span class="line">  <span class="comment">// ownKeys() 主要是获取target的key数组，Reflect.ownKeys(target)</span></span><br><span class="line">  ownKeys</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>collectionHandlers</strong>：对于Set、Map、WaekMap、WeakSet类型数据，Proxy实例的第二个参数。传入的baseHandlers就是<code>mutableCollectionHandlers</code>。mutableCollectionHandlers主要是对 set、map、weakSet、weakMap 四种类型的对象进行劫持。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码位置：core-main/packages/reactivity/src/mutableCollectionHandlers.ts</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">mutableCollectionHandlers</span>: <span class="title class_">ProxyHandler</span>&lt;<span class="title class_">CollectionTypes</span>&gt; = &#123;</span><br><span class="line">  <span class="attr">get</span>: <span class="comment">/*#__PURE__*/</span> <span class="title function_">createInstrumentationGetter</span>(<span class="literal">false</span>, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createInstrumentationGetter</span>(<span class="params">isReadonly: boolean, shallow: boolean</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> instrumentations = shallow? </span><br><span class="line">    isReadonly? <span class="attr">shallowReadonlyInstrumentations</span>: shallowInstrumentations</span><br><span class="line">    : isReadonly? <span class="attr">readonlyInstrumentations</span>: mutableInstrumentations</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">target: CollectionTypes,key: string | symbol,receiver: CollectionTypes</span>) =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(</span><br><span class="line">      <span class="title function_">hasOwn</span>(instrumentations, key) &amp;&amp; key <span class="keyword">in</span> target? <span class="attr">instrumentations</span>:target,</span><br><span class="line">      key,</span><br><span class="line">      receiver</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><strong>ref</strong>：定义基本数据类型、引用数据类型的响应式。封装数据类型为ref类型，主要就是<code>创建了RefImpl实例对象</code>。</li>
+<li><strong>reactive</strong>：定义引用类型数据的响应式，不支持基本数据类型，如果需要写基本数据类型只能是放在对象中。封装数据为reactive类型，主要是<code>创建了Proxy实例对象</code>，通过Reflect实现数据的获取与修改。</li>
+</ul>
+<p>作者：路灯下的光<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7185798606522155068">https://juejin.cn/post/7185798606522155068</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Vue/"># Vue</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/96f5861d/">一起玩转 Vue 中的 JSX：让你一次性掌握它的特性!</a>
+            
+            
+            <a class="next" rel="next" href="/b340e08/">vue生命周期</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/96f5861d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/b340e08/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

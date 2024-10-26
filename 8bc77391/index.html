@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>JavaScript数据类型转换 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">JavaScript数据类型转换</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 5, 2016&nbsp;&nbsp;23:10:45</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 5, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JavaScript是一门动态语言，所谓的动态语言可以暂时理解为在语言中的一切内容都是不确定的。比如一个变量，这一时刻是个整型，下一时刻可能会变成字符串了。虽然变量的数据类型是不确定的，但是各种运算符对数据类型是有要求的。如果运算符发现，运算子的类型与预期不符，就会自动转换类型。</p>
+<p>本文主要介绍数据类型强制转换和自动转换，自动转换是基于强制转换之上。<strong>强制转换主要指使用Number、String和Boolean三个函数，手动将各种类型的值，分布转换成数字、字符串或者布尔值</strong>。</p>
+<p>四句话总结当前文章内容：</p>
+<p>1、其他类型转String</p>
+<ul>
+<li>toString()：不会改变原变量。null和undefined这两个值没有toString，如果调用他们的方法，会报错。Number类型调用toString，参数就是进制。</li>
+<li>String()：对于Number和Boolean实际上就是调用的toString()方法。对于null和undefined，就不会调用toString()方法,它会将null直接转换为”null”，将undefined 直接转换为”undefined”。数组直接返回字符串形式，对象返回[object Object]。</li>
+</ul>
+<p>2、其他类型转Number</p>
+<ul>
+<li>Number()：字符串中有非数字的内容，则转换为NaN。空字符串和Null为0。undefined为NaN。</li>
+<li>parseInt() &amp; parseFloat()：只能对以数字开头的进行提取，如果开头非数字，则直接返回NaN。没有Number那么严格。</li>
+</ul>
+<p>3、其他类型转Boolean：只有空字符串(“”)、null、undefined、+0、-0 和 NaN 转为布尔型是 false，其他的都是 true。</p>
+<p>4、自动转换</p>
+<h2 id="一、强制转换"><a href="#一、强制转换" class="headerlink" title="一、强制转换"></a>一、强制转换</h2><h3 id="1、其他的数据类型转换为String"><a href="#1、其他的数据类型转换为String" class="headerlink" title="1、其他的数据类型转换为String"></a>1、其他的数据类型转换为String</h3><h4 id="方式一：toString-方法"><a href="#方式一：toString-方法" class="headerlink" title="方式一：toString()方法"></a>方式一：toString()方法</h4><ul>
+<li>调用被转换数据类型的toString()方法,该方法不会影响到原变量，它会将转换的结果返回，<strong>但是注意：null和undefined这两个值没有toString，如果调用他们的方法，会报错</strong>。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var a = 123</span><br><span class="line">a.toString()//&quot;123&quot;</span><br><span class="line">var b = null;</span><br><span class="line">b.toString()//&quot;报错&quot;</span><br><span class="line">var c = undefined</span><br><span class="line">c.toString()//&quot;报错&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>采用 Number 类型的 toString() 方法的基模式，可以用不同的基输出数字，例如二进制的基是 2，八进制的基是 8，十六进制的基是 16</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var iNum = 10;</span><br><span class="line">alert(iNum.toString(2));        //输出 &quot;1010&quot;</span><br><span class="line">alert(iNum.toString(8));        //输出 &quot;12&quot;</span><br><span class="line">alert(iNum.toString(16));       //输出 &quot;A&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：String-函数"><a href="#方式二：String-函数" class="headerlink" title="方式二：String()函数"></a>方式二：String()函数</h4><ul>
+<li>使用String()函数做强制类型转换时，对于Number和Boolean实际上就是调用的toString()方法, 但是对于null和undefined，就不会调用toString()方法,它会将null直接转换为”null”,将undefined 直接转换为”undefined”</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = null</span><br><span class="line">String(a)//&quot;null&quot;</span><br><span class="line">var b = undefined</span><br><span class="line">String(b)//&quot;undefined&quot;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>String方法的参数如果是对象，返回一个类型字符串；如果是数组，返回该数组的字符串形式。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String(&#123;a: 1&#125;) // &quot;[object Object]&quot;</span><br><span class="line">String([1, 2, 3]) // &quot;1,2,3&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、其他的数据类型转换为Number"><a href="#2、其他的数据类型转换为Number" class="headerlink" title="2、其他的数据类型转换为Number"></a>2、其他的数据类型转换为Number</h3><h4 id="方式一：使用Number-函数"><a href="#方式一：使用Number-函数" class="headerlink" title="方式一：使用Number()函数"></a>方式一：使用Number()函数</h4><p>下面分成两种情况讨论，一种是参数是原始类型的值，另一种是参数是对象</p>
+<p><strong>(1)原始类型值</strong></p>
+<p>①字符串转数字</p>
+<p>Ⅰ 如果是纯数字的字符串，则直接将其转换为数字</p>
+<p>Ⅱ 如果字符串中有非数字的内容，则转换为NaN</p>
+<p>Ⅲ 如果字符串是一个空串或者是一个全是空格的字符串，则转换为0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Number(&#x27;324&#x27;) // 324</span><br><span class="line">Number(&#x27;324abc&#x27;) // NaN</span><br><span class="line">Number(&#x27;&#x27;) // 0</span><br></pre></td></tr></table></figure>
+
+<p>②布尔值转数字:true转成1,false转成0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Number(true) // 1</span><br><span class="line">Number(false) // 0</span><br></pre></td></tr></table></figure>
+
+<p>③undefined转数字:转成NaN</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(undefined) // NaN</span><br></pre></td></tr></table></figure>
+
+<p>④null转数字：转成0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(null) // 0</span><br></pre></td></tr></table></figure>
+
+<p>⑤Number() 接受数值作为参数，此时它既能识别负的十六进制，也能识别0开头的八进制，返回值永远是十进制值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Number(3.15);    //3.15</span><br><span class="line">Number(023);     //19</span><br><span class="line">Number(0x12);    //18</span><br><span class="line">Number(-0x12);   //-18</span><br></pre></td></tr></table></figure>
+
+<p><strong>(2)对象</strong></p>
+<p>简单的规则是，Number方法的参数是对象时，将返回NaN，除非是包含单个数值的数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Number(&#123;a: 1&#125;) // NaN</span><br><span class="line">Number([1, 2, 3]) // NaN</span><br><span class="line">Number([5]) // 5</span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：parseInt-amp-parseFloat"><a href="#方式二：parseInt-amp-parseFloat" class="headerlink" title="方式二：parseInt() &amp; parseFloat()"></a>方式二：parseInt() &amp; parseFloat()</h4><p>这种方式专门用来对付字符串，parseInt()一个字符串转换为一个整数,可以将一个字符串中的有效的整数内容取出来，然后转换为Number。parseFloat()把一个字符串转换为一个浮点数。parseFloat()作用和parseInt()类似，不同的是它可以获得有效的小数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">console.log(parseInt(&#x27;.21&#x27;));        //NaN</span><br><span class="line">console.log(parseInt(&quot;10.3&quot;));        //10</span><br><span class="line">console.log(parseFloat(&#x27;.21&#x27;));      //0.21</span><br><span class="line">console.log(parseFloat(&#x27;.d1&#x27;));       //NaN</span><br><span class="line">console.log(parseFloat(&quot;10.11.33&quot;));  //10.11</span><br><span class="line">console.log(parseFloat(&quot;4.3years&quot;));  //4.3</span><br><span class="line">console.log(parseFloat(&quot;He40.3&quot;));    //NaN</span><br></pre></td></tr></table></figure>
+
+<p>parseInt()在没有第二个参数时默认以十进制转换数值，有第二个参数时，以第二个参数为基数转换数值，如果基数有误返回NaN</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">console.log(parseInt(&quot;13&quot;));          //13</span><br><span class="line">console.log(parseInt(&quot;11&quot;,2));        //3</span><br><span class="line">console.log(parseInt(&quot;17&quot;,8));        //15</span><br><span class="line">console.log(parseInt(&quot;1f&quot;,16));       //31</span><br></pre></td></tr></table></figure>
+
+<p><strong>两者的区别：Number函数将字符串转为数值，要比parseInt函数严格很多。基本上，只要有一个字符无法转成数值，整个字符串就会被转为NaN。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&#x27;42 cats&#x27;) // 42</span><br><span class="line">Number(&#x27;42 cats&#x27;) // NaN</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，parseInt逐个解析字符，而Number函数整体转换字符串的类型。 另外，对空字符串的处理也不一样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Number(&quot;   &quot;);     //0    </span><br><span class="line">parseInt(&quot;   &quot;);   //NaN</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、其他的数据类型转换为Boolean"><a href="#3、其他的数据类型转换为Boolean" class="headerlink" title="3、其他的数据类型转换为Boolean"></a>3、其他的数据类型转换为Boolean</h3><p>它的转换规则相对简单：<strong>只有空字符串(“”)、null、undefined、+0、-0 和 NaN 转为布尔型是 false，其他的都是 true，空数组、空对象转换为布尔类型也是 true,甚至连false对应的布尔对象new Boolean(false)也是true</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Boolean(undefined) // false</span><br><span class="line">Boolean(null) // false</span><br><span class="line">Boolean(0) // false</span><br><span class="line">Boolean(NaN) // false</span><br><span class="line">Boolean(&#x27;&#x27;) // false</span><br><span class="line">复制代码Boolean(&#123;&#125;) // true</span><br><span class="line">Boolean([]) // true</span><br><span class="line">Boolean(new Boolean(false)) // true</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、自动转换"><a href="#二、自动转换" class="headerlink" title="二、自动转换"></a>二、自动转换</h2><p>遇到以下三种情况时，JavaScript 会自动转换数据类型，即转换是自动完成的，用户不可见。</p>
+<h3 id="1-自动转换为布尔值"><a href="#1-自动转换为布尔值" class="headerlink" title="1.自动转换为布尔值"></a>1.自动转换为布尔值</h3><p>JavaScript 遇到预期为布尔值的地方(比如if语句的条件部分),就会将非布尔值的参数自动转换为布尔值。系统内部会自动调用Boolean函数。</p>
+<p>逻辑运算符!如果对非布尔值进行运算，则会将其转换为布尔值，然后再取反。 所以我们可以利用该特点，来将一个其他的数据类型转换为布尔值， <strong>可以为一个任意数据类型取两次反，来将其转换为布尔值，原理和Boolean()函数一样。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (&#x27;abc&#x27;) &#123;</span><br><span class="line">  console.log(&#x27;hello&#x27;)</span><br><span class="line">&#125;  // &quot;hello&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-自动转换为数值"><a href="#2-自动转换为数值" class="headerlink" title="2.自动转换为数值"></a>2.自动转换为数值</h3><p><strong>算数运算符(+ - * /)跟非Number类型的值进行运算时，会将这些值转换为Number，然后在运算，除了字符串的加法运算</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">true + 1 // 2</span><br><span class="line">2 + null // 2</span><br><span class="line">undefined + 1 // NaN</span><br><span class="line">2 + NaN // NaN 任何值和NaN做运算都得NaN</span><br><span class="line">&#x27;5&#x27; - &#x27;2&#x27; // 3</span><br><span class="line">&#x27;5&#x27; * &#x27;2&#x27; // 10</span><br><span class="line">true - 1  // 0</span><br><span class="line">&#x27;1&#x27; - 1   // 0</span><br><span class="line">&#x27;5&#x27; * []    // 0</span><br><span class="line">false / &#x27;5&#x27; // 0</span><br><span class="line">&#x27;abc&#x27; - 1   // NaN</span><br></pre></td></tr></table></figure>
+
+<p><strong>一元运算符也会把运算子转成数值。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+&#x27;abc&#x27; // NaN</span><br><span class="line">-&#x27;abc&#x27; // NaN</span><br><span class="line">+true // 1</span><br><span class="line">-false // 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-自动转换为字符串"><a href="#3-自动转换为字符串" class="headerlink" title="3.自动转换为字符串"></a>3.自动转换为字符串</h3><p>字符串的自动转换，主要发生在字符串的加法运算时。当一个值为字符串，另一个值为非字符串，则后者转为字符串。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x27;5&#x27; + 1 // &#x27;51&#x27;</span><br><span class="line">&#x27;5&#x27; + true // &quot;5true&quot;</span><br><span class="line">&#x27;5&#x27; + false // &quot;5false&quot;</span><br><span class="line">&#x27;5&#x27; + &#123;&#125; // &quot;5[object Object]&quot;</span><br><span class="line">&#x27;5&#x27; + [] // &quot;5&quot;</span><br><span class="line">&#x27;5&#x27; + function ()&#123;&#125; // &quot;5function ()&#123;&#125;&quot;</span><br><span class="line">&#x27;5&#x27; + undefined // &quot;5undefined&quot;</span><br><span class="line">&#x27;5&#x27; + null // &quot;5null&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><h3 id="1-强制转换的各种情况"><a href="#1-强制转换的各种情况" class="headerlink" title="1. 强制转换的各种情况"></a>1. 强制转换的各种情况</h3><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/8/30/1658b493e7878441~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp" alt="img"></p>
+<h3 id="2-自动转换的的各种情况"><a href="#2-自动转换的的各种情况" class="headerlink" title="2. 自动转换的的各种情况"></a>2. 自动转换的的各种情况</h3><ul>
+<li>只有空字符串(“”)、null、undefined、+0、-0 和 NaN 转为布尔型是 false，其他的都是 true</li>
+<li>除了加法运算符（+）有可能把运算子转为字符串，其他运算符都会把运算子自动转成数值。一元运算符也会把运算子转成数值。</li>
+<li>字符串的自动转换，主要发生在字符串的加法运算时。</li>
+</ul>
+<p>作者：浪里行舟<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903667947175949">https://juejin.cn/post/6844903667947175949</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/404a8c80/">JavaScript中的数组方法</a>
+            
+            
+            <a class="next" rel="next" href="/9c481d2b/">JavaScript 的数据类型及其检测</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/404a8c80/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/9c481d2b/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

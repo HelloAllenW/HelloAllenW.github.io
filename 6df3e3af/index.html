@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>ES5和ES6中的类与继承 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES5和ES6中的类与继承</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2018&nbsp;&nbsp;23:28:15</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2018
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">10 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>本篇分别通过 ES5 和 ES6 讲述JS中的类、静态方法、继承和单例</p>
+</blockquote>
+<h1 id="一、ES5-类和静态方法"><a href="#一、ES5-类和静态方法" class="headerlink" title="一、ES5 类和静态方法"></a>一、ES5 类和静态方法</h1><p>1、构造函数里面的方法和属性与原型链上的方法和属性都叫做：实例方法。要调用必须通过实例化构造函数（Person类），静态方法直接通过构造函数（类名）进行调用</p>
+<p>2、原型链上的属性和方法可以被多个实例共享，而构造函数里面的方法和属性不会被多个实例共享</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 通过构造函数来定义类</span><br><span class="line">function Person(name, age) &#123;</span><br><span class="line">  // 构造函数里面的方法和属性</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">  this.run = function () &#123;</span><br><span class="line">    console.log(`$&#123;this.name&#125; - $&#123;this.age&#125;`);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">// 构造函数原型链上的属性和方法</span><br><span class="line">Person.prototype.sex = &quot;男&quot;;</span><br><span class="line">Person.prototype.work = function () &#123;</span><br><span class="line">  console.log(`$&#123;this.name&#125; - $&#123;this.age&#125; - $&#123;this.sex&#125;`);</span><br><span class="line">&#125;;</span><br><span class="line">// 静态方法</span><br><span class="line">Person.setName = function () &#123;</span><br><span class="line">  console.log(&quot;静态方法&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 实例方法是通过实例化来调用的</span><br><span class="line">var p = new Person(&quot;zhangsan&quot;, &quot;20&quot;);</span><br><span class="line">p.run();</span><br><span class="line">p.work();</span><br><span class="line">// 静态方法是通过类名直接调用</span><br><span class="line">Person.setName();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="二、ES5-继承"><a href="#二、ES5-继承" class="headerlink" title="二、ES5 继承"></a>二、ES5 继承</h1><p>原型链继承和对象冒充继承：</p>
+<ul>
+<li>对象冒充继承：可以实现将参数传递到父类，但是没法继承原型链上的属性和方法</li>
+<li>原型链继承：可以继承构造函数里面以及原型链上面的属性和方法，但是实例化子类的时候没法给父类传参</li>
+</ul>
+<p>所以平时都是两者结合起来实现继承</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function Person(name, age) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">  this.age = age;</span><br><span class="line">  this.run = function () &#123;</span><br><span class="line">    console.log(this.name + &quot;-&quot; + this.age);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.work = function () &#123;</span><br><span class="line">  console.log(&quot;work&quot;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function Web(name, age) &#123;</span><br><span class="line">  // 通过 call()，能够使用属于另一个对象的方法。</span><br><span class="line">  // 此处相当于 Web 函数去调用Person类，并传值name,age</span><br><span class="line">  Person.call(this, name, age); // 对象冒充实现继承，可以实现将参数传递到父类</span><br><span class="line">&#125;</span><br><span class="line">Web.prototype = new Person(); // 原型链继承，但是原型链继承在实例化时没法将参数传递到父类里面</span><br><span class="line">var w = new Web(&quot;李四&quot;, 20);</span><br><span class="line">w.run(); // 测试调用构造函数里面的方法</span><br><span class="line">w.work(); // 测试调用原型链上的方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="三、ES6-类"><a href="#三、ES6-类" class="headerlink" title="三、ES6 类"></a>三、ES6 类</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  constructor(name, age) &#123;</span><br><span class="line">    // 类的构造方法，实例化的时候执行，new的时候执行</span><br><span class="line">    this._name = name;</span><br><span class="line">    this._age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  // 定义方法，注意：es6里面方法之间没有逗号(,)</span><br><span class="line">  getName() &#123;</span><br><span class="line">    console.log(this._name);</span><br><span class="line">  &#125;</span><br><span class="line">  setName() &#123;</span><br><span class="line">    this._name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var p = new Person(&quot;张三&quot;, &quot;20&quot;);</span><br><span class="line">p.setName(&quot;李四&quot;);</span><br><span class="line">p.getName();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="四、ES6-继承"><a href="#四、ES6-继承" class="headerlink" title="四、ES6 继承"></a>四、ES6 继承</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  constructor(name, age) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">  &#125;</span><br><span class="line">  getInfo() &#123;</span><br><span class="line">    console.log(`姓名：$&#123;this.name&#125; - 年龄：$&#123;this.age&#125;`);</span><br><span class="line">  &#125;</span><br><span class="line">  run() &#123;</span><br><span class="line">    console.log(&quot;run&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">class Web extends Person &#123;</span><br><span class="line">  constructor(name, age, sex) &#123;</span><br><span class="line">    super(name, age); // 实例化子类的时候把子类的数据传给父类</span><br><span class="line">    this.sex = sex;</span><br><span class="line">  &#125;</span><br><span class="line">  print() &#123;</span><br><span class="line">    console.log(this.sex);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var w = new Web(&quot;张三&quot;, &quot;30&quot;, &quot;男&quot;);</span><br><span class="line">w.print(); // 调用自己的方法</span><br><span class="line">w.getInfo(); // 调用父类方法</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="五、ES6-静态方法"><a href="#五、ES6-静态方法" class="headerlink" title="五、ES6 静态方法"></a>五、ES6 静态方法</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    // 属性</span><br><span class="line">    this._name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  run() &#123;</span><br><span class="line">    // 实例方法</span><br><span class="line">    console.log(this._name);</span><br><span class="line">  &#125;</span><br><span class="line">  static work() &#123;</span><br><span class="line">    // 静态方法</span><br><span class="line">    console.log(&quot;这是es6中的静态方法&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 或者通过这种方式定义类的静态方法</span><br><span class="line">Person.instance = &quot;这是一个静态方法的属性&quot;;</span><br><span class="line"></span><br><span class="line">var p = new Person(&quot;张三&quot;);</span><br><span class="line">p.run();</span><br><span class="line">Person.work(); // 通过类名来调用静态方法</span><br><span class="line">console.log(Person.instance);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="六、类的应用：单例"><a href="#六、类的应用：单例" class="headerlink" title="六、类的应用：单例"></a>六、类的应用：单例</h1><blockquote>
+<p>使用场景：nodejs连接mongodb数据库，只连接成功一次，然后之后每次操作数据库都使用本次连接后的实例，不用每次都重新连接</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class DB &#123;</span><br><span class="line">  static getInstance() &#123;</span><br><span class="line">    // 单例（单例是通过静态方法来实现的）</span><br><span class="line">    if (!DB.instance) &#123;</span><br><span class="line">      DB.instance = new DB();</span><br><span class="line">    &#125;</span><br><span class="line">    return DB.instance;</span><br><span class="line">  &#125;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    console.log(&quot;实例化会触发构造函数&quot;);</span><br><span class="line">    this.connect();</span><br><span class="line">  &#125;</span><br><span class="line">  connect() &#123;</span><br><span class="line">    console.log(&quot;连接数据库&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  find() &#123;</span><br><span class="line">    console.log(&quot;查询数据库&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var myDb1 = new DB();</span><br><span class="line">var myDb2 = new DB(); // 验证发现：每次实例化都会执行构造函数重新进行连接数据库。 所以对性能产生影响，采用单例模式进行处理</span><br><span class="line">var myDb3 = DB.getInstance(); // 单例实例化：实例化多次但只会调用一次构造函数，然后各自调用实例方法互不影响</span><br><span class="line">myDb3.find();</span><br><span class="line">var myDb4 = DB.getInstance();</span><br><span class="line">myDb4.find();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="七、详解ES6中的类和继承的使用"><a href="#七、详解ES6中的类和继承的使用" class="headerlink" title="七、详解ES6中的类和继承的使用"></a>七、详解ES6中的类和继承的使用</h1><h2 id="1、ES6之前实现面向对象编程的方法"><a href="#1、ES6之前实现面向对象编程的方法" class="headerlink" title="1、ES6之前实现面向对象编程的方法"></a>1、ES6之前实现面向对象编程的方法</h2><p>一直以来，JS都是使用function和prototype来模拟其他语言中类class实现面向对象的编程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 构造函数模拟创建一个Dog类</span><br><span class="line">function Dog(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;</span><br><span class="line">// 把一些属性和方法，定义在prototype对象上</span><br><span class="line">Dog.prototype = &#123;</span><br><span class="line">  type: &quot;动物&quot;,</span><br><span class="line">  say: function () &#123;</span><br><span class="line">    alert(&quot;名字叫&quot; + this.name);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 实例化</span><br><span class="line">var dog = new Dog(&quot;旺财&quot;);</span><br><span class="line">// 调用say方法</span><br><span class="line">dog.say();</span><br><span class="line">// 结果：名字叫旺财</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、ES6引入了class"><a href="#2、ES6引入了class" class="headerlink" title="2、ES6引入了class"></a>2、ES6引入了class</h2><p>ES6引入的class实际上也是通过函数function和原型prototype实现，只不过对实现方式做了进一步的封装。</p>
+<h2 id="3、基本用法"><a href="#3、基本用法" class="headerlink" title="3、基本用法"></a>3、基本用法</h2><p>那么，我们就使用ES6封装后的类class来实现我们想要的效果，我们来学学它的基本用法。</p>
+<p>声明一个类的写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个叫Animal的类</span><br><span class="line">class Animal &#123;</span><br><span class="line">  // 构造函数constructor</span><br><span class="line">  constructor(color) &#123;</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>我们通过关键字class来声明一个名字叫Animal的类，可以看到类里面（花括号 {}里面）有一个叫constructor方法，它就是构造方法，构造方法里面的this，指向的是该类实例化后的对象，这就是实现了一个类的声明。</p>
+<p>其中，构造方法constructor是一个类必须要有且只能存在一个的方法，默认返回实例对象；创建类的实例对象的时候，会调用此方法来初始化实例对象。如果你没有编写constructor方法，执行的时候也会被加上一个默认的空的constructor方法。</p>
+<h2 id="4、类的属性和方法"><a href="#4、类的属性和方法" class="headerlink" title="4、类的属性和方法"></a>4、类的属性和方法</h2><p>了解了类的声明和constructor构造函数的特点，我们下面来了解如何给类添加属性和方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    // 属性name</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 实例方法getName</span><br><span class="line">  getName() &#123;</span><br><span class="line">    return this.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们把类名后面的括号{ }里面的内容称之为类体，我们会在类体内来编写类的属性和方法。上面的案例中，类体内有2个方法：constructor( )、getName()。</p>
+<p>我们可以在构造方法constructor里面自定义一些对象的属性，比如案例中的name属性。此外，我们还自定义了一个getName( )方法，它属于类的实例方法，实例化后对象可以调用此方法。</p>
+<h2 id="5、类的实例对象"><a href="#5、类的实例对象" class="headerlink" title="5、类的实例对象"></a>5、类的实例对象</h2><p>掌握了类的属性和方法的写法，接下来，我们学习如何创建对象和使用对象的实例方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    // 属性name</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 实例方法getName</span><br><span class="line">  getName() &#123;</span><br><span class="line">    return &quot;This is a&quot; + this.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建一个Animal实例对象dog</span><br><span class="line">let dog = new Animal(&quot;dog&quot;);</span><br><span class="line">dog.name; // 结果：dog</span><br><span class="line">dog.getName(); // 结果：This is a dog</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实例对象的创建有几个要注意的事项：</p>
+<p>必须使用new创建字来创建类的实例对象；</p>
+<p>先声明定义类，再创建实例，否则会报错</p>
+<h2 id="6、类的静态方法"><a href="#6、类的静态方法" class="headerlink" title="6、类的静态方法"></a>6、类的静态方法</h2><p>上面讲到的自定义方法是实例方法，也就是实例化后的对象才可以调用的方法，比如上述案例的getName( )方法。除了实例方法以外，我们还可以定义一种直接使用类名即可访问的方法，我们称之为“静态方法”。</p>
+<p>我们一起来看看如何实现静态方法的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    // 属性name</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 自定义一个静态方法</span><br><span class="line">  static friends(a1, a2) &#123;</span><br><span class="line">    return `$&#123;a1.name&#125; and $&#123;a2.name&#125; are friends`;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建2个实例</span><br><span class="line">let dog = new Animal(&quot;dog&quot;);</span><br><span class="line">let cat = new Animal(&quot;cat&quot;);</span><br><span class="line"></span><br><span class="line">// 调用静态方法friends</span><br><span class="line">Animal.friends(dog, cat);</span><br><span class="line">// 结果：dog and cat are friends</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>静态方法和实例方法不同的是：静态方法的定义需要使用static关键字来标识，而实例方法不需要；此外，静态方法通过类名来的调用，而实例方法通过实例对象来调用。</p>
+<h2 id="7、类的继承"><a href="#7、类的继承" class="headerlink" title="7、类的继承"></a>7、类的继承</h2><p>说到类class，就不得不说类的继承，ES6使用extends关键字来实现子类继承父类，我们来演示一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> // 父类Animal</span><br><span class="line">class Animal &#123;//...&#125;</span><br><span class="line"></span><br><span class="line">// 子类Dog</span><br><span class="line">class Dog extends Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name,color)&#123;</span><br><span class="line">    super(name);</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的案例中，我们定义两个类，Animal类作为父类，Dog类作为子类，然后通过关键字extends来实现继承，此外，我们还注意到一个关键字super，它相当于是父类中的this。</p>
+<p>我们可以用super来引用父类，访问父类的方法，我们来演示一下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">// 父类Animal</span><br><span class="line">class Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name) &#123;</span><br><span class="line">    // 属性name</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 父类的自定义方法</span><br><span class="line">  say() &#123;</span><br><span class="line">    return `This is a animal`;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 子类Dog</span><br><span class="line">class Dog extends Animal &#123;</span><br><span class="line">  // 构造方法</span><br><span class="line">  constructor(name, color) &#123;</span><br><span class="line">    super(name);</span><br><span class="line">    this.color = color;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 子类的实例方法</span><br><span class="line">  getAttritube() &#123;</span><br><span class="line">    return `$&#123;super.say()&#125;,</span><br><span class="line">              name：$&#123;this.name&#125;,</span><br><span class="line">              color:$&#123;this.color&#125;`;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 创建Dog的实例对象</span><br><span class="line">let d = new Dog(&quot;dog&quot;, &quot;black&quot;);</span><br><span class="line"></span><br><span class="line">// 调用子类的Dog的实例方法</span><br><span class="line">d.getAttritube();</span><br><span class="line">// 结果：This is a animal,</span><br><span class="line">// name：dog,</span><br><span class="line">// color:black</span><br></pre></td></tr></table></figure>
+
+<p>在父类中，我们定义了say方法，想要在子类中调用父类的say方法的话，我们使用super.say( )即可实现。</p>
+<p>使用super有几个要注意的事项：</p>
+<ul>
+<li>子类必须在constructor方法中调用super方法</li>
+<li>必须先调用super( )，才可以使用this，否则报错</li>
+</ul>
+<p>以上就是关于类继承的介绍，重点在于关键字extends和super，尤其是super的理解和使用，大家需要理解透彻。</p>
+<p>如果是完全没有接触过类class和面向对象的初学者，看这一节也许不能完全理解透彻，你可以先翻看第九节的JavaScript面向对象的介绍。</p>
+<h1 id="八、总结"><a href="#八、总结" class="headerlink" title="八、总结"></a>八、总结</h1><p>1、ES5中类和继承</p>
+<ul>
+<li>利用构造函数和原型链来实现类。</li>
+<li>原型链实现继承</li>
+</ul>
+<p>2、ES6中类和继承</p>
+<ul>
+<li>class：必须要有constructor</li>
+<li>extends</li>
+</ul>
+<p>3、静态方法和单例 </p>
+<ul>
+<li>es6通过static来定义静态方法</li>
+<li>通过静态方法来实现单例</li>
+</ul>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/f4f40861/">JSON.stringify() 详解</a>
+            
+            
+            <a class="next" rel="next" href="/e95c50a9/">JavaScript如何退出循环</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/f4f40861/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e95c50a9/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

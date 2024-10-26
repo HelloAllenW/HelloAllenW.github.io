@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>5. 一口气看完伊朗史 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">5. 一口气看完伊朗史</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 5, 2017&nbsp;&nbsp;10:40:09</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 5, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">12 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="伊朗早期历史"><a href="#伊朗早期历史" class="headerlink" title="伊朗早期历史"></a>伊朗早期历史</h2><center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403242033367.png" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+        伊朗地理位置
+    </div>
+</center>
+
+
+
+<h3 id="1-埃兰王国（公元前3200年-公元前639年）"><a href="#1-埃兰王国（公元前3200年-公元前639年）" class="headerlink" title="1. 埃兰王国（公元前3200年 ~ 公元前639年）"></a>1. 埃兰王国（公元前3200年 ~ 公元前639年）</h3><p>人类早在公元前10万年的旧石器时代，已经居住在伊朗高原了。公元前5000年，农业聚落就在扎格罗斯山脉及其周边地区繁衍生息，伊朗当地已经出现了农耕畜牧业杂糅的定居文明。公元前3200年左右，这里出现了以苏萨和安善两座城市为中心的埃兰王国，形成了伊朗最早的文明——埃兰文明。</p>
+<h3 id="2-米底王国（公元前639年-公元前549年）"><a href="#2-米底王国（公元前639年-公元前549年）" class="headerlink" title="2. 米底王国（公元前639年 ~ 公元前549年）"></a>2. 米底王国（公元前639年 ~ 公元前549年）</h3><p>公元前1500 ~ 1000年左右，这片土地上迎来了北方的移民。俄罗斯草原地区的雅利安人，经过一系列的迁徙和入侵，在欧洲、伊朗、中亚和印度北部定居。随着时间的推移，他们的一些后代，成为我们所知的米底人和波斯人，也有帕提亚人、粟特人以及其他民族。公元前700年左右，米底人建立了一个独立的国家，后来逐渐征服周边部落，发展成为第一个伊朗人的帝国。</p>
+<h3 id="3-阿契美尼德王朝（公元前549年-公元前330年）"><a href="#3-阿契美尼德王朝（公元前549年-公元前330年）" class="headerlink" title="3. 阿契美尼德王朝（公元前549年 ~ 公元前330年）"></a>3. 阿契美尼德王朝（公元前549年 ~ 公元前330年）</h3><p>公元前559年左右，一名叫居鲁士的波斯贵族，领导了针对米底国王的反抗。在公元前549年占领了米底首都，自封波斯国王，从此，使波斯成为帝国的中心，米底则成为下级合作者。居鲁士大帝不断征服周边地区，从爱琴海东岸的希腊城邦，延伸至印度河畔，创造了人类历史上第一个横跨欧亚非三大洲的大帝国，希腊人称之为“波斯帝国”。也是从此时起，“波斯”一词被希腊人、罗马人和其他欧洲人沿用。</p>
+<h3 id="4-亚历山大和塞琉古时期（公元前330年-公元前247年）"><a href="#4-亚历山大和塞琉古时期（公元前330年-公元前247年）" class="headerlink" title="4. 亚历山大和塞琉古时期（公元前330年 ~ 公元前247年）"></a>4. 亚历山大和塞琉古时期（公元前330年 ~ 公元前247年）</h3><p>波斯帝国时代，最重要的事件之一，便是和希腊之间，进行了长达半个世纪的“希波战争”。之后波斯帝国元气大伤，为马其顿的崛起创造了条件。公元前334年，著名的马其顿国王亚历山大大帝挥师东进，四年后攻占波斯帝国全境，在首都进行了长达数月的狂欢之后，将之焚毁。阿契美尼德王朝成为过往，一代帝国，就此灭亡。而亚历山大大帝于公元前323年死在巴比伦，这一伟大征服的胜利果实，落到了亚历山大的一位将领，塞琉古手中。塞琉古时期，伊朗人短暂地臣服于外来的统治。</p>
+<h3 id="5-安息王朝（公元前247年-公元226年）"><a href="#5-安息王朝（公元前247年-公元226年）" class="headerlink" title="5. 安息王朝（公元前247年 ~ 公元226年）"></a>5. 安息王朝（公元前247年 ~ 公元226年）</h3><p>公元前250年左右，伊朗东北部的帕提亚人发动叛乱，成为该地区的独立统治者，自称为阿萨息斯王朝。（中国史称安息王朝，西方史学家称之为帕提亚王朝。）他们在与塞琉古人的长期斗争中，建立了一个强大的帝国，并成功统治了数个世纪。后期由于同罗马的长期战争和朝廷的内讧，逐渐衰落。</p>
+<h3 id="6-萨珊王朝（公元226年-公元642年）"><a href="#6-萨珊王朝（公元226年-公元642年）" class="headerlink" title="6. 萨珊王朝（公元226年 ~ 公元642年）"></a>6. 萨珊王朝（公元226年 ~ 公元642年）</h3><p>3世纪初，一股新势力在阿契美尼德王朝发祥的省份，即法尔斯兴起。一个与阿萨息斯王朝结盟的家族崛起，成为该地的地方统治者。224年，这个家族新任的领导者阿尔达希尔，将势力进一步拓展，自称“萨珊王朝”，并在226年夺取了阿萨息斯王朝的首都，阿尔达希尔加冕为“众王之王”。萨珊王朝统治期，也是著名的“<strong>古波斯文艺复兴</strong>”时期。</p>
+<p>梳理一下，从埃兰文明的兴起，萨珊王朝的覆灭，这3800多年的时间里，除短暂经历过亚历山大征服和塞琉古的统治，但是很快，又有了伊朗人复兴的帕提亚王朝和萨珊王朝。整体来说，这一时期，主要还是伊朗人自己建立的政权。</p>
+<h2 id="伊朗中世纪"><a href="#伊朗中世纪" class="headerlink" title="伊朗中世纪"></a>伊朗中世纪</h2><h3 id="1-阿拉伯征服（642年-11世纪中叶）"><a href="#1-阿拉伯征服（642年-11世纪中叶）" class="headerlink" title="1. 阿拉伯征服（642年 ~ 11世纪中叶）"></a>1. 阿拉伯征服（642年 ~ 11世纪中叶）</h3><p>公元7世纪，伊斯兰教兴起。三十年代后期，阿拉伯穆斯林军队开始向东进攻萨珊帝国。</p>
+<p>642年，萨珊王朝的军队再一次被击败，此后，他们的抵抗基本上就崩溃了。阿拉伯人逐渐确立了对伊朗高原的统治。</p>
+<p>波斯成为阿拉伯帝国的一部分，阿拉伯语成了通行的语言，伊斯兰教迅速发展，各地大量兴建清真寺。</p>
+<p>这，可以说是伊朗被穆斯林化的开端。</p>
+<p>阿拉伯帝国统治时期，经历了伍麦叶和阿拔斯两个王朝 。</p>
+<p>与此同时，也先后出现了几个与中央政权分庭抗礼的地方王朝：塔希德王朝（821-873年）、萨法尔王朝（861-1003年）、萨曼王朝（875-999年）。它们，都是源于伊朗人的王朝。</p>
+<h3 id="2-突厥征服（11世纪中叶-13世纪初）"><a href="#2-突厥征服（11世纪中叶-13世纪初）" class="headerlink" title="2. 突厥征服（11世纪中叶 ~ 13世纪初）"></a>2. 突厥征服（11世纪中叶 ~ 13世纪初）</h3><p>多年以来，阿拔斯王朝和其他王朝，都雇佣突厥佣兵，从中亚将之掠为奴隶，来为自己作战并守卫领土。</p>
+<p>于是，突厥人在帝国政治中逐渐变得重要，时有取而代之的危险势头。伽色尼王朝在帝国的东部地区，成功做到了这一点。</p>
+<p>11世纪中叶，一个在塞尔柱突厥人领导下的突厥部落联盟，则更进一步。</p>
+<p>他们在东北部击败伽色尼王朝，攻入帝国的核心地带，并继续向西进军。先后征服巴格达、叙利亚、拜占庭帝国，建立起一个东起中亚、西至博斯普鲁斯海峡，包括伊朗在内的塞尔柱帝国。</p>
+<p>12世纪末，因为附庸国花剌子模的崛起，塞尔柱帝国分裂。花剌子模王国先夺取伊朗东北部，13世纪初占领伊朗全境，其统治疆域还包括伊拉克、阿富汗等地区。</p>
+<h3 id="3-蒙古征服（13世纪初-1380年左右）"><a href="#3-蒙古征服（13世纪初-1380年左右）" class="headerlink" title="3. 蒙古征服（13世纪初 ~ 1380年左右）"></a>3. 蒙古征服（13世纪初 ~ 1380年左右）</h3><p>在花剌子模王国迅速发展的13世纪早期，河中之外的草原地区，同样有一股新的势力在崛起——成吉思汗所领导的蒙古势力。</p>
+<p>随着一系列入侵，花剌子模国王被杀死，蒙古人建立了他们在已征服土地上的政权。</p>
+<p>在约1300年之后，蒙古人的伊儿汗国伊斯兰化并且波斯化了，他们改变了之前粗暴的统治方式，开始重建曾经被自己摧毁的城市，新的都城兴盛起来。</p>
+<h3 id="4-帖木儿征服（1380年-1502年）"><a href="#4-帖木儿征服（1380年-1502年）" class="headerlink" title="4. 帖木儿征服（1380年 ~ 1502年）"></a>4. 帖木儿征服（1380年 ~ 1502年）</h3><p>伊儿汗国统治下的伊朗，尽管有复兴的迹象，但依旧是一个贫穷而严酷的地区。伊儿汗的帝国开始不可避免地分崩离析，地方上的附属统治者慢慢地独立于中央。  </p>
+<p>从1380年开始，朝气蓬勃的附属地方王朝建立者，都屈服于下一波帖木儿领导的草原游牧民族入侵。</p>
+<p>帖木儿是河中地区一个突厥小封臣之子，最初以撒马尔罕为基地，随后入侵波斯，在夺取了波斯并在莫斯科周围的草原击败金帐汗国的蒙古人之后，进入印度，又向西征服巴格达，建立了强大的帝国。 </p>
+<p>而和之前其他王朝一样，帖木儿帝国后来逐渐分裂为由几个王朝继承国组成的拼凑国家。在15世纪后半叶，两个强大的蒙古化突厥部落联盟在伊朗高原争夺霸权，即黑羊王朝和白羊王朝 ，白羊王朝最终胜出。</p>
+<p>可以看到，从7世纪中叶阿拉伯穆斯林取代萨珊王朝，在伊朗高原建立政权，之后，突厥人、蒙古人、帖木儿人轮流主宰着这片土地。近千年的时间，伊朗被异族统治。而多族入侵，也使得伊朗成为了一个多民族融合的国家。</p>
+<h2 id="伊朗近代史"><a href="#伊朗近代史" class="headerlink" title="伊朗近代史"></a>伊朗近代史</h2><h3 id="1-萨法维王朝（1502年-1722年）"><a href="#1-萨法维王朝（1502年-1722年）" class="headerlink" title="1. 萨法维王朝（1502年 ~ 1722年）"></a>1. 萨法维王朝（1502年 ~ 1722年）</h3><p>15世纪末，一支来自伊朗西北部的武装团体，建立了萨法维王朝。这是伊朗历史上第一个以什叶派伊斯兰教为国教的朝代，将伊朗转变为什叶派国家。</p>
+<p>萨法维王朝，在传统意义上的伊朗疆域内，建立起了几个世纪以来比其他王朝更加复杂、强大而持久的管理体系。</p>
+<h3 id="2-阿夫沙尔王朝和赞德王朝（1722年-1796年）"><a href="#2-阿夫沙尔王朝和赞德王朝（1722年-1796年）" class="headerlink" title="2. 阿夫沙尔王朝和赞德王朝（1722年 ~ 1796年）"></a>2. 阿夫沙尔王朝和赞德王朝（1722年 ~ 1796年）</h3><p>萨法维王朝的统治，在17世纪阿拔斯大帝和阿拔斯二世的时代，到达了巅峰。</p>
+<p>而18世纪20年代，则因为阿富汗的叛乱走向毁灭，伊朗的不同地区，被阿富汗人、奥斯曼人等分别控制。</p>
+<p>而在东北部省份，一位名叫纳迪尔·戈利的年轻军人，在混乱无序的时代悄然崛起，成为该地区强大的地方统治者。</p>
+<p>1929年底，纳迪尔的军队已经在三场战役中击败阿富汗人，重夺首都，之后又继续将奥斯曼土耳其人驱逐出波斯西部，而后迅速东转，征服了赫拉特。</p>
+<p>纳迪尔建立的政权，被称为阿夫沙尔王朝。</p>
+<p>可惜，纳迪尔的统治并不长久，他在人生的最后五年精神错乱，1947年6月被自己护卫队的军官刺杀而亡，他的军队也随之分崩离析，国家陷入混乱无序中。</p>
+<p>1759年起，卡里姆汗进行了一段相对祥和平静的统治，直到1779年去世，被称为“赞德王朝”。</p>
+<h3 id="3-恺加王朝（1796年-1926年）"><a href="#3-恺加王朝（1796年-1926年）" class="headerlink" title="3. 恺加王朝（1796年 ~ 1926年）"></a>3. 恺加王朝（1796年 ~ 1926年）</h3><p>卡里姆汗死后，波斯再次落入内战的惨境。争斗的双方，一边是赞德王朝的诸位王公，另一边是阿迦·穆罕默德领导的恺加部落。</p>
+<p>1785年，阿迦·穆罕默德夺取了首都伊斯法罕。</p>
+<p>之后，他又与赞德王朝的残余势力进行了几年的征战，1796年春，阿迦·穆罕默德在穆甘平原加冕，确立了“恺加王朝”100多年的统治。</p>
+<p>恺加王朝统治时期，欧洲以英国为中心发生了工业革命。</p>
+<p>1857年，如日中天的大英帝国向伊朗宣战，并获得战争胜利——这标志着伊朗开始沦为一个半封建半殖民地国家。</p>
+<p>这，与我们的近代史何其相似。</p>
+<h3 id="4-巴列维王朝（1926年-1979年）"><a href="#4-巴列维王朝（1926年-1979年）" class="headerlink" title="4. 巴列维王朝（1926年 ~ 1979年）"></a>4. 巴列维王朝（1926年 ~ 1979年）</h3><p>到了20世纪初，伊朗作为一个“半殖民地半封建”国家的特征愈发明显。</p>
+<p>1907年，英法俄三国签署协议，将波斯划分为三个区域，北部为俄国势力范围，东南部为英国势力范围，中间是中立区域。</p>
+<p>民众对于恺加王朝的君主在维持波斯主权和尊严上的无能，越来越感到痛恨。</p>
+<p>与中国近代史类似，20世纪初的伊朗人民，也在寻找出路。恺加王朝时期，发生过立宪革命，建立过议会，议会中同样有自由派、温和派、保皇派等。</p>
+<p>立宪革命代表着恺加王朝君权政府时代的结束，但是，最终开启的，是一个充满冲突和混乱的时代。</p>
+<p>1921年2月，军官礼萨汗发动政变。</p>
+<p>1926年4月25日，礼萨汗加冕登基，正式建立“巴列维王朝”。他停用了一直以来的代表着悠久历史的“波斯”国号，正式使用“伊朗”作为国家名称。</p>
+<p>关于伊朗的这段历史，跟中国的近代史很像，可以对比来理解。</p>
+<p>恺加王朝，实则是伊朗历史上最后一个君主制封建王朝，类似于我们的大清。而大清覆灭之后，走向何方？</p>
+<p>我们走向了北洋时代，而伊朗，走向的是“巴列维王朝”，这都是属于一个过渡转轨期。</p>
+<p>“巴列维王朝”虽然叫的是王朝，但跟恺加王朝并不一样。</p>
+<p>礼萨汗最初是想建立共和国的，但他所处的，是一个独裁的时代。不管是法西斯主义者，还是别的一些政治派别，都滑向了独裁。</p>
+<p>建立共和国的计划遭遇失败，礼萨汗才建立了王朝。</p>
+<p>对他而言，王朝和共和国，只是实现最终目标的手段。他的抱负在于控制国家，让国家变得强大，使之发展从而获得真正的独立，使之现代化从而能与列强平起平坐。</p>
+<h2 id="1979年伊斯兰革命后的伊朗"><a href="#1979年伊斯兰革命后的伊朗" class="headerlink" title="1979年伊斯兰革命后的伊朗"></a>1979年伊斯兰革命后的伊朗</h2><p><font color=red>神权共和时代（1979年至今）</font></p>
+<p>“巴列维王朝”，其实就延续了礼萨汗父子两代。</p>
+<p>他们基本上统一了纷乱的伊朗，终止了各项不平等条约；对这个国家进行了全盘改革，推动国家现代化、世俗化、西化；伊朗的经济和教育，都获得了巨大的发展。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403242047985.png" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+        巴列维时期的伊朗青年
+    </div>
+</center>
+
+<p>1963年到1976年，伊朗每年的GDP增长，基本都保持在两位数，1974年更是达到过惊人的40%，这使得伊朗一跃而为世界上最富裕的国家之一。</p>
+<p>但是，“巴列维王朝”偏向于独裁的统治方式，镇压各种工人运动和民主运动，王室成员和政府各层官员贪污成风，腐败问题十分严重，贫富差距进一步拉大，平民阶层怨气非常大。</p>
+<p>1978年，伊朗国内陷入混乱，罢工、游行此起彼伏，暴力事件不断加剧，巴列维政府已经失去了对国家的控制。</p>
+<p>1979年2月1日，流亡海外14年的伊朗什叶派宗教学者霍梅尼，回到了德黑兰，成为整个国家希望的焦点。</p>
+<p>在霍梅尼的领导下，伊朗人民推翻了巴列维王朝，成立“伊朗伊斯兰共和国”。</p>
+<p>伊朗，从此又走向了政教合一的“神权共和”时代，直到如今。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ba3622ff/">6. 巴以冲突的渊源，极简梳理</a>
+            
+            
+            <a class="next" rel="next" href="/f03630a1/">4. 印度极简史</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ba3622ff/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f03630a1/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

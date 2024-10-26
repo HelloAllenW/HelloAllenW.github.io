@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Console 实用调试技巧 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Console 实用调试技巧</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2020&nbsp;&nbsp;23:21:14</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">14 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>浏览器的开发者工具为我们提供了强大的调试系统，可以用来查看DOM树结构、CSS样式调试、动画调试、JavaScript代码断点调试等。今天我们就来看看console调试的那些实用的调试技巧。</p>
+<p>如今，我们项目的开发通常会使用React、Vue等前端框架，前端调试也变得更加有难度，除了使用React DevTools，Vue DevTools 等插件之外，我们使用最多的就是console.log()了，当然多数情况下，console.log() 就能满足我们的需求，但是当数据变得比较复杂时，console.log() 就显得有些单一。其实 console 对象提供了很多方法，下面是console对象包含的方法：</p>
+<p><img src="https://s8.51cto.com/oss/202207/06/9208b187518a0072063963f33e73e8205bf1f7.png" alt="图片"></p>
+<p>console 对象提供了浏览器控制台调试的接口，我们可以从任何全局对象中访问到它，如果你平时只是用console.log()来输出一些变量，那你可能没有用过console那些强大的功能。下面带你用console玩玩花式调试。</p>
+<h3 id="一、基本打印"><a href="#一、基本打印" class="headerlink" title="一、基本打印"></a>一、基本打印</h3><h4 id="1-console-log"><a href="#1-console-log" class="headerlink" title="1. console.log()"></a>1. console.log()</h4><p>console.log()就是最基本、最常用的用法了。它可以用在JavaScript代码的任何地方，然后就可以浏览器的控制台中看到打印的信息。其基本使用方法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let name = &quot;CUGGZ&quot;;</span><br><span class="line">let age = 18;</span><br><span class="line">console.log(name)                    // CUGGZ</span><br><span class="line">console.log(name, age)               // CUGGZ 18</span><br><span class="line">console.log(&quot;message:&quot;, name, age)   // message: CUGGZ 181.2.3.4.5.</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，console.log()还支持下面这种输出方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let name = &quot;CUGGZ&quot;;</span><br><span class="line">let age = 18;</span><br><span class="line">let height = 180;</span><br><span class="line">console.log(&#x27;Name: %s, Age: %d&#x27;, name, age)     // Name: CUGGZ, Age: 18</span><br><span class="line">console.log(&#x27;Age: %d, Height: %d&#x27;, age, height) // Age: 18, Height: 1801.2.3.4.5.</span><br></pre></td></tr></table></figure>
+
+<p>这里将后面的变量赋值给了前面的占位符的位置，他们是一一对应的。这种写法在复杂的输出时，能保证模板和数据分离，结构更加清晰。不过如果是简单的输出，就没必要这样写了。在console.log中，支持的占位符格式如下：</p>
+<ul>
+<li>字符串：%s</li>
+<li>整数：%d</li>
+<li>浮点数：%f</li>
+<li>对象：%o或%O</li>
+<li>CSS样式：%c</li>
+</ul>
+<p>可以看到，除了最基本的几种类型之外，它还支持定义CSS样式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let name = &quot;CUGGZ&quot;;</span><br><span class="line">console.log(&#x27;My Name is %cCUGGZ&#x27;, &#x27;color: skyblue; font-size: 30px;&#x27;)1.2.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下（好像并没有什么卵用）：</p>
+<p><img src="https://s2.51cto.com/oss/202207/06/62b8afe2579d62349974240dd5db3b291864b6.png" alt="图片"></p>
+<p>这个样式打印可能有用的地方就是打印图片，用来查看图片是否正确：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&#x27;%c &#x27;,&#x27;background-image:url(&quot;http://iyeslogo.orbrand.com/150902Google/005.gif&quot;);background-size:120% 120%;background-repeat:no-repeat;background-position:center center;line-height:60px;padding:30px 120px;&#x27;);1.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s8.51cto.com/oss/202207/06/417986f5418abd71b72679c8b17d1525876e25.png" alt="图片"></p>
+<p>严格地说，console.log()并不支持打印图片，但是可以使用CSS的背景图来打印图片，不过并不能直接打印，因为是不支持设置图片的宽高属性，所以就需要使用line-heigh和padding来撑开图片，使其可以正常显示出来。</p>
+<p>我们可以使用console.log()来打印字符画，就像知乎的这样：</p>
+<p><img src="https://s7.51cto.com/oss/202207/06/64e428195d9f97f6a3e053b4fbf83dd0218e61.png" alt="图片"></p>
+<p>可以使用字符画在线生成工具，将生成的字符粘贴到console.log()即可。在线工具：mg2txt。我的头像生成效果如下，中间的就是生成的字符：</p>
+<p><img src="https://s9.51cto.com/oss/202207/06/470972149d1c7ba206005400fedcc5bcdd3633.png" alt="图片"></p>
+<p>除此之外，可以看到，当占位符表示一个对象时，有两种写法：%c或者%C，那它们两个有什么区别呢？当我们指定的对象是普通的object对象时，它们两个是没有区别的，如果是DOM节点，那就有有区别了，来看下面的示例：</p>
+<p><img src="https://s2.51cto.com/oss/202207/06/c4e59f117354811a14187905bdf80a01a621ab.png" alt="图片"></p>
+<p>可以看到，使用 %o 打印的是DOM节点的内容，包含其子节点。而%O打印的是该DOM节点的对象属性，可以根据需求来选择性的打印。</p>
+<h4 id="2-console-warn"><a href="#2-console-warn" class="headerlink" title="2. console.warn()"></a>2. console.warn()</h4><p>console.warn() 方法用于在控制台输出警告信息。它的用法和console.log是完全一样的，只是显示的样式不太一样，信息最前面加一个黄色三角，表示警告：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const app = [&quot;facebook&quot;, &quot;google&quot;, &quot;twitter&quot;];</span><br><span class="line">console.warn(app);1.2.</span><br></pre></td></tr></table></figure>
+
+<p>打印样式如下：</p>
+<p><img src="https://s9.51cto.com/oss/202207/06/836d5cf88d0f797998717630d0667130ecec2a.png" alt="图片"></p>
+<h4 id="3-console-error"><a href="#3-console-error" class="headerlink" title="3. console.error()"></a>3. console.error()</h4><p>console.error()可以用于在控制台输出错误信息。它和上面的两个方法的用法是一样的，只是显示样式不一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const app = [&quot;facebook&quot;, &quot;google&quot;, &quot;twitter&quot;];</span><br><span class="line">console.error(app);1.2.</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s7.51cto.com/oss/202207/06/0348aa610e4415a88e593850c12588b7c1a21a.png" alt="图片"></p>
+<p>需要注意，console.exception() 是 console.error() 的别名，它们功能是相同的。</p>
+<p>当然，console.error()还有一个console.log()不具备的功能，那就是打印函数的调用栈：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function a() &#123;</span><br><span class="line">  b();</span><br><span class="line">&#125;</span><br><span class="line">function b() &#123;</span><br><span class="line">  console.error(&quot;error&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function c() &#123;</span><br><span class="line">  a();</span><br><span class="line">&#125;</span><br><span class="line">c();1.2.3.4.5.6.7.8.9.10.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s5.51cto.com/oss/202207/06/980e99581579047b822655656921252ed583a0.png" alt="图片"></p>
+<p>可以看到，这里打印出来了函数函数调用栈的信息：b→a→c。</p>
+<p>console对象提供了专门的方法来打印函数的调用栈（console.trace()），这个下面会介绍到。</p>
+<h4 id="4-console-info"><a href="#4-console-info" class="headerlink" title="4. console.info()"></a>4. console.info()</h4><p>console.info()可以用来打印资讯类说明信息，它和console.log()的用法一致，打印出来的效果也是一样的：</p>
+<p><img src="https://s2.51cto.com/oss/202207/06/26c28ca66510c3f658c90937e76f6b5b86df67.png" alt="图片"></p>
+<h3 id="二、打印时间"><a href="#二、打印时间" class="headerlink" title="二、打印时间"></a>二、打印时间</h3><h4 id="1-console-time-amp-console-timeEnd"><a href="#1-console-time-amp-console-timeEnd" class="headerlink" title="1. console.time() &amp; console.timeEnd()"></a>1. console.time() &amp; console.timeEnd()</h4><p>如果我们想要获取一段代码的执行时间，就可以使用console对象的console.time() 和console.timeEnd()方法，来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">console.time();</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line"> console.timeEnd();</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">// default: 1001.9140625 ms1.2.3.4.5.6.7.</span><br></pre></td></tr></table></figure>
+
+<p>它们都可以传递一个参数，该参数是一个字符串，用来标记唯一的计时器。如果页面只有一个计时器时，就不需要传这个参数 ，如果有多个计时器，就需要使用这个标签来标记每一个计时器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;timer1&quot;);</span><br><span class="line">console.time(&quot;timer2&quot;);</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line"> console.timeEnd(&quot;timer1&quot;);</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line"> console.timeEnd(&quot;timer2&quot;);</span><br><span class="line">&#125;, 2000);</span><br><span class="line"></span><br><span class="line">// timer1: 1004.666259765625 ms</span><br><span class="line">// timer2: 2004.654052734375 ms1.2.3.4.5.6.7.8.9.10.11.12.13.</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-console-timeLog"><a href="#2-console-timeLog" class="headerlink" title="2. console.timeLog()"></a>2. console.timeLog()</h4><p>这里的console.timeLog()上面的console.timeEnd()类似，但是也有一定的差别。他们都需要使用console.time()来启动一个计时器。然后console.timeLog()就是打印计时器当前的时间，而console.timeEnd()是打印计时器，直到结束的时间。下面来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;timer&quot;);</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    console.timeLog(&quot;timer&quot;)</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">     console.timeLog(&quot;timer&quot;);</span><br><span class="line">    &#125;, 2000);</span><br><span class="line">&#125;, 1000);</span><br><span class="line"></span><br><span class="line">// timer: 1002.80224609375 ms</span><br><span class="line">// timer: 3008.044189453125 ms1.2.3.4.5.6.7.8.9.10.11.</span><br></pre></td></tr></table></figure>
+
+<p>而使用console.timeEnd()时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.time(&quot;timer&quot;);</span><br><span class="line"></span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">  console.timeEnd(&quot;timer&quot;)</span><br><span class="line"> setTimeout(() =&gt; &#123;</span><br><span class="line">     console.timeLog(&quot;timer&quot;);</span><br><span class="line">    &#125;, 2000);</span><br><span class="line">&#125;, 1000);1.2.3.4.5.6.7.8.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s6.51cto.com/oss/202207/06/638351214e8c488a360684168faa46ced6bcbf.png" alt="图片"></p>
+<p>可以看到，它会终止当前的计时器，所以里面的timeLog就无法在找到timer计数器了。所以两者的区别就在于，是否会终止当前的计时。</p>
+<h3 id="三、分组打印"><a href="#三、分组打印" class="headerlink" title="三、分组打印"></a>三、分组打印</h3><h4 id="1-console-group-amp-console-groupEnd"><a href="#1-console-group-amp-console-groupEnd" class="headerlink" title="1. console.group() &amp; console.groupEnd()"></a>1. console.group() &amp; console.groupEnd()</h4><p>这两个方法用于在控制台创建一个信息分组。一个完整的信息分组以 console.group() 开始，console.groupEnd() 结束。来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">console.group();</span><br><span class="line">console.log(&#x27;First Group&#x27;);</span><br><span class="line">console.group();</span><br><span class="line">console.log(&#x27;Second Group&#x27;)</span><br><span class="line">console.groupEnd();</span><br><span class="line">console.groupEnd();1.2.3.4.5.6.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s3.51cto.com/oss/202207/06/d79e585027a812e004d9272f91e71f1685de30.png" alt="图片"></p>
+<p>再来看一个复杂点的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">console.group(&quot;Alphabet&quot;)</span><br><span class="line">  console.log(&quot;A&quot;);</span><br><span class="line">  console.log(&quot;B&quot;);</span><br><span class="line">  console.log(&quot;C&quot;);</span><br><span class="line">  console.group(&quot;Numbers&quot;);</span><br><span class="line">    console.log(&quot;One&quot;);</span><br><span class="line">    console.log(&quot;Two&quot;);</span><br><span class="line">  console.groupEnd(&quot;Numbers&quot;);</span><br><span class="line">console.groupEnd(&quot;Alphabet&quot;);1.2.3.4.5.6.7.8.9.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s5.51cto.com/oss/202207/06/3933ff434e5e4996f1e17464243df9141631e8.png" alt="图片"></p>
+<p>可以看到，这些分组是可以嵌套的。当前我们需要调试一大堆调试输出，就可以选择使用分组输出，</p>
+<h4 id="2-console-groupCollapsed"><a href="#2-console-groupCollapsed" class="headerlink" title="2. console.groupCollapsed()"></a>2. console.groupCollapsed()</h4><p>console.groupCollapsed()方法类似于console.group()，它们都需要使用console.groupEnd()来结束分组。不同的是，该方法默认打印的信息是折叠展示的，而group()是默认展开的。来对上面的例子进行改写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">console.groupCollapsed(&quot;Alphabet&quot;)</span><br><span class="line">  console.log(&quot;A&quot;);</span><br><span class="line">  console.log(&quot;B&quot;);</span><br><span class="line">  console.log(&quot;C&quot;);</span><br><span class="line">  console.groupCollapsed(&quot;Numbers&quot;);</span><br><span class="line">    console.log(&quot;One&quot;);</span><br><span class="line">    console.log(&quot;Two&quot;);</span><br><span class="line">  console.groupEnd(&quot;Numbers&quot;);</span><br><span class="line">console.groupEnd(&quot;Alphabet&quot;);1.2.3.4.5.6.7.8.9.</span><br></pre></td></tr></table></figure>
+
+<p>其打印结果如下：</p>
+<p><img src="https://s2.51cto.com/oss/202207/06/47bcb8f1861bb0d1306285597b5db0a0fda7e2.png" alt="图片"></p>
+<p>可以看到，和上面方法唯一的不同就是，打印的结果被折叠了，需要手动展开来看。</p>
+<h3 id="四、打印计次"><a href="#四、打印计次" class="headerlink" title="四、打印计次"></a>四、打印计次</h3><h4 id="1-console-count"><a href="#1-console-count" class="headerlink" title="1. console.count()"></a>1. console.count()</h4><p>可以使用使用console.count()来获取当前执行的次数。来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">    console.count();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 输出结果如下</span><br><span class="line">default: 1</span><br><span class="line">default: 2</span><br><span class="line">default: 3</span><br><span class="line">default: 4</span><br><span class="line">default: 51.2.3.4.5.6.7.8.9.10.</span><br></pre></td></tr></table></figure>
+
+<p>它也可以传一个参数来进行标记（如果为空，则为默认标签default）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; 5; i++) &#123;</span><br><span class="line">    console.count(&quot;hello&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 输出结果如下</span><br><span class="line">hello: 1</span><br><span class="line">hello: 2</span><br><span class="line">hello: 3</span><br><span class="line">hello: 4</span><br><span class="line">hello: 51.2.3.4.5.6.7.8.9.10.</span><br></pre></td></tr></table></figure>
+
+<p>这个方法主要用于一些比较复杂的场景，有时候一个函数被多个地方调用，就可以使用这个方法来确定是否少调用或者重复调用了该方法。</p>
+<h4 id="2-console-countReset"><a href="#2-console-countReset" class="headerlink" title="2. console.countReset()"></a>2. console.countReset()</h4><p>顾名思义，console.countReset()就是重置计算器，它会需要配合上面的console.count()方法使用。它有一个可选的参数label：</p>
+<p>如果提供了参数label，此函数会重置与label关联的计数，将count重置为0。</p>
+<p>如果省略了参数label，此函数会重置默认的计数器，将count重置为0。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">console.count(); </span><br><span class="line">console.count(&quot;a&quot;); </span><br><span class="line">console.count(&quot;b&quot;); </span><br><span class="line">console.count(&quot;a&quot;); </span><br><span class="line">console.count(&quot;a&quot;); </span><br><span class="line">console.count(); </span><br><span class="line">console.count(); </span><br><span class="line">  </span><br><span class="line">console.countReset(); </span><br><span class="line">console.countReset(&quot;a&quot;); </span><br><span class="line">console.countReset(&quot;b&quot;); </span><br><span class="line">  </span><br><span class="line">console.count(); </span><br><span class="line">console.count(&quot;a&quot;); </span><br><span class="line">console.count(&quot;b&quot;);1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">default:1</span><br><span class="line">a:1</span><br><span class="line">b:1</span><br><span class="line">a:2</span><br><span class="line">a:3</span><br><span class="line">default:2</span><br><span class="line">default:3</span><br><span class="line">default:1</span><br><span class="line">a:1</span><br><span class="line">b:11.2.3.4.5.6.7.8.9.10.</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、其他打印"><a href="#五、其他打印" class="headerlink" title="五、其他打印"></a>五、其他打印</h3><h4 id="1-console-table"><a href="#1-console-table" class="headerlink" title="1. console.table()"></a>1. console.table()</h4><p>我们平时使用console.log较多，其实console对象还有很多属性可以使用，比如console.table()，使用它可以方便的打印数组对象的属性，打印结果是一个表格。console.table() 方法有两个参数，第一个参数是需要打印的对象，第二个参数是需要打印的表格的标题，这里就是数组对象的属性值。来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">const users = [ </span><br><span class="line">   &#123; </span><br><span class="line">      &quot;first_name&quot;:&quot;Harcourt&quot;,</span><br><span class="line">      &quot;last_name&quot;:&quot;Huckerbe&quot;,</span><br><span class="line">      &quot;gender&quot;:&quot;Male&quot;,</span><br><span class="line">      &quot;city&quot;:&quot;Linchen&quot;,</span><br><span class="line">      &quot;birth_country&quot;:&quot;China&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123; </span><br><span class="line">      &quot;first_name&quot;:&quot;Allyn&quot;,</span><br><span class="line">      &quot;last_name&quot;:&quot;McEttigen&quot;,</span><br><span class="line">      &quot;gender&quot;:&quot;Male&quot;,</span><br><span class="line">      &quot;city&quot;:&quot;Ambelókipoi&quot;,</span><br><span class="line">      &quot;birth_country&quot;:&quot;Greece&quot;</span><br><span class="line">   &#125;,</span><br><span class="line">   &#123; </span><br><span class="line">      &quot;first_name&quot;:&quot;Sandor&quot;,</span><br><span class="line">      &quot;last_name&quot;:&quot;Degg&quot;,</span><br><span class="line">      &quot;gender&quot;:&quot;Male&quot;,</span><br><span class="line">      &quot;city&quot;:&quot;Mthatha&quot;,</span><br><span class="line">      &quot;birth_country&quot;:&quot;South Africa&quot;</span><br><span class="line">   &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">console.table(users, [&#x27;first_name&#x27;, &#x27;last_name&#x27;, &#x27;city&#x27;]);1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s6.51cto.com/oss/202207/06/01ac4bd80b6104b7f9038315a76ac6943b14d9.png" alt="图片"></p>
+<p>通过这种方式，可以更加清晰的看到数组对象中的指定属性。</p>
+<p>除此之外，还可以使用console.table()来打印数组元素：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const app = [&quot;facebook&quot;, &quot;google&quot;, &quot;twitter&quot;];</span><br><span class="line">console.table(app);1.2.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s3.51cto.com/oss/202207/06/41e0cd3026443a0236c900bc1c441da4e1fdf5.png" alt="图片"></p>
+<p>通过这种方式，我们可以更清晰的看到数组中的元素。</p>
+<p>需要注意，console.table() 只能处理最多1000行，因此它可能不适合所有数据集。但是也能适用于多数场景了。</p>
+<h4 id="2-console-clear"><a href="#2-console-clear" class="headerlink" title="2. console.clear()"></a>2. console.clear()</h4><p>console.clear() 顾名思义就是清除控制台的信息。当清空控制台之后，会打印一句：“Console was clered”:</p>
+<p><img src="https://s5.51cto.com/oss/202207/06/63468ff9029b118818c392de53305dd31ae612.png" alt="图片"></p>
+<p>当然，我们完全可以使用控制台的清除键清除控制台：</p>
+<p><img src="https://s4.51cto.com/oss/202207/06/59c22a08874e559d04f754256676228f0f8875.png" alt="图片"></p>
+<h4 id="3-console-assert"><a href="#3-console-assert" class="headerlink" title="3. console.assert()"></a>3. console.assert()</h4><p>console.assert()方法用于语句断言，当断言为 false时，则在信息到控制台输出错误信息。它的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.assert(expression, message)1.</span><br></pre></td></tr></table></figure>
+
+<p>它有两个参数：</p>
+<p>expression: 条件语句，语句会被解析成 Boolean，且为 false 的时候会触发message语句输出；</p>
+<p>message: 输出语句，可以是任意类型。</p>
+<p>该方法会在expression条件语句为false时，就会打印message信息。当在特定情况下才输出语句时，就可以使用console.assert()方法。</p>
+<p>比如，当列表元素的子节点数量大于等于100时，打印错误信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.assert(list.childNodes.length &lt; 100, &quot;Node count is &gt; 100&quot;);1.</span><br></pre></td></tr></table></figure>
+
+<p>其输出结果如下图所示：</p>
+<p><img src="https://s5.51cto.com/oss/202207/06/f4566ba2415eb7e5e95035ec8eb9d831780a90.png" alt="图片"></p>
+<h4 id="4-console-trace"><a href="#4-console-trace" class="headerlink" title="4. console.trace()"></a>4. console.trace()</h4><p>console.trace()方法可以用于打印当前执行的代码在堆栈中的调用路径。它和上面的console.error()的功一致，不过打印的样式就和console.log()是一样的了。来看下面的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function a() &#123;</span><br><span class="line">  b();</span><br><span class="line">&#125;</span><br><span class="line">function b() &#123;</span><br><span class="line">  console.trace();</span><br><span class="line">&#125;</span><br><span class="line">function c() &#123;</span><br><span class="line">  a();</span><br><span class="line">&#125;</span><br><span class="line">c();1.2.3.4.5.6.7.8.9.10.</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://s4.51cto.com/oss/202207/06/355a7a3287ad38e6d8a572a534be8b0853ff57.png" alt="图片"></p>
+<p>可以看到，这里输出了调用栈的信息：b→a→c，这个堆栈信息是从调用位置开始的。</p>
+<h4 id="5-console-dir"><a href="#5-console-dir" class="headerlink" title="5. console.dir()"></a>5. console.dir()</h4><p>console.dir()方法可以在控制台中显示指定JavaScript对象的属性，并通过类似文件树样式的交互列表显示。它的语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.dir(object);1.</span><br></pre></td></tr></table></figure>
+
+<p>它的参数是一个对象，最终会打印出该对象所有的属性和属性值。</p>
+<p>在多数情况下，使用consoledir()和使用console.log()的效果是一样的。但是当打印元素结构时，就会有很大的差异了，console.log()打印的是元素的DOM结构，而console.dir()打印的是元素的属性：</p>
+<p><img src="https://s7.51cto.com/oss/202207/06/a2bdd605967a4f7598e06987b563c20e2c6c8a.png" alt="图片"></p>
+<p><img src="https://s5.51cto.com/oss/202207/06/984c7382753373bd3e55898f0f3cc9b6447fd7.png" alt="图片"></p>
+<h4 id="6-console-dirxml"><a href="#6-console-dirxml" class="headerlink" title="6. console.dirxml()"></a>6. console.dirxml()</h4><p>console.dirxml()方法用于显示一个明确的XML/HTML元素的包括所有后代元素的交互树。如果无法作为一个element被显示，那么会以JavaScript对象的形式作为替代。它的输出是一个继承的扩展的节点列表，可以让你看到子节点的内容。其语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.dirxml(object);1.</span><br></pre></td></tr></table></figure>
+
+<p>该方法会打印输出XML元素及其后代元素，对于XML和HTML元素调用console.log()和console.dirxml()是等价的。</p>
+<p><img src="https://s5.51cto.com/oss/202207/06/a134f06316a820cf81e89049434ca365632463.png" alt="图片"></p>
+<h4 id="7-console-memory"><a href="#7-console-memory" class="headerlink" title="7. console.memory"></a>7. console.memory</h4><p>console.memory 是 console 对象的一个属性，而不是一个方法。它可以用来查看当前内存的使用情况，如果使用过多的console.log()会占用较多的内存，导致浏览器出现卡顿情况。</p>
+<p><img src="https://s6.51cto.com/oss/202207/06/859302509d1dce1a4ae7784c1621eea7589f9c.png" alt="图片"></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/57f0df0e/">new 的模拟实现</a>
+            
+            
+            <a class="next" rel="next" href="/fbb5b988/">在 CSS 中隐藏元素的 10 种方法</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/57f0df0e/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/fbb5b988/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

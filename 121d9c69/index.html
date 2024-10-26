@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>分分钟搞清欧洲各种建筑类型 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">分分钟搞清欧洲各种建筑类型</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">八月 5, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        八月 5, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BB%BA%E7%AD%91/">建筑 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><strong>先看这个图表</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTerUHiaMhXLMsEibQc11DbhOOUicWqiajj7S6MWb7O59XKcfFgmG9mjLr9fxDsRCByj2EVfzIg6s9LCVTw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>假如到欧洲旅行，一定得对欧洲建筑有一定的了解，但一座又一座不同时期的教堂和古堡，不仅让人看的眼花缭乱，真的要说也说不出个所以然。我们经常听到所谓的罗马式、希腊式、哥特式、文艺复兴哪又是如何来分别的？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Ab6BAjMJJT9BqX09cib8aIzZvzibJ2v8TJJH64KvnUY3cVFfnOW0yQAUP0IxHF14LM0BgR87rBPrnUHCtvqcNTPQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>整个欧洲，不管我们聊什么都可以说：先有希腊文明起其先，后有罗马文明承其后。整个欧洲都是建立在希腊、罗马文明之上。</p>
+<p>欧洲建筑按照年代来划分第一个就是希腊式建筑。</p>
+<h2 id="希腊式建筑"><a href="#希腊式建筑" class="headerlink" title="希腊式建筑"></a>希腊式建筑</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKNmpruXneLLHFJcy47woWM4kwiczT462H5icKkZKILfAq7iavjfWibicRqQg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKCkTic1vkvTnkULwBzNjno1neBhND6X1icVzoKFefJWtRrgqbdxFWrZZA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>希腊式的建筑非常容易辨识，三角形的门楣，下面一根根的希腊柱。就像古希腊先贤阿基米德所说：给我一个支点，我就能撬起整个地球。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKo4BqoOpqfjaqsYItPWgTzqNPt0iaPXObT4icuZQwOFoAKuPAkuTsLVicw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>​    </p>
+<p>支点有了（三角门楣），棍子有了（希腊柱）。</p>
+<p>这就是希腊式建筑</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKwwjat7via9h3S3cBF6x6auTQ4ibJF6u7F9yN7VUueHcibkbvB3wKBiccmg/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="罗马式建筑"><a href="#罗马式建筑" class="headerlink" title="罗马式建筑"></a>罗马式建筑</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKG8xFMOaOgGeaN7oF1Ye96bEX15ZOMMVz6ibg2I48F0e7bicO1LUiaPCyw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKEU7m6VqyO1GukHpCCEYO8bj3PfqI5TmDA7vYggslZlQcsScf3BYcQQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小贴士：罗马人对建筑工程的重大贡献，是发明了一种被称为“黏浆”(Ｃａｅｍｅｎｔｕｍ)的万用材料，这是一种用火山灰岩、石灰和水拌成的石浆，再加上碎石或碎砖，用之于建筑业，非常坚固，又增添色彩。这就是世界上第一种足以支撑大跨度建筑的混凝土。罗马人发明了混凝土，从此大拱门、大圆顶、大拱顶就都能独立，而无需像古希腊建筑那样靠许多柱子来支撑了，从而成为世界建筑史上划时代的创举。</p>
+<p>古罗马诗人霍雷斯说过，我们罗马人征服了希腊，可是文化上却被希腊所征服。所以罗马人的的建筑也就是在希腊建筑基础上加上拱。</p>
+<p>我们看看如果在希腊建筑后面加个包子（拱）就变成了这样</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpK5L6WntQyialjtRdaEf7jq1PKPcE0eHKibsxVUtqYFz6jbJAXejfjgtBQ/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>如果在上面加个包子（拱）就是这样的</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKvyukauicITyXkVcRTwd6sT6MkzOWZzDGibiciaS0LIaQP813VCDczoQp3A/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>也有单独放个包子（拱）的</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKsNd4kibXK6SJfRYwX1bniaFvQsPibiaKdEKoTWZIxD9d8Nkd03fsqjwibhg/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>还有把包子（拱门）放盘子里的</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKZbSyEjNpZAuOGBUo1xacL2qIQREFkzuI7hMjtbNYKjETMl5TySf0vQ/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>于是因为各种拱，造就了罗马式的建筑。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKWfHngRSN13eKAQ7oHgs73xSBjooJXIQa10uFpFxAHEzd6kqoTamUdA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="拜占庭式建筑"><a href="#拜占庭式建筑" class="headerlink" title="拜占庭式建筑"></a>拜占庭式建筑</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENc3tmNdvkPzwfL2h71GyVpKxC72KWpiaBVw2ohxG2ftAJhf1sNhibL0pgV1z2TyGfP5qdOTrLoRMPIg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALaWacEPNdleqaACbRQLqhg72tHicVRSXk0cyzwaI8fSBmm1aZ8h8Zhglg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>公元395年，罗马帝国随着君士坦丁大帝的去世，分成东、西罗马帝国。而东罗马帝国随着东进，与东方文明的交融、碰撞，形成了与罗马式大同小异的建筑风格—-拜占庭式建筑。</p>
+<p>如何辨认拜占庭风格，主要是看它的顶。和罗马式一样，在建筑上加一个大圆顶，但风格又有所不同。罗马式直接加个半圆，而拜占庭式则是在半圆的底部略微内收，就像是一个洋葱头。</p>
+<p>像这个–洋葱顶</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Ab6BAjMJJT9BqX09cib8aIzZvzibJ2v8TJ0hfAKnNDc4KTsuO2uiaw0IYq02FDLOP2unDeL7QCd6x4N3EwjQDFwNQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>还有这个–洋葱顶</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Ab6BAjMJJT9BqX09cib8aIzZvzibJ2v8TJt88A0fvqickZtsia9rRPWiaZ21w32wzvwU0r0icKmrSEcuib8NkuGmmhQAw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>更东边的俄罗斯人喜欢吃洋葱，他们觉得一个洋葱不够，所以就放了好多个。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Ab6BAjMJJT9BqX09cib8aIzZvzibJ2v8TJnpAhFElmZBZx0wbqF90s9CBuW8nC2262w9eyk4nhBhicliblibogaVRGw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>小贴士：因为帝国的分裂而导致两个宗教产生最后影响各自建筑形式的发展。所以在欧洲罗马式建筑与拜占庭建筑可谓泾渭分明。我们把欧洲切一半，罗马式的在西边（像法国、意大利），而跑到东边就都变成了拜占庭式建筑（像捷克、波黑）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="哥特式建筑"><a href="#哥特式建筑" class="headerlink" title="哥特式建筑"></a>哥特式建筑</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALaibY11eFJicfLR7wTUdia56pAG1U2o6sEX47mh998GjywuOmHKGsnR0aSQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALaeqxIG1rl8ab1qb6k6AqY0icwqoQI6UgFoZ7DUIUIUjaCJOtibFbkPjFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>罗马帝国覆灭了，基督教却在欧洲生根发芽，到了中世纪天主教成为了西欧的唯一宗教。神权时代来临。</p>
+<p>绝对的权力带来绝对的腐败，天主教在西欧一家独大之后，所谓的神权大于皇权。出现了赎罪券、十一税等为天主教搜刮了大量的财富。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALaSEJN1OxqlREHUFhrecxhbUK5LMVZTVVL8F5nE6dxkZoUzvrhLY7IPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALalCPml9ibBRUTGSwk8mYNnzGxAAFcpFSso7cibbuc7nwjy7gHq64fp86Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>原来希腊式、罗马式风格通通不要。什么三明治、包子、洋葱，都站一边。天主教的风格就是—-</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENfYe1Dn7PzjicA5BlWicVHALa5c93evicOhoqylCDvaFdjmtqbsic9Iv4ibZianL6sabpwGMEfSoPrWZciaw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>为什么要高？天主教徒相信人生最后要面临的四件事：一、死亡。二、审判。三、天堂。四、地狱。（这是所谓的万民四未）。</p>
+<p>好，第一件事，死亡。人死后要葬在墓地，欧洲人的墓地就是教堂。</p>
+<p>死了之后由神灵对你审判。要是身前是个坏蛋，直接下地狱。要是个好人，恭喜你，你就可以与耶稣、玛利亚、天使和圣人相聚。他们组成天上的教会，在那里看到天主，与至圣圣三生活于爱的共融内，并为我们转祷。（圣经原话，不是赵导瞎编的）</p>
+<p>那么，问题来了。下地狱的话还容易点，棺材原本就是埋在地下的，带个锹，往下挖挖就到了。可是好人要咋办？他们可是要与耶稣、玛利亚、天使和圣人相聚的。</p>
+<p>​    在哪聚？</p>
+<p>​        天堂。</p>
+<p>​        天堂在哪里？</p>
+<p>​        天上。</p>
+<p>于是当时的人们就想把教堂建高，造的高，才能越加的接近上帝。原来希腊、罗马、拜占庭式哪些大圆顶通通不能要。因为顶重，就要用又厚又重的石墙去支撑，从而导致建筑高不起来。改用尖塔，为了让建筑更高，还发明了飞扶壁。</p>
+<p>飞扶壁（英语：Flying buttresses）是一种起支撑作用的建筑结构部件，凌空跨越下层附属空间（如走道、小祈祷室等）连接到顶部高墙上肋架券的起脚部位，用于平衡肋架拱顶对墙面的侧向推力。由于飞扶壁通常以半个拱券的形式出现，所以又称飞券。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9Cicmjg9CTn7TM5W5FsVXcWKw1Bdm3b8HKvxfv24jibJPeJfxR4sCKIhWtg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>既然是宗教建筑，哪当然会与上帝息息相关。上帝说了啥？</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9CiczFm9DByduXvCFNZ1PibnCSKEaypGx82x3txVsPOM9CN7p8P8ia6YcgKA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9CickI1ZdWnjrtZrE5oAPnYtia8VuBAVOMBn0XC6fdicxBgDiaxFMpuL9jKtw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>哥特式建筑上的玻璃百花窗其功用主要有三：</p>
+<p>1、减轻建筑的整体重量，使得可以建的更高。</p>
+<p>2、透光。花窗玻璃造就了教堂内部神秘灿烂的景象，从而改变了罗马式建筑因采光不足而沉闷压抑的景象，并表达了人们向往天国的内心理想。（玻璃着色主要以蓝、红色。蓝色代表天堂，红色代表基督之血）</p>
+<p>3、教化百姓。</p>
+<p>小贴士：古时欧洲和我们中国一样，读书识字只是贵族们的权利。老百姓不识字怎么办，好在每个星期都要去教堂。于是就用彩色玻璃在花窗上拼出一幅幅的圣经故事。教徒可以根据图案来理解圣经。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="文艺复兴式建筑"><a href="#文艺复兴式建筑" class="headerlink" title="文艺复兴式建筑"></a>文艺复兴式建筑</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9CicwHdE3b1lyPtJ0EcPj94E3cW5XC1LBiauehGrzm4sNEhdhmFMUNWic7MA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9Cicv9Cx3MtKA2pp38Oft2XQX2RzJUiakMzfia2eial4yVVwKM43h8rmMmxhw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>文艺复兴。我们可以简单的理解为，复兴文艺，复兴什么时候的文艺？罗马、希腊时期的文化，艺术。</p>
+<p>文艺复兴这四个字从背景、起因、发展等又是一个专题，赵导以后有机会和朋友聊。今天我们只讲建筑。</p>
+<p>文艺复兴式建筑的特点很简单—-左右对称。</p>
+<p>从中间一分为二。左边一根柱，右边一根柱。左边一扇窗，右边一扇窗。左边一扇门，右边一扇门。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9CickmYyudKmMXZORyoex4NFibo4cnAflOovdasIvvwGeG3TjCae26otSzw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>我们也可以这样看—-像一本书</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENcskPYSIJxNF8pacAI1j9CicZ4WPSr5wdrLj364IwbJuBt1pYOVazSdibj6ajWvatgLqBia0pcP29eBw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="巴洛克式风格"><a href="#巴洛克式风格" class="headerlink" title="巴洛克式风格"></a>巴洛克式风格</h2><p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkJc0pdPW6jEKPYlicEmlUojyibEMuMRXibccXgibqNSyVEmdCeW0icv8Hl6A/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>请朋友们注意，这次的小标题上赵导没有用建筑二字。巴洛克式是个统称，更应该把它叫做风格。风格之下有巴洛克式的建筑、巴洛克式的家具、巴洛克式的服装等等。</p>
+<p>巴洛克式风格源于17世纪的意大利，之前的文艺复兴时期为意大利带来了大量的财富也权势。于是意大利人原本的文艺复兴建筑，添上新的华丽、夸张及雕刻风气。从而形成了巴洛克</p>
+<p>关于如何辨认巴洛克式风格，赵导给朋友们四个字—-无金不巴，没有金色就没有巴洛克。如果你看到一样东西（建筑、家具、服装等等），从里到外，从上到下，都是金光闪闪，Bling Bling的。巴洛克就是他了。</p>
+<p><strong>巴黎歌剧院</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkZvibFm0dq1ZFFFBLiaPiabKPCQ9eCS1ftiaz0S3KMR87R1vJicvZ9rkPgtg/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p><strong>凡尔赛宫</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkSJAW9ekZ0MJlJ9OmicUSmBsXDdoEico9dJtO1JFiaMACB2NibdicnF5RIEA/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>再来一个超级巴洛克晃瞎你。。。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkSg6c9l4bDfUKOMGiaHylwGhicVibVEZqlgFfzlxjIiawzsm9KzFnZMxqbw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>关于洛可可</strong></p>
+<p>洛可可式是巴洛克末期风格的代表。洛可可风格其实更应该算是一种室内装饰风格。我们可以把洛可可看做巴洛克2.0版本。更加的奢华、更加的金碧辉煌。</p>
+<p>所以我们就用一张图解决它</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nknicWo1VeIRt8icCI43hnLlnP3niaAVFVL0xiciaAhw2D4AAJg931M32ibiaLg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/Ab6BAjMJJTibO5zA1OeO9mnrFCye1NXheZqKF1txo7j2bIKNSQRxeOnG4puQHGCdEJlOxt7c7WTVACNT2tWXVlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>最后再说两句。</p>
+<p>在欧洲除了上文所说的哪些皇帝、教皇、贵族们建的“高大上”建筑之外，还有平民式的建筑风格。下面我们来举两个例子。</p>
+<p><strong>德国山形墙</strong></p>
+<p>以前的老百姓可没有皇室贵族这么有钱，他们的房子多数都按照当地的气候地形所建。例如德国山形墙建筑，中间高，两头底。它外立面像我们汉字的山，顾得名—-山形墙。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Ab6BAjMJJT9BqX09cib8aIzZvzibJ2v8TJcaq0Oa4u56ciaJuw6soLuE7w3md0PodlyXrNfnZribRbEuaWXYC0zL3A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>哪为什么德国人要建这种山形墙的建筑，原因很简单，我们来看一下德国气候。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkuJicsFhwQ61Ecqhz37xxTehsNf05uVEic9DWeHaRBiaeaiajexvuiaerZibA/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<p>德国的气候类型是属于温带大陆性气候，这种气候很像我国北方地区的气候类型，就是冬天冷夏天热。冬天一到德国入目所见，白雪皑皑。如果把房层建成平顶的话，以前也没有现在的建筑科技，雪越压越厚，直接就把房子压垮。于是德国人就发明了山形墙，便于雪的滑落。</p>
+<p>小贴士：山形墙这种建筑风格并不是德国独有，世界上只要冬天下雪的地区都会出现这种风格，例如中国的东北、欧洲的瑞士等等。</p>
+<p><strong>地中海式建筑</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/EPNlPLZ8ENeaGIC7SvYSCsr39VZMT4nkl3GGkIu8zfHa77cvjjLLv56Tgk3DLHUQnQEicjQIJTrOKuNgGYnEEBw/0?wx_fmt=gif&tp=wxpic&wxfrom=5&wx_lazy=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">圣托里尼岛</center>
+
+<p> 在地中海沿岸，我们看不到像德国山形墙之类的建筑。其特征为”夏季炎热干燥，冬季温和多雨”。终年无雪，所以古时候人们选择平顶式建筑，并在外墙漆以冷色调（多以白色、蓝色为主）。用来反射阳光，降低室内温度。建筑，它可以说是一种起源、一种文化、一种历史、一种艺术。希望这篇文章能够帮助朋友们简单的了解欧洲的那些建筑。</p>
+<div style="color:gray;font-size:0.9em;">文章来自网络</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BB%BA%E7%AD%91/"># 建筑</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/21189e40/">艺术的最高点与宗教相接近（丰子恺）</a>
+            
+            
+            <a class="next" rel="next" href="/5745d62e/">二十一世纪银幕上的21个标志性镜头</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/21189e40/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/5745d62e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>现代建筑的最后大师：贝聿铭 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">现代建筑的最后大师：贝聿铭</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 11, 2015&nbsp;&nbsp;22:59:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 11, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%BB%BA%E7%AD%91/">建筑 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30zjc3dc5EVULSf8mcibSmH1P5v8muj9gwvRHLfOuPGpLfYeDqhwVQc5w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><strong>贝聿铭</strong></p>
+<p>一个仿佛超越了时代的存在</p>
+<p>在现代建筑史上</p>
+<p>被称为“现代建筑的最后大师”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5egqPdPzlbf47mZJXN0ibZ9yXMWycIlMXEpcRxKon33ibfv265urNTIf6Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">贝聿铭作品—卢浮宫玻璃金字塔</center>
+
+
+
+<p>他是建筑界一个特殊的存在</p>
+<p>游走在东西方文化之间</p>
+<p>始终坚持着现代主义风格</p>
+<p>在将建筑人格化的同时</p>
+<p>也为其注入了东方的诗意</p>
+<p>贝聿铭作品以公共建筑、文教建筑为主</p>
+<p>被归类为现代主义建筑</p>
+<p>善用钢材、混凝土、玻璃与石材</p>
+<p><strong>贝聿（yù）铭</strong>（1917—2019）出生于广东广州，美籍华人建筑师 ，美国艺术与科学院院士，中国工程院外籍院士，土木专家。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/pxvm9QzYib7ywjHdmy2wChlkR1dA0Lc54LRwYriaTLmKSYxmbD905oRKBoSLP2QnZ6FoTRKibQhkiaDfLRfXSVYQyA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="第一部分【经典作品】"><a href="#第一部分【经典作品】" class="headerlink" title="第一部分【经典作品】"></a>第一部分【经典作品】</h2><center><font face="黑体"><b>卢浮宫玻璃金字塔</b></font></center>
+
+<center><font face="黑体"><b>法国巴黎</b></font></center>
+
+<center><font face="黑体"><b>1983年—1989年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30iadHZE0c2IIqaqkz72HVDE0yyZsLRpHcXia8xGJ7FjC5GyLEwFI8aW6g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30iaibm0sYCun0GLlF1k8ROIze9QqQwmYL8RRxRGHqggLzsxOk6vamUeiag/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5e003iaIicicmEWuWQ7QsiayAS9erkKBRrMV5kj7DVd2UAHVQeeF1s7XKtGA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD306nPtP7fd7gPafk7wjqhnPkDd4HpKicyEOMFV0aZILr0JK3SmgdeQiatg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30YwFj49YC4QY0kclgn15lXibYfn3jH5jiaqeWwpg6iaHBDiaVrclOLbQIwA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30rYKiceSial9fj8icznkFMc7KP2icda9tKic7iaRJWts4cBq5qpSPAmDXxtGg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30icYiaOqtLUCSKlcVkWM8L0guZmgdsU1Iv1aYxXYAeos5iaYHw2iaPqL8jA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>改造巴黎卢浮宫设计图纸</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30WGiaP7GEAd20lvpU6GPSAGDediboEVvpWNW91sqxYdWHPv1Cib6piaCbiaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭为卢浮宫扩建设计的图纸</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30wnkZMd4jqlxMibrm2e8UIt5rmF1sbbUB6ZTLWnb4xoDicEWWYkXkahDA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭在卢浮宫金字塔模型前</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/c2Sib3Mp7pOPD5A6DVYg2BDGIxxsjWstkWVmtlkNY8N1V5rBtQSzibgAM2AJgCAoYiaPFpvG4odqJ9FkhCCG2nZwA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭与卢浮宫金字塔</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30RPqgQS4xpmpUA7V17spEgGQqkhIJOQ7UQaryxZCKJQicSFz3UnEx8eg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>伊斯兰艺术博物馆</b></font></center>
+
+<center><font face="黑体"><b>卡塔尔 多哈</b></font></center>
+
+<center><font face="黑体"><b>2000—2008</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD306ibDnAfDB603mKqlwHVgZJwKsBKWXuFRMPaN1wb16DIRCrFNFLdZIgw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这座博物馆在2008年顺利开馆，</p>
+<p>贝聿铭称这个伊斯兰艺术博物馆</p>
+<p>将是他最后一个大型文化建筑。</p>
+<p>贝老的目标是</p>
+<p>将较久远时代的价值观融入当今的文化之中，</p>
+<p>或如他所说的，</p>
+<p>捕捉住“伊斯兰建筑的精髓”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30GG7GQrmtWQXFd3SDjGFNx62phb0sYaaNyJOySNlEnmBTjM9DvLCdOw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30cmHrn3GHuk5uqAU7tmPl69ibBTJk99ibwofZtzWcPLjWgnz8ofUZ3JQQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30tYC9oBRUoq0YyT7KzTrnehUQicsKzXr7QcKepdSnibyeDsoDMbJ0W8Eg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD302TiaficI2MP5euvkpPXUQ9jjNmAsJYM991jncBfyzJbeV5l2JZK6wicNA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eg84ReJh19wz9tPVevW1wFjMicJ7KA73d8vTlRPaXLQyl9UjtvJwmteQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eHEzicoHs6H8wteN2p3V4DuEaZBqeNRnS5lhrErlBTfRM3VicfdGYSkqw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5e2jIYe9o9GXZMPaNd9DcgUfa8EMtBiccojDHOntNReS3IpcEfENib8m7g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>博物馆外墙用白色石灰石堆叠而成，</p>
+<p>折射在蔚蓝的海面上，</p>
+<p>形成一种慑人的宏伟力量。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5e93g2Sw2P8nvsCA5LhzjtUvX7aWNqn9llTMYPiacBSwtNpFKrv4YkkMg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5e1k9PDlcZbt7Jlq9AMSZdsDpG86LRAJqLKYaWjjNBc6ey5xdLepNicyA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5ecUAebMSCoLLjHR88ohJ0j4GhibsBIRGiczF8yzO9TiaoOIwZYFUHCgEZw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5e9L0t6wapMbG0tCOQ59xjZgAtZ4R8qBZ66wI5ibh6icNXkqibu2Q2jLw4Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30cyf74RPzjCP85egJgEPNQrrGM8xVZicE4ddQM47OJ5uzKKoLicaYj4KQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30jLxNw4NC4iaS7CsbzKcaJoocNviasaaXVM08MaHiaUVG5JaRIfow7uXsQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30f4eKJIk1FytUbkdmGMiaFNEH8yJqxVu19ruBfCZovibplRSY5FTOVjtg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30NrK741djmU8B8yQTOo7HsMfuk0kqYWps2wXfpDEoib2Ib7HGBia3ke3w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>美秀美术馆 (Miho Museum)</b></font></center>
+
+<center><font face="黑体"><b>日本滋贺县甲贺市</b></font></center>
+
+<center><font face="黑体"><b>1996-1997年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30TMRzhYptwOn8icdPFKuzG1ElsLTEibRjq8MtzuHYZYcPiaS7ZOGdA5lnw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30B9V7vH2Mz5WXFKiabStdajoiaQrMyuia1TCZO8WbktmzheHQckkl5e0Sg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/USOHOibkRVWxDGvq2B3JeSicJibIycpicHc0bkswne51wnqPIXeDOqMnKfgc8LibA1WYicWmnslNg0P3NM7WfTKibqfHg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/USOHOibkRVWxDGvq2B3JeSicJibIycpicHc0DpoE6UJ8JjeHp7nv5eiahLs4Lfsbv4laOQ5jXnXa81ZME8zjWDc6cuw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>贝老以桃花源为原型，</p>
+<p>精心策划设计了这栋美术馆。</p>
+<p>整个美术馆的参访过程，</p>
+<p>好比是世外桃源的发现之旅，</p>
+<p>峰回路转，引人入胜，</p>
+<p>唯美景致处处动人，让人留以回味。</p>
+<center><font face="黑体"><b>美术馆平面图</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eZDxbH6HjMnBnthCpEkNz0VnOfxpRTnpDet17Nr9EWo4FPpRzBiceaNA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>局部鸟瞰图</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eeGeLicmpBlXeFyictnkKNOQsjDQnGfiadSiahtvzRzXpIcEh6ML70DcqyA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>鸟瞰图</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5ej3rJ2nRCEqLkqh29JFrfyXJDjwaSMibpERaLI7DSdDFhHibFKJJhB26w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>隧道</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/USOHOibkRVWxDGvq2B3JeSicJibIycpicHc0AFKREmUMxHOJ9ia4BFSdU2CFcjc37CoOjfVKlQH61JQicmQIhzGbcZZA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KdVCBcNS6OK9BqicvnlA5Kqw4DIIa9jX8j8ibtZsM2Igpm7zpJxz1fCQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Hia4ictq8zbyTuXnoc5BFricNlzS4AdwLuITtyoYL6fQGkQU9MSXxHwbQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/ZQR8PiaHxPjaop42FTTG8CKqibdxn8Nx5l0CCUU5jPhxibJygibHwE9ibtGm4doDf00eFibCy9rlLvzqmxzesyzVnBxQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30rI99jrgpcLQg7AiaBsz8ia2g6pgM2EVfC19DX7PlTo68enHb9BGRr5kw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Gr0gOXZEl4BPwcR8ibFO3fUlIpicjudHdZTvwslDo9ccOwn75sEAmRgg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30me6njW893rWqM39UGicAmoJqNjuMbhvJIZupOaE8F4XmM2ag0aohfHQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Jr8jktbry7BuajibK1GGzibMrY8gndcRMSLwRztQkWm4kJly4WSoZSlw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30vfbURYlnibiaOlbCY524hfhpt5clta4rTj2J08ia4KZloubOJoPP8ZMcw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30xjjVWXrIibclic1wjhW5ORm006NvAicPrbdm0MNflJibCP4DORO97LlqCw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>苏州博物馆</b></font></center>
+
+<center><font face="黑体"><b>2003年—2006年</b></font></center>
+
+<center><font face="黑体"><b>（新馆）</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eIsBkoencX5lCLwic6pGk2GawssF44OViawebc9eIL0I26TqFDgpg5ypw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>建筑的灵感来源于苏州传统的坡顶景观</p>
+<p>博物馆置于院落之间，</p>
+<p>使建筑物与其周围环境相协调。</p>
+<p>新馆与拙政园相互借景、相互辉映，</p>
+<p>成为一代名园拙政园的现代化延续。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ibv8mIKWm3iax0kTesu1jsic2ib46DOiaEia44A17leJ4ICt358dVnnxdXzA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30U7pZ8nLY9VgGhg9f4pJyRlJhE7Rr9I9Z26QBBEWm9Fv0Viarajm2oRw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30geicicApibgtwE3TjGhaNAGBc2e4kQ5IRNKe780dQ5jCDRer1SaibzMk6A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30hrecDXm5hMGV4dAD0KjiaZJjVVjLDel0ESSVRmRoLpAMiaRoUZPscqWQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">苏州博物馆片石假山手绘图</center>
+
+
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30y3yQAia8SicFmA4v8IFhibia6y5HVzt2ib8VQgWzRO5TwFZMshYP1T9nohA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30OZZWSKxA8h8iaEXbuwwXt3LoDnAMZGajs366v59le7cFfzDicXyDdRug/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ow8uI4LpsE6iccPopE0lkYlqAXkbnflZfYzAmCEjUbMgWia7YtyfmOjQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD3083199jk5ou3keqpBnPRbJ80sSk4oXWApbPuvahxVkRicjAMXv5hH1dQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30wjSmEln8Y7cE0ia1JSpjA09er2nt5lfhiakuVeaJqCVzicoPHEv9BJSDw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ABOM5pLfloxjv6zsPGhS5mz0iaG82OR6slXrHLuOr0t2ichuLUVogSTQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30nTbY3uy86u3K0O6N7z3PwbB4sR1WQPLnCwjns6oVN01TeVVRibDmdqA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30XxOLkM8gO32WrpbvTicVibt1LH0cCnS4AVuT6HvpWZRbcKs6E6LQKclA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KuzDsic5sLvxxfK2PuWAn2H7NibRw9Ec8Ddz6KJk3PVcur9hQyicdEHFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30BLOk8JoPCZPkib7OegZMElDrMc68LgwHMSq0KsqBhGy2CHicSeNnUYew/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Lgm8KhOsbEYLNP0PfzmKn7x0TqxJ1PMfu3BvfZcOopXABATbV7ias2w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30BLOk8JoPCZPkib7OegZMElDrMc68LgwHMSq0KsqBhGy2CHicSeNnUYew/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ArNkDSw4q2GG1JegemhjgmIRkQtPibvHibdPtthHA6yajvfMkIFeSS7A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ZBOcIJia3SicQhhUQEia3ZZ93TAIMkOlsrqQplPXUgibIHNhpB4uFCoILw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30O6nJHMAOibeO6KgPJ2qcG6NJNHyiaNiaXX0FsMBYl1oxCKKaX9TBDcV8Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30nnZFt5yiakdSdWHltxgbVOHc7DMUI0ic7Mrh34hFrMNl3y1NmkQaZp4g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KTSiaXR0nZ6XlpdjuJiaV0ZsnkKATzKAiaI7b8EQVuG48BaSic2lfloRyA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30hLLibl1e2o0JjkDiaILslBiaxvC8mOqa3ceK3bpMmmjswY2FRRgy5Ubeg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在建筑的构造上，</p>
+<p>玻璃、钢铁结构</p>
+<p>让现代人可以在室内借到大片天光，</p>
+<p>开放式钢结构替代传统建筑的木构材料，</p>
+<p>屋面形态的设计突破了</p>
+<p>中国传统建筑“大屋顶”在采光方面的束缚。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KTSiaXR0nZ6XlpdjuJiaV0ZsnkKATzKAiaI7b8EQVuG48BaSic2lfloRyA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>香港中银大厦</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/USOHOibkRVWxDGvq2B3JeSicJibIycpicHc0MGJKt3WUyRXCR7VwXKcxxwMx6DGKFQibGTwxo2APEliaJiaWsDbRuYxSQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>香港中银大厦</p>
+<p>楼高七十层</p>
+<p>以竹子（节节高）的形象作为建筑主题</p>
+<p>外形极富想象力</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/USOHOibkRVWxDGvq2B3JeSicJibIycpicHc0gjzssOJoAn03EMFiaQa2ER1SpjGTPsl1aL2cQMdOa0xJqRlUibVhpvXA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>香港中国银行大厦结构模型</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30GWDuG1LmWcxS416qHJ3ibNEF1ZT5rVMtKSRLJ4P9vk4krYT3lY31Y9w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭在研究结构模型</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30vZf23ib2zyPvvX6FaugIyiawW5z7Mm8AIYRHT97xjsvSFicniauWlLItQg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30b4qKxEZmWe2tCib2icRBjicsvJsGIiawQEUswBTJaFpO2ITyIO2XjSiaFeA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30N4VeRJ2WVApiaZoEDBTyzCJ7ojNGKCmh7GmIHbhVibIUjPcNIHomdoiaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30tJqj6S5vqicHQzdFmoXwXibKwrdjJRU6zDHFpRH346kA7XkyLD4jC4fA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30DI6fzJ0klvAMfecQzZFRw1XwoJicD1qeXl3TMKeHc7VtTiccFItnJDNg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KHeKYrIxrHJa5Dxm20qyoxa2ic7qAaWgFK3Dk9rSUWwuqJMJiaxibdWDw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD302fVaETprsRcfcyoEcuXRxldIib9ZQc96pfJEPQVXicZwHcUXAz3KB6fQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="第二部分-【其他作品摘选】"><a href="#第二部分-【其他作品摘选】" class="headerlink" title="第二部分 【其他作品摘选】"></a>第二部分 【其他作品摘选】</h2><center><font face="黑体"><b>中国银行总部大楼</b></font></center>
+
+<center><font face="黑体"><b>中国北京</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30fAAuhrcuU4OX3F7bsib61tvfsI50RoA5ZP2icsd1COs6G0J4eCicllrPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30y07JUrd31iaMpxs0T96gN4QHqcKHnC2qB2spyDK8qSCqsmQCOQNdG6w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ZUBTlKojWEzMjECbiaAOECT6aUzu4GM1jpEonIo4Hrn5m7eOCBljUtw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30gM1oHm2o25gNaRp0EJu7ObsSR3DwyCZMm2AD1GlCfG4MsUpAMBzQ8w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30mibxchc0Bvf6uuwzK6iaBVHy24xaU41pqtsJwicLv1rpGrFLEOdorGHEw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30K155sISN3uOvWziayHl54NVuVcBEicERDeszicqbaMZGUIZk5EibPlw7tQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>香山饭店</b></font></center>
+
+<center><font face="黑体"><b>北京</b></font></center>
+
+<center><font face="黑体"><b>1982年</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30qxFkrZAWwuNTHYlmaSSPQKLITp17q5MHITtkeI0SVjuPv9TuwC19Ew/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30HiaicpnMo4AdicFXauyY5COiadZ84ibFNgBXeqTtXibzClvarQptwI3wwMTA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30SaOJLpwfcRM0WcvAZ5BKjia8wsM4Ey70DR22g71oXRABPjbSibOFXP2g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30kCichjZVwEpXK5icFhX0yibp9FY6p79XORPDfh7IgEia1jq9Cf3CicUIAMw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD303wETIBqfzWq07MmaszV72XibEFtpUI6LQOYKagKzuXIkdnzeSVGL0oQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>路思义纪念教堂</b></font></center>
+
+<center><font face="黑体"><b>台湾东海大学</b></font></center>
+
+<center><font face="黑体"><b>1956—1963</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30icTcSkeQicaFn6uicJvLnMiaibvRZ2om5tWs6IJVajHdzPhyuHJpH2libic6g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30qodOJuVU18eWCcGR1sCRzZNPUUs3icibN1iatvtBMPictYDYT6bf6zk7zQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ChFnIHic1K1ibFBY74zdmTM88sgYhltWib1PCQTZzdGQdQ0pwnWOX342g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30aUBsicFFuiayLMptzaNdsAXLiaWmp467GLLuXI5iaH1DXfzMic7RJO5icN7Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ibjf7W0kqt5BmXWdT8h1t2juMibsTTIeKcVF33ibu0Rl395uIKsZ1NicbQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>艾佛森美术馆</b></font></center>
+
+<center><font face="黑体"><b>1968年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30euTibGO0B8UP8hibIGILmIkSn44NO1y8Jp4Cibp6cKgicpaLZ2Zxian5sVg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30AvKxMPs3vksIy4xm7GDxlDanNWx3iarKKyvbe0CHtzIRnzUPFyJqicEg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30F1RngcjIcibonSWIuZicPRcP3tdIUTF3CDernyBico55NfOibz1upnXZYw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30JmdEBAUNA01AibPrQib6kvNYiaic8LALWjfjxdMlgpPzAoKxqu7iaB2ricuw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30icf4xjqOvGxoNOoS2KicpPTLQUibQ1RUHiclJC4gmGQJDqtKk78TEXT9tA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30rBHZa6NlNibsoKO7xbgBIY7nUkIRJeA2OhLsbny3fCnicXa7Y4TWuYXQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>美国大气研究中心</b></font></center>
+
+<center><font face="黑体"><b>科罗拉多州落基山脉</b></font></center>
+
+<center><font face="黑体"><b>1960-1967年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30EkVGKvyWS6njwd4FXs8Z9MN2bm2rIyH2htVsaiclLulCc3aVFHwh4Hg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30gHQFq3yEwf13uFavQlaes14RibYYfYqgNJ7iboicCsC0nKOtroD7j5TEQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>克莱奥罗杰斯纪念图书馆</b></font></center>
+
+<center><font face="黑体"><b>1969年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ttHxIYF8blEuAOZgpKzX1H0z1pDlU1GrFs4dibWmOeBnhAh8USic6Sibw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30KFRLsXQPjBibzFY3kncJwSxwoUKnfBo6LuWWl1Via5hLTlWPRlRTE6yg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30wnAYOAeLjhWuK64IL9h3Jzs7aKQQ88icqtNuEibM8ScPX0zSdvKGicZVg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>德国历史博物馆</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30nIjALhgLoy20fo3QLDTf298PGfGQC4NqUoPsr5gFKcegQvkp0oWDsQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30FB5dDznXibictcMzCI4iaydYJMyS4v4tZC4F3v96kol30hJQic4rElz8Eg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD308ibwf2RpMTkuQia2c8squ7ia1jjrc2T7oazEWV9XHCGeYOGDQ6Z2dUdPw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>纽约市贾维茨会展中心</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Da2kAIofqglLTM4o9tYJXhqmwhmB0FBOOgytPvAsaW0uvGMCtTGh0Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30mjiafX3rSL0r7NmuJhucUiapTZ7BpxOEfP7dhutCH20wS7OV2AINyAqA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30sA6Q6aC9ibfLTPIZ5YHr6aJawibnQdvOl5aalhwx65IQdIqscvY6cmPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30DI7AB8drT4JUic9VzVGahianDHWEfbibPaDDlCHo2CtSvOotDI3BgIDicQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30D1HM1bjdVLIhSzhdiaudVicNwAYXibckGMt1fv5nlHVYLCh7ia61dTCdpw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>波士顿美术馆</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30mJJ65YaM3MmHrKk7uhTribFOKeiab0h4xYeryOfY03PuU6MU3TP6k5Cw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30kkYtFTjU0L0op4SbgwkicGT578mcvAoTCErwPEOTVlibu3F3Y38UlA6g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>新加坡华侨银行中心</b></font></center>
+
+<center><font face="黑体"><b>1976年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30IKbJeamicYSUVSYC0HnRoy9Phz3nV4iajQnIWEF4hTfepgEFnYyCq4qA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30gMCLLiaE7y0mGsN1B8092icRPbokibD5icJkvhh1zeMjBVSKIOEsfyMYpA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>罗彻斯特大学学生活动中心</b></font></center>
+
+<center><font face="黑体"><b>1976年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30DYbwtibaV9y7ygMWcYJvRibPM0GvDpYosGfSnsLAuwOSLmOBvrpPicXxA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30DIJCevYd6vkKUicuSL8wHVOhR205hxJDNtN2agKb8DbqVOosJuoRU9g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30SOYicHibwzQaPNBU1NjFGIhWK136FEeOJoXwljssQsxEFQ7sbmF6yTicg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>费城社会山项目</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30DHy8qNLTFicfSgjWPtz5PPHicAG5fsibQ8f0NgN5ia4nrh9kNaSVnBqUQg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30IT4P5wnv4iblxrzLFsEstw47sJdyMicIMFgoxgibIEeaMlJa6wnpuEEyw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>上海艺术博物馆</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30GonvYR6VPATic9iatotUA1lq16VJuTesy5zAicNb8r6rUFAjblpHw4dyg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>威斯纳馆</b></font></center>
+
+<center><font face="黑体"><b>麻省理工学院媒体实验室</b></font></center>
+
+<center><font face="黑体"><b>1985年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30Etc4MhIjkkARhtr7cibscjVn2ta9SVMiafCF6NEMO8o6VSscGuHoibAWA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>达拉斯市政厅</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30HAsYQFmWiassn7UFiawCrfYeZC4SXOQyzRI0gDSyyo6C0O09m2K77paw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30icUOfbIjic50ZLvGO4UJOIyCobpPXJ0rYPVic8uX3gkRbIKzPeqfibxiayg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>莫顿·梅尔森交响乐中心</b></font></center>
+
+<center><font face="黑体"><b>美国得克萨斯州达拉斯</b></font></center>
+
+<center><font face="黑体"><b>1981—1989年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30nh8GkTnep6JjYcyGObtA5xAah0t3ib3cH0chLmZUpIIn2qLRWc9iaCIg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>得克萨斯商业银行大厦</b></font></center>
+
+<center><font face="黑体"><b>休斯顿</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ic9aREhhxnhBDQIMdZdmEfYUic44oqA6LOg2jChBLFLtHRDgcB9q7Ubg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>雅各布·杰维思会议中心</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30lkce9a16MiapKI8ibIj4fNjcSGv9adIo4Dc1CYtFtZZRUyxIJmg7vcpg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>澳门科学馆</b></font></center>
+
+<center><font face="黑体"><b>2006年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30tWchI3gxLOAicsS4opcQrkiapMgooh5mT3jGRuLjT4TQjsBVs4fW4PWw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30qibfu9W3icXz3mTUl7ucia2SrltLNygdMMIZe5EjbJ0znt2psM6vJDMicQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30h8Bt0AzJmNP9aHIJJ7pzqn0JPAL5hAvDdlqZWibFUibPsJ5fQP7mK5OQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="第三部分【贝老经历】"><a href="#第三部分【贝老经历】" class="headerlink" title="第三部分【贝老经历】"></a>第三部分【贝老经历】</h2><p>贝聿铭1917年4月26日生于广州</p>
+<p>其祖上贝家是吴中的名门望族</p>
+<p>原籍浙江兰溪，明代中叶迁居苏州</p>
+<p>贝家族人中人才辈出：</p>
+<p>清朝中期的贝慕庭为吴中巨富</p>
+<p>与戈、毛、毕姓人家</p>
+<p>合称为当时的“苏州四富”</p>
+<p>颜料大王贝润生是贝聿铭的叔祖</p>
+<p>其祖父贝理泰是清末著名的金融家</p>
+<p>父亲贝祖诒则是中国银行的行长</p>
+<center><font face="黑体"><b>贝氏全家福（左一是贝聿铭）</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30voRbLTCicJrjU5SgyeyEGrN6lG0v0YEWA7IlL6YoElbIclzEjLf2SFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭年少时与家人的合影（左一）</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30yG8nXZRhy8yVCibcaPt8GJUJSrQk2u72PP2jeREUyplCm0Nqia4LUiaxw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1935年，年轻的贝聿铭远渡重洋留学</p>
+<p>进入美国宾夕法尼亚州立大学攻读建筑系</p>
+<p>后转学到麻省理工学院</p>
+<center><font face="黑体"><b>贝聿铭在哈佛</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZQR8PiaHxPjZYfXLcAZdewCAKJIfdrZzxeYvQYRVBCvkGibSgMFDrMBFgQUKVXbhOeRwXQHYVP8KaJiargmFlmXtQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>毕业后</p>
+<p>贝聿铭留校受聘为设计研究所助理教授</p>
+<p>在哈佛短暂的留校任教之后</p>
+<p>受邀加盟纽约地产大亨柴根道夫的房地产公司</p>
+<p>从事商业房地产的规划和设计</p>
+<p>而且一干就是12年</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ZQR8PiaHxPjZYfXLcAZdewCAKJIfdrZzxCNRwIM4pFjVkhG91XvMib8pBN9q6QZEcLibKclqp0D5fQG6qll211tSw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>十二年中</p>
+<p>贝聿铭为母校麻省理工学院设计了科学大楼</p>
+<p>为纽约大学设计了两栋教职员工住宅大厦</p>
+<p>1960年聿铭离开柴根道夫</p>
+<p>自立门户，成立了自己的建筑公司</p>
+<p>费城莱斯大学在一九六三年颁赠他“人民建筑师”的光荣称号</p>
+<p>同年，美国建筑学会向他颁发了纽约荣誉奖</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5euLeTzXMcibRLNHpXGXEUoraoqOZBibxueCmnGz3aoB8kPeBHpn0Qtk5A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1979年荣获了美国建筑学会金奖，</p>
+<p>1981年法国建筑学金奖，</p>
+<p>1983年第五届普利兹克奖，</p>
+<p>1989年日本帝赏奖，</p>
+<p>1986年里根总统颁予自由奖章等。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/DDshwSNiaXY1NaOSmxNEWQvK7HKTtwD5eKAht6nLLap7vLGk6YmT8Dz0Crib1jBzgC6OpwUjmkm0jL2do2nkTPIg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>作为中国建筑界的先驱者</p>
+<p>贝聿铭以其东方的智慧</p>
+<p>宽容乐观的人生态度</p>
+<p>卓越的建筑设计功力</p>
+<p>独具慧眼的现代建筑理念</p>
+<p>横跨东西城市，历时半个世纪</p>
+<p>创立了众多影响世界的建筑名作</p>
+<center><font face="黑体"><b>贝聿铭与陆书华的结婚照</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30O9j6jpgLHAJKAAn7Lyn0aEdnFsqwqTOj5Jy58TKS9mJveIlACNDZLw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭和杰奎琳·肯尼迪出席新闻发布会，1964年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD303SdjhDdVzeicJfdmAsf2W4icc4HMJGZCoHBWB9rdkp6xvwfbMAplxkKQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭和肯尼迪夫人杰奎琳</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30b4yoXdgceibqwAQ8QwpVQ5v5zKanAJEGOEBHjzxsD1E8h6pzicNibosxQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>巴黎卢浮宫施工现场，</b></font></center>
+
+<center><font face="黑体"><b>中间手持玻璃材料的是时任法国总统密特朗，</b></font></center>
+
+<center><font face="黑体"><b>密特朗旁边戴红色安全帽的是贝聿铭。</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30XCicZfkQ7o7O2rBQ9OV8YM3XJEYpDj3icHEgrXcI4oWwNRKVX1AxYJ3A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭与罗纳德·里根总统及夫人南希合影</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30edxMWJjsN9rviarufjicYrjJHrI7Xv75UkHTcOEs2KcSQkiccY7PZeJicw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭在讲解中国银行总行大厦模型</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30rrwPJQIGcNwURK5cF6pH3AKCRnZ8Wf1fv5U3ibD9sv0MJwFk1l0U8uw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭与儿子</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30VU3tUmJYLytQQiciaMCiasG7N1PYPiclwBZudxHunWBA4VMW75NMluX8SQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭回苏时与贝氏亲友的合影，1989年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30w4ibmSNKFgRS2eksNjbFm8OIOohgO2ID6X9k4BxMgxQMN4KLAGqVGXQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭与伊斯兰艺术博物馆</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD303zsLDy32TIicqJw7CzHOxOZgpuT42wicmEHy8J7x6k1escuv6wCIjnUg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭获Leonore and Walter Annenberg Award，2012年</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD306Eq1USbZicd5Ha5wwSJEW2LRUAicia9vMWPUUI1BzoKR0tWVlyShtjAgA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center><font face="黑体"><b>贝聿铭获得2016-2017年度“影响世界华人终身成就奖”</b></font></center>
+
+<center><font face="黑体"><b>▼</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/UPicI8pS9R3QlsAUbelOrROOYI17bHD30ZJOokeAGNj4chCPuh7ibG128767Iibynmpw62Cl3BZ9zMqbW2WhVaJMg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这位百岁老人一生的故事</p>
+<p>数不尽道不完</p>
+<p>曾有人这样评价贝老</p>
+<p>“贝聿铭是一个难得的跨文化样本</p>
+<p>他从东方和西方两种截然的文化土壤中汲取了精华，</p>
+<p>又游刃有余地在两个世界里穿越。”</p>
+<p>从法国巴黎卢浮宫前的玻璃金字塔</p>
+<p>到卡塔尔多哈的伊斯兰艺术博物馆</p>
+<p>从中国的香山饭店再到日本的美秀美术馆</p>
+<p>贝老的作品征服了世界</p>
+<p>他用了100年的时间</p>
+<p>倾其一生</p>
+<p>只为向世人呈现</p>
+<p>最美、最极致的设计</p>
+<div style="color:gray;font-size:0.9em;">文章转自公众号：yipinhuiclub</div>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%BB%BA%E7%AD%91/"># 建筑</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/36ad02ad/">燕妮 · 马克思｜动荡生活简记</a>
+            
+            
+            <a class="next" rel="next" href="/c51e02ef/">西方音乐美学极简史</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/36ad02ad/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/c51e02ef/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

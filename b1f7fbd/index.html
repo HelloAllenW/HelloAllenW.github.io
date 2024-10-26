@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>33. 中国画的灵魂：意境 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">33. 中国画的灵魂：意境</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 3, 2015&nbsp;&nbsp;23:12:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 3, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E7%BB%98%E7%94%BB/">绘画 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">2.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>推荐一种看画的方法：</p>
+<p>闭上一只眼睛，用一只眼睛，眯着眼看，</p>
+<p>把自己的心投入到画面的场景中，试试看。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/mXch5sVTOyAwiao7a3vyj00JM2QWuFMl2ABueVibVibpmaYP7EwU73SVVW7Xw6aemz4K6mJZOMLGvk9ib1b8CaKvdg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">以下文章来自网络，鸣谢作者！</div>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/nEhrLYrvloQAuJicmkE6p1FUsG4cht6m9uRsDTvws3XPxjJOAc9cWt8JwMhbqPkF8XaVH5ZgFKjTICNibpIcloeg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">明 沈周 《落花诗意图》</center>
+
+<p>苏轼曾在《东坡志林》中说，</p>
+<p>“味摩诘之诗，诗中有画；</p>
+<p>观摩诘之画，画中有诗。”</p>
+<p>对王维的诗艺意境作了很好的总结。</p>
+<p>其中的“画中有诗”，</p>
+<p>可谓是意境在艺术中的最好呈现！</p>
+<p>每幅中国画都有其艺术性，而艺术性中的灵魂就是要体现出意境美。因此，探究中国画的意境美具有现实意义。</p>
+<center><font face="黑体"><b>历代名家作品的意境之美</b></font></center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/ph2uL4iaibdFcUA3bQfEzGhAbms5M5GpTEsiaJ4qbefOjoVf8B53Db28flQJvQGLFHZHRl9DSBeiaoN1NrEDRRWdbw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">禅僧画家 牧溪《莲鸟图》</center>
+
+
+
+<p>中国画强调的“意境”，实际上是禅宗极大地推动社会审美层次发展的结果，“意境”和“禅境”在本质上有着一致性。</p>
+<p>何为“禅境”？正如青原惟信禅师所说：“老僧三十年前未参禅时，见山是山，见水是水，及至后来，亲见之时，有个入口，见山不是山，见水不是水，而今得个休歇处，依然见山是山，见水是水。”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/r7tZiavlvkzyKwIiatD6wUh2dIaKAibasVqYaWN8nqHGru0GaR5fDvPR6mDSF5F1ykkjJOxC1Sx6ib9XEQJySJic50A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"><img src="https://mmbiz.qpic.cn/mmbiz/r7tZiavlvkzyKwIiatD6wUh2dIaKAibasVqfTPicjaibS5j3WL1c0WSkIRapvq9FL1GVlAX6KDpUOXbicYuErsDKVUxw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">黄公望《富春山居图》局部</center>
+
+<p>这种人与自然的高度和谐统一的状态，便是禅宗追求的最高境界。意境生成的三个阶段，实际上也是禅境产生的三个阶段。</p>
+<h2 id="【五代】"><a href="#【五代】" class="headerlink" title="【五代】"></a>【五代】</h2><hr>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/K2BDXcWJk0CDqjaMKzU0kZn2uuGXvY7qPrcs8mRicvqbiabKeSLIYNyOuRKuj8oictZnjBRRDdrCcNwcZCHcLibhjA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">荆浩 《雪景山水图》</center>
+
+<p>把意境说得最精辟的，要推五代时期邺都青莲寺僧大愚向荆浩索画的诗了：</p>
+<p>六幅故牢建，知君笔意踪；</p>
+<p>不求干涧水，止要两株松。</p>
+<p>树下留磐石，天边纵远峰；</p>
+<p>近岩幽湿处，惟借墨烟浓。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/K2BDXcWJk0CDqjaMKzU0kZn2uuGXvY7qPjuiaeDriatsFRDb7U7yNmriaHH8QT66ne1tl7ZIOfia8eia6AF8Ab6TC3g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">荆浩《 匡庐图 》 </center>
+
+<p>荆浩画好画后也做了一诗回答他：</p>
+<p>恣意纵横扫，峰峦次第成；</p>
+<p>笔尖寒树瘦，墨淡野烟清。</p>
+<p>崖石喷泉窄，山根到水平；</p>
+<p>禅房时一展，兼称可空情。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/K2BDXcWJk0CDqjaMKzU0kZn2uuGXvY7qWQ7aoj5fVKtpBBbpVcJQR6jiabW6l6N48XSsktPbtiaOd4HNSxUQxGuw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">荆浩 《山水中堂》</center>
+
+<p>这首诗的含义却不同了，它的意思是偏重笔情墨趣一方面的。可知有了意境也需要笔墨来表现和加工。没有笔墨的情趣，尽管你有好的意境也很难具有逗人爱恋的魅力。</p>
+<h2 id="【唐代】"><a href="#【唐代】" class="headerlink" title="【唐代】"></a>【唐代】</h2><hr>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/ibDHqXib5NaUDWIbX05bB7rUiatSYtudrPoBD8zTISjEermFc7ibp7JIQrRp9ZKric4iayfMCEqBxKmNonpjgymN5nlQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">王维《江干雪霁图卷》（局部）</center>
+
+<p>在中唐，王维用破墨表现山水，追求一种幽静、淡泊、空寂、玄远的意境，后被推崇为“文人画鼻祖”。他对中国画的意境追求立足于诗画的结合上，以诗入画。他的诗画之境是“诗中有画，画中有诗”的“禅宗之境”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uL96DekYqYXQmbRTib5ShAQBkr3d2AxVDp8rFN5pDD9FJ4qmn3k5K79aYENzHT2kluzNfbA6RPeicnqiag55I99gg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/uL96DekYqYXQmbRTib5ShAQBkr3d2AxVDUuyvIr6C2OFsy7vpiaibLGBY5MrOpDywEyuVWrbJWtqynddMEyTxz4VQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/CXMdsAYQfLzPnTukuD4uYlqKA828Ty4FLoAcXZia1swZzCOSzS5HIJqOFr1aZW2HGDyB6IWWyGTuS0RMHm2aSFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">《辋川图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/YFggE0Dib9KkSovAMedKAbwBtxq9MjXoCEsl7TR5yh7DxJGJnGtEUjmGKf5ZQjGp56P7rMt2p8KicOb87tRIZz3g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">王维《雪溪图》</center>
+
+
+
+<h2 id="【宋代】"><a href="#【宋代】" class="headerlink" title="【宋代】"></a>【宋代】</h2><hr>
+<p>到了宋代，王维的诗画结合在苏轼那里又进一步得到发挥。苏轼提倡天真自然，对画论的贡献很大。他与同时代的黄庭坚都和禅师交往甚密，其观点也与禅宗“本自天然不雕琢”的观点极为契合。 </p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/ibDHqXib5NaUCQUgqzyTkhg1aKf2HLRH2CgMmuoDY6GDWv7IjImH72a0q3euupxPmibKrCxQgVJ0Ax0OrEKuBwo1w/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">苏轼《枯木怪石图》</center>
+
+<p>宋代马远的《寒江独钓图》：浩渺大江中漂来一叶扁舟，一人在船头垂钓，巧妙地以大片空白突出了江水的辽阔和钓者的悠闲。画中小舟与大江的对照，虚与实的衬托，使人感到一种“清空寥旷，烟波浩渺”的意境。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz5icpHrBvMwHlicKTVdb8VlQmoL0icUImCDM3rg7nRN3BFkOQvHDS3Yj8ATTI2VLTwraiamcyc2JydpcQ/640.jpeg?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《寒江独钓》</center>
+
+<p>马远的其他山水画，同样也无不在将中国画的意境表现到底。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/mXch5sVTOyAwiao7a3vyj00JM2QWuFMl2ABueVibVibpmaYP7EwU73SVVW7Xw6aemz4K6mJZOMLGvk9ib1b8CaKvdg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《踏歌图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jKHOfPO3nyNF2RibkH4RLWlQeicWmBqicM4ykl86IG4WhotDIRyABBQSsDsvemgwWhk3eBEj8aywRQbgkbdwBiaofw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《对月图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jKHOfPO3nyM5F7bp67bMR0bWzQee0UjzhBARsiabL6VibPF4wyHicAVCiauUJqUBMOqAJhe5e7Oz6ApIrD5X3Q2DdQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《松月图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jKHOfPO3nyM5F7bp67bMR0bWzQee0UjzdS1tWxlNiajQcc4ibuBtDsbHf42Rib4WibN6ibQm6VlU2vA2ByTmcT6fbEA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《举杯玩月图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jKHOfPO3nyM5F7bp67bMR0bWzQee0UjzZbrcmNg4LMzANPyWxgticNX8o3tia1U9ZJMliaXCeMAU6jtGChicvYLBaw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/jKHOfPO3nyM5F7bp67bMR0bWzQee0UjzQ5aJKMDOfXg7JiaEibrAibnxwj3iaUFpNkUyD6RqKHnpj7kxC4j8TSuRdg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">马远《梅花书屋》</center>
+
+<p>宋代郭熙的“画是有形诗”和明代董其昌所谓画中词意等论说，尽管历来对意境从字面上有不同的解释，但从实际作品的分析和感受上来说，一般都是把意境指作具有空间境象。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/mXch5sVTOyAwiao7a3vyj00JM2QWuFMl2f3GpkXuLo4GoCfvh17wCuuIxiaujZ4BsLh4SichDZUOticyWDbALaETvw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">郭熙《窠石平远图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/DFPhBibrnpoPrnpOpRqknCVNeFuetbibRmh8ow0lcXKWPb1fHRqhuKt0snmBDl8YxUqNiaiciamsBxIxpZxQVRSRRPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">北宋 郭熙《早春图》</center>
+
+<p>范宽深入山川，长居华山、终南山等山林之中，并对景造意，将崇山峻岭的雄强气势和老树密林的荒寒景色生动地现于笔下，创造了中国山水画的高峰。其山水画构图的复杂与高妙、意境的深远与神秘、山水的气魄与气势、通篇的气韵、用笔的古朴与骨气均达到了后人很难超越的境界。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/DFPhBibrnpoPrnpOpRqknCVNeFuetbibRmjdjq0XB8KAqbLWggVca0fibVP9T1eOrs05ibOBgtQpnFI2UgcSlX7Sng/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">北宋 范宽《溪山行旅图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/5YmuBIagR7Gb9DGLUdPw899akA4IeTD8tfia0h6KsUcCDMC7opcbFdiaibwq93yCULsRUMTYmiaqjbVbNPJk3cgyBg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">北宋 范宽《临流独坐图》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/5YmuBIagR7Gb9DGLUdPw899akA4IeTD8TmBq0nt9PUxC9fzk2kTqG1iabCy8nWCvhl9FUcyc61ywiaTbibxCs4uTQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">北宋 范宽《雪景寒林图》</center>
+
+
+
+<h2 id="【元代】"><a href="#【元代】" class="headerlink" title="【元代】"></a>【元代】</h2><hr>
+<p>到了元代，以“元四家”为代表的重写心、写意，强调自我、超脱的画风，体现了另一种中国画意境。突出了山水画的文学趣味，使诗、书、画有意识地融为一体，各具风貌，开创了一代新风，形成了以“文人画”为主流的山水画派。</p>
+<p><strong>黄公望</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wqJvGU1FzfUm2bhhJ1tqbK9m7dubuibrgYJuWxic38ZzveU45YSIBdbEg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 黄公望 丹崖玉树图 故宫博物院藏</center>
+
+
+
+<p>元四家中，以黄公望年龄最长，并直接聆受赵孟頫的教导，又开始寄画以乐的门径，故列为四家之冠。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wsVT01BtIibvAH0zhsJRUunh6SCBqXuLqbO0MhcQX77v4eJ2Yok7IqtA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 黄公望 九峰雪霁图 故宫博物院藏</center>
+
+
+
+<p>一度曾以卖卜为生。后参加了主张儒、释、道三教合一的全真教，更加看破红尘。长期浪迹山川，经常观察山水的朝暮变幻的奇丽景色，得之于心，运之于笔。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07w8jKAiaPuSnzED9urQd6BlgRqNqG4ERaQyaD0Xv88r0ScL9n6oj2kfmg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 黄公望 天池石壁图 故宫博物院藏</center>
+
+<p>擅于以清润的笔墨、简远的意境，把浩渺连绵的江南山水表现得淋漓尽致，达到“山川浑厚，草木华滋”的境界。</p>
+<p><strong>吴镇</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wibibPCDONvfuicOiaiaStfNaD5hajAO5RBfGvHQgeJPFH3P6gicfe1xSAmhg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">吴镇 溪山高隐图</center>
+
+
+
+<p>吴镇性孤介，一生清贫，曾在村塾教书、并卖卜于武林等地。</p>
+<p>但他博学多识，工书法，善草书，能诗文，绘画善水墨山水画，师法巨然，用长披麻皴，兼以斧劈，笔力劲爽，墨气淋漓，写出山川林木峥嵘繁茂之景，改变了巨然“淡墨轻岚”的风格。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wasBydoxPnlRaZ9iaJE09BOdic338JTJZXXu69wiawuEP3ecu0CMQbibQRA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 吴镇 渔父图轴</center>
+
+<p>他的画善用老笔湿墨，笔力雄劲，墨气沉厚，题咏诗文较多。画墨竹笔意豪宕，生意满纸；画古木、怪石挺劲有力。明清两代书画家均受他很大影响。</p>
+<p><strong>倪瓒</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/oaMPeUUIOkGRYDxIS1l3gpDMaHABbEOs6VytllAAmbzsoibmJ2oJ9ofcADBKE7AdQGL3yE7iaC0Da6v8mK9CPpuw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">倪瓒《渔庄秋霁图》</center>
+
+<p>倪瓒家富，博学好古，四方名士常至其门。元顺帝至正初忽散尽家财，浪迹太湖一带。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wI4f67fWGXmOBrdg4V0gibyTWmY5aeFdRIqnUd8FhfmBLTTBNHNFO3TA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 倪瓒 《虞山林壑图》</center>
+
+<p>倪瓒擅画山水、墨竹，师法董源，受赵孟頫影响。早年画风清润，晚年变法，平淡天真。疏林坡岸，幽秀旷逸，笔简意远，惜墨如金。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/0jJYU03pjYbDgJ1IBXpib6q7HuH271JQd0M8CIWKkOGGic1HyB1hUSJJ0hq2V0DzNW0hPaReEdSc6Q37qbeAZV1A/640.jpeg?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">元 倪瓒 《秋亭嘉树图》</center>
+
+<p>以侧锋干笔作皴，名为“折带皴”。墨竹偃仰有姿，寥寥数笔，逸气横生。书法从隶入，有晋人风度，亦擅诗文。倪瓒崇尚淡逸的生活，由此形成了天真幽淡的画风。</p>
+<p><strong>王蒙</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wAlibBbLcn7U2mZvTsYDGpXaRzmicejD8XpicTKibm7PnMF28vYGYTNnHYg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">夏山高隐图 故宫博物院藏 </center>
+
+<p>王蒙，元四家中最年轻者。于元朝末年曾入仕，后来弃官隐居于今浙江馀杭黄鹤山达30年，自号黄鹤山樵。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lV7oE7TTlz4mficf91QeBUGnsXX48d07wkuickPSAHZCtNMmEOovRXZ9NZN55mp5FMqFWrbTWMOiasF4UWCgIvybQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">葛稚川移居图 故宫博物院藏</center>
+
+<p>王蒙自幼受外祖父赵孟頫的影响，喜好绘画，后来得到黄公望的指教，又常与倪瓒等人切磋，对山水画有独到的创新，发明了解索皴画法，用解索皴和渴墨点苔，表现林峦郁茂苍茫的气氛，为他的独到处。</p>
+<h2 id="【明、清】"><a href="#【明、清】" class="headerlink" title="【明、清】"></a>【明、清】</h2><hr>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/2viaV1lTFIy9bR3WErL9ysr6GOBCJb9Q5DfqODyBoJR7fJoqcXE8juUb4CdgbVyGuHsAls3QTY4EdMLgEQIsmNA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">清 四僧 禅意山水</center>
+
+<p> “明四家”和“清四僧”等也都受到很大影响，因而，诗画结合的追求最终也成了文人画所追求的一个突出意境。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/K2BDXcWJk0C4pydXurO4FqSr0euIDuvm2p9dRAwSOZ07aen4Ykj9ZP2L5QSiaFC03uDB9w0LibQ1eaiacywhBJ1OQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">桃源胜境</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Tu7nO3LmMRpweGCHPw0TVb7JEtiae4mt2K5X28M5rfZW89v1PTGCqbvG0KTbT4eicztwiaSSgGLXuGL5G9Cbj1Jbw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">文徵明 秋江饯别图 立轴</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yxUZRO7DrWMMEicIciaze2m8wjgndCfpHZ7yBRb4R69YkeHG1efibyYBUb9bsG0DjJYeVXTCFibXeP9vic6a6DODSaQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">唐寅《落霞孤鹜》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz/K2BDXcWJk0BtAOgnEwTgfFDxtVxwKICiaM5tb4Cric2oRYl300ey8twPDWicUHfAQhAqUddr9UBmKqEfGR9zZtFpQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">仇英 山水</center>
+
+<p>清“四僧”对于水墨诗境禅意的探究，将写意画融诗、书、印为一体，成为综合性意象艺术，使其在有限的笔墨中蕴藏着无限的精神含量，写意绘画以身心俱遗，物我两忘，天人合一为最高境界，深刻体现了中国儒、释、道哲学的精华。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/X4tekoQwTmVUl4sdAIHkYwmVbxTnpwHL4IJjZLYjNh98oX4Ad7KFhtibiagEEM5JIS9JTnlOlpVftFcbQvNPdLWw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">八大山人《荷花水鸟图》轴</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/X4tekoQwTmVUl4sdAIHkYwmVbxTnpwHLD97CeF5seoRJM2tWnCnrKkaM12WlVqTz9gF1mQAVEichjceuHKVD4nA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">弘仁《墨梅图》轴</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lNSbZiaerEt7Czia5S5picxzrkf63fNtypgV7695PaVB2ib5SRUIMrq1wCo76cPJ3Ad4wUlr0ic63qxyC79yHjicictkg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">清 髡残 《人物图页》</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/lNSbZiaerEt7Czia5S5picxzrkf63fNtypgA58g8YFC2ODFcrgBLibiczr49vdjica4YiaROzW1dNDdQwiavIlIVOSCCTg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">石涛 《罗汉百开册页》（部分）</center>
+
+<p>清朝蒙古族画家、理论家布颜图所说的境界是：“因地成形，移步换影，千奇万状”。在他看来，意境也就是如何处理峰峦、岛屿、眉黛遥岭、巨浪洪涛、平溪浅濑、茂树浓阴、疏林淡影等等画面。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/nEhrLYrvloQ2rLu9eic8ljicBmqHD9luvruOVOzxfRIkQtRhOiaTxDXAg57xrM7Pk5lZ9PwdYAGSrmU9O5W1ia78Xg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">清 布颜图 《山口捕渔》</center>
+
+<p>有的画家，即使在一幅画中，对于空间境象没有给以实际的描绘，却能使人引起间接的对境象丰富的联想，也能产生意境。如清代郑板桥所画的有些墨竹，虽然只有疏疏几枝，却叫人联想起一片雨后清新的境象。又如于非的“玉兰黄鹂”从那石青的底色上，会让人联想起广阔的境象，而有东方欲曙，黄莺相唤之感。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Tu7nO3LmMRpweGCHPw0TVb7JEtiae4mt2giaPVYRkycJaN3R9AJUHBqpzMLf1nueMSFAbYqPAJSGULQCiasMF67Lw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">郑板桥《墨竹》</center>
+
+
+
+<h2 id="【近现代】"><a href="#【近现代】" class="headerlink" title="【近现代】"></a>【近现代】</h2><hr>
+<p>意境更多的表达方式在作品的空间上，大家都十分熟悉的近现代画家傅抱石、关山月合作的“江山如此多娇”巨幅山水画。画中那层迭的雪山，茫茫的云海，碧绿的苍松，飞流的山泉，闪耀的红霞和初升的旭日，使人体会到有一种欣欣向上、气势雄壮的意境。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/yxUZRO7DrWMMEicIciaze2m8wjgndCfpHZM8S1icyia1vh8Fd9qiceiattf9xusa7kkyiaNrKtKOfyyApqqq7dkwTdwCw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">关山月、傅抱石《江山如此多娇》</center>
+
+<p>还有留白这一技法，在中国画的意境中也体现地淋漓尽致。齐白石画虾，虾透明，无水，满纸水汽淋漓；徐悲鸿画马，马蹄飞驰，满屏风的速度。这都是中国画留白的效果，说了，但不说透，任你去遐想。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/07w0icu0EIibicjwzlqkmQy5PzOj0BVasIxw0abhYP6Xgia9cT6dvLiafcGGqby5rD1t5DKHiaDjkFoic0F9BHEuQWNFw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 齐白石 虾</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/07w0icu0EIibicjwzlqkmQy5PzOj0BVasIxumNaVgm4NaxibXXQKmwcgnBCKBPzJISD1es1ouAiaTX75upF2yibkYONg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 徐悲鸿 马</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/Tu7nO3LmMRpweGCHPw0TVb7JEtiae4mt2XaiclnGybb8fFoCah5icg2ialOczIF4V7Y05Uj3ibkRUnn8zVantXIIxPg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 吴作人 金鱼</center>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/07w0icu0EIibicjwzlqkmQy5PzOj0BVasIxbuGO5ibelOawYIxCNvCDhlGlBNFyjEN19LrTrRxWKxiaX1DbFxYQ1NFg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<center style="color: #999; padding: 2px;font-size:0.8em">▲ 吴冠中</center>
+
+<p>中国画的意境不仅只是情与景的融合，而且也是艺术家的思想、观念、理想和客观景物的融合。</p>
+<p>在欣赏中国画的时候，我们结合画家的个人经历，用心品味，这样才能进入画中世界，去感受画中所描绘的一景一物，去感受画家内心深处的情感世界，去领略人生之奥妙，这也是中国画意境的魅力所在！ </p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E7%BB%98%E7%94%BB/"># 绘画</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d038a45f/">34. 中国艺术意境的最高层次是禅境（李泽厚）</a>
+            
+            
+            <a class="next" rel="next" href="/6ddc6ff1/">32. 中国画的本质、特性、境界和欣赏</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d038a45f/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/6ddc6ff1/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

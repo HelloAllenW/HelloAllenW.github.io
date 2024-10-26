@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>国际化插件i18n和vuex的混合使用 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">国际化插件i18n和vuex的混合使用</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十一月 9, 2020&nbsp;&nbsp;23:14:59</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十一月 9, 2020
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/Vue/">Vue </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.3k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">6 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h1><p>前段时间测试对于项目切换中英文后页面会闪一下标为bug，想了想肯定是前任开发者在切换中英文后对页面进行了强制刷新。查看源码发现果不其然，并且前任仅将中英文状态存储在cookie中，然后在需要的组件中通过cookie获取中英文状态。发现接口都是同时有返回中英文，这样完全可以通过vuex全局状态管理中英文状态，达到在一处修改了中英文后全局自动修改。</p>
+<blockquote>
+<p>本文以 vue+ElementUI 并且以和vue组合的 vue-i18n 为例</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a>准备阶段</h1><p><strong>1、安装相关插件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 安装 vue-i18n</span><br><span class="line">npm install --save vue-i18n</span><br><span class="line">// 安装 js-cookie</span><br><span class="line">npm install --save js-cookie</span><br><span class="line">// 安装 vuex</span><br><span class="line">npm install --save vuex</span><br></pre></td></tr></table></figure>
+<p><strong>2、目录结构</strong><br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL0hlbGxvQWxsZW5XL0Jsb2dBc3NldHNAbGF0ZXN0L2ltYWdlcy8yMDIwLzA2L2JnNi01LTYucG5n?x-oss-process=image/format,png" alt="目录结构"></p>
+<h1 id="国际化部分"><a href="#国际化部分" class="headerlink" title="国际化部分"></a>国际化部分</h1><h2 id="i18n-封装"><a href="#i18n-封装" class="headerlink" title="i18n 封装"></a>i18n 封装</h2><blockquote>
+<p>将i18n的引入与注册实例封装在了./langs/index.js中</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import VueI18n from &#x27;vue-i18n&#x27;</span><br><span class="line">import Cookies from &#x27;js-cookie&#x27;</span><br><span class="line">import elementEnLocale from &#x27;element-ui/lib/locale/lang/en&#x27;</span><br><span class="line">import elementZhLocale from &#x27;element-ui/lib/locale/lang/zh-CN&#x27;</span><br><span class="line">import enLocale from &#x27;./en&#x27;</span><br><span class="line">import zhLocale from &#x27;./zh&#x27;</span><br><span class="line"></span><br><span class="line">Vue.use(VueI18n)</span><br><span class="line"></span><br><span class="line">const messages = &#123;</span><br><span class="line">  en: &#123;</span><br><span class="line">    ...enLocale,</span><br><span class="line">    ...elementEnLocale</span><br><span class="line">  &#125;,</span><br><span class="line">  zh: &#123;</span><br><span class="line">    ...zhLocale,</span><br><span class="line">    ...elementZhLocale</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">export function getLanguage() &#123;</span><br><span class="line">  const chooseLanguage = Cookies.get(&#x27;language&#x27;)</span><br><span class="line">  if (chooseLanguage) return chooseLanguage</span><br><span class="line"></span><br><span class="line">  // if has not choose language</span><br><span class="line">  const language = (navigator.language || navigator.browserLanguage).toLowerCase()</span><br><span class="line">  const locales = Object.keys(messages)</span><br><span class="line">  for (const locale of locales) &#123;</span><br><span class="line">    if (language.indexOf(locale) &gt; -1) &#123;</span><br><span class="line">      return locale</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return &#x27;en&#x27;</span><br><span class="line">&#125;</span><br><span class="line">const i18n = new VueI18n(&#123;</span><br><span class="line">  locale: getLanguage(),</span><br><span class="line">  // set locale messages</span><br><span class="line">  messages</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default i18n</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="语言配置样例"><a href="#语言配置样例" class="headerlink" title="语言配置样例"></a>语言配置样例</h2><blockquote>
+<p>en.js</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  settings: &#123;</span><br><span class="line">    title: &#x27;Page style setting&#x27;,</span><br><span class="line">    theme: &#x27;Theme Color&#x27;,</span><br><span class="line">    tagsView: &#x27;Open Tags-View&#x27;,</span><br><span class="line">    fixedHeader: &#x27;Fixed Header&#x27;,</span><br><span class="line">    sidebarLogo: &#x27;Sidebar Logo&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>zh.js</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">  settings: &#123;</span><br><span class="line">    title: &#x27;系统布局配置&#x27;,</span><br><span class="line">    theme: &#x27;主题色&#x27;,</span><br><span class="line">    tagsView: &#x27;开启 Tags-View&#x27;,</span><br><span class="line">    fixedHeader: &#x27;固定 Header&#x27;,</span><br><span class="line">    sidebarLogo: &#x27;侧边栏 Logo&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><blockquote>
+<p>通过vuex实现国际化状态切换状态管理功能</p>
+</blockquote>
+<h2 id="index"><a href="#index" class="headerlink" title="index"></a>index</h2><blockquote>
+<p>./store/index.js</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import Vuex from &#x27;vuex&#x27;</span><br><span class="line">import getters from &#x27;./getters&#x27;</span><br><span class="line">// 使用vuex</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">// 这种方式很好的将modules中的所有文件全部导出，这样以后修改modules不用再在此处进行添加导出</span><br><span class="line">const modulesFiles = require.context(&#x27;./modules&#x27;, true, /\.js$/)</span><br><span class="line">const modules = modulesFiles.keys().reduce((modules, modulePath) =&gt; &#123;</span><br><span class="line">  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, &#x27;$1&#x27;)</span><br><span class="line">  const value = modulesFiles(modulePath)</span><br><span class="line">  modules[moduleName] = value.default</span><br><span class="line">  return modules</span><br><span class="line">&#125;, &#123;&#125;)</span><br><span class="line"></span><br><span class="line">// 创建vuex实例</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">  modules,</span><br><span class="line">  getters</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default store</span><br></pre></td></tr></table></figure>
+<h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><blockquote>
+<p>./store/getters.js</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 监听 vuex 中state下language的改变</span><br><span class="line">// 外部通过 this.$store.getters.language 调用</span><br><span class="line">const getters = &#123;</span><br><span class="line">  language: state =&gt; state.app.language,</span><br><span class="line">&#125;</span><br><span class="line">export default getters</span><br></pre></td></tr></table></figure>
+<h2 id="app-js"><a href="#app-js" class="headerlink" title="app.js"></a>app.js</h2><blockquote>
+<p>./store/modules/app.js<br>单独建立一个app.js的目的是以后如果需要扩展其他的全局状态，可以封装在其他独立的js中</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// 获取当前国际化状态封装在了上面的./langs/index.js中，相当于是初始化国际化</span><br><span class="line">import &#123; getLanguage &#125; from &#x27;@/i18n/langs/index&#x27;</span><br><span class="line">import Cookies from &#x27;js-cookie&#x27;</span><br><span class="line">// 数据，外部可以通过 this.$store.state.language 调用</span><br><span class="line">const state = &#123;</span><br><span class="line">  language: getLanguage()</span><br><span class="line">&#125;</span><br><span class="line">// 外部可以通过提交mutation来修改state中的值</span><br><span class="line">// this.$store.commit(&quot;SET_LANGUAGE&quot;)</span><br><span class="line">const mutations = &#123;</span><br><span class="line">  SET_LANGUAGE: (state, language) =&gt; &#123;</span><br><span class="line">    // 修改state并将其保存在Cookies中，这样用户下次打开仍然是上次选择的国际化状态</span><br><span class="line">    state.language = language</span><br><span class="line">    Cookies.set(&#x27;language&#x27;, language)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">// 官方推荐我们去提交一个actions，在actions中提交mutation再去修改state</span><br><span class="line">// this.$store.dispatch(&quot;setLanguage&quot;)</span><br><span class="line">const actions = &#123;</span><br><span class="line">  setLanguage(&#123; commit &#125;, language) &#123;</span><br><span class="line">    commit(&#x27;SET_LANGUAGE&#x27;, language)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">export default &#123;</span><br><span class="line">  namespaced: true,</span><br><span class="line">  state,</span><br><span class="line">  mutations,</span><br><span class="line">  actions</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="main"><a href="#main" class="headerlink" title="main"></a>main</h1><blockquote>
+<p>main.js配置导入</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import Vue from &#x27;vue&#x27;</span><br><span class="line">import App from &#x27;./App&#x27;</span><br><span class="line">import router from &#x27;./router&#x27;</span><br><span class="line">import ElementUI from &#x27;element-ui&#x27;</span><br><span class="line">import &#x27;element-ui/lib/theme-chalk/index.css&#x27;</span><br><span class="line">// 导入封装的i18n配置</span><br><span class="line">import i18n from &#x27;./i18n/langs&#x27;;</span><br><span class="line">import Cookies from &#x27;js-cookie&#x27;</span><br><span class="line">import store from &#x27;./store&#x27;</span><br><span class="line"></span><br><span class="line">// 应用</span><br><span class="line">Vue.use(ElementUI, &#123;</span><br><span class="line">  i18n: (key, value) =&gt; i18n.t(key, value)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 将i18n、store注入到vue实例中</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &#x27;#app&#x27;,</span><br><span class="line">  router,</span><br><span class="line">  i18n,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>1、切换语言，向vuex的actions提交改变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-dropdown trigger=&quot;click&quot; class=&quot;international&quot; @command=&quot;handleSetLanguage&quot;&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;svg-icon class-name=&quot;international-icon&quot; icon-class=&quot;language&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;el-dropdown-menu slot=&quot;dropdown&quot;&gt;</span><br><span class="line">      &lt;el-dropdown-item :disabled=&quot;language===&#x27;zh&#x27;&quot; command=&quot;zh&quot;&gt;</span><br><span class="line">        中文</span><br><span class="line">      &lt;/el-dropdown-item&gt;</span><br><span class="line">      &lt;el-dropdown-item :disabled=&quot;language===&#x27;en&#x27;&quot; command=&quot;en&quot;&gt;</span><br><span class="line">        English</span><br><span class="line">      &lt;/el-dropdown-item&gt;</span><br><span class="line">    &lt;/el-dropdown-menu&gt;</span><br><span class="line">  &lt;/el-dropdown&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    language() &#123;</span><br><span class="line">      return this.$store.getters.language</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    handleSetLanguage(lang) &#123;</span><br><span class="line">      // 设置i18n，以便后面通过$t(&#x27;settings.title&#x27;)使用</span><br><span class="line">      this.$i18n.locale = lang</span><br><span class="line">      // 向vuex提交修改后的国际化，以便后面获取</span><br><span class="line">      this.$store.dispatch(&#x27;app/setLanguage&#x27;, lang)</span><br><span class="line">      this.$message(&#123;</span><br><span class="line">        message: &#x27;Switch Language Success&#x27;,</span><br><span class="line">        type: &#x27;success&#x27;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、在需要的组件中使用与获取国际化状态</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// html中使用</span><br><span class="line">&#123;&#123; $t(&#x27;settings.title&#x27;) &#125;&#125;</span><br><span class="line"></span><br><span class="line">// js中使用</span><br><span class="line">$t(&#x27;settings.title&#x27;)</span><br><span class="line"></span><br><span class="line">// 通过computed获取vuex中的language状态，这样其他地方修改后这边可以监测到，并同步修改DOM中的值</span><br><span class="line">computed: &#123;</span><br><span class="line">    language() &#123;</span><br><span class="line">      return this.$store.getters.language</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Vue/"># Vue</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/bba3ef50/">前端神器：BrowserSync & live-server</a>
+            
+            
+            <a class="next" rel="next" href="/98fe42d6/">拦截Element-UI中el-tabs组件的切换</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/bba3ef50/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/98fe42d6/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

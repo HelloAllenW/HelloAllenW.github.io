@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Less完整指南 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Less完整指南</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2022&nbsp;&nbsp;23:17:24</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">17 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在 Web 发展的这几年， 为了让 CSS 富有逻辑性，短板不那么严重，涌现出了 一些神奇的预处理语言。 它们让 CSS 彻底变成一门 可以使用 变量 、循环 、继承 、自定义方法等多种特性的标记语言，逻辑性得以大大增强。</p>
+<h1 id="一、预处理语言的诞生"><a href="#一、预处理语言的诞生" class="headerlink" title="一、预处理语言的诞生"></a>一、预处理语言的诞生</h1><p>其中 就我所知的有三门语言：Sass、Less 、Stylus 。</p>
+<ol>
+<li>Sass 诞生于 2007 年，Ruby 编写，其语法功能都十分全面，可以说 它完全把 CSS 变成了一门编程语言。另外 在国内外都很受欢迎，并且它的项目团队很是强大 ，是一款十分优秀的预处理语言。</li>
+<li>Less 诞生于 2009 年，受Sass的影响创建的一个开源项目。 它扩充了 CSS 语言，增加了诸如变量、混合（mixin）、函数等功能，让 CSS 更易维护、方便制作主题、扩充（引用于官网）。</li>
+<li>Stylus 诞生于 2010 年，来自 Node.js 社区，语法功能也和 Sass 不相伯仲，是一门十分独特的创新型语言。</li>
+</ol>
+<h1 id="二、选择预处理语言"><a href="#二、选择预处理语言" class="headerlink" title="二、选择预处理语言"></a>二、选择预处理语言</h1><p>这是一个十分纠结的问题。</p>
+<ol>
+<li>在网上讨论看来，Sass 与 Stylus 相比于 Less 功能更为丰富，但对于学习成本以及适应时间 ，Less 稍胜一筹，这也是我选择 Less 的原因。</li>
+<li>Less 没有去掉任何 CSS 的功能，而是在现有的语法上，增添了许多额外的功能特性，所以学习 Less 是一件非常舒服的事情。</li>
+</ol>
+<p>如果你之前没有接触过预处理语言，纠结应该学哪一个，不如先看看 下面 Less 的介绍，我相信你会爱上它的。</p>
+<h1 id="三、准备工作"><a href="#三、准备工作" class="headerlink" title="三、准备工作"></a>三、准备工作</h1><h2 id="1-引入"><a href="#1-引入" class="headerlink" title="1. 引入"></a>1. 引入</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet/less&quot; href=&quot;style.less&quot;&gt;</span><br><span class="line">&lt;script src=&quot;less.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，link 标签一定要在 Less.js 之前引入，并且 link 标签的 rel 属性要设置为<code>stylesheet/less</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet/less&quot; href=&quot;style.less&quot;&gt;</span><br><span class="line">&lt;script src=&quot;less.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-npm安装"><a href="#2-npm安装" class="headerlink" title="2. npm安装"></a>2. npm安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g less</span><br></pre></td></tr></table></figure>
+
+<p>如果你也是 Webpack 的使用者，还需要配合 less-loader 进行处理</p>
+<h1 id="四、正文开始"><a href="#四、正文开始" class="headerlink" title="四、正文开始"></a>四、正文开始</h1><h2 id="1-变量"><a href="#1-变量" class="headerlink" title="1. 变量"></a>1. 变量</h2><p>我们常常在 CSS 中 看到同一个值重复多次，这样难易于代码维护。 理想状态，应是下面这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const bgColor=&quot;skyblue&quot;;</span><br><span class="line"></span><br><span class="line">$(&quot;.post-content&quot;).css(&quot;background-color&quot;,bgColor);</span><br><span class="line">$(&quot;#wrap&quot;).css(&quot;background-color&quot;,bgColor);</span><br><span class="line">$(&quot;.arctive&quot;).css(&quot;background-color&quot;,bgColor);</span><br></pre></td></tr></table></figure>
+
+<p>只要我们修改 bgColor这一个变量， 整个页面的背景颜色都会随之改变。</p>
+<p>而 Less 中的变量十分强大，可化万物，值得一提的是，其变量是常量 ，所以只能定义一次，不能重复使用。</p>
+<h3 id="（1）值变量"><a href="#（1）值变量" class="headerlink" title="（1）值变量"></a>（1）值变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@color: #999;</span><br><span class="line">@bgColor: skyblue; // 不要添加引号</span><br><span class="line">@width: 50%;</span><br><span class="line"></span><br><span class="line">#wrap &#123;</span><br><span class="line">  color: @color;</span><br><span class="line">  background: @bgColor;</span><br><span class="line">  width: @width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">#wrap &#123;</span><br><span class="line">  color: #999;</span><br><span class="line">  background: skyblue;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以 @ 开头 定义变量，并且使用时 直接 键入 @名称。</p>
+<p>在平时工作中，我们就可以把 常用的变量 封装到一个文件中，这样利于代码组织维护。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@lightPrimaryColor: #c5cae9;</span><br><span class="line">@textPrimaryColor: #fff;</span><br><span class="line">@accentColor: rgb(99, 137, 185);</span><br><span class="line">@primaryTextColor: #646464;</span><br><span class="line">@secondaryTextColor: #000;</span><br><span class="line">@dividerColor: #b6b6b6;</span><br><span class="line">@borderColor: #dadada;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）选择器变量：让选择器成为动态"><a href="#（2）选择器变量：让选择器成为动态" class="headerlink" title="（2）选择器变量：让选择器成为动态"></a>（2）选择器变量：让选择器成为动态</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@mySelector: #wrap;</span><br><span class="line">@Wrap: wrap;</span><br><span class="line"></span><br><span class="line">@&#123;mySelector&#125;&#123; // 变量名 必须使用大括号包裹</span><br><span class="line">  color: #999;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line">.@&#123;Wrap&#125;&#123;</span><br><span class="line">  color:#ccc;</span><br><span class="line">&#125;</span><br><span class="line">#@&#123;Wrap&#125;&#123;</span><br><span class="line">  color:#666;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap&#123;</span><br><span class="line">  color: #999;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line">.wrap&#123;</span><br><span class="line">  color:#ccc;</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  color:#666;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）属性变量-可减少代码书写量"><a href="#（3）属性变量-可减少代码书写量" class="headerlink" title="（3）属性变量: 可减少代码书写量"></a>（3）属性变量: 可减少代码书写量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@borderStyle: border-style;</span><br><span class="line">@Soild:solid;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  @&#123;borderStyle&#125;: @Soild;//变量名 必须使用大括号包裹</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap&#123;</span><br><span class="line">  border-style:solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）url变量"><a href="#（4）url变量" class="headerlink" title="（4）url变量"></a>（4）url变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@images: &quot;../img&quot;; // 需要加引号</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(&quot;@&#123;images&#125;/dog.png&quot;);//变量名 必须使用大括号包裹</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">body &#123;</span><br><span class="line">  background: url(&quot;../img/dog.png&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）声明变量"><a href="#（5）声明变量" class="headerlink" title="（5）声明变量"></a>（5）声明变量</h3><ul>
+<li>定义声明变量: @name: { 属性: 值 ;};</li>
+<li>使用：@name();</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@background: &#123; background:red; &#125;;</span><br><span class="line">#main &#123;</span><br><span class="line">    @background();</span><br><span class="line">&#125;</span><br><span class="line">@Rules: &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    border: solid 1px red;</span><br><span class="line">&#125;;</span><br><span class="line">#con &#123;</span><br><span class="line">  @Rules();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  background:red;</span><br><span class="line">&#125;</span><br><span class="line">#con&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 200px;</span><br><span class="line">  border: solid 1px red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）变量运算"><a href="#（6）变量运算" class="headerlink" title="（6）变量运算"></a>（6）变量运算</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@width:300px;</span><br><span class="line">@color:#222;</span><br><span class="line"></span><br><span class="line">#wrap &#123;</span><br><span class="line">  width:@width-20; // 加减法时，以第一个数据的单位为准</span><br><span class="line">  height:@width-20*5; // 乘除法时，注意单位要统一</span><br><span class="line">  margin:(@width-20)*5; </span><br><span class="line">  color:@color*2;</span><br><span class="line">  background-color:@color + #111;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap&#123;</span><br><span class="line">  width:280px;</span><br><span class="line">  height:200px;</span><br><span class="line">  margin:1400px;</span><br><span class="line">  color:#444;</span><br><span class="line">  background-color:#333;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）变量作用域"><a href="#（7）变量作用域" class="headerlink" title="（7）变量作用域"></a>（7）变量作用域</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@var: @a;</span><br><span class="line">@a: 100%;</span><br><span class="line"></span><br><span class="line">#wrap &#123; // 就近原则</span><br><span class="line">  width: @var;</span><br><span class="line">  @a: 9%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap &#123;</span><br><span class="line">  width: 9%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（8）用变量去定义变量"><a href="#（8）用变量去定义变量" class="headerlink" title="（8）用变量去定义变量"></a>（8）用变量去定义变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@fnord:  &quot;I am fnord.&quot;;</span><br><span class="line">@var:    &quot;fnord&quot;;</span><br><span class="line"></span><br><span class="line">#wrap::after&#123;</span><br><span class="line">  content: @@var; // 将@var替换为其值 content:@fnord;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap::after&#123;</span><br><span class="line">  content: &quot;I am fnord.&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、嵌套"><a href="#2、嵌套" class="headerlink" title="2、嵌套"></a>2、嵌套</h2><h3 id="（1）-amp-：代表上一层选择器的名字"><a href="#（1）-amp-：代表上一层选择器的名字" class="headerlink" title="（1）&amp;：代表上一层选择器的名字"></a>（1）&amp;：代表上一层选择器的名字</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#header&#123;</span><br><span class="line">  &amp;:after&#123;</span><br><span class="line">    content:&quot;Less is more!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  .title&#123;</span><br><span class="line">    font-weight:bold;</span><br><span class="line">  &#125;</span><br><span class="line">  &amp;_content&#123;//理解方式：直接把 &amp; 替换成 #header</span><br><span class="line">    margin:20px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#header::after&#123;</span><br><span class="line">  content:&quot;Less is more!&quot;;</span><br><span class="line">&#125;</span><br><span class="line">#header .title&#123; //嵌套了</span><br><span class="line">  font-weight:bold;</span><br><span class="line">&#125;</span><br><span class="line">#header_content&#123;//没有嵌套！</span><br><span class="line">    margin:20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）媒体查询"><a href="#（2）媒体查询" class="headerlink" title="（2）媒体查询"></a>（2）媒体查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// 以前的媒体查询要把一个元素分开写</span><br><span class="line">#wrap &#123;</span><br><span class="line">  width:500px;</span><br><span class="line">&#125;</span><br><span class="line">@media screen and (max-width:768px) &#123;</span><br><span class="line">  #wrap &#123;</span><br><span class="line">    width:100px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// less</span><br><span class="line">/* Less */</span><br><span class="line">#main &#123;</span><br><span class="line">    //something...</span><br><span class="line"></span><br><span class="line">    @media screen &#123;</span><br><span class="line">        @media (max-width:768px)&#123;</span><br><span class="line">          width:100px;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    @media tv &#123;</span><br><span class="line">      width:2000px;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">@media screen and (maxwidth:768px)&#123;</span><br><span class="line">  #main&#123;</span><br><span class="line">      width:100px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">@media tv&#123;</span><br><span class="line">  #main&#123;</span><br><span class="line">    width:2000px;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、混合方法"><a href="#3、混合方法" class="headerlink" title="3、混合方法"></a>3、混合方法</h2><h3 id="（1）无参数方法"><a href="#（1）无参数方法" class="headerlink" title="（1）无参数方法"></a>（1）无参数方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.card &#123; // 等价于 .card() . 与 # 皆可作为 方法前缀。</span><br><span class="line">    background: #f6f6f6;</span><br><span class="line">    -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);</span><br><span class="line">    box-shadow: 0 1px 2px rgba(151, 151, 151, .58);</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  .card; // 等价于.card();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap&#123;</span><br><span class="line">  background: #f6f6f6;</span><br><span class="line">  -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);</span><br><span class="line">  box-shadow: 0 1px 2px rgba(151, 151, 151, .58);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 其中 .card 与 .card() 是等价的。 个人建议，为了避免 代码混淆，应加上()</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）默认参数方法"><a href="#（2）默认参数方法" class="headerlink" title="（2）默认参数方法"></a>（2）默认参数方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.border(@a:10px,@b:50px,@c:30px,@color:#000)&#123; // 如果没传参就使用默认参数</span><br><span class="line">    border:solid 1px @color;</span><br><span class="line">    box-shadow: @arguments; // 指代的是 全部参数，犹如 JS 中的 arguments</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    .border(0px,5px,30px,red); // 传参必须带着单位</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">    .border(0px);</span><br><span class="line">&#125;</span><br><span class="line">#content&#123;</span><br><span class="line">  .border;// 等价于 .border()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">    border:solid 1px red;</span><br><span class="line">    box-shadow:0px,5px,30px,red;</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">    border:solid 1px #000;</span><br><span class="line">    box-shadow: 0px 50px 30px #000;</span><br><span class="line">&#125;</span><br><span class="line">#content&#123;</span><br><span class="line">    border:solid 1px #000;</span><br><span class="line">    box-shadow: 10px 50px 30px #000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）方法的匹配模式"><a href="#（3）方法的匹配模式" class="headerlink" title="（3）方法的匹配模式"></a>（3）方法的匹配模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.triangle(top,@width:20px,@color:#000)&#123;</span><br><span class="line">    border-color:transparent  transparent @color transparent ;</span><br><span class="line">&#125;</span><br><span class="line">.triangle(right,@width:20px,@color:#000)&#123;</span><br><span class="line">    border-color:transparent @color transparent  transparent ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">.triangle(bottom,@width:20px,@color:#000)&#123;</span><br><span class="line">    border-color:@color transparent  transparent  transparent ;</span><br><span class="line">&#125;</span><br><span class="line">.triangle(left,@width:20px,@color:#000)&#123;</span><br><span class="line">    border-color:transparent  transparent  transparent @color;</span><br><span class="line">&#125;</span><br><span class="line">.triangle(@_,@width:20px,@color:#000)&#123;</span><br><span class="line">    border-style: solid;</span><br><span class="line">    border-width: @width;</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    .triangle(left, 50px, #999) // 第一个参数 left 要会找到方法中匹配程度最高的，如果匹配程度相同，将全部选择，并存在着样式覆盖替换。如果匹配的参数 是变量，则将会匹配，如 @_</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  border-color:transparent  transparent  transparent #999;</span><br><span class="line">  border-style: solid;</span><br><span class="line">  border-width: 50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）方法的命名空间"><a href="#（4）方法的命名空间" class="headerlink" title="（4）方法的命名空间"></a>（4）方法的命名空间</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#card()&#123;</span><br><span class="line">    background: #723232;</span><br><span class="line">    .d(@w:300px)&#123;</span><br><span class="line">        width: @w;</span><br><span class="line">        </span><br><span class="line">        #a(@h:300px)&#123;</span><br><span class="line">            height: @h;//可以使用上一层传进来的方法</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">    // 在 CSS 中&gt; 选择器，选择的是 儿子元素，就是 必须与父元素 有直接血源的元素</span><br><span class="line">    #card &gt; .d &gt; #a(100px); // 父元素不能加 括号</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    #card .d();</span><br><span class="line">&#125;</span><br><span class="line">#con&#123;</span><br><span class="line">    // 不得单独使用命名空间的方法</span><br><span class="line">    // .d() 如果前面没有引入命名空间 #card ，将会报错</span><br><span class="line">    </span><br><span class="line">    #card; // 等价于 #card();</span><br><span class="line">    .d(20px); //必须先引入 #card</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#wrap &#123;</span><br><span class="line">  height:100px;</span><br><span class="line">&#125;</span><br><span class="line">#main &#123;</span><br><span class="line">  width:300px;</span><br><span class="line">&#125;</span><br><span class="line">#con &#123;</span><br><span class="line">  width:20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）方法的条件筛选"><a href="#（5）方法的条件筛选" class="headerlink" title="（5）方法的条件筛选"></a>（5）方法的条件筛选</h3><p>Less 没有 if else，可是它有 when</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#card&#123;</span><br><span class="line">    </span><br><span class="line">    // and 运算符 ，相当于 与运算 &amp;&amp;，必须条件全部符合才会执行</span><br><span class="line">    .border(@width,@color,@style) when (@width&gt;100px) and(@color=#999)&#123;</span><br><span class="line">        border:@style @color @width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // not 运算符，相当于 非运算 !，条件为 不符合才会执行</span><br><span class="line">    .background(@color) when not (@color&gt;=#222)&#123;</span><br><span class="line">        background:@color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // , 逗号分隔符：相当于 或运算 ||，只要有一个符合条件就会执行</span><br><span class="line">    .font(@size:20px) when (@size&gt;50px) , (@size&lt;100px)&#123;</span><br><span class="line">        font-size: @size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#main &#123;</span><br><span class="line">    #card&gt;.border(200px,#999,solid);</span><br><span class="line">    #card .background(#111);</span><br><span class="line">    #card &gt; .font(40px);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  border:solid #999 200px;</span><br><span class="line">  background:#111;</span><br><span class="line">  font-size:40px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）数量不定的参数"><a href="#（6）数量不定的参数" class="headerlink" title="（6）数量不定的参数"></a>（6）数量不定的参数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.boxShadow(...)&#123; // ... ，犹如 ES6 的扩展运算符</span><br><span class="line">    box-shadow: @arguments;</span><br><span class="line">&#125;</span><br><span class="line">.textShadow(@a,...)&#123;</span><br><span class="line">    text-shadow: @arguments;</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    .boxShadow(1px,4px,30px,red);</span><br><span class="line">    .textShadow(1px,4px,30px,red);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  box-shadow: 1px 4px 30px red;</span><br><span class="line">  text-shadow: 1px 4px 30px red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）方法使用-important"><a href="#（7）方法使用-important" class="headerlink" title="（7）方法使用 important!"></a>（7）方法使用 important!</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.border&#123;</span><br><span class="line">    border: solid 1px red;</span><br><span class="line">    margin: 50px;</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    .border() !important;</span><br><span class="line">&#125;</span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">#main &#123;</span><br><span class="line">    border: solid 1px red !important;</span><br><span class="line">    margin: 50px !important;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（8）循环方法"><a href="#（8）循环方法" class="headerlink" title="（8）循环方法"></a>（8）循环方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.generate-columns(4);</span><br><span class="line"></span><br><span class="line">// Less并没有直接提供for循环功能，但是可以通过递归实现</span><br><span class="line">.generate-columns(@n, @i: 1) when (@i =&lt; @n) &#123;</span><br><span class="line">  .column-@&#123;i&#125; &#123;</span><br><span class="line">    width: (@i * 100% / @n);</span><br><span class="line">  &#125;</span><br><span class="line">  .generate-columns(@n, (@i + 1));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">.column-1 &#123;</span><br><span class="line">  width: 25%;</span><br><span class="line">&#125;</span><br><span class="line">.column-2 &#123;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line">.column-3 &#123;</span><br><span class="line">  width: 75%;</span><br><span class="line">&#125;</span><br><span class="line">.column-4 &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（9）属性拼接方法"><a href="#（9）属性拼接方法" class="headerlink" title="（9）属性拼接方法"></a>（9）属性拼接方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// +_ 代表的是 空格；+ 代表的是 逗号。</span><br><span class="line"></span><br><span class="line">// 1. 逗号</span><br><span class="line">.boxShadow() &#123;</span><br><span class="line">    box-shadow+: inset 0 0 10px #555;</span><br><span class="line">&#125;</span><br><span class="line">.main &#123;</span><br><span class="line">  .boxShadow();</span><br><span class="line">  box-shadow+: 0 0 20px black;</span><br><span class="line">&#125;</span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">.main &#123;</span><br><span class="line">  box-shadow: inset 0 0 10px #555, 0 0 20px black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 2. 空格</span><br><span class="line">.Animation() &#123;</span><br><span class="line">  transform+_: scale(2);</span><br><span class="line">&#125;</span><br><span class="line">.main &#123;</span><br><span class="line">  .Animation();</span><br><span class="line">  transform+_: rotate(15deg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">.main &#123;</span><br><span class="line">  transform: scale(2) rotate(15deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（10）官网Demo"><a href="#（10）官网Demo" class="headerlink" title="（10）官网Demo"></a>（10）官网Demo</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.average(@x, @y) &#123;</span><br><span class="line">  @average: ((@x + @y) / 2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  .average(16px, 50px); // 调用 方法</span><br><span class="line">  padding: @average;    // 使用返回值</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">div &#123;</span><br><span class="line">  padding: 33px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、继承"><a href="#4、继承" class="headerlink" title="4、继承"></a>4、继承</h2><p>extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式。</p>
+<h3 id="（1）extend关键字的使用"><a href="#（1）extend关键字的使用" class="headerlink" title="（1）extend关键字的使用"></a>（1）extend关键字的使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">.animation&#123;</span><br><span class="line">    transition: all .3s ease-out;</span><br><span class="line">    .hide&#123;</span><br><span class="line">      transform:scale(0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">    &amp;:extend(.animation);</span><br><span class="line">&#125;</span><br><span class="line">#con&#123;</span><br><span class="line">    &amp;:extend(.animation .hide);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">.animation,#main&#123;</span><br><span class="line">  transition: all .3s ease-out;</span><br><span class="line">&#125;</span><br><span class="line">.animation .hide , #con&#123;</span><br><span class="line">    transform:scale(0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）all全局搜索替换"><a href="#（2）all全局搜索替换" class="headerlink" title="（2）all全局搜索替换"></a>（2）all全局搜索替换</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#main&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line">#main &#123;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    content:&quot;Less is good!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">#wrap:extend(#main all) &#123;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main,#wrap&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line">#main:after, #wrap:after &#123;</span><br><span class="line">    content: &quot;Less is good!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）减少代码重复性（方法与extend对比）"><a href="#（3）减少代码重复性（方法与extend对比）" class="headerlink" title="（3）减少代码重复性（方法与extend对比）"></a>（3）减少代码重复性（方法与extend对比）</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 从表面 看来，extend 与 方法 最大的差别，就是 extend 是同个选择器共用同一个声明，而 方法 是使用自己的声明，这无疑 增加了代码的重复性。</span><br><span class="line"></span><br><span class="line">// 方法示例 与上面的 extend 进行对比：</span><br><span class="line">.Method&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">      content:&quot;Less is good!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">#main&#123;</span><br><span class="line">  .Method;</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  .Method;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  &amp;:after&#123;</span><br><span class="line">    content:&quot;Less is good!&quot;;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">  &amp;:after&#123;</span><br><span class="line">    content:&quot;Less is good!&quot;;</span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）导入"><a href="#（4）导入" class="headerlink" title="（4）导入"></a>（4）导入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 1. 导入 less 文件 可省略后缀</span><br><span class="line">import &quot;main&quot;;</span><br><span class="line">// 等价于</span><br><span class="line">import &quot;main.less&quot;;</span><br><span class="line"></span><br><span class="line">2. @import 的位置可随意放置</span><br><span class="line">#main&#123;</span><br><span class="line">  font-size:15px;</span><br><span class="line">&#125;</span><br><span class="line">@import &quot;style&quot;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）reference"><a href="#（5）reference" class="headerlink" title="（5）reference"></a>（5）reference</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 使用@import (reference)导入外部文件，但不会添加 把导入的文件 编译到最终输出中，只引用。</span><br><span class="line">@import (reference) &quot;bootstrap.less&quot;;</span><br><span class="line"></span><br><span class="line">#wrap:extend(.navbar all)&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）once"><a href="#（6）once" class="headerlink" title="（6）once"></a>（6）once</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// @import语句的默认行为。这表明相同的文件只会被导入一次，而随后的导入文件的重复代码都不会解析。</span><br><span class="line">@import (once) &quot;foo.less&quot;;</span><br><span class="line">@import (once) &quot;foo.less&quot;; // this statement will be ignored</span><br></pre></td></tr></table></figure>
+
+<h3 id="（7）multiple"><a href="#（7）multiple" class="headerlink" title="（7）multiple"></a>（7）multiple</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 使用@import (multiple)允许导入多个同名文件。</span><br><span class="line">// file: foo.less</span><br><span class="line">.a &#123;</span><br><span class="line">  color: green;</span><br><span class="line">&#125;</span><br><span class="line">// file: main.less</span><br><span class="line">@import (multiple) &quot;foo.less&quot;;</span><br><span class="line">@import (multiple) &quot;foo.less&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">.a &#123;</span><br><span class="line">  color: green;</span><br><span class="line">&#125;</span><br><span class="line">.a &#123;</span><br><span class="line">  color: green;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、函数"><a href="#5、函数" class="headerlink" title="5、函数"></a>5、函数</h2><h3 id="（1）判断类型"><a href="#（1）判断类型" class="headerlink" title="（1）判断类型"></a>（1）判断类型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1. isnumber 判断是否是数字</span><br><span class="line">isnumber(#ff0);     // false</span><br><span class="line">isnumber(blue);     // false</span><br><span class="line">isnumber(&quot;string&quot;); // false</span><br><span class="line">isnumber(1234);     // true</span><br><span class="line">isnumber(56px);     // true</span><br><span class="line">isnumber(7.8%);     // true</span><br><span class="line">isnumber(keyword);  // false</span><br><span class="line">isnumber(url(...)); // false</span><br><span class="line"></span><br><span class="line">// 2. iscolor 判断给定的值 是否 是一个颜色。</span><br><span class="line"></span><br><span class="line">// 3. isurl 判断给定的值 是否 是一个 url 。</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）颜色操作"><a href="#（2）颜色操作" class="headerlink" title="（2）颜色操作"></a>（2）颜色操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">* saturate: 增加一定数值的颜色饱和度。</span><br><span class="line">* lighten：增加一定数值的颜色亮度。</span><br><span class="line">* darken：降低一定数值的颜色亮度。</span><br><span class="line">* fade：给颜色设定一定数值的透明度。</span><br><span class="line">* mix：根据比例混合两种颜色。</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）数字函数"><a href="#（3）数字函数" class="headerlink" title="（3）数字函数"></a>（3）数字函数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* ceil：向上取整。</span><br><span class="line">* floor：向下取整。</span><br><span class="line">* percentage：将浮点数转换为百分比字符串。</span><br><span class="line">* round：四舍五入。</span><br><span class="line">* sqrt：计算一个数的平方根。</span><br><span class="line">* abs：计算数字的绝对值，原样保持单位。</span><br><span class="line">* pow：计算一个数的乘方。</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、其他"><a href="#6、其他" class="headerlink" title="6、其他"></a>6、其他</h2><h3 id="（1）注释"><a href="#（1）注释" class="headerlink" title="（1）注释"></a>（1）注释</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* /* */ CSS原生注释，会被编译在 CSS 文件中。</span><br><span class="line">* /   / Less提供的一种注释，不会被编译在 CSS 文件中。</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）-避免编译"><a href="#（2）-避免编译" class="headerlink" title="（2） 避免编译"></a>（2） 避免编译</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#main&#123;</span><br><span class="line">  width:~&#x27;calc(300px-30px)&#x27;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">#main&#123;</span><br><span class="line">  width:calc(300px-30px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）-变量拼串"><a href="#（3）-变量拼串" class="headerlink" title="（3） 变量拼串"></a>（3） 变量拼串</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.judge(@i) when(@i=1)&#123;</span><br><span class="line">  @size:15px;</span><br><span class="line">&#125;</span><br><span class="line">.judge(@i) when(@i&gt;1)&#123;</span><br><span class="line">  @size:16px;</span><br><span class="line">&#125;</span><br><span class="line">.loopAnimation(@i) when (@i&lt;16) &#123;</span><br><span class="line">  </span><br><span class="line">  .circle:nth-child(@&#123;i&#125;)&#123;</span><br><span class="line">      .judeg(@i);</span><br><span class="line">      border-radius:@size @size 0 0;</span><br><span class="line">      animation: ~&quot;circle-@&#123;i&#125;&quot; @duration infinite @ease;</span><br><span class="line">      transition-delay:~&quot;@&#123;i&#125;ms&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">  @keyframes ~&quot;circle-@&#123;i&#125;&quot; &#123;</span><br><span class="line">      // do something...</span><br><span class="line">  &#125;</span><br><span class="line">  .loopAnimation(@i + 1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）使用-JS"><a href="#（4）使用-JS" class="headerlink" title="（4）使用 JS"></a>（4）使用 JS</h3><p>因为 Less 是由 JS 编写，所以 Less 有一得天独厚的特性：代码中使用 Javascript 。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">@content:`&quot;aaa&quot;.toUpperCase()`;</span><br><span class="line">#randomColor&#123;</span><br><span class="line">  @randomColor: ~&quot;rgb(`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`,`Math.round(Math.random() * 256)`)&quot;;</span><br><span class="line">&#125;</span><br><span class="line">#wrap&#123;</span><br><span class="line">  width: ~&quot;`Math.round(Math.random() * 100)`px&quot;;</span><br><span class="line">  &amp;:after&#123;</span><br><span class="line">      content:@content;</span><br><span class="line">  &#125;</span><br><span class="line">  height: ~&quot;`window.innerHeight`px&quot;;</span><br><span class="line">  alert:~&quot;`alert(1)`&quot;;</span><br><span class="line">  #randomColor();</span><br><span class="line">  background-color: @randomColor;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* 生成后的 CSS */</span><br><span class="line">// 弹出 1</span><br><span class="line">#wrap&#123;</span><br><span class="line">  width: 随机值（0~100）px;</span><br><span class="line">  height: 743px;//由电脑而异</span><br><span class="line">  background: 随机颜色;</span><br><span class="line">&#125;</span><br><span class="line">#wrap::after&#123;</span><br><span class="line">  content:&quot;AAA&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、结束语"><a href="#7、结束语" class="headerlink" title="7、结束语"></a>7、结束语</h2><p> 前几个月 ， 有个 CSS in JS 的概念非常火，现在 看来 JS in CSS 也未曾不可。 我觉得完全可以根据 Less 这个特性来造个轮子，JS来控制 CSS ，形成 动态属性，如果成功 很可能会改变 现在前端的打开姿势。</p>
+<p>从我学习 Web 以来，无数前辈告诉我，Web 有三大基石，JS 控制行为，HTML 控制结构，CSS 控制样式。我一直再想 为什么要分为 3 个语言？为什么不能合成一个语言？或者说 就没有更合适的吗？在这几年的 Web 发展中，页面从 MVC 到 现在的 MVVC，结构正在发生着改变，但 其根本 不过是造了一个又一个 完美的轮子。我们为什么就不能打破传统呢？让 前端的 三大基石 变成一座大山呢 ？     请试想一下，那该是个怎样的世界。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e3393ac9/">你应该知道的 7 种 JavaScript 错误类型</a>
+            
+            
+            <a class="next" rel="next" href="/1acc2f95/">500 多个纯 CSS 实现的 Loading 效果，炫酷！</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e3393ac9/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1acc2f95/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

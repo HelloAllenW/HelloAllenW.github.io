@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>科学史概述 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">科学史概述</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 1, 2021&nbsp;&nbsp;22:17:39</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 1, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/">自然科学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">8.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">29 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h2><p>自然哲学是科学的前身，起源于古希腊。</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102219732.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        西方哲学起源
+    </div>
+</center>
+
+<p>牛顿的著作《自然哲学的数学原理》，之所以不叫《科学的数学原理》，就是因为牛顿时代还没有出现科学的概念。</p>
+<h2 id="泰勒斯：哲学与科学之父"><a href="#泰勒斯：哲学与科学之父" class="headerlink" title="泰勒斯：哲学与科学之父"></a>泰勒斯：哲学与科学之父</h2><p>提出万物源于水</p>
+<h2 id="古希腊哲学的四大门派"><a href="#古希腊哲学的四大门派" class="headerlink" title="古希腊哲学的四大门派"></a>古希腊哲学的四大门派</h2><ul>
+<li><p>埃利亚学派：巴门尼德，认为万物的本源是存在；</p>
+</li>
+<li><p>米利都学派：泰勒斯，万物本源是水；</p>
+</li>
+<li><p>毕达哥拉斯学派：毕达哥拉斯，万物本源是数；</p>
+</li>
+<li><p>爱菲斯学派：赫拉克利特，万物本源是逻各斯；</p>
+</li>
+</ul>
+<p>这段学术吵架交流史，被认为是西方哲学史的开端。</p>
+<h2 id="德谟克利特：原子论"><a href="#德谟克利特：原子论" class="headerlink" title="德谟克利特：原子论"></a>德谟克利特：原子论</h2><p>留基伯认为万物的本质是原子，这就是著名的原子论1.0版本；</p>
+<p>他的学生德谟克利特将原子论进行了升级，认为万物的本质是原子+虚空，他认为原子是不可再分的，它们在虚空中运动着，构成了万物。</p>
+<h2 id="亚里士多德"><a href="#亚里士多德" class="headerlink" title="亚里士多德"></a>亚里士多德</h2><p>亚里士多德任务月亮上面的世界是由以太构成的，而月球以下，包括地球在内，都是由水、火、土、气（认为这四个是构成万物的本源）构成的。</p>
+<p>并且引出了：地心说</p>
+<h2 id="地心说"><a href="#地心说" class="headerlink" title="地心说"></a>地心说</h2><p>地心说不仅是一个科学理论，还是人类最早成体系的科学理论之一。</p>
+<p>要了解地心说，我们了解三个人就够了。</p>
+<h3 id="1-毕达哥拉斯"><a href="#1-毕达哥拉斯" class="headerlink" title="1. 毕达哥拉斯"></a>1. 毕达哥拉斯</h3><ul>
+<li>他证明了勾股定理。这个定理还引发了第一次数学危机（也称为有理数危机），由于当时的古希腊没有无理数的概念，所以等腰直角三角形两个直角边为1时，它的斜边根2无法表示。</li>
+<li>他提出了大地是原的。说整个宇宙也是一个大球体，宇宙中心是一团中心火，所有的天体都绕着中心火转。他还假想出一个天体：对地。</li>
+</ul>
+<h3 id="2-亚里士多德"><a href="#2-亚里士多德" class="headerlink" title="2. 亚里士多德"></a>2. 亚里士多德</h3><ul>
+<li><p>柏拉图和欧多克斯</p>
+<p>柏拉图提出天体的运动是匀速圆周运动。但他发现了理论与观测不相符的问题，因此发起了拯救现象。就是说他的想法没有错，只是还不够完善。在柏拉图的号召下，有个叫欧多克斯的提出了同心球叠加模型，地球位于宇宙中心就是欧多克斯提出来的，这就是地心说1.0版。</p>
+</li>
+<li><p>亚里士多德证明大地是球形的</p>
+<p>他为了证明大地是球形的，使用了罗列观测证据的方法，这也是人类第一次使用这种方法，打开了实证科学的大门。</p>
+</li>
+<li><p>亚里士多德提出水晶球模型</p>
+<p>为了解释天体为什么会运动，在欧多克斯的基础上提出。这就是地心说2.0版</p>
+</li>
+</ul>
+<h3 id="3-托勒密"><a href="#3-托勒密" class="headerlink" title="3. 托勒密"></a>3. 托勒密</h3><ul>
+<li><p>阿波罗尼和喜帕恰斯</p>
+<p>地心说2.0后不久，阿波罗尼为了补充地心说模型，提出了本轮和均轮的概念。后来，喜帕恰斯又提出，如果地球在太阳圆周运动的偏心位置而不是中心点上，模型会更加准确。</p>
+</li>
+<li><p>托勒密在前人理论基础上，提出系统的地心说模型，出版巨著《天文学大成》</p>
+<p>托勒密的地心说就是地心说3.0版，也是终极版本。《天文学大成》这本书横行西方天文学界一千多年，是那些年里的标准教科书。托勒密这套系统最难能可贵之处，在于其引入了大量数学方法进行论证。</p>
+</li>
+</ul>
+<h2 id="欧几里得和阿基米德"><a href="#欧几里得和阿基米德" class="headerlink" title="欧几里得和阿基米德"></a>欧几里得和阿基米德</h2><h3 id="1-几何之父：欧几里得，出版《几何原本》"><a href="#1-几何之父：欧几里得，出版《几何原本》" class="headerlink" title="1. 几何之父：欧几里得，出版《几何原本》"></a>1. 几何之父：欧几里得，出版《几何原本》</h3><p>《几何原本》最厉害的地方在于它用到了公理化方法，就是根据23条基本的定义（例如点、线、面、圆、角等是什么）出发，推演出的结论越来越多，渐渐形成了几何学大厦。</p>
+<p>19世纪，人们发现这种被大家普遍认可的定义、公设、也未必是绝对真理，并由此诞生了非欧几何，这是后话。</p>
+<h3 id="2-力学之父：阿基米德"><a href="#2-力学之父：阿基米德" class="headerlink" title="2. 力学之父：阿基米德"></a>2. 力学之父：阿基米德</h3><ul>
+<li>提出浮力定理</li>
+<li>搞出很多武器，被罗马将军称为[罗马舰队与阿基米德一人的战争]</li>
+<li>杠杆原理：给我一个支点，我能撬动整个地球</li>
+<li>计算出了圆周率约等于3.14（通过穷竭法，即就是近代极限概念的前身）</li>
+</ul>
+<h2 id="中世纪"><a href="#中世纪" class="headerlink" title="中世纪"></a>中世纪</h2><h3 id="1-中世纪中断的科学"><a href="#1-中世纪中断的科学" class="headerlink" title="1. 中世纪中断的科学"></a>1. 中世纪中断的科学</h3><p>北方蛮族入侵，罗马帝国一分为二。从此欧洲进入了漫长的时代–黑暗的中世纪。乱世之中，老百姓需要信仰寻求安慰，皇帝需要信仰控制人民，于是潜伏了几百年的基督教称为欧洲社会的主流。所以神学开始代替科学。</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102226620.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        中世纪
+    </div>
+</center>
+
+<p>相当于希腊文明的藏经阁的亚历山大图书馆被烧毁。</p>
+<p>亚历山大城有世界第一位女数学家希帕蒂亚被基督徒杀害。</p>
+<p>希腊科学在西欧算是中断了，而东罗马帝国虽然收藏了很多但没怎么研究，没啥大发展。</p>
+<h3 id="2-阿拉伯人拯救希腊科学"><a href="#2-阿拉伯人拯救希腊科学" class="headerlink" title="2. 阿拉伯人拯救希腊科学"></a>2. 阿拉伯人拯救希腊科学</h3><p>阿拉伯人本来属于游牧民族，后来出了穆罕默德，创立了伊斯兰教，进而将阿拉伯人整合起来了，瞬间横扫世界，建立了阿拉伯帝国。</p>
+<p>征服西方后，阿拉伯将希腊的科学资料搬回去，掀起了一场百年的翻译运动，全部被翻译为了阿拉伯文。阿拉伯人特意建了智慧宫，其中有个：花剌子米</p>
+<p>花剌子米精通天文地理，他最大贡献是在数学领域，他建立了代数学，写了好几本数学著作，后来被传入西方，甚至成了教材，他也因此被称为代数之父。</p>
+<p>阿拉伯数字也是经花剌子米推广后进入数学体系的，不过这些数字其实是印度人发明的，只是欧洲人误以为是阿拉伯人发明的，所以称为阿拉伯数字。</p>
+<p>花剌子米贡献还有很多，涵盖很多领域，是那个时代的学术集大成者，堪称阿拉伯的牛顿。</p>
+<h3 id="3-科学回到欧洲"><a href="#3-科学回到欧洲" class="headerlink" title="3. 科学回到欧洲"></a>3. 科学回到欧洲</h3><p>穆斯林夺取了基督教的圣城耶路撒冷，东罗马帝国一看打不过了，就扭头回去叫兄弟了。</p>
+<p>西欧这会穷的要死，社会矛盾激烈。于是他们打着上帝的旗号，组建了十字军，跑去跟穆斯林火拼，这一拼就是两百年。</p>
+<p>十字军东征使东西方交流更为频繁，西欧人发现了科学书籍，于是又准备重新翻译回来，这就是第二次翻译运动。</p>
+<h2 id="科学的曙光"><a href="#科学的曙光" class="headerlink" title="科学的曙光"></a>科学的曙光</h2><h3 id="1-大学的出现"><a href="#1-大学的出现" class="headerlink" title="1. 大学的出现"></a>1. 大学的出现</h3><p>西欧人民有了祖宗的科学没有，得有人研究而且要有接班人，这就需要一个场所。</p>
+<p>大学其实诞生在黑暗的欧洲，原因是由于教会的存在欧洲没有大的战争，而且有一群时间充足且不愁吃喝的教士。</p>
+<p>在这样有利的条件下，11世纪意大利诞生了世界上第一所大学：博洛尼亚大学。后来又诞生了巴黎大学。英法死对头，所以英国搞了个牛津大学，牛津学生闹出了命案，便自立门户建立了剑桥大学。</p>
+<p>牛津第一任校长格罗斯泰斯特，建立了教育体系，包括教纲，将教学内容标准化。牛津大学老师罗杰培根，提出获取新知识靠蒙不行，必须要做实验。由此大学的发展慢慢走上正轨。</p>
+<h3 id="2-文艺复兴"><a href="#2-文艺复兴" class="headerlink" title="2. 文艺复兴"></a>2. 文艺复兴</h3><p>文艺复兴也是科学的复兴，是全方位的复兴。</p>
+<ul>
+<li>美第奇家族是文艺复兴的天使投资人，没有美第奇家族，文艺复兴还要晚上几百年。</li>
+<li>文艺复兴三杰：拉斐尔、达芬奇、米开朗琪罗。</li>
+<li>笛卡尔：发明了直角坐标系（直角坐标系的诞生从此代数能表示几何，几何也能表示代数，这为数学发展做出了伟大的贡献）。并提出：我思故我在</li>
+<li>惠更斯：光的波动说</li>
+<li>哈维：血液循环理论</li>
+<li>弗朗西斯培根：实验科学的创始人，近代归纳法的创始人</li>
+</ul>
+<p>等等这些大牛的出现，意味着一个新的时代就要到来…</p>
+<h3 id="3-哥白尼革命"><a href="#3-哥白尼革命" class="headerlink" title="3. 哥白尼革命"></a>3. 哥白尼革命</h3><p>西欧文艺复兴后，各行各业都在革命，这一革，就革到了科学圈，参加科学圈这场革命主要的五人是：开普勒、第谷、哥白尼、伽利略、牛顿。</p>
+<p>（1）日心说的提出</p>
+<p>中世纪前，先后几位大神奠定了地心说，后来托勒密对此学说进行了集大成。但随着这个学说与实际观测数据的出入，哥白尼重新设计了宇宙模型，这就是日心说，并写了一本书《天体运行论》</p>
+<p>（2）三个没解决的问题</p>
+<p>按照日心说理论，存在三个解释不了的问题</p>
+<ul>
+<li>地动抛物：如果地球是动的（日心说认为地球也是运动的），那人跳起来，不就没法落到起跳点了？</li>
+<li>恒星的周年视差：如果地球绕着太阳转，那地球旋转过程中，看到的星空应该是在变化的？（哥白尼解释说宇宙远比我们想象中大，地球和太阳之间的距离可忽略，因此我们看不到星空的变化。如今我们证实了这一点，哥白尼蒙对了）直到19世纪，随着观测技术的提升，天文学家贝塞尔才观测到了因地球自转导致的星空变化。</li>
+<li>准确度不够：日心说没有比地心说更准确地描述天体运动</li>
+</ul>
+<p>因此哥白尼书出版后，并没有撼动地心说的地位。</p>
+<h2 id="现代科学的祖师爷：伽利略"><a href="#现代科学的祖师爷：伽利略" class="headerlink" title="现代科学的祖师爷：伽利略"></a>现代科学的祖师爷：伽利略</h2><p>爱因斯坦说：伽利略的科学发现，标志着物理学的真正开端。</p>
+<p>霍金说：自然科学的诞生要归功于伽利略。</p>
+<p>上面说到日心说存在三个没解决的问题：</p>
+<ol>
+<li><p>伽利略解释日心说第一个问题：</p>
+<p>假想有一艘船，非常平稳的行使。一个人原地起跳，但还是会落到原地。就是因为自然本性（其实就是惯性，伽利略那时候还没有惯性这个概念）</p>
+<p>然后他做了一个实验（如下），他认为如果水平面够光滑小球会一直运动下去，这就是由物体的惯性导致的。</p>
+</li>
+</ol>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102228728.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        斜面实验
+    </div>
+</center>
+
+<ol start="2">
+<li><p>伽利略否定亚里士多德重的物体先落地的说法，通过比萨斜塔实验证明同一个高度下两个重量不同的物体同时释放时会同时落地。</p>
+</li>
+<li><p>为了证明日心说，升级了望远镜。然后发现月亮是个麻子脸，发现木星有四个卫星。这样，日心说逐渐占据上风。</p>
+</li>
+<li><p>伽利略专门写了一本书《关于托勒密和哥白尼两大世界体系的对话》，这本书在科学史上极为重要。</p>
+</li>
+<li><p>由于受到天主教会的迫害被禁足，期间写了《关于两门新科学的对话》，在这本书中，伽利略详细总结了材料强度、动力学的相关知识以及力学原理。这本书也被认为是近代物理学的基石之一。</p>
+</li>
+</ol>
+<h2 id="现代天文学的建立：第谷与开普勒"><a href="#现代天文学的建立：第谷与开普勒" class="headerlink" title="现代天文学的建立：第谷与开普勒"></a>现代天文学的建立：第谷与开普勒</h2><h3 id="1-第谷：天文学奠基人"><a href="#1-第谷：天文学奠基人" class="headerlink" title="1. 第谷：天文学奠基人"></a>1. 第谷：天文学奠基人</h3><ul>
+<li>主业是占星，副业是炼金术</li>
+<li>教皇格里高利请他修订历法，在他的帮助下，当时最精确的历法诞生了–格里高利历。直到现在，我们都还在使用这套历法。</li>
+<li>第谷拥有那个时代西方最准、最全的天文观测数据，包含了各个行星在不同时间的速度和位置，但这些数据有啥规律，他也不知道。</li>
+</ul>
+<h3 id="2-开普勒：天空立法者"><a href="#2-开普勒：天空立法者" class="headerlink" title="2. 开普勒：天空立法者"></a>2. 开普勒：天空立法者</h3><ul>
+<li>开普勒是第谷的徒弟，也是个占星师。</li>
+<li>开普勒留下过一份手稿，从科幻的角度聊日心说，其中就有月球旅行、星际之旅的内容，也有人把这份手稿看成是人类历史上第一部科幻作品。</li>
+<li>开普勒根据第谷留下的数据，用几何学做工具进行大量的计算，发现了一颗行星在同样的时间内相对于太阳扫过的面积是一样的，这就是开普勒第二定律。</li>
+<li>行星沿椭圆轨道绕太阳运行，太阳处在椭圆两个焦点中的其中一个上，这就是开普勒第一定律。</li>
+<li>所有的行星轨道的半长轴的三次方，和它绕太阳转一圈的时间的平方的比值，都是相等的，这是开普勒第三定律。</li>
+</ul>
+<p>开普勒三大定律的提出，天文学和占星术终于分道扬镳而成为一门科学。</p>
+<p>但是留下来一个问题：为什么行星运动的轨迹是椭圆的？</p>
+<h2 id="上帝下班了：牛顿"><a href="#上帝下班了：牛顿" class="headerlink" title="上帝下班了：牛顿"></a>上帝下班了：牛顿</h2><p>科学史上有两个奇迹年，一个是1666年的牛顿奇迹年，一个是1905年的爱因斯坦奇迹年</p>
+<p>牛顿和胡克在很多问题上相互抬杠，比如他们争论过，光到底是什么？除了光他们吵得最多的就是万有引力定律，牛顿用微积分论证了万有引力，后来出版了《自然哲学的数学原理》</p>
+<p>牛顿发起的著名科学革命称为牛顿革命，用一句话概括就是：请上帝离开（宇宙就像一台巨大的机器，没有上帝存在，可以自行运转）</p>
+<p>牛顿去世后被安葬在伦敦威斯敏斯特教堂，在牛顿以前，这里只安葬一些王公贵族，牛顿是第一位安葬在这里的学者。</p>
+<p>从牛顿时代起，陆续涌现了许多杰出的科学家，比如：现代化学之父拉瓦锡，热工当量提出者焦耳，进化论提出者达尔文。</p>
+<h2 id="欧洲科学院的诞生"><a href="#欧洲科学院的诞生" class="headerlink" title="欧洲科学院的诞生"></a>欧洲科学院的诞生</h2><p>天主教不让学，大家偷摸摸学。</p>
+<h3 id="1-意大利"><a href="#1-意大利" class="headerlink" title="1. 意大利"></a>1. 意大利</h3><p>最开始在意大利，出现了科学院的萌芽 – 自然秘密研究院，被教会摧残后。自然秘密研究院留下了两个种子：林琴学院、齐曼托学院</p>
+<p>林琴学院拉了伽利略入伙，后来资金链断裂，伽利略被关，林琴学院倒闭</p>
+<p>齐曼陀傍了美第奇家族大款，在佛罗伦萨建立了科学院3.0–齐曼托学院，后来迫于教会压力被搞垮</p>
+<h3 id="2-英国"><a href="#2-英国" class="headerlink" title="2. 英国"></a>2. 英国</h3><ul>
+<li>起源在酒吧，叫做隐形学院。胡克在里面，后来被统治者克伦威尔解散</li>
+<li>查理二世上台后支持胡克这帮人搞科学，赞助了皇家科学院（这是世界上第一所真正意义的科学院）</li>
+</ul>
+<p>同时国王建了格林尼治天文台，第一任台长是弗拉姆斯蒂德（就是牛顿拿到他数据后证明了万有引力），第二任台长是哈雷，他发现有颗彗星每76年上线一次，还预测了下两次出现的时间，因此这颗彗星的名字命名为哈雷彗星。</p>
+<h3 id="3-法国"><a href="#3-法国" class="headerlink" title="3. 法国"></a>3. 法国</h3><p>梅森靠着强大的关系网，建立了梅森学院。法国国王眼馋，将其变为了巴黎科学院</p>
+<h2 id="化学起源"><a href="#化学起源" class="headerlink" title="化学起源"></a>化学起源</h2><p>古希腊人民提出四元素说，即物质是由土、水、火、气组成的。</p>
+<h3 id="1-波意耳"><a href="#1-波意耳" class="headerlink" title="1. 波意耳"></a>1. 波意耳</h3><p>15世纪，欧洲流行炼金术（就是将贱金属变为贵金属）。其中一个叫波意耳的质疑了四元素说，并写了《怀疑的化学家》</p>
+<h3 id="2-拉瓦锡：现代化学之父"><a href="#2-拉瓦锡：现代化学之父" class="headerlink" title="2. 拉瓦锡：现代化学之父"></a>2. 拉瓦锡：现代化学之父</h3><ul>
+<li>提出了燃素说（拉瓦锡认为物体里都有燃素，燃素烧没了，物体就轻了），但是有人做实验发现燃烧后的铅更重了。</li>
+<li>然后拉瓦锡将铅放在真空中进行加热，铅没有然后，把真空罩打开发现燃烧起来了，想明白了燃烧靠的是空气而不是燃素。</li>
+<li>普利斯特利（发现氧气的第一人）告诉拉瓦锡，空气中有种气体可以让燃烧更猛。拉瓦锡将其命名为氧气，并重新定义了燃烧的原理–氧化反应</li>
+<li>拉瓦锡将发现的33种元素列了一张表</li>
+<li>拉瓦锡后被砍头。拉格朗日评价：他们一眨眼看下他的头，但这样的脑袋一百年也长不出一个来。</li>
+</ul>
+<h3 id="3-道尔顿：近代化学之父"><a href="#3-道尔顿：近代化学之父" class="headerlink" title="3. 道尔顿：近代化学之父"></a>3. 道尔顿：近代化学之父</h3><ul>
+<li>思考氢氧问题</li>
+<li>协助戴维思考氧氮问题并解决倍比定律（此时距离能测原子质量的质谱仪发明出来还有一百多年）但道尔顿提出了绝对质量和相对质量，即氢为1，其他元素相对氢的质量可算出来。</li>
+<li>提出了自己专属的原子论：同种原子就像多胞胎，体积长相一模一样；而且各元素反应符合倍比定律。</li>
+</ul>
+<h3 id="4-门捷列夫：元素周期表"><a href="#4-门捷列夫：元素周期表" class="headerlink" title="4. 门捷列夫：元素周期表"></a>4. 门捷列夫：元素周期表</h3><ul>
+<li>为了纪念门捷列夫，第101号元素被命名为钔</li>
+<li>1907年，门捷列夫去世，数万俄国人为他送葬，队伍前面不是遗像，而是一群青年学生抬着的元素周期表</li>
+</ul>
+<h3 id="5-分子论"><a href="#5-分子论" class="headerlink" title="5. 分子论"></a>5. 分子论</h3><p>阿伏伽德罗在盖吕萨克的基础上提出分子论：大环境相同下，相同的体积中，不管你是啥分子，数量都一样。这就是阿伏伽德罗定律。</p>
+<h2 id="永动机引发热力学研究"><a href="#永动机引发热力学研究" class="headerlink" title="永动机引发热力学研究"></a>永动机引发热力学研究</h2><h3 id="1-推翻第一类永动机：不需要热力，也能一直动下去"><a href="#1-推翻第一类永动机：不需要热力，也能一直动下去" class="headerlink" title="1. 推翻第一类永动机：不需要热力，也能一直动下去"></a>1. 推翻第一类永动机：不需要热力，也能一直动下去</h3><ul>
+<li>瑞典人摄尔西斯用冰水混合物设定为0度，烧开的水定位100度进而发明了温度计。为了纪念他，这种温度单位就叫摄氏度</li>
+<li>开尔文用绝对零度为起点，建立了更科学的开尔文温度。开尔文度=摄氏度+273.15</li>
+<li>英国化学家普利斯特利提出热质说：热是一种看不见的物质，藏在物体内部，物体表面裂开后就会窜出来，而且从高温流向低温。18世纪热质量说特别火，拉瓦锡还把热质(caloric，音译为卡路里)列入元素表中。后来伦福德提出摩擦也能生热推翻了热质说。</li>
+<li>焦耳通过热功当量实验揭开了摩擦的秘密：热不是一种物质，而是一种能量，和做功一回事。所以现在热量和功都用焦耳做单位。</li>
+<li>赫姆霍兹对焦耳实验进行系统总结提出：热量不会凭空产生，也不会凭空消失，它只会从一种形式转化为另一种形式。或者从一个物体转移到其他物体。在转化过程中，热量总量保持不变。这就是能量守恒定律，也叫热力学第一定律。</li>
+</ul>
+<p>热力学第一定律推翻了第一类永动机不可能实现</p>
+<h3 id="2-第二类永动机：百分百热机，就是说热力100-进行转化"><a href="#2-第二类永动机：百分百热机，就是说热力100-进行转化" class="headerlink" title="2. 第二类永动机：百分百热机，就是说热力100%进行转化"></a>2. 第二类永动机：百分百热机，就是说热力100%进行转化</h3><ul>
+<li>卡诺热机，卡诺发表《关于火的动力》</li>
+<li>卡诺师弟克拉伯龙，发表《关于热的动力》，用数学语言翻译了卡诺的理论。</li>
+<li>克劳修斯把卡诺理论拿来扒了扒，得出总结：热量不能从低温物体传向高温物体，而不引起其他变化。这就是热力学第二定律</li>
+</ul>
+<h2 id="十八世纪的博物学家"><a href="#十八世纪的博物学家" class="headerlink" title="十八世纪的博物学家"></a>十八世纪的博物学家</h2><ol>
+<li><p>林奈：16世纪，人类发现了6000个新生物，随后一百年间，又增加了12000个，命名是个问题。林奈引入了纲、目、属、种，将生物按特点进行分类。由于特殊贡献，瑞典人将他印在钞票上。</p>
+</li>
+<li><p>布丰：写了《自然志》，并猜测地球上的动植物都是由某种物种演变而来。同时推断猴子是由人退化而来的。</p>
+</li>
+<li><p>居维叶：提出灾变论：认为地球上经历过多次物种灭绝。</p>
+<p>无论林奈还是居维叶都相信物种不变论。</p>
+</li>
+<li><p>达尔文进化论</p>
+</li>
+</ol>
+<ul>
+<li>1809年，拉马克在《动物哲学》中论述了他对生物进化的见解：用进废退、获得性遗传</li>
+<li>达尔文读了莱伊尔的《地质学原理》其中认为改变并不需要灾变，自然界的风霜雨雪都可以改变自然。在普遍相信神创论和灾变论的那个年代，这无异于歪理学说。</li>
+<li>达尔文读了马尔萨斯的《人口论》其中认为有能力的人才可以填饱肚子，能力弱的人会被淘汰。</li>
+<li>同时达尔文大学毕业后进行了环球考察有很多发现</li>
+<li>突然有一天英国生物学家华莱士发了一篇论文与达尔文进化论意思差不多，达尔文坐不住了。两人一合计，华莱士的论文和达尔文的《物种起源》同时发表，但没有激起千层浪</li>
+<li>接下来的一年达尔文加速整理自己的理论，1859年，《物种起源》出版，在科学界和学术界引起巨大反响。</li>
+<li>不过达尔文没搞清楚为什么生物性特征会保留在后代身上，这个问题被遗传学之父–孟德尔解决了。</li>
+</ul>
+<h2 id="电"><a href="#电" class="headerlink" title="电"></a>电</h2><h3 id="1-电的概念提出"><a href="#1-电的概念提出" class="headerlink" title="1. 电的概念提出"></a>1. 电的概念提出</h3><p>（1）两千五百年前，泰勒斯（古希腊哲学家，被称为科学的祖师爷）用琥珀和毛皮摩擦之后，发现这种半透明的小石头居然产生了吸轻小物体的魔力。但始终没搞明白原因</p>
+<p>（2）直到16世纪英国医生吉尔伯特发现，琥珀和皮毛摩擦生电，关键不是琥珀而是摩擦。他换成了水晶摩擦也能生电，他就给这个现象起了个名字：电(Electric)</p>
+<h3 id="2-从此，电学成为显学，各路名人开始追热点："><a href="#2-从此，电学成为显学，各路名人开始追热点：" class="headerlink" title="2. 从此，电学成为显学，各路名人开始追热点："></a>2. 从此，电学成为显学，各路名人开始追热点：</h3><p>（1）德国马德堡市长盖利克发明了摩擦起电机</p>
+<p>（2）荷兰莱顿城的实验室发明了可以储存电的装置，这就是大名鼎鼎的莱顿瓶</p>
+<h3 id="3-电的本质的探索"><a href="#3-电的本质的探索" class="headerlink" title="3. 电的本质的探索"></a>3. 电的本质的探索</h3><p>（1）英国斯蒂芬格雷发现了点传导现象：带电物体通过中介，把电传给另外一个物体。这样即使不摩擦，原本不带电的物体也有了吸引力（那些给电就传电的物体称为导体，反之为绝缘体）</p>
+<p>（2）美国物理学家本杰明富兰克林：</p>
+<ul>
+<li>放风筝证明了天上打雷和摩擦生电是一回事；</li>
+<li>解释了摩擦生电是因为原本不带电的物体里正负电荷数量相等，维持着平衡。在摩擦时，电荷发生了转移。带负电的电子转移后就赖着不动了，就叫静电。</li>
+</ul>
+<p>当然现在对于电流有了更专业的定义：电荷的定向移动就是电流。常说的静电和电流其实就是电荷的两种状态。</p>
+<p>（3）库伦（后来电荷量的单位）：有多少电荷称为电荷量的大小。安培（后来电流的单位）：电流强度指的是单位时间内有多少电荷经过导体任一截面。</p>
+<h3 id="4-电的本质之电压"><a href="#4-电的本质之电压" class="headerlink" title="4.  电的本质之电压"></a>4.  电的本质之电压</h3><p>科学家早期用于实验的电流又短又快，如何让电流稳定持久一直是个难题。</p>
+<p>（1）意大利医生伽伐尼</p>
+<p>有一天在解剖青蛙时发现青蛙抽搐了起来，他认为动物本身是带电的，提出了动物电的概念。</p>
+<p>伏特反驳，说青蛙动不是动物电导致，而是两块金属手术刀的相遇。</p>
+<p>（2）伏特（后来电压的单位）推测两块不同的金属接触后，会产生持续稳定的电流，于是发明了伏特电池（拿破仑也跑来参观）</p>
+<p>（3）那为啥电池可以提供持久的电流呢？德国物理学家乔治西蒙欧姆给出了解释：热流的流动是因为温度差，那电池提供的这个差就叫电势差，也叫电压。</p>
+<h3 id="5-电的本质之电阻"><a href="#5-电的本质之电阻" class="headerlink" title="5. 电的本质之电阻"></a>5. 电的本质之电阻</h3><p>欧姆（电阻的单位）给出了电流电压和电阻的关系。要注意的是：电阻的大小是由导体本身的性质决定的，和电压电流无关。</p>
+<h2 id="电磁"><a href="#电磁" class="headerlink" title="电磁"></a>电磁</h2><p>人类和电的缘分在于泰勒斯发现了静电有吸引力。而在自然界中有个东西也有同样的魔力，那就是磁。那么这两者有什么关系吗？</p>
+<h3 id="1-汉斯奥斯特"><a href="#1-汉斯奥斯特" class="headerlink" title="1. 汉斯奥斯特"></a>1. 汉斯奥斯特</h3><p>奥斯特的朋友约翰沃特随口说了一个观点，电场合磁场之间有一种物理的关系。此外奥斯特还是哲学家康德的粉丝，康德也说过自然界的各种力，不仅同根同源，还能相互转换，包括电和磁。所以奥斯特坚信：电能生磁，磁能生电。</p>
+<p>经过很多次实验，奥斯特发现了电流冲击现象。</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 25em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102239693.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        电磁感应
+    </div>
+</center>
+
+<h3 id="2-安德烈安培"><a href="#2-安德烈安培" class="headerlink" title="2. 安德烈安培"></a>2. 安德烈安培</h3><p>最初安培一直坚信电和磁之间没有任何关系，可当奥斯特发现电能生磁后，安培开始研究。发现了电生磁的规律，即安培定则，也叫右手螺旋定则。</p>
+<p>接着安培想到，将导线绕成圈，效果就相当于一块磁铁，这就是通电螺线管。</p>
+<p>安培在这些现象的基础上，发明了电流计。安培被誉为电学里的牛顿。</p>
+<h3 id="3-迈克尔法拉第"><a href="#3-迈克尔法拉第" class="headerlink" title="3. 迈克尔法拉第"></a>3. 迈克尔法拉第</h3><p>安培差不多解开了电生磁的秘密，那么磁能生电吗？</p>
+<p>法拉第跟着戴维学习，当时已经知道，电流可以让小磁针转动，那么，有啥办法能让小磁针一直动呢？</p>
+<p>法拉第利用电磁相互作用，鼓捣出了电动机的雏形。</p>
+<p>后来发现，只有变化的磁场才能产生电流，这就是电磁感应现象。</p>
+<p>法拉第后来又发明了初代发电机。一个电动机，一个发电机，把人类送进了电气时代。</p>
+<p>为了表彰像法拉第一样的人，发明了一个新的称号：科学家。在这之前都叫哲学家。</p>
+<h3 id="4-詹姆斯麦克斯韦"><a href="#4-詹姆斯麦克斯韦" class="headerlink" title="4. 詹姆斯麦克斯韦"></a>4. 詹姆斯麦克斯韦</h3><p>麦克斯韦用数学方法总结了法拉第的研究成果，出了麦克斯韦方程组。</p>
+<p>这个公式，将电生磁、磁生电，几乎所有的一切蕴含其中，给电磁学的统一大业，画上了句号。</p>
+<p>同时，麦克斯韦根据这个公式，预言了电磁波的存在。后来德国赫兹（频率的单位）发现了电磁波的存在从而证明了麦克斯韦预言的正确性。</p>
+<h2 id="经典物理的两朵乌云"><a href="#经典物理的两朵乌云" class="headerlink" title="经典物理的两朵乌云"></a>经典物理的两朵乌云</h2><p>至此科学史也将进入高潮。牛顿统一了天地，麦克斯韦统一了电磁。</p>
+<h3 id="1-麦克斯韦"><a href="#1-麦克斯韦" class="headerlink" title="1. 麦克斯韦"></a>1. 麦克斯韦</h3><p>因为电场的存在，电荷表现出吸引力的特点。电荷跑起来后形成了电流，就会形成另一种神秘的物质：磁场。根据电磁感应原理，电流一旦变化磁场也跟着变，变化的磁场会继续生成新的电场，这样素有东西一直在变。</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 25em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102241898.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        电磁波
+    </div>
+</center>
+
+<p>这就是传说中的电磁波。</p>
+<p>麦克斯韦不仅预言了电磁波的存在，而且计算出了它的速度，得出电磁波在真空中的速度竟然是一个常量，等于光速。</p>
+<p>那么，光也是一种电磁波。这是麦克斯韦的第二个预言。</p>
+<h3 id="2-牛顿"><a href="#2-牛顿" class="headerlink" title="2. 牛顿"></a>2. 牛顿</h3><p>牛顿用三大定律和万有引力定律亲手搭建了经典物理学的大厦，称霸两百多年，大家都奉为真理，无人可以撼动。</p>
+<p>而麦克斯韦方程组的出现，补充了牛顿理论原本缺失的部分，牛顿和麦克斯韦的理论共同构成了经典物理学的地基。</p>
+<h3 id="3-两朵乌云"><a href="#3-两朵乌云" class="headerlink" title="3. 两朵乌云"></a>3. 两朵乌云</h3><p>后人针对电磁波的两个问题展开研究并得出结论</p>
+<ul>
+<li>根据电磁波传播的介质研究得出能量有最小的变化单位</li>
+<li>根据电磁波辐射的性质研究得出时空会变</li>
+</ul>
+<p>根据经典物理学：</p>
+<p>绝对时空论：时间的流速、空间的形状不会随着物质运动状态的改变而发生改变。</p>
+<p>能量变化连续：辐射电磁波的能量是连续变化的，可无限分割，能取任意的值。</p>
+<p>而根据上面这两个研究结果，彻底推翻了牛顿的绝对时空和能量的连续变化假设。</p>
+<p>然后科学家们针对两朵乌云展开研究，结果发展出两门很厉害的学问：量子力学和相对论</p>
+<h2 id="爱因斯坦"><a href="#爱因斯坦" class="headerlink" title="爱因斯坦"></a>爱因斯坦</h2><ol>
+<li><p>1905年，爱因斯坦接连发表多篇论文，这一年被称为爱因斯坦奇迹年：</p>
+<p>光电效应：《关于光的产生和转化的一个试探性观点》（讲的是光和电子的事情）</p>
+<p>布朗运动：《热的分子运动论所要求的静液体中悬浮粒子的运动》（研究分子是咋运动的）</p>
+<p>狭义相对论：《论动体的电动力学1》（研究出时间和空间会变）</p>
+<p>质能方程：《物体的惯性同它所含的能量有关吗》（研究质量和能量咋转换的）</p>
+</li>
+</ol>
+<h3 id="2-普朗克"><a href="#2-普朗克" class="headerlink" title="2. 普朗克"></a>2. 普朗克</h3><p>论文发表后没人看得懂，当时科学界顶流马克斯普朗克看了很赞赏爱因斯坦的光电效应论文两人约着见了一面。</p>
+<h3 id="3-广义相对论"><a href="#3-广义相对论" class="headerlink" title="3. 广义相对论"></a>3. 广义相对论</h3><p>提出狭义相对论后，爱因斯坦觉得这套理论不完美，狭义相对论主要解释的是匀速和静止运动，没法解释变速运动。</p>
+<p>比如它解释不了小胖正在乘坐电梯，忽然电梯绳被压断，小胖就和电梯一起下坠，那为什么不上头而是入地？爱因斯坦认为物体下落不是因为引力，而是空间被扭曲后压下去的。</p>
+<p>后提出广义相对论，但是没有得到正确的论证方程式</p>
+<h3 id="4-美国科学家威廉坎贝尔"><a href="#4-美国科学家威廉坎贝尔" class="headerlink" title="4. 美国科学家威廉坎贝尔"></a>4. 美国科学家威廉坎贝尔</h3><p>天文学家坎贝尔精准拍到日全食照片，验证了广义相对论的准确性</p>
+<h3 id="5-统一场论"><a href="#5-统一场论" class="headerlink" title="5. 统一场论"></a>5. 统一场论</h3><p>爱因斯坦后半辈子想要将引力场合电磁场统一起来，建立统一场论。但直到去世也没搞定</p>
+<h2 id="相对论"><a href="#相对论" class="headerlink" title="相对论"></a>相对论</h2><p>狭义相对论主要说的是：你跑的越快，衰老的越慢</p>
+<p>广义相对论主要说的是：引力不存在，其实是时空被某种东西扭曲了</p>
+<p>质能方程：运动会让质量和能量产生变化（能够计算出原子弹的威力）</p>
+<p>因此相对论统一了时间和空间、质量和能量</p>
+<h2 id="从光到量子力学"><a href="#从光到量子力学" class="headerlink" title="从光到量子力学"></a>从光到量子力学</h2><p>光的本质是什么？一派认为是波动，一派认为是微粒</p>
+<ol>
+<li><p>波动派的胡克 VS 微粒派的牛顿</p>
+</li>
+<li><p>托马斯杨做了著名的杨式双缝干涉实验，得出了光是一种波。这个结论占据了百来年。</p>
+</li>
+<li><p>波粒统一</p>
+</li>
+</ol>
+<ul>
+<li>赫兹除了验证电磁波之外，还发现了一个神奇的现象，光电效应（有光的情况下，电子会离家出走）。而实验结果是无论光强度如何，电子就是不跑。这如何解释呢？</li>
+<li>普朗克为了解释黑体辐射问题，认为能量是不能无限分割的，不可分割的单位叫能量子，也就是量子的雏形。（经典物理认为能量是可以无限分割的）</li>
+<li>爱因斯坦根据普朗克的研究，进而思考光电效应遗留的问题，得出光可能不是波，而是一种粒子！爱因斯坦这个假设完美解释了光电效应的问题</li>
+<li>美国科学家密立根完成了验证光电效应的实验，和爱因斯坦理论完全吻合</li>
+<li>爱因斯坦根据杨氏双缝干涉实验验证光的波动性，光电效应实验验证光的粒子性，提出了光的波粒二重性</li>
+</ul>
+<ol start="4">
+<li>量子力学</li>
+</ol>
+<ul>
+<li>法国德布罗意根据波粒二象性得出世间万物都有波粒二象性，也就是说你以为的实物粒子，其实都有波动性。这种波被称为物质波，也叫德布罗意波</li>
+<li>后来科学家验证了德布罗意的猜想，得出了所有微观粒子都具备波粒二象性。然后科学家针对微观粒子的运动状态进行研究，这个衍生了一个全新的学说：量子力学</li>
+<li>哥本哈根学派中的卢瑟福研究原子的运动，提出了原子的太阳系模型；他的徒弟玻尔对其进行了补充；海森堡不同意他们的模型，提出了矩阵力学，奠定了他量子力学之父的地位</li>
+<li>海森堡提出电子运动的不确定性原理。比如双缝干涉实验中，你看它的时候就像粒子一样穿过，不看的时候其实像波一样穿过</li>
+<li>薛定谔提出波函数；</li>
+<li>玻恩解释了波函数：意思就是电子的运动位置是一团概论，是随机的。我们没法确定具体的走位，但是电子在每个位置出现的概论是可以计算出来的，这就是玻恩的概论解释。</li>
+</ul>
+<p>综上，不确定性原理和概论解释，共同构成了量子力学的核心–哥本哈根学派解释的主要内容</p>
+<p>第五届索尔维会议中，由玻尔领头的哥本哈根学派，和由爱因斯坦带领的一派质疑哥本哈根的研究，再加上一些看热闹的大佬，双方就微观粒子的运动到底是否随机这个问题展开了激烈的讨论，后来谁也说服不了谁，留下了这张著名的合影</p>
+<center>
+    <img
+        style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+        src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404102243079.png" />
+    <div
+        style="color: #999; padding: 2px;font-size:0.8em">
+        第五届索尔维会议
+    </div>
+</center>
+
+<p>作为爱因斯坦的迷弟，薛定谔站出来怒喷哥本哈根学派，他提出了一个丧心病狂的思想实验–薛定谔的猫。后来人们发现这个实验并不严谨，所以没法参考。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E8%87%AA%E7%84%B6%E7%A7%91%E5%AD%A6/"># 自然科学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/be9b372b/">从宇宙生灭到对大一统理论的探索</a>
+            
+            
+            <a class="next" rel="next" href="/65c912e4/">webpack - 6. 基于webpack4带你一步步打造极致的前端开发环境。</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/be9b372b/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/65c912e4/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

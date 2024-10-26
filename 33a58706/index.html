@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>前端项目构建最佳实践 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">前端项目构建最佳实践</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">一月 14, 2023&nbsp;&nbsp;12:11:04</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        一月 14, 2023
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">8.6k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">35 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文从通过脚手架搭建vue项目开始，到editorconfig、VSCode配置文件、jsconfig.json、Prettier、ESLint、Git提交规范（husky、lint-staged、conventional-changelog）、StyleLint、多环境配置、browserslist的使用，详细说明了前端项目构建的最佳实践。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HelloAllenW/vue2-base-project">源码</a></p>
+<br />
+
+<h1 id="通过脚手架搭建vue项目"><a href="#通过脚手架搭建vue项目" class="headerlink" title="通过脚手架搭建vue项目"></a>通过脚手架搭建vue项目</h1><p><a href="https://blog.helloallen.cn/2024/01/14/%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%AE%8C%E6%95%B4%E7%9A%84vue%E9%A1%B9%E7%9B%AE/">手动搭建一个完整的vue项目</a></p>
+<br />
+
+<h1 id="通过editorconfig抹平编辑器差异"><a href="#通过editorconfig抹平编辑器差异" class="headerlink" title="通过editorconfig抹平编辑器差异"></a>通过editorconfig抹平编辑器差异</h1><p>EditorConfig保证不同开发者如果使用不同的编辑器（sublime/vscode）或系统（windows/mac），能够执行统一的代码风格标准。比如：缩进是tab还是space，结尾end_of_line是lf还是crlf。</p>
+<p>简而言之，EditorConfig可以覆盖编辑器的默认配置，是为了抹平不同IDE的代码格式差异而产生的。</p>
+<p>但是这种方式只能简单的配置一些规范，并不能完全满足需求，所以还需要其它代码检查工具配合使用，比如说：ESLint或StyleLint，统一代码风格。</p>
+<h2 id="1-添加配置文件"><a href="#1-添加配置文件" class="headerlink" title="1. 添加配置文件"></a>1. 添加配置文件</h2><p>定义格式规则，避免常见的代码格式不一致和丑陋的 diffs。</p>
+<p>通常在项目根目录下，添加<code>.editorconfig</code>配置文件，贴一份常见的配置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 配置项文档：https://editorconfig.org/</span><br><span class="line"></span><br><span class="line"># 告知 EditorConfig 插件，当前即是根文件</span><br><span class="line">root = true</span><br><span class="line"></span><br><span class="line"># * 表示下面的配置适用全部文件</span><br><span class="line">[*]</span><br><span class="line">## 设置字符集</span><br><span class="line">charset = utf-8</span><br><span class="line">## 缩进风格 space | tab，建议 space</span><br><span class="line">indent_style = space</span><br><span class="line">## 设置每个缩进级别的空格数（修改这里的话需要将 prettier.config.js 和 .vscode -&gt; settings.json 也同步修改）</span><br><span class="line">indent_size = 2</span><br><span class="line">## 换行符类型。可选值为lf（Unix 风格）、cr（Mac 风格）或 crlf（Windows 风格），一般都是设置为 lf</span><br><span class="line">end_of_line = lf</span><br><span class="line">## 是否在文件末尾插入空白行</span><br><span class="line">insert_final_newline = true</span><br><span class="line">## 是否删除一行中的前后空格</span><br><span class="line">trim_trailing_whitespace = true</span><br><span class="line"></span><br><span class="line"># 适用 .md 文件</span><br><span class="line">[*.md]</span><br><span class="line">insert_final_newline = false</span><br><span class="line">trim_trailing_whitespace = false</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-安装插件"><a href="#2-安装插件" class="headerlink" title="2. 安装插件"></a>2. 安装插件</h2><p>某些编辑器已经内置了EditorConfig插件，无需另外安装了，比如 WebStorm、VisualStudio、pyCharm等等。</p>
+<p>某些编辑器没有内置，需要自行安装插件，比如vscode，需要安装 EditorConfig for VS Code</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141213634.png"></p>
+<p>安装插件后就可以手动格式化代码（Mac OS：shift+option+f；  Windows：shift+alt+f）</p>
+<br />
+
+<h1 id="VSCode配置文件（Settings-json）"><a href="#VSCode配置文件（Settings-json）" class="headerlink" title="VSCode配置文件（Settings.json）"></a>VSCode配置文件（Settings.json）</h1><p>VSCode的<code>setting.json</code>设置分为工作区和用户两个级别，其中用户区会对所有项目生效，而工作区的设置只会对当前项目生效。</p>
+<h2 id="1-用户区settings-json配置"><a href="#1-用户区settings-json配置" class="headerlink" title="1. 用户区settings.json配置"></a>1. 用户区settings.json配置</h2><p>点击VSCode左下角的设置按钮，选择Settings，选择以文本编辑形式打开settings.json，并且在setting.json中加入以下代码。配置完成之后，当我们保存某个文件时，就可以自动对当前文件进行ESLint检查，并且自动对一些错误进行修复。配置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  // 每次保存的时候自动格式化</span><br><span class="line">  &quot;editor.formatOnSave&quot;: true,</span><br><span class="line">  &quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">    &quot;source.fixAll.eslint&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-工作区settings-json配置"><a href="#2-工作区settings-json配置" class="headerlink" title="2. 工作区settings.json配置"></a>2. 工作区settings.json配置</h2><p>除了配置用户区的settings.json之外，我们也可以配置工作区的settings.json，工作区的配置只会对当前项目生效。首先，我们需要在项目根目录创建<code>.vscode</code>目录，并且在该目录下创建settings.json文件。</p>
+<p>接着，在settings.json中加入以下代码，配置完成后，当我们保存该项目中某个文件时，也会自动对该文件进行ESLint检查，并且自动修复一些问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;editor.formatOnSave&quot;: true,</span><br><span class="line">  &quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">    &quot;source.fixAll.eslint&quot;: true,</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;eslint.validate&quot;: [&quot;typescript&quot;, &quot;javascript&quot;, &quot;vue&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="tsconfig"><a href="#tsconfig" class="headerlink" title="tsconfig"></a>tsconfig</h1><h2 id="1-tsconfig-json"><a href="#1-tsconfig-json" class="headerlink" title="1. tsconfig.json"></a>1. tsconfig.json</h2><p><code>tsconfig.json</code> 是 TypeScript 编译器的配置文件，一般放在项目根目录。用于指定编译 TypeScript 代码时的编译选项和编译目标等信息。当我们使用 tsc 命令编译项目，且没有指定输入文件时，编译器就会去查找 tsconfig.json 文件。如果在当前目录没找到，就会逐级向父文件夹查找。我们也可以通过在 tsc 命令中加上–project 参数，来指定一个包含 tsconfig.json 文件的目录。如果命令行上指定了输入文件时，tsconfig.json 的配置会被忽略。</p>
+<p>通过修改该文件，可以定制 TypeScript 编译器的行为，例如指定编译目标、启用或禁用特定的语言特性、设置代码检查规则等。</p>
+<h2 id="2-jsconfig-json"><a href="#2-jsconfig-json" class="headerlink" title="2. jsconfig.json"></a>2. jsconfig.json</h2><p><code>jsconfig.json</code> 源自 <code>tsconfig.json</code>，默认启用了一些与 JavaScript 相关的编译选项，常用于 JavaScript 项目。可以简单理解为设置了 <code>allowJs</code> 为 <code>true</code> 的 <code>tsconfig.json</code>。</p>
+<p>如果你的项目中有一个 jsconfig.json文件的话，这个文件的配置<strong style="border-bottom: 1px green dashed;">可以对你的文件所在目录下的所有js代码做出个性化支持</strong>。目录中存在此类文件表示该目录是JavaScript项目的根目录，否则会把打开的JavaScript文件被视为独立单元。文件本身可以选择列出属于项目的文件，要从项目中排除的文件，以及编译器选项。</p>
+<p>在工作空间中定一个jsconfig.json文件时，JavaScript体验会得到改进。</p>
+<p>配置的内容比如：在不使用typescript的时候也可以对js进行ts的类型检查（因为jsconfig.json是tsconfig.json的子集，所以检查是ts的）；当我们使用Webpack Alias时，可以往<code>jsconfig.json</code>里添加<code>baseUrl</code>、<code>paths</code>配置以获得路径智能提示，提高开发体验。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;compilerOptions&quot;: &#123;</span><br><span class="line">        &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">        &quot;paths&quot;: &#123;</span><br><span class="line">            &quot;@/*&quot;: [&quot;./src/*&quot;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-一份基本的配置"><a href="#3-一份基本的配置" class="headerlink" title="3. 一份基本的配置"></a>3. 一份基本的配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">// vscode配置文件: 通过jsconfig.json来设置编译选项，可以帮助我们提高开发效率，避免一些不必要的错误。</span><br><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    // 指定要使用的默认库，值为&quot;es3&quot;,&quot;es5&quot;,&quot;es2015&quot;...</span><br><span class="line">    &quot;target&quot;: &quot;es5&quot;,</span><br><span class="line">    // 生成代码的模板标准，可选 amd / commonJS / es2015 / es6 / esnext / none / system / umd</span><br><span class="line">    &quot;module&quot;: &quot;esnext&quot;,</span><br><span class="line">    &quot;baseUrl&quot;: &quot;./&quot;,</span><br><span class="line">    // 指定如何解析模块以进行导入，可选 node / classic</span><br><span class="line">    &quot;moduleResolution&quot;: &quot;node&quot;,</span><br><span class="line">     // 解决别名导致vscode无法跳转文件的问题</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">      &quot;@/*&quot;: [</span><br><span class="line">        &quot;src/*&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line">    // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,</span><br><span class="line">    // 如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入&quot;ES2019.Array&quot;,</span><br><span class="line">    &quot;lib&quot;: [</span><br><span class="line">      &quot;esnext&quot;,</span><br><span class="line">      &quot;dom&quot;,</span><br><span class="line">      &quot;dom.iterable&quot;,</span><br><span class="line">      &quot;scripthost&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  // 指定不需要被编译的目录：与开发无关的文件(非源码)可以让 IDE 全部在编译时排除掉，以提高 IDE 性能</span><br><span class="line">  &quot;exclude&quot;: [</span><br><span class="line">    &quot;node_modules&quot;, </span><br><span class="line">    &quot;**/node_modules/*&quot;, // 在填写路径时 ** 表示任意目录， * 表示任意文件</span><br><span class="line">    &quot;dist&quot;</span><br><span class="line">  ],</span><br><span class="line">  // 指定被编译文件所在的目录</span><br><span class="line">  &quot;include&quot;: [</span><br><span class="line">    &quot;src/*.js&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-compilerOptions的其他配置"><a href="#4-compilerOptions的其他配置" class="headerlink" title="4. compilerOptions的其他配置"></a>4. compilerOptions的其他配置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&quot;compilerOptions&quot;: &#123;</span><br><span class="line">  &quot;target&quot;: &quot;ES5&quot;, // 目标语言的版本</span><br><span class="line">  &quot;module&quot;: &quot;CommonJS&quot;, // 生成代码的模板标准</span><br><span class="line">  &quot;lib&quot;: [&quot;DOM&quot;, &quot;ES2015&quot;, &quot;ScriptHost&quot;, &quot;ES2019.Array&quot;], // TS需要引用的库，即声明文件，es5 默认引用dom、es5、scripthost,如需要使用es的高级版本特性，通常都需要配置，如es8的数组新特性需要引入&quot;ES2019.Array&quot;,</span><br><span class="line">  &quot;outDir&quot;: &quot;./dist&quot;, // 指定输出目录</span><br><span class="line">  &quot;rootDir&quot;: &quot;./&quot;, // 指定输出文件目录(用于输出)，用于控制输出目录结构</span><br><span class="line">  &quot;allowJS&quot;: true, // 允许编译器编译JS，JSX文件</span><br><span class="line">  &quot;checkJs&quot;: true, // 允许在JS文件中报错，通常与allowJS一起使用</span><br><span class="line">  &quot;removeComments&quot;:true, // 删除注释 </span><br><span class="line">  &quot;esModuleInterop&quot;: true, // 允许export=导出，由import from 导入</span><br><span class="line">  </span><br><span class="line">  /* 严格检查选项 */</span><br><span class="line">  &quot;strict&quot;: true, // 开启所有严格的类型检查</span><br><span class="line">  &quot;alwaysStrict&quot;: true, // 在代码中注入&#x27;use strict&#x27;</span><br><span class="line">  &quot;noImplicitAny&quot;: true, // 不允许隐式的any类型</span><br><span class="line">  &quot;noImplicitThis&quot;: true, // 不允许this有隐式的any类型</span><br><span class="line">  &quot;strictNullChecks&quot;: true, // 不允许把null、undefined赋值给其他类型的变量</span><br><span class="line">  &quot;strictBindCallApply&quot;: true, // 严格的bind/call/apply检查</span><br><span class="line">  &quot;strictFunctionTypes&quot;: true, // 不允许函数参数双向协变</span><br><span class="line">  &quot;strictPropertyInitialization&quot;: true, // 类的实例属性必须初始化</span><br><span class="line">  </span><br><span class="line">  /* 额外检查 */</span><br><span class="line">  &quot;noUnusedLocals&quot;: true, // 检查只声明、未使用的局部变量(只提示不报错)</span><br><span class="line">  &quot;noUnusedParameters&quot;: true, // 检查未使用的函数参数(只提示不报错)</span><br><span class="line">  &quot;noImplicitReturns&quot;: true, // 每个分支都会有返回值</span><br><span class="line">  &quot;noImplicitOverride&quot;: true,// 是否检查子类继承自基类时，其重载的函数命名与基类的函数不同步问题</span><br><span class="line">  &quot;noFallthroughCasesInSwitch&quot;: true, // 防止switch语句贯穿(即如果没有break语句后面不会执行)</span><br><span class="line">  &quot;noUncheckedIndexedAccess&quot;: true, / /是否通过索引签名来描述对象上有未知键但已知值的对象</span><br><span class="line">  &quot;noPropertyAccessFromIndexSignature&quot;: true, // 是否通过&quot; . “(obj.key) 语法访问字段和&quot;索引”( obj[“key”])， 以及在类型中声明属性的方式之间的一致性</span><br><span class="line">  </span><br><span class="line">  /* 实验选项 */</span><br><span class="line">  &quot;experimentalDecorators&quot;: true, // 是否启用对装饰器的实验性支持，装饰器是一种语言特性，还没有完全被 JavaScript 规范批准</span><br><span class="line">  &quot;emitDecoratorMetadata&quot;: true, // 为装饰器启用对发出类型元数据的实验性支持</span><br><span class="line"></span><br><span class="line">  /* 高级选项 */</span><br><span class="line">  &quot;forceConsistentCasingInFileNames&quot;: true, // 是否区分文件系统大小写规则</span><br><span class="line">  &quot;extendedDiagnostics&quot;: false, // 是否查看 TS 在编译时花费的时间</span><br><span class="line">  &quot;noEmit&quot;: true, // 不输出文件,即编译后不会生成任何js文件</span><br><span class="line">  &quot;noEmitOnError&quot;: true, // 有错误时不进行编译</span><br><span class="line">  &quot;noEmitHelpers&quot;: true, // 不生成helper函数，减小体积，需要额外安装，常配合importHelpers一起使用</span><br><span class="line">  &quot;resolveJsonModule&quot;: true, // 是否解析 JSON 模块</span><br><span class="line">  </span><br><span class="line">  /* 其他 */</span><br><span class="line">  &quot;incremental&quot;: true, // TS编译器在第一次编译之后会生成一个存储编译信息的文件，第二次编译会在第一次的基础上进行增量编译，可以提高编译的速度</span><br><span class="line">  &quot;tsBuildInfoFile&quot;: &quot;./buildFile&quot;, // 增量编译文件的存储位置</span><br><span class="line">  &quot;diagnostics&quot;: true, // 打印诊断信息 </span><br><span class="line">  &quot;outFile&quot;: &quot;./app.js&quot;, // 将多个相互依赖的文件生成一个文件，可以用在AMD模块中，即开启时应设置&quot;module&quot;: &quot;AMD&quot;,</span><br><span class="line">  &quot;declaration&quot;: true, // 生成声明文件，开启后会自动生成声明文件</span><br><span class="line">  &quot;declarationDir&quot;: &quot;./file&quot;, // 指定生成声明文件存放目录</span><br><span class="line">  &quot;emitDeclarationOnly&quot;: true, // 只生成声明文件，而不会生成js文件</span><br><span class="line">  &quot;sourceMap&quot;: true, // 生成目标文件的sourceMap文件</span><br><span class="line">  &quot;inlineSourceMap&quot;: true, // 生成目标文件的inline SourceMap，inline SourceMap会包含在生成的js文件中</span><br><span class="line">  &quot;declarationMap&quot;: true, // 为声明文件生成sourceMap</span><br><span class="line">  &quot;typeRoots&quot;: [], // 声明文件目录，默认时node_modules/@types</span><br><span class="line">  &quot;types&quot;: [], // 加载的声明文件包</span><br><span class="line">  &quot;importHelpers&quot;: true, // 通过tslib引入helper函数，文件必须是模块</span><br><span class="line">  &quot;downlevelIteration&quot;: true, // 降级遍历器实现，如果目标源是es3/5，那么遍历器会有降级的实现</span><br><span class="line">  &quot;allowUmdGlobalAccess&quot;: true, // 允许在模块中全局变量的方式访问umd模块</span><br><span class="line">  &quot;moduleResolution&quot;: &quot;node&quot;, // 模块解析策略，ts默认用node的解析策略，即相对的方式导入</span><br><span class="line">  &quot;baseUrl&quot;: &quot;./&quot;, // 解析非相对模块的基地址，默认是当前目录</span><br><span class="line">  &quot;paths&quot;: &#123; // 路径映射，相对于baseUrl</span><br><span class="line">    // 如使用jq时不想使用默认版本，而需要手动指定版本，可进行如下配置</span><br><span class="line">    &quot;jquery&quot;: [&quot;node_modules/jquery/dist/jquery.min.js&quot;]</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;rootDirs&quot;: [&quot;src&quot;,&quot;out&quot;], // 将多个目录放在一个虚拟目录下，用于运行时，即编译后引入文件的位置可能发生变化，这也设置可以虚拟src和out在同一个目录下，不用再去改变路径也不会报错</span><br><span class="line">  &quot;listEmittedFiles&quot;: true, // 打印输出文件</span><br><span class="line">  &quot;listFiles&quot;: true// 打印编译的文件(包括引用的声明文件)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="代码格式化工具（Prettier）"><a href="#代码格式化工具（Prettier）" class="headerlink" title="代码格式化工具（Prettier）"></a>代码格式化工具（Prettier）</h1><h2 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h2><p>在保存/粘贴代码或者使用格式化快捷键时，可以自动按照我们制定的Prettier规范格式化代码。</p>
+<p>Prettier只关注代码格式，它即可单独使用，也可以配合编辑器使用，或和eslint一起使用。</p>
+<p>这里有人可能会有疑问，eslint不也关注代码格式，做格式校验吗？ 为啥还要用Prettier？这是因为一是在之前eslint不支持autoFix，二是两个的规则并不完全相同。</p>
+<p>而且，ESLint 有一个局限性，它执行 <code>eslint index.js --fix</code> 只能处理 js 文件，处理不了其他格式的文件，例如html css 文件，但是 prettier 就能处理其他类型的文件 。</p>
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2. 使用"></a>2. 使用</h2><h3 id="（1）下载依赖"><a href="#（1）下载依赖" class="headerlink" title="（1）下载依赖"></a>（1）下载依赖</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install prettier -D</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）设置配置文件"><a href="#（2）设置配置文件" class="headerlink" title="（2）设置配置文件"></a>（2）设置配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">	// 每行最大字符数，超过会换行，默认80</span><br><span class="line">	printWidth: 130,</span><br><span class="line">	// 缩进字节数</span><br><span class="line">	tabWidth: 2,</span><br><span class="line">	// 使用制表符而不是空格缩进行</span><br><span class="line">	useTabs: true,</span><br><span class="line">	// 结尾不用分号(true有，false没有)</span><br><span class="line">	semi: false,</span><br><span class="line">	// 使用单引号(true单双引号，false双引号)</span><br><span class="line">	singleQuote: true,</span><br><span class="line">	// 更改引用对象属性的时间 可选值&quot;&lt;as-needed|consistent|preserve&gt;&quot;</span><br><span class="line">	quoteProps: &quot;as-needed&quot;,</span><br><span class="line">	// 在对象，数组括号与文字之间加空格 &quot;&#123; foo: bar &#125;&quot;</span><br><span class="line">	bracketSpacing: true,</span><br><span class="line">	// 是否使用尾逗号 可选值&quot;&lt;none|es5|all&gt;&quot;，默认none</span><br><span class="line">	trailingComma: &quot;none&quot;,</span><br><span class="line">	// 在JSX中使用单引号而不是双引号</span><br><span class="line">	jsxSingleQuote: true,</span><br><span class="line">	//  (x) =&gt; &#123;&#125; 箭头函数参数只有一个时是否要有小括号。avoid：省略括号 ,always：不省略括号</span><br><span class="line">	arrowParens: &quot;avoid&quot;,</span><br><span class="line">	// 如果文件顶部已经有一个 doclock，这个选项将新建一行注释，并打上@format标记。</span><br><span class="line">	insertPragma: false,</span><br><span class="line">	// 指定要使用的解析器，不需要写文件开头的 @prettier</span><br><span class="line">	requirePragma: false,</span><br><span class="line">	// 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行</span><br><span class="line">	proseWrap: &quot;preserve&quot;,</span><br><span class="line">	// 在html中空格是否是敏感的 &quot;css&quot; - 遵守CSS显示属性的默认值， &quot;strict&quot; - 空格被认为是敏感的 ，&quot;ignore&quot; - 空格被认为是不敏感的</span><br><span class="line">	htmlWhitespaceSensitivity: &quot;css&quot;,</span><br><span class="line">	// 换行符使用 lf 结尾是 可选值&quot;&lt;auto|lf|crlf|cr&gt;&quot;</span><br><span class="line">	endOfLine: &quot;auto&quot;,</span><br><span class="line">	// 这两个选项可用于格式化以给定字符偏移量（分别包括和不包括）开始和结束的代码</span><br><span class="line">	rangeStart: 0,</span><br><span class="line">	rangeEnd: Infinity,</span><br><span class="line">	// Vue文件脚本和样式标签缩进</span><br><span class="line">	vueIndentScriptAndStyle: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录下手动创建一个 <code>.prettierrc.js</code> ，进行如上配置。或者也可以在VSCode的settings.json中进行配置。配置完成后我们就可以手动通过命令行来格式化某个文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx prettier main.js --write</span><br></pre></td></tr></table></figure>
+
+<p>prettier 先会去项目文件中找是否有 .prettierrc.js 或 .prettierrc 的文件，如果有就使用 .prettierrc.js 或 .prettierrc 文件中的格式化规则，如果没有则查找是否有.editorconfig，还是没有就使用 settings.json 的规则。</p>
+<h3 id="（3）安装VSCode插件"><a href="#（3）安装VSCode插件" class="headerlink" title="（3）安装VSCode插件"></a>（3）安装VSCode插件</h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141218003.png" alt="img"></p>
+<p>安装插件后，调出系统设置 settings.json 并将 prettier 设置为默认格式化工具，可以为所有语言或特定语言设置此项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  // 所有语言</span><br><span class="line">  &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;,</span><br><span class="line">  // 特定语言</span><br><span class="line">  &quot;[html]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[javascript]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[vue]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;[css]&quot;: &#123;</span><br><span class="line">    &quot;editor.defaultFormatter&quot;: &quot;esbenp.prettier-vscode&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  ···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，我们就可以使用shift + Alt + F（VSCode默认快捷键）来格式化代码。还可以通过修改VSCode设置，实现保存即格式化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.formatOnSave&quot;: true</span><br></pre></td></tr></table></figure>
+
+<p>更多Prettier的使用，请移步 <a target="_blank" rel="noopener" href="https://prettier.io/">Prettier官网</a></p>
+<br />
+
+<h1 id="代码规范性工具（ESLint）"><a href="#代码规范性工具（ESLint）" class="headerlink" title="代码规范性工具（ESLint）"></a>代码规范性工具（ESLint）</h1><h2 id="1-说明-1"><a href="#1-说明-1" class="headerlink" title="1. 说明"></a>1. 说明</h2><p>eslint的关注点是代码质量和代码格式。</p>
+<p>何为代码质量？如未使用变量、三等号、全局变量声明等问题</p>
+<p>何为代码格式？如单行代码太长、tab的长度、空格、逗号，单双引号等问题</p>
+<p>对于质量和格式问题，eslint可以给出错误或警告提示，也可以自动修复，autofix eslint的原则是一切皆可配，没有什么必须要禁止，或必须要使用的规则，如果有，这些规则应该从语言本身就限制掉。</p>
+<p>灵活是有代价的，虽然每个规则都可配，但要配置那么多规则也是极其繁琐的，因此有人提供了一些preset，也就是预设规则，通常由一些最佳实践集成而来。</p>
+<h2 id="2-使用-1"><a href="#2-使用-1" class="headerlink" title="2. 使用"></a>2. 使用</h2><h3 id="（1）eslint初始化"><a href="#（1）eslint初始化" class="headerlink" title="（1）eslint初始化"></a>（1）eslint初始化</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g eslint</span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录执行以下命令初始化eslint：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --init</span><br></pre></td></tr></table></figure>
+
+<p>回答几个问题后，比如配置文件格式、是否使用react，vue，是否支持typescript等，则会自动在根目录下生成对应的配置文件.eslintrc.js。</p>
+<p>用vue脚手架创建项目时，这步已经在脚手架完成。可以跳过当前步骤直接进入下一步，设置配置文件。</p>
+<h3 id="（2）设置配置文件-1"><a href="#（2）设置配置文件-1" class="headerlink" title="（2）设置配置文件"></a>（2）设置配置文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  // 表示当前目录即为根目录，ESLint规则被现在到该目录下</span><br><span class="line">  root: true,</span><br><span class="line">  // env 表示启用 ESLint 检查的环境</span><br><span class="line">  env: &#123;</span><br><span class="line">    // 在 node 环境下启动ESLint检测</span><br><span class="line">    node: true</span><br><span class="line">  &#125;,</span><br><span class="line">  // ESLint 中基础配置需要继承的配置，这里不知道怎么配置需要看文档</span><br><span class="line">  extends: [</span><br><span class="line">    &#x27;plugin:vue/essential&#x27;,</span><br><span class="line">    &#x27;@vue/standard&#x27;</span><br><span class="line">  ],</span><br><span class="line">  // 解析器</span><br><span class="line">  parserOptions: &#123;</span><br><span class="line">    parser: &#x27;@babel/eslint-parser&#x27; // 是一个解析器，允许您使用ESLint对所有有效的Babel代码进行检查。</span><br><span class="line">  &#125;,</span><br><span class="line">  // 需要修改的启用规则及其各自的错误级别</span><br><span class="line">  /**</span><br><span class="line">   * 错误级别分为三种：</span><br><span class="line">   * &quot;off&quot; 或 0 -   关闭规则</span><br><span class="line">   * &quot;warn&quot; 或 1 -  开启规则，使用警告级别的错误：warn（不会导致程序退出）</span><br><span class="line">   * &quot;error&quot; 或 2 - 开启规则，使用错误级别的错误：error（当被触发的时候，程序会）</span><br><span class="line">   */</span><br><span class="line">  rules: &#123;</span><br><span class="line">    &#x27;no-console&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;warn&#x27; : &#x27;off&#x27;,</span><br><span class="line">    &#x27;no-debugger&#x27;: process.env.NODE_ENV === &#x27;production&#x27; ? &#x27;warn&#x27; : &#x27;off&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置完成后，我们就可以使用命令<code>eslint index.js</code>来检测index.js文件，并且可以使用<code>eslint index.js --fix</code> 指令，对这个文件的错误语法进行自动修正。</p>
+<p>【注意】eslint 的 auto-fix，能够修复的规范问题比较有限。</p>
+<p>比如，ESLint 对于 console.log 是不会帮你移除的，还要就是声明的变量未使用到，同样不会帮你移除，它只会帮你添加分号与替换双引号。其他需要较大变动才能修复的规范问题，eslint 无法自动修复。如：单行不能超过 80 个字符。</p>
+<h3 id="（3）下载VSCode插件"><a href="#（3）下载VSCode插件" class="headerlink" title="（3）下载VSCode插件"></a>（3）下载VSCode插件</h3><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141220569.png" alt="img"></p>
+<p>像上面这样每次想知道文件中是否错误都要执行一次 eslint xxx.js 指令 ，很麻烦的，如果我们想一边写代码时候就一边发现错误，就及时更改，我们就需要安装 vscode 的 ESLint 插件。安装完成 ESLint 插件后，插件会根据项目根目录下的配置文件，校验代码格式。我们就会发现 鼠标指向代码时就能看到了警告与错误提示 ，那么我们怎么做到保存时自动校验并修正代码呢，我们需要给setting.json添加如下配置项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.formatOnType&quot;: true, // 控制编辑器在键入一行后是否自动格式化该行</span><br><span class="line">&quot;editor.formatOnSave&quot;: true, // 在保存时格式化文档</span><br><span class="line">&quot;eslint.codeAction.showDocumentation&quot;: &#123;</span><br><span class="line">  &quot;enable&quot;: true</span><br><span class="line">&#125;,</span><br><span class="line">&quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">  &quot;source.fixAll.eslint&quot;: true,</span><br><span class="line">&#125;,</span><br><span class="line">&quot;eslint.validate&quot;: [ // 检测语言</span><br><span class="line">  &quot;javascript&quot;,</span><br><span class="line">  &quot;javascriptreact&quot;,</span><br><span class="line">  &quot;html&quot;,</span><br><span class="line">  &quot;vue&quot;,</span><br><span class="line">  &quot;typescript&quot;,</span><br><span class="line">  &quot;typescriptreact&quot;,</span><br><span class="line">  &quot;markdown&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>这样，对于可自动修复的格式错误，在保存文件时，eslint会自动帮我们修复。</p>
+<p>此外，如果项目对格式强制要求，还可加载husky和lint-staged在commit前对更改的代码做lint校验（前者用来给git流程添加钩子，后者用来给只更改的代码而不是整个项目做lint），lint不通过则不予commit。防止部分团队成员在eslint不通过时仍然提交代码。</p>
+<h2 id="3-ESLint其他依赖介绍"><a href="#3-ESLint其他依赖介绍" class="headerlink" title="3. ESLint其他依赖介绍"></a>3. ESLint其他依赖介绍</h2><table>
+<thead>
+<tr>
+<th>依赖</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>eslint</td>
+<td>ESLint 核心库</td>
+</tr>
+<tr>
+<td>eslint-config-prettier</td>
+<td>关掉所有和 Prettier 冲突的 ESLint 的配置</td>
+</tr>
+<tr>
+<td>eslint-plugin-prettier</td>
+<td>将 Prettier 的 rules 以插件的形式加入到 ESLint 里面</td>
+</tr>
+<tr>
+<td>eslint-plugin-vue</td>
+<td>为 Vue 使用 ESlint 的插件</td>
+</tr>
+<tr>
+<td>@typescript-eslint/eslint-plugin</td>
+<td>ESLint 插件，包含了各类定义好的检测 TypeScript 代码的规范</td>
+</tr>
+<tr>
+<td>@typescript-eslint/parser</td>
+<td>ESLint 的解析器，用于解析 TypeScript，从而检查和规范 TypeScript 代码</td>
+</tr>
+</tbody></table>
+<br />
+
+<h1 id="ESLint中使用Prettier"><a href="#ESLint中使用Prettier" class="headerlink" title="ESLint中使用Prettier"></a>ESLint中使用Prettier</h1><h2 id="1-安装-eslint-prettier"><a href="#1-安装-eslint-prettier" class="headerlink" title="1. 安装 eslint + prettier"></a>1. 安装 eslint + prettier</h2><p>（如果已安装请跳过直接进入下一步）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint prettier -D</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-安装-eslint-config-prettier"><a href="#2-安装-eslint-config-prettier" class="headerlink" title="2. 安装 eslint-config-prettier"></a>2. 安装 eslint-config-prettier</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint-config-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>（1）该依赖的作用是：</p>
+<p>让所有可能会与 prettier 规则存在冲突的 eslint rule失效，并使用 prettier 的规则进行代码检查。</p>
+<p>相当于，用 prettier 的规则，覆盖掉 eslint:recommended 的部分规则。</p>
+<p>（2）使用：修改.eslintrc.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;, &quot;prettier&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-安装-eslint-plugin-prettier"><a href="#3-安装-eslint-plugin-prettier" class="headerlink" title="3. 安装 eslint-plugin-prettier"></a>3. 安装 eslint-plugin-prettier</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint-plugin-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p>（1）作用是将 prettier 的能力集成到 eslint 中。按照 prettier 的规则检查代码规范性，并进行修复。</p>
+<p>（2）使用：修改.eslintrc.js</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;rules&quot;:&#123;</span><br><span class="line">        &quot;prettier/prettier&quot;:&quot;error&quot; // 不符合 prettier 规则的代码，要进行错误提示（红线）</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    &quot;plugins&quot;: [&quot;prettier&quot;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 或者</span><br><span class="line">&#123;</span><br><span class="line">    &quot;extends&quot;: [&quot;eslint:recommended&quot;,&quot;plugin:prettier/recommended&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx eslint --fix main.js</span><br></pre></td></tr></table></figure>
+
+<p>至此，eslint 会拥有和 prettier 一样的修复能力。像 prettier 一样，格式化所有不符合规范的代码。</p>
+<h2 id="4-小结"><a href="#4-小结" class="headerlink" title="4. 小结"></a>4. 小结</h2><ul>
+<li>eslint、prettier、VSCode相关插件（ESLint、Prettier - Code formatter）的关系？<br>prettier主要关注代码格式，比如单双引号、单行代码长度等。eslint同时关注代码质量（如声明变量未使用）和代码格式，但是对于代码格式，eslint只能处理js文件。所以一般情况下prettier和eslint合起来使用。当配置后两者的配置文件后，便可以通过命令行对某个文件进行格式化。<br>当安装VSCode插件后，可以直接通过快捷键<code>shift + Alt + F</code>来进行格式化。<br>当进一步配置了VSCode的Settings.json中的<code>&quot;editor.formatOnSave&quot;: true</code>后，保存代码后自动进行格式化。</li>
+</ul>
+<br />
+
+<h1 id="Git流程规范配置"><a href="#Git流程规范配置" class="headerlink" title="Git流程规范配置"></a>Git流程规范配置</h1><p><a href="https://blog.helloallen.cn/2024/01/14/Git%E6%B5%81%E7%A8%8B%E8%A7%84%E8%8C%83%E9%85%8D%E7%BD%AE/">Git流程规范配置</a></p>
+<br />
+
+<h1 id="样式规范工具（StyleLint）"><a href="#样式规范工具（StyleLint）" class="headerlink" title="样式规范工具（StyleLint）"></a>样式规范工具（StyleLint）</h1><h2 id="1-下载-StyleLint-相关依赖"><a href="#1-下载-StyleLint-相关依赖" class="headerlink" title="1. 下载 StyleLint 相关依赖"></a>1. 下载 StyleLint 相关依赖</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i stylelint stylelint-config-html stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-config-recess-order postcss postcss-html stylelint-config-prettier -D</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141223542.png" alt="img"></p>
+<h2 id="2-安装-Vscode-插件（StyleLint）："><a href="#2-安装-Vscode-插件（StyleLint）：" class="headerlink" title="2. 安装 Vscode 插件（StyleLint）："></a>2. 安装 Vscode 插件（StyleLint）：</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141224886.png" alt="img"></p>
+<h2 id="3-在目录的-vscode-文件夹下新建-settings-json："><a href="#3-在目录的-vscode-文件夹下新建-settings-json：" class="headerlink" title="3. 在目录的 .vscode 文件夹下新建 settings.json："></a>3. 在目录的 .vscode 文件夹下新建 settings.json：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;editor.formatOnSave&quot;: true,</span><br><span class="line">	&quot;stylelint.enable&quot;: true,</span><br><span class="line">	&quot;editor.codeActionsOnSave&quot;: &#123;</span><br><span class="line">		&quot;source.fixAll.stylelint&quot;: true</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;stylelint.validate&quot;: [</span><br><span class="line">		&quot;css&quot;,</span><br><span class="line">		&quot;less&quot;,</span><br><span class="line">		&quot;postcss&quot;,</span><br><span class="line">		&quot;scss&quot;,</span><br><span class="line">		&quot;vue&quot;,</span><br><span class="line">		&quot;sass&quot;,</span><br><span class="line">		&quot;html&quot;</span><br><span class="line">	],</span><br><span class="line">	&quot;files.eol&quot;: &quot;\n&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-配置-StyleLint（-stylelintrc-js）："><a href="#4-配置-StyleLint（-stylelintrc-js）：" class="headerlink" title="4. 配置 StyleLint（.stylelintrc.js）："></a>4. 配置 StyleLint（.stylelintrc.js）：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">// @see: https://stylelint.io</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">	/* 继承某些已有的规则 */</span><br><span class="line">	extends: [</span><br><span class="line">		&quot;stylelint-config-standard&quot;, // 配置stylelint拓展插件</span><br><span class="line">		&quot;stylelint-config-html/vue&quot;, // 配置 vue 中 template 样式格式化</span><br><span class="line">		&quot;stylelint-config-standard-scss&quot;, // 配置stylelint scss插件</span><br><span class="line">		&quot;stylelint-config-recommended-vue/scss&quot;, // 配置 vue 中 scss 样式格式化</span><br><span class="line">		&quot;stylelint-config-recess-order&quot;, // 配置stylelint css属性书写顺序插件,</span><br><span class="line">		&quot;stylelint-config-prettier&quot;, // 配置stylelint和prettier兼容</span><br><span class="line">	],</span><br><span class="line">	overrides: [</span><br><span class="line">		// 扫描 .vue/html 文件中的&lt;style&gt;标签内的样式</span><br><span class="line">		&#123;</span><br><span class="line">			files: [&quot;**/*.&#123;vue,html&#125;&quot;],</span><br><span class="line">			customSyntax: &quot;postcss-html&quot;,</span><br><span class="line">		&#125;,</span><br><span class="line">	],</span><br><span class="line">	/**</span><br><span class="line">	 * null  =&gt; 关闭该规则</span><br><span class="line">	 */</span><br><span class="line">	rules: &#123;</span><br><span class="line">		&quot;value-keyword-case&quot;: null, // 在 css 中使用 v-bind，不报错</span><br><span class="line">		&quot;no-descending-specificity&quot;: null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器</span><br><span class="line">		&quot;function-url-quotes&quot;: &quot;always&quot;, // 要求或禁止 URL 的引号 &quot;always(必须加上引号)&quot;|&quot;never(没有引号)&quot;</span><br><span class="line">		&quot;string-quotes&quot;: &quot;double&quot;, // 指定字符串使用单引号或双引号</span><br><span class="line">		&quot;unit-case&quot;: null, // 指定单位的大小写 &quot;lower(全小写)&quot;|&quot;upper(全大写)&quot;</span><br><span class="line">		&quot;color-hex-case&quot;: &quot;lower&quot;, // 指定 16 进制颜色的大小写 &quot;lower(全小写)&quot;|&quot;upper(全大写)&quot;</span><br><span class="line">		&quot;color-hex-length&quot;: &quot;long&quot;, // 指定 16 进制颜色的简写或扩写 &quot;short(16进制简写)&quot;|&quot;long(16进制扩写)&quot;</span><br><span class="line">		&quot;rule-empty-line-before&quot;: &quot;never&quot;, // 要求或禁止在规则之前的空行 &quot;always(规则之前必须始终有一个空行)&quot;|&quot;never(规则前绝不能有空行)&quot;|&quot;always-multi-line(多行规则之前必须始终有一个空行)&quot;|&quot;never-multi-line(多行规则之前绝不能有空行。)&quot;</span><br><span class="line">		&quot;font-family-no-missing-generic-family-keyword&quot;: null, // 禁止在字体族名称列表中缺少通用字体族关键字</span><br><span class="line">		&quot;block-opening-brace-space-before&quot;: &quot;always&quot;, // 要求在块的开大括号之前必须有一个空格或不能有空白符 &quot;always(大括号前必须始终有一个空格)&quot;|&quot;never(左大括号之前绝不能有空格)&quot;|&quot;always-single-line(在单行块中的左大括号之前必须始终有一个空格)&quot;|&quot;never-single-line(在单行块中的左大括号之前绝不能有空格)&quot;|&quot;always-multi-line(在多行块中，左大括号之前必须始终有一个空格)&quot;|&quot;never-multi-line(多行块中的左大括号之前绝不能有空格)&quot;</span><br><span class="line">		&quot;property-no-unknown&quot;: null, // 禁止未知的属性(true 为不允许)</span><br><span class="line">		&quot;no-empty-source&quot;: null, // 禁止空源码</span><br><span class="line">		&quot;declaration-block-trailing-semicolon&quot;: null, // 要求或不允许在声明块中使用尾随分号 string：&quot;always(必须始终有一个尾随分号)&quot;|&quot;never(不得有尾随分号)&quot;</span><br><span class="line">		&quot;selector-class-pattern&quot;: null, // 强制选择器类名的格式</span><br><span class="line">		&quot;scss/at-import-partial-extension&quot;: null, // 解决不能引入scss文件</span><br><span class="line">		&quot;value-no-vendor-prefix&quot;: null, // 关闭 vendor-prefix(为了解决多行省略 -webkit-box)</span><br><span class="line">		&quot;selector-pseudo-class-no-unknown&quot;: [</span><br><span class="line">			true,</span><br><span class="line">			&#123;</span><br><span class="line">				ignorePseudoClasses: [&quot;global&quot;, &quot;v-deep&quot;, &quot;deep&quot;],</span><br><span class="line">			&#125;,</span><br><span class="line">		],</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="项目多环境配置"><a href="#项目多环境配置" class="headerlink" title="项目多环境配置"></a>项目多环境配置</h1><p>vue2项目的环境默认一共有三种：  development（开发环境）、test（测试环境）、production(生产环境)</p>
+<h2 id="1-配置文件"><a href="#1-配置文件" class="headerlink" title="1. 配置文件"></a>1. 配置文件</h2><p>你可以在你的项目根目录中放置下列文件来指定环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.env                # 在所有的环境中被载入</span><br><span class="line">.env.local          # 在所有的环境中被载入，但会被 git 忽略</span><br><span class="line">.env.[mode]         # 只在指定的模式中被载入  mode: development\test\production</span><br><span class="line">.env.[mode].local   # 只在指定的模式中被载入，但会被 git 忽略</span><br></pre></td></tr></table></figure>
+
+<p>在Vue项目中，通常配置文件有：</p>
+<p>（1）env 全局默认配置文件，无论什么环境都会加载合并</p>
+<p>（2）.env.development 开发环境下的配置文件</p>
+<p>（3）.env.production 生产环境下的配置文件</p>
+<h2 id="2-属性名规则"><a href="#2-属性名规则" class="headerlink" title="2. 属性名规则"></a>2. 属性名规则</h2><p>请注意，只有 NODE_ENV，BASE_URL 和以 VUE_APP_ 开头的变量将通过 webpack.DefinePlugin 静态地嵌入到客户端侧的代码中。</p>
+<p>除了 VUE_APP_* 变量之外，在你的应用代码中始终可用的两个特殊的变量：</p>
+<p>● NODE_ENV ：会是 “development”、”production” 或 “test” 中的一个。具体的值默认取决于应用运行的模式。这也就是为什么在package.json中配置”serve”: “vue-cli-service serve”而不是”serve”: “vue-cli-service serve –mode development”，但本地npm run  serve时仍然是正确加载.env.development配置文件的原因。</p>
+<p>● BASE_URL：会和 vue.config.js 中的 publicPath 选项相同，即你的应用会部署到的基础路径。</p>
+<p>所以NODE_ENV和BASE_URL不用在.env.*中定义也可以直接通过process.env获取到，而想要定义其他变量，属性名必须以VUE_APP_开头，否则外部获取不到值。</p>
+<h2 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h2><p>直接调用process.env属性（全局属性，任何地方无论js还是vue中都可以使用）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202404092014714.png" alt="img"></p>
+<h2 id="4-自定义配置文件"><a href="#4-自定义配置文件" class="headerlink" title="4. 自定义配置文件"></a>4. 自定义配置文件</h2><p>（1）创建文件：.env.prod</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 指定环境</span><br><span class="line">NODE_ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># 配置变量</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>（2）修改启动命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">	&quot;serve&quot;: &quot;vue-cli-service serve&quot;,</span><br><span class="line">	&quot;serve-prod&quot;: &quot;vue-cli-service serve --mode prod&quot;,</span><br><span class="line">	&quot;build&quot;: &quot;vue-cli-service build&quot;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<br />
+
+<h1 id="browserslist"><a href="#browserslist" class="headerlink" title="browserslist"></a>browserslist</h1><p>Browserslist 帮助我们在浏览器兼容性和包大小之间保持适当的平衡。使用 Browserslist，可以做到覆盖更广泛的受众（浏览器），同时包的体积也会保持最小化。Browserslist包在安装 webpack 的时候自动下载。</p>
+<h2 id="1-配置方式"><a href="#1-配置方式" class="headerlink" title="1. 配置方式"></a>1. 配置方式</h2><p>在工程中使用 Browserslist 有两种常见方式：① 在 package.json 相应字段中增加；② 独立的 browserslistrc 文件</p>
+<p>（1）在 package.json 中声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;browserslist&quot;: [</span><br><span class="line">     &quot;&gt; 1%&quot;,</span><br><span class="line">     &quot;last 2 versions&quot;,</span><br><span class="line">     &quot;not ie &lt;= 8&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>（2）通过 <code>browserslistrc</code> 配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># Browsers that we support</span><br><span class="line">&gt; 1%</span><br><span class="line">last 2 versions</span><br><span class="line">not ie &lt;= 8</span><br></pre></td></tr></table></figure>
+
+<p>两种方式没有差异，大家根据自己习惯或者各自团队规范进行管理即可。（我们采用的是单独文件方式）</p>
+<h2 id="2-受众浏览器选择"><a href="#2-受众浏览器选择" class="headerlink" title="2. 受众浏览器选择"></a>2. 受众浏览器选择</h2><p>如果你所负责的工程受众是固定的，或者说你们可以自由做主支撑哪些浏览器，那太幸运了，你可以跳过这节，直接根据特定浏览器配置即可。</p>
+<p>但往往我们很难决定应该支持哪些浏览器？只最新 Chrome 版本？还是要都兼容包括 IE11？<a href="https://link.zhihu.com/?target=https://github.com/ben-eb/caniuse-lite">caniuse-lite</a> 和 <a href="https://link.zhihu.com/?target=https://caniuse.com/">Can I Use</a> 可以提供相应的数据支撑，Browserslist 也是依据此数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141226823.png" alt="img"></p>
+<p>市场占用了大于 0.3% 且持续维护的具体浏览器及版本。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141227083.png" alt="img"></p>
+<p>我们可以发现了，&gt;0.3%, and not dead 的浏览器占据了整个的 89.5%。</p>
+<p>当然，你也可以根据地区来选择，如中国地区使用率大于 0.3%的。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141229308.png" alt="img"></p>
+<p>由于中国移动端普及率比较高，所以整体上面的整体覆盖率只有 79.5%，剩余的有众多各种 for Android 的浏览器版本。</p>
+<h2 id="3-如何配置"><a href="#3-如何配置" class="headerlink" title="3. 如何配置"></a>3. 如何配置</h2><p>通过上述方式，我们可以圈定我们也支持哪些浏览器及版本，接下来就是如何通过 browserslist 进行配置？</p>
+<p>（1）可以通过 <a href="https://link.zhihu.com/?target=https://browsersl.ist/">https://browsersl.ist/</a> 这个网站来查看，你配置的内容具体支持的浏览器情况可以选择在全球、某个地区或某个国家/地区拥有超过或低于一定规模观众的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt; 5%&quot;:  代表着兼容全球超过5%人使用的浏览器  </span><br><span class="line">&quot;&gt;= 5% in US&quot;: 代表兼容美国使用率大于等于5% 的浏览器</span><br></pre></td></tr></table></figure>
+
+<p>（2）选择最近的浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;last 2 versions&quot;: 表示所有浏览器兼容到最后两个版本</span><br><span class="line">&quot;last 2 Chrome versions chrome&quot;: 表示兼容Chrome浏览器最新2个版本</span><br></pre></td></tr></table></figure>
+
+<p>（3）特定浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;Chrome &gt; 100 chrome&quot;: 浏览器版本大于100</span><br><span class="line">&quot;not Firefox ESR&quot;: 排除 Firefox ESR</span><br><span class="line">&quot;not ie &lt;=8&quot; : 表示兼容IE浏览器版本大于8（实则用npx browserslist 跑出来不包含IE9 ）  </span><br><span class="line">&quot;safari &gt;=7&quot;: 表示兼容safari浏览器版本大于等于7</span><br></pre></td></tr></table></figure>
+
+<p>（4）选择支持特定功能的浏览器版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;supports es6-module&quot;: 支持 es6-module 的浏览器</span><br><span class="line">&quot;supports css-grid&quot;: 支持 css-grid 的浏览器</span><br></pre></td></tr></table></figure>
+
+<p>（5）以上条件可以组合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;&gt; 0.5%, last 2 versions&quot;: 使用率大于0.5% 或者 所有浏览器最新2个版本（等价于 &gt; 0.5% or last 2 versions）</span><br><span class="line">&quot;&gt; 0.5% and last 2 versions&quot;: 使用率大于0.5% 的浏览器最新2个版本</span><br><span class="line">&quot;defaults&quot;: 等价于 &gt; 0.5%, last 2 versions, Firefox ESR, not dead</span><br></pre></td></tr></table></figure>
+
+<p>你可以用如下查询条件来限定浏览器和 node 的版本范围（大小写不敏感）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt; 5%: 基于全球使用率统计而选择的浏览器版本范围。&gt;=,&lt;,&lt;=同样适用。</span><br><span class="line">&gt; 5% in US : 同上，只是使用地区变为美国。支持两个字母的国家码来指定地区。</span><br><span class="line">&gt; 5% in alt-AS : 同上，只是使用地区变为亚洲所有国家。这里列举了所有的地区码。</span><br><span class="line">&gt; 5% in my stats : 使用定制的浏览器统计数据。</span><br><span class="line">cover 99.5% : 使用率总和为99.5%的浏览器版本，前提是浏览器提供了使用覆盖率。</span><br><span class="line">cover 99.5% in US : 同上，只是限制了地域，支持两个字母的国家码。</span><br><span class="line">cover 99.5% in my stats :使用定制的浏览器统计数据。</span><br><span class="line">maintained node versions :所有还被 node 基金会维护的 node 版本。</span><br><span class="line">node 10 and node 10.4 : 最新的 node 10.x.x 或者10.4.x 版本。</span><br><span class="line">current node :当前被 browserslist 使用的 node 版本。</span><br><span class="line">extends browserslist-config-mycompany :来自browserslist-config-mycompany包的查询设置</span><br><span class="line">ie 6-8 : 选择一个浏览器的版本范围。</span><br><span class="line">Firefox &gt; 20 : 版本高于20的所有火狐浏览器版本。&gt;=,&lt;,&lt;=同样适用。</span><br><span class="line">ios 7 :ios 7自带的浏览器。</span><br><span class="line">Firefox ESR :最新的火狐 ESR（长期支持版） 版本的浏览器。</span><br><span class="line">unreleased versions or unreleased Chrome versions : alpha 和 beta 版本。</span><br><span class="line">last 2 major versions or last 2 ios major versions :最近的两个发行版，包括所有的次版本号和补丁版本号变更的浏览器版本。</span><br><span class="line">since 2015 or last 2 years :自某个时间以来更新的版本（也可以写的更具体since 2015-03或者since 2015-03-10）</span><br><span class="line">dead :通过last 2 versions筛选的浏览器版本中，全球使用率低于0.5%并且官方声明不在维护或者事实上已经两年没有再更新的版本。目前符合条件的有 IE10,IE_Mob 10,BlackBerry 10,BlackBerry 7,OperaMobile 12.1。</span><br><span class="line">last 2 versions :每个浏览器最近的两个版本。</span><br><span class="line">last 2 Chrome versions :chrome 浏览器最近的两个版本。</span><br><span class="line">defaults :默认配置&gt; 0.5%, last 2 versions, Firefox ESR, not dead。</span><br><span class="line">not ie &lt;= 8 : 浏览器范围的取反。</span><br><span class="line">#可以添加not在任和查询条件前面，表示取反</span><br></pre></td></tr></table></figure>
+
+<p>了解了上述配置语法，配置完成后，你可以上述提到的 <a href="https://link.zhihu.com/?target=https://browsersl.ist/">https://browsersl.ist/</a> 进行实时查看。除此，你也可以通过下述工具，来检测配置是否正确和支撑的具体浏览器版本。</p>
+<h2 id="4-如何检查配置是否正确？"><a href="#4-如何检查配置是否正确？" class="headerlink" title="4. 如何检查配置是否正确？"></a>4. 如何检查配置是否正确？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npx browserslist-lint</span><br><span class="line">missedNotDead  The not dead query skipped when using last N versions query</span><br><span class="line">✖ 1 problems</span><br></pre></td></tr></table></figure>
+
+<p>需要追加 not dead，但谨慎使用，其会过滤到不再支持的浏览器，如IE11</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202401141233851.png" alt="img"></p>
+<h2 id="5-如何查看配置的内容，支撑哪些浏览器？"><a href="#5-如何查看配置的内容，支撑哪些浏览器？" class="headerlink" title="5. 如何查看配置的内容，支撑哪些浏览器？"></a>5. 如何查看配置的内容，支撑哪些浏览器？</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ npx browserslist</span><br><span class="line"> </span><br><span class="line">and_chr 95</span><br><span class="line">chrome 95</span><br><span class="line">chrome 94</span><br><span class="line">safari 15</span><br><span class="line">safari 14.1</span><br><span class="line">samsung 15.0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>至此，你就可以通过简单的几行命令，来控制要支持的浏览器情况，剩下的就交给 browserslist 即可。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/85b6b455/">CSS 从媒体查询到容器查询</a>
+            
+            
+            <a class="next" rel="next" href="/2bb3c7e9/">Git流程规范配置</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/85b6b455/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2bb3c7e9/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

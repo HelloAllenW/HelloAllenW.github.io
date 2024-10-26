@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>原子化CSS和Tailwind | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">原子化CSS和Tailwind</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 3, 2021&nbsp;&nbsp;17:16:39</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 3, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/CSS/">CSS </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">3.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">11 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="什么是原子化-CSS？"><a href="#什么是原子化-CSS？" class="headerlink" title="什么是原子化 CSS？"></a>什么是原子化 CSS？</h1><p>原子化 CSS 是一种 CSS 编写的方法论，它的主要思想是将 CSS 样式规则拆分成小的、独立的、可复用的部分，这些部分被称为“原子类”</p>
+<p>在原子化 CSS 中，每个原子类只包含一个很小的样式规则，比如设置颜色、字体大小、边距、背景等。通过将这些小的样式规则组合起来，可以构建出复杂的页面。</p>
+<p>比如，我们平时写 css 是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;aaa&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.aaa &#123;</span><br><span class="line">	font-size: 16px;</span><br><span class="line">	border: 1px solid #000;</span><br><span class="line">	padding: 4px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 html 里指定 class，然后在 css 里定义这个 class 的样式。</p>
+<p>也就是 class 里包含多个样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031718345.png"></p>
+<p>而原子化 css 是这样的写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;text-base p-1 border border-black border-solid&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.text-base &#123;</span><br><span class="line">	font-size: 16px;</span><br><span class="line">&#125;</span><br><span class="line">.p-1 &#123;</span><br><span class="line">	padding: 4px;</span><br><span class="line">&#125;</span><br><span class="line">.border &#123;</span><br><span class="line">	border-width: 1px;</span><br><span class="line">&#125;</span><br><span class="line">.border-black &#123;</span><br><span class="line">	border-color: black;</span><br><span class="line">&#125;</span><br><span class="line">.border-solid &#123;</span><br><span class="line">	border-style: solid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031719376.png"></p>
+<p>定义一些细粒度的 class，叫做原子 class，然后在 html 里直接引入这些原子化的 class。</p>
+<p>原子化 CSS 的优势包括：</p>
+<ol>
+<li>可复用性：由于样式规则被拆分成独立的原子类，可以在不同的元素上重复使用。这样可以减少代码冗余并提高代码的可维护性。</li>
+<li>灵活性：通过组合不同的原子类，可以快速构建出不同样式和布局的组件。</li>
+<li>性能优化：由于原子类是独立的小样式规则，可以利用浏览器的缓存机制，减少下载和解析的数据量，从而提高页面加载速度。</li>
+<li>易于维护：每个原子类只包含一个样式规则，修改和扩展样式更加清晰和方便。</li>
+</ol>
+<p>尽管原子化 CSS 有一些好处，但也存在一些缺点和考虑因素：</p>
+<ol>
+<li>学习曲线：原子化 CSS 需要掌握一套新的类命名规则和组合方式，这可能需要一定的学习曲线。特别是对于团队中新加入的开发人员，需要一定的时间来适应和理解原子化 CSS 的工作方式。</li>
+<li>类名冲突：当原子类命名不规范或命名空间不清晰时，可能会导致类名冲突的问题。如果不小心定义了相同的类名，可能会造成样式的混乱和冲突。</li>
+<li>管理成本：由于原子化 CSS 以小的样式单元为基础，可能会导致样式表的冗余和重复。在大型项目中，管理和维护大量的原子类可能会变得复杂，并需要额外的工具和规范来确保一致性和可维护性。</li>
+<li>语义性问题：原子化 CSS 通常使用简短的类名来表示样式规则，这可能会导致语义性的丧失。开发人员和设计师可能需要花费额外的时间来理解每个类名的含义和作用。</li>
+<li>深度嵌套的问题：原子化 CSS 通常倾向于使用多个类名来定义样式，这可能导致在 HTML 标记中出现深度嵌套的问题。这可能会增加 HTML 的复杂性，并可能使选择器的性能受到影响。</li>
+</ol>
+<p>因此，在决定是否使用原子化CSS时，需要考虑项目的规模、团队的技术能力以及维护成本等因素，权衡好其中的利与弊。</p>
+<h1 id="Tailwind-是流行的原子化-css-框架。"><a href="#Tailwind-是流行的原子化-css-框架。" class="headerlink" title="Tailwind 是流行的原子化 css 框架。"></a>Tailwind 是流行的原子化 css 框架。</h1><p>原子化 CSS 最流行的框架应该就是 Tailwind CSS了。有多流行呢？</p>
+<p>它现在有 68k star 了，要知道 express 才 60k。</p>
+<p>原子化 css 它到底有啥好处呢? 它解决了什么问题？</p>
+<h1 id="Tailwind-实战！"><a href="#Tailwind-实战！" class="headerlink" title="Tailwind 实战！"></a>Tailwind 实战！</h1><ol>
+<li>我们通过 <code>crerate-react-app</code> 创建一个 react 项目：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app tailwind-test</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>然后进入 <code>tailwind-test </code>目录，执行：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -D tailwindcss</span><br><span class="line">npx tailwindcss init</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>安装 <code>tailwindcss</code> 依赖，创建 tailwindcss 配置文件：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031721206.png"></p>
+<p>tailwind 实际上是一个 postcss 插件，因为 cra 内部已经做了 postcss 集成 tailwind 插件的配置，这一步就不用做了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031722724.png"></p>
+<ol start="4">
+<li>然后在入口 css 里加上这三行代码：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031722298.png"></p>
+<p>这三行分别是引入 tailwind 的基础样式、组件样式、工具样式的。</p>
+<ol start="5">
+<li>之后就可以在组件里用 tailwind 提供的 class 了：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import &#x27;./App.css&#x27;;</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">	return (</span><br><span class="line">		&lt;div className=&#x27;text-base p-1 border border-black border-solid&#x27;&gt;guang&lt;/div&gt;</span><br><span class="line">	);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>我们执行 <code>npm run start</code> 把开发服务跑起来。</li>
+</ol>
+<p>可以看到，它正确的加上了样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031724023.png"></p>
+<p>用到的这些原子 class 就是 tailwind 提供的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031724574.png"></p>
+<ol start="7">
+<li>这里的 <code>p-1</code> 是 <code>padding:0.25rem</code>，你也可以在配置文件里修改它的值：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031725974.png"></p>
+<p>在 <code>tailwind.config.js</code> 的 <code>theme.extend</code> 修改 p-1 的值，设置为 30px。</p>
+<p>刷新页面，就可以看到 p-1 的样式变了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031725793.png"></p>
+<ol start="8">
+<li>.text-base 是 font-size、line-height 两个样式，这种通过数组配置：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031726733.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031727620.png"></p>
+<p>也就是说所有 tailwind 提供的所有内置原子 class 都可以配置。</p>
+<ol start="9">
+<li>但这些都是全局的更改，有的时候你想临时设置一些值，可以用 <code>[]</code> 语法。</li>
+</ol>
+<p>比如 <code>text-[14px]</code>，它就会生成 <code>font-size:14px</code> 的样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031727611.png"></p>
+<p>比如 <code>aspect-[4/3]</code>，就是这样的样式：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031728729.png"></p>
+<p>我们平时经常指定 hover 时的样式，在 tailwind 里怎么指定呢？</p>
+<p>很简单，这样写：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031728621.png"></p>
+<p>生成的就是带状态的 class：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031729498.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031729275.jpg"></p>
+<ol start="10">
+<li>此外，写响应式的页面的时候，我们要指定什么宽度的时候用什么样式，这个用 tailwind 怎么写呢？</li>
+</ol>
+<p>也是一样的写法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031730339.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031730353.jpg"></p>
+<p>生成的是这样的代码：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031731189.png"></p>
+<ol start="11">
+<li>这个断点位置自然也是可以配置的：</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031731273.png"></p>
+<p>可以看到 md 断点对应的宽度变了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031731348.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031735321.jpg"></p>
+<p>光这些就很方便了。</p>
+<p>之前要这么写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;aaa&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.aaa &#123;</span><br><span class="line">	background: red;</span><br><span class="line">	font-size: 16px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.aaa:hover &#123;</span><br><span class="line">	font-size: 30px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@media(min-width:768px) &#123;</span><br><span class="line">	.aaa &#123;</span><br><span class="line">		background: blue;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在只需要这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;text-[14px] bg-red-500 hover:text-[30px] md:bg-blue-500&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>省去了很多样板代码，还省掉了 class 的命名。</p>
+<p>并且这些 class 都可以通过配置来统一修改。</p>
+<h1 id="感受到原子化-css-的好处了么？"><a href="#感受到原子化-css-的好处了么？" class="headerlink" title="感受到原子化 css 的好处了么？"></a>感受到原子化 css 的好处了么？</h1><p>tailwind 文档提到了 3 个好处：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031737042.png"></p>
+<p>不用起 class 名字，这点简直太爽了，我就经常被起 class 名字折磨。</p>
+<p>css 不会一直增长，因为如果你用之前的写法可能是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031737232.png"></p>
+<p>多个 class 里都包含了类似的样式，但你需要写多次，而如果用了原子 class，就只需要定义一次就好了。</p>
+<p>css 没有模块作用域，所以可能你在这里加了一个样式，结果别的地方样式错乱了。</p>
+<p>而用原子 class 就没这种问题，因为样式是只是作用在某个 html 标签的。</p>
+<p>我觉得光这三点好处就能够说服我用它了，特别是不用起 class 名字这点。</p>
+<p>当然，社区也有一些反对的声音，我们来看看他们是怎么说的：</p>
+<p>一堆 class，可读性、可维护性太差了</p>
+<p>真的么？</p>
+<p>这种把 css 写在 html 里的方式应该是更高效才对。</p>
+<p>想想为啥 vue 要创造个单文件组件的语法，把 js、css、template 放在一个文件里写，不就是为了紧凑么？</p>
+<p>之前你要在 css、js 文件里反复跳来跳去的，查找某个 class 的样式是啥，现在不用这么跳了，直接在 html 里写原子样式，它不香么？</p>
+<p>而且 tailwindcss 就前面提到的那么几个语法，没啥学习成本，很容易看懂才对。</p>
+<p>但是还要每次去查文档哪些 class 对应什么样式呀?</p>
+<h1 id="vscode-插件"><a href="#vscode-插件" class="headerlink" title="vscode 插件"></a>vscode 插件</h1><p>这个可以用 tailwind css 提供的 vscode 插件来解决。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031739183.png"></p>
+<p>安装这个 <code>Tailwind CSS IntelliSense</code> 之后的体验是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031740209.webp"></p>
+<p>有智能提示，可以查看它对应的样式。</p>
+<p>不需要记。</p>
+<h1 id="难以调试"><a href="#难以调试" class="headerlink" title="难以调试?"></a>难以调试?</h1><p>在 chrome devtools 里可以直接看到有啥样式，而且样式之间基本没有交叉，很容易调试：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031741110.png"></p>
+<p>相反，我倒是觉得之前那种写法容易多个 class 的样式相互覆盖，还要确定优先级和顺序，那个更难调试才对：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031741702.png"></p>
+<p>类型太长了而且重复多次</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031741202.png"></p>
+<p>这种问题可以用 <code>@layer</code> <code>@apply</code> 指令来扩展：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031742198.png"></p>
+<p>前面讲过 @tailwind 是引入不同的样式的，而 @layer 就是在某一层样式做修改和扩充，里面可以用 @apply 应用其他样式。</p>
+<p>效果是这样的：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031742276.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031743238.png"></p>
+<p>内置 class 不能满足我的需求</p>
+<p>其实上面那个 @layer 和 @apply 就能扩展内置原子 class。</p>
+<h1 id="想跨项目复用"><a href="#想跨项目复用" class="headerlink" title="想跨项目复用?"></a>想跨项目复用?</h1><p>那可以开发个 tailwind 插件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const plugin = require(&#x27;tailwindcss/plugin&#x27;);</span><br><span class="line"></span><br><span class="line">module.exports = plugin(function(&#123; addUtilities &#125;) &#123;</span><br><span class="line">	addUtilities(&#123;</span><br><span class="line">		&#x27;.guang&#x27;: &#123;</span><br><span class="line">			background: &#x27;blue&#x27;,</span><br><span class="line">			color: &#x27;yellow&#x27;</span><br><span class="line">		&#125;,</span><br><span class="line">		&#x27;.guangguang&#x27;: &#123;</span><br><span class="line">			&#x27;font-size&#x27;: &#x27;70px&#x27;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在 tailwind.config.js 里引入：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031744360.png"></p>
+<p>这样就可以用这个新加的原子 class 了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031744902.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031744412.png"></p>
+<p>插件的方式或者 @layer 的方式都可以扩展。</p>
+<p>tailwind 的 class 名和我已有的 class 冲突了咋办？</p>
+<h1 id="命名冲突问题"><a href="#命名冲突问题" class="headerlink" title="命名冲突问题"></a>命名冲突问题</h1><p>比如我本来有个 border 的 class：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031745702.png"></p>
+<p>而 tailwind 也有，不就冲突了么？</p>
+<p>这个可以通过加 prefix 解决：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031745181.png"></p>
+<p>不过这样所有的原子 class 都得加 prefix 了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031746734.png"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031746380.png"></p>
+<p>知道了什么是原子 css 以及 tailwind 的用法之后，我们再来看看它的实现原理。</p>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>tailwind 可以单独跑，也可以作为 postcss 插件来跑。这是因为如果单独跑的话，它也会跑起 postcss，然后应用 tailwind 的插件：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031746349.png"></p>
+<p>所以说，tailwind 本质上就是个 postcss 插件。</p>
+<p>postcss 是一个 css 编译器，它是 parse、transform、generate 的流程。</p>
+<p>在 <a href="https://link.zhihu.com/?target=http://astexplorer.net">astexplorer.net</a> 可以看到 postcss 的 AST：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031747844.png"></p>
+<p>而 postcss 就是通过 AST 来拿到 @tailwind、@layer、@apply 这些它扩展的指令，分别作相应的处理，也就是对 AST 的增删改查。</p>
+<p>那它是怎么扫描到 js、html 中的 className 的呢？</p>
+<p>这是因为它有个 extractor 的东西，用来通过正则匹配文本中的 class，之后添加到 AST 中，最终生成代码。</p>
+<p>extractor 的功能看下测试用例就明白了：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402031747741.png"></p>
+<p>所以说，tailwind 就是基于 postcss 的 AST 实现的 css 代码生成工具，并且做了通过 extractor 提取 js、html 中 class 的功能。</p>
+<p>tailwind 还有种叫 JIT 的编译方式，这个原理也容易理解，本来是全部引入原子 css 然后过滤掉没有用到的，而 JIT 的话就是根据提取到的 class 来动态引入原子 css，更高效一点。</p>
+<h1 id="为啥这个-css-框架叫-tailwind-？"><a href="#为啥这个-css-框架叫-tailwind-？" class="headerlink" title="为啥这个 css 框架叫 tailwind ？"></a>为啥这个 css 框架叫 tailwind ？</h1><p>因为作者喜欢叫做 kiteboarding 风筝冲浪的运动。</p>
+<p>就是这样的，一个风筝，一个冲浪板：</p>
+<p>这种运动在顺风 tailwind 和逆风 headwind 下有不同的技巧。而 tailwind 的时候明显更加省力。</p>
+<p>所以就给这个 css 框架起名叫 tailwind 了。</p>
+<p>确实，我也觉得用这种方式来写 css 更加省力、高效，不用写 class 名字了，代码更简洁了，还不容易样式冲突了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>tailwind 是一个流行的原子化 css 框架。</p>
+<p>传统 css 写法是定义 class，然后在 class 内部写样式，而原子化 css 是预定义一些细粒度 class，通过组合 class 的方式完成样式编写。</p>
+<p>tailwind 用起来很简单：</p>
+<p>所有预定义的 class 都可以通过配置文件修改值，也可以通过 aaa-[14px] 的方式定义任意值的 class。</p>
+<p>所有 class 都可以通过 hover:xxx、md:xxx 的方式来添加某个状态下的样式，响应式的样式，相比传统的写法简洁太多了。</p>
+<p>它的优点有很多，我个人最喜欢的就是不用起 class 的名字了，而且避免了同样的样式在多个 class 里定义多次导致代码重复，并且局部作用于某个标签，避免了全局污染。</p>
+<p>它可以通过 @layer、@apply 或者插件的方式扩展原子 class，支持 prefix 来避免 class 名字冲突。</p>
+<p>tailwind 本质上就是一个 postcss 插件，通过 AST 来分析 css 代码，对 css 做增删改，并且可以通过 extractor 提取 js、html 中的 class，之后基于这些来生成最终的 css 代码。</p>
+<p>是否感受到了 tailwind 的简洁高效，易于扩展？就是这些原因让它成为了最流行的原子化 css 框架。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/CSS/"># CSS</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2d2f9f9d/">实现九宫格布局，你能想到多少种方法？</a>
+            
+            
+            <a class="next" rel="next" href="/1ccf5874/">webpack 拆包：SplitChunksPlugin</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2d2f9f9d/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/1ccf5874/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

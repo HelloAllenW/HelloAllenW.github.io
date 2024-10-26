@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>谈谈JS二进制：File、Blob、FileReader、ArrayBuffer、Base64 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">谈谈JS二进制：File、Blob、FileReader、ArrayBuffer、Base64</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 5, 2022&nbsp;&nbsp;19:47:19</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 5, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.2k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">25 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>JavaScript 提供了一些 API 来处理文件或原始文件数据，例如：File、Blob、FileReader、ArrayBuffer、base64 等。下面就来看看它们都是如何使用的，它们之间又有何区别和联系！</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBcQECI5aicL7byicfumiaGXWLSFCfHPkalFiccSHWWKOOSFHPpaJ88ic4K2w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="1-Blob"><a href="#1-Blob" class="headerlink" title="1. Blob"></a>1. Blob</h2><p>Blob 全称为 binary large object ，即二进制大对象，它是 JavaScript 中的一个对象，表示原始的类似文件的数据。下面是 MDN 中对 Blob 的解释：</p>
+<blockquote>
+<p>Blob 对象表示一个不可变、原始数据的类文件对象。它的数据可以按文本或二进制的格式进行读取，也可以转换成 ReadableStream 来用于数据操作。</p>
+</blockquote>
+<p>实际上，Blob 对象是包含有只读原始数据的类文件对象。简单来说，Blob 对象就是一个不可修改的二进制文件。</p>
+<h3 id="（1）Blob-创建"><a href="#（1）Blob-创建" class="headerlink" title="（1）Blob 创建"></a>（1）Blob 创建</h3><p>可以使用 Blob() 构造函数来创建一个 Blob：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new Blob(array, options);</span><br></pre></td></tr></table></figure>
+
+<p>其有两个参数：</p>
+<ul>
+<li><p><code>array</code>：由 <code>ArrayBuffer</code>、<code>ArrayBufferView</code>、<code>Blob</code>、<code>DOMString</code> 等对象构成的，将会被放进 <code>Blob</code>；</p>
+</li>
+<li><p><code>options</code>：可选的 <code>BlobPropertyBag</code> 字典，它可能会指定如下两个属性</p>
+</li>
+<li><ul>
+<li><code>type</code>：默认值为 “”，表示将会被放入到 <code>blob</code> 中的数组内容的 MIME 类型。</li>
+<li><code>endings</code>：默认值为”<code>transparent</code>“，用于指定包含行结束符<code>\n</code>的字符串如何被写入，不常用。</li>
+</ul>
+</li>
+</ul>
+<p>常见的 MIME 类型如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjB9DibsGicIP99Q90ric28KNxfRsG6yV4bzia5Lpiclq7Ja3eriaFrdnwMpZsw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面来看一个简单的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const blob = new Blob([&quot;Hello World&quot;], &#123;type: &quot;text/plain&quot;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里可以成为动态文件创建，其正在创建一个类似文件的对象。这个 blob 对象上有两个属性：</p>
+<ul>
+<li><code>size</code>：Blob对象中所包含数据的大小（字节）；</li>
+<li><code>type</code>：字符串，认为该Blob对象所包含的 MIME 类型。如果类型未知，则为空字符串。</li>
+</ul>
+<p>下面来看打印结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const blob = new Blob([&quot;Hello World&quot;], &#123;type: &quot;text/plain&quot;&#125;);</span><br><span class="line"></span><br><span class="line">console.log(blob.size); // 11</span><br><span class="line">console.log(blob.type); // &quot;text/plain&quot;</span><br></pre></td></tr></table></figure>
+
+<p>注意，字符串”Hello World”是 UTF-8 编码的，因此它的每个字符占用 1 个字节。</p>
+<p>到现在，Blob 对象看起来似乎我们还是没有啥用。那该如何使用 Blob 对象呢？可以使用 URL.createObjectURL() 方法将将其转化为一个 URL，并在 Iframe 中加载：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe&gt;&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">const iframe = document.getElementsByTagName(&quot;iframe&quot;)[0];</span><br><span class="line"></span><br><span class="line">const blob = new Blob([&quot;Hello World&quot;], &#123;type: &quot;text/plain&quot;&#125;);</span><br><span class="line"></span><br><span class="line">iframe.src = URL.createObjectURL(blob);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）Blob-分片"><a href="#（2）Blob-分片" class="headerlink" title="（2）Blob 分片"></a>（2）Blob 分片</h3><p>除了使用<code>Blob()</code>构造函数来创建blob 对象之外，还可以从 blob 对象中创建blob，也就是将 blob 对象切片。Blob 对象内置了 slice() 方法用来将 blob 对象分片，其语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const blob = instanceOfBlob.slice([start [, end [, contentType]]]&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其有三个参数：</p>
+<ul>
+<li><code>start</code>：设置切片的起点，即切片开始位置。默认值为 0，这意味着切片应该从第一个字节开始；</li>
+<li><code>end</code>：设置切片的结束点，会对该位置之前的数据进行切片。默认值为<code>blob.size</code>；</li>
+<li><code>contentType</code>：设置新 blob 的 MIME 类型。如果省略 type，则默认为 blob 的原始值。</li>
+</ul>
+<p>下面来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const iframe = document.getElementsByTagName(&quot;iframe&quot;)[0];</span><br><span class="line"></span><br><span class="line">const blob = new Blob([&quot;Hello World&quot;], &#123;type: &quot;text/plain&quot;&#125;);</span><br><span class="line"></span><br><span class="line">const subBlob = blob.slice(0, 5);</span><br><span class="line"></span><br><span class="line">iframe.src = URL.createObjectURL(subBlob);</span><br></pre></td></tr></table></figure>
+
+<p>此时页面会显示”Hello”。</p>
+<h2 id="2-File"><a href="#2-File" class="headerlink" title="2. File"></a>2. File</h2><p>文件（File）接口提供有关文件的信息，并允许网页中的 JavaScript 访问其内容。实际上，File 对象是特殊类型的 Blob，且可以用在任意的 Blob 类型的 context 中。Blob 的属性和方法都可以用于 File 对象。</p>
+<blockquote>
+<p>注意：File 对象中只存在于浏览器环境中，在 Node.js 环境中不存在。</p>
+</blockquote>
+<p>在 JavaScript 中，主要有两种方法来获取 File 对象：</p>
+<ul>
+<li><code>&lt;input&gt;</code> 元素上选择文件后返回的 FileList 对象；</li>
+<li>文件拖放操作生成的 <code>DataTransfer</code> 对象；</li>
+</ul>
+<h3 id="（1）input"><a href="#（1）input" class="headerlink" title="（1）input"></a>（1）input</h3><p>首先定义一个输入类型为 file 的 <code>input</code> 标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;fileInput&quot; multiple=&quot;multiple&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这里给 <code>input</code> 标签添加了三个属性：</p>
+<ul>
+<li><code>type=&quot;file&quot;</code>：指定 <code>input</code> 的输入类型为文件；</li>
+<li><code>id=&quot;fileInput&quot;</code>：指定 <code>input</code> 的唯一 id；</li>
+<li><code>multiple=&quot;multiple&quot;</code>：指定 <code>input</code> 可以同时上传多个文件；</li>
+</ul>
+<p>下面来给 <code>input</code> 标签添加 <code>onchange</code> 事件，当选择文件并上传之后触发：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">    console.log(e.target.files);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当点击上传文件时，控制台就会输出一个 FileList 数组，这个数组的每个元素都是一个 File 对象，一个上传的文件就对应一个 File 对象：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBx2B7dlBnCJm4hLulndbtFJV7ksEmxZ8LqgoPoYnTkVzSVbiaHicLXksQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>每个 <code>File</code> 对象都包含文件的一些属性，这些属性都继承自 Blob 对象：</p>
+<ul>
+<li><code>lastModified</code>：引用文件最后修改日期，为自1970年1月1日0:00以来的毫秒数；</li>
+<li><code>lastModifiedDate</code>：引用文件的最后修改日期；</li>
+<li><code>name</code>：引用文件的文件名；</li>
+<li><code>size</code>：引用文件的文件大小；</li>
+<li><code>type</code>：文件的媒体类型（MIME）；</li>
+<li><code>webkitRelativePath</code>：文件的路径或 URL。</li>
+</ul>
+<p>通常，我们在上传文件时，可以通过对比 size 属性来限制文件大小，通过对比 type 来限制上传文件的格式等。</p>
+<h3 id="（2）文件拖放"><a href="#（2）文件拖放" class="headerlink" title="（2）文件拖放"></a>（2）文件拖放</h3><p>另一种获取 File 对象的方式就是拖放 API，这个 API 很简单，就是将浏览器之外的文件拖到浏览器窗口中，并将它放在一个成为拖放区域的特殊区域中。拖放区域用于响应放置操作并从放置的项目中提取信息。这些是通过 <code>ondrop</code> 和 <code>ondragover</code> 两个 API 实现的。</p>
+<p>下面来看一个简单的例子，首先定义一个拖放区域：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;drop-zone&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后给这个元素添加 <code>ondragover</code> 和 <code>ondrop</code> 事件处理程序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const dropZone = document.getElementById(&quot;drop-zone&quot;);</span><br><span class="line"></span><br><span class="line">dropZone.ondragover = (e) =&gt; &#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dropZone.ondrop = (e) =&gt; &#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    const files = e.dataTransfer.files;</span><br><span class="line">    console.log(files)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：这里给两个 API 都添加了 <code>e.preventDefault()</code>，用来阻止默认事件。它是非常重要的，可以用来阻止浏览器的一些默认行为，比如放置文件将显示在浏览器窗口中。</p>
+<p>当拖放文件到拖放区域时，控制台就会输出一个  FileList 数组，该数组的每一个元素都是一个 <code>File</code> 对象。这个 FileList 数组是从事件参数的 <code>dataTransfer</code> 属性的 <code>files</code> 获取的：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBMZVVUgo40UaMyPKFZOrrHLqgTSMHYFssib4YFLFXzIia8ztEofPetcdg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>可以看到，这里得到的 <code>File</code> 对象和通过 <code>input</code> 标签获得的 <code>File</code> 对象是完全一样的。</p>
+<h2 id="3-FileReader"><a href="#3-FileReader" class="headerlink" title="3. FileReader"></a>3. FileReader</h2><p>FileReader 是一个异步 API，用于读取文件并提取其内容以供进一步使用。FileReader 可以将 Blob 读取为不同的格式。</p>
+<blockquote>
+<p>注意：FileReader 仅用于以安全的方式从用户（远程）系统读取文件内容，不能用于从文件系统中按路径名简单地读取文件。</p>
+</blockquote>
+<h3 id="（1）基本使用"><a href="#（1）基本使用" class="headerlink" title="（1）基本使用"></a>（1）基本使用</h3><p>可以使用 FileReader 构造函数来创建一个 FileReader 对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const reader = new FileReader();</span><br></pre></td></tr></table></figure>
+
+<p>这个对象常用属性如下：</p>
+<ul>
+<li><code>error</code>：表示在读取文件时发生的错误；</li>
+<li><code>result</code>：文件内容。该属性仅在读取操作完成后才有效，数据的格式取决于使用哪个方法来启动读取操作。</li>
+<li><code>readyState</code>：表示<code>FileReader</code>状态的数字。取值如下：</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBDaAbKMiaCHcNOgsLR6entjQHDFPy5jcpJBKaicu0AYFncCKmPicVRQXsA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>FileReader 对象提供了以下方法来加载文件：</p>
+<ul>
+<li><code>readAsArrayBuffer()</code>：读取指定 Blob 中的内容，完成之后，<code>result</code> 属性中保存的将是被读取文件的 <code>ArrayBuffer</code> 数据对象；</li>
+<li><code>FileReader.readAsBinaryString()</code>：读取指定 Blob 中的内容，完成之后，<code>result</code> 属性中将包含所读取文件的原始二进制数据；</li>
+<li><code>FileReader.readAsDataURL()</code>：读取指定 Blob 中的内容，完成之后，<code>result</code> 属性中将包含一个<code>data: URL</code> 格式的 Base64 字符串以表示所读取文件的内容。</li>
+<li><code>FileReader.readAsText()</code>：读取指定 Blob 中的内容，完成之后，<code>result</code> 属性中将包含一个字符串以表示所读取的文件内容。</li>
+</ul>
+<p>可以看到，上面这些方法都接受一个要读取的 blob 对象作为参数，读取完之后会将读取的结果放入对象的 <code>result</code> 属性中。</p>
+<h3 id="（2）事件处理"><a href="#（2）事件处理" class="headerlink" title="（2）事件处理"></a>（2）事件处理</h3><p>FileReader 对象常用的事件如下：</p>
+<ul>
+<li><code>abort</code>：该事件在读取操作被中断时触发；</li>
+<li><code>error</code>：该事件在读取操作发生错误时触发；</li>
+<li><code>load</code>：该事件在读取操作完成时触发；</li>
+<li><code>progress</code>：该事件在读取 Blob 时触发。</li>
+</ul>
+<p>当然，这些方法可以加上前置 on 后在HTML元素上使用，比如<code>onload</code>、<code>onerror</code>、<code>onabort</code>、<code>onprogress</code>。除此之外，由于<code>FileReader</code>对象继承自<code>EventTarget</code>，因此还可以使用 <code>addEventListener()</code> 监听上述事件。</p>
+<p>下面来看一个简单的例子，首先定义一个 <code>input</code> 输入框用于上传文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;fileInput&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接下来定义 <code>input</code> 标签的 <code>onchange</code> 事件处理函数和<code>FileReader</code>对象的<code>onload</code>事件处理函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line"></span><br><span class="line">const reader = new FileReader();</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">    reader.readAsText(e.target.files[0]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reader.onload = (e) =&gt; &#123;</span><br><span class="line">    console.log(e.target.result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里，首先创建了一个 <code>FileReader</code> 对象，当文件上传成功时，使用 <code>readAsText()</code> 方法读取 <code>File</code> 对象，当读取操作完成时打印读取结果。</p>
+<p>使用上述例子读取文本文件时，就是比较正常的。如果读取二进制文件，比如png格式的图片，往往会产生乱码，如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBiaE2mnicVvcib36FADoJuqbgE4rWd7KNnAkU90XIKKyw1kyxVw6VibojHQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>那该如何处理这种二进制数据呢？<code>readAsDataURL()</code> 是一个不错的选择，它可以将读取的文件的内容转换为 base64 数据的 URL 表示。这样，就可以直接将 URL 用在需要源链接的地方，比如 img 标签的 src 属性。</p>
+<p>对于上述例子，将 readAsText 方法改为 <code>readAsDataURL()</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line"></span><br><span class="line">const reader = new FileReader();</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">    reader.readAsDataURL(e.target.files[0]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reader.onload = (e) =&gt; &#123;</span><br><span class="line">    console.log(e.target.result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时，再次上传二进制图片时，就会在控制台打印一个 base64 编码的 URL，如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBwp075sRvcDbUEBARehWia3XFevFtrrYyMI7NrVVag4cCv9Ex7B0ibVZg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>下面来修改一下这个例子，将上传的图片通过以上方式显示在页面上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;fileInput&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img id=&quot;preview&quot; /&gt;</span><br><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line">const preview = document.getElementById(&quot;preview&quot;);</span><br><span class="line">const reader = new FileReader();</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">  reader.readAsDataURL(e.target.files[0]);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">reader.onload = (e) =&gt; &#123;</span><br><span class="line">  preview.src = e.target.result;</span><br><span class="line">  console.log(e.target.result);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBpibytqWcTodGCHmMamLOiaoZFwibZEfUPp2XGVbS2WRC8aOgP7bqK7aAA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>当上传大文件时，可以通过 <code>progress</code> 事件来监控文件的读取进度：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const reader = new FileReader();</span><br><span class="line"></span><br><span class="line">reader.onprogress = (e) =&gt; &#123;</span><br><span class="line">  if (e.loaded &amp;&amp; e.total) &#123;</span><br><span class="line">    const percent = (event.loaded / event.total) * 100;</span><br><span class="line">    console.log(`上传进度: $&#123;Math.round(percent)&#125; %`);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>progress</code> 事件提供了两个属性：<code>loaded</code>（已读取量）和<code>total</code>（需读取总量）。</p>
+<h2 id="4-ArrayBuffer"><a href="#4-ArrayBuffer" class="headerlink" title="4. ArrayBuffer"></a>4. ArrayBuffer</h2><h3 id="（1）ArrayBuffer"><a href="#（1）ArrayBuffer" class="headerlink" title="（1）ArrayBuffer"></a>（1）ArrayBuffer</h3><p>ArrayBuffer 对象用来表示通用的、固定长度的<strong>原始二进制数据缓冲区</strong>。ArrayBuffer 的内容不能直接操作，只能通过 DataView 对象或 TypedArrray 对象来访问。这些对象用于读取和写入缓冲区内容。</p>
+<p>ArrayBuffer 本身就是一个黑盒，不能直接读写所存储的数据，需要借助以下视图对象来读写：</p>
+<ul>
+<li><strong>TypedArray</strong>：用来生成内存的视图，通过9个构造函数，可以生成9种数据格式的视图。</li>
+<li><strong>DataViews</strong>：用来生成内存的视图，可以自定义格式和字节序。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBBT93872GFpMId0yL0wkERib8DQJjZICRn3ljrib8ObXao2ibOVPVtTxibA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>TypedArray视图和 DataView视图的区别主要是<strong>字节序</strong>，前者的数组成员都是同一个数据类型，后者的数组成员可以是不同的数据类型。</p>
+<p>那 ArrayBuffer 与 Blob 有啥区别呢？根据 ArrayBuffer 和 Blob 的特性，Blob 作为一个整体文件，适合用于传输；当需要对二进制数据进行操作时（比如要修改某一段数据时），就可以使用 ArrayBuffer。</p>
+<p>下面来看看 ArrayBuffer 有哪些常用的方法和属性。</p>
+<h4 id="①-new-ArrayBuffer"><a href="#①-new-ArrayBuffer" class="headerlink" title="① new ArrayBuffer()"></a>① new ArrayBuffer()</h4><p>ArrayBuffer 可以通过以下方式生成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new ArrayBuffer(bytelength)</span><br></pre></td></tr></table></figure>
+
+<p><code>ArrayBuffer()</code>构造函数可以分配指定字节数量的缓冲区，其参数和返回值如下：</p>
+<ul>
+<li><strong>参数</strong>：它接受一个参数，即 bytelength，表示要创建数组缓冲区的大小（以字节为单位。）；</li>
+<li><strong>返回值</strong>：返回一个新的指定大小的ArrayBuffer对象，内容初始化为0。</li>
+</ul>
+<h4 id="②-ArrayBuffer-prototype-byteLength"><a href="#②-ArrayBuffer-prototype-byteLength" class="headerlink" title="② ArrayBuffer.prototype.byteLength"></a>② ArrayBuffer.prototype.byteLength</h4><p>ArrayBuffer 实例上有一个 byteLength 属性，它是一个只读属性，表示 ArrayBuffer 的 byte 的大小，在 ArrayBuffer 构造完成时生成，不可改变。来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16); </span><br><span class="line">console.log(buffer.byteLength);  // 16</span><br></pre></td></tr></table></figure>
+
+<h4 id="③-ArrayBuffer-prototype-slice"><a href="#③-ArrayBuffer-prototype-slice" class="headerlink" title="③ ArrayBuffer.prototype.slice()"></a>③ ArrayBuffer.prototype.slice()</h4><p>ArrayBuffer 实例上还有一个 slice 方法，该方法可以用来截取 ArrayBuffer 实例，它返回一个新的 ArrayBuffer ，它的内容是这个 ArrayBuffer 的字节副本，从 begin（包括），到 end（不包括）。来看例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16); </span><br><span class="line">console.log(buffer.slice(0, 8));  // 16</span><br></pre></td></tr></table></figure>
+
+<p>这里会从 buffer 对象上将前8个字节生成一个新的ArrayBuffer对象。这个方法实际上有两步操作，首先会分配一段指定长度的内存，然后拷贝原来ArrayBuffer对象的置顶部分。</p>
+<h4 id="④-ArrayBuffer-isView"><a href="#④-ArrayBuffer-isView" class="headerlink" title="④ ArrayBuffer.isView()"></a>④ ArrayBuffer.isView()</h4><p>ArrayBuffer 上有一个 isView()方法，它的返回值是一个布尔值，如果参数是 ArrayBuffer 的视图实例则返回 true，例如类型数组对象或 DataView 对象；否则返回 false。简单来说，这个方法就是用来判断参数是否是 TypedArray 实例或者 DataView 实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16);</span><br><span class="line">ArrayBuffer.isView(buffer)   // false</span><br><span class="line"></span><br><span class="line">const view = new Uint32Array(buffer);</span><br><span class="line">ArrayBuffer.isView(view)     // true</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）TypedArray"><a href="#（2）TypedArray" class="headerlink" title="（2）TypedArray"></a>（2）TypedArray</h3><p>TypedArray 对象一共提供 9 种类型的视图，每一种视图都是一种构造函数。如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>元素</strong></th>
+<th><strong>类型化数组</strong></th>
+<th><strong>字节</strong></th>
+<th><strong>描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Int8</td>
+<td>Int8Array</td>
+<td>1</td>
+<td>8 位有符号整数</td>
+</tr>
+<tr>
+<td>Uint8</td>
+<td>Uint8Array</td>
+<td>1</td>
+<td>8 位无符号整数</td>
+</tr>
+<tr>
+<td>Uint8C</td>
+<td>Uint8ClampedArray</td>
+<td>1</td>
+<td>8 位无符号整数</td>
+</tr>
+<tr>
+<td>Int16</td>
+<td>Int16Array</td>
+<td>2</td>
+<td>16 位有符号整数</td>
+</tr>
+<tr>
+<td>Uint16</td>
+<td>Uint16Array</td>
+<td>2</td>
+<td>16 位无符号整数</td>
+</tr>
+<tr>
+<td>Int32</td>
+<td>Int32Array</td>
+<td>4</td>
+<td>32 位有符号整数</td>
+</tr>
+<tr>
+<td>Uint32</td>
+<td>Uint32Array</td>
+<td>4</td>
+<td>32 位无符号整数</td>
+</tr>
+<tr>
+<td>Float32</td>
+<td>Float32Array</td>
+<td>4</td>
+<td>32 位浮点</td>
+</tr>
+<tr>
+<td>Float64</td>
+<td>Float64Array</td>
+<td>8</td>
+<td>64 位浮点</td>
+</tr>
+</tbody></table>
+<p>来看看这些都是什么意思：</p>
+<ul>
+<li><strong>Uint8Array：</strong> 将 ArrayBuffer 中的每个字节视为一个整数，可能的值从 0 到 255 （一个字节等于 8 位）。 这样的值称为“8 位无符号整数”。</li>
+<li><strong>Uint16Array</strong>：将 ArrayBuffer 中任意两个字节视为一个整数，可能的值从 0 到 65535。 这样的值称为“16 位无符号整数”。</li>
+<li><strong>Uint32Array：</strong>将 ArrayBuffer 中任何四个字节视为一个整数，可能值从 0 到 4294967295，这样的值称为“32 位无符号整数”。</li>
+</ul>
+<p>这些构造函数生成的对象统称为 TypedArray 对象。它们和正常的数组很类似，都有<code>length</code> 属性，都能用索引获取数组元素，所有数组的方法都可以在类型化数组上面使用。</p>
+<p><strong>那类型化数组和数组有什么区别呢？</strong></p>
+<ul>
+<li>类型化数组的元素都是连续的，不会为空；</li>
+<li>类型化数组的所有成员的类型和格式相同；</li>
+<li>类型化数组元素默认值为 0；</li>
+<li>类型化数组本质上只是一个视图层，不会存储数据，数据都存储在更底层的 ArrayBuffer 对象中。</li>
+</ul>
+<p>下面来看看 TypedArray 都有哪些常用的方法和属性。</p>
+<h4 id="①-new-TypedArray"><a href="#①-new-TypedArray" class="headerlink" title="① new TypedArray()"></a>① new TypedArray()</h4><p>TypedArray 的语法如下（TypedArray只是一个概念，实际使用的是那9个对象）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">new Int8Array(length);</span><br><span class="line">new Int8Array(typedArray);</span><br><span class="line">new Int8Array(object);</span><br><span class="line">new Int8Array(buffer [, byteOffset [, length]]);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，TypedArray 有多种用法，下面来分别看一下。</p>
+<ul>
+<li><strong>TypedArray(length)</strong> ：通过分配指定长度内容进行分配</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let view = new Int8Array(16);</span><br><span class="line">view[0] = 10;</span><br><span class="line">view[10] = 6;</span><br><span class="line">console.log(view);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBjvbhdePuMQRqP6Utd6LC6GvSotoErhqtkjYKkzdkP5DXafIHqUkc1w/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>这里就生成了一个 16个元素的 Int8Array 数组，除了手动赋值的元素，其他元素的初始值都是 0。</p>
+<ul>
+<li><strong>TypedArray(typeArray)</strong> ：接收一个视图实例作为参数</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const view = new Int8Array(new Uint8Array(6));</span><br><span class="line">view[0] = 10;</span><br><span class="line">view[3] = 6;</span><br><span class="line">console.log(view);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBTJ7n72mWia8vicclFrDlG5h1iccSNElNkRfdiaJvaic5FrVA1dMpZhJk4Sg/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li><strong>TypedArray(object)</strong> ：参数可以是一个普通数组</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const view = new Int8Array([1, 2, 3, 4, 5]);</span><br><span class="line">view[0] = 10;</span><br><span class="line">view[3] = 6;</span><br><span class="line">console.log(view);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBQvwyeSQtbOzJpoQr7wr1buJUflke5QOMV87mVgEmtLGhS6KY6g4XEA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>需要注意，TypedArray视图会开辟一段新的内存，不会在原数组上建立内存。当然，这里创建的类型化数组也能转换回普通数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Array.prototype.slice.call(view); // [10, 2, 3, 6, 5]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>TypeArray(buffer [, byteOffset [, length]])</strong> ：</li>
+</ul>
+<p>这种方式有三个参数，其中第一个参数是一个ArrayBuffer对象；第二个参数是视图开始的字节序号，默认从0开始，可选；第三个参数是视图包含的数据个数，默认直到本段内存区域结束。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(8);</span><br><span class="line">const view1 = new Int32Array(buffer); </span><br><span class="line">const view2 = new Int32Array(buffer, 4); </span><br><span class="line">console.log(view1, view2);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjB7p2VKK6MNIZAsDsRtFX8v4VdWydZic3locxHRzohOhqbgzMZm36p8sQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="②-BYTES-PER-ELEMENT"><a href="#②-BYTES-PER-ELEMENT" class="headerlink" title="② BYTES_PER_ELEMENT"></a>② BYTES_PER_ELEMENT</h4><p>每种视图的构造函数都有一个 <code>BYTES_PER_ELEMENT</code> 属性，表示这种数据类型占据的字节数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Int8Array.BYTES_PER_ELEMENT // 1</span><br><span class="line">Uint8Array.BYTES_PER_ELEMENT // 1</span><br><span class="line">Int16Array.BYTES_PER_ELEMENT // 2</span><br><span class="line">Uint16Array.BYTES_PER_ELEMENT // 2</span><br><span class="line">Int32Array.BYTES_PER_ELEMENT // 4</span><br><span class="line">Uint32Array.BYTES_PER_ELEMENT // 4</span><br><span class="line">Float32Array.BYTES_PER_ELEMENT // 4</span><br><span class="line">Float64Array.BYTES_PER_ELEMENT // 8</span><br></pre></td></tr></table></figure>
+
+<p><code>BYTES_PER_ELEMENT</code> 属性也可以在类型化数组的实例上获取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16); </span><br><span class="line">const view = new Uint32Array(buffer); </span><br><span class="line">console.log(Uint32Array.BYTES_PER_ELEMENT); // 4</span><br></pre></td></tr></table></figure>
+
+<h4 id="③-TypedArray-prototype-buffer"><a href="#③-TypedArray-prototype-buffer" class="headerlink" title="③ TypedArray.prototype.buffer"></a>③ <strong>TypedArray.prototype.buffer</strong></h4><p>TypedArray 实例的 buffer 属性会返回内存中对应的 ArrayBuffer对象，只读属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const a = new Uint32Array(8);</span><br><span class="line">const b = new Int32Array(a.buffer); </span><br><span class="line">console.log(a, b);</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBcQ1icc88FA4sRfCAeKjP6khiaqWufjw3mRFTibKcpb6fyOwZsGyhaA7lw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="④-TypedArray-prototype-slice"><a href="#④-TypedArray-prototype-slice" class="headerlink" title="④ TypedArray.prototype.slice()"></a>④ TypedArray.prototype.slice()</h4><p>TypeArray 实例的 slice方法可以返回一个指定位置的新的 TypedArray实例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const view = new Int16Array(8);</span><br><span class="line">console.log(view.slice(0 ,5));</span><br></pre></td></tr></table></figure>
+
+<p>输出结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBl8pv1icHKibWF5hxKS6a9RecUo0qqu2BuF8n3juwtWRTk3TPKKdjQic0g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="⑤-byteLength-和-length"><a href="#⑤-byteLength-和-length" class="headerlink" title="⑤ byteLength 和 length"></a>⑤ byteLength 和 length</h4><ul>
+<li><code>byteLength</code>：返回 TypedArray 占据的内存长度，单位为字节；</li>
+<li><code>length</code>：返回 TypedArray 元素个数；</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const view = new Int16Array(8);</span><br><span class="line">view.length;      // 8</span><br><span class="line">view.byteLength;  // 16</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）DataView"><a href="#（3）DataView" class="headerlink" title="（3）DataView"></a>（3）DataView</h3><p>说完 ArrayBuffer，下面来看看另一种操作 ArrayBuffer 的方式：DataView。<strong>DataView</strong> 视图是一个可以从 二进制 ArrayBuffer 对象中读写多种数值类型的底层接口，使用它时，不用考虑不同平台的字节序问题。</p>
+<p>DataView视图提供更多操作选项，而且支持设定字节序。本来，在设计目的上，ArrayBuffer对象的各种TypedArray视图，是用来向网卡、声卡之类的本机设备传送数据，所以使用本机的字节序就可以了；而DataView视图的设计目的，是用来处理网络设备传来的数据，所以大端字节序或小端字节序是可以自行设定的。</p>
+<h4 id="①-new-DataView"><a href="#①-new-DataView" class="headerlink" title="① new DataView()"></a>① new DataView()</h4><p>DataView视图可以通过构造函数来创建，它的参数是一个ArrayBuffer对象，生成视图。其语法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new DataView(buffer [, byteOffset [, byteLength]])</span><br></pre></td></tr></table></figure>
+
+<p>其有三个参数：</p>
+<ul>
+<li><code>buffer</code>：一个已经存在的 ArrayBuffer 对象，DataView 对象的数据源。</li>
+<li><code>byteOffset</code>：可选，此 DataView 对象的第一个字节在 buffer 中的字节偏移。如果未指定，则默认从第一个字节开始。</li>
+<li><code>byteLength</code>：可选，此 DataView 对象的字节长度。如果未指定，这个视图的长度将匹配 buffer 的长度。</li>
+</ul>
+<p>来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16);</span><br><span class="line">const view = new DataView(buffer);</span><br><span class="line">console.log(view);</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBAQgcSIZ83CaQVmnFC5jj8P2B9bLdnsvd9ic24IAecF01pD8UdnLqHGA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="②-buffer、byteLength、byteOffset"><a href="#②-buffer、byteLength、byteOffset" class="headerlink" title="② buffer、byteLength、byteOffset"></a>② buffer、byteLength、byteOffset</h4><p>DataView 实例有以下常用属性：</p>
+<ul>
+<li><code>buffer</code>：返回对应的ArrayBuffer对象；</li>
+<li><code>byteLength</code>：返回占据的内存字节长度；</li>
+<li><code>byteOffset</code>：返回当前视图从对应的ArrayBuffer对象的哪个字节开始。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(16);</span><br><span class="line">const view = new DataView(buffer);</span><br><span class="line">view.buffer;</span><br><span class="line">view.byteLength;</span><br><span class="line">view.byteOffset;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBmbzW69HZianteiafuia1gEico1cNj5Iib4TTwF8dJswWW7k5EIF23VcxldQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h4 id="③-读取内存"><a href="#③-读取内存" class="headerlink" title="③ 读取内存"></a>③ 读取内存</h4><p>DataView 实例提供了以下方法来读取内存，它们的参数都是一个字节序号，表示开始读取的字节位置：</p>
+<ul>
+<li>getInt8：读取1个字节，返回一个8位整数。</li>
+<li>getUint8：读取1个字节，返回一个无符号的8位整数。</li>
+<li>getInt16：读取2个字节，返回一个16位整数。</li>
+<li>getUint16：读取2个字节，返回一个无符号的16位整数。</li>
+<li>getInt32：读取4个字节，返回一个32位整数。</li>
+<li>getUint32：读取4个字节，返回一个无符号的32位整数。</li>
+<li>getFloat32：读取4个字节，返回一个32位浮点数。</li>
+<li>getFloat64：读取8个字节，返回一个64位浮点数。</li>
+</ul>
+<p>下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const buffer = new ArrayBuffer(24);</span><br><span class="line">const view = new DataView(buffer);</span><br><span class="line"></span><br><span class="line">// 从第1个字节读取一个8位无符号整数</span><br><span class="line">const view1 = view.getUint8(0);</span><br><span class="line"></span><br><span class="line">// 从第2个字节读取一个16位无符号整数</span><br><span class="line">const view2 = view.getUint16(1);</span><br><span class="line"></span><br><span class="line">// 从第4个字节读取一个16位无符号整数</span><br><span class="line">const view3 = view.getUint16(3);</span><br></pre></td></tr></table></figure>
+
+<h4 id="④-写入内存"><a href="#④-写入内存" class="headerlink" title="④ 写入内存"></a>④ 写入内存</h4><p>DataView 实例提供了以下方法来写入内存，它们都接受两个参数，第一个参数表示开始写入数据的字节序号，第二个参数为写入的数据：</p>
+<ul>
+<li>setInt8：写入1个字节的8位整数。</li>
+<li>setUint8：写入1个字节的8位无符号整数。</li>
+<li>setInt16：写入2个字节的16位整数。</li>
+<li>setUint16：写入2个字节的16位无符号整数。</li>
+<li>setInt32：写入4个字节的32位整数。</li>
+<li>setUint32：写入4个字节的32位无符号整数。</li>
+<li>setFloat32：写入4个字节的32位浮点数。</li>
+<li>setFloat64：写入8个字节的64位浮点数。</li>
+</ul>
+<h2 id="5-Object-URL"><a href="#5-Object-URL" class="headerlink" title="5. Object URL"></a>5. Object URL</h2><p>Object URL（MDN定义名称）又称Blob URL（W3C定义名称），是HTML5中的新标准。它是一个用来表示File Object 或Blob Object 的URL。在网页中，我们可能会看到过这种形式的 Blob URL：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjBmvaNyW9DO3dpELEDT9LNKJSPvC6OeakDWv6s8fI7Cfhn3QkxX93TKA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>其实 Blob URL/Object URL 是一种伪协议，允许将 Blob 和 File 对象用作图像、二进制数据下载链接等的 URL 源。</p>
+<p>对于 Blob/File 对象，可以使用 URL构造函数的 <code>createObjectURL()</code> 方法创建将给出的对象的 URL。这个 URL 对象表示指定的 File 对象或 Blob 对象。我们可以在<code>&lt;img&gt;</code>、<code>&lt;script&gt;</code> 标签中或者 <code>&lt;a&gt;</code> 和 <code>&lt;link&gt;</code> 标签的 <code>href</code> 属性中使用这个 URL。</p>
+<p>来看一个简单的例子，首先定义一个文件上传的 input 和一个 图片预览的 img：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;fileInput&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img id=&quot;preview&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>再来使用 <code>URL.createObjectURL()</code> 将File 对象转化为一个 URL：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line">const preview = document.getElementById(&quot;preview&quot;);</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">  preview.src = URL.createObjectURL(e.target.files[0]);</span><br><span class="line">  console.log(preview.src);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，上传的图片转化成了一个 URL，并显示在了屏幕上：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjB9qia0MSzEmPwaTnQQ7vavMiaPckOBib2F85CDIHJGXoLIbgXx0n2ugtdw/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>那这个 API 有什么意义呢？可以将Blob/File对象转化为URL，通过这个URL 就可以实现文件下载或者图片显示等。</p>
+<p>当我们使用<code>createObjectURL()</code>方法创建一个data URL 时，就需要使用<code>revokeObjectURL()</code>方法从内存中清除它来释放内存。虽然浏览器会在文档卸载时自动释放 Data URL，但为了提高性能，我们应该使用<code>revokeObjectURL()</code>来手动释放它。<code>revokeObjectURL()</code>方法接受一个Data URL 作为其参数，返回<code>undefined</code>。下面来看一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const objUrl = URL.createObjectURL(new File([&quot;&quot;], &quot;filename&quot;));</span><br><span class="line">console.log(objUrl);</span><br><span class="line">URL.revokeObjectURL(objUrl);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-Base64"><a href="#6-Base64" class="headerlink" title="6. Base64"></a>6. Base64</h2><p>Base64 是一种基于64个可打印字符来表示二进制数据的表示方法。Base64 编码普遍应用于需要通过被设计为处理文本数据的媒介上储存和传输二进制数据而需要编码该二进制数据的场景。这样是为了保证数据的完整并且不用在传输过程中修改这些数据。</p>
+<p>在 JavaScript 中，有两个函数被分别用来处理解码和编码 <em>base64</em> 字符串：</p>
+<ul>
+<li><code>atob()</code>：解码，解码一个 Base64 字符串；</li>
+<li><code>btoa()</code>：编码，从一个字符串或者二进制数据编码一个 Base64 字符串。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">btoa(&quot;JavaScript&quot;)       // &#x27;SmF2YVNjcmlwdA==&#x27;</span><br><span class="line">atob(&#x27;SmF2YVNjcmlwdA==&#x27;) // &#x27;JavaScript&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>那 base64 的实际应用场景有哪些呢？其实多数场景就是基于Data URL的。比如，使用<code>toDataURL()</code>方法把 canvas 画布内容生成 base64 编码格式的图片：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const canvas = document.getElementById(&#x27;canvas&#x27;); </span><br><span class="line">const ctx = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">const dataUrl = canvas.toDataURL();</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，还可以使用<code>readAsDataURL()</code>方法把上传的文件转为base64格式的data URI，比如上传头像展示或者编辑：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;file&quot; id=&quot;fileInput&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img id=&quot;preview&quot; /&gt;</span><br><span class="line">const fileInput = document.getElementById(&quot;fileInput&quot;);</span><br><span class="line">const preview = document.getElementById(&quot;preview&quot;);</span><br><span class="line">const reader = new FileReader();</span><br><span class="line"></span><br><span class="line">fileInput.onchange = (e) =&gt; &#123;</span><br><span class="line">  reader.readAsDataURL(e.target.files[0]);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">reader.onload = (e) =&gt; &#123;</span><br><span class="line">  preview.src = e.target.result;</span><br><span class="line">  console.log(e.target.result);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下，将图片（二进制数据）转化为可打印的字符，也便于数据的传输：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/EO58xpw5UMOaLRWgbtfiafOM84RoleicjB79D4jerx6hW3q3EeWR2lC79s1XqRmdfxwutzkv2V3upd9dGRGFtvMA/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>另外，一些小的图片都可以使用 base64 格式进行展示，<code>img</code>标签和<code>background</code>的 <code>url</code> 属性都支持使用base64 格式的图片，这样做也可以减少 HTTP 请求。</p>
+<h2 id="7-格式转化"><a href="#7-格式转化" class="headerlink" title="7. 格式转化"></a>7. 格式转化</h2><p>看完这些基本的概念，下面就来看看常用格式之间是如何转换的。</p>
+<h3 id="（1）ArrayBuffer-→-blob"><a href="#（1）ArrayBuffer-→-blob" class="headerlink" title="（1）ArrayBuffer → blob"></a>（1）ArrayBuffer → blob</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const blob = new Blob([new Uint8Array(buffer, byteOffset, length)]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="（2）ArrayBuffer-→-base64"><a href="#（2）ArrayBuffer-→-base64" class="headerlink" title="（2）ArrayBuffer → base64"></a>（2）ArrayBuffer → base64</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const base64 = btoa(String.fromCharCode.apply(null, new Uint8Array(arrayBuffer)));</span><br></pre></td></tr></table></figure>
+
+<h3 id="（3）base64-→-blob"><a href="#（3）base64-→-blob" class="headerlink" title="（3）base64 → blob"></a>（3）base64 → blob</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">const base64toBlob = (base64Data, contentType, sliceSize) =&gt; &#123;</span><br><span class="line">  const byteCharacters = atob(base64Data);</span><br><span class="line">  const byteArrays = [];</span><br><span class="line"></span><br><span class="line">  for (let offset = 0; offset &lt; byteCharacters.length; offset += sliceSize) &#123;</span><br><span class="line">    const slice = byteCharacters.slice(offset, offset + sliceSize);</span><br><span class="line"></span><br><span class="line">    const byteNumbers = new Array(slice.length);</span><br><span class="line">    for (let i = 0; i &lt; slice.length; i++) &#123;</span><br><span class="line">      byteNumbers[i] = slice.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const byteArray = new Uint8Array(byteNumbers);</span><br><span class="line">    byteArrays.push(byteArray);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  const blob = new Blob(byteArrays, &#123;type: contentType&#125;);</span><br><span class="line">  return blob;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（4）blob-→-ArrayBuffer"><a href="#（4）blob-→-ArrayBuffer" class="headerlink" title="（4）blob → ArrayBuffer"></a>（4）blob → ArrayBuffer</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function blobToArrayBuffer(blob) &#123; </span><br><span class="line">  return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">      const reader = new FileReader();</span><br><span class="line">      reader.onload = () =&gt; resolve(reader.result);</span><br><span class="line">      reader.onerror = () =&gt; reject;</span><br><span class="line">      reader.readAsArrayBuffer(blob);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（5）blob-→-base64"><a href="#（5）blob-→-base64" class="headerlink" title="（5）blob → base64"></a>（5）blob → base64</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function blobToBase64(blob) &#123;</span><br><span class="line">  return new Promise((resolve) =&gt; &#123;</span><br><span class="line">    const reader = new FileReader();</span><br><span class="line">    reader.onloadend = () =&gt; resolve(reader.result);</span><br><span class="line">    reader.readAsDataURL(blob);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="（6）blob-→-Object-URL"><a href="#（6）blob-→-Object-URL" class="headerlink" title="（6）blob → Object URL"></a>（6）blob → Object URL</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const objectUrl = URL.createObjectURL(blob);</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ab4ab2c8/">设计模式中观察者模式和发布订阅模式的区别？</a>
+            
+            
+            <a class="next" rel="next" href="/e3393ac9/">你应该知道的 7 种 JavaScript 错误类型</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ab4ab2c8/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/e3393ac9/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

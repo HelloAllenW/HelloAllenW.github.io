@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Oracle数据库下载安装 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Oracle数据库下载安装</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 4, 2024&nbsp;&nbsp;10:13:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 4, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">764 Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">2 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="一、数据库下载"><a href="#一、数据库下载" class="headerlink" title="一、数据库下载"></a>一、数据库下载</h1><h2 id="1-进入Oracle官网下载页面"><a href="#1-进入Oracle官网下载页面" class="headerlink" title="1. 进入Oracle官网下载页面"></a>1. 进入Oracle官网下载页面</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.oracle.com/cn/downloads/">https://www.oracle.com/cn/downloads/</a></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">补充：首次下载可能需要注册/登录用户</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-选择Database，点击数据库企业标准版"><a href="#2-选择Database，点击数据库企业标准版" class="headerlink" title="2. 选择Database，点击数据库企业标准版"></a>2. 选择Database，点击数据库企业标准版</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041023689.png" alt="img"></p>
+<h2 id="3-选择Oracle-Database-Free，点击Select-your-download-below，进入下载页"><a href="#3-选择Oracle-Database-Free，点击Select-your-download-below，进入下载页" class="headerlink" title="3. 选择Oracle Database Free，点击Select your download below，进入下载页"></a>3. 选择Oracle Database Free，点击Select your download below，进入下载页</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041026357.png" alt="img"></p>
+<h2 id="4-选择适合自己电脑操作系统的版本，点击zip进行下载"><a href="#4-选择适合自己电脑操作系统的版本，点击zip进行下载" class="headerlink" title="4. 选择适合自己电脑操作系统的版本，点击zip进行下载"></a>4. 选择适合自己电脑操作系统的版本，点击zip进行下载</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041027337.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041028433.png" alt="img"></p>
+<h1 id="二、数据库安装"><a href="#二、数据库安装" class="headerlink" title="二、数据库安装"></a>二、数据库安装</h1><h2 id="1-解压zip并运行setup-exe"><a href="#1-解压zip并运行setup-exe" class="headerlink" title="1. 解压zip并运行setup.exe"></a>1. 解压zip并运行setup.exe</h2><p>将下载的zip文件解压到一个目录下，该目录最好使用纯英文字符进行命名。并且该目录需要长期存在，即使在Oracle安装成功后也不能删除。然后以管理员身份运行setup.exe。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041029131.png" alt="img"></p>
+<h2 id="2-创建并配置单实例数据库"><a href="#2-创建并配置单实例数据库" class="headerlink" title="2. 创建并配置单实例数据库"></a>2. 创建并配置单实例数据库</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041036775.png" alt="img"></p>
+<h2 id="3-错误：无权限或空间不足错"><a href="#3-错误：无权限或空间不足错" class="headerlink" title="3. 错误：无权限或空间不足错"></a>3. 错误：无权限或空间不足错</h2><p>点击下一步有可能会提示“无法创建目录AppData\Local\Temp，无权限或空间不足”的错误。原因可能是因为原来的环境变量temp和tmp配置目录存在数字或其他特殊字符导致。<br>解决方法：修改temp环境变量。右键开始菜单–系统–高级系统设置–高级–环境变量，找到temp和tmp变量，统一将其目录指向到新的临时目录，如：d:\temp。</p>
+<h2 id="4-系统选择桌面类"><a href="#4-系统选择桌面类" class="headerlink" title="4. 系统选择桌面类"></a>4. 系统选择桌面类</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041037342.png" alt="img"></p>
+<h2 id="5-使用Windows内置账户"><a href="#5-使用Windows内置账户" class="headerlink" title="5. 使用Windows内置账户"></a>5. 使用Windows内置账户</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041044048.png" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041044677.png" alt="img"></p>
+<h2 id="6-自定义选择安装路径，全局数据库名称，数据库登录口令"><a href="#6-自定义选择安装路径，全局数据库名称，数据库登录口令" class="headerlink" title="6. 自定义选择安装路径，全局数据库名称，数据库登录口令"></a>6. 自定义选择安装路径，全局数据库名称，数据库登录口令</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041049001.png" alt="img"></p>
+<h2 id="7-错误：已存在具有指定标识符的数据库实例"><a href="#7-错误：已存在具有指定标识符的数据库实例" class="headerlink" title="7. 错误：已存在具有指定标识符的数据库实例"></a>7. 错误：已存在具有指定标识符的数据库实例</h2><p>点击下一步如果提示：“[INS-35075] 已存在具有指定标识符的数据库实例”。是因为之前安装过Oracle，没有清除干净。</p>
+<p>解决方法：</p>
+<p>（1）任务管理器右击，选择服务页面，打开服务，停止Oracle相关服务<br>（2）运行regedit，选择HKEY_LOCAL_MACHINE &gt; SOFTWARE &gt; ORACLE，按del键删除这个入口<br>（3）运行regedit，选择HKEY_LOCAL_MACHINE &gt; SYSTEM &gt; CurrentControlSet &gt; Services，滚动这个列表，删除所有Oracle入口</p>
+<p>注意：卸载并清除Oracle后需要重启电脑才会生效。</p>
+<h2 id="8-安装"><a href="#8-安装" class="headerlink" title="8. 安装"></a>8. 安装</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041125065.png" alt="img"></p>
+<h2 id="9-错误：-INS-20802-Oracle-Database-Configuration-Assistant-失败。"><a href="#9-错误：-INS-20802-Oracle-Database-Configuration-Assistant-失败。" class="headerlink" title="9. 错误：[INS-20802] Oracle Database Configuration Assistant 失败。"></a>9. 错误：[INS-20802] Oracle Database Configuration Assistant 失败。</h2><p>安装过程中可能会出现：[INS-20802] Oracle Database Configuration Assistant 失败。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041131233.png"></p>
+<p>解决方法：</p>
+<p>（1）以管理员身份运行 <code>D:\\OracleHome</code> 下 BIN 目录中的 netca.bat</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402042031930.png"></p>
+<p>（2）选第一个“监听程序配置”添加：不成功，提示已经运行。那么选择 监听程序配置“重新配置”，配置成功，然后在oracle安装页面重试即可。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402042033249.png"></p>
+<h2 id="10-安装完成"><a href="#10-安装完成" class="headerlink" title="10. 安装完成"></a>10. 安装完成</h2><p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402041237315.png" alt="img"></p>
+<h1 id="三、数据库验证"><a href="#三、数据库验证" class="headerlink" title="三、数据库验证"></a>三、数据库验证</h1><p>cmd进入终端，输入sqlplus，提示输入用户名，口令（默认用户名：system，口令：数据库安装时输入的口令），点击回车，进入数据库输入列，则此时数据库安装完成。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402042036375.png"></p>
+<p>运用sql Developer连接Oracle时：<br>​    用户名：system<br>​    口令：数据库安装时输入的口令<br>​    SID：orcl<br>​    若提示：<code>Listener refused the connection with the following error: ORA-12505, TNS:listener does not currently know of SID given in connect descriptor </code> 错误，则：<br>需要找到解压文件<code>\network\admin</code>内的<code>tnsnames.ora</code>文件，将SERVER的值修改为orcl</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"># 数据库</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/78e191b0/">ES11、ES12、ES13新特性</a>
+            
+            
+            <a class="next" rel="next" href="/342d88cc/">维持平衡与不平衡</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/78e191b0/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/342d88cc/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

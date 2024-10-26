@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>ES6迭代器和生成器 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">ES6迭代器和生成器</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2016&nbsp;&nbsp;15:35:42</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2016
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/JavaScript/">JavaScript </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">8 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="一、迭代器"><a href="#一、迭代器" class="headerlink" title="一、迭代器"></a>一、迭代器</h2><p>JavaScript 原有的表示“集合”的数据结构，主要是数组（Array）和对象（Object），ES6 又添加了Map和Set。这样就需要一种统一的接口机制，来处理所有不同的数据结构。遍历器（Iterator）就是这样一种机制。它是一种接口，为各种不同的数据结构提供统一的访问机制。<strong>任何数据结构只要部署 Iterator 接口，就可以完成遍历操作（即依次处理该数据结构的所有成员）</strong>。</p>
+<h3 id="1-Iterator的作用："><a href="#1-Iterator的作用：" class="headerlink" title="1.Iterator的作用："></a>1.Iterator的作用：</h3><ul>
+<li>为各种数据结构，提供一个统一的、简便的访问接口；</li>
+<li>使得数据结构的成员能够按某种次序排列</li>
+<li>ES6创造了一种新的遍历命令for…of循环，Iterator接口主要供for…of消费。</li>
+</ul>
+<h3 id="2-原生具备iterator接口的数据-可用for-of遍历"><a href="#2-原生具备iterator接口的数据-可用for-of遍历" class="headerlink" title="2.原生具备iterator接口的数据(可用for of遍历)"></a>2.原生具备iterator接口的数据(可用for of遍历)</h3><ul>
+<li>Array</li>
+<li>set容器</li>
+<li>map容器</li>
+<li>String</li>
+<li>函数的 arguments 对象</li>
+<li>NodeList 对象</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr3 = [1, 2, &#x27;kobe&#x27;, true];</span><br><span class="line">for(let i of arr3)&#123;</span><br><span class="line">   console.log(i); // 1 2 kobe true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let str = &#x27;abcd&#x27;;</span><br><span class="line">for(let item of str)&#123;</span><br><span class="line">   console.log(item); // a b c d</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function fun() &#123;</span><br><span class="line">    for (let i of arguments) &#123;</span><br><span class="line">       console.log(i) // 1 4 5</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fun(1, 4, 5)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var engines = new Set([&quot;Gecko&quot;, &quot;Trident&quot;, &quot;Webkit&quot;, &quot;Webkit&quot;]);</span><br><span class="line">for (var e of engines) &#123;</span><br><span class="line">  console.log(e);</span><br><span class="line">&#125;</span><br><span class="line">// Gecko</span><br><span class="line">// Trident</span><br><span class="line">// Webkit    </span><br></pre></td></tr></table></figure>
+
+<h3 id="3-迭代器的工作原理"><a href="#3-迭代器的工作原理" class="headerlink" title="3.迭代器的工作原理"></a>3.迭代器的工作原理</h3><ul>
+<li>创建一个指针对象，指向数据结构的起始位置。</li>
+<li>第一次调用next方法，指针自动指向数据结构的第一个成员</li>
+<li>接下来不断调用next方法，指针会一直往后移动，直到指向最后一个成员</li>
+<li>每调用next方法返回的是一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}<ul>
+<li>value表示当前成员的值，done对应的布尔值表示当前的数据的结构是否遍历结束。</li>
+<li>当遍历结束的时候返回的value值是undefined，done值为true</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-手写一个迭代器"><a href="#4-手写一个迭代器" class="headerlink" title="4.手写一个迭代器"></a>4.手写一个迭代器</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function myIterator(arr) &#123;</span><br><span class="line">    let nextIndex = 0</span><br><span class="line">    return &#123;</span><br><span class="line">      next: function() &#123;</span><br><span class="line">        return nextIndex &lt; arr.length</span><br><span class="line">          ? &#123; value: arr[nextIndex++], done: false &#125;</span><br><span class="line">          : &#123; value: undefined, done: true &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  let arr = [1, 4, &#x27;ads&#x27;]// 准备一个数据</span><br><span class="line">  let iteratorObj = myIterator(arr)</span><br><span class="line">  console.log(iteratorObj.next()) // 所有的迭代器对象都拥有next()方法，会返回一个结果对象</span><br><span class="line">  console.log(iteratorObj.next())</span><br><span class="line">  console.log(iteratorObj.next())</span><br><span class="line">  console.log(iteratorObj.next())</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://camo.githubusercontent.com/24eda2fb174002a8651f9216447e3cc8cd90ae643cbb3b95711562bb90fd8c0e/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333137343730312d646266633863663639663062656336372e706e673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430"><img src="https://camo.githubusercontent.com/24eda2fb174002a8651f9216447e3cc8cd90ae643cbb3b95711562bb90fd8c0e/68747470733a2f2f75706c6f61642d696d616765732e6a69616e7368752e696f2f75706c6f61645f696d616765732f333137343730312d646266633863663639663062656336372e706e673f696d6167654d6f6772322f6175746f2d6f7269656e742f7374726970253743696d61676556696577322f322f772f31323430" alt="img"></a></p>
+<h3 id="5-注意点"><a href="#5-注意点" class="headerlink" title="5.注意点"></a>5.注意点</h3><p><strong>① for of循环不支持遍历普通对象</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; a: 2, b: 3 &#125;</span><br><span class="line">   for (let i of obj) &#123;</span><br><span class="line">     console.log(i) // Uncaught TypeError: obj is not iterable</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对象的Symbol.iterator属性，指向该对象的默认遍历器方法。<strong>当使用for of去遍历某一个数据结构的时候，首先去找Symbol.iterator，找到了就去遍历，没有找到的话不能遍历，提示Uncaught TypeError: XXX is not iterable</strong></p>
+<p><strong>② 当使用扩展运算符（…）或者对数组和 Set 结构进行解构赋值时，会默认调用Symbol.iterator方法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let arr1 = [1,3]</span><br><span class="line">let arr2 = [2,3,4,5]</span><br><span class="line">arr2 = [1,...arr2,6]</span><br><span class="line">console.log(arr2) // [1, 2, 3, 4, 5, 6]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、生成器"><a href="#二、生成器" class="headerlink" title="二、生成器"></a>二、生成器</h2><h3 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h3><ul>
+<li><strong>Generator 函数是 ES6 提供的一种异步编程解决方案</strong>，语法行为与传统函数完全不同</li>
+<li>语法上，首先可以把它理解成，<strong>Generator 函数是一个状态机，封装了多个内部状态</strong>。</li>
+<li><strong>Generator 函数除了状态机，还是一个遍历器对象生成函数</strong>。</li>
+<li>可暂停函数(惰性求值), yield可暂停，next方法可启动。每次返回的是yield后的表达式结果</li>
+</ul>
+<h3 id="2-特点"><a href="#2-特点" class="headerlink" title="2.特点"></a>2.特点</h3><ul>
+<li>function关键字与函数名之间有一个星号；</li>
+<li>函数体内部使用yield表达式，定义不同的内部状态</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> function* generatorExample()&#123;</span><br><span class="line">    console.log(&quot;开始执行&quot;)</span><br><span class="line">    yield &#x27;hello&#x27;;  </span><br><span class="line">    yield &#x27;generator&#x27;; </span><br><span class="line"> &#125;</span><br><span class="line">// generatorExample() </span><br><span class="line">// 这种调用方法Generator 函数并不会执行</span><br><span class="line">let MG = generatorExample() // 返回指针对象</span><br><span class="line">MG.next() //开始执行  &#123;value: &quot;hello&quot;, done: false&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Generator 函数是分段执行的，调用next方法函数内部逻辑开始执行，遇到yield表达式停止，返回<code>&#123;value: yield后的表达式结果/undefined, done: false/true&#125;</code>,再次调用next方法会从上一次停止时的yield处开始，直到最后。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* helloWorldGenerator() &#123;</span><br><span class="line">  yield &#x27;hello&#x27;;</span><br><span class="line">  yield &#x27;world&#x27;;</span><br><span class="line">  return &#x27;ending&#x27;;</span><br><span class="line">&#125;</span><br><span class="line">var hw = helloWorldGenerator();</span><br><span class="line">hw.next()// &#123; value: &#x27;hello&#x27;, done: false &#125;</span><br><span class="line">hw.next()// &#123; value: &#x27;world&#x27;, done: false &#125;</span><br><span class="line">hw.next()// &#123; value: &#x27;ending&#x27;, done: true &#125;</span><br><span class="line">hw.next()// &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一次调用，Generator 函数开始执行，直到遇到第一个yield表达式为止。next方法返回一个对象，它的value属性就是当前yield表达式的值hello，done属性的值false，表示遍历还没有结束。</p>
+<p>第二次调用，Generator 函数从上次yield表达式停下的地方，一直执行到下一个yield表达式。next方法返回的对象的value属性就是当前yield表达式的值world，done属性的值false，表示遍历还没有结束。</p>
+<p>第三次调用，Generator 函数从上次yield表达式停下的地方，一直执行到return语句（如果没有return语句，就执行到函数结束）。next方法返回的对象的value属性，就是紧跟在return语句后面的表达式的值（如果没有return语句，则value属性的值为undefined），done属性的值true，表示遍历已经结束。</p>
+<p>第四次调用，此时 Generator 函数已经运行完毕，next方法返回对象的value属性为undefined，done属性为true。以后再调用next方法，返回的都是这个值。</p>
+<h3 id="3-next传递参数"><a href="#3-next传递参数" class="headerlink" title="3.next传递参数"></a>3.next传递参数</h3><p>yield表达式本身没有返回值，或者说总是返回undefined。next方法可以带一个参数，该参数就会被当作上一个yield表达式的返回值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function* generatorExample () &#123;</span><br><span class="line">  console.log(&#x27;开始执行&#x27;)</span><br><span class="line">  let result = yield &#x27;hello&#x27;</span><br><span class="line">  console.log(result)</span><br><span class="line">  yield &#x27;generator&#x27;</span><br><span class="line">&#125;</span><br><span class="line">let MG = generatorExample()</span><br><span class="line">MG.next()</span><br><span class="line">MG.next()</span><br><span class="line">// 开始执行</span><br><span class="line">// undefined</span><br><span class="line">// &#123;value: &quot;generator&quot;, done: false&#125;</span><br></pre></td></tr></table></figure>
+
+<p>没有传值时result默认是undefined，接下来我们向第二个next传递一个参数，看下输出结果是啥？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function* generatorExample () &#123;</span><br><span class="line">  console.log(&#x27;开始执行&#x27;)</span><br><span class="line">  let result = yield &#x27;hello&#x27;</span><br><span class="line">  console.log(result)</span><br><span class="line">  yield &#x27;generator&#x27;</span><br><span class="line">&#125;</span><br><span class="line">let MG = generatorExample()</span><br><span class="line">MG.next()</span><br><span class="line">MG.next(11)</span><br><span class="line">// 开始执行</span><br><span class="line">// 11</span><br><span class="line">// &#123;value: &quot;generator&quot;, done: false&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-与-Iterator-接口的关系"><a href="#4-与-Iterator-接口的关系" class="headerlink" title="4.与 Iterator 接口的关系"></a>4.与 Iterator 接口的关系</h3><p>我们上文中提到对象没有iterator接口，用for…of遍历时便会报错。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; username: &#x27;kobe&#x27;, age: 39 &#125;</span><br><span class="line">for (let i of obj) &#123;</span><br><span class="line">  console.log(i) //  Uncaught TypeError: obj is not iterable</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>由于 Generator 函数就是遍历器生成函数，因此可以把 Generator 赋值给对象的Symbol.iterator属性，从而使得该对象具有 Iterator 接口</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123; username: &#x27;kobe&#x27;, age: 39 &#125;</span><br><span class="line">obj[Symbol.iterator] = function* myTest() &#123;</span><br><span class="line">  yield 1;</span><br><span class="line">  yield 2;</span><br><span class="line">  yield 3;</span><br><span class="line">&#125;;</span><br><span class="line">for (let i of obj) &#123;</span><br><span class="line">  console.log(i) // 1 2 3</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码中，Generator函数赋值给Symbol.iterator属性，从而使得obj对象具有了 Iterator 接口，可以被for of遍历了。</p>
+<h3 id="5-Generator的异步的应用"><a href="#5-Generator的异步的应用" class="headerlink" title="5.Generator的异步的应用"></a>5.Generator的异步的应用</h3><h4 id="业务需求："><a href="#业务需求：" class="headerlink" title="业务需求："></a>业务需求：</h4><ul>
+<li>发送ajax请求获取新闻内容</li>
+<li>新闻内容获取成功后再次发送请求，获取对应的新闻评论内容</li>
+<li>新闻内容获取失败则不需要再次发送请求。</li>
+</ul>
+<h4 id="如何实现-前端核心代码如下-："><a href="#如何实现-前端核心代码如下-：" class="headerlink" title="如何实现(前端核心代码如下)："></a>如何实现(前端核心代码如下)：</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">function* sendXml() &#123;</span><br><span class="line">  // url为next传参进来的数据</span><br><span class="line"> let url = yield getNews(&#x27;http://localhost:3000/news?newsId=2&#x27;);//获取新闻内容</span><br><span class="line">  yield getNews(url);//获取对应的新闻评论内容，只有先获取新闻的数据拼凑成url,才能向后台请求</span><br><span class="line">&#125;</span><br><span class="line">function getNews(url) &#123;</span><br><span class="line">  $.get(url, function (data) &#123;</span><br><span class="line">    console.log(data);</span><br><span class="line">    let commentsUrl = data.commentsUrl;</span><br><span class="line">    let url = &#x27;http://localhost:3000&#x27; + commentsUrl;</span><br><span class="line">    // 当获取新闻内容成功，发送请求获取对应的评论内容</span><br><span class="line">    // 调用next传参会作为上次暂停是yield的返回值</span><br><span class="line">    sx.next(url);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">let sx = sendXml();// 发送请求获取新闻内容</span><br><span class="line">sx.next();</span><br></pre></td></tr></table></figure>
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/63c2041f/">还原HTTPS的设计过程</a>
+            
+            
+            <a class="next" rel="next" href="/6efe8d22/">彻底了解instanceof的底层实现原理</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/63c2041f/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/6efe8d22/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

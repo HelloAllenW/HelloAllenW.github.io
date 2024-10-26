@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>文学、电影，以及图像的革命（布尔斯廷） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">文学、电影，以及图像的革命（布尔斯廷）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">十二月 6, 2015&nbsp;&nbsp;23:08:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        十二月 6, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%91%84%E5%BD%B1/">摄影 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/sz_mmbiz_jpg/sM5SdPkqTepBnc6wQyAtSaKIZBrPJVqibpSMCQOc7fVODmzW4mOMjWhCLgSZibH3SbH13owc6uX2pxPSsAIlA3GQ/640?wx_fmt=jpeg&wxfrom=13" alt="图片"></p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+[美]丹尼尔·布尔斯廷 著，符夏怡 译<br />
+节选自《幻象》，南海出版公司
+</div>
+
+
+
+<h2 id="万物皆可改编"><a href="#万物皆可改编" class="headerlink" title="万物皆可改编"></a>万物皆可改编</h2><p>电影是图像革命的产物，我先前也提过，它催生了消解文学形式的新方法。电影在历史上第一次提供了一种视觉媒介，让文学作品得以接触到规模远远超过印刷品读者的受众。</p>
+<p>“会说话的”（或许应该叫作“非阅读”）电影使得这种媒介离印刷品更远了一步。继活字印刷的发明与地方语言文学的出现，电影最深刻地影响了公众对文学的态度，尤其是对虚构写作的态度。</p>
+<p>在这个时代，人们开始谈论所谓的“非虚构”（该词最早的使用记录是在1910年）。在此之前，人们将“现实”视作规范。只有在我们这个时代，才会以如此负面的方式描述现实世界。“虚构”（也即“非现实”）显得如此真实自然，以至于现实本身要被称作“非虚构”。电影必定在很大程度上造就了如此的思维方式。</p>
+<p>电影还带来了更为微妙的影响。文学能够被转化成这种更为生动、更为通用的媒介，导致文学形式这一概念本身大大消解。电影工业成了出版界最大的客户。重大文学事件再也不直接接触公众。小说家的产品就是他的小说：一系列具有其自身独特形式的文字。但如今，更广大的观众群体直接体验的不是小说，而是小说改编的电影。当然，只有印刷出来的文字可以提供真正“原版”的作品。电影，至多只能算是原作的形象。</p>
+<p>虽然将小说改编成电影的创作目的不是被报道，它仍然具有伪事件的其他特点。它是合成的，可以任意重复，极佳地满足了观看者舒适、方便与懒惰的需求。它也具有伪事件最为重大的特点：对大部分人而言，它比自发的原作——即小说——更生动、更令人印象深刻。没多久，美国人就会把任何由小说改编而来的电影当成“原作”。而该作品的文学版本的卖点则只会变成二手的文字版叙述。电影更胜一筹的生动性一在大银幕上五光十色、声情并茂一不可避免地导致了这个结果，你可以买到平装版电影“原作”《飘》或《战争与和平》，书中还附有“真实”人物图像（克拉克·盖博饰白瑞德，费雯·丽饰郝思嘉）。有时，在电影公映后出版的印刷品会改用电影里的故事线来显得更加“本真”一常常与其文学原型大为不同。在沃尔特·迪士尼制作了《海角乐园》（从中几乎辨认不出鲁道夫·怀斯的经典原作）后，出现了意在教育年轻人的“经典版”漫画，不过漫画严格遵循的是迪士尼大幅改编后的“原版”电影剧情。</p>
+<p>将电影当作更原版的形式这一趋势不可避免，这必然会导致占据大众认知的所有戏剧形式都趋于简单化。虽然电影使用的技术设备更为复杂，但它在戏剧程度上却远比小说简单。电影之所以加入新角色或新剧情，一般是为了让故事符合公认的单一式样：提供人们十分熟悉的浪漫桥段，让善恶之分更加鲜明，或是保证故事结局皆大欢喜。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7YCKp1R0ZckTGvSRcPoKpicnicWrXlPYoNuavXxicI6dZFyMf9Lkric1iaoxZncXlF4fGVibKic53xiaPMOw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>巴德·舒尔伯格是超凡电影《码头风云》的剧本作者——该电影在院线大获成功——他并不满意自己在电影中表达的内容。该电影根据舒尔伯格的脚本拍摄，然后他又就同一主题写了本小说。他看过电影后（由伊利亚·卡赞执导，马龙·白兰度出演），认为它作为电影做到了极致，但仍决定把同一个故事写成小说。他在《周六评论》（1955年9月3日刊）上发表了一篇雄辩的文章，阐述他这么做的原因。“不能卖给电影商，那还为什么要写？”这句话清晰地指出了电影和小说间的差异，人们常常会忘却这种差异的存在。虽然舒尔伯格认为电影拍得很好一将所有荣誉收入囊中，从奥斯卡金像奖到威尼斯国际电影节奖项无一遗漏一他依然认为他想表达的内容超出了最好的电影所能做到的极致。</p>
+<p>舒尔伯格辩称，讲故事的方式有两种，它们不能互相取代。</p>
+<p>剧本受到形式的限制。只有导演有机会通过洞见展开人物和故事背景，因此，电影最好的创作方式就成了导演-作家合作。就拿我的《码头风云》来说，其长度（在大量修改后）是一百一十五页手稿纸。小说长度是剧本的五倍，电影是高潮的艺术。我认为它含有五到六条故事线，每一条都向高潮推进，并推动行为。而小说则是高、中、低潮的艺术……电影集中描绘一个角色时，效果最好。它讲述《告密者》的效果可称超凡脱俗，而处理《战争与和平》的繁杂故事时，则有些手足无措。电影空不出时间给我所说的那种必要的走题。“走题”可以体现复杂、矛盾的角色。“走题”帮助描述社会背景。电影必须从一个重大情节前进到第二个重大情节，不断层层推高。这是一种激动人心的艺术形式。但这种激动人心的特质也需要付出代价。它不能像人生那样漫游、不能像生活那样时常停驻，畅想偶然与意外。</p>
+<p>因此，指责电影导演头脑简单常常是不公正的。他们所用以创作的形式，像所有艺术形式一样，有自己的短板。就连最优秀的电影也会将事物简化。票房大热的作品，就连《一个国家的诞生》或《飘》这样的全景式作品，都只有简单的时间线以及简单（因此也十分误导人）的主旨思想。大导演如D.W.格里菲斯都难以处理《党同伐异》中复杂交缠的剧情（从而导致了票房失败）。这一难度极高的创举挑战了复杂精巧的结构，做了一场实验，没有后继者可以成功地重复它的脚步，而范例《一个国家的诞生》则不断被重制。</p>
+<p>我们对自己能够施加给世界的影响具有过分的期待，这从我们以为能够把小说的精华转变成电影便可窥见一斑。这使我们忘了小说里有些东西是不能影视化的（好小说更甚）。仅仅因为电影可以在视觉上非常热闹，远远超过剧院舞台或小说的限度，我们就常常太轻易地认为没什么东西一至少没什么重要的东西不可以改编成电影。九十分钟的时间限制（即使时长翻一番甚至两番）只能涵盖人类经验中十分有限的一部分。就如舒尔伯格坚持认为的那样，即使音效、色彩、广角镜头、宽银幕立体电影和3D技术有了如此的进步，还是有极其广阔、丰富而微妙的世界超出了电影制作者和电影观众的视野。历史演变与社会交往里的微妙信息、不同视角以及种种矛盾，是摄影机所不能捕捉的。真正的束缚并不来自海斯办公室或本地审查，而是电影这种形式本身。当然，电影可以“大声表达”，效果十分生动、可怖，就像《码头风云》一样。但小说，用舒尔伯格的话说，可以“向内呢喃，探寻心灵和思想的内部戏剧”。《码头风云》一片结束于对马龙·白兰度戏剧性的特写，这种表达本身已经十分优秀，但小说可以结束于“不确定处，呈现更深刻的真实……电影必须有行动，而书本则有时间沉思、漫步……电视令人目不暇接的精彩画面不断涌现，电影屏幕越来越宽，机械进步成果丰富、令人生畏，但在这一切洪流之中，书籍依然是文明教化必不可少的手段，能够穿透人类渴望中的未知”。</p>
+<p>我们的现实感面临的威胁，并不在于电影要改编自小说，小说要改编自电影。相反，我们可能会混淆，因为电影和小说都不能完全地成为彼此，传统小说形式继续拓宽着我们的体验，而广角镜头和电影银幕则恰恰要把我们在同一领域中的体验限制缩窄。危险并不在于两种故事可以互相转换，而在于我们相信两种形式可以互相转换。当我们让自己相信（我们十分渴求电影制作者及其媒体经纪人的安抚）电影可以让我们抓住事物的要点时，我们失去了现实感。</p>
+<p>然而电影制作者本人受电影形式需求的推动（就如同《文摘》编辑受他们表达形式的推动），不可避免地把小说本身仅仅当作包装纸以及一系列“文学华饰”。必须舍弃这些才能露出精华，找到故事线。于是，形象种类的增加——从印刷品到照片到电影到广播到电视，到漫画书，再回到轮回的开始——使我们的文学-戏剧体验落入飘忽不定的状态。在这片无定形的混乱中，没有任何形式成立，只有其他形式鬼魅般的影子。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7YCKp1R0ZckTGvSRcPoKpicEjmW4IfTUZzABrVg62yd8SNSichHHKEJ82p0W8kGZdfeiceaibtqKmzbw/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<h2 id="为改编而生"><a href="#为改编而生" class="headerlink" title="为改编而生"></a>为改编而生</h2><p>电影自然是叙述性文学的视觉代替形式，是图像革命的产物。直到1910年，电影才得到普及。1917年，《出版人周刊》就在撰稿讨论“电影小说”了。在20世纪20年代，工作室给小说家付成千上万美元，购买电影改编权。1931年，切尼的《图书行业经济调查》声称，高价电影改编权已导致数例严重的职业病，这种病叫“‘小说家式眼球震颤’，病因是一眼盯着打字机，一眼盯着好莱坞。这导致了‘某类’书籍的井喷式产出”。随后几年间，电影业不断变化的经济形势使得这种职业病前所未有地普遍。二战后，电影制作经费高居不下，以至于大部分制作者不再保留工作室，转而选择租赁设施。此后，贷款拍电影变得简单了。1945年到1960年间，一百多家新成立的独立制片公司购买了小说改编权。</p>
+<p>1946年，米高梅举办了一场小说家比赛，奖金高达十二万五千美元。二十世纪福克斯付给格雷斯·梅塔琉斯二十六万五千美金，让她为《冷暖人间》（1956）写续集，这部票房大卖的电影改编自畅销八百万册的小说。电影续集的标题会是《重返故里》。</p>
+<p>高昂的改编费本身具有宣传价值（“他们肯花这么多钱，一定非常不错！”），就连这笔商业交易本身也成了精心筹划的伪事件（就像电影明星和体育名人定下签约事宜），签合同时要留下照片，作家、制片人等角色还要接受采访。这是一种高级的证明，其权威实际上来自制片人在这次交易中花出去的大笔钱财——制片人也是提供证明的人。</p>
+<p>在针对图书行业的《出版人周刊》里，“电影改编”在1944年成了常设栏目。1952年11月15日，专栏作者保罗·S.南森发现专栏名字太过局限。“电影权益，”他解释道，“毕竟只是一种附属权益；实际上出版商、编辑、书商和其他相关方没有任何理由区别对待不同的改编，比如卖给《妇女家庭杂志》或《万有文集》做摘录，或卖给百老汇改编，又或者卖给电影。”他补充道，好莱坞给的预付款被平装本再版出版商抢去风头；电视在过去寥寥六年里，成了“规模更大、更如饥似渴的附属权市场，压电影一头”。内森抛弃了比较宽泛的专栏名“钱财书事”，改称“权益与许可”。这个专栏现在依然是该杂志读者最多的栏目之一。</p>
+<p>如果某书的电影改编权卖出高价，书商就更容易对其感兴趣，更倾向采购并宣传该书，这已经成了出版界的公理，它保证了这本书将会带来利润。在这里给出《出版人周刊》某一期上的几个例子（1960年12月12日刊）。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/iazj19Ay5QX7YCKp1R0ZckTGvSRcPoKpick0AMicWmlrpx3EFuT8pfJDCsdMTia9BicPBicwFw04jACkzmotW3mDEXTA/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1&tp=wxpic" alt="图片"></p>
+<p>百老汇前所未有的预制拍摄合约——可称突破极限——哥伦比亚影业与韦恩·斯内德签订协议，改编由普特南出版社发行的新小说《来自阿什塔比拉的国王》。</p>
+<p>哥伦比亚影业将承担该剧的所有资金支出，交由罗伯特·佛莱雅及劳伦斯·卡尔监制，莫顿·达·科斯塔执导。哥伦比亚影业还以高额预付款买下电影改编权，另附一条价格调整条款，具体金额根据院线上映期而定，封顶五十万美金。</p>
+<p>根据协议内容来看，达·科斯塔尤其能大赚一笔。除了导演戏剧外，他还被承诺，一旦电影摄制启动，他也将执导电影。除此之外，作为斯内德在戏剧改编中的合作者，他也能从戏剧改编收益中分得一笔，另外还有一笔进账来自他的独立班子贝尔格雷夫制片公司，该公司将和哥伦比亚影业携手制作电影版。</p>
+<p>这些是协议中的亮点，除此之外，还有一些细节让这份协议与众不同。威廉·莫里斯经纪公司的大牌阿贝·拉斯特福主持了谈判，而柯提斯·布朗有限公司的克莱尔·S德格纳则作为斯内德的代表，与他合作。</p>
+<p>据悉，其他电影公司也认为《来自阿什塔比拉的国王》作为该作者所写的《八月月光茶室》的续集必然带来丰厚利润，也想将改编权收入囊中，但无奈要求苛刻，只好退缩。</p>
+<p>一本书甚至不需要写完，就可以激发人们对书籍电影改编权的兴趣，这本不存在的书所谓的作者，基至都不需要是个作家。</p>
+<p>本周有种种奇事，其中一件便是伯纳德·盖斯联合公司披露准备出版明星小萨米·戴维斯的传记。这一消息激起十分热烈的关注，以至于以十分极端的形式表现出来。一听到消息，一家大电影公司便派了一位信使找该书经纪人斯科特·梅瑞迪斯，开出丰厚价码要买下电影改编权。当时，这一出价没有。被接受。首先，这笔交易的条件之一就是戴维斯要在该电影中出演角色，而现在要做这种承诺还为时过早一尤其考虑侧中到这本书至少要到一月份才动笔。</p>
+<p>戴维斯的朋友博特·博伊尔是多家报刊的专栏作家，他将帮助戴维斯在纸上描述他的人生。</p>
+<p>先前，梅瑞迪斯经纪公司确实卖出了一本尚未写就的书的的电影改编权。该书是埃文·亨特的《母与女》（今年春末将由西蒙与舒斯特公司出版），现在已经完成，德语版权刚刚卖给了金德勒出版社。该公司驻美国代表麦斯米兰·贝克尔以破纪录的一万七千美元预付款签下这笔交易。同样，柯基其出版社也刚刚以一万五千美元预付款签下英国的平装版权。</p>
+<p>在这个影子的影子的世界里，文学著作权的概念本身瓦解并消失了。威廉·惠勒改编的《宾虚》于1959年在百老汇开演，预订座位价格高企，节目单印刷精美，还有这部现象级电影的所有周边。详尽的节目单巨细无遗地列举了从制片人萨姆·津巴利斯特到服装色彩顾问琼·布里奇和发型师加布里埃尔·博尔泽利的所有人。但在册子上，原著作者的名字卢·华莱士压根提都没提。</p>
+<p>由于卢·华莱士早已过世，版权也到期已久，没有人对此做出抗议。不过，有时候会有尚在世的作者抗议自已的作品被不明不白地“改编”。这导致了一系列诉讼，但作者很少打赢官司。其中最令人印象深刻、最讽刺的一案发生在1931年，西奥多·德莱塞向法庭申请禁令，要求禁止纽约某影院播映派拉蒙公司根据其作品拍摄的《美国悲剧》。据德莱塞说，他的作品细腻地探索了整个社会如何对某个年轻男人的死负有责任，而该电影（基于小说及小说所改编的戏剧）把它简化成了“八卦报纸上的谋杀故事”。德莱塞输掉了官司。</p>
+<p>根据凡诺斯特兰的观察，在电影世界中，把小说精炼为电影的过程化为一系列标准操作。用好莱坞术语说，这些步骤包括创作“剧本小样”（基于大纲的叙述），展开“分镜脚本”（把剧本小样变成电影场景），然后再创作“拍摄剧本”。最后再经过“交叉剪辑”（把不同场景的拍摄素材交叉播放），“剪接花招”或“跳场”（突然跳到另一个场景，揭露新信息，加剧悬念），通过yak（有趣的意外）和“催泪弹”（悲伤的意外）来丰富内容。将小说、戏剧或电影改编成电视节目时，过程也十分相似。戏剧性概念现在可以融入如此多种多样的媒体，不可避免地使得文学形式与其内容相分离。</p>
+<p>与20世纪电影对小说的改编相比，约翰·德莱顿的莎翁“改编”或托马斯·包德勒的“家庭”版莎翁看上去就像逐字誊抄。文学艺术这个概念本身一“具有艺术特色的文字”一一从大众的观念中消失了。于是，每种表现形式都在互相争夺作为“原版”的荣耀。在这种竞争中，根据伪事件的法则，在观众意识中胜出的版本，就是与作者本人那原始且自发的产物最为大相径庭的一个。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%91%84%E5%BD%B1/"># 摄影</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5bc53521/">西方古典音乐入门100首（爬楼珍藏版）</a>
+            
+            
+            <a class="next" rel="next" href="/2d3858b1/">为什么美国黑手党每年要在深圳买一万多幅画？</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/5bc53521/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/2d3858b1/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

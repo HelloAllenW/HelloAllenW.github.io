@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>Node.js 实现定时每天给女朋友发消息—nodemailer模块 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Node.js 实现定时每天给女朋友发消息—nodemailer模块</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 6, 2021&nbsp;&nbsp;19:57:36</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 6, 2021
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E5%90%8E%E7%AB%AF/">后端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/NodeJs/">NodeJs </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">5 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文是以一个给女友发邮件的例子讲解 <code>nodemailer</code> 模块，实际工作中发送异常日志等到自己的邮箱还是挺常用的，有兴趣的小伙伴学习下这个模块。</p>
+<h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>工作的时候不能陪女朋友，就想着写个程序，每天在固定时间给她发一些情话，好让她时刻能感受到我的爱心，帮她缓解一下对我的思念之情。</p>
+<p>考虑的到qq和微信有诸多的限制（一不小心就被封），先来个邮箱版本的吧！</p>
+<p>Stack Overflow 联合创始人杰夫·阿特伍德曾经说过，任何一个能用 JavaScript 编写的应用系统，最终都必将使用 JavaScript 实现。</p>
+<blockquote>
+<p>Atwood’s Law是Jeff Atwood在2007年提出的：”any application that can be written in JavaScript, will eventually be written in JavaScript。</p>
+</blockquote>
+<p>大佬的定律都出来了，只能说js牛x！</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/FaeDdIfeuq7ru0dicxyEwDvah8qLQMicMGpnzz3nBPjo8hVfy1laMp8Zm9LyEcMZJaJvmjQ45FibkMHPwmhNsb15A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>我们的技术选型 就是nodejs，首先你得安装一个nodejs，然后我们主要使用一个模块<code>Nodemailer</code>。</p>
+<h2 id="二、nodemailer介绍"><a href="#二、nodemailer介绍" class="headerlink" title="二、nodemailer介绍"></a>二、nodemailer介绍</h2><p><code>nodemailer</code>是一个发送邮件npm包，我们可以使用它方便快捷的给任何人发送邮件。</p>
+<h2 id="三、nodemailer的安装"><a href="#三、nodemailer的安装" class="headerlink" title="三、nodemailer的安装"></a>三、nodemailer的安装</h2><p>打开终端，然后输入如下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir mailBot  #cmd创建文件夹mailBot（touch mailBot  #如果是Linux可以用touch命令）</span><br><span class="line">cd mailBot  #进入文件夹</span><br><span class="line">npm init -y #初始化npm</span><br><span class="line">npm install nodemailer  #安装邮件发送模块</span><br></pre></td></tr></table></figure>
+
+<p>我们创建一个mailBot文件夹，在终端中进入文件夹，初始化npm，然后安装<code>nodemailer</code></p>
+<h2 id="四、nodemailer的使用-发送邮件"><a href="#四、nodemailer的使用-发送邮件" class="headerlink" title="四、nodemailer的使用 - 发送邮件"></a>四、nodemailer的使用 - 发送邮件</h2><p>接下来在项目中新建 index.js 文件，编写如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const nodemailer = require(&quot;nodemailer&quot;);</span><br><span class="line">// 发送邮件函数</span><br><span class="line">async function sendMail(text) &#123;</span><br><span class="line">  var user = &quot;xxx@qq.com&quot;;//自己的邮箱</span><br><span class="line">  var pass = &quot;xxx&quot;; //qq邮箱授权码,如何获取授权码下面有讲</span><br><span class="line">  var to = &quot;waitfor_1153@qq.com&quot;;//对方的邮箱</span><br><span class="line">  let transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    host: &quot;smtp.qq.com&quot;,</span><br><span class="line">    port: 587,</span><br><span class="line">    secure: false,</span><br><span class="line">    auth: &#123;</span><br><span class="line">      user: user, // 用户账号</span><br><span class="line">      pass: pass, //授权码,通过QQ获取</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">  let info = await transporter.sendMail(&#123;</span><br><span class="line">    from: `你亲爱&lt;$&#123;user&#125;&gt;`, // sender address</span><br><span class="line">    to: `亲爱的&lt;$&#123;to&#125;&gt;`, // list of receivers</span><br><span class="line">    subject: &quot;亲爱的&quot;, // Subject line</span><br><span class="line">    text: text, // plain text body</span><br><span class="line">  &#125;);</span><br><span class="line">  console.log(&quot;发送成功&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//测试一下</span><br><span class="line">send(&#x27;你好亲爱的&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>在终端中输入 <code>node index.js</code> 就可以执行js文件的代码！</p>
+<p>通过以上代码，我们就可以发送 任意一句话给你想发送的人！</p>
+<p>注意：qq邮箱的pass（授权码）需要进入 qq邮箱 的【设置】-【账户】，然后如下图1的地方，开启smtp，下图2的地方查看你的授权码</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/FaeDdIfeuq7ru0dicxyEwDvah8qLQMicMGnbujC2Qoia4HVrRtn2WOrBhT2ibYicdylGKSNaPK18Hv5hJMqkmUsKZ7g/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="五、自动生成情话"><a href="#五、自动生成情话" class="headerlink" title="五、自动生成情话"></a>五、自动生成情话</h2><p>当然现在还有个缺点，既然要献爱心，那就要发句比较好听的话，我们也叫彩虹屁。。。</p>
+<p>有个彩虹屁生成网站，网站名字很有意思，自己体会。</p>
+<p>我们使用这个网站的接口来生成我们要说的内容。</p>
+<p>使用<code>axios</code>模块来下载生成的情话。</p>
+<p>安装<code>axios</code>，在终端中输入如下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i axios</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>axios</code>获取情话，在<code>index.js</code>中 增加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const &#123; default: Axios &#125; = require(&quot;axios&quot;);</span><br><span class="line">function getHoneyedWords() &#123;</span><br><span class="line">  var url = &quot;https://chp.shadiao.app/api.php&quot;;</span><br><span class="line">  //获取这个接口的信息</span><br><span class="line">  return Axios.get(url);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、使用邮件发送情话"><a href="#六、使用邮件发送情话" class="headerlink" title="六、使用邮件发送情话"></a>六、使用邮件发送情话</h2><p><code>index.js</code>中增加测试邮件发送代码如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//获取情话</span><br><span class="line">getHoneyedWords().then(res=&gt;&#123;</span><br><span class="line">    console.log(res.data)</span><br><span class="line">  //发送邮件</span><br><span class="line">    sendMail(res.data);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>终端中输入<code>node index.js</code></p>
+<p><strong>结果显示 ：</strong>春水初生，春林初盛，春风十里，不如你！</p>
+<h2 id="七、每天定时发送"><a href="#七、每天定时发送" class="headerlink" title="七、每天定时发送"></a>七、每天定时发送</h2><p>考虑到每天定时发送会显示的更有诚意，接下来搞个定时发送。我们需要启动个定时任务，使用<code>node-schedule</code>模块。</p>
+<p>安装，终端中输入如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install node-schedule</span><br></pre></td></tr></table></figure>
+
+<p>使用，<code>index.js</code>增加如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const schedule = require(&quot;node-schedule&quot;);</span><br><span class="line">//每天下午5点21分发送</span><br><span class="line">schedule.scheduleJob(&#123; hour: 17, minute: 21 &#125;, function () &#123;</span><br><span class="line">  console.log(&quot;启动任务:&quot; + new Date());</span><br><span class="line">  getHoneyedWords().then((res) =&gt; &#123;</span><br><span class="line">    console.log(res.data);</span><br><span class="line">    sendMail(res.data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>终端中输入<code>node index.js</code></p>
+<p>这样每天下午5点21分就会自动发送一句情话！</p>
+<p>就连家庭地位都提高了呢！</p>
+<h2 id="八、完整代码"><a href="#八、完整代码" class="headerlink" title="八、完整代码"></a>八、完整代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">const nodemailer = require(&quot;nodemailer&quot;);</span><br><span class="line">const &#123; default: Axios &#125; = require(&quot;axios&quot;);</span><br><span class="line">const schedule = require(&quot;node-schedule&quot;);</span><br><span class="line">// 发送邮件函数</span><br><span class="line">async function sendMail(text) &#123;</span><br><span class="line">    const user = &quot;1358307904@qq.com&quot;; // 邮件发送方账号</span><br><span class="line">    const pass = &quot;yqfzddbqbkzxfjgb&quot;; // 发送方邮箱授权码</span><br><span class="line">    const to = &quot;hailun0815@163.com&quot;; // 邮件接收方账号</span><br><span class="line">    // 创建一个 SMTP 客户端配置对象</span><br><span class="line">    const transporter = nodemailer.createTransport(&#123;</span><br><span class="line">        host: &quot;smtp.qq.com&quot;,</span><br><span class="line">        port: 587,</span><br><span class="line">        secure: false,</span><br><span class="line">        auth: &#123;</span><br><span class="line">            user: user, // 用户账号</span><br><span class="line">            pass: pass // 授权码</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    // 创建一个收件人对象</span><br><span class="line">    const mail = &#123;</span><br><span class="line">        from: `Your Dear&lt;$&#123;user&#125;&gt;`, // 发件人: 一定不能少&lt; &gt;</span><br><span class="line">        to: `My Dear&lt;$&#123;to&#125;&gt;`, // 收件人</span><br><span class="line">        subject: &#x27;My Favourite&#x27;, // 主题</span><br><span class="line">        text: text, // 内容</span><br><span class="line">        html: &#x27;&#x27; // 这里可以添加html标签</span><br><span class="line">    &#125;</span><br><span class="line">    // 发送邮件</span><br><span class="line">    await transporter.sendMail(mail, (err, info) =&gt; &#123;</span><br><span class="line">        if (err) &#123;</span><br><span class="line">            return console.log(err);</span><br><span class="line">        &#125;</span><br><span class="line">        transporter.close();</span><br><span class="line">        console.log(&#x27;mail sent:&#x27;, info.response)</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">// 从彩虹屁生成网站获取一条彩虹屁</span><br><span class="line">function getHoneyedWords() &#123;</span><br><span class="line">    var url = &quot;https://chp.shadiao.app/api.php&quot;;</span><br><span class="line">    return Axios.get(url)</span><br><span class="line">&#125;</span><br><span class="line">// 定时：每天下午5点21分</span><br><span class="line">schedule.scheduleJob(&#123; hour: 17, minute: 21 &#125;, function() &#123;</span><br><span class="line">    console.log(&quot;启动任务&quot; + new Date());</span><br><span class="line">    // 使用邮件发送情话</span><br><span class="line">    getHoneyedWords().then(res=&gt;&#123;</span><br><span class="line">        console.log(res.data)</span><br><span class="line">        sendMail(res.data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/NodeJs/"># NodeJs</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e1a25e03/">NodeJs监控工具: nodemon</a>
+            
+            
+            <a class="next" rel="next" href="/fa43536d/">异步（五、前端请求库：从 XHR 到 Ajax 再到 axios）</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/e1a25e03/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/fa43536d/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

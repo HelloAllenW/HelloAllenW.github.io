@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>《易经》全文翻译 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《易经》全文翻译</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 17, 2015&nbsp;&nbsp;21:31:25</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 17, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%96%87%E5%AD%A6/">文学 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.1k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">13 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+   src="https://mmbiz.qpic.cn/mmbiz/uI083iap50ZvjjggictIicPbcCA8YlY9frWumbtbwJ3J6H5FjHFY0MsjlVOZG6r92czjWqlZEujdnKAthMPtH9n1A/640?wxfrom=5&wx_fmt=gif&tp=webp" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<h2 id="第一讲-乾卦"><a href="#第一讲-乾卦" class="headerlink" title="第一讲 乾卦"></a><strong>第一讲 乾卦</strong></h2><p>乾卦象征天，天的四种本质特征是：元、亨、利、贞。</p>
+<ul>
+<li><p>天之阳气是始生万物的本原，称为”元”。</p>
+</li>
+<li><p>天能使万物流布成形，无不亨通，称为”亨”。</p>
+</li>
+<li><p>天能使万物和谐，各得其利，称为”利”。</p>
+</li>
+<li><p>天能使万物，正固持久地存在，称为”贞”。</p>
+</li>
+</ul>
+<p>总之，天之阳气是万物资生之本，又制约，主宰着整个世界。天有开创万物并使之亨通，正固的”功德”，元、亨、利、贞被称为乾之”四德”。</p>
+<p>《彖(<code>tuàn</code>)》曰：天行健，君子以自强不息。</p>
+<p>意译：天的运行刚劲强健，君子因此不停息地发愤图强。</p>
+<p><font face="黑体"><b>乾卦六爻(<code>yáo</code>)的爻辞：</b></font></p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初九，潜龙勿用。</strong></p>
+<p>意译：龙潜在水中，暂时不能发挥作用。</p>
+<p>《彖》曰：潜龙勿用，阳在下也。</p>
+<p>意译：初期阶段，应暂行潜藏。</p>
+<p>乾卦的卦辞以天为象征，六爻的爻辞以龙为象征。龙是善变之物，能够潜水，行地，飞天，海陆空三栖，取龙为象，可以达到假象喻意，以明变化的目的。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，见龙在田，利见大人。</strong></p>
+<p>意译：龙出现在田间，有利于大德大才之人出现。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 九三，君子终日乾乾，夕惕若，厉无咎。</strong></p>
+<p>乾乾：健行不息。若：语助词。厉：危险。</p>
+<p>意译：君子整天勤奋不息，甚至夜间时时警惕，虽然面临危险也无祸害。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 九四，或跃在渊，无咎。</strong></p>
+<p>意译：相机而动，跃起上进，无咎害。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 九五，飞龙在天，利见大人。</strong></p>
+<p>意译：飞龙上天，有利大德大才之人出现。</p>
+<p>九五在所有卦里都是最吉之爻，此爻为”君位”。皇帝通称”九五之尊”，就是这么来的。乾卦九五，刚健中正，纯粹而精，最为可贵。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上九，亢龙有悔。</strong></p>
+<p>意译：龙高飞到了极点，必有过悔。</p>
+<p><strong style="border-bottom: 1px green dashed;">7. 用九，见群龙无首，吉。</strong></p>
+<p>意译：出现一群龙，都不以首领自居，吉祥。</p>
+<p><font face="黑体"><b>常用占断用语：</b></font></p>
+<p>1、亨：通达，顺利。</p>
+<p>2、利：有利，适宜。</p>
+<p>3、吝：遗憾，麻烦，艰难。</p>
+<p>4、厉：危险。</p>
+<p>5、悔：忧虑，困厄。</p>
+<p>6、咎：过错。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 25em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/tgbeD6dEPTAEuS3.EZLUgp.QlnYfDW1m8mv5THdytVw!/b/dDNFJOPSMAAA&bo=dQKXAgAAAAAFAME!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第二讲-坤卦"><a href="#第二讲-坤卦" class="headerlink" title="第二讲 坤卦"></a>第二讲 坤卦</h2><p>坤：元亨，利牝(<code>pìn</code>)马之贞，君子有攸往，先迷，后得主，利。西南得朋，东北丧朋，安贞吉。</p>
+<p>意译：元始，亨通，利于雌马以柔顺坚持正道，君子有所往，如果争先前行会迷入歧途；如果随从人后，就会有人出来作主，有利。向西南走会得到朋友，向东北走会失去朋友，这时安于坚持正道是吉祥的。（攸：所。贞，坚持正道。）</p>
+<p>坤卦以柔顺的雌马为象征，坚持柔顺便是正道。坤是纯阴之气，本质是阴柔顺从，乾为君道，坤为臣道。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初六，履霜，坚冰至。</strong></p>
+<p>译：踩着微霜，知道坚冰快要出现了。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 六二，直方大，不习无不利。</strong></p>
+<p>译：正直，端方，胸襟阔大，方能担负起辅佐之重任。不用”修习”，也能成功。”无为而无不为”。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六三，含章可贞。或从王事，无成有终。</strong></p>
+<p>译：蕴含美德，不显露，吉。辅佐君王的事业，不以成功自居，最后才会有结果。（章：文采、美德。）</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四，括囊，无咎无誉。</strong></p>
+<p>译：扎紧囊口，免遭危害，也不求赞誉。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 六五，黄裳，元吉。</strong></p>
+<p>译：穿黄色裙裳，大吉。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上六，龙战于野，其血玄黄。</strong></p>
+<p>译：龙在原野上争斗，流出青黄混杂的血。龙是本气阳的象征物，坤阴气极盛，转化为与乾阳抗争，血流遍野。</p>
+<p><strong style="border-bottom: 1px green dashed;">7. 用六，利永贞。</strong></p>
+<p>译：永远坚持正道，以阴返阳为终结。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/8fjQyiXIMG3g.Nfm81X5WzYO3ijlHeaWNyA812yZ3gI!/b/dLemGePPMAAA&bo=pAJxAgAAAAAFAPY!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第三讲-屯卦"><a href="#第三讲-屯卦" class="headerlink" title="第三讲 屯卦"></a>第三讲 屯卦</h2><p>屯：元亨，利贞。勿用有攸往，利建侯。</p>
+<p>译：亨通，利于坚守正道，不宜有所前进，利于建立诸侯。（攸：所。）</p>
+<p>屯卦意为”初生”，象征万物始生状态。</p>
+<p>《彖》曰：屯，刚柔始交而难生，动乎险中，大亨贞。</p>
+<p>译：初生，阳刚阴柔开始结合，艰难也随之产生。在艰险中变动，如能坚持正道是极为亨通的。乌云与雷声混杂，大雨将至，象征”初生”状态。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初九，磐桓(pán huán)，利居贞，利建候。</strong></p>
+<p>译：徘徊不前，利守正而居，利于建立诸侯。初爻是阳刚之爻，在卑贱的两个阴爻之下。在危险、风险面前，徘徊思考是正确的。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 六二，屯如，邅(zhān)如。乘马班如，匪寇，婚媾(gòu)。女子贞不字，十年乃字。邅如，难行不进貌。班如：纷纷而来状。</strong></p>
+<p>译：创始艰难，彷徨不前。乘马的人纷纷而来，他们不是强盗，而是求婚者。女子守正不嫁，过了十年才出嫁。（字：许嫁。）六二凌乘初九，六二得六五之应的力量，一阴一阳，关系密切。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六三，即鹿无虞，惟入于林中，君子几，不如舍，往吝。</strong></p>
+<p>译：追逐野鹿没有虞的引导，只能盲目跟着猎物跑，君子放弃不逐，继续追赶会带来遗憾。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四，乘马班如，求婚媾。往吉，无不利。</strong></p>
+<p>译：乘马纷纷而来，是求婚者。前往应婚，吉。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 九五：屯，其膏。小贞吉，大贞凶。（膏：恩译。）</strong></p>
+<p>译：艰难创业时，需要广施恩译。柔小者，守持正道可获吉祥。刚大者，即使守正道也有凶险。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上六，乘马班如，滋血涟如。</strong></p>
+<p>译：骑在马上盘旋不前，哭泣得血泪涟涟。</p>
+<p>屯卦强调万事创始时期的艰难危险，不要轻举妄动，要善于积聚力量。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/XCBzrr7k1Ae6yD*q37tfL.iaGjwq3FQEPZNTkJW6Eyo!/b/dHwChOIrEwAA&bo=8AGhAgAAAAAFAHE!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第四讲-蒙卦"><a href="#第四讲-蒙卦" class="headerlink" title="第四讲 蒙卦"></a>第四讲 蒙卦</h2><p>蒙，亨。匪我求童蒙，童蒙求我。初筮告，再三渎，渎则不告。利贞。</p>
+<p>译：亨通。 不是我去求蒙昧的童子，而是蒙昧的童子来求我。初次请问应该回答，对同一问题再三地滥问，那是对先生的亵渎，就不再回答。利于守持正道。</p>
+<p>《象》曰：山下出泉，蒙。君子以果行育德。</p>
+<p>译：山下流出泉水，象征蒙昧的开启，君子以果敢的行为来培育品德，人的智慧应该表现在品德修养上。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初六，发蒙，利用刑人，用说桎梏。以往吝。</strong></p>
+<p>译：启发蒙昧，施加惩罚手段是有利的，使人免犯罪过。听任其发展下去必然造成遗憾。刑人：罚人。桎梏音：木制刑具。说：脱。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，包蒙吉，纳妇吉。子克家。</strong></p>
+<p>译：包容蒙昧，吉；容纳昏暗，吉。儿辈能治家。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六三，勿用取女，见金夫，不有躬，无攸利。</strong></p>
+<p>译：不要娶这样的女子，见到有钱的男子，就失身子，娶她为妻子是不利的。（取：娶。不有躬：失身。）</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四，困蒙，吝。</strong></p>
+<p>译：困在蒙昧之中，这是憾事。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 六五，童蒙，吉。</strong></p>
+<p>译：童子蒙昧，吉。</p>
+<p>九二，阳刚居中，启迪群蒙，是有道”师表”的象征，六五以”童蒙”身处，是好学，”君子”的象征。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上九，击蒙，不利为寇，利御寇。</strong></p>
+<p>译：以猛击来启发蒙昧，过于暴烈是不利的。严防其为非作歹是有利的。</p>
+<p>《易经》的思维模式是辩证的，处处给人以启发。在施教方式上，一般说来是主张宽容的，但在必要时也不排斥严厉。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/c68P45Mpv5Pc**PuYKWVpzDsRZ2tw3dwYdoa1LyIE*4!/b/dJ6V7uEnBgAA&bo=HAEFAQAAAAAFADo!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第五讲-需卦"><a href="#第五讲-需卦" class="headerlink" title="第五讲 需卦"></a>第五讲 需卦</h2><p>需：有孚，光亨贞吉。利涉大川。</p>
+<p>译：需卦象征等待，信守正道，前途光明而亨通。</p>
+<p>《象》曰：云上于天，需。君子以饮食宴乐。</p>
+<p>译：云气上升到天空,象征等待，君子因此饮食娱乐。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初九，需于郊，利用恒，无咎。</strong></p>
+<p>译：在郊外等待，利于保持恒心，这样不会有过错。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，需于沙，小有言，终吉。</strong></p>
+<p>译：在沙滩上等待，有些小小的言语中伤，最终是吉祥的。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 九三，需于泥，致寇至。</strong></p>
+<p>译：在泥淖中等待，可能招致贼寇到来。”寇”是危害的象征，九三靠近于水，濒临于险了。但是毕竟没有直接陷入水中，灾祸危险仍然在外面。如果自我去招致，那是咎由自取。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四，需于血，出自穴。</strong></p>
+<p>译：在血泊中等待，能从陷穴中脱出。血者，杀伤之地，穴者，险陷之所。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 九五，需于酒食，贞吉。</strong></p>
+<p>译：在酒食宴中等待，持正道吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上六，入于穴。有不速之客三人来，敬之终吉。</strong></p>
+<p>译：落进陷穴。有不请而至的三个客人来，恭敬相待，吉。</p>
+<p>需卦的提示：在险外，不轻进；在险中，静守待援。处险的基本态度是沉着，等待。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 25em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/jFJFFyzCW629dr1FrnGTnFAlpe1rEQWC.mhAzGA1KJM!/b/dH3u7OEnBgAA&bo=7QHpAQAAAAAFACc!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第六讲-讼卦"><a href="#第六讲-讼卦" class="headerlink" title="第六讲 讼卦"></a>第六讲 讼卦</h2><p>讼：有孚，窒惕。中吉，终凶。利见大人。；不利涉大川。</p>
+<p>译：诚实，克制，警惕。中途停止是吉祥的，争讼到底有凶险。利于出现大人。不利于涉越大河。（窒：堵塞。见：出现。）</p>
+<p>《彖》曰：讼，上刚下险，险而健，讼。</p>
+<p>译：阳刚居上，坎险在下，阴险又刚健，就会与人争讼。</p>
+<p>《象》曰：天与水违行，讼。君子以作事谋始。</p>
+<p>译：天向西转，水向东流，违背运行。产生争讼。君子在谋事时要仔细策划好的开始。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初六，不永所事，小有言，终吉。</strong></p>
+<p>译：不长久纠缠争执之事，略有言语磨擦，最终是吉祥的。（永：长）</p>
+<p>九二，不能胜讼，赶快回家，像犯人逃亡一样。他的三百户领地中的农户可以免灾。克：胜。逋：逃亡。眚：灾祸。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 六三，食旧德，贞厉，终吉。或从王事，无成。</strong></p>
+<p>译：安亨旧有的俸禄，守持正道，以防危险，终将吉祥。辅助君王的事业，不以成功自居。德：俸禄。厉：危险。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 九四，不克讼，复即命，渝安贞，吉。</strong></p>
+<p>译：不能胜讼，回心转意而归向正理，改变态度而安守正道，可获吉祥。复：回头。即：靠拢。命：正理。渝：改变。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 九五，讼，元吉。</strong></p>
+<p>译：能够决断争讼，大吉。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 上九，或锡之以鞶带，终朝三褫之。</strong></p>
+<p>译：或许会得到赏赐佩带，也必然在一天之内三次被剥夺。锡：赐。鞶带：大臣的佩带。褫：剥夺。</p>
+<p>整个讼卦提示：忍让息讼是有益的。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 25em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/R*yrY2UW9wk.MkxTxxHLhYjUL6FS0OU9HL0KvMzVMms!/b/dJ0fG.PSMAAA&bo=fAFqAQAAAAAFADU!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第七讲-师卦"><a href="#第七讲-师卦" class="headerlink" title="第七讲 师卦"></a>第七讲 师卦</h2><p>师：贞，丈人言，无咎。</p>
+<p>译：师卦象征军队，守持正道，以贤明长者为统帅，无灾祸。</p>
+<p>《象》曰：地中有水，师。君子以客民畜众。</p>
+<p>译：地中聚藏水，象征民众。兵藏于民中。君子因此注意蓄民众。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初六，师出以律，否臧凶。</strong></p>
+<p>译：军队出动要用纪律来约束，军纪不良必有凶险。否臧：不善。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，在师，中吉无咎，王三锡命。</strong></p>
+<p>译：统率军队，守持中道，可获吉祥，无灾祸。君王多次赐命嘉奖。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六三，师或舆尸，凶。</strong></p>
+<p>译：军队可能会载尸而归，凶险。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四，师左次，无咎。</strong></p>
+<p>译：军队撤退驻守，没有灾祸。左次：撤退。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 六五，田有禽，利执言，无咎，长子帅师，弟子舆尸，贞凶。</strong></p>
+<p>译：田地有禽兽，捕捉是有利的。没有灾祸。刚正者可以率兵出征，平庸小子必将载尸败归。守持正道可以防凶。</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上六，大君有命，开国承家。小人勿用。</strong></p>
+<p>译：国君颁发命令，封赏功臣，分封诸侯，大夫。小人不可以用。开国：册封新的诸侯。承家：封为大夫使之承家继业。</p>
+<p>《象》曰：大君有命，以正功也。小人勿用，必乱邦也。</p>
+<p>译：国君颁发命令，是为了评定功勋。小人不可重用，因为重用小人必然使国家发生动乱。</p>
+<p>师卦，可称为古代兵法的总纲。兵者，凶多吉少，用兵当慎之又慎。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/vB0uLj17Z4h8JfsqicfPb4tZZup6ek7C2CgdZcQxfNg!/b/dCp27uEjBgAA&bo=LgL2AQAAAAAFAPg!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第八讲-比卦"><a href="#第八讲-比卦" class="headerlink" title="第八讲 比卦"></a>第八讲 比卦</h2><p>比：吉，原筮，元永咎，不宁方来，后夫凶。</p>
+<p>译：比卦象征亲附，吉。要经过考虑观察再俾决定，有尊长之德，可以长久不变，能坚守正道，无灾。不安顺的邦国也来亲附了，后来者危险。</p>
+<p>《象》曰：地上有水，比。先王以建万国，亲诸侯。</p>
+<p>译：地上有水，象征亲附。先代君王因此卦建万国，亲近诸侯。</p>
+<p>初六，有孚比之，无咎。有孚盈缶，终来有它吉。</p>
+<p>译：心怀诚信地亲附，没有过错。充满诚信如同美酒盈缸，终究会有意处的吉祥。缶：盛酒的瓦器。</p>
+<p>《象》曰：比之初六，有它吉也。</p>
+<p>译：有开始阶段的亲附，会有意外的吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 六二，比之自内，贞吉。</strong></p>
+<p>译：从内部亲附，坚持正道必获吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 六三，比之匪人。</strong></p>
+<p>译：想亲附而不得其人。（匪：非）</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六四，外比之，贞吉。</strong></p>
+<p>译：在外部亲附，坚持正道可获吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 九五，显心。王用三驱，失前禽，邑人不诫，吉。</strong></p>
+<p>译：光明正大的亲比是吉祥的，由于九五处正中，舍弃违逆者，容纳顺从者。听任前面的禽兽逃掉。对属下的邑人也不特别告诫。吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 上六，比之无首，凶。</strong></p>
+<p>译：比附于人而没有良好的开端，凶险。</p>
+<p>比卦指出：不论是亲附于人，还是为人所亲附，都要正而不邪，心怀诚信，充分有利条件，得到吉祥的结果，做任何事业都需要合作，必须协调好人际关系。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/o.WSlujNowzOPZq42Vw4YkCbsvGvlsUEj1stbzSvN68!/b/dO8T7eEjBgAA&bo=3AGiAQAAAAAFAF0!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第九讲-小畜卦"><a href="#第九讲-小畜卦" class="headerlink" title="第九讲 小畜卦"></a>第九讲 小畜卦</h2><p>小畜：亨。密云不雨，自我西郊。</p>
+<p>译：小畜卦象征微小的蓄聚。亨通。从西方吹来的浓云密布，却不降雨。</p>
+<p>《象》曰：风行天上，小畜。君子以懿文德。</p>
+<p>译：风流行于天上，象征微小的蓄聚。君子因此蓄养文明之德。（懿： 蓄养美德）</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初九，复自道，何其咎？吉。</strong></p>
+<p>译：返回于本位，会有什么害处呢？吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，牵复，吉。</strong></p>
+<p>译：被牵连而返回本位，吉祥。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 九三，舆说辐，夫妻反目。</strong></p>
+<p>译：车轮的辐条散脱，夫妻反目失和。（说：脱）</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 六四、有孚，血去惕出，无咎。</strong></p>
+<p>译：心怀诚信，就能免去伤害，脱出惕惧，不会有过失。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 九五，有孚挛如，富以其邻。</strong></p>
+<p>译：心怀诚信，紧密合作，充满至诚之心，并且推广影响到它的近邻。（挛如：结合紧密。）</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上九，既雨既处，尚德载。妇贞厉，月几望。君子征凶。</strong></p>
+<p>译：密云已经降雨，阳气已被畜止，高尚的功德已经圆满。妇人应该坚守正道以防危险，要像月亮将圆而不过盈。此时，君子如果继续前进，将有灾祸。处：被畜止。载：积满。几望：将圆。征：前进。</p>
+<p>小畜，就蓄聚的主体看，量”小”者，”阴”者。作为从属的”阴”只能在适宜的限度内发挥主观能动作用，蓄积作为主导者的”阳”，促使阴阳的和谐统一。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 40em;"
+   src="http://m.qpic.cn/psb?/V11SmAsQ11fVZZ/M2yc*fja*Zrf5.tx*xxhhz6gBJB*4HzdOD71FowkGSw!/b/dPOTheIpEwAA&bo=OAKbAQAAAAAFAIM!&wx_lazy=1&wx_co=1" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+    </div>
+</center>
+
+<br />
+
+<h2 id="第十讲-履卦"><a href="#第十讲-履卦" class="headerlink" title="第十讲 履卦"></a>第十讲 履卦</h2><p>履：履虎尾，不咥人，亨。</p>
+<p>译：履卦象征行走。跟在老虎尾巴后面行走，老虎却不咬人，亨通。（咥：咬。）</p>
+<p><strong style="border-bottom: 1px green dashed;">1. 初九，素履，往无咎。</strong></p>
+<p>译：以质朴的态度行事，继续前进必无过错。</p>
+<p><strong style="border-bottom: 1px green dashed;">2. 九二，履道坦坦，幽人贞吉。</strong></p>
+<p>译：行走在平坦的大路上，安静恬淡的人坚持正道可得吉祥。</p>
+<p>《象》曰：幽人贞吉，中不自乱也。</p>
+<p>译：恬淡人生，紧守正道，没有扰乱自己的内心世界。</p>
+<p><strong style="border-bottom: 1px green dashed;">3. 六三，眇能视，跛(bǒ)能履。履虎尾咥人，凶。武人为于大君。</strong></p>
+<p>译：独眼却自以为能看，跛脚却自以为能行。跟着老虎行走被虎咬，有凶险。这是一介武夫，只能郊力于大人君主。眇：一只眼盲。</p>
+<p><strong style="border-bottom: 1px green dashed;">4. 九四，履虎尾，愬(shuò)愬终吉。</strong></p>
+<p>译：跟在老虎后面行走，保持恐惧谨慎，吉。</p>
+<p><strong style="border-bottom: 1px green dashed;">5. 九五，夬(guài)履，贞厉。</strong></p>
+<p>译：果断地办事，守正道以防危险。（夬：决）</p>
+<p><strong style="border-bottom: 1px green dashed;">6. 上九，视履考祥，其旋元吉。</strong></p>
+<p>译：回顾行动的历程，考察吉凶的征兆，自己省悟，大吉。祥：吉凶的征兆，旋：转身。</p>
+<p>履卦强调慎行防危的行为哲学。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%96%87%E5%AD%A6/"># 文学</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33cafe50/">东西方大艺术家笔下的绿色，请大家鉴别高下</a>
+            
+            
+            <a class="next" rel="next" href="/4d40a159/">《苏菲的世界》里的100个经典哲理</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/33cafe50/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/4d40a159/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

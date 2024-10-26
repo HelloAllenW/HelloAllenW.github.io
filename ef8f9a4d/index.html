@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>5. 古埃及文明 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">5. 古埃及文明</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 5, 2015&nbsp;&nbsp;8:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 5, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="古埃及文明"><a href="#古埃及文明" class="headerlink" title="古埃及文明"></a>古埃及文明</h1><h2 id="1-撒哈拉之殇"><a href="#1-撒哈拉之殇" class="headerlink" title="1. 撒哈拉之殇"></a>1. 撒哈拉之殇</h2><p>撒哈拉沙漠覆盖着非洲北部的大部分土地，这里如今是地球上最不适合人类居住的地方之一，但在史前时期却并非如此。考古表明，自人类诞生以来，撒哈拉地区多次经历了干湿交替的气候变化。距今约1.2万年前，最后一次冰期结束的时候，这里温暖湿润、水草丰茂，是人类生活的乐土。然而，这片可能养育了史前人类的丰饶土地，却在文明时代的曙光来临之前消亡了。</p>
+<p>由于沙漠中的考古非常困难，我们对这个地区的史前人类了解甚少，但在如今的沙漠深处保留着古人们绘制的大量壁画，记录了他们曾经的生活场景：在<code>1.2万~1万</code>年前，壁画里的动物有水牛、大象、河马和犀牛，表明这里河流众多；在<code>9500~6000</code>年前，壁画里有羚羊、长颈鹿等草原动物，还有人们在这里放牧牛羊，并且出现了种植农业。然而在大约5900年前，出现了一次强烈的气候改变（称为“5.9千年事件”），撒哈拉地区开始变得干燥，至<strong>5000年前已成为沙漠</strong>。人类活动仍然没有完全消逝，只是局限到少数绿洲，并逐渐引入了马和骆驼。然而随着气候愈发恶劣，漫漫黄沙最终湮没了一切，撒哈拉彻底沦为一片死亡之地。</p>
+<p>撒哈拉的沙漠化永久改变了非洲的面貌。曾经绵延分布的史前文化被沙漠阻断成两截：沙漠以南的辽阔非洲与世界其它部分长期隔绝，文明的发展极其缓慢；沙漠以北，地中海沿岸到尼罗河谷的狭长地带则与欧亚大陆紧密相连，从历史角度可将其视为欧亚大陆的一部分，而与沙漠以南截然不同。</p>
+<p>我们可以猜测，在撒哈拉沙漠化的过程中，一部分非洲人群向尼罗河谷和三角洲地区汇集，从而促成一个璀璨的文明在尼罗河畔出现，这就是古埃及文明。</p>
+<h2 id="2-尼罗河孕育下的古埃及王国"><a href="#2-尼罗河孕育下的古埃及王国" class="headerlink" title="2. 尼罗河孕育下的古埃及王国"></a>2. 尼罗河孕育下的古埃及王国</h2><p>古埃及文明兴起于大约距今5000多年前。它的地理位置虽然与苏美尔文明非常接近，但却是一个独立的文明，语言和文化都完全不同。</p>
+<p>埃及的核心是尼罗河三角洲，这里气候炎热，水源充足，非常适合于农业发展。比两河流域更加有利的是，尼罗河的定期泛滥每年都会带来肥沃的泥土，所以当上千年后苏美尔人为土地盐碱化所苦时，埃及人仍然能维持高产的农业。另外，埃及的地理位置比两河流域更加封闭，不利于游牧民族的入侵。因此，在苏美尔文明毁于战乱之后，古埃及文明仍然延续了近两千年。</p>
+<p>尼罗河发源于埃塞俄比亚高原地区，自南向北注入地中海，它纵贯埃及全境。尼罗河的冲刷，将埃及分为了上埃及和下埃及两个部分。古埃及奴隶制城邦经过长期战争，逐渐形成两个王国。南部尼罗河上游谷地一带的王国叫作上埃及王国；北部尼罗河下游三角洲一带的王国叫下埃及王国。两个王国的分界线大体处在孟菲斯附近。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai4.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         古代埃及
+    </div>
+</center>
+
+
+
+<h2 id="3-公元前3150年，美尼斯统一上下埃及"><a href="#3-公元前3150年，美尼斯统一上下埃及" class="headerlink" title="3. 公元前3150年，美尼斯统一上下埃及"></a>3. 公元前3150年，美尼斯统一上下埃及</h2><p><font color=red>古埃及文明之初有多个小国城邦并存，逐渐整合为上下埃及两个王国。大约在公元前3150年，上埃及国王美尼斯征服了下埃及，定都孟菲斯，这被看作是埃及国家的正式起点。古埃及王国流传了三千多年，历经三十一个王朝，其间出现了三个大的乱世时期（被称为中间期）。</font></p>
+<p>大约在公元前3150年，上埃及的提尼斯地区在纳尔迈（美尼斯）的统治下，逐渐强大起来。纳尔迈亲率大军北上，征讨下埃及。两军在尼罗河三角洲展开激战，最终经过三天三夜的厮杀，纳尔迈领导的上埃及取得胜利，并建立起了埃及历史上的第一个统一王朝。为了纪念这次胜利，并且加强对下埃及的控制，纳尔迈就在决战胜利的地点修建了一座城市：白城。希腊人称之为孟菲斯，遗址在今埃及首都开罗附近。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai15.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         位于埃及首都开罗南郊的孟菲斯遗址
+    </div>
+</center>
+
+<p>纳尔迈自称“上下埃及之王“，王权的标志之一就是王冠，埃及王冠一般都是采用红、白两种王冠，红冠象征下埃及，白冠则象征上埃及。<strong>纳尔迈是古埃及的第一位国王，他统治的王国被称为“第一王朝”，是古埃及文明兴起的标志，古埃及的三十一个王朝由此开始，并延续了近3000年。</strong></p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai7.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         古代埃及的红白王冠
+    </div>
+</center>
+
+<p>现在，开罗的埃及博物馆里有一块《纳美尔（美尼斯的王衔名）记功石板》，用浮雕记录了美尼斯征服下埃及、建立统一王国的丰功伟绩，这是目前为止埃及发现的最古老的石刻历史记录。</p>
+<h2 id="4-古王国时期"><a href="#4-古王国时期" class="headerlink" title="4. 古王国时期"></a>4. 古王国时期</h2><p>大约从公元前2686年到公元前2160年，古埃及进入新的阶段 — 古王国时期。古王国包含了第三至第八王朝。在这一时期，国王终于完成了国家政治上的统一，专制王权更加稳固。<strong>古王国第三王朝的第二位国王左赛尔非常有名，只因为他建造了目前已知最古老的金字塔，即萨卡拉的梯形大金字塔。</strong>接下来是公元前2613～前2494年的第4王朝，其中胡夫、哈夫拉和孟考拉三位国王也先后建立了三座大金字塔，我们今天看到的最壮观的胡夫金字塔、狮身人面像等都建造于这一时期。它们被看作古埃及文明的标志。但后来的法老们渐渐发现，宏伟的金字塔并不能阻挡盗墓者，反而更容易成为盗墓者的目标。因此，在第6王朝之后，法老们也就不再建造金字塔，而是在深山里开凿秘密陵墓了。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai18.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         埃及三大金字塔
+    </div>
+</center>
+
+<h2 id="5-中王国时期"><a href="#5-中王国时期" class="headerlink" title="5. 中王国时期"></a>5. 中王国时期</h2><p>埃及初期的法老对努比亚（埃及南部、现苏丹）发动了征服战，消除了来自南方的威胁。但是在第7<del>11王朝（约前2181</del>前2055年）由于中央衰弱、地方割据而引起内战，进入第一中间期。之后埃及人又重新统一起来，建立了中王国。</p>
+<p>到埃及中王国的第十二王朝时（公元前1991-前1785年），埃及国王们在努比亚地区用砖石修建了一系列的要塞，即<strong>努比亚碉堡线</strong>，这条碉堡线最终完成后，沿尼罗河从第一瀑布到第四瀑布绵延250英里，两边的尼罗河和沙漠尽在掌握之中，各个碉堡之间也许是通过烽火信号守望相助。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai8.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         辛努塞尔特三世在南部努比亚建造的大型堡垒的复原图
+    </div>
+</center>
+
+<h2 id="6-西克索斯人入侵"><a href="#6-西克索斯人入侵" class="headerlink" title="6. 西克索斯人入侵"></a>6. 西克索斯人入侵</h2><p><font color=red>毁灭中王国的第二中间期（第14<del>17王朝，约前1650</del>前1550年）是由于西克索斯人入侵。西克索斯人并不是入侵民族的自称，而是埃及人对他们的称呼（“西克索斯”的原意就是“异国的统治者”）。这些异族驾着战车攻入埃及，其具体来源并不清楚，很可能是从迦南地区过来的闪族人。这段时期相当混乱，缺乏清晰的历史记录，直到第18王朝成功推翻了西克索斯人的统治，并把他们驱逐回亚洲。西克索斯人被推翻后，古埃及进入了强盛的新王国时期。</font></p>
+<p>中王国初期不存在来自北方的威胁，因为东地中海沿岸基本无人居住。但到公元前1700年，北边的威胁开始显现出来，属于闪族的希克索斯人（来自亚洲的黎巴嫩北部和巴勒斯坦地区，字面意思就是“外国统治者“），开始由尼罗河三角洲进入埃及，推翻了埃及虚弱的第十三王朝，并在孟菲斯建立了自己的首都。喜克索斯人征服了大半个埃及，建立了第十五王朝和第十六王朝。喜克索斯人把亚洲地区更为先进的青铜技术带到了埃及，新式的武器装备也是由喜克索斯人引进到埃及地区的，例如战车、马匹和复合弓箭等，这些先进的技术和装备为后来埃及新王国的崛起和对外战争提供了重要保障。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai9.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         喜克索斯人的马拉战车
+    </div>
+</center>
+
+<p>虽然喜克索斯王朝入主了埃及，但其主要的势力范围仍是在下埃及，尤其是三角洲地区，因为南部的底比斯地区兴起了第十七王朝。第十七王朝实际上与第十三王朝源自底比斯的同一个家族，因而它可谓埃及的本土王朝。在喜克索斯王朝统治的强盛时期，第十七王朝一度沦为其属国，但喜克索斯人毕竟身为异族，埃及人对其掌握埃及王权始终充满敌意。这种敌意逐渐积累，最终公开转化为战争。</p>
+<h2 id="7-新王国时代"><a href="#7-新王国时代" class="headerlink" title="7. 新王国时代"></a>7. 新王国时代</h2><p>公元前1550年左右，第十八王朝的开创者<strong>阿赫摩斯一世</strong>，率领埃及人继续展开驱逐喜克索斯人的斗争，经过11年的苦战，最终攻陷了喜克索斯王朝的首都阿瓦利斯，不仅把喜克索斯人赶出了埃及，甚至还乘胜追击，直达喜克索斯人的故乡巴勒斯坦地区，并开创了古埃及新王国时代。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403192310113.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         古埃及极盛时的版图
+    </div>
+</center>
+
+<p>图特摩斯三世，埃及第十八王朝法老。通常认为，是图特摩斯三世使埃及完成了从一个地域性王国向洲际大帝国的质变。公元前1469年，当时刚刚即位的图特摩斯三世对侵入它的尼罗河王国的外来人予以迎头痛击，美吉多战役大获全胜。约前1445年，图特摩斯三世打败了米坦尼国王，夺占米坦尼王国位于幼发拉底河西岸的土地。这时的古埃及势力范围，南达埃塞俄比亚，北到巴勒斯坦、叙利亚，是世界历史上第一个将西亚北非诸文明紧密地联系在一起的帝国。他还使利比亚、亚述、巴比伦、赫梯及克里特岛的统治者们都向他纳贡。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.rongwp.com/8life/book/dizhonghai/img/ai6.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         古埃及图特摩斯三世
+    </div>
+</center>
+
+<p>图特摩斯三世去世之后，他的三个继任者继续保持了埃及军事上的强势，但只限于巩固祖先留下来的成果，而鲜有扩展。图特摩斯三世所建立的庞大帝国是埃及人从未预料过的，所以他的继任者们欠缺治理大帝国的经验，当他去世之时，整个帝国开始陷入了大范围的叛乱之中。</p>
+<p>此时，西亚的赫梯王国兴起，西亚原本臣服于埃及的诸多小国又转投日益强大的赫梯王国。埃及进入了第十九王朝。公元前1279年，拉美西斯二世继位，他就是历史上的拉美西斯大帝。（公元前1279—公元前1213年）</p>
+<h2 id="8-拉美西斯二世"><a href="#8-拉美西斯二世" class="headerlink" title="8. 拉美西斯二世"></a>8. 拉美西斯二世</h2><p>拉美西斯二世是这一时期最具有传奇色彩的法老，也是最后一位伟大的埃及法老（约前1303~前1213年）。拉美西斯二世18岁时即位，为了扩大帝国疆域，不断地北上远征叙利亚地区，对抗当时占领安纳托利亚的另一强大帝国赫梯。拉美西斯攻占了迦南（今以色列/巴勒斯坦一带），并于前1274年御驾亲征，率领约两万人，分为四个军团，进入叙利亚地区。赫梯王国也不甘示弱，国王穆瓦塔里二世率军三万也进入了叙利亚地区。双方大战于卡叠什，拉美西斯在身陷包围、几乎溃败的情况下奇迹般地扭转战局，并宣称自己是此战役的胜利者。但实际上双方都伤亡惨重，此后进入战略均势，埃及了也失去了对叙利亚地区的控制权。直到前1258年，赫梯的新王继位，两国缔结和约，结束了近一个世纪的争霸战争，并结成军事同盟。埃及-赫梯和约可说是人类历史上现存最早的国际条约，其埃及文本与赫梯文本均被保存下来，并为近代考古学者所发现，因其刻写于银板之上而又被称为《银板条约》。这也是埃及帝国由盛转衰的标志。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403192314161.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         拉美西斯二世与赫梯人的战争
+    </div>
+</center>
+
+<p>战争结束之后，拉美西斯二世把自己的精力投入到巨大的土木工程中：他兴建了一座新的首都，还有遍布埃及各地的大量神庙。当时埃及已有原始宗教和多神崇拜，而拉美西斯兴建的神庙中往往也为他自己建造巨大的石像，和神灵并列甚至更加高大。借助这些不朽的石像，拉美西斯在生前就为自己树立了近乎神一样的形象，并流传千古，直至今朝。其最宏伟的建筑阿布-辛拜勒石窟寺包括两座神庙：大庙献给拉美西斯本人，小庙献给他最宠爱的王后奈菲尔塔利。在王后的墓室中，刻着拉美西斯二世的爱情表白：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">我对她的爱是独一无二的，</span><br><span class="line"></span><br><span class="line">她是这个世界上最美的女人，没有人可以超越她。</span><br><span class="line"></span><br><span class="line">当她轻轻走过我的身边，就偷走了我的心。</span><br></pre></td></tr></table></figure>
+
+<p>在那个人均寿命只有40岁左右的时代，拉美西斯二世活到了91岁高龄，死后被葬于帝王谷。1881年，他的木乃伊被发现，并保存在埃及国家博物馆。1974年，由于他的木乃伊滋生真菌，埃及政府将其送往法国修复，还特别发给其木乃伊一本国民护照，职业栏上注明“国王（已殁）”，以盛大的军礼替他举行出国仪式。而法国也在巴黎勒布尔热机场，对其木乃伊以元首待遇隆重欢迎。</p>
+<p>拉美西斯二世是埃及历史上统治时间最长的法老，据说一直活到了96岁。拉美西斯二世之后的法老美楞普塔继位时已经五十多岁，此时的埃及帝国已经开始面临重重的危机。美楞普塔去世之后，埃及陷入了无政府状态，拉美西斯二世的子孙后代们为争夺王位而互相斗争。</p>
+<h2 id="9-古埃及灭亡"><a href="#9-古埃及灭亡" class="headerlink" title="9. 古埃及灭亡"></a>9. 古埃及灭亡</h2><p>拉美西斯二世统治下是埃及的全盛时期，然而他的大量工程亦极大的透支了古埃及的国力。在他的晚年，埃及已经面临海上民族的大肆侵袭。盟友赫梯在海上民族的攻击下灭亡，而埃及也在内忧外患中衰落，先后被西方的利比亚人、南方的库施人、以及北方的亚述入侵（第三中间期 ，第<code>21~25</code>王朝，约<code>前1070~前664年</code>）。古埃及人虽然再次驱逐了异族统治，但到了公元前525年的阿契美尼德波斯时代，这个从未遭遇挑战的强大帝国扑向了埃及。波斯国王冈比西斯二世同埃及的军队展开了激战。刚跨越沙漠的波斯人击溃了人数远不如已的埃及军队，并迅速攻克了培琉喜阿姆城，为波斯入侵三角洲地区扫清了道路。孟斐斯很快也陷落 了，波斯人逐渐控制了整个埃及。从这时起，曾经创造了辉煌文明的古埃及人民从未再统治自己的国家。</p>
+<p>随后的一千多年里，富饶的埃及地区先后被波斯、马其顿/希腊、罗马等外来统治者占领。在罗马统治时期，基督教成为埃及居民的普遍信仰，原先的多神信仰被废弃了。而<strong>642年信仰伊斯兰教的阿拉伯人征服埃及</strong>，更是将古老的埃及文化彻底摧毁。阿拉伯人逐渐成为埃及的主体民族，而创造古埃及文明的原住民后裔被称为科普特人，沦落成今日埃及的一个少数民族，占人口比例约10%，保持基督教信仰并受到伊斯兰教的压迫。（1992～1996年的联合国秘书长加利即为埃及科普特人。）</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/622470f/">6. 犹太文明</a>
+            
+            
+            <a class="next" rel="next" href="/92e68a9e/">4. 波斯文明</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/622470f/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/92e68a9e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

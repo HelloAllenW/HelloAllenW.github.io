@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>11. 黑暗的中世纪 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">11. 黑暗的中世纪</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 11, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 11, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">16 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="中世纪"><a href="#中世纪" class="headerlink" title="中世纪"></a>中世纪</h2><h2 id="序幕"><a href="#序幕" class="headerlink" title="序幕"></a>序幕</h2><h3 id="1、匈奴的进击"><a href="#1、匈奴的进击" class="headerlink" title="1、匈奴的进击"></a>1、匈奴的进击</h3><p>匈奴人，印度称其为白匈奴人，中国称其为胡人。公元91年，汉军直捣匈奴腹地，匈奴人被迫西迁。公元4世纪 ~ 5世纪，匈奴人继续西进，进入印度的部分地区（大乘佛教在这一时期同时出现）。匈奴人灭了统治印度一个多世纪的笈多帝国，袭击了波斯的萨珊帝国（但波斯人联合从阿尔泰山区崛起的突厥人将匈奴人击退）。</p>
+<p>匈奴人继续西进，在公元370年，他们渡过了伏尔加河，征服了阿然人部落（匈奴人进攻柔然人的沙漠，柔然人只得向西退去，公元6世纪，他们到达欧洲，被称为阿瓦尔人。）。这迫使他们向顿河与第聂伯河之间的日耳曼东哥特人进攻。</p>
+<p>面对匈奴进攻，东哥特人逃入另一支日耳曼人和西哥特人的地盘，迫使西哥特人离开家园，渡过多瑙河进入罗马帝国的领土（罗马收留了西哥特人）公元395年，西哥特领袖阿拉里克进攻希腊。公元401年，又进攻意大利，最终西哥特人占领了罗马，在高卢和西班牙的领土上建立了西哥特王国。</p>
+<p>公元451年，罗马人、高卢人、日耳曼人联合打败了匈奴首领阿提拉。</p>
+<h2 id="黑暗的千年"><a href="#黑暗的千年" class="headerlink" title="黑暗的千年"></a>黑暗的千年</h2><p>（待补充）</p>
+<h2 id="中世纪的落幕"><a href="#中世纪的落幕" class="headerlink" title="中世纪的落幕"></a>中世纪的落幕</h2><h3 id="1-拜占庭的残晖"><a href="#1-拜占庭的残晖" class="headerlink" title="1. 拜占庭的残晖"></a>1. 拜占庭的残晖</h3><p>1204年十字军攻破君士坦丁堡之后，拜占庭故地成为不同民族、文明争夺的战场。十字军的拉丁王国占据了君士坦丁堡，而流亡的拜占庭贵族在外建立了数个小国，其中最重要的是位于安纳托利亚西部的尼西亚王国，它以拜占庭的正统继承人自居。尼西亚的历代皇帝都卧薪尝胆，为恢复拜占庭而不懈努力，并且废除了曾给予威尼斯等国的贸易特权，使得国力振兴。尼西亚初期的外部环境危机四伏，因为东侧的罗姆苏丹国（由塞尔柱帝国分裂而来）占据了安纳托利亚的大部分，西北方的保加利亚和塞尔维亚也先后独立……一片混乱之中，蒙古西征军的杀入使得局势发生了改变：蒙古军团重创了保加利亚，然后又击溃了罗姆苏丹国，使其沦为附庸——尼西亚的机会到来了。</p>
+<p>1261年，尼西亚的米海尔八世在热那亚（他们是威尼斯的商业竞争对手）的协助下，驱逐拉丁人，夺回君士坦丁堡，光复了东罗马帝国。此时的帝国已经雄风不再，为了在天主教欧洲和穆斯林的夹缝中生存，米海尔八世进行了全方位的外交努力。他把自己的女儿嫁给蒙古统帅旭烈兀之子，并且同意让东正教会服从罗马教皇（但由于受到东正教众的强烈抵制而未实现），还企图在热那亚与威尼斯之间保持微妙的平衡。然而，他犯了一个巨大的错误，同意授予热那亚免税特权，而后来威尼斯也再度获此待遇。从此以后，金角湾里虽然商船熙熙攘攘，却不给拜占庭带来任何税收，而帝国的传统农耕区域又丧于敌手，这使得帝国的财政收入几乎断绝。随后的几次内战进一步消耗了拜占庭的国力。重生后的两百年间，可怜的拜占庭一直在极其贫困的生存线上苦苦挣扎，直到最后灭亡。</p>
+<h3 id="2-十字军的谢幕"><a href="#2-十字军的谢幕" class="headerlink" title="2. 十字军的谢幕"></a>2. 十字军的谢幕</h3><p>在拜占庭努力求生的同时，天主教欧洲向耶路撒冷作出了最后一次努力。1270年，法王路易九世联合英国王子“长腿”爱德华发动第八次东征，但路易在中途病故于突尼斯（后来被教皇封为“圣路易”），法军主力撤退回国。路易之弟查理·安茹（他刚在1268年吞并了西西里王国）和爱德华率领部分军队继续进行第九次东征（1271 ~ 1272年），但在马穆鲁克面前无能为力。此后英法统帅都放弃了东方的征战，回到国内维护其本土利益。——“长腿”爱德华归国后继承了英国王位，他率军吞并了威尔士，并把自己的儿子封为威尔士亲王（这一头衔后来成为英国王储的惯例封号），然后又进攻苏格兰并捕杀起义军领袖威廉·华莱士，但始终未能彻底征服苏格兰（参见电影《勇敢的心》）。查理·安茹则返回西西里镇压民众起义（1282年，被称为“西西里晚祷战争”）。在西西里起义军的邀请下，腓特烈二世的孙女婿、阿拉贡国王佩德罗三世渡海征服了西西里岛，而那不勒斯仍在法国手中，直到1442年被阿拉贡夺取。曾经富饶的西西里地区在战火中彻底衰落。</p>
+<p>在此时期，历史曾给予西方极好的机会——蒙古统帅旭烈兀于1258 ~ 1260年征战中东，摧毁了残存的阿拔斯王朝和阿尤布王朝，但受阻于埃及马穆鲁克军团。旭烈兀的母亲和妻子都是基督教徒，而他的儿子阿八哈（1265～1282年在位）迎娶了拜占庭米海尔八世之女，因此都对基督教持友善态度。他们曾数次联系西方，试图联手攻打马穆鲁克，但西方始终未能组织起有效的合作。随着蒙古军团停止西进，伊斯兰世界渡过最危险的时刻，开始转守为攻。</p>
+<p>1291年，最后一个十字军据点阿卡（一百年前狮心王的战果）被马穆鲁克攻陷，耶路撒冷王国彻底灭亡。残存的医院骑士团转移到罗得岛，圣殿骑士团撤回法国。然而，法王腓力四世不愿看到这支强大的组织存在于国内。<strong>1307年10月13日星期五，法国突然逮捕了圣殿骑士团的几乎所有成员，随后以“异端”的罪名将他们处死，圣殿骑士团灭亡，“黑色星期五”从此在西方被视作不祥之兆。</strong></p>
+<p>十字军的时代结束了。西方的君主们把精力收回到本土的权力斗争，放任东方在伊斯兰面前自生自灭。</p>
+<h3 id="3-阿维尼翁之囚"><a href="#3-阿维尼翁之囚" class="headerlink" title="3. 阿维尼翁之囚"></a>3. 阿维尼翁之囚</h3><p>在霍亨斯陶芬家族覆灭之后，神圣罗马帝国走向分裂，而法国取代它成为教皇的新盟友。然而，当教皇决定另攀法国这棵大树时，他们忽视了一点：法国奉行君主世袭制度，王权并不仰仗教皇的加冕。因此，教皇的地位只是建立在宗教思想的流沙之上，其脆弱本质不久就暴露无遗。1302年，教皇卜尼法斯八世因教会纳税问题与法国发生冲突，于是颁布剌谕，宣布世俗王权必须服从教皇神权。而法王腓力四世的回应是派人公然逮捕并殴打教皇，使其很快就死掉了。1305年，法国主教克雷芒五世被腓力四世扶植成为教皇。他实质上是法国的傀儡，不但应腓力四世的要求而解散了圣殿骑士团，还于1309年把教廷迁至法国阿维尼翁。此后数十年间，教廷都是法国的掌中之物。</p>
+<p>1377年，教皇格列高利十一世设法离开阿维尼翁回到罗马，但次年他就去世了，法国、意大利分别在阿维尼翁和罗马选出两个教皇。这时正值英法百年战争期间，整个天主教欧洲根据政治利益站队到两大阵营：英格兰、神圣罗马帝国支持罗马教廷，而法国、西班牙、苏格兰等支持阿维尼翁教廷。1409年的比萨会议本来是为了调解，结果又选出第三个教皇，一时间形成三皇并立的混乱局面。1414年，神圣罗马皇帝西吉斯蒙德召开天主教大会，迫使各方达成一致，选出意大利的马丁五世担任教皇，罗马才重新成为公认的教皇驻地。</p>
+<p>天主教廷的分裂局面虽然终结了，然而<strong>这一系列变故已经严重损伤了教皇的政治地位，打碎了他们与世俗君王争夺权力的梦想。神权与王权的数百年争斗，以王权的胜利而告终。</strong></p>
+<h3 id="4-英法百年战争"><a href="#4-英法百年战争" class="headerlink" title="4 英法百年战争"></a>4 英法百年战争</h3><p>在西方的封建制度中，封地乃是贵族私产，可以随着血脉继承，而不受国别限制。因此，英国的金雀花王室（源自法国贵族）大量占有法国的土地，这造成了英法之间的长期矛盾。自从布汶战役（1214年）之后，英国国王丧失了在法国境内的大部分封地，只剩下西南的阿基坦一地。法国仍想把英国彻底驱逐出去，而英国也想收回祖上的土地。</p>
+<p>1328年，法王查理四世去世后，矛盾再次爆发。按法国规定，女性不可继承王位，但查理四世只有独女而无子，与他血缘最近的男性是英国国王爱德华三世（他的母亲是查理四世的姐姐伊莎贝拉，即电影《勇敢的心》里面苏菲·玛索饰演的法国公主，但她与威廉·华莱士并无关系）。法国贵族们不愿让英国国王继承法国王位，于是宣称按照萨利克法（自从克洛维一世开始的法兰克王国法律），男性不可因母亲的血缘而继承王位，从而把王位交给查理四世的堂兄腓力六世。这意味着法国卡佩王朝结束，瓦卢瓦王朝开始。这一方式也得到了阿维尼翁教皇的支持。然而，英国并无这一法律（金雀花王朝的亨利二世就是通过母亲玛蒂尔达的血缘而获得王位），因此爱德华三世仍然于1337年自称为法国王位的继承者，英法百年战争由此爆发。</p>
+<p>这场战争持续了一百多年，形势反复改变：起初英国占据上风，夺取了大片法国领土，然后法国反攻，几乎夺回了全部失地；1415 ~ 1429年期间，英国再度获胜，攻占了包括巴黎在内的法国北部，法国到了几乎亡国的边缘。危急时刻，法国出现了一位传奇的农家女孩，率领法军击败了英格兰，扭转了整个战局，这就是圣女贞德（1412 ~ 1431年）。尽管贞德最终被英国俘虏后杀害，但法国的民族精神已经觉醒，进行了举国大反攻。1453年10月，这场战争以驻法英军的投降而告终。法国收回了除加莱之外的全部领土（加莱于1558年收回），英国从此不再向欧洲大陆扩张。（然而，英国的国王和女王们仍然继续宣称自己拥有法国王位，直到法国在大革命之后成为共和国。）</p>
+<p>英法百年战争使欧洲两强都损失惨重，但也促使两国的民族意识苏醒，从而演变成独立自主的民族国家。而就在此时，伊斯兰的圣战大军终于打破了基督教世界的东部大门。</p>
+<h3 id="5-奥斯曼的崛起"><a href="#5-奥斯曼的崛起" class="headerlink" title="5. 奥斯曼的崛起"></a>5. 奥斯曼的崛起</h3><p><font color=red>在蒙古西征时期，罗姆苏丹国被其摧毁，分崩离析。在它的废墟上，一支突厥部落在首领奥斯曼（1258～1326年）的领导下崛起，因此这一政权被称为奥斯曼土耳其，即后来的奥斯曼帝国。奥斯曼所处的地方不是传统的伊斯兰领土，而是伊斯兰世界与基督教世界战争的最前线。他把对外圣战作为自己的发展方向，而不是在穆斯林势力之间内斗，从而在伊斯兰世界获得了很高的支持。</font></p>
+<p>在蒙古西征时期，罗姆苏丹国被其摧毁，分崩离析。在它的废墟上，一支突厥部落（来源不详，有可能是突厥化的亚美尼亚人）在首领奥斯曼（1258～1326年）的领导下崛起，因此这一政权被称为奥斯曼土耳其，即后来的奥斯曼帝国。奥斯曼所处的地方不是传统的伊斯兰领土，而是伊斯兰世界与基督教世界战争的最前线。他把对外圣战作为自己的发展方向，而不是在穆斯林势力之间内斗，从而在伊斯兰世界获得了很高的支持。</p>
+<p><strong>1326年奥斯曼去世后，他的儿子乌尔汗继承其战略，率军攻占了尼西亚的大部分领土，使奥斯曼帝国真正成形。</strong>1345～1356年期间，奥斯曼帝国趁拜占庭内战之机，渡海进入巴尔干地区，从此扩张到欧洲。1361年，奥斯曼帝国攻占了阿德里安堡（378年罗马皇帝瓦伦斯在此战败于哥特人而阵亡），将其改名为埃迪尔内，并迁都于此。当年罗马人浴血之地成了奥斯曼的统治中心。时逢欧洲遭遇黑死病的肆掠，人口大量减少，土耳其人势如破竹，连续征服了马其顿和保加利亚，并使塞尔维亚成为附庸。<strong>到1396年时，除了君士坦丁堡以外，从巴尔干半岛东部到安纳托利亚西部的大片领土全归奥斯曼帝国所有。</strong></p>
+<p>为了抵御穆斯林的侵略，拜占庭皇帝们多次出访西方，希望得到西方国家的支援。然而正所谓“弱国无外交”，在只注重现实利益的西方国家面前，实力孱弱的拜占庭皇帝如同乞丐，无法得到真正的援助。此时的神圣罗马帝国四分五裂，英、法正忙于百年战争，威尼斯亦不愿得罪穆斯林贸易伙伴。这种情况下，中欧的匈牙利成为基督教世界抵御穆斯林的中坚力量。1396年，匈牙利国王西吉斯蒙德（他后来当选为神圣罗马皇帝）与法国、医院骑士团组成联军进攻奥斯曼帝国，却在保加利亚境内的尼科波利斯惨败于苏丹巴耶济德一世。然而戏剧性的是，巴耶济德一世因此骄狂自大，颇为不智的得罪了东线的中亚枭雄帖木儿。1402年，帖木儿率军大破奥斯曼帝国，巴耶济德被俘而死。好在帖木儿对西方领土本无兴趣，不久就挥师东归（前去征伐大明并且病死途中），留下巴耶济德的四个儿子争夺残局。最后，穆罕默德一世成功消灭了他的三个兄弟，他的儿子穆拉德二世（1421～1451年在位）进而清除了所有其它分裂势力，重新统一帝国。——为了防止同室操戈的局面重演，此后的奥斯曼苏丹们采取了一种简单的办法：每个继位的苏丹都把自己的兄弟全部杀掉。</p>
+<p>与伊斯兰的一夫多妻制相比，基督教的严格一夫一妻制使其王室子嗣不丰。匈牙利国王西吉斯蒙德死后无子，王位传给其女婿、奥地利大公阿尔布雷希特，但他不久也死于与奥斯曼的战争中，国家后继无人。为了抵御外敌威胁，匈牙利贵族决定将本国王位授予波兰-立陶宛（两国于1386年组成联邦）国王瓦迪斯瓦夫三世。1444年，匈牙利、波兰、瓦拉几亚（今罗马尼亚南部）、威尼斯等多国组成联军，向奥斯曼帝国发起进攻。基督教联军一度取得上风，然而在瓦尔纳的决战中，瓦迪斯瓦夫三世冲锋阵亡，联军随之溃败。此后数百年里，基督教世界都无力再向东方出击。（匈牙利与波兰的共主也就此终止。）</p>
+<h3 id="6-君士坦丁堡的陷落"><a href="#6-君士坦丁堡的陷落" class="headerlink" title="6. 君士坦丁堡的陷落"></a>6. 君士坦丁堡的陷落</h3><p><font color=red>1453年，君士坦丁堡陷落。奥斯曼军队对城市进行了洗劫，然后穆罕默德二世举行了进城仪式。君士坦丁堡成为奥斯曼帝国的新首都，圣索菲亚大教堂被改为清真寺。土耳其人逐渐以“伊斯坦布尔”（意思是“进城去”）来称呼这座城市，直到1930年，凯末尔将其正式更名为伊斯坦布尔。</font></p>
+<p>奥斯曼帝国的穆拉德二世死后，继位的穆罕默德二世（1451～1481年在位）把目标对准了基督教在东方的终极王城：君士坦丁堡。1453年4月6日，穆罕默德二世率十余万大军、120艘战船、60多门大炮（包括当时世界最大的、直径762mm的乌尔班巨炮）进攻君士坦丁堡。曾经据有天下的罗马帝国如今只剩这一座孤城，陷于穆斯林的重重围困之中，仅有7000守军，其中还包括2000名外国志愿军。奥斯曼军队持续用火炮轰击巨大的城墙，君士坦丁堡军民则以不屈的意志进行艰苦卓绝的抵抗。然而，当奥斯曼帝国在一夜间把70艘战船从陆上翻越山丘运输了1.5公里送入金角湾之后，所有人都明白这是一场不可能取胜的战争。1453年5月29日，在53个昼夜的顽强抵抗后，这座千年帝都终于陷落了，最后一位罗马皇帝君士坦丁十一世以身殉国。在近两个月的战役中，西方基督教君主们没有进行任何实质性援助。</p>
+<p>破城之后，奥斯曼军队对城市进行了洗劫，然后穆罕默德二世举行了进城仪式。君士坦丁堡成为奥斯曼帝国的新首都，圣索菲亚大教堂被改为清真寺。土耳其人逐渐以“伊斯坦布尔”（意思是“进城去”）来称呼这座城市，直到1930年，凯末尔将其正式更名为伊斯坦布尔。</p>
+<p>尽管最后一个拜占庭残余势力特拉布宗王国在1461年才被奥斯曼帝国摧毁，但普遍认为君士坦丁堡的陷落标志着罗马帝国的最后谢幕，亦是伊斯兰世界的历史性胜利。然而，<strong>君士坦丁堡的逃亡者们把古希腊-罗马的珍贵文献带到西欧，使得天主教世界的人们重新了解到柏拉图、亚里士多德等古希腊先贤的光辉思想，人性的光芒穿透了封建神性的重重帷幕，推动了文艺复兴的到来。1453年5月29日这一天，代表着欧洲中世纪的结束，一个新时代的开始。</strong></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/883df873/">12. 维京的传奇</a>
+            
+            
+            <a class="next" rel="next" href="/aedb139e/">10. 罗马帝国的兴衰</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/883df873/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/aedb139e/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

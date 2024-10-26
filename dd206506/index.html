@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>雅虎前端优化的35条军规 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">雅虎前端优化的35条军规</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 8, 2017&nbsp;&nbsp;15:52:36</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 8, 2017
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">性能优化与代码规范 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.9k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">24 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在工作中，前端的性能优化是非常重要的，那我们该从何入手？可以参考雅虎前端优化35条军规，虽然这些“军规”中一些的原则有些过时（比如CSS Sprite，不会真的还有人在用雪碧图吧~），但是仍然能为我们的前端优化指明方向。下面就来看看雅虎这35条军规。</p>
+<h2 id="一、图片优化"><a href="#一、图片优化" class="headerlink" title="一、图片优化"></a>一、图片优化</h2><h3 id="1-优化图片"><a href="#1-优化图片" class="headerlink" title="1. 优化图片"></a>1. 优化图片</h3><ul>
+<li>检查 GIF 图片的调色板大小是否匹配图片颜色数；</li>
+<li>把GIF格式转换成PNG格式，看看是否节省空间；</li>
+<li>运行 pngcrush 或其它工具来压缩 png 格式的图片；</li>
+<li>运行 jpegtran 或其它工具来压缩 jpeg 格式的图片。</li>
+</ul>
+<h3 id="2-优化CSS-Sprite"><a href="#2-优化CSS-Sprite" class="headerlink" title="2. 优化CSS Sprite"></a>2. 优化CSS Sprite</h3><ul>
+<li>把图片横向合并而不是纵向，因为横向图片文件更小；</li>
+<li>把颜色近似的图片合并到一张雪碧图，这样可以让颜色数更少，如果低于 256 色就可以用 png8 格式；</li>
+<li>对移动端友好，合并时图片间的间距不要太大。虽然这对图片大小影响不是太大，但这样做可以节省用户代理把图片解压成像素映射时消耗的内存。100×100的图片是1万个像素，而1000×1000的图片就是100万个像素了。</li>
+</ul>
+<h3 id="3-禁止在HTML中缩放图片"><a href="#3-禁止在HTML中缩放图片" class="headerlink" title="3. 禁止在HTML中缩放图片"></a>3. 禁止在HTML中缩放图片</h3><p>不要在 HTML 中缩放图片。不要因为可以设置图片的宽高就去用比需要的大得多的图片。如果需要100px * 100px的图片，那就不要用500px  * 500px的。</p>
+<h3 id="4-用小的且可以缓存的favicon"><a href="#4-用小的且可以缓存的favicon" class="headerlink" title="4. 用小的且可以缓存的favicon"></a>4. 用小的且可以缓存的favicon</h3><ul>
+<li><p>favicon.ico是放在服务器根目录的图片，浏览器也会自动请求它，所以最好不要给一个404 Not Found响应。而且只要在同一个服务器上，每次请求它时都会发送cookie，此外这个图片还会干扰下载顺序，例如在IE中，当你在onload中请求额外组件时，将会先下载favicon。</p>
+</li>
+<li><p>所以为了缓解favicon.ico的缺点，应该确保：</p>
+</li>
+<li><ul>
+<li>足够小，最好在1K以下；</li>
+<li>favicon.ico 一般是不进行更换的，所以可以给它设置Expires头，而且可以安全地设置为几个月，避免每一次打开页面都需要去进行请求。</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、CSS-优化"><a href="#二、CSS-优化" class="headerlink" title="二、CSS 优化"></a>二、CSS 优化</h2><h3 id="5-将CSS样式放在顶部"><a href="#5-将CSS样式放在顶部" class="headerlink" title="5. 将CSS样式放在顶部"></a>5. 将CSS样式放在顶部</h3><p>将样式表移到 <code>&lt;head&gt;</code> 里会让页面加载地更快。这是因为把样式表移到 <code>&lt;head&gt;</code> 里允许页面逐步渲染。</p>
+<p>我们希望浏览器尽早的去渲染获取到的内容，这对大页面和网速慢的用户很重要。给用户视觉反馈（比如进度指标）就非常重要，HTML 页面就是进度指标。当浏览器逐步加载页面头部，导航条，顶部 logo 等内容时，这些都是给等待页面的用户的视觉反馈，能够提高整体用户体验。</p>
+<p>把样式表放在文档底部的问题是它阻止了许多浏览器的逐步渲染，包括 IE。这些浏览器阻止渲染来避免在样式更改时需要重绘页面元素。所以用户会卡在白屏。</p>
+<h3 id="6-避免使用CSS表达式"><a href="#6-避免使用CSS表达式" class="headerlink" title="6. 避免使用CSS表达式"></a>6. 避免使用CSS表达式</h3><p>CSS 表达式是强大的（可能也是危险的）设置动态 CSS 属性的方法。CSS 表达式的问题是它们可能比预期计算的更频繁。它们不仅在页面载入和调整大小时重新计算，也在滚动页面甚至是用户在页面上移动鼠标时计算。比如在页面上移动鼠标可能轻易计算超过10000次。要避免CSS表达式计算太多次，可以在它第一次计算后替换成确切值，或者用事件处理函数而不是CSS表达式。</p>
+<h3 id="7-选择-舍弃-import"><a href="#7-选择-舍弃-import" class="headerlink" title="7. 选择 舍弃@import"></a>7. 选择 舍弃@import</h3><p>上面提到了一个最佳实践：为了实现逐步渲染，CSS应该放在顶部。在IE中用@import与在底部用效果一样，所以最好不要用它。</p>
+<h3 id="8-避免使用（IE）过滤器"><a href="#8-避免使用（IE）过滤器" class="headerlink" title="8. 避免使用（IE）过滤器"></a>8. 避免使用（IE）过滤器</h3><p>IE专有的AlphaImageLoader过滤器用于修复IE7以下版本的半透明真彩色PNG的问题。这个过滤器的问题是它阻止了渲染，并在图片下载时冻结了浏览器。另外它还引起内存消耗，并且它被应用到每个元素，而不是每个图片，所以会存在一大堆问题。最佳做法是放弃 AlphaImageLoader，而优雅地降级到用在IE中支持性很好的PNG8图片来代替。</p>
+<h2 id="三、Cookie-优化"><a href="#三、Cookie-优化" class="headerlink" title="三、Cookie 优化"></a>三、Cookie 优化</h2><h3 id="9-减少Cookie的体积"><a href="#9-减少Cookie的体积" class="headerlink" title="9. 减少Cookie的体积"></a>9. 减少Cookie的体积</h3><p>HTTP Cookie 的使用有多种原因，比如授权和个性化。Cookie 的信息通过 http 头部在浏览器和服务器之间交换。重要的是保证cookie尽可能的小，以最小化对用户响应时间的影响。可以对Cookie做如下优化：</p>
+<ul>
+<li>消除不必要的 Cookie；</li>
+<li>尽可能减小 Cookie 的大小来降低响应时间；</li>
+<li>注意设置 Cookie 到合适的域名级别，以免影响其它子域；</li>
+<li>设置合适的 Expires 日期。更早的有效期或者none可以更快的删除cookie，提高用户响应时间。</li>
+</ul>
+<h3 id="10-把组件放在不含Cookie的域下"><a href="#10-把组件放在不含Cookie的域下" class="headerlink" title="10. 把组件放在不含Cookie的域下"></a>10. 把组件放在不含Cookie的域下</h3><p>当浏览器请求静态图片并把 cookie 一起发送到服务器时，cookie 此时对服务器没什么用处。所以这些 cookie 只会增加无意义的网络流量。所以应该保证静态组件的请求是没有 cookie 的。可以创建一个子域名来托管所有静态组件。</p>
+<p>比如，域名是<code>www.example.org</code>，可以把静态组件托管在<code>static.example.org</code>。不过，如果把cookie设置在顶级域名 <code>example.org</code> 下，这些cookie仍然会被传给<code>static.example.org</code>。这种情况下，可以启用一个全新的域名来托管静态组件。</p>
+<p>注意：因为cookie是可以跨二级域名的，所以如果设置的顶级域名是<code>example.org</code>，那么<code>static.example.org</code>也是可以被访问到的，因此需要启用一个全新的域名。</p>
+<p>另外一个用没有 cookie 的域名提供组件的好处是，某些代理可能会阻止缓存带 cookie 的静态组件请求。</p>
+<h2 id="四、服务端优化"><a href="#四、服务端优化" class="headerlink" title="四、服务端优化"></a>四、服务端优化</h2><h3 id="11-使用CDN（内容分发网络）"><a href="#11-使用CDN（内容分发网络）" class="headerlink" title="11. 使用CDN（内容分发网络）"></a>11. 使用CDN（内容分发网络）</h3><p>用户接近服务器就会减少响应时间。把内容发布到多个地理上分散的服务器可以让页面加载更快。80-90%的终端用户响应时间花费在下载页面中的所有组件：图片、样式、脚本、falsh 等，这就是业绩黄金法则。最好先分散静态内容，而不是一开始就重新设计应用程序结构。这不仅能够大大减少响应时间，还更容易表现出CDN的功劳。</p>
+<p>内容分发网络（CDN）是一组分散在不同地理位置的web服务器，用来给用户更高效地发送内容。典型地，选择用来发送内容的服务器是基于网络距离的衡量标准的。</p>
+<h3 id="12-添加Expires或者Cache-Control头部"><a href="#12-添加Expires或者Cache-Control头部" class="headerlink" title="12. 添加Expires或者Cache-Control头部"></a>12. 添加Expires或者Cache-Control头部</h3><p>这条规则有两个方面：</p>
+<ul>
+<li>对静态组件：通过设置 Expires 头部来实现永不过期策略。</li>
+<li>对动态组件：用合适的 Cache-Control 头部来帮助浏览器进行有条件性的请求。</li>
+</ul>
+<p>网站设计越来越丰富，这意味着更多脚本，样式，图片等。第一次访问的用户可能需要发出多个请求，但使用Expires可以让这些组件被缓存。这避免了访问子页面时没必要的 http 请求。Expires 一般用在图片上，但它应该用在所有的组件上，包括脚本、样式等。</p>
+<p>浏览器使用缓存来减少HTTP请求数和大小，加快页面加载。服务器使用HTTP响应的Expires头部来告诉客户端一个组件可以缓存多久。注意，如果设置了Expires头部，当组件更新后，必须更改文件名。</p>
+<h3 id="13-传输时用gzip等压缩组件"><a href="#13-传输时用gzip等压缩组件" class="headerlink" title="13. 传输时用gzip等压缩组件"></a>13. 传输时用gzip等压缩组件</h3><p>HTTP 请求或响应的传输时间可以被显著减少。压缩可以通过减少 http 响应的大小来缩短响应时间。从 HTTP/1.1 开始，客户端通过http请求中的 Accept-Encoding 头部来提示支持的压缩：</p>
+<p><code>Accept-Encoding: gzip, deflate</code></p>
+<p>如果服务器看到这个头部，它就会选用列表中的某个方法压缩响应。服务器通过Content-Encoding 头部来提示客户端：</p>
+<p><code>Content-Encoding: gzip</code></p>
+<p>gzip 一般可减小响应的 70%。尽可能去gzip更多（文本）类型的文件，这也是提升用户体验最简单的方法。。html，脚本，样式，xml 和json 等都应该被gzip，而图片，pdf等不应该被gzip，因为它们本身已被压缩过，gzip 它们只是浪费 cpu，甚至增加文件大小。</p>
+<h3 id="14-配置-ETags"><a href="#14-配置-ETags" class="headerlink" title="14. 配置 ETags"></a>14. 配置 ETags</h3><p>实体标记（Entity tags，简称ETag）是服务器和浏览器之间判断浏览器缓存中某个组件是否匹配服务器端原组件的一种机制。实体就是组件：图片，脚本，样式等。ETag被当作验证实体的比最后更改（last-modified）日期更高效的机制。一个ETag是一个字符串，作为一个组件某一具体版本的唯一标识符。唯一的格式约束是字符串必须用引号括起来。服务器这样设置组件的ETag：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line"></span><br><span class="line">Last-Modified: Tue, 12 Dec 2006 03:03:59 GMT</span><br><span class="line"></span><br><span class="line">ETag: &quot;10c24bc-4ab-457e1c1f&quot;</span><br><span class="line"></span><br><span class="line">Content-Length: 12195</span><br></pre></td></tr></table></figure>
+
+<p>然后，如果浏览器要验证组件，它用 If-None-Match 头部来把 ETag 传回服务器。如果 ETag 匹配成功，服务器返回状态码304：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET /i/yahoo.gif HTTP/1.1</span><br><span class="line"></span><br><span class="line">Host: [us.yimg.com](http://us.yimg.com/)</span><br><span class="line"></span><br><span class="line">If-Modified-Since: Tue, 12 Dec 2006 03:03:59 GMT</span><br><span class="line"></span><br><span class="line">If-None-Match: &quot;10c24bc-4ab-457e1c1f&quot;</span><br><span class="line"></span><br><span class="line">HTTP/1.1 304 Not Modified</span><br></pre></td></tr></table></figure>
+
+<p>ETag 的问题是它们被构造来使它们对特定的运行这个网站的唯一服务器。浏览器从一个服务器获取组件，之后向另一个服务器验证，ETag 将不匹配。然而服务器集群是处理请求的通用解决方案。如果不能解决多服务器间的 ETag 匹配问题，那么删除 ETag 可能更好。</p>
+<h3 id="15-尽早清空缓冲区"><a href="#15-尽早清空缓冲区" class="headerlink" title="15. 尽早清空缓冲区"></a>15. 尽早清空缓冲区</h3><p>当用户请求一个页面，服务器一般要花 200-500ms 来渲染整个页面。这段时间，浏览器是空闲的（等待数据返回）。在 php中，有个方法 flush() 允许传输部分准备好的 html 响应给浏览器。这样的话浏览器就可以开始下载组件，而同时后台可以继续生成页面剩下的部分。这种好处更多是在忙碌的后台或轻前端网站可以看到。</p>
+<p>较理想的清空缓冲区的位置是HEAD后面，因为HTML的HEAD部分通常更容易生成，并且允许引入任何CSS和JavaScript文件，这样就可以让浏览器在后台还在处理的时候就开始并行获取组件。</p>
+<h3 id="16-对Ajax用GET请求"><a href="#16-对Ajax用GET请求" class="headerlink" title="16. 对Ajax用GET请求"></a>16. 对Ajax用GET请求</h3><p>当使用 XMLHttpRequest 时，POST请求被浏览器实现为两步：首先发送头部，然后发送数据。所以最好使用 GET，仅用一个 TCP 包发送（除非cookie太多）。IE的url长度限制是2K。如果POST不提交任何数据，那它跟 GET 行为类似。但从语义上讲，获取数据应该用 GET，提交数据到服务器用 POST。</p>
+<h3 id="17-避免图片src属性为空"><a href="#17-避免图片src属性为空" class="headerlink" title="17. 避免图片src属性为空"></a>17. 避免图片src属性为空</h3><p>空src属性的图片的行为有两种形式：</p>
+<ul>
+<li>html标签：<code>&lt;img src=&quot;&quot;&gt;</code></li>
+<li>js：<code>var img = new Image(); img.src = &quot;&quot;;</code></li>
+</ul>
+<p>上面的两种形式都会造成同一种后果：浏览器会向服务器发送另一个请求。</p>
+<p>发送大量的意料之外的流量，会削弱服务器，甚至可能会破坏用户数据。如果你在跟踪请求状态，通过 cookie 或其它，可能会破坏数据。即使 image 的请求不会返回图片，但所有的头部数据都被浏览器读取了，包括 cookie。即使剩下的响应体被丢弃，破坏可能已经发生。这种行为的根源是 uri 解析发生在浏览器。</p>
+<p>RFC 3986 定义了这种行为，空字符串被当作相对路径，Firefox, Safari, 和 Chrome都正确解析，而IE错误。总之，浏览器解析空字符串为相对路径的行为被认为是符合预期的。</p>
+<p>html5在4.8.2添加了对标签src属性的描述，指导浏览器不要发出额外的请求。幸运的是将来浏览器不会有这个问题了（仅在图片上）。不幸的是，<code>&lt;script src=&quot;&quot;&gt;</code>和<code>&lt;link href=&quot;&quot;&gt;</code>没有这样的规范。</p>
+<h2 id="五、JavaScript-优化"><a href="#五、JavaScript-优化" class="headerlink" title="五、JavaScript 优化"></a>五、JavaScript 优化</h2><h3 id="18-把脚本放到底部"><a href="#18-把脚本放到底部" class="headerlink" title="18. 把脚本放到底部"></a>18. 把脚本放到底部</h3><p>脚本会阻塞并行下载。HTTP/1.1 规范建议浏览器每个域名下不要并行下载超过2个组件。如果图片分散在不同服务器，那么就能并行下载多个图片。如果脚本正在下载，浏览器就不开始任何其它下载任务，即使是在不同主机名下的。</p>
+<p>有些情况下，把脚本移动到底部并不简单。比如，脚本中用了 document.write 来插入内容，它就不能被移动到底部。另外有可能有作用域问题。但大多数情况，这些问题都有办法解决。</p>
+<p>一个替代建议是使用异步脚本。defer 属性表明脚本不包含 document.write，并且提示浏览器可以继续渲染。不幸的是，Firefox 不支持defer属性。如果脚本能异步加载，那么也就可以把它移动到底部，这样可以大大加快网页运行速度。</p>
+<p>这里要注意JavaScript是会阻塞浏览器运行的，所以脚本文件尽量放到页面的最下面。</p>
+<h3 id="19-使用外部JavaScript和CSS"><a href="#19-使用外部JavaScript和CSS" class="headerlink" title="19. 使用外部JavaScript和CSS"></a>19. 使用外部JavaScript和CSS</h3><p>JavaScript 和 CSS 是应该包含在外部文件还是内联在页面里？</p>
+<p>实际上，使用外部文件一般可以让页面加载更快，因为 JS 和 CSS 文件会被浏览器缓存。内而联的 JavaScript 和CSS 在每次 HTML 文档下载时都被下载。虽然内联减少了http请求，但增加了HTML文档大小。另一方面，如果 JavaScript 和 CSS 被缓存了，那么 HTML 文档可以减小大小而不增加 HTTP 请求。</p>
+<p>核心因素就是 JavaScript 和 CSS 被缓存相对于 HTML 文档被请求的频率。如果网站用户每个会话打开了多个页面，许多页面重复使用相同的 JavaScript 和CSS，那么有很大可能用外部 JS 和 CSS 更好。</p>
+<p>许多网站用这些指标计算后在中间位置。对这些网站来说，最佳方案还是用外部 JS 和 CSS 文件。唯一例外是内联更被主页偏爱。主页每个会话可能只会打开少量甚至一个页面，这时候内联可能更快。</p>
+<p>注意，需要根据实际业务来选择内联还是外联。（内联就是直接写在HTML文件的js或者css，外联就是引入的js或者css文件）</p>
+<h3 id="20-压缩JS和CSS"><a href="#20-压缩JS和CSS" class="headerlink" title="20. 压缩JS和CSS"></a>20. 压缩JS和CSS</h3><p>压缩就是删除代码中不必要的字符来减小文件大小，从而提高加载速度。当代码压缩时，注释删除，不需要的空格（空白，换行，tab）也被删除。在JavaScript中这样做能够提高响应性能，因为要下载的文件变小了。两个最常用的JavaScript代码压缩工具是JSMin和YUI Compressor，YUI compressor还可以压缩CSS。</p>
+<p>混淆是对代码可选的优化。它比压缩更复杂，并且可能产生 bug。在对美国 Top10 网站的调查中，压缩可减小 21%，而混淆可以减小 25%。除了外部脚本和样式，内联的脚本和样式同样应该被压缩。</p>
+<p>除了压缩外部脚本和样式，行内的<code>&lt;script&gt;</code>和<code>&lt;style&gt;</code>块也可以压缩。即使启用了gzip模块，先进行压缩也能够缩小5%或者更多的大小。JavaScript和CSS的用处越来越多，所以压缩代码会有不错的效果。</p>
+<h3 id="21-删除重复的脚本"><a href="#21-删除重复的脚本" class="headerlink" title="21. 删除重复的脚本"></a>21. 删除重复的脚本</h3><p>在页面中两次引入相同的脚本会降低性能。当确实引入重复脚本，会发出不必要的http请求和浪费js执行时间。</p>
+<p>IE会产生不必要的HTTP请求，而Firefox不会。在IE中，如果一个不可缓存的外部脚本被页面引入了两次，它会在页面加载时产生两个HTTP请求。即使脚本是可缓存的，在用户重新加载页面时也会产生额外的HTTP请求。</p>
+<p>除了产生没有意义的HTTP请求之外，多次对脚本求值也会浪费时间。因为无论脚本是否可缓存，在Firefox和IE中都会执行冗余的JavaScript代码。</p>
+<p>避免不小心把相同脚本引入两次的一种方法就是在模版系统中实现脚本管理模块。典型的脚本引入方法就是在HTML页面中用script标签：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;menu_1.0.17.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="22-尽量减少DOM访问"><a href="#22-尽量减少DOM访问" class="headerlink" title="22. 尽量减少DOM访问"></a>22. 尽量减少DOM访问</h3><p>用 JavaScript 访问 DOM 元素是很慢的，所以为了让页面反应更迅速，应该：</p>
+<ul>
+<li>缓存访问过的元素的引用；</li>
+<li>在 DOM 树外更新节点，然后添加到 DOM 树；</li>
+<li>避免用JavaScript修复布局问题；</li>
+</ul>
+<p>注意，能用CSS解决的事情，就尽量不用JS操作DOM，DOM操作开销很大。</p>
+<h3 id="23-用智能的事件处理器"><a href="#23-用智能的事件处理器" class="headerlink" title="23. 用智能的事件处理器"></a>23. 用智能的事件处理器</h3><p>有时候页面看起来响应速度比较慢，是因为绑定到不同元素的大量事件处理函数执行太多次。一种更好的解决方法就是使用事件委托。另外，不必等到 onload 事件来开始处理 DOM 树，使用DOMContentLoaded 会更快。大多时候需要的只是想访问的元素已在 DOM 树中，所以不必等到所有图片下载完。</p>
+<p>注意：</p>
+<ul>
+<li>onLoad：在页面所有文件加载完成后执行；</li>
+<li>DomContentLoad：在DOM加载完成后执行，不必等待样式脚本和图片加载。</li>
+</ul>
+<h2 id="六、移动端优化"><a href="#六、移动端优化" class="headerlink" title="六、移动端优化"></a>六、移动端优化</h2><h3 id="24-保持组件小于25K"><a href="#24-保持组件小于25K" class="headerlink" title="24. 保持组件小于25K"></a>24. 保持组件小于25K</h3><p>这个限制是因为iPhone不能缓存大于25K的组件，注意这里指的是未压缩的大小。这就是为什么缩减内容本身也很重要，因为单纯的gzip可能不够。</p>
+<h3 id="25-组件打包到一个复合文档中"><a href="#25-组件打包到一个复合文档中" class="headerlink" title="25. 组件打包到一个复合文档中"></a>25. 组件打包到一个复合文档中</h3><p>将组件打包到复合文档就像带有附件的电子邮件，它可以帮助我们通过一个 HTTP 请求获取多个组件（请记住：HTTP 请求很昂贵）。使用此技术时，首先检查用户代理是否支持它( iPhone 就不支持)。</p>
+<h2 id="七、内容优化"><a href="#七、内容优化" class="headerlink" title="七、内容优化"></a>七、内容优化</h2><h3 id="26-减少HTTP请求数"><a href="#26-减少HTTP请求数" class="headerlink" title="26. 减少HTTP请求数"></a>26. 减少HTTP请求数</h3><p>80%的终端用户响应时间都花在了前端上，：大部分用于下载组件 js/css/image/flash 等。减少组件数必然能够减少渲染页面所需的 http 请求数。这是让页面更快的关键。</p>
+<p>减少组件数的一个方法就是简化页面设计。保持富内容的页面且能减少 http 请求，有以下几个技术：</p>
+<ul>
+<li>Combined files (合并文件)：通过把所有脚本放在一个文件中的方式来减少请求数的，当然，也可以合并所有的CSS。如果各个页面的脚本和样式不一样的话，合并文件就是一项比较麻烦的工作了，但把这个作为站点发布过程的一部分确实可以提高响应时间。</li>
+<li>CSS Sprites（雪碧图）：雪碧图可以合并多个背景图片，通过 background-image 和 background-position 来显示不同部分。</li>
+<li>Image maps （图片映射）：可以把多张图片合并成单张图片，总大小是一样的，但减少了请求数并加速了页面加载。图片映射只有在图像在页面中连续的时候才有用，比如导航条。给image map设置坐标的过程既无聊又容易出错，用image map来做导航也不容易，所以不推荐用这种方式。</li>
+<li>Inline images (内联图片)：使用 data:url scheme 来内联图片，将内嵌图像组合到（缓存的）样式表中同样也是一种减少 HTTP 请求并避免增加页面大小的方法。</li>
+</ul>
+<p>减少请求数是为第一次访问页面的用户提高性能的最重要的指导。注意，Inline images 这里是将矢量图标转换为base64编码，然后直接内嵌到HTML文件或者CSS文件当中，减少http请求。</p>
+<h3 id="27-减少DNS查询"><a href="#27-减少DNS查询" class="headerlink" title="27. 减少DNS查询"></a>27. 减少DNS查询</h3><p>在浏览器地址栏输入网址，通过 DNS 查询得到网站真实 IP。DNS 查询被缓存来就可以提高性能。这种缓存可能发生在特定的缓存服务器（ISP/local area network维护），或者用户的计算机。DNS 信息留存在操作系统 DNS 缓存中。大多浏览器有自己的缓存，独立于操作系统缓存。只要浏览器在自己的缓存里有某条DNS 记录，它就不会向操作系统发 DNS 解析请求。IE默认缓存 DNS 记录30分钟，FireFox 默认缓存1分钟。</p>
+<p>当客户端的 DNS 缓存是空的，DNS 查找次数等于页面中的唯一域名数。减少DNS请求数可能会减少并行下载数。避免 DNS 查找减少响应时间，但减少并行下载数可能会增加响应时间。指导原则是组件可以分散在至少2个但不多于4个的不同域名。这是这两者的一个平衡点。</p>
+<h3 id="28-避免重定向"><a href="#28-避免重定向" class="headerlink" title="28. 避免重定向"></a>28. 避免重定向</h3><p>重定向用301或302状态码来完成。一个301响应 http 头的例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 301 Moved Permanently</span><br><span class="line"></span><br><span class="line">Location: &lt;http://example.com/newuri&gt;</span><br><span class="line"></span><br><span class="line">Content-Type: text/html</span><br></pre></td></tr></table></figure>
+
+<p>浏览器自动跳转到 Location 指定的路径。重定向所需的所有信息都在 http 头部，所以 http 主体一般是空的。301和302响应一般不会被缓存，除非有额外的头部信息，比如 Expires 或 Cache-Control 指定要缓存。meta 刷新标签或 JavaScript 也可以跳转，但如果真要跳转，3xx跳转更好，主要是保证返回键可用。</p>
+<p>最重要的是重定向会降低用户体验。在用户和 HTML 文档之间插入重定向会延迟页面中的所有内容，因为页面中的任何内容都无法呈现，并且在 HTML 文档到达之前不会开始下载任何组件。</p>
+<p>最浪费的跳转之一发生在url尾部斜杠（/）缺失。比如<code>http://astrology.yahoo.com/astrology</code>会301跳转到<code>http://astrology.yahoo.com/astrology/</code>。这可以被Apache等服务器修复，如果使用的是Apache处理程序，则可以使用Alias，mod_rewrite或DirectorySlash指令来取消不必要的重定向。</p>
+<p>重定向最常见的用途是把旧站点连接到新的站点，还可以连接同一站点的不同部分，针对用户的不同情况（浏览器类型，用户帐号类型等）做一些处理。用重定向来连接两个网站是最简单的，只需要少量的额外代码。虽然在这些时候使用重定向减少了开发人员的开发复杂度，但降低了用户体验。一种替代方案是用Alias和mod_rewrite，前提是两个代码路径都在相同的服务器上。如果是因为域名变化而使用了重定向，就可以创建一条CNAME（创建一个指向另一个域名的DNS记录作为别名）结合Alias或者mod_rewrite指令。</p>
+<h3 id="29-让Ajax可缓存"><a href="#29-让Ajax可缓存" class="headerlink" title="29. 让Ajax可缓存"></a>29. 让Ajax可缓存</h3><p>使用 ajax 的好处是可以向用户提供很快的反馈，因为它是向后台异步请求数据。但是，这些异步请求不保证用户等待的时间——异步不意味着瞬时。提高ajax性能的最重要的方法是让响应被缓存，即在上面第12条中讨论的 Expires 。其它方法是：</p>
+<ul>
+<li>gzip 组件</li>
+<li>减少 DNS 查找</li>
+<li>压缩 JS</li>
+<li>避免跳转</li>
+<li>设置 ETags</li>
+</ul>
+<h3 id="30-延迟加载组件"><a href="#30-延迟加载组件" class="headerlink" title="30. 延迟加载组件"></a>30. 延迟加载组件</h3><p>我们需要考虑什么是页面初始化时所必须的。剩下的内容和组件就可以延迟加载。JavaScript 是理想的（延迟）候选者，可以切分到 onload 事件之前和之后。比如拖放的 js 库可以延迟，因为拖动必须在页面初始化之后。其它可延迟的包括隐藏的内容，折叠起来的图片等。</p>
+<h3 id="31-预加载组件"><a href="#31-预加载组件" class="headerlink" title="31. 预加载组件"></a>31. 预加载组件</h3><p>预加载看起来与延迟加载是相反的，但它的确有不同的目标。通过预加载可以利用浏览器的空闲时间来请求将来会用到的组件。这样当用户访问下一个页面时，会有更多的组件已经在缓存中，这样会极大加快页面加载。预加载类型：</p>
+<ul>
+<li>无条件预加载：一旦 onload 触发，你立即获取另外的组件。比如谷歌会在主页这样加载搜索结果页面用到的雪碧图。</li>
+<li>有条件预加载：基于用户动作，推测用户下一步会去哪里并加载相应组件。</li>
+<li>预期的预加载：在发布重新设计的网站前提前加载。在旧网页预加载新网页的部分组件，那么切换到新网页时就不会是没有任何缓存了。</li>
+</ul>
+<h3 id="32-减少DOM元素的数量"><a href="#32-减少DOM元素的数量" class="headerlink" title="32. 减少DOM元素的数量"></a>32. 减少DOM元素的数量</h3><p>一个复杂的页面意味着更多的内容需要下载，以及更慢的 DOM 访问。比如在有 500个DOM 元素的页面添加事件处理就和有 5000 个DOM 元素是有区别的。</p>
+<p>如果页面 DOM 元素很多，那么意味着可能需要删除无用的内容和标签来优化。</p>
+<h3 id="33-把组件分散到不同的域名"><a href="#33-把组件分散到不同的域名" class="headerlink" title="33. 把组件分散到不同的域名"></a>33. 把组件分散到不同的域名</h3><p>把组件分散到不同的域名允许你最大化并行下载数。但要确保只用不超过2-4个域，因为存在DNS查找的代价。例如，可以把HTML和动态内容部署在<code>www.example.org</code>，而把静态组件分离到<code>static1.example.org</code>和<code>static2.example.org</code>。</p>
+<h3 id="34-尽量少用-iframe"><a href="#34-尽量少用-iframe" class="headerlink" title="34. 尽量少用 iframe"></a>34. 尽量少用 iframe</h3><p>iframe 允许 html 文档被插入到父文档里。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe&gt;优点：file:///D:/Tools/typora/Typora/resources/app//null</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>帮助解决缓慢的第三方内容的加载，如广告和标志；</p>
+</li>
+<li><p>并行下载脚本；</p>
+</li>
+<li><p>安全沙箱；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe&gt;缺点：file:///D:/Tools/typora/Typora/resources/app//null</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即使空的也消耗（资源和时间）；</p>
+</li>
+<li><p>阻塞了页面的onload；</p>
+</li>
+<li><p>非语义化（标签）；</p>
+</li>
+</ul>
+<h3 id="35-杜绝404"><a href="#35-杜绝404" class="headerlink" title="35. 杜绝404"></a>35. 杜绝404</h3><p>http 请求是昂贵的，所以发出 http 请求但获得没用的响应（如404）是完全不必要的，并且会降低用户体验。一些网站会有特别的 404 页面提高用户体验，但这仍然会浪费服务器资源。最坏的情况的是当链接指向外部 js 但却得到 404 结果，这样首先会占用并行下载数，其次浏览器可能会把 404 响应体当作 js 来解析，试图从里面找出可用的东西。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/"># 性能优化与代码规范</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ebe39eda/">1. 极简中外历史对照图</a>
+            
+            
+            <a class="next" rel="next" href="/f440ff1b/">JavaScript 函数式编程</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/ebe39eda/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/f440ff1b/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>使用pnpm workspace管理Monorepo架构 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用pnpm workspace管理Monorepo架构</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">二月 8, 2024&nbsp;&nbsp;11:19:10</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        二月 8, 2024
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/Web%E5%89%8D%E7%AB%AF/">Web前端</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/">项目构建 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">1.8k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">7 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>1、workspace：pnpm中使用workspace协议的目的是将拒绝解析除本地 workspace 包含的 package 之外的任何内容。也就是说如果引入的项目需要强制使用本地包，则可以使用workspace:协议 。</p>
+<p>2、微前端和Monorepo的关系：Monorepo是一种单仓库多应用的代码管理方式。微前端是一种实现了多个子项目间样式隔离、JS隔离、路由、子项目通信等功能的项目架构模式。微前端使用Monorepo进行代码管理可以实现共享工程配置，同时又快捷地共享模块代码的功能。</p>
+<p>3、pnpm：在使用monorepo方式管理项目时，会产生诸多问题，如幽灵依赖、依赖安装耗时的问题，需要使用pnpm进行解决这类问题。</p>
+<p>所以，当仅仅需要对多个子项目间共享工程配置和模块间代码共享时使用Monorepo进行代码管理即可。</p>
+<p>而当需要继承多个不同栈的模块或服务、每个模块需要独立开发部署、需要支持独立的生命周期和版本控制等时使用微前端。</p>
+<p>在开发项目的过程中，我们需要在一个仓库中管理多个项目，每个项目有独立的依赖、脚手架，这种形式的项目结构我们称之为Monorepo，pnpm workspace就是管理这类项目的方案之一。</p>
+<h1 id="一、pnpm"><a href="#一、pnpm" class="headerlink" title="一、pnpm"></a>一、pnpm</h1><p>pnpm代表performance npm（高性能的npmn），同npm和yarn，都属于javascript包管理安装工具，它较npm和yarn在性能上得到很大提升，被称为 快速地，节省磁盘空间的包管理工具。</p>
+<h1 id="二、对比lerna-yarn"><a href="#二、对比lerna-yarn" class="headerlink" title="二、对比lerna+yarn"></a>二、对比lerna+yarn</h1><p>使用lerna+yarn组合，也可以实现Monorepo项目管理。但是相比来说，更推荐pnpm workspace来管理。</p>
+<h1 id="三、构建一个Monorepo"><a href="#三、构建一个Monorepo" class="headerlink" title="三、构建一个Monorepo"></a>三、构建一个Monorepo</h1><p>先上最终的项目结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Monorepo</span><br><span class="line">- umi-antd</span><br><span class="line">- web</span><br><span class="line">-- common1</span><br><span class="line">-- common2</span><br></pre></td></tr></table></figure>
+
+<p>如上图，我们最终要创建如上图的一个项目结构，其中umi-antd是主项目，web文件夹下的都是子项目，供umi-antd调用。</p>
+<h2 id="1、创建主项目"><a href="#1、创建主项目" class="headerlink" title="1、创建主项目"></a>1、创建主项目</h2><p>主项目这里是使用的umi项目，这里也可以构建基于其他打包工具的各类项目，只要是遵守package.json配置条例的项目，都是可以的。</p>
+<p>构建umi项目</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm dlx create-umi@latest</span><br></pre></td></tr></table></figure>
+
+<p>这里选择创建Ant Design Pro项目。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ npx create-umi@latest</span><br><span class="line">? Pick Umi App Template › - Use arrow-keys. Return to submit.</span><br><span class="line">Simple App</span><br><span class="line">❯ Ant Design Pro</span><br><span class="line">Vue Simple App</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、创建子项目common1"><a href="#2、创建子项目common1" class="headerlink" title="2、创建子项目common1"></a>2、创建子项目common1</h2><ul>
+<li>进入Monorepo&gt;web目录，创建common1文件夹</li>
+<li>然后进入common1目录，执行命令npm init对项目进行初始化，这时候会生产一个package.json文件</li>
+</ul>
+<p>新建index.ts文件，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export default function print(msg:string) &#123;</span><br><span class="line">    console.log(msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、创建子项目common2"><a href="#3、创建子项目common2" class="headerlink" title="3、创建子项目common2"></a>3、创建子项目common2</h2><p>步骤和创建common1一致</p>
+<h2 id="4、主项目中引入子项目"><a href="#4、主项目中引入子项目" class="headerlink" title="4、主项目中引入子项目"></a>4、主项目中引入子项目</h2><p>安装common1和common2。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pnpm -F umi-antd add common1</span><br><span class="line">pnpm -F umi-antd add common2</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，在umi-antd依赖中出现两个子项目的软链接（或者叫符号链接）。</p>
+<p>在业务代码中调用子项目输出的方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//umi-antd\src\pages\Home\index.tsx</span><br><span class="line"></span><br><span class="line">import Guide from &#x27;@/components/Guide&#x27;;</span><br><span class="line">import &#123; trim &#125; from &#x27;@/utils/format&#x27;;</span><br><span class="line">import &#123; PageContainer &#125; from &#x27;@ant-design/pro-components&#x27;;</span><br><span class="line">import &#123; useModel &#125; from &#x27;@umijs/max&#x27;;</span><br><span class="line">import styles from &#x27;./index.less&#x27;;</span><br><span class="line">import print1 from &#x27;common1&#x27;;</span><br><span class="line">import print2 from &#x27;common2&#x27;;</span><br><span class="line"></span><br><span class="line">const HomePage: React.FC = () =&gt; &#123;</span><br><span class="line">  const &#123; name &#125; = useModel(&#x27;global&#x27;);</span><br><span class="line">  print1(&quot;umi-antd中调用common1&quot;);</span><br><span class="line">  print2(&quot;umi-antd中调用common2&quot;);</span><br><span class="line">  return (</span><br><span class="line">    &lt;PageContainer ghost&gt;</span><br><span class="line">      &lt;div className=&#123;styles.container&#125;&gt;</span><br><span class="line">        &lt;Guide name=&#123;trim(name)&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/PageContainer&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default HomePage;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、运行主项目"><a href="#5、运行主项目" class="headerlink" title="5、运行主项目"></a>5、运行主项目</h2><p>到这里基本搭建完毕，这时候的整体项目结构如图：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081120071.png"></p>
+<p>然后执行命令启动主项目：pnpm -F umi-antd start，我们可以看到，控制台打印出来子模块中的信息。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081121312.png"></p>
+<h2 id="6、子模块调用子模块"><a href="#6、子模块调用子模块" class="headerlink" title="6、子模块调用子模块"></a>6、子模块调用子模块</h2><p>子模块也是可以相互调用的，这里我们在common1中引入common2的方法。</p>
+<ul>
+<li><p>执行命令pnpm -F common1 add common2</p>
+</li>
+<li><p>在common1中调用common2中方法，代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//web\common1\index.ts</span><br><span class="line">import print2 from &#x27;common2&#x27;;</span><br><span class="line">export default function print(msg:string) &#123;</span><br><span class="line">    console.log(msg);</span><br><span class="line">    print2(&quot;这里是common1中调用common2&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>再次运行umi-antd项目时，我们可以看到，控制台已经打印了common2中方法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202402081121628.png"></p>
+<h1 id="四、workspace协议-workspace"><a href="#四、workspace协议-workspace" class="headerlink" title="四、workspace协议(workspace:)"></a>四、workspace协议(workspace:)</h1><h2 id="1、协议概述"><a href="#1、协议概述" class="headerlink" title="1、协议概述"></a>1、协议概述</h2><p>默认情况下，如果可用的 packages 与已声明的可用范围相匹配，pnpm 将从工作区链接这些 packages。 例如, 如果bar引用”foo”: “^1.0.0”并且<a href="mailto:&#x66;&#x6f;&#111;&#64;&#49;&#x2e;&#x30;&#x2e;&#x30;">&#x66;&#x6f;&#111;&#64;&#49;&#x2e;&#x30;&#x2e;&#x30;</a>存在工作区，那么pnpm会从工作区将<a href="mailto:&#x66;&#111;&#111;&#x40;&#x31;&#x2e;&#48;&#46;&#48;">&#x66;&#111;&#111;&#x40;&#x31;&#x2e;&#48;&#46;&#48;</a>链接到bar。 但是，如果 bar 的依赖项中有 “foo”: “2.0.0”，而 <a href="mailto:&#x66;&#111;&#111;&#x40;&#x32;&#x2e;&#48;&#46;&#x30;">&#x66;&#111;&#111;&#x40;&#x32;&#x2e;&#48;&#46;&#x30;</a> 在工作空间中并不存在，则将从 npm registry 安装 <a href="mailto:&#x66;&#x6f;&#111;&#x40;&#50;&#x2e;&#x30;&#46;&#x30;">&#x66;&#x6f;&#111;&#x40;&#50;&#x2e;&#x30;&#46;&#x30;</a> 。 这种行为带来了一些不确定性。</p>
+<p>幸运的是，pnpm 支持 workspace 协议 workspace: 。 当使用此协议时，pnpm 将拒绝解析除本地 workspace 包含的 package 之外的任何内容。 因此，如果您设置为 “foo”: “workspace:2.0.0” 时，安装将会失败，因为 “<a href="mailto:&#102;&#x6f;&#x6f;&#64;&#50;&#46;&#48;&#46;&#x30;">&#102;&#x6f;&#x6f;&#64;&#50;&#46;&#48;&#46;&#x30;</a>“ 不存在于此 workspace 中。</p>
+<p>当 link-workspace-packages 选项被设置为 false 时，这个协议将特别有用。 在这种情况下，仅当使用 workspace: 协议声明依赖，pnpm 才会从此 workspace 链接所需的包。</p>
+<p>以上是官网的解释，实际在使用的时候，如果引入的项目需要强制使用本地包，则可以使用workspace:协议。改造下umi-antd的package.json文件如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;@ant-design/icons&quot;: &quot;^5.0.1&quot;,</span><br><span class="line">    &quot;@ant-design/pro-components&quot;: &quot;^2.4.4&quot;,</span><br><span class="line">    &quot;@umijs/max&quot;: &quot;^4.0.76&quot;,</span><br><span class="line">    &quot;antd&quot;: &quot;^5.4.0&quot;,</span><br><span class="line">    &quot;common1&quot;: &quot;workspace:^&quot;,</span><br><span class="line">    &quot;common2&quot;: &quot;workspace:^&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>上面加上common1和common2的依赖声明后，会强制到本地寻找，找不到也不会到npm registry对应的私仓去下载。</p>
+<h2 id="2、版本符号"><a href="#2、版本符号" class="headerlink" title="2、版本符号"></a>2、版本符号</h2><p>workspace协议，区分*、~、^、版本号，表示的意义各部相同，具体如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;dependencies&quot;: &#123;</span><br><span class="line">        &quot;foo&quot;: &quot;workspace:*&quot;,</span><br><span class="line">        &quot;bar&quot;: &quot;workspace:~&quot;,</span><br><span class="line">        &quot;qar&quot;: &quot;workspace:^&quot;,</span><br><span class="line">        &quot;zoo&quot;: &quot;workspace:^1.5.0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 将会被转化为：</span><br><span class="line">&#123;</span><br><span class="line">    &quot;dependencies&quot;: &#123;</span><br><span class="line">        &quot;foo&quot;: &quot;1.5.0&quot;,</span><br><span class="line">        &quot;bar&quot;: &quot;~1.5.0&quot;,</span><br><span class="line">        &quot;qar&quot;: &quot;^1.5.0&quot;,</span><br><span class="line">        &quot;zoo&quot;: &quot;^1.5.0&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、Monorepo工具有哪些？"><a href="#五、Monorepo工具有哪些？" class="headerlink" title="五、Monorepo工具有哪些？"></a>五、Monorepo工具有哪些？</h1><p>Monorepo 是一种代码管理策略，它将一个项目的所有代码存储在一个单独的版本控制库中。Monorepo 解决了多个问题：解决了代码共享与重复的困扰，提供更好的可追踪性和一致性。通过使用Monorepo，开发团队可以更好地组织、共享和管理代码，提高开发效率和协作质量。选择合适的Monorepo工具并灵活运用，能够帮助开发者更好地应对复杂的软件开发需求，推动项目的成功完成。</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/kFJqZrJVu5jh5HNOhsOEfg">Hello Monorepo</a></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA/"># 项目构建</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fb5d0dd3/">一文带你快速上手Rollup</a>
+            
+            
+            <a class="next" rel="next" href="/63e1a769/">esbuild 简介</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/fb5d0dd3/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/63e1a769/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

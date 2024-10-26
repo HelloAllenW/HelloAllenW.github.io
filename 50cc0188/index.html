@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>19. 大航海时代 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">19. 大航海时代</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 19, 2015&nbsp;&nbsp;18:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 19, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.4k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">14 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="大航海时代"><a href="#大航海时代" class="headerlink" title="大航海时代"></a>大航海时代</h2><p>17世纪，意大利人伽利略发明的望远镜，观察星空，开始支持日心说。1638年在比萨斜塔做了实验，两个东西是同时落地的。推到了亚里士多德统治欧洲近两千年的学说。（欧洲人开始反权威）</p>
+<p>布鲁诺支持哥白尼的日心说，被教会烧死。1687年，牛顿提出万有引力。</p>
+<p>麦克斯韦提出热力学。</p>
+<p>1453-1513年，经过60年的探索，欧洲人看到了太平洋。</p>
+<p>1519年，麦哲伦完成了环球航行。（环球航行告诉了那些仍然想用宗教束缚人思想的人说，地球是圆的，我是可以绕回来的）</p>
+<h3 id="1-香料贸易"><a href="#1-香料贸易" class="headerlink" title="1. 香料贸易"></a>1. 香料贸易</h3><p>香料，是古代西方对一些东方特产的统称，主要是一些芳香的植物，包括胡椒、丁香、肉豆蔻、肉桂等。香料既可以作为烹饪调料或者熏香，也可以用于防腐、杀菌，甚至有人认为它们可以催情。尤其是古代西方贵族喜好肉食，但缺乏丰富的烹饪手段，因此大量借助香料来增加风味，这使香料在很长时间内成为西方喜好的奢侈品。</p>
+<p>来自东方的香料很早（或许在苏美尔时期）就已经传入中东，在《圣经·旧约》中就已经有关于香料的记载。亚历山大远征进一步使西方人见识到东方的物产，到了罗马时期的西方贵族们就已经对香料具有很强的需求。香料植物大多产于热带，无法引进到地中海地区，只能从原产地运输。因此，香料和丝绸一起，成为东西方贸易中最主要的货物。</p>
+<p>作为远途贸易货物，香料有很多好处：它重量轻、价值高、易于携带而不易腐坏。更重要的是，香料在原产地东南亚极为普遍，价格极低，而在终端市场可以卖到非常高的价钱（罗马时期，香料的价格大约相当于同等重量黄金的百分之一），因此给中间商创造了极高的暴利。——虽然西方历史上长期高价购买香料，但印度和东南亚等产地国并未因此而发达，反而是波斯、阿拉伯、威尼斯等中间商获得了巨大财富。</p>
+<p>自古以来，东西方之间的贸易路线主要有两条：一条是从中东横穿波斯之后分别前往中国和印度的陆上之路，一条是从红海或波斯湾出发跨越印度洋的海上之路。陆上之路从很早开始就被古波斯帝国和伊斯兰国家垄断，而穿越红海的海上之路在早期曾一度被罗马帝国打通（汉朝时罗马人曾从海路到达中国），但从575年之后也被波斯和伊斯兰掐断。因此，伊斯兰兴起之后的绝大部分时间里，西方人都只能通过穆斯林获取东方的商品，从而使大量金银流入伊斯兰世界，这极大的制约了中世纪欧洲的经济发展。</p>
+<h3 id="2-早期探索"><a href="#2-早期探索" class="headerlink" title="2. 早期探索"></a>2. 早期探索</h3><p>蒙古人的征服短暂地打破了这一垄断：由于庞大的蒙古帝国最西端已经与基督教世界接壤，这使得基督徒可以穿越蒙古统治区域到达中国，而无需经过穆斯林统治区域。1245年，罗马教皇派使者柏郎嘉宾从黑海进入拔都的金帐汗国，然后一路东行，到达蒙古上都哈拉和林（今日蒙古境内）拜见贵由大汗，然后返回法国里昂。柏郎嘉宾劝说大汗停止西进的外交努力虽未成功，但这是已知的中世纪欧洲人第一次到达蒙古，留下了大量历史记录。</p>
+<p>柏郎嘉宾之后，欧洲人和蒙古之间又有几次外交往来，但他们并未真正到达中国，而只见识了荒凉的蒙古草原。真正开拓西方眼界的是一个叫马可·波罗的威尼斯冒险家。马可·波罗本人不识字，但他于1298年参加威尼斯和热那亚海战被俘后，在狱中口述由同伴记录下来的《东方见闻录》描述了他游历中国元朝的大量见闻，都是当时欧洲人完全无法想象的。至今仍有争议马可·波罗究竟是真的到过中国还是道听途说，但这本书极大地激发了欧洲对于东方的狂热，在还没有印刷术的情况下就已经被翻译成多国语言，在欧洲广为流传。然而，不久之后蒙古帝国就瓦解了，奥斯曼帝国兴起，前往东方的商路再次被穆斯林垄断。</p>
+<p>随着奥斯曼帝国越来越强势，甚至把触角伸入地中海内部，西方人迫切希望找到一条通往东方的新路。航海技术的发展、地理知识的进步，使他们可以通过远洋探索。但比他们更早迈出这一步的，却是东方的中国。</p>
+<p>1405 ~ 1433年间，明成祖朱棣派郑和（有波斯血统的回族人）七次下西洋。他率领的是当时世界上最庞大的舰队，最多时超过200艘船、27000人，到达马六甲、暹罗、印度等地，最远曾抵达东非索马里、红海和麦加。郑和下西洋显示了当时中国具有世界最强大的远洋航海能力，但其发起和停止的原因一直是个谜（可能是到海外寻找失踪的建文帝朱允炆）。在第七次下西洋之后，明朝再未组织官方的航海活动，同时对民间实行海禁，使得中国失去了向海洋扩张的机会。</p>
+<h3 id="3-前往印度"><a href="#3-前往印度" class="headerlink" title="3. 前往印度"></a>3. 前往印度</h3><p>欧洲对海洋的探索始于最西端的葡萄牙。自从711年穆斯林（伍麦叶王朝）摧毁伊比利亚半岛的西哥特王国以来，基督教徒经过数百年努力，终于收复了伊比利亚的大部分领土，并在此建立了三个基督教王国：卡斯蒂利亚、阿拉贡、葡萄牙。穆斯林仍然据有半岛南部的格拉纳达和北非海岸。1415年，葡萄牙国王若昂一世远征北非，攻占了直布罗陀海峡南端的休达，并以此作为探航西非的出发点。在王子恩里克的主持下，葡萄牙把探索大洋作为一项国家事业：1434年，葡萄牙船队首次越过了西撒哈拉的博哈多尔角，这是当时欧洲人已知世界的最南端。1487年，迪亚士越过好望角进入印度洋，东方的印度已经遥遥在望。这一时期，葡萄牙人在非洲掠夺黄金和象牙，并把大量黑人抓为奴隶。西非原本强盛的桑海帝国在葡萄牙人的掠夺下瓦解了，曾是伊斯兰文化盛地的廷巴克图也被洗劫一空，衰落成一座荒漠枯城，此后西非洲再也未能建立强盛国家。</p>
+<p><strong>1469年，卡斯蒂利亚国王的妹妹伊萨贝拉（1451～1504年）不顾王兄的反对，自主嫁给阿拉贡的年轻王子斐迪南。几年后，双方分别继承了本国王位，统一的西班牙在爱情的力量下诞生了。</strong>伊萨贝拉和斐迪南以“双王一体”的名义共同领导西班牙，向格拉纳达的穆斯林王国大举进攻，经过十余年苦战，终于在1492年将其彻底灭亡。（伊萨贝拉在战事中四处奔波筹务后勤，这一形象被作为国际象棋中的王后流传下来。）西班牙境内所有穆斯林要么改教，要么被驱逐出境。这是数百年来基督教对伊斯兰的首次重大胜利，尤其是在君士坦丁堡陷落之后的低潮时期，它极大地振奋了基督教世界的士气。同时，这也是整个人类文明史上唯一的一次，一个地区完全被伊斯兰化之后又将其完全清除。也在1492年，雄心万丈的伊萨贝拉女王资助一个叫哥伦布的航海家向西航行，探寻绕过地球前往印度的新航线。此时人们已经知道地球是圆的，但哥伦布其实低估了地球的直径，因此当他到达中美洲的岛屿时就以为这里是印度，还把当地人称为“印第安人”。伊萨贝拉派遣西班牙人向美洲殖民定居，并积极传播天主教。西班牙移民与印第安人通婚，导致今日拉丁美洲很多居民都是西班牙人与印第安人的混血后裔。</p>
+<p>西葡两国王室频繁通婚，但双方仍就海上利益范围产生争吵。1494年，在教皇的调停下，两国于西班牙小镇托尔德西里亚斯签订了一份瓜分世界的条约：取葡萄牙发现的西非佛得角群岛和西班牙发现的美洲古巴岛连线的中点，以穿过此点的经线（西经46°37’）为界，规定西侧的归西班牙，东侧的归葡萄牙。在当时情况下，这一条约使葡萄牙获得了欧洲人已探明土地的绝大部分，但对双方仍是相对公平的，因为谁都没有找到印度，美洲大陆也并未真正发现。西葡两国此后都较好的履行了条约，在一些地方奠定了今日世界的格局（例如巴西讲葡萄牙语而阿根廷讲西班牙语）。然而，当后来的荷兰、英格兰等国参与到地理大冒险之中时， 这些后起之秀声称他们不是托尔德西里亚斯条约的签约国，因此不受此条约限制。</p>
+<p>西葡两国在分界线的两侧分别探索。1498年，葡萄牙的达伽马终于抵达印度，建立了西方梦寐以求的贸易新航线，打破了穆斯林对香料贸易的垄断。虽然非洲航线路途遥远、风险高昂，但由于规避了中间商的层层盘剥，仍然给葡萄牙带来了巨大的回报。奥斯曼帝国的贸易线路并未终止，但他们再也不能享受垄断所带来的高额利润。里斯本很快就超越威尼斯，成为西方的香料贸易中心。葡萄牙人在印度建立了据点，然后就向东进军。此时的马来群岛有多个原住民建立的王国，其中最繁荣的是信奉伊斯兰教的马六甲苏丹国。马六甲是一个重要的东西方贸易枢纽，也是中国明朝的海外属国（郑和下西洋时每次都在马六甲驻留），但其军事技术远落后于西方入侵者。1511年，葡萄牙人以武力攻占马六甲，使之成为其在东方的根据地。<strong>1513年，一支葡萄牙船队从马六甲北上航行到珠江口——在西罗马帝国灭亡的一千多年后，欧洲船队终于再次抵达中国。</strong></p>
+<h3 id="4-美丽新大陆"><a href="#4-美丽新大陆" class="headerlink" title="4. 美丽新大陆"></a>4. 美丽新大陆</h3><p>1499 ~ 1504年间，为西班牙效力的意大利航海家阿美利哥·维斯普西考察了南美洲东北部，发现这里不是印度，而是一块新大陆，后人便以他的名字命名这里为亚美利加洲。西班牙人在这里发现了很多新奇的农作物（玉米、辣椒、红薯、烟草等），但他们仍然对此地甚感失望，因为这里并没有任何传统香料。然而当西班牙人深入探索时，他们发现这里有两个在面积和人口上都远超欧洲国家的大国：阿兹特克文明（今日墨西哥）和印加文明（今日秘鲁）。（玛雅文明在哥伦布到达美洲之前很久就已经消亡了。）依靠先进的枪炮科技，人数极少的西班牙征服者在很短时间内就征服了这两大文明。<strong>阿兹特克于1521年、印加于1533年分别灭亡</strong>，而美洲的大量黄金白银被西班牙人运回欧洲。这不仅包括从印第安人手中直接获取的金银，也包括欧洲人发现的矿产：在玻利维亚发现的波多西银矿是人类迄今发现的最大银矿，它在一个世纪内的产量就超过全球产量的一半。据统计，从1502年到1660年，西班牙从美洲得到1.86万吨白银和200吨黄金，这使得西班牙一跃而成欧洲最富裕的国家，他们可以在全球市场上任意挥霍。<strong>这不仅使西方的商业繁荣，甚至使遥远的中国明朝出现了通货膨胀危机，也使西班牙有能力成为基督教世界抗击奥斯曼帝国的领袖。——而美洲原住民则遭受了深重的灾难，在短短几十年间，印第安人口减少近90%，一部分原因是西方殖民者的屠杀和虐待，更重要的则是西方传来的天花、麻疹等病毒。由于印第安人对欧亚大陆上的病毒缺乏免疫力，大片大片的印第安人聚居区几乎全部死绝。为了补充劳动力，西方殖民者甚至不得不从非洲贩卖黑奴到美洲，从而永久改变了这一地区的人口组成。</strong></p>
+<p>在美洲探险的同时，为了跟葡萄牙人竞争，1519年西班牙再度资助麦哲伦远航，希望绕过南美洲进入太平洋，从而在不违背托尔德西里亚斯条约的情况下抵达印度。当时很多人猜测南美洲的最南端会一直与南极洲相连，但麦哲伦的船队终于找到了通往太平洋的海峡，然后横渡大洋，到达了盛产香料的印度尼西亚摩鹿加群岛（又称“香料群岛”）。麦哲伦在途中去世，其部下继续前行回到西班牙，完成了人类历史上首次环球航行。<strong>这一事件终于证明了“地球是圆的”，也标志着西方成为世界霸主的时代正式来临。</strong></p>
+<p>鉴于麦哲伦打通了绕过美洲前往东方的航线，西葡两国再度就太平洋上的利益发生争论。1525 ~ 1526年，西班牙国王卡洛斯一世（即哈布斯堡的查理五世）与葡萄牙国王若昂三世分别与对方的姐妹结婚，从而结为联盟。此后两国于1529年达成了萨拉戈萨条约，葡萄牙获得了香料群岛，而西班牙获得了菲律宾群岛（以西班牙王子腓力命名）。</p>
+<p>由于此时的中国明朝采取海禁政策，葡萄牙人在舟山双屿港建立据点，以走私方式与中国民间进行贸易。同时，<strong>葡萄牙人还在1543年（德川家康同年出生）到达日本，并把火器技术卖给了日本人，从此改变了日本的战争方式，加快了日本战国的统一。</strong>1557年葡萄牙人终于获得明朝批准在澳门居住，而西班牙人于1571年占领了菲律宾的马尼拉，并把它开发成一座国际贸易中转站：这使得西班牙人在美洲开采的白银无须回到欧洲，可以直接从美洲跨太平洋前往亚洲购物。这条新的线路再度改变了世界贸易体系，使得美洲的港口繁荣起来，而奥斯曼帝国、波斯和中亚贸易线路从此无可挽回地衰弱下去。</p>
+<p>值得一提的是，随着香料越来越容易获取，它在人们心目中的地位反而大幅度降低了。西方人控制了香料原产地并大规模引种到热带非洲地区，这使它们失去了神秘感；从美洲引进的辣椒、烟草、可可等作物（以及来自非洲的咖啡）使得大众有了更多的感官风味；医学和化学的进步消除了香料在防腐、杀菌、熏香方面的多种需求……虽然香料在日常生活中的使用量实际上增加了，但它们已经变成了一种大众型商品而不再是高端奢侈品。<strong>而东方的瓷器、茶叶、纺织品逐渐取代了香料，成为全球贸易中的主导。</strong></p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d2fc0301/">20. 海外殖民</a>
+            
+            
+            <a class="next" rel="next" href="/d8c2b101/">18. 俄国崛起</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/d2fc0301/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/d8c2b101/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

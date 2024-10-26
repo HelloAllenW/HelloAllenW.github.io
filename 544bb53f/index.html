@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>1. 极简西方艺术史（完整梳理） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">1. 极简西方艺术史（完整梳理）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">四月 1, 2015&nbsp;&nbsp;22:38:00</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        四月 1, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E8%89%BA%E6%9C%AF%E4%B8%8E%E6%96%87%E5%AD%A6/">艺术与文学</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">16.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">56 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><img src="https://mmbiz.qpic.cn/mmbiz_png/sM5SdPkqTeoibB1McezpJrZMPib5GNqK4RrSxTpBp1QRLs1xaJwLX3b5MkNFPtKWqBLmNlxL8pIavdnP2pwvczNw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<ul>
+<li>如果不把今天的艺术放进艺术史中去观看，就无法读懂。</li>
+<li>整个西方艺术史，19世纪是最重要的分水岭，也就是印象派前后时期。这一时期之后，“古典艺术”被彻底打破，就像旧的封建王朝土崩瓦解，西方在艺术的新领域开疆扩土。</li>
+<li>不仅仅是绘画艺术，包括音乐、建筑等其它形式的艺术发展脉络也大抵如此。读透此文，读懂艺术！</li>
+</ul>
+<h2 id="一、原始、古代（公元前-公元476年）"><a href="#一、原始、古代（公元前-公元476年）" class="headerlink" title="一、原始、古代（公元前-公元476年）"></a>一、原始、古代（公元前-公元476年）</h2><p>（注：公元476年是西罗马灭亡的时间，从这之后，欧洲开始进入了黑暗中世纪，一直到东罗马灭亡，文艺复兴开始。）</p>
+<h3 id="原始艺术"><a href="#原始艺术" class="headerlink" title="原始艺术"></a>原始艺术</h3><p>是指人类最早的造型艺术，产生于旧石器时代晚期，即距今三万到一万多年之间。原始美术包括洞窟壁画、岩画、雕刻、建筑等。大多数现已发现的美术作品集中在欧洲，分别属于旧石器时代，中石器时代和新石器时代。</p>
+<h3 id="古埃及艺术"><a href="#古埃及艺术" class="headerlink" title="古埃及艺术"></a>古埃及艺术</h3><p>公元前3000年，上埃及国王美尼斯征服下埃及，建立了统一的专制王朝。此后，埃及经历了古王国、中王国和新王国（前1071-前332）三个统一时期。古埃及艺术。一般指公元前332年前的埃及美术。其特点是：建筑体量巨大，宏伟壮观，具有强烈的崇高感；雕刻朴素写实，整体性强，有观念化、概念化和程式化的倾向；绘画线条流畅优美，色彩丰富。现遗存一些金字塔、雕刻和墓室壁画。埃及艺术是人类最早的文化遗产之一，具有重要的历史价值和艺术价值。</p>
+<h3 id="美索不达米亚艺术"><a href="#美索不达米亚艺术" class="headerlink" title="美索不达米亚艺术"></a>美索不达米亚艺术</h3><p>公元前3000-前331年出现于西亚底格里斯河和幼发拉底河流域一带(即今伊拉克、叙利亚、土耳其、约旦、巴勒斯坦一带和伊朗西部)的美术。美索不达米亚一词，源于希腊文，意为两河之间。其特点是：各种艺术风格互相渗杂，多种渊源汇集，造型艺术绚丽多彩。传世艺术品有圆雕、浮雕、陶器、乐器和贵金属工艺品，以及巨大的神庙和宫殿遗址。</p>
+<h3 id="希腊艺术"><a href="#希腊艺术" class="headerlink" title="希腊艺术"></a>希腊艺术</h3><p>通常指公元前12-前1世纪希腊及其附近岛屿和小亚细亚西部沿海地区的美术。广义上包括爱琴艺术。公元前5-前4世纪，是希腊艺术的全盛时期，产生了米隆、菲迪亚斯、波利克里托斯、斯科帕斯、普拉克西特列斯等艺术家和帕提侬神庙、宙斯祭坛等建筑艺术。其雕刻具有强健的体魄、昂扬的精神和典雅优美的造型，被尊崇为造型艺术的典范。</p>
+<h3 id="罗马艺术"><a href="#罗马艺术" class="headerlink" title="罗马艺术"></a>罗马艺术</h3><p>公元前509-公元476年罗马帝国的美术。继承希腊艺术成就，融会欧洲、北非、西亚美术的地方因素，创造了大量的美术作品。其内容多为享乐性的世俗生活，形式上追求宏伟壮丽，刻画人物强调个性。突出成就主要反映在建筑、壁画、肖像雕刻方面。</p>
+<h3 id="原始、古代各艺术流派作品："><a href="#原始、古代各艺术流派作品：" class="headerlink" title="原始、古代各艺术流派作品："></a>原始、古代各艺术流派作品：</h3><h4 id="1、原始艺术"><a href="#1、原始艺术" class="headerlink" title="1、原始艺术"></a>1、原始艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFkeJtURsWAd3xHNxPAYfsiabp9EZq5brb9VRcuaC9KtNOeRxSzRXSIicg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：鹿，这是第一个被发现的旧石器时代艺术品，1834年法国人布劳伊莱在一个叫夏芳德的洞穴中发现了一块骨块，在骨块上用利器刻有两只鹿，刀法肯定，造型真实，不仅形象准确，还在身体上刻画出脊梁骨和细而有规则的毛，颇似出自现代人的手笔。</p>
+<h4 id="2、古埃及艺术"><a href="#2、古埃及艺术" class="headerlink" title="2、古埃及艺术"></a>2、古埃及艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFtMCRNYuxOgm5rJ2ickiaxl0MbLRxWKkHnsQmpnFR2HLMIX2Te8mW43vw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：金字塔，论及人类文明建树时，人们首先会想到古代埃及的金字塔，它是人类幼年时代最伟大的成就之一。在离开罗不远的基泽平坦广阔的沙漠上，耸立着许多体积庞大、高耸入云的金字塔，最高的胡夫金字塔高146.5米，它是古埃及第四王朝法老王胡夫的陵墓。金字塔现在只有137米高，底边各长230.6米，占地5.3公顷，用230余万块平均重约2.5吨重石块砌成，塔身斜度为51°52′。金字塔的构思反映古埃及人的信仰。</p>
+<h4 id="3、美索不达米亚艺术"><a href="#3、美索不达米亚艺术" class="headerlink" title="3、美索不达米亚艺术"></a>3、美索不达米亚艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFiaZPa0dLKRkApuDia9AEic6C5fmgoicmgFlMY2YO7V7AB5dQfgv8h0dqLA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：巴别塔，又名通天塔，也叫巴比伦巴别塔。传说巴别塔在约5000年前位于今天伊拉克首都巴格达。据《圣经》创世记 ：挪亚后代迁居南亚底格里斯河与幼发拉底河之间一块大平原，因为祖先被洪水冲怕了，担心再遭水灾，就齐心修建一座高塔使全体人员都住进去永保平安。塔越修越高达至天界，触怒了上帝。上帝决定施神术搅乱造塔人的语言，使人们互相不能勾通而造不成塔，这是基督教解释不同民族语言的来源。</p>
+<h4 id="4、希腊艺术"><a href="#4、希腊艺术" class="headerlink" title="4、希腊艺术"></a>4、希腊艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF9g104cUgA4onibGEYeuyj7lbu1fysbBu69ibsYLGSHqHCLl4ukycXX9g/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：阿芙罗狄忒雕像，公元1世纪仿制，原作为公元前360年普拉克西特利斯创作，1651年发现于法国阿尔勒古剧院废墟，原被路易十四收藏于凡尔赛宫的镜廊。这尊爱神雕像是普拉克西特利斯的一件作品的复制品，此类雕塑可能是普拉克西特利斯雕塑全裸女神雕像的开端。</p>
+<h4 id="5、罗马艺术"><a href="#5、罗马艺术" class="headerlink" title="5、罗马艺术"></a>5、罗马艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFKF1Xu32HWxPZjd1zQnTIWNWgTL7mwt32y0Mx1IMms8VLQjR20OFHLg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：万神庙，位于意大利首都罗马圆形广场的北部，是罗马最古老的建筑之一，也是古罗马建筑的代表作。万神庙采用了穹顶覆盖的集中式形制，重建后的万神庙是单一空间、集中式构图的建筑物的代表，它也是罗马穹顶技术的最高代表。</p>
+<h2 id="二、中世纪（476-15世纪）"><a href="#二、中世纪（476-15世纪）" class="headerlink" title="二、中世纪（476-15世纪）"></a>二、中世纪（476-15世纪）</h2><h3 id="中世纪艺术"><a href="#中世纪艺术" class="headerlink" title="中世纪艺术"></a>中世纪艺术</h3><p>一般指5-15世纪的西方美术。主要表现在建筑的高度发展，各种形式的大教堂，如拜占庭教堂、罗马式教堂、哥特式教堂在艺术上和工程设计上都取得了很高的成就。雕刻、镶嵌画、壁画、插图画等也获得了繁荣。中世纪艺术属于基督教艺术，它不注重客观世界的真实描写，而往往以夸张、变形等手法表现精神世界。</p>
+<p><strong>中世纪</strong>：历史学上一般指封建制时代。主要用于欧洲。时限是公元476年西罗马帝国灭亡到1640年英国资产阶级革命。</p>
+<h3 id="基督教艺术"><a href="#基督教艺术" class="headerlink" title="基督教艺术"></a>基督教艺术</h3><p>早期基督教艺术出现在公元2世纪下半叶或3世纪上半叶，图像偏重于对某事物的象征性或寓意性。由于公元二世纪到四世纪期间的基督教被罗马皇帝视为非法宗教，早期基督教艺术主要出现在地下墓室。[1]壁画沿袭希腊罗马的风格，题材则与基督教相关。直到公元313年，罗马帝国君主君士坦丁大帝颁布的《米兰诏书》，自始对基督教艺术及西方文明有决定性的影响。随着时间推进，早期基督教艺术逐渐脱离古罗马末期的古典风格形成拜占庭艺术。</p>
+<h3 id="拜占庭艺术"><a href="#拜占庭艺术" class="headerlink" title="拜占庭艺术"></a>拜占庭艺术</h3><p>公元4世纪到15世纪的罗马帝国美术和东罗马帝国(即拜占庭帝国)美术，即宗教美术和封建帝国美术。以罗马晚期的艺术形式和以小亚细亚、叙利亚、埃及为中心的东方艺术形式相结合为风格特点。在教堂建筑、圣像画、镶嵌画、壁画、细密画及工艺美术的风格创造上，都有较大的成果。后期风格因受教会束缚，倾向于公式化、概念化。对中世纪欧洲各国，尤其是东正教国家的艺术有很大影响。</p>
+<h3 id="罗马式艺术"><a href="#罗马式艺术" class="headerlink" title="罗马式艺术"></a>罗马式艺术</h3><p>欧洲9至12世纪流行的一种以建筑为主体的艺术形式。建筑多为教堂和修道院，以厚重坚实的墙壁、高大雄伟的塔楼和半圆形拱穹结构为主要特征。著名的建筑有意大利的比萨大教堂、法国的普瓦提埃大教堂、德国的沃姆斯大教堂等。出现在教堂外部墙壁上的雕刻多取材于《圣经》故事，并以非写实性和框架法为特点。</p>
+<h3 id="哥特式艺术"><a href="#哥特式艺术" class="headerlink" title="哥特式艺术"></a>哥特式艺术</h3><p>欧洲12世纪中叶至16世纪初的一种艺术。以大教堂建筑为主，一反罗马式厚重阴暗的半圆形拱门的式样，以广泛运用交叉肋拱、高扶壁、飞扶壁、尖拱结构和新装饰体系为特征。反映了基督教盛行的时代观念和中世纪城市发展的物质文化面貌。代表作品有法国的巴黎圣母院、德国的科隆大教堂、英国的林肯教堂和意大利的米兰大教堂等。</p>
+<h3 id="中世纪各艺术流派作品："><a href="#中世纪各艺术流派作品：" class="headerlink" title="中世纪各艺术流派作品："></a>中世纪各艺术流派作品：</h3><h4 id="6、中世纪艺术"><a href="#6、中世纪艺术" class="headerlink" title="6、中世纪艺术"></a>6、中世纪艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFhLY4EjYCtc1FibYAyQicK8KTA7dMTUQydlFuVG7ibDnEBx7Q8TaT0v7QA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：安吉利科·博士来拜， 于1445年创作的油画，现藏华盛顿美国国家美术馆。据圣经记载：当希律王的时候，耶稣生在犹太的伯利恒。有几个博士从东方来到耶路撒冷，说：“那生下来作犹太人之王的在那里？我们在东方看见他的星，特来拜他。”画家以中世纪的画风，传达中世纪的宗教概念。</p>
+<h4 id="7、基督教艺术"><a href="#7、基督教艺术" class="headerlink" title="7、基督教艺术"></a>7、基督教艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFVE8xo5qiarYMzUEoY5O4tnkJ4Wjz8RotxG6cXialSudCXbHBkNvsicAZA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：罗得和他的女儿们 Lot and his daughters，艺术家：亨德利克·霍尔齐厄斯 Hendrick Goltzius (1558–1617)，创作日期：1616年，形式：布面油画，大小：140 厘米×204 厘米。圣经创世记中罗得和他的女儿们，画中的罗得正被他两个女儿勾引。</p>
+<h4 id="8、拜占庭艺术"><a href="#8、拜占庭艺术" class="headerlink" title="8、拜占庭艺术"></a>8、拜占庭艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFL6iatrg5QmD84oHibABMpBgqdQnWVNKGkah3la6sVTNf2r7hEsfqe5pg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：圣索菲亚大教堂，圣索菲亚大教堂建于公元537年，是拜占廷时期建造的一座罗马纪念馆。“圣索菲亚”在基督教里是上帝智慧的意思。圣索菲亚大教堂是当时世界最宏伟最华丽的建筑。从君士坦丁王朝的兴起，到君士坦丁堡被奥斯曼人占领为止，圣索菲亚大教堂历经沧桑900多年，她亲眼目睹了君士坦丁王朝的兴衰。圣索菲亚大教堂是一座三拱长方型建筑，教堂的圆顶高60米，相当于20层楼高，是世界有名的五大圆顶之一。它占地面积近８000平方米，其中中央大厅5000多平方米，教堂前厅600多平方米。大教堂内墙上有天使杰布拉欣的巨幅油面，它向教徒们描绘了天国幸福、安详而和平的景象。</p>
+<h4 id="9、罗马式艺术"><a href="#9、罗马式艺术" class="headerlink" title="9、罗马式艺术"></a>9、罗马式艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFPTGbMvlRNzDuQ61ZQq8uackCNJqQ5jAWDibotVejGE2icoDE1lGIyNGw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：比萨教堂建筑群，是意大利罗马式教堂建筑的典型代表。位于意大利比萨。大教堂始建于1063年，包括比萨主教堂，它的钟塔和洗礼堂，是意大利中世纪最重要的建筑群之一。主教堂是拉丁十字形的，全长95米，正立面高32米。钟塔呈圆形，直径16米，高55米，分为8层。它在建造时便已倾斜，是著名的斜塔。在不远处还有一座圆形的洗礼堂，构成一个教堂建筑群。</p>
+<h4 id="10、哥特式艺术"><a href="#10、哥特式艺术" class="headerlink" title="10、哥特式艺术"></a>10、哥特式艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF3hxqOvd1ib5zW6ttjibheq8CGgsVeE9QT61yWvl0Y9PJLyNpVE7SwWSA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：科隆大教堂。位于德国科隆的一座天主教主教座堂，157米高的钟楼使得它成为德国第二（仅次于乌尔姆市的乌尔姆主教座堂）、世界第三高的教堂，另外也是世界上第三大的哥特式教堂（前两位是塞维利亚主教座堂和米兰主教座堂）。它从13世纪中起建，工程时断时续，至1880年才由德皇威廉一世宣告完工，耗时超过600年，直到今日仍然修缮工程不断。</p>
+<h2 id="三、文艺复兴时期（14-16世纪）"><a href="#三、文艺复兴时期（14-16世纪）" class="headerlink" title="三、文艺复兴时期（14-16世纪）"></a>三、文艺复兴时期（14-16世纪）</h2><h3 id="文艺复兴艺术"><a href="#文艺复兴艺术" class="headerlink" title="文艺复兴艺术"></a>文艺复兴艺术</h3><p>欧洲14-16世纪资本主义萌芽和初步发展时期的艺术。开始于意大利，后扩大到尼德兰、法国、德国、英国、西班牙等国，并席卷全欧洲。以贯彻现实主义和体现反封建反宗教的人文主义思想为主要特征。代表人物有画家达·芬奇、拉斐尔，雕塑家米开朗琪罗等。作为西方近代艺术源头的文艺复兴艺术，其基本风格和表现技法构成了西方近代艺术的主要传统，影响极其深远。 </p>
+<h3 id="佛罗伦萨画派"><a href="#佛罗伦萨画派" class="headerlink" title="佛罗伦萨画派"></a>佛罗伦萨画派</h3><p>是意大利文艺复兴时代形成的美术流派，13世纪末已经形成，早期代表画家有：乔托·迪·邦多纳、马萨乔、安杰利科、乌切洛、波提切利等。盛期代表画家有：达·芬奇、米开朗基罗、拉斐尔。15世纪中叶以后佛罗伦萨画派已呈衰退之势，取而代之的是以罗马为中心的罗马画派。16世纪末，由于佛罗伦萨政治上失去独立，经济衰落，以及画家盲目崇拜前辈的结果，逐渐走向风格主义。</p>
+<h3 id="威尼斯画派"><a href="#威尼斯画派" class="headerlink" title="威尼斯画派"></a>威尼斯画派</h3><p>是16世纪以威尼斯画家乔尔乔内和提香为代表的绘画形式。产生于意大利文艺复兴时期。该画派以人文主义思想为主导，吸收尼德兰美术的油画技法，偏重色彩和感觉效果，画面绚丽，构图新颖。对欧洲绘画有很大影响。代表人物有乔尔乔内、提香、丁托列托等。</p>
+<h3 id="尼德兰画派"><a href="#尼德兰画派" class="headerlink" title="尼德兰画派"></a>尼德兰画派</h3><p>中世纪的尼德兰包括现在的荷兰、比利时、卢森堡以及法国东北部的一些地区。15世纪尼德兰画派成就非常突出。尼德兰画派的艺术家们创作了大量祭坛画与独幅木板画，因为尼德兰美术脱胎于中世纪的哥特式艺术，使得尼德兰文艺复兴初期的绘画有比较浓郁有宗教气息，总的绘画倾向是：严肃、静穆，人物形象不够生动自然。另一方面，尽管这些作品大多表现了传统的宗教题材，却由于画家对描写世俗生活和周围环境的兴趣大大增长，作品中便不时体现出现实主义倾向。罗伯特·康宾和扬·凡·埃克是尼德兰画派的主要奠基人。</p>
+<h3 id="枫丹白露画派"><a href="#枫丹白露画派" class="headerlink" title="枫丹白露画派"></a>枫丹白露画派</h3><p>是16世纪活跃在法国宫廷的美术流派。是国际样式主义绘画的重要组成部分，分别以法王两次修建巴黎郊外的枫丹白露宫为契机形成了两代枫丹白露派画家，第一代枫丹白露派画家由来自意大利的画家罗索、普里马蒂乔和雕塑家切利尼等人与法国画家库新、卡龙、雕刻家古戎和庇隆等人合作，在宫廷内外的装饰上形成了一个风格性很强的艺术流派。</p>
+<h3 id="文艺复兴时期各艺术流派作品："><a href="#文艺复兴时期各艺术流派作品：" class="headerlink" title="文艺复兴时期各艺术流派作品："></a>文艺复兴时期各艺术流派作品：</h3><h4 id="11、文艺复兴艺术"><a href="#11、文艺复兴艺术" class="headerlink" title="11、文艺复兴艺术"></a>11、文艺复兴艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFcgnTcVzBA0nEOAzUo80f4kLXYPYWQcsxAOXicE2rSahjmOj2yLv6RkQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：圣母子与圣安妮、施洗者圣约翰 达芬奇 1499-1500年 炭笔画 141.5×104.6cm 伦敦国家美术馆。这幅黑白艺术珍品是文艺复兴艺术巨匠达·芬奇500多年前用木炭和粉笔创作的，它悬挂展示于伦敦国家画廊。1987年，这幅作品的价值就达3500万美元。这一年，一位男子用一把短猎枪试图射击这幅作品，来表达他对于“英国政治、社会以及经济状况”的愤怒。枪响后，展厅中保护画作的玻璃展柜被击碎，玻璃将画面中圣母的长袍划出一道6英寸的口子。</p>
+<h4 id="12、佛罗伦萨画派作品"><a href="#12、佛罗伦萨画派作品" class="headerlink" title="12、佛罗伦萨画派作品"></a>12、佛罗伦萨画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFA1LBH0pUlKL8fibZWNpicrdEWXZbW1CHSLjNv0732MrdHy9p8aeqY78A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：维纳斯的诞生。波提切利 1487年 画布上蛋彩 175 x 287.5cm 意大利佛罗伦萨乌斐齐美术馆。波提切利是15世纪佛罗伦萨画派的最后一位大师，画家以浪漫的气质与诗意的手法，表现了美神维纳斯诞生的奇异场面。在这幅作品中，波提切利塑造了一位忧郁哀婉的美丽女性形象，在她身上寄寓了画家的人文主义理想。饱满的构图强调一种深刻的内涵和装饰性，突出了一种醉人的浪漫气息，渲染了生命主题的诗性。</p>
+<h4 id="13、威尼斯画派作品"><a href="#13、威尼斯画派作品" class="headerlink" title="13、威尼斯画派作品"></a>13、威尼斯画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF3CAHqZtqFJzFwW24jEfiajq9X8qzPGgIHmiaaicXNd5wdqgnyoQVDhpsw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：田园合奏。1510-1511年 乔尔乔内 意大利 110cm×138cm 布 油彩 巴黎　卢浮宫藏。乔尔乔内是第一个严格意义上的威尼斯画派的画家。他的这幅画是乡土自然美和女性裸体美的绘画结合，不仅表现了画家对时代精神的探索，还反映了16世纪以来威尼斯绘画风格的审美理想。这件作品先是由乔尔乔内绘制，后由提香继续完成的。这件作品展示了一幕耽于幻想的神、人心灵交流的幻境，充满神秘的诗意，体现了当时人们对美的梦幻般向往。</p>
+<h4 id="14、尼德兰画派作品"><a href="#14、尼德兰画派作品" class="headerlink" title="14、尼德兰画派作品"></a>14、尼德兰画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF5eQ63KUHTZGtGAvN8e2lClxcTibY0UzBgn0SL7LBQoXUUYChia9jtylw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：阿尔诺芬尼夫妇像。扬·凡埃克 1434年 油画 82cm×59.5cm 英国国家美术馆藏。扬·凡·埃克是尼德兰画派的主要奠基人。这幅画是他的代表作品。阿尔诺芬尼是在1420年被菲利普公爵封为骑士的真实人物。画家真实地描绘了典型的资产者形象。画中的人物手势动作、环境道具都有民俗的含义，十分有趣：阿尔诺芬尼夫妇的手势表示互相的忠贞，托着妻子的手表示丈夫要永远养活妻子；而妻子手心向上表明要永远忠于丈夫。华贵衣饰表明人物的富有；画面上方悬挂的吊灯点着一支蜡烛，意为通向天堂的光明；画的下角置一双拖鞋表示结婚，脚边的小狗表示忠诚，女子的白头巾表示贞洁、处女，绿色代表生育，床上的红颜色象征性和谐，窗台上的苹果代表平安，墙上的念珠代表虔诚，刷帚意味着纯洁；画面中间带角边的圆镜代表天堂之意。</p>
+<h4 id="15、枫丹白露画派作品"><a href="#15、枫丹白露画派作品" class="headerlink" title="15、枫丹白露画派作品"></a>15、枫丹白露画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFWfucXGDKLgYPVxj39WIDbmK8sktD4zu5O3QN4E4XAwicUStNza0jRGA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：埃斯特雷姐妹。是“枫丹白露画派”的重要代表作品，但作者已不得而知。画中裸体的卡芭利埃尔、埃丝特蕾是国王亨利四世的宠姬，1599年因难产身亡。画面表现两姐妹正在大床的帷幕之中梳妆打扮，房间深处一位衣着华丽的妇女正在大壁炉前缝纫。人物手捏乳房的动作暗示着贵妃期望怀孕得子。画家对细部描绘的热衷，以及远近人物大小悬殊的夸张手法，都极好地体现出北派的写实传统。</p>
+<h2 id="四、十七、十八世纪"><a href="#四、十七、十八世纪" class="headerlink" title="四、十七、十八世纪"></a>四、十七、十八世纪</h2><h3 id="学院派艺术"><a href="#学院派艺术" class="headerlink" title="学院派艺术"></a>学院派艺术</h3><p>始于16世纪末的意大利，十七八世纪在英、法、俄等国流行，其中法国的学院派因官方特别重视，所以势力和影响最大。学院派重视的规范，包括题材的规范、技巧的规范和艺术语言的规范。由于对规范的过分重视，结果导致程式化的产生。学院“ Academy ”一词最初含“正规“、走正路不走邪路的意思。如何才能走正道，在学院派看来就是重视传统，向传统学习，因而学院派反对所有的改革。学院派十分重视基本功训练，强调素描，贬低色彩在造型艺术中的作用，并以此排斥艺术中的感情作用。这些特点给学生带来的影响是正反两方面的。代表人物卡拉契兄弟，大卫，安格尔等。</p>
+<h3 id="样式主义"><a href="#样式主义" class="headerlink" title="样式主义"></a>样式主义</h3><p>意大利16世纪中后期的美术流派，代表著盛期文艺复兴渐趋衰落后出现的追求形式的保守倾向。样式主义时期的艺术并未形成统一的风格，艺术家们各自表现出自己的特色，如夸张变形的手法，强调细节的修饰，突出个性的表现，反对理性、典雅、优美的原则，强调想像等等。总之，我们把这一时期出现的不同与盛期文艺复兴理性优美原则的艺术，都归为样式主义。代表画家布龙齐诺（1503～1572），瓦萨里。</p>
+<h3 id="现实主义艺术"><a href="#现实主义艺术" class="headerlink" title="现实主义艺术"></a>现实主义艺术</h3><p>在16世纪末17世纪初，与样式主义艺术和学院派艺术相对立的是现实主义艺术。现实主义艺术家赞美自然，歌颂劳动，深刻而全面地展现了现实生活的广阔画面，尤其描绘了普通劳动者的生活和斗争，此时劳动者真正成为绘画中的主体形象，大自然也作为独立的题材受到现实主义画家青睐。这一时期现实主义最主要的代表人物是卡拉瓦乔。</p>
+<h3 id="巴洛克艺术"><a href="#巴洛克艺术" class="headerlink" title="巴洛克艺术"></a>巴洛克艺术</h3><p>巴洛克(Baroque)是17世纪广为流传的一种艺术风格。它的名称由来，说法不一，一说来自葡萄牙或西班牙语，意思是不圆的珠子；又一说它来自意大利语，有奇特、古怪或推论上错误的含义。总的来说这个名称在当时含有贬意，是18世纪古典主义艺术理论家对于上一个世纪一种艺术风格的称呼。代表性人物贝尼尼，鲁本斯。</p>
+<h3 id="佛兰德斯美术"><a href="#佛兰德斯美术" class="headerlink" title="佛兰德斯美术"></a>佛兰德斯美术</h3><p>16-18世纪尼德兰南部（今比利时及法国一小部）美术的通称。原为尼德兰美术的一部分。1579年荷兰独立后，即称佛兰德斯美术。既带有民主性倾向，又保留着明显的贵族性和宗教性，追求富丽堂皇的装饰风格。代表人物有勃鲁盖尔、鲁本斯、凡·戴克等。对欧洲美术的发展有很大影响。</p>
+<h3 id="荷兰画派"><a href="#荷兰画派" class="headerlink" title="荷兰画派"></a>荷兰画派</h3><p>17世纪兴起于荷兰。摆脱了对宫廷贵族和天主教会的依附，转向为新兴的市民阶级服务。用写实手法描绘人民生活和自然风景。除肖像画和宗教历史画外，还发展了风景画、风俗画、静物画及动物画。代表人物有哈尔斯、伦勃朗、维米尔。1609年的尼德兰革命，建立起荷兰共和国，这是欧洲历史上第一个资产阶级共和国，荷兰绘画得到空前繁荣。</p>
+<h3 id="塞维利亚画派"><a href="#塞维利亚画派" class="headerlink" title="塞维利亚画派"></a>塞维利亚画派</h3><p>17世纪上半期，西班牙最重要的画派之一是南方的“塞维利亚画派”。“塞维利亚画派” 主要描绘寂静的僧侣世界，平凡中含有诗意。这个画派的宗教题材画:有个显著特点，那就是并不过分渲染宗教气息，反而富于生活的情趣，具有强烈的世俗化倾向。有三个最杰出的代表：穆里罗，苏巴朗，委拉斯贵支。</p>
+<h3 id="古典主义"><a href="#古典主义" class="headerlink" title="古典主义"></a>古典主义</h3><p>西欧文学艺术上的一个流派，盛行于17世纪，延续到18世纪后期。主要特点是模仿古希腊、罗马的艺术形式，尊重传统，崇尚理性，要求均衡、简洁，表现出反宗教权威的精神。但由于模拟多，创造少，不能反映现实。代表画家普桑，乌埃，勒布伦，拉图尔，勒南兄弟，洛兰等。</p>
+<h3 id="洛可可艺术"><a href="#洛可可艺术" class="headerlink" title="洛可可艺术"></a>洛可可艺术</h3><p>洛可可(rococo)，源于法文rocaille，意为贝壳形。指法国国王路易十五统治时期(1715-1774)所推崇的艺术风格。在工艺美术、绘画、建筑等方面尤为明显。以具有纤细、轻巧、华丽和繁琐的装饰性为其特征。洛可可艺术在形成过程中，曾受到中国明清工艺美术的影响。绘画方面，以法国画家布歇·弗拉戈纳尔等人为代表。建筑方面，以法国巴黎苏比斯府为代表。</p>
+<h3 id="新古典主义艺术"><a href="#新古典主义艺术" class="headerlink" title="新古典主义艺术"></a>新古典主义艺术</h3><p>18世纪50年代至19世纪初流行于西欧的美术样式。它力求恢复古典美术(主要指古希腊罗马艺术)的传统，追求古典式的宁静，重视素描，强调理性。代表人物有法国画家大卫，热拉尔，安格尔，普吕东等。</p>
+<h3 id="十七、十八世纪各艺术流派作品："><a href="#十七、十八世纪各艺术流派作品：" class="headerlink" title="十七、十八世纪各艺术流派作品："></a>十七、十八世纪各艺术流派作品：</h3><h4 id="16、学院派艺术作品"><a href="#16、学院派艺术作品" class="headerlink" title="16、学院派艺术作品"></a>16、学院派艺术作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFR75fqARWKS3I3l0HwlCic8vUAvtibzSOozDuoDMvr3mDIIcsj4tmOWbQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：圣玛丽的少女时代。作者格·列尼（1575—1642）是意大利学院派艺术的代表人物。画中少女高贵端庄，温文尔雅，反映了学院派的风格特点。</p>
+<h4 id="17、样式主义作品"><a href="#17、样式主义作品" class="headerlink" title="17、样式主义作品"></a>17、样式主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFgpNXqib9mck62WCsEm9WwVVZGWw9E19PwTaALfViarDHWBekxQNFqmQA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：手持经书的少女肖像 布龙齐诺 约1545-1550年 木板蛋彩画 58×46.5厘米 佛罗伦萨乌斐济美术馆。</p>
+<p>布龙齐诺（1503～1572）是意大利样式主义的代表画家。这幅肖像画是他精心绘制的作品之一。画家通过少女的思维神态去表现她的若隐若现的忧伤。肖像的背景是浓淡相间的天蓝色，这是这位艺术家的一种杰出的独创。</p>
+<h4 id="18、现实主义艺术"><a href="#18、现实主义艺术" class="headerlink" title="18、现实主义艺术"></a>18、现实主义艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF5zAKXKyTnSj1yYdiarSBWH4ibrl56JV8HX5zKt6mLM8aKwjpXsTYV0Og/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：酒神巴克斯。卡拉瓦乔 1596年 布油彩 95cm×85cm 佛罗伦萨乌菲齐美术馆藏。</p>
+<p>卡拉瓦乔（1573—1610）是意大利现实主义绘画的主要创始人和杰出的代表。画中的酒神是衣服古典的装扮，却有着一张女性的脸：头发卷曲，唇微微紧闭，延伸慵懒。他举着象征快乐的酒杯，但腐化、堕落永远近在眼前——苹果上虫蛀的洞、熟透了的石榴和葡萄，都是万物的无常变化的象征。传说酒神拥有无人企及的英俊相貌。根据传说和现实生活中的模特，绘画大师卡拉瓦乔描绘出了酒神的形象。</p>
+<h4 id="19、巴洛克艺术"><a href="#19、巴洛克艺术" class="headerlink" title="19、巴洛克艺术"></a>19、巴洛克艺术</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFAwBaeMfHtuvBAymbto3Sc7dZLuxrqECY7jIiaKpicpNbCnd6ib7eP2lrA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：阿波罗和达芙妮(雕像)。贝尼尼 1622-1624年 大理石 意大利罗马的博格斯美术馆藏。</p>
+<p>贝尼尼(1598 - 1680) 是17世纪巴洛克艺术在建筑方面的最主要代表。他为罗马红衣主教的花园装饰了四组群像雕刻，《阿波罗与达芙妮》是其中一组雕像。目空一切的太阳神阿波罗瞧不起丘彼特的箭艺，这使小爱神很恼火。当阿波罗走近河神女儿达芙妮时，小爱神立即向他们分别发出两支爱情之箭，射向阿波罗的是钟情达芙妮之箭，而达芙妮中的却是拒绝求爱之箭，这引起神界的求爱追逐。当阿波罗即将追逐到女神时，女神大声向河神发出呼救：“亲爱的爸爸快把我十分喜爱的美貌改变吧!”即刻河神将爱女变成一棵月桂树。无奈的太阳神爱之不得，只得取下月桂枝编织成桂冠，赐给一切有成就的人，这就是“桂冠”的由来。</p>
+<h4 id="20、佛兰德斯美术作品"><a href="#20、佛兰德斯美术作品" class="headerlink" title="20、佛兰德斯美术作品"></a>20、佛兰德斯美术作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1wxOggzlo5bxkgoPIfD9OFaSxjjyVALndIVibl3qaxCM7vKoKzM6mIZA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>作品名称：强劫留西帕斯的女儿 鲁本斯 1617-1617年 油画 224×210.5厘米 慕尼黑老绘画陈列馆。</p>
+<p>鲁本斯（1577－1640）是佛兰德斯美术的杰出代表，也是欧洲第一个巴洛克式的画家。这幅描写的是传统的“抢婚”场面：卡斯托耳与波吕刻斯两个黝黑的壮汉把留西帕斯的两个女儿从睡梦中劫走，正准备强行拉上马背的情景。画面上人和马占据了整个空间，两匹马和两对男女的交错动势，给人以强烈的运动感。马头、人手、马脚、人脚，放射般地向四角展伸，这里既是暴力，又是一种充满喜悦的游戏。鲁本斯所注意的是肉体与马匹之间的色调对比，关心的是人仰马翻般的猛烈的场面。这种动势的色彩，线的运动与裸体的质感造成一种狂热的色彩交响。近乎方形的构图，本来是稳定的，但形象组成了X形，却又构成了极不稳定的动乱。画面左侧一角，画家又添画上一个长着翅膀的小爱神，它给整个画面作了一点暗示：这是一种爱情的暴力。鲁本斯所特有的画风，是富有装饰性的构思，这在画史上称作“巴洛克风格”。</p>
+<h4 id="21、荷兰画派作品"><a href="#21、荷兰画派作品" class="headerlink" title="21、荷兰画派作品"></a>21、荷兰画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFqcRAOHRjYNQGUTWNLw4S2vPBkibqNxDh3H1QnXibgia1zQwwgz7Ing6nA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：达那厄。作者伦勃朗（16O6～1669）是荷兰最杰出的肖像画大师，荷兰画派代表。</p>
+<p>达那厄是画家最喜欢表现的希腊神话题材，伦勃朗笔下的达那厄与别的画家不同，她具有鲜明的艺术个性，体现了画家所处的时代精神和独特的审美理想。画中的达那厄不是提香笔下的少女，而是一位成熟的荷兰妇人，从时代来审视属于荷兰独立之后新时代的社会理想反映；从现实来考察，画中人是以他的夫人作模特创作的，既真实又有美学意义。</p>
+<h4 id="22、塞维利亚画派作品"><a href="#22、塞维利亚画派作品" class="headerlink" title="22、塞维利亚画派作品"></a>22、塞维利亚画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFKkmh1WoVO2Sruy4LVZ6PJBZedFZC8nVhxvEFWN1oZM44Iva1G0Ya0Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：镜前的维纳斯 委拉士贵支 1656年 布面油画 112.5×177厘米 伦敦国家画廊藏。</p>
+<p>委拉斯贵支，1599年6月6日生于塞维利亚，是塞维利亚画派杰出的代表。这幅《镜前的维纳斯》是目前我们所能见到的委拉士开兹唯一一幅女性裸体绘画。女子裸体绘画在17世纪封建专制的西班牙是极其罕见的，这幅画标明了17世纪西班牙艺术家人本精神的觉醒。画家以充满节奏感的流动线条，塑造了女性人体美，如果以维纳斯身体环视一周，她的曲线起伏变化宛如一首旋律美妙的乐曲，上身高亢有力，下身平和舒缓。大师素来善用透明凝练的色彩和精到的笔触去描绘复杂的肌肤变化，细嫩的肉体富有勃勃生机，充满了青春气息。这是画家对人类自身美感的赞颂。</p>
+<h4 id="23、古典主义作品"><a href="#23、古典主义作品" class="headerlink" title="23、古典主义作品"></a>23、古典主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFtBEBhMnoWtpAZj81C2GibHXZnYQiaD6KQaoMp3jKZ4t9pgLxE4T8dApg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：阿卡迪亚的牧人 普桑　作于1638～1639年　油画 85×121厘米 现藏巴黎卢浮宫。</p>
+<p>普桑（1594－1665年)是17世纪法国古典主义绘画的奠基人。这一幅著名的《阿卡迪亚的牧人》含义较晦涩，一直是美术史上莫测高深的难解作品。“阿卡迪亚”，即古代传说中一个世外桃源式的乐土。画上展现一块宁静的旷野之地，和煦的阳光照在仅有几棵荒疏林木的墓地前；背景是一片明净的蓝天。四个牧人，头戴花冠，各拿牧杖，正围在一块墓碑前在研读着铭文。一个连腮胡须的牧人跪着读出碑上铭文，并回过头来向右侧的一个女牧人说着什么，石上的拉丁铭文是:“即使在阿卡迪亚也有我。” 据美术史家的解释，这里的”我”，是指”死神”。那末，铭文的意思似乎是说: “在美好的乐土里，死也是不可避免的。”显然，这是一种“风光虽好，人生苦短”的感叹。我们从左侧一个伏在墓顶上的牧人的表情看，他低着头，似有缅怀之情，与左边站立着的女牧人形成对比。女牧人身着黄衣蓝裙，是全画最跳突的色彩。这个女性形象费人猜思，据说，她是美好人生的象征。她虽含颌垂首，默默倾听着铭文，却给人以一种抚慰感。疑虑与抚慰，惆怅与哀思，围绕着一个人生的哲理问题,让人紧紧思索。</p>
+<h4 id="24、洛可可艺术作品"><a href="#24、洛可可艺术作品" class="headerlink" title="24、洛可可艺术作品"></a>24、洛可可艺术作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFA7eQb6KWlsdwBiaSRp5lDnkTYD6sQRgqTuqt61wQhOCK4n5icQibYRcZg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：路易斯·莫菲的画像。</p>
+<p>这是画家布榭(1703-1770)在18世纪下半叶洛可可形式的最高峰期的作品。裸露的年轻女性有着粉红色泽的肉体，以一种具有挑逗性的姿势俯趴在丝绒沙发上，这幅作品被视为情色艺术的典范，而画中女主角本人在作为布榭的模特儿两年之后(1751-1752)，因画作送给当时的法王路易十五而于1753年成为路易十五的情妇。</p>
+<h4 id="25、新古典主义艺术作品"><a href="#25、新古典主义艺术作品" class="headerlink" title="25、新古典主义艺术作品"></a>25、新古典主义艺术作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFFAsqgrw9ABqrNqrR2YVQZY8YH0Itj5ibUcSm1ibKYLRUx8YFLGXK9hjg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：普赛克第一次接受爱神之吻 热拉尔 1798年 布油彩 186cm×132cm  巴黎卢浮官藏</p>
+<p>弗朗索瓦·热拉尔（1770-1837）是法国新古典主义绘画的杰出代表。在这幅作品中，他很好地发挥了描绘人体的长处。画中描绘了维纳斯之子厄洛斯前往普赛克处，一个国王漂亮的女儿，与她幽会的情景，画上所描绘的正是初吻的瞬间。古典主义绘画有三大特点：极端严谨的素描，饱满而富于装饰性的色彩，线条流畅的对称性构图。就此来看，这幅作品已经具备了这三点。</p>
+<h2 id="五、十九世纪"><a href="#五、十九世纪" class="headerlink" title="五、十九世纪"></a>五、十九世纪</h2><h3 id="浪漫主义画派"><a href="#浪漫主义画派" class="headerlink" title="浪漫主义画派"></a>浪漫主义画派</h3><p>19世纪初至30年代在法国兴起。该派摆脱了当时学院派和新古典主义美术的羁绊，采用现实生活、中世纪传说和文学名著为题材，偏重于发挥艺术家自己的想像和创造。画面色彩热烈，笔触奔放，富有运动感。代表人物有籍里柯，德拉克洛瓦，卡尔波等。</p>
+<h3 id="批判现实主义"><a href="#批判现实主义" class="headerlink" title="批判现实主义"></a>批判现实主义</h3><p>19世纪30年代首先在法国、英国等地出现的文学思潮，以后波及俄国、北欧和美国等地，成为19世纪欧美文学的主流，也造就了近代欧美文学的高峰。由于现实主义文学具有强烈的社会批判性，高尔基称之为“批判现实主义”。现实主义是国际关系中的主流理论，它也是一个多义且有争议的概念。虽然现实主义的批评者和支持者经常将其视为一个统一的思想整体，但实际上，现实主义并不是一个单一或统一的理论。代表画家有库尔贝(1819-1877年)，卢梭，科罗，米勒，杜米埃等。</p>
+<h3 id="巴比松画派"><a href="#巴比松画派" class="headerlink" title="巴比松画派"></a>巴比松画派</h3><p>19世纪产生于法国。巴比松系巴黎近郊的一个村庄。1848年，以特奥陀·卢梭为首的部分青年画家因不满学院派的艺术和官方沙龙审查制度，先后来此定居作画。他们以农民生活、农村风景为题材，主张走出画室，“回到自然”。作品具有真实、朴素、田园诗般的风格。代表人物还有米勒、杜普雷等。</p>
+<h3 id="印象画派"><a href="#印象画派" class="headerlink" title="印象画派"></a>印象画派</h3><p>19世纪末期流行于法国。名称源于1874年评论家路易·勒鲁瓦对莫奈所作《日出印象》一画的嘲笑而来。该派把光和色看作画家追求的主要目的，强调画家应该走出画室，面对真实的自然物象进行写生。代表人物有莫奈、毕沙罗、西斯莱、雷诺阿、德加等。</p>
+<h3 id="新印象画派"><a href="#新印象画派" class="headerlink" title="新印象画派"></a>新印象画派</h3><p>也称“点彩派”。19世纪末从法国印象画派发展而来。该派认为印象画派表现光色效果的方法不够严格，主张用不同的色点排列组合作画，具有镶嵌装饰画的效果，但画法机械。代表人物有修拉、西涅克等。</p>
+<h3 id="后印象画派"><a href="#后印象画派" class="headerlink" title="后印象画派"></a>后印象画派</h3><p>19世纪末20世纪初流行于法国。他们反对印象画派的客观主义表现和片面追求外光与色彩，强调主观感受的表达，重视形和构成形的线条、色块和体积。代表人物有塞尚、凡·高、高更等。</p>
+<h3 id="纳比派"><a href="#纳比派" class="headerlink" title="纳比派"></a>纳比派</h3><p>法国的艺术社团，1891年出现于巴黎，其主要成员是巴黎朱利安美术学院的学生。这是一个为期很短的艺术运动，主要参加者是法国的画家和雕塑家。纳比派的主要理论家德尼，将纳比派的特色归纳为两种变形的理论：客观的变形和主观的变形。主要成员有塞律西埃、德尼、波纳尔、鲁塞尔、维亚尔、朗宋和瑞士画家瓦洛东等。</p>
+<h3 id="柏林分离派"><a href="#柏林分离派" class="headerlink" title="柏林分离派"></a>柏林分离派</h3><p>19世纪末由德国柏林官方艺术组织中分离出来的美术家联盟。1898年柏林美术学院以利贝曼为首的十一人社与其他组织共同组成了柏林分离派。他们极力推崇法国现实主义和印象主义绘画，以新的艺术目标与学院派和官方艺术相抗衡。其创作活动一直延续到1914年。代表画家为利贝曼。</p>
+<h3 id="象征主义"><a href="#象征主义" class="headerlink" title="象征主义"></a>象征主义</h3><p>十九世纪末叶在法国兴起的颓废主义文艺思潮中的一个主要流派。其理论基础是主观唯心主义，认为现实世界是虚幻的﹑痛苦的，而”另一世界”是真的﹑美的。要求用晦涩难解的语言刺激感官，产生恍惚迷离的神秘联想﹐形成某种”意象”，即所谓”象征”。法国象征派诗人以马拉美﹑魏尔伦等为代表;戏剧方面以梅特林克为代表;美术方面以摩罗 、夏凡纳和雷东为代表。</p>
+<h3 id="拉斐尔前派"><a href="#拉斐尔前派" class="headerlink" title="拉斐尔前派"></a>拉斐尔前派</h3><p>19世纪中叶出现于英国的画派。认为绘画艺术至拉斐尔时盛极而衰，故企图复兴拉斐尔以前的艺术以振兴英国画坛。其绘画题材多为神话传说、圣经故事及内容严肃的文学作品。画风严谨、细致。代表人物有罗赛蒂、亨特、密莱斯、伯恩·琼司等。 </p>
+<h3 id="哈得逊河画派"><a href="#哈得逊河画派" class="headerlink" title="哈得逊河画派"></a>哈得逊河画派</h3><p>美国风景画派。以纽约为基地,活跃于1820～1880年间。18世纪的美国人大部分时间都忙于在荒野奋斗以求生存。到了19世纪，他们在这种斗争中获得了胜利，于是对大自然的一种怀旧和浪漫的情绪便油然而生，这样，风景画开始在美国流行。一批以哈得逊河沿岸风光为题材的风景画家被称为“哈得逊河画派”，这标志着美国美术开始摆脱欧洲的影响，逐步显露出自己的品格。代表画家科尔，道蒂，杜兰德，布莱克洛克等。</p>
+<h3 id="巡回展览画派"><a href="#巡回展览画派" class="headerlink" title="巡回展览画派"></a>巡回展览画派</h3><p>19世纪末至20世纪初俄国现实主义画家团体，以在俄国各大城市举行美术展览活动而著名。受别林斯基、车尔尼雪夫斯基等人的美学观点影响，不少作品反映了俄罗斯人民的生活。代表人物有列宾、克拉姆斯柯依、苏里柯夫等。</p>
+<h3 id="十九世纪各艺术流派作品："><a href="#十九世纪各艺术流派作品：" class="headerlink" title="十九世纪各艺术流派作品："></a>十九世纪各艺术流派作品：</h3><h4 id="26、浪漫主义画派作品"><a href="#26、浪漫主义画派作品" class="headerlink" title="26、浪漫主义画派作品"></a>26、浪漫主义画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFcQ6pqqtib8fUeRHmjwQUiabMtp9uia2tPKXvXw0wu1QcvJiagt6NRKIlTg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：但丁之舟 德拉克洛瓦 1822 油画 189 x 246cm</p>
+<p>24岁的德拉克洛瓦，以但丁的《神曲》为题材创作了《但丁之舟》，直接向学院派挑战。在这幅画中，画家以浪漫主义手法描绘了但丁在维吉尔的引导下游地狱。在地狱里的斯谛吉河中浸透着一群曾经在人世间犯下罪行的人的灵魂，他们被罚在污泥浊水中无休止地互相咆哮、互相斗殴，看到但丁的小舟，他们个个竞相争着求生，踩着别人往船上爬，在这群罪恶的灵魂中有个但丁的仇人，想请但丁搭救他免受黑暗之苦，被维吉尔又推到河中。这些灵魂在人间时妄自尊大、罪行累累，无善可录，所以死后他们的灵魂还在这里咆哮如雷，他们中有许多自命不凡的大人物，将同样像蠢猪一样躺在这阴暗的地狱里受苦受难，遗臭万年。这幅画表达了悲剧性的主题和画家的民主思想，说明行恶者必然受到惩罚，罪恶深重的魔鬼们如果有求生的欲望，也必然遭到拒绝。</p>
+<h4 id="27、批判现实主义作品"><a href="#27、批判现实主义作品" class="headerlink" title="27、批判现实主义作品"></a>27、批判现实主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1E8quPqf7Ziaw9jLF1RSibxvGTcSC3PgIkKndicY4HqMubJQ8SwaYVA2cg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品名称：石工 库尔贝 1849年 布面油画 450×541.5厘米 私人收藏 </p>
+<p>1849年11月20日库尔贝给友人的信中提到：“我乘了我们的四轮马车，到梅齐埃尔附近的圣·但尼宫去。在路途中我停下来看了一下两个在路旁打石头的工人。比这更充分地表现出贫困的场面，是不大容易碰见的。”后来画家邀请了两位贫民到自己的画室里当模特儿，创作了《石工》。它是现实生活中最底层社会劳苦人的真实写照。《石工》原藏德累斯顿美术馆，1945年被烧毁，如今只留下了一些印刷品。</p>
+<h4 id="28、巴比松画派作品"><a href="#28、巴比松画派作品" class="headerlink" title="28、巴比松画派作品"></a>28、巴比松画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFdqqL99vO33ooUJ1icXZ3lkBxgILcyHeJNfXLANJLfAQlM8PTam8EzBA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：种苹果树的夫妇 米勒 1861-1862年 82.5x101.3cm 布 油彩 波士顿美术馆</p>
+<p>这是法国北部金色的秋天，一对农民夫妇正在田间整理他们的土地，画面由金黄与赭红两种颜色揉和在一起，使大地和原野呈现为一种迷人的色彩。男人头戴一顶褐色粘帽弯腰侧着身子，双手握着一枚撅头在刨地，他的两条腿扎在泥土上用着力气。女人站在男人的右边面朝土地，她头上缠着一条灰色丝巾，使她脸部的神情宁静而安祥，女人的那只右手伸向男人撅头在刨地的位置，泥土好像板结的很硬。他们的身后站立着两棵树，树下有一个圆形的条筐，筐沿边搭着一件深色衣服，筐里这对农民夫妇的婴儿正在睡梦中。树下还有一头灰色的毛驴，它竖着耳朵在倾听什么？而不远处的四棵小树金黄着远方若隐若现的村庄，使天空的水蓝和灰白的云诗意而明亮。</p>
+<h4 id="29、印象画派作品"><a href="#29、印象画派作品" class="headerlink" title="29、印象画派作品"></a>29、印象画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1gt1j7yxEicPRibHMtLPNhAia6eQwol8zaFsiba9P5eTVGiah6wmvdYFGu8A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：午餐 莫奈 1873 年 油彩画布 162 x 203 cm 法国巴黎奥塞美术馆藏</p>
+<p>莫奈是印象派代表人物和创始人之一</p>
+<p>这幅画细致精妙，色泽美丽，像一首歌颂快乐的赞美诗，其中有他最爱的人、事、物。走在背景里瘦长的白色身影是莫奈的妻子，坐在草地上是他的儿子。花团锦簇、佳肴美酒，的确合乎莫奈典型中产阶级出生的背景。此画在1876年参加了第二届印象派画展后由卡玉伯特买下，其后遗赠给了国家。</p>
+<h4 id="30、新印象画派作品"><a href="#30、新印象画派作品" class="headerlink" title="30、新印象画派作品"></a>30、新印象画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1LVIgkXicoIO1n17dOkt693js3ru50vdWcO7qhVzLHQS9nP367P8wkXQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：鲁安涅尔浴场 修拉 1884年 油画</p>
+<p>修拉是新印象画派（点彩派）的创始人。《安涅尔浴场》这是确立了以”点彩”为表现手法的画家修拉的第一部大作。此作品描绘了在巴黎西部阿尼埃尔一带塞纳河里享受沐浴之乐的人们。当时二十五岁的修拉探求出一种新的技法–点彩法，这种点彩技巧是将几种原料并列，但并非直接在调色板上调色，而是利用人的直觉经由大脑所转换的多种颜色的基点，在观赏者眼中呈现出某种色彩。在这幅画中虽尚未确立此种点彩技巧，但堪称为所谓新印象派宣言的历史性作品。1884年，修拉以《安涅尔浴场》参加官方沙龙，被评选委员会定为落选作品。遭到拒展后的修拉决定举办独立派沙龙展。同年6月，修拉展出了《安涅尔浴场》，并得到了保罗·西涅克的赞赏。</p>
+<h4 id="31、后印象画派作品"><a href="#31、后印象画派作品" class="headerlink" title="31、后印象画派作品"></a>31、后印象画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1s1Yl8UUdkKk3WsCKSmLibibD9YhZyzMO8alwlNBcYFHy9xYWNA85HUBA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：夜晚的咖啡馆—外景 凡高 1888年 油彩 81*65.5公分 ，纽哈芬耶鲁大学艺廊。</p>
+<p>凡高是后期印象派的代表人物。这是他的晚期作品，用了他最喜欢的蓝色与黄色作为主基调。很容易让人联想到《星空》。不同的是，画中的夜晚并没有给人压抑之感，而是多了几分和谐欢畅。那时梵高的心情应该是自由快乐的，暂时忘却了生命的孤独。蓝色与黄色向来是梵高的最爱，这两种对比色，一个诉说着恬静的心情，一个代表着喧闹的气氛，在这幅画中，即便静谧的蓝色夜晚将至，但由鹅卵石铺成的广场，在黄色调的灯光下，依旧展现着人们的欢乐与活力。本幅画的笔触相当准确，这是梵高细心观察的结果。黄橙的灯光和深蓝的夜空相互对比，视线沿着咖啡棚和座位向后延伸，使画面产生纵深感。梵高曾说这是一张不用黑色的夜景图，他成功的运用色彩表现了夜间户外写生的效果。</p>
+<h4 id="32、纳比派作品"><a href="#32、纳比派作品" class="headerlink" title="32、纳比派作品"></a>32、纳比派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1nmxaVLxJBFGOxcz9NYbaa34MEm7PZaDn7iciaBGyQ44K1eTvVgfWSTeQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：逆光的裸体像 波纳尔 1908年 124×109cm 比利時布魯塞爾皇家美術館。</p>
+<p>波纳尔（1867-1947 ）是纳比派代表画家，以色彩而闻名，被誉为20世纪最伟大的色彩画家之一。1892年他与好友德尼、塞鲁西叶、维亚尔、鲁塞勒等组织了“纳比”社团。1893年底，26岁的波纳尔在街上邂逅并认识了24岁无依无靠的玛尔泰，成了他的朋友和模特，并于1925年结婚。著名的《逆光的裸体像》等“浴女”系列，就是以玛尔泰为模特的。在这些作品中，波纳尔借鉴了日本浮世绘的构图方式，在色彩方面巧妙使用了补色技巧，并着意于室内光线的动态和明暗变化，在闪烁的光线中呈现出美的世界。</p>
+<h4 id="33、柏林分离派作品"><a href="#33、柏林分离派作品" class="headerlink" title="33、柏林分离派作品"></a>33、柏林分离派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1Iibib796764QRZ5d6lwSkkcZd8ticcPv90geXIxexZrrZ2jichMo9nBCgw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：慕尼黑的啤酒花园 利贝曼 1884年 布油彩 94.6x68.5cm 慕尼黑新绘画馆。</p>
+<p>利贝曼（1847-1935）是德国具有代表性的印象派画家，也是柏林分离派中的重要成员。在《慕尼黑的啤酒花园》中运用印象派的观察和表现方法，直接描绘这一风俗场面中的人物活动，以及透过树木枝叶的空隙洒在人群中的阳光，具有真实生动感和阳光感。</p>
+<h4 id="34、象征主义作品"><a href="#34、象征主义作品" class="headerlink" title="34、象征主义作品"></a>34、象征主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK10foWl1psM8DmT0WrAichibVKztUxEicVpo9gWYdPHvB5tiaE6rjH0UKhUA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：海边的年轻姑娘们。作者夏凡纳(1824-1898年)出生于法国里昂，法国象征主义代表人物。</p>
+<p>这是幅著名的人体肖像画。画中三个年轻姑娘在海边，一位站着的姑娘面朝大海，手提长发，亭亭玉立，优雅飘逸。坐着的二位姑娘身心放松又若有所思。整幅画给人以一种梦幻的、充满诗意的意境。</p>
+<h4 id="35、拉斐尔前派作品"><a href="#35、拉斐尔前派作品" class="headerlink" title="35、拉斐尔前派作品"></a>35、拉斐尔前派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1f3ArJzWqWdseYVRI9YoLjib9bicXLaRibTB48xZkBYg7Z90NIcRQECFOw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：受胎告知 罗赛蒂 1849-1850年 布油彩 72.6x41.9cm 伦敦泰特美馆</p>
+<p>丹特·加布里埃尔·罗赛蒂 (1828-1882年)是19世纪英国拉斐尔前派的三位核心成员之一。《受胎告知》是传统圣经绘画题材。画的是天使长加伯列手持花枝来到圣母玛丽亚面前，祝福她已身怀基督。玛丽亚不安地问天使，自己还是个处女，怎么会怀孕？天使说这是圣灵的力量所致。罗赛蒂在这幅画中描绘了玛丽亚的不安和紧张神态，既写实又隐含神秘感。画面以白色为基本色调显得洁静幽秘，间以蓝红两色，使画面朴素中有变化，具有特殊的艺术魅力。画家的妹妹英国著名诗人克里斯蒂娜 ·吉奥尔吉娜· 罗塞蒂是这画里的圣母玛丽亚的模特，当年17岁。</p>
+<h4 id="36、哈得逊河画派作品"><a href="#36、哈得逊河画派作品" class="headerlink" title="36、哈得逊河画派作品"></a>36、哈得逊河画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1S8YtxwtO35Sako4YVTKDR7qGxoJXyfkRjJeAibeEkCXmveLPHNBXuMQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：树林中的家。科尔作于1847年，现藏于北卡州Reynolda House, Winston-Salem。</p>
+<p>科尔（Thomas Cole，1801-1848），是“没上过学”的一位美国画家，哈得逊河画派代表人物。他在1825年，随父母迁徙到纽约，纽约位于哈德逊河的入海口。他在纽约卖出了三幅绘画给George W. Bruen 先生以后，后者资助他前往哈德逊河上游的河谷地区逗留了一个夏天，绘制当地的风景。他的这些风景画登报后，引起艺术界关注。此后，科尔成为一个著名的风景画大师。这幅《树林中的家》给人世外桃源的感觉。</p>
+<h4 id="37、巡回展览画派作品"><a href="#37、巡回展览画派作品" class="headerlink" title="37、巡回展览画派作品"></a>37、巡回展览画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFicOw0mS6lEOmhA5zUapAF3efLiaywcEFbcsdeICP0XTibmkicKTvibYfDWg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：托尔斯泰在耕地 列宾 1887年 布面油画 27.8x40.3cm 莫斯科特列恰科夫美术博物馆</p>
+<p>列宾（1844-1930）是俄国19世纪末最伟大的现实主义画家，巡回展览画派的主要成员。托尔斯泰（1828-1910）是俄国最伟大的文学家，这幅画中的托尔斯泰已经59岁，这位文学大师埋头躬耕的形象，似乎在向世人证明，劳动是有益的快乐的，强有力的劳动培养强有力的精神。</p>
+<h2 id="六、二十世纪"><a href="#六、二十世纪" class="headerlink" title="六、二十世纪"></a>六、二十世纪</h2><h3 id="立体主义"><a href="#立体主义" class="headerlink" title="立体主义"></a>立体主义</h3><p>1908年产生于法国，追求一种几何形体的美，追求形式的排列组合所产生的美感。把三度空间的画面归结成平面的、两度空间的画面，着力表现有直线、曲线所构成的轮廓、块面堆积与交错的趣味和情调。人们以立体主义这一称呼来给毕加索、布拉克、格里斯和莱热在1907年到1914年期间的艺术探索性创作命名。</p>
+<h3 id="野兽主义"><a href="#野兽主义" class="headerlink" title="野兽主义"></a>野兽主义</h3><p>1905年产生于法国松散的美术社团。野兽主义画派吸收了东方和非洲艺术的表现手法，创造一种有别于西方古典绘画的疏、简的意境，有明显的写意倾向，同时追求更为主观和强烈的艺术表现。马蒂斯是野兽主义的领袖。</p>
+<h3 id="表现主义"><a href="#表现主义" class="headerlink" title="表现主义"></a>表现主义</h3><p>注重主观情感和内心世界的揭示，不拘泥于视觉特征的真实。它是20世纪初期绘画领域中特别流行于北欧诸国的艺术潮流。代表画家是荷兰人凡·高、法国人劳特累克、奥地利人克里姆特、瑞士人霍德勒和挪威人蒙克。</p>
+<h3 id="维也纳分离派"><a href="#维也纳分离派" class="headerlink" title="维也纳分离派"></a>维也纳分离派</h3><p>是在奥地利新艺术运动中产生的著名的艺术家组织。1897年，在奥地利首都维也纳的一批艺术家、建筑家和设计师声称要与传统的美学观决裂、与正统的学院派艺术分道扬镳，故自称分离派。其口号是“为时代的艺术–艺术应得的自由”。代表人物有克里姆特、席勒、霍夫曼等。</p>
+<h3 id="超现实主义画派"><a href="#超现实主义画派" class="headerlink" title="超现实主义画派"></a>超现实主义画派</h3><p>1924年产生于法国。由法国作家布雷东发起。在巴黎先后发表两次《超现实主义宣言》，形成了超现实主义画派。认为“下意识的领域”，如梦境、幻觉、本能等是创作的源泉，主张从潜意识的思想实际中求得“超现实”。作品主要描写潜意识领域的矛盾现象，把生与死、过去与未来、真实与幻觉统一起来，具有恐怖、离奇、怪诞的特点。代表人物有米罗、达利、马格利特、唐吉等。</p>
+<h3 id="达达主义"><a href="#达达主义" class="headerlink" title="达达主义"></a>达达主义</h3><p>是1916年至1923年间出现于法国、德国和瑞士的一种艺术流派。达达主义是一种无政府主义的艺术运动，它试图通过废除传统的文化和美学形式发现真正的现实。达达主义由一群年轻的艺术家和反战人士领导，他们通过反美学的作品和抗议活动表达了他们对资产阶级价值观和第一次世界大战的绝望。代表人物杜尚、恩斯特等。“达达”一词，意即孩子不明确的呀语，没有什么意义。</p>
+<h3 id="抽象主义"><a href="#抽象主义" class="headerlink" title="抽象主义"></a>抽象主义</h3><p>20世纪初产生于西方国家的美术流派。他们反对用具体形象反映现实，主张以色彩、线条、形状等抽象形式来表现艺术家的主观心灵。一般分为两大体系：一为几何抽象，即画面运用抽象的几何形体或线条构成。代表人物有俄国的马列维奇、荷兰的蒙德里安。一为抒情抽象，用色彩、线条、各类形体的构成直接抒发感情。代表人物有俄国的康定斯基。</p>
+<h3 id="行动画派"><a href="#行动画派" class="headerlink" title="行动画派"></a>行动画派</h3><p>20世纪产生于美国。抽象表现主义艺术的重要分支。创作时，以画布铺地，画家在其上滴洒颜料来显示作者感情的自发冲动和强烈的动作效果为特征，亦称“动作画派”。代表画家有波洛克等。</p>
+<h3 id="波普艺术"><a href="#波普艺术" class="headerlink" title="波普艺术"></a>波普艺术</h3><p>又称“新写实主义”或“新达达主义”。20世纪60年代风行于欧美的艺术流派。多以社会上流行的形象(如各种商业广告、电视、连环漫画中的人和物)或戏剧性的偶然事件作为表现内容。使用材料包括各种塑料、霓虹灯和发光颜料等。代表人物有美国的劳申伯格、 沃霍尔，英国的汉密尔顿等。</p>
+<h3 id="照相现实主义"><a href="#照相现实主义" class="headerlink" title="照相现实主义"></a>照相现实主义</h3><p>又称“超级现实主义”。20世纪60年代兴起于美国的艺术流派。主张艺术的要素是“逼真”和“酷似”，反对艺术家离开客观对象的任意发挥。画家作画大多利用或者临摹照片，或用幻灯机将底片投射到画布上，然后在投影上着色。作品尺幅巨大，注重表现生理细节。所作雕塑与真人一般大小，涂以肤色，配以衣服道具，极度逼真。代表人物有查克·克洛斯、汉森等。</p>
+<h3 id="后现代主义"><a href="#后现代主义" class="headerlink" title="后现代主义"></a>后现代主义</h3><p>是一场发生于欧美60年代，并于70与80年代流行于西方的艺术、社会文化与哲学思潮。其要旨在于放弃现代性的基本前提及其规范内容。在后现代主义艺术中，这种放弃表现在拒绝现代主义艺术作为一个分化了文化领域的自主价值，并且拒绝现代主义的形式限定原则与党派原则。其本质是一种知性上的反理性主义、道德上的犬儒主义和感性上的快乐主义。后现代主义的特点可以归纳为五个基本点：矛盾、不连续、随意、无节制、流程短。后现代主义虽然与现代主义有背道而驰的一面，但是本质上是现代主义的继续与发展。代表索扎斯、芭芭拉•克鲁格。</p>
+<h3 id="二十世纪各艺术流派作品："><a href="#二十世纪各艺术流派作品：" class="headerlink" title="二十世纪各艺术流派作品："></a>二十世纪各艺术流派作品：</h3><h4 id="38、立体主义作品"><a href="#38、立体主义作品" class="headerlink" title="38、立体主义作品"></a>38、立体主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFqIWTgandYNkIa9iaY3GZIicHdYibQQVibhFxKfrdaxWJBRic9u4ic7gXbcsg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：亚威农少女 毕加索 1907年 油画 244×厘米 纽约现代艺术博物馆藏。</p>
+<p>毕加索（1881年-1973年）是现代艺术的创始人，立体主义绘画的主要代表。这幅画，可谓第一件立体主义的作品。画面左边的三个裸女形象，显然是古典型人体的生硬变形；而右边两个裸女那粗野、异常的面容及体态，则充满了原始艺术的野性特质。在这幅画上，不仅是比例，就连人体有机的完整性和延续性，都遭到了否定。但这种破坏却是相当地井井有条：所有的东西，无论是形象还是背景，都被分解为带角的几何块面，这些碎块并不是扁平的，它们由于被衬上阴影而具有了某种三度空间的感觉。</p>
+<h4 id="39、野兽主义作品"><a href="#39、野兽主义作品" class="headerlink" title="39、野兽主义作品"></a>39、野兽主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseF4eNSUbPS8NADAoSpaRSM13S7ZJNicZLMRH4icF0wCcanYSic8UvBsTkFA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：河边浴女 马蒂斯 1909-1916 芝加哥艺术学院</p>
+<p>马蒂斯(1869—1954)二十世纪最伟大的善于运用色彩的画家，野兽派的代表人物。这幅画是芝加哥艺术学院的镇院之宝，也是艺术家花了7年时间创作完成的（1909-1916）。马蒂斯曾说过“这是他职业生涯最重要的作品之一。”亚历山德罗说，“我们深入研究了这幅作品，终于开始明白他所说的意味着什么，画作本身就是一部编年史。”</p>
+<h4 id="40、表现主义作品"><a href="#40、表现主义作品" class="headerlink" title="40、表现主义作品"></a>40、表现主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1veEFMV11puE3EcQg4StmjPEos95n32PNGeu9icbvVibTdPatibTJlg54A/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：红磨坊舞会。作者劳特累克 (1864-1901年)出生于法国阿尔比，是表现主义代表人物</p>
+<p>他用类似杜米埃的讽刺造型笔调描绘这一“乐园”场面。在以绿色为主调的环境衬托下红衣女子显得鲜明突出，一群绅士活跃其中。画面中心一对男女翩翩起舞，那舞男的身影随意屈伸跳动着，沉醉在半是幽默、半是纵情恣肆的状态中；舞女翘起腿，提起长裙踢踏着，扭摆着，充分展现出放浪形骸的姿情，但是他们的面部表情却十分呆板，好像疯狂的动作只是一种习惯反应或是一种下意识的需要。各式男女在这一自由的天地里放纵狂舞中获得一点精神麻木和舒展。</p>
+<h4 id="41、维也纳分离派作品"><a href="#41、维也纳分离派作品" class="headerlink" title="41、维也纳分离派作品"></a>41、维也纳分离派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1kNMn3wcQhtNMh8bibUr62KS8ycomtWlYrVgicxsJUzKIjXJXUWPDu8Jw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：女人的三个阶段</p>
+<p>作者克里姆特(1862-1918年) 是奥地利画家，奥地利维也纳分离派的领袖人物，他在创作时充分发挥了写实造型和装饰风格，使具象和抽象这两种表现方法结合得合情合理,天衣无缝。这幅画将女人的一生——幼年、青年和老年三个阶段浓缩在一幅画中,这是一首不可逆转的人生三部曲，表现出画家对命运的感伤。</p>
+<h4 id="42、超现实主义画派作品"><a href="#42、超现实主义画派作品" class="headerlink" title="42、超现实主义画派作品"></a>42、超现实主义画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFia3Hbvt7EUKvW3r9hZwYr0XhBBvbaXeqYm1wjuLpZ1amzQRJLePg0lg/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：哥伦布发现新大陆 达利 1958-1959年 布油彩 410x284cm 萨尔瓦多·达利博物馆。</p>
+<p>达利（1904年-1989）是西班牙超现实主义画家。这幅画不是一幅实景，是一种意象，是人在梦中常常不够具体的意象。这种超乎现实的真实，令观者在欣赏中感到迷惑难解。这里没有时间与空间的制约。为了让人感到似是而非，他采取极端的自然主义手法刻画每一个细节，如这幅画上提拽木船的古代青年，旗幡上带有现代明星头像的圣母（据说是他夫人的形象），浸入水中的侧面青年像，都是非常真实的。素描表现是细腻的，用色是恰到是处的。细致入微与荒诞不经纠缠在一起，一些内容几乎达到了以假乱真的地步。气氛独特，令人不可捉摸。这就是画家所要达到的目的。</p>
+<h4 id="43、达达主义作品"><a href="#43、达达主义作品" class="headerlink" title="43、达达主义作品"></a>43、达达主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1Dvmibj1ByWWKKzrzWUnZQ0Tjjdic6DcEfjFSLELcs9IraWtvZUEOsv4Q/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：甚至新娘也被光棍汉们剥光了衣服 杜尚 1915—1923年 装置艺术（铅箔、银箔、油彩、玻璃）</p>
+<p>杜尚（1887-1968年）是二十世纪实验艺术的先驱，国际达达主义的领袖。杜尚认为：“绘画是视觉的艺术，而真正的艺术是大脑的艺术，或者说最终是大脑的艺术，而如果能用其他方法对大脑达到同样的刺激，产生同样的审美，为什么还要在画布上折腾呢？”杜尚是非功利的，不搞运动，不建派系，把艺术看作只不过是人生的一部分内容，他的否定一切是为了呈现一种自由的人生境界。所以，他可以花20年时间去下棋，也可以花8年时间完成一件作品，比如这件装置作品《甚至新娘也被光棍汉们剥光了衣服》。当然，剥光衣服的目的应当不是把新娘内裤上的“皮筋抽出来，拴到弹弓子上，打他们家玻璃”，尽管这件作品的别名是“大玻璃”。《甚至新娘也被光棍汉剥光了衣服》这个题目有点tricky，其实很简单：所有男人在脱光自己新娘的衣服之前都是光棍，所有新婚之夜，都是男人通过脱光自己新娘的衣服结束自己的光棍生涯。</p>
+<p>杜尚与裸女对弈</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1iccncYQH5bvS2BoopgQObL8MfNK7IWeg6iaaKIqiaSxhWJNO0UKEyC6RQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1963年10月18日，杜桑在洛杉矶帕莎迪那美术馆的回顾展上与一位20岁的裸体女学生夏娃·贝比兹对弈，背景是其装置作品《甚至新娘也被光棍汉们剥光了衣服》。</p>
+<h4 id="44、抽象主义作品"><a href="#44、抽象主义作品" class="headerlink" title="44、抽象主义作品"></a>44、抽象主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFviaMibofSEM0IwrkYYPAwiabNcqCDYhtJKpXibZnbVKSBW8LsqfGzOnibMw/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：构成第七号</p>
+<p>作者康定斯基（1866－1944），出生于俄罗斯，是抽象艺术的先驱。他在1913年创作的《构成第七号》可以称为是一支音乐狂想曲。这是他作品中画幅最大的一幅，也是超越他以往其他作品的杰出成就的作品之一，因此用 “ 狂想 ” 来形容也不为过。初看这幅画时，给人的感觉是异常迷乱，同时也可以感受到康定斯基构图的技巧，因为画面中有着无数的重叠和变化的布置。并且每一个形体都有着自己的法则，每一个法则又在这个整体中发挥着强大的冲击力，使画面本身充满着律动感，又如同一部伟大的交响乐。在画面中较为突出的是，画面中央出现的黑色的点和线，像旋风一样牵动着整个画面的色彩，具有强烈的倾向性。</p>
+<h4 id="45、行动画派作品"><a href="#45、行动画派作品" class="headerlink" title="45、行动画派作品"></a>45、行动画派作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK1dcL3ho4lXA9VQv3S0gW7a5xN4e6Y7k3JmW3EyasFibZZblQTftncNsQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：1948年，第五号（竞拍价1.4亿美元，世界上最昂贵的抽象艺术画）。</p>
+<p>作者波洛克（1912年－1956）是一位有影响力的美国画家以及抽象表现主义分支行动画派的主要代表人物。他把自己的作品题材解释为绘画自身的行动。他的创作并没有开始的草图，而只是由一系列即兴的行动完成作品。《1948 年，第五号》画面复合运用红、黄、白、黑等颜色，是波洛克“滴洒法”（ 即将颜色用笔或勺滴洒在画布上，运用各种材料入画）的代表作。画面在看似随意的泼洒中，狂野而富有张力的色彩线条有着自身的逻辑，隐藏着戏剧性的偶然效果，画家也在移动中即兴而刻意地编排着视觉音乐的节律。</p>
+<h4 id="46、波普艺术作品"><a href="#46、波普艺术作品" class="headerlink" title="46、波普艺术作品"></a>46、波普艺术作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/xGIXQ8eMuyR2MI1Y7DXHq4fEKeHYxqK12A6RdicH5qiaQ72vLJqpptTh50y5wJBvQVlHEtY73g9GUPdnI8seiavaA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：毛泽东</p>
+<p>作者沃霍尔（1928－1987）被誉为20世纪艺术界最有名的人物之一，是波普艺术的倡导者和领袖。上个世纪70年代，美国媒体上开始出现中国开国领袖毛泽东的头像及相关报道，安迪·沃霍尔以艺术家的敏锐嗅到一向对立僵硬的中美关系有所缓和，这个时期他大胆地创作了许多以毛泽东头像为题材的作品，取之于媒体的毛泽东肖像开始广泛地与不同媒材结合产生不同形式的作品，不久中美果真建立了外交关系。这幅作品在2006年纽约一场拍卖会中，李嘉欣绯闻男友刘銮雄以1730万美元折合1.3亿元人民币拍得。</p>
+<h4 id="47、照相现实主义作品"><a href="#47、照相现实主义作品" class="headerlink" title="47、照相现实主义作品"></a>47、照相现实主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFwUGbRia1HIQda3amXGA8gOHGNszuPm9fzPnzgic3JtNjPXb3nI8ibKEsQ/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：女人体</p>
+<p>作者查克·克洛斯(1940- ) 美国超级写实主义画家，照相现实主义的代表画家。他以人物肖像作为创作题材，他的肖像完全是照片的复制，不光是细致精确到极点，而且尺度非常大，当一个刻画精细而又尺幅巨大的肖像，突然出现在人们面前时，油然而生一种征服感。</p>
+<h4 id="48、后现代主义作品"><a href="#48、后现代主义作品" class="headerlink" title="48、后现代主义作品"></a>48、后现代主义作品</h4><p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/sM5SdPkqTeph33F3vMwhuEVWIdDAqseFm07fvPwcbmfricfMiaNM631wa18RGCatVOicqCQFg3cRysoONfYCWT1sA/640?wx_fmt=jpeg&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>代表作品：卡尔顿书架</p>
+<p>索扎斯(Ettore Sottsass，1917-2007) 是意大利著名设计组织——孟菲斯(Memphis)设计事务所的创始人之一，也是意大利著名的后现主义设计集团的成员之一。索扎斯设计的卡尔顿书架是后现代风格家具的代表作。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/83e5a52f/">2. 中国艺术史图鉴集（从仰韶文化到现当代）</a>
+            
+            
+            <a class="next" rel="next" href="/280c5cf7/">31. 20世纪世界重大事件记</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/83e5a52f/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/280c5cf7/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>8.3 最早的中国 | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">8.3 最早的中国</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">三月 8, 2015&nbsp;&nbsp;22:23:50</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        三月 8, 2015
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E5%8E%86%E5%8F%B2/">历史 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">4.5k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">15 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="中国文明溯源"><a href="#中国文明溯源" class="headerlink" title="中国文明溯源"></a>中国文明溯源</h2><h3 id="1-人类起源"><a href="#1-人类起源" class="headerlink" title="1. 人类起源"></a>1. 人类起源</h3><p>人类种族的起源，是一个很难弄清的问题。<strong>最早的文字记录出现在距今5000 ~ 6000年前</strong>，在此之前的事情，我们几乎无从得知。1871年，达尔文在《人类的由来》一书中首次提出人类起源于非洲的猜想，但当时并无任何实际证据。直到将近五十年后，考古学家在非洲发现古人类化石，基本证实这一猜想。（<strong>当前已发现最早的人类化石是在埃塞俄比亚，距今320万年前的“Lucy”。</strong>）然而，考古发掘所能获得的信息是非常有限的，神话传说更是不足为凭。直到近几十年来，分子人类学兴起，利用基因来分析人类起源、民族演化等问题，并与考古研究结合起来，取得了突破性进展，但仍有很多争议和谜团。</p>
+<p><font color=red>700万-500万年前，我们的先辈在非洲和黑猩猩分开了</font></p>
+<p>主流的观点认为，人类大约在700万 ~ 500万年前从非洲的猿类进化而来。早期的人类曾有不止一个物种，也不止一次走出非洲，而是多次上演“长江后浪推前浪，前浪死在沙滩上”的故事。最早走出非洲的原始人类是与今日我们不同的物种，并且在上百万年前就从非洲扩张到亚欧大陆 —— 例如<strong>直立人</strong>（旧称猿人，北京人和元谋人都属于这个人种）在200万～20万年前生活于亚洲和非洲，<strong>尼安德特人</strong>在40万 ~ 3.5万年前生活于欧洲 —— 但这些人种后来都灭绝了，我们今天的人类并不是他们的后裔，而是<strong>智人</strong>。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 20em;"
+         src="https://ihep.cas.cn/kxcb/kjqy/201708/W020170816378329788879.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         灵长目的额叶开始进化得更高级: 人科物种出现
+    </div>
+</center>
+
+
+<p><font color=red>25万年前，产生了我们的直系祖先：智人</font></p>
+<p>智人在大约40万 ~ 25万年前出现于非洲，25万年 ~ 15万年前演化成解剖学上的现代人类（称为晚期智人）。12万年前，开始有智人走出非洲进入两河流域，但他们似乎在8万年前消亡了。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://ihep.cas.cn/kxcb/kjqy/201708/W020170816378329786913.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         第一批人类（旧石器时代）
+    </div>
+</center>
+
+
+<p><font color=red>6万年前，智人再次走出非洲</font></p>
+<p>约6万年前，智人再次走出非洲，成功扩张到世界各地：他们大约是沿着印度洋北岸前进（当时的海平面比现在低一百多米，智人的前进路线很可能在今天的海面以下），经东南亚到达澳大利亚，然后在<strong>约5万年前进入中国南部</strong>，约4万年前进入欧洲，约3万年前到达日本，约1.4万年前跨过白令陆桥进入美洲，约1万年前到达大陆最远的角落：美洲最南端的巴塔哥尼亚。更不可思议的是，约4000年前，人类驾着独木舟把茫茫太平洋上的诸多岛屿都逐一征服。在这个宏伟的扩张过程中，智人把遇到的其它种群都消灭了，所以今天生活在世界上的所有人类都是智人。——在中国，距今10万年 ~ 4万年之间没有发现任何人类化石，很可能是直立人在智人到来之前就已灭绝。而在欧洲，尼安德特人与智人共存了一段时间，有可能是智人消灭了尼安德特人。（2010年发表的一项最新研究显示，现代智人基因中混有很少量的尼安德特人基因，表明智人走出非洲之后曾与尼安德特人发生小规模混血。）</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="http://www.kepuchina.cn/kpcs/ydt/kxyl6/201708/W020170815364103658068.jpg" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">         智人在澳大利亚登陆
+    </div>
+</center>
+
+
+<p><font color=red>基因研究</font></p>
+<p>考古发掘能够证实智人到达各地的时间，但我们需要更多工具来研究智人在扩张过程中的种族演化。直到数十年前，人们还把肤色、头发、相貌等作为区分人类种族的主要依据，但通过基因研究，我们发现实际情况并非如此。外表特征主要是为了适应不同地区的自然环境而形成的，并不能准确反映种族之间的差异：例如肤色棕黑的印度人可能与欧洲白人的基因非常接近，而同为黄皮肤的中国汉人与蒙古人的基因其实相距较远。</p>
+<p>分子人类学对基因的研究主要有两个途径：线粒体DNA（mtDNA）和Y染色体DNA（Y-DNA），前者通过母亲传给女儿，后者通过父亲传给儿子。对mtDNA的研究表明，今日所有女性的基因都可以上溯到15万年前的一个非洲女性（“线粒体夏娃”），而对Y-DNA的研究表明，所有男性的基因都可以上溯到6万年前的一个非洲男性（“Y染色体亚当”）。从他们为起点，根据DNA中的突变信息，可以把现存的人类划分成不同的类型。然而引人注意的是，在很多地方，线粒体类型（母系遗传）的分布状况与Y染色体（父系遗传）的并不一致。可以推测，这是由于人类扩张过程中发生种族替代，当强大种族打败弱小种族之时，他们把失败方的男性全部杀掉，而女性部分保留下来，从而造成这种现象。因此，Y-DNA的分布更能体现种族扩张的结果。</p>
+<p>研究者把Y-DNA的不同类型用字母表示：最先到达亚洲东部的一批人是C型（澳洲土著人、东北亚通古斯-蒙古族祖先，还有少量到达北美洲西部）和D型（印尼安达曼人、日本阿依努人、部分藏族人祖先）。他们曾经占领了广阔天地，但如今只在边远蛮荒地区留下少许残余，原因是更晚出现、肤色较浅、身材较高的另一批人打败了他们。这批后来者起源于约4.5万年出现在亚洲南部的F型，逐渐扩张到非洲以外的几乎所有大洲，并进一步分化成更多类型，其中的主要类型有：J型是中东闪族人（阿拉伯人、犹太人）的祖先；O型是大部分东亚、东南亚民族、以及太平洋上南岛民族的祖先（其中汉族和苗族、瑶族等都是以O3支型为主，而日、韩的O2支型比例较高）；Q型是美洲印第安人的主流，并少量存在于蒙古和西伯利亚；R型是原始印欧人，其后裔包括今天的绝大部分欧美白人、伊朗人和部分印度人。而在人类的老家非洲，仍保留着古老的A型（布须曼人）和B型（俾格米人），但较晚出现的E型成为主流，并且分化出诸多不同支型。这意味着其它大洲的人种和现存的A/B/E型非洲人有共同的祖先，但并不是由这些非洲人种演化来的。</p>
+<p>通过这样的反复分化、扩张和替代，<strong>原始的人类民族在距今1.2万年前便已基本成形</strong>。——值得一提的是，蒙古民族主要是C型，加上少量其它类型的混血，因此过去把汉族定义成蒙古人种的说法是不准确的，汉人与蒙古人的差距比与欧洲人的差距更大。</p>
+<h3 id="2-华夏溯源"><a href="#2-华夏溯源" class="headerlink" title="2. 华夏溯源"></a>2. 华夏溯源</h3><p>与碎片化的西方古典文明相比，华夏文明是独立发展起来的，并以惊人的连续性和稳定性绵延至今。然而，这个文明是如何起源的，却隐藏在迷雾之中。远古神话中有“三皇五帝”的说法，而从最早的文献《尚书》开始，夏商周三代一直被视为中国历史的正式起点。现代考古和基因研究为我们提供了更多线索，使我们能够在迷雾中探寻真相。</p>
+<p>由于青藏高原的阻碍，发源于非洲的智人主要从两个通道进入中国，一个是从东南亚进入中国南部，另一个是从中亚进入中国西北。通过对Y-DNA的研究分析，最先到来的很可能是C型，他们在4万多年前从东南亚出发，沿着太平洋海岸北上进入东西伯利亚，甚至少量到达北美大陆。大致同时期，一批中亚民族（可能以P型为主）也从北方扩张到蒙古和西伯利亚，进而演化成为Q型，然后远涉美洲，成为大部分印第安人的祖先。这两批人群都已进入今日中国境内，但现今华夏民族的主体不是他们，而是更晚一点的O型人群。</p>
+<p>O型人群在大约3万多年前出现于东南亚，他们分成两支北上：O1支型最早在3万年前就从华南进入中国东南沿海；O2支型大约2.5万年前从滇缅经川陕北上到黄河流域。此后一万多年里，地球处于末次冰盛期，这些古人的生活可能非常艰难，并被冰雪阻隔成多个族群。大约1.2万年前的冰期结束之后，东亚地区的人群迎来了爆发性增长，经过多次的大范围迁徙、融合，演变形成多个民族：今日汉族的主体是华夏民族，它是以黄河流域的北方族群（古汉藏人群）为主，融合了长江流域的南方族群（古南岛族群、古南亚族群）而形成；一支古汉藏人群进入青藏高原，与更早的D型融合成藏羌民族；一支古南岛人群从福建经台湾南下到菲律宾和马来群岛，进而远航到太平洋上，成为今日南岛民族；西南地区人群进入中南半岛，与原有居民混合演化成今日东南亚各民族；还有一部分现今已难以溯源的人群（冰期海平面比现在要低，渤海、黄海一带曾是陆地，现已被淹没）从东部沿海扩散至日韩，分别演变成日韩民族。得益于丰饶的自然环境，O型人群在东亚建立起繁荣的农业文明，也成为了世界上人口最多的族群。（从基因角度大致而言，北方汉族的Y-DNA以O2为主，O1比例很低；南方汉族也以O2为主，但O1明显增加；南岛民族以O1为主，日韩的O1、O2比例相对接近，东南亚的民族情况复杂，但总体以O型为主。）</p>
+<h3 id="3-史前文明"><a href="#3-史前文明" class="headerlink" title="3. 史前文明"></a>3. 史前文明</h3><p>华夏文明是古代世界规模最大的农业文明。考古研究表明，这一文明是由长江流域、黄河流域这两大区系的多个文化融汇而成。前者发明了种植稻谷，后者则是粟和黍等作物。</p>
+<p>中国史前文明按照考古年代主要分为旧石器时代、新石器时代、金石并用时代和青铜时代。</p>
+<h4 id="（1）旧石器时代"><a href="#（1）旧石器时代" class="headerlink" title="（1）旧石器时代"></a>（1）旧石器时代</h4><p>这个阶段包括传说中的<code>巢氏构木为巢</code>、<code>燧人氏钻木取火</code>、<code>伏羲和女娲</code>等时代。距今约98000到97000他们建立<code>伏羲罗奉政权</code>，成为黄河下游地区的氏族首领。</p>
+<p>这个时期的文化有：元谋人、蓝田人、北京猿人、大洞文化、金牛山文化、大荔人、马坝人、丁村人、柳江人、河套人、下川文化、山顶洞人等。</p>
+<h4 id="（2）新时器时代"><a href="#（2）新时器时代" class="headerlink" title="（2）新时器时代"></a>（2）新时器时代</h4><p>在该阶段出现了国家的萌芽，对应传说中<code>神农时期</code>。</p>
+<p>这个时期的文化有：上山文化、大地湾文化、仙人洞文化、磁山文化、裴李岗文化、仰韶文化早期、半坡文化、庙底沟文化、大溪文化、河姆渡文化、大汶口文化早期、城子崖文化、屈家岭文化等。</p>
+<p>在长江下游的吴越地区，目前已知最早的新石器文化是距今约11000 ~ 9000年的<strong>上山文化</strong>，已有稻作遗迹和陶器出土。距今约8000～5300年间，这里有河姆渡、马家、崧泽等文化，普遍种植稻谷，并蓄养猪、狗、水牛等牲畜，还有榫卯工艺的木结构建筑。</p>
+<p>黄河流域的早期发展略滞后于长江流域，但这里最终成长为中华文明的核心。发掘于在甘肃天水，距今约8000年至6000年前的<strong>大地湾文化</strong>，是黄河中游最早也是延续时间最长的旧石器文化和新石器时代文化，比广为人们所知的河南渑池仰韶村和陕西西安的半坡村遗址都要早，是华夏文明的来源之一。黄河流域已知最早的农业是距今8000 ~ 7000年前的<strong>裴李岗文化</strong>，出现了粟的种植。此后有多个文化同时兴盛，其中最重要的是中原-陕甘地区约7000 ~ 5000年前的<strong>仰韶文化</strong>，以及山东地区约6500～4500年前的<strong>大汶口文化</strong>，二者都以粟为主要作物，并能制作红陶和彩陶。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 35em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403242331529.png" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+        仰韶文化遗址
+    </div>
+</center>
+
+<h4 id="（3）金石并用时代"><a href="#（3）金石并用时代" class="headerlink" title="（3）金石并用时代"></a>（3）金石并用时代</h4><p><font color=red>距今约5300年前的良渚文化成为中国史前文化的最高峰。大约4500年前，从大汶口文化演变而来，替代仰韶文化的龙山文化在华北大地骤然兴起，和吴越地区璀璨的良渚文化遥相辉映。</font></p>
+<p>在该阶段出现邦国、刻骨文（早于甲骨文）等城市、国家和成熟的文字，对应传说中的<code>五帝时期</code>。</p>
+<p>这个时期的文化包括：仰韶文化晚期、大汶口文化晚期、红山文化、龙山文化、良渚文化、马家窑文化、齐家文化等。</p>
+<p>发展与长江下游太湖地区，距今约5300 ~ 4200年前的<strong>良渚文化</strong>是中国史前文化的最高峰，产生了大型城市和宫殿、陵墓，还有以玉器为标志的礼制，很可能形成了强大的王权国家。而从基因来看，良渚先民属于O1支型，它在今日汉族中的占比仅次于O2支型，尤其是浙沪一带比例相对较高。另外，与良渚大致同时期，长江中游还有屈家岭、石家河等文化存在。</p>
+<p>大约4500 ~ 4000年前，以黑陶为特征的<strong>龙山文化</strong>从山东骤然兴起，它很可能是由大汶口文化演变而来，迅速扩张到几乎整个黄河中下游，并且覆盖了仰韶文化。<strong>龙山时代的华北大地上出现了满天星斗般的诸多城址，与吴越地区璀璨的良渚古国遥相辉映</strong>。在这些城邦遗址中，最引人注目的是黄河中游的晋南、陕北地区，出现了陶寺、石峁两座大型城址。陶寺遗址中发现了天文观象台和个别文字符号，有人认为它就是传说中的陶唐氏（尧）所在。</p>
+<center>
+    <img
+         style="border-radius: 0.3125em; box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.08);width: 30em;"
+         src="https://cdn.jsdelivr.net/gh/HelloAllenW/BlogAssets/images/202403242332581.png" />
+    <div
+         style="color: #999; padding: 2px;font-size:0.8em">
+        龙山文明
+    </div>
+</center>
+
+<p><strong>石峁古城则是现今已知的中国史前规模最大城址</strong>，占地425万平方米，约相当于6个紫禁城。这座气势恢弘的石城遗迹，一方面显示了社会已经具有相当的统治力量，另一方面似乎也意味着他们面临强大的武力冲突。</p>
+<p>考古显示，龙山时代晚期，原本百花盛放的华夏史前文化发生了大范围的衰退。首先是江南的良渚文化在大约4200年前突然崩溃，良渚先民们可能分散并融入到更广阔的地域。此后近千年，吴越地区都没有恢复原先的水平。紧随其后，华北的龙山文化也陷入黑暗，晋陕地区的很多城址都被毁弃，只有河南的洛阳-嵩山一带还保持着相对繁荣，如同黑夜中的灯火。在传统文化纷纷衰落的同时，邻近草原的燕辽-内蒙-甘青一线反而变得繁荣。与中原文化相比，这一地带的文化风格明显受到蒙古草原甚至西伯利亚人群影响，畜牧业发达，陶器技术相对落后，但却出现了青铜器，并且侵入了陕西、山东等地区。</p>
+<h4 id="（4）青铜时代（夏商周）"><a href="#（4）青铜时代（夏商周）" class="headerlink" title="（4）青铜时代（夏商周）"></a>（4）青铜时代（夏商周）</h4><p><font color=red>距今约3500年前，洛阳盆地的二里头文化极有可能是史籍中记载的夏朝</font></p>
+<p>这个时期的文化包括：三星堆文化、二里头文化、岳石文化、四坝文化、安阳殷墟、周原遗址、半镐遗址、夏家店文化等。</p>
+<p>龙山-良渚时期尽管遭受了沉重打击，但华夏民族很快就再现辉煌。约3800～3500年前，<strong>二里头文化</strong>在洛阳盆地蓬勃而兴。二里头不仅出土了大型城市和宫殿遗迹，还有大批青铜器和冶炼遗址，很可能形成了一个强大的方国，并且辐射几乎整个华北地区。很多学者认为它就是史籍中记载的夏朝，但目前尚无确凿证据。无论如何，基因研究已证实二里头先民的Y-DNA是O2支型，与今日汉族主流相同，因此可将其视为“最早的中国”。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E5%8E%86%E5%8F%B2/"># 历史</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3a6304b6/">8.4 中国文明</a>
+            
+            
+            <a class="next" rel="next" href="/968bab9a/">8.1 佛教</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/3a6304b6/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/968bab9a/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer" />
+
+    <meta name="author" content="Allen">
+
+
+    <meta name="subtitle" content="绿衣捧砚催题卷，红袖添香伴读书">
+
+
+
+
+<title>《文明的冲突与世界秩序的重建》（亨廷顿） | 阿伦的个人博客</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+<!-- 百度统计，在head.ejs中引入 -->
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?4089b5476d9d7b1fbf81de2841dc180c";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+<!-- 搜索 -->
+<div id="algolia-search">
+  <div class="search-dialog">  
+    <nav class="search-nav">
+      <span class="search-dialog-title">Search</span>
+      <button class="search-close-button">
+        <span class="iconfont icon-guanbi"></span>
+      </button>
+    </nav>
+  
+    <div class="search-wrap">
+      <div id="algolia-search-input"></div>
+      <hr />  
+      <div id="algolia-search-results">
+        <div id="algolia-hits"></div>
+        <div id="algolia-pagination"></div>
+        <div id="algolia-info">
+          <div class="algolia-stats"></div>
+          <div class="algolia-poweredBy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="search-mask"></div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.66.1/dist/instantsearch.production.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/algoliasearch/4.23.2/algoliasearch-lite.umd.js"></script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/algolia.js"></script>
+</div>
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="阿伦的个人博客" type="application/atom+xml">
+</head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+            } else {
+                pagebody.classList.remove('dark-theme');
+            }
+            // mobile
+            if (document.getElementById("mobile-toggle-theme")) {
+                document.getElementById("mobile-toggle-theme").innerText = isDark ? "· Dark" : "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Allen&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                <!-- 其他的导航 -->
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+
+                <!-- Search -->
+                <span id="search-button" style="padding: 0 8px;cursor: pointer;">
+                    <span class="search">Search</span>
+                </span>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Allen&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">《文明的冲突与世界秩序的重建》（亨廷顿）</h1>
+            
+                <div class="post-meta">
+                    
+                    <!-- 
+                        Author: <a itemprop="author" rel="author" href="/">Allen</a>
+                     -->
+
+                    
+                        <span class="post-time">
+                        
+                        <!-- Date: <a href="#">五月 5, 2022&nbsp;&nbsp;10:19:13</a> -->
+                        <span class="iconfont icon-date1"></span>
+                        五月 5, 2022
+                        </span>
+                    
+                    &nbsp;  &nbsp;
+                    
+                        <span class="post-category">
+                            <span class="iconfont icon-icon-goodscategory"></span>
+                            
+                                <a href="/categories/%E4%BB%8E%E5%AE%87%E5%AE%99%E8%B5%B7%E6%BA%90%E5%88%B0%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E/">从宇宙起源到人类文明</a>
+                            
+                        </span>
+                    
+                    <!-- 展示当前文章所属tags -->
+                    
+                    &nbsp;  &nbsp;
+                    <span class="iconfont icon-tags"></span>
+                        <span>
+                            
+                                <a href="/tags/%E4%BA%BA%E9%97%B4%E4%B8%96/">人间世 </a>&nbsp;
+                            
+                        </span>
+                    
+                    
+                    
+                        <!-- 文章字数和阅读时间 -->
+<div style="display: inline;">
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-post"></span>
+      <!-- <span class="post-meta-item-text">  Count: </span> -->
+      <span class="post-count">6.7k Words</span>
+    </span>
+  </span>
+  <!-- &nbsp; | &nbsp; -->
+  &nbsp;  &nbsp;
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <span class="iconfont icon-time"></span>
+      <!-- <span class="post-meta-item-text">  Time: </span> -->
+      <span class="post-count">22 min</span>
+    </span>
+  </span>
+</div>
+
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="导读"><a href="#导读" class="headerlink" title="导读"></a>导读</h2><p>1993年夏，美国《外交》杂志发表了美国著名政治学者塞缪尔·亨廷顿的《文明的冲突》一文，引起全世界广泛而激烈的争论。</p>
+<p>文中首次提出“伊斯兰世界到处是流血的边界”的论断成为冷战后最富争议，又最富远见的政治预言。</p>
+<p>1996 年，亨廷顿出版了《文明冲突和世界秩序重建》一书，在《文明的冲突》一文的基础上进一步阐述和捍卫了自己的观点。此书一问世即成为经典，常年位居美国大学生图书借阅量的前10位。</p>
+<p>在该书中，亨廷顿系统地提出了他的“文明冲突论”。认为冷战后，世界格局的决定因素表现为七大或八大文明，即中华文明、日本文明、印度文明、伊斯兰文明、西方文明、东正教文明、拉美文明，还有可能存在的非洲文明。冷战后的世界，冲突的基本根源不再是意识形态，而是文化方面的差异，主宰全球的将是“文明的冲突”。</p>
+<p>亨廷顿在该书中提出一个看待冷战之后全球政治的范式和框架。他希望，文明的研究范式有助于理解20世纪末和21世纪初的全球政治演变。</p>
+<p>亨廷顿显然做到了这一点。</p>
+<p>时隔20多年重温该书，我们发现，国际政治发展与亨廷顿20多年前的预判惊人地相似，书中很多预言一一实现：</p>
+<p>文明冲突范式可以精确地解释21世纪初的911、伊拉克战争、“阿拉伯之春”、乌克兰内战、“伊斯兰国IS”、叙利亚战争等暴力冲突事件，也可以帮助我们理解近年出现的西方国家民粹势力兴起、欧洲穆斯林移民争端、中美贸易纠纷和土耳其危机等事件。</p>
+<div style="color:gray;font-size:0.9em;text-align:right;margin-bottom:0.5em;">
+本文摘自《文明冲突和世界秩序重建》（新华出版社）<br />
+作者：塞缪尔·亨廷顿
+</div>
+
+
+
+<h2 id="预言1：中美冲突不可避免"><a href="#预言1：中美冲突不可避免" class="headerlink" title="预言1：中美冲突不可避免"></a>预言1：中美冲突不可避免</h2><p>人类历史上，全球政治首次成了多极和多元化的。在这样一个多元化的世界上，任何国家之间的关系都没有中国和美国之间的关系那样至关重要。</p>
+<p>如果中国经济在未来的10年或20年中仍以现在的速度发展，那么中国将有能力重建其1842年以前在东亚的霸权地位。</p>
+<p>另一方面，美国一贯反对由另一个强国来主宰欧洲或东亚，为了防止这样的情况发生，美国在本世纪参加了两次世界大战和一次冷战。因此，未来的世界和平在相当程度上依赖中国和美国的领导人协调两国各自利益的能力，而这些紧张状态和对抗将不可避免地存在。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSNLCadczwGG6tylx5yIDia2jZxnz3ic0HmI0xkOEE7jUXcq4hW3JibTTnA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>美国与中国几乎在所有重大政策问题上都没有共同目标，两国的分歧是全面的。</p>
+<p>在最广泛的层面上，盛行于众多亚洲社会的儒家精神强调这样一些价值观：权威、等级制度、个人权力和利益居次要地位、一致的重要性、避免正面冲突、“保全”面子、以及总的说来，国家高于社会，社会高于个人。</p>
+<p>此外，亚洲人倾向于以百年和千年为单位来计算其社会的演进，把扩大长远利益放在首位。</p>
+<p>这些态度与美国人信念的首要内容形成了对照，即自由、平等、民主和个人主义、以及美国人倾向于不信任政府、反对权威、赞成制衡、鼓励竞争、崇尚人权、倾向于忘记过去、忽视未来、集中精力尽可能扩大眼前的利益。冲突的根源是社会和文化方面的根本差异。</p>
+<p>尼克松于1994年说：“今天，中国的经济实力使美国关于人权的说教显得轻率；10年之内，会显得不着边际；20年之后，会显得可笑。”</p>
+<p>不论亚洲和美国社会之间存在怎样的经济联系，根本上的文化差异将使二者无法同居一室。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSib1NIHya0S8Wc8umx0Emz61LtrzJxd7SWhQlswDHfUe7kFGC1khKb4A/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>中国的历史、文化、传统、规模、经济活力和自我形象，都驱使它在东亚寻求一种霸权地位。这个目标是中国经济迅速发展的自然结果。所有其他大国英国、法国、德国、日本、美国和苏联，在经历高速工业化和经济增长的同时，或在紧随其后的年代里，都进行了对外扩张、自我伸张和实现帝国主义。</p>
+<p>没有理由认为，中国在经济和军事实力增强后不会采取同样的做法。</p>
+<p>两千年来，中国曾一直是东亚的杰出大国。现在，中国人越来越明确地表示他们想恢复这个历史地位，结束屈辱与屈从西方和日本的漫长世纪，这个世纪是以1842年英国强加给中国的南京条约为开端的。</p>
+<p>李光耀于1994年说：“中国参与世界地位重组的规模，使得世界必须在30或40年的时间内找到一种新的平衡。假装中国不过是另一个大的参与者是不可能的，它是人类历史上最大的参与者”。</p>
+<h2 id="预言2：西方文明和伊斯兰文明的冲突有1400多年历史，而且将继续上演"><a href="#预言2：西方文明和伊斯兰文明的冲突有1400多年历史，而且将继续上演" class="headerlink" title="预言2：西方文明和伊斯兰文明的冲突有1400多年历史，而且将继续上演"></a>预言2：西方文明和伊斯兰文明的冲突有1400多年历史，而且将继续上演</h2><p>一些西方人，包括比尔.克林顿总统在内，认为西方只是与伊斯兰教极端主义暴力分子之间存在问题，而不是与伊斯兰世界之间存在问题。但是1400年的历史却提出了相反的证明。伊斯兰教和基督教关系经常充满风暴，彼此将对方视为外人。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSzJUsic3RWSEDM53qheODDZvNT9icHxPB3nibLYk1FjlTVic7UPpkxmFxxQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>伯纳德.刘易斯说道：“在将近1千年的时间里，从摩尔人首次在西班牙登陆到土耳其人第二次围攻维也纳，欧洲不断处于伊斯兰威胁之中。”伊斯兰文明是唯一使西方的存在受到过威胁的文明，而且这种情况至少发生过两次。</p>
+<p>一方面，冲突是差异的产物，特别是穆斯林的伊斯兰教观念作为一种生活方式超越并结合了宗教和政治，而西方基督教则持政教分离的观念。</p>
+<p>然而，冲突也产生于它们的相似性。这两种宗教都是一神教，不容易接受其他神；它们都用二元的，非我即彼的眼光看待世界；它们又都是普世主义的，声称自己是全人类都应追随的唯一真正信仰。自创始起，伊斯兰教就依靠征服进行扩张，只要有机会，基督教也是如此行事。</p>
+<p>“圣战”和“十字军东征”这两个类似的概念不仅令它们彼此相像，而且将这两种信仰与世界其他主要宗教区别开来。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgS6G31v1oeErYVgw3xGnH2ScibDkVtX8dExD5QwdCdLt95gBLXhLKjLuw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>1979-1989年的阿富汗战争是第一场文明之间的战争。阿富汗战争是冷战最后的，决定性的胜利，是滑铁卢之役。这场被西方人视为自由世界的胜利的战争，却被穆斯林视为伊斯兰的胜利。</p>
+<p>苏联人最后被三个因素击败：美国的技术、沙特阿拉伯的金钱、以及穆斯林的人口和狂热。</p>
+<p>这场战争遗留下了一个不稳定的伊斯兰组织的联盟，其目的在于促进伊斯兰反对一切非伊斯兰力量。战争的遗产还包括：训练有素和有经验的战士、军营、训练场地和后勤设施，一个复杂的个人和组织之间的泛伊斯兰关系网，以及包括300-500枚未付帐的毒刺式导弹在内的大量军事装备。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSSLr7OcIHnSDlX2xzgaI85NUiblUd386P2zYrPOxFBMLRVjRvG5bEw0Q/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>最为重要的是，伊斯兰从胜利中获得了实在的力量感和自信，以及进一步取得其他胜利的愿望。一位美国官员1994年说：阿富汗志愿兵的“圣战资格从宗教和政治上看是无懈可击的，他们击败了世界上两个超级大国中的一个，现在正在对付第二个”。</p>
+<h2 id="预言3：穆斯林的边界是血腥的"><a href="#预言3：穆斯林的边界是血腥的" class="headerlink" title="预言3：穆斯林的边界是血腥的"></a>预言3：穆斯林的边界是血腥的</h2><p>在所有地区，穆斯林和属于其他文明的人——天主教徒、新教徒、东正教徒、印度教徒、华人、佛教徒金额犹太人——之间的关系总体上是对抗性的，他们之间大部分在历史上的某一刻曾发生暴力冲突。沿着伊斯兰周边看去，穆斯林总是难以与其邻居和平相处。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgS7icvYt76ywa3zAWLWCzcDI2aibWO8HMpBZLSz9IjT2Z6icqy1qACxrgow/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>文明间有三分之二到四分之三是穆斯林和非穆斯林之间的战争。<strong style="border-bottom: 1px green dashed;">穆斯林的边界是血腥的，其内部也是如此</strong>。</p>
+<p>“作者注：在我于《外交》季刊上发表的文章中，没有一句话比“血腥的伊斯兰边界”招致更多的批评了。我的判断是基于一份有关文明间冲突原因的调查报告，大量不带偏见的资料完全证明了它的正确。”</p>
+<p>伊斯兰起源于“好战的贝都因游牧部落”，伊斯兰教的基础深深地打上了这种暴力起源的烙印。穆罕默德本人就是作为一位坚强的战士和高潮的军事指挥家留在人们记忆之中。（没有人会这样形容基督或者释迦牟尼）。《古兰经》和其他有关穆罕穆德信仰的陈述几乎都不禁止使用暴力，在穆斯林的教义和实践中没有非暴力的概念。</p>
+<p>好战，不相容，以及与非穆斯林群体相邻，仍然是穆斯林持续存在的特点，而且是造成整个历史过程中穆斯林具有冲突倾向的原因。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSLibvGJcPMJG2RXJn1LEMGW1l6UIv50ibgqceLgHt3FTe7DZdM7cpeZEg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>东亚的崛起被惊人的经济增长率所推动，而伊斯兰教的复兴是被同样惊人的人口增长率所推动。伊斯兰国家人口的膨胀，尤其是在巴尔干，北非，中亚，大大超过了其临近国家和世界的一般水平。穆斯林社会的人口增长率几乎总是在2.0%以上，常常超过2.5%，有时达3.0%以上。</p>
+<p>在整个21世纪上半叶，人们都将感觉的这一增长的影响。未来若干年里，穆斯林人口中年轻人人口多得将不成比例，十几岁和二十几岁的人口出现引人注目的激增。此外，这个年龄组的人将大部分是城市人口，并且至少受过中等教育。青年人是反抗，不稳定，改革和革命的主角。历史上，存在大批年轻人的时期往往与发生这类运动的时期重合。</p>
+<p>1988年沙特阿拉伯王储阿普杜拉说，对他的国家构成最大威胁的是伊斯兰教原教旨主义在青年人中的兴起。根据这些预测，这种威胁将持续到21世纪。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSYUVmMjjhOCPYV2WRNCZ6ibaLxUGGD0wyUwicAkeQ02pQtC9zk6vLhdug/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>基督教主要通过使人皈依来传布，而伊斯兰教可以通过使人皈依和人口繁殖来传布。20世纪80年代基督教徒在世界上的人口比例达到约30%后稳定下来，现在开始下降，到2025年可能占世界人口的将近25%。世界上穆斯林人口由于极高的人口增长率，将继续急剧增长，大约在世纪之交达到世界人口的20%，再过若干年后将超过基督徒的人数，而到2025年可能占到世界人口的大约30%。</p>
+<p>更多的人口需要更多的资源，伊斯兰人口增长于是成为导致沿伊斯兰世界边境的穆斯林和其他名族之间冲突的主要因素。</p>
+<p>穆斯林人口的增长将成为使穆斯林社会及其邻国不稳定的因素。大量受过中等教育的青年人将继续成为伊斯兰教的复兴提供人力，并助长穆斯林的好胜性，军国主义和移民。结果，在21世纪初期可能会发生非西方力量和文化的持续复兴，以及非西方文明的各民族和西方之间以及它们相互之间的冲突。</p>
+<h2 id="预言4：基督教国家一致对外有悠久的传统"><a href="#预言4：基督教国家一致对外有悠久的传统" class="headerlink" title="预言4：基督教国家一致对外有悠久的传统"></a>预言4：基督教国家一致对外有悠久的传统</h2><p>当雅典人向斯巴达人重新保证自己不会向波斯人出卖斯巴达人时，他们用古典的形式提出了界定文明的文化核心因素：</p>
+<p>“因为即使我们倾向于此，也有许多强有力的考虑禁止我们这样做。首要的是，众神的形象和住所被焚烧和夷为平地，我们必须竭尽全力为此雪耻，而不是同那些犯下如此罪行的人达成协议。其次，希腊种族具有同样的血统和同样的语言，有相同的神庙和献祭；以及我们相似的习俗；雅典人如果背叛这些将不会有好的结果。”</p>
+<p>血统、语言、宗教、生活方式是希腊人共有的东西，也是使他们区别于波斯人和非希腊人的东西。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSJqT1nOXeVicgnIwYrRyqGRRhgz13KaJEFXibkia0ccVErJa04obTZx1oQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在这样的一个时代，美国既不可能统治世界也无法逃避世界。不论是国际主义还是孤立主义，不论是多边主义还是单边主义，都不能很好地为美国的利益服务。只有避免这些极端的做法，采取与欧洲伙伴紧密合作的大西洋主义政策，保护和促进大家共同拥有的、独一无二的文明的利益和价值观，才能够最有力地促进美国的利益。</p>
+<h2 id="预言5：伊斯兰文明和中华文明之间的共性甚至不如各自与西方文明的共性，但政治上会走到一起对抗西方文明"><a href="#预言5：伊斯兰文明和中华文明之间的共性甚至不如各自与西方文明的共性，但政治上会走到一起对抗西方文明" class="headerlink" title="预言5：伊斯兰文明和中华文明之间的共性甚至不如各自与西方文明的共性，但政治上会走到一起对抗西方文明"></a>预言5：伊斯兰文明和中华文明之间的共性甚至不如各自与西方文明的共性，但政治上会走到一起对抗西方文明</h2><p>伊斯兰国家和中国拥有与西方极为不同的伟大的文化传统，并自认其传统远较西方的优越。</p>
+<p>伊斯兰文明和中华文明在宗教，文化，社会结构，传统，政治和根植于其生活方式的基本观念上，存在着根本的不同。从根本上来说，这两者之间具有的共性可能还不及它们各自与西方文明之间的共性。但是在政治上，共同的敌人将产生共同的利益。伊斯兰社会和华人社会都视西方为对手，因此他们有理由彼此合作来反对西方，甚至会像同盟国和斯大林联手对付希特勒一样行事。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgS5XestM92bmz4XXMlCGcBicHBGSd2vEWmC62fuIHNduXe6eq2LiadcOrw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>只要穆斯林人口增长和亚洲经济增长的浪潮继续下去，西方于挑战者文明之间的冲突就将超过其他任何分界线而成为全球政治的中心。在这样的形势下，儒教-伊斯兰国家之间的联系会继续，或许还会扩大和加深。</p>
+<p>然而，中国方面对反西方的儒教-伊斯兰教国家联盟的热情一直相当低。中国不需要正式盟友，而其他国家会发现与中国结盟符合它们的利益。</p>
+<h2 id="预言6：欧洲穆斯林移民问题将在2025年解决？"><a href="#预言6：欧洲穆斯林移民问题将在2025年解决？" class="headerlink" title="预言6：欧洲穆斯林移民问题将在2025年解决？"></a>预言6：欧洲穆斯林移民问题将在2025年解决？</h2><p>人口压力与经济停滞交织在一起，促进了穆斯林向西方和其他穆斯林社会移民，使移民问题成为那些社会的突出问题。</p>
+<p>如果人口分布是天定的，那么人口流动便是历史的发动机。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSicgmBnOgnZod0Md0A6ltlH5NCJda7BxdumyjC8khygHaQNZeaic6qDWQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>皮埃尔·勒鲁什总结到：“历史，亲缘关系和贫困使法国和欧洲注定要挤满来自南方不成功国家的人民。欧洲过去是白人和犹太教-基督教的欧洲，将来却不是“。问题并不在于欧洲是否伊斯兰化，或者美国是否拉美化，而在于欧洲和美国会否成为分裂的社会。这将取决于移民的数量和他们融入在欧洲和美国占优势的现有西方文化的程度。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSuhRRDU2P3qhoRuHPPWu4jxQvVb9BqbIIYIiagJMlVc7Z0Jsg6sCjrEg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>然而，穆斯林人口入侵的问题可能会减轻，因为北非和中东社会的人口增长率会达到顶峰后开始下降。就刺激移民的人口压力而言，至2025年，穆斯林移民可能会大大减少。</p>
+<h2 id="预言7：西方极右势力崛起与移民问题相伴而生"><a href="#预言7：西方极右势力崛起与移民问题相伴而生" class="headerlink" title="预言7：西方极右势力崛起与移民问题相伴而生"></a>预言7：西方极右势力崛起与移民问题相伴而生</h2><p>西方文化受到了来自西方社会内部集团的挑战。其中一种挑战来自其他文明的移民，他们拒绝融入西方社会，继续坚持和宣扬他们原有社会的价值观、习俗和文化。这一现象在欧洲的穆斯林中最为显著，不过他们人数不多。</p>
+<p>它在美国为数众多的拉美裔少数民族中也很显著，尽管程度较轻。在这种情况下，如果同化移民的努力归于失败，美国便会成为一个分裂的国家，并存在内部冲突和由此造成分裂的潜在可能。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSU9zXbAM2yiasiaZCg4Fk1XicT4hbyh4deBZ9y9GiaUSk0tnQH8lbj7ut2g/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>一个多文明的美国将不再是美利坚合众国，而是联合国。摒弃美国信条和西方文明，就意味着我们认识的美利坚合众国的终结，实际上也意味着西方文明的终结。美国和西方的未来取决于美国人再次确认他们对西方文明的责任。</p>
+<p>在美国内部，这意味着拒绝造成分裂的多元化注意的诱人号召。在国际上，则意味着拒绝要求美国认同亚洲的令人难以理解的、虚幻的号召。</p>
+<h2 id="预言8：国际贸易带来好处，但也常常令彼此害怕，造成冲突"><a href="#预言8：国际贸易带来好处，但也常常令彼此害怕，造成冲突" class="headerlink" title="预言8：国际贸易带来好处，但也常常令彼此害怕，造成冲突"></a>预言8：国际贸易带来好处，但也常常令彼此害怕，造成冲突</h2><p>经济增长改变了国家和地区间的均势，造成了国家内部和国家间的政治不稳定。经济交往可以使人们互相接触，但不能使他们达成协议。</p>
+<p>在历史上，它往往使各国人民更深刻地认识到他们之间的不同，令他们彼此害怕。国家之间的贸易不仅带来了好处，而且也造成了冲突<strong>。</strong></p>
+<p>如果过去的经验靠得住，那么亚洲的经济成就将为其带了政治阴影，即不稳定和冲突。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSOCmbHl3ZTBm5CBqwwbUKMPElmReaE7QyvvaGmF5tQtuiarRYdQFMJGw/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>美国一贯追求与亚洲国家实行预期互惠的方针，它在做出让步时，期望这些让步能够导致亚洲国家做出类似让步，但亚洲国家往往将这种让步视为美国软弱的迹象，因此进一步拒绝美国的要求。这一模式在与中国的交往中尤为明显。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSoB6qPmKgricreqiaKa1VNXalsdEWDuF9KZKwzV1D4nusXqfeXGpia2ALg/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>在反复出现的美日贸易冲突中形成了一种模式：美国在贸易问题上对日本提出要求，并威胁说，如果要求得不到满足就进行制裁。接着就是无休止的谈判，然后双方在制裁生效之前的最后一刻宣布达成协议。协议的措辞通常是模棱两可的，因而美国可以宣布在原则上取得了胜利，日本则可根据自己的意愿执行或者不执行协议。于是一切照旧进行。</p>
+<p>与中国的冲突也大体如此。中国勉强地同意在人权，知识产权和核扩散问题上的广泛的原则声明，但是对声明的解释去与美国极为不同，并且继续执行他以往的政策。</p>
+<h2 id="预言9：无所适从的国家：土耳其，俄罗斯，澳大利亚"><a href="#预言9：无所适从的国家：土耳其，俄罗斯，澳大利亚" class="headerlink" title="预言9：无所适从的国家：土耳其，俄罗斯，澳大利亚"></a>预言9：无所适从的国家：土耳其，俄罗斯，澳大利亚</h2><p><strong>（1）土耳其：西方没有在欧洲为穆斯林的土耳其留下一席之地</strong></p>
+<p>凯末尔在奥斯曼帝国的废墟上创建了一个新的土耳其，付出了巨大的努力使他既西方化也现代化。在从事这项事业和抛弃伊斯兰的历史时，凯末尔使土耳其成为一个“无所适从”的国家，一个在宗教、遗产、习俗和体制方面是伊斯兰的社会，但是其统治精英却决心使它成为现代的，西方的和与西方一致的。</p>
+<p>土耳其为什么被忽略？而且为什么它似乎总是排在最后（加入欧盟等）？在公开场合，欧洲官员提出是因为土耳其的经济发展水平低，而且不郑重人权。私下里，欧洲人和土耳其人都承认，真正的理由是由于希腊人的强烈反对，更重要的是，土耳其是一个穆斯林国家。</p>
+<p>欧洲国家不想面对自己开放边境后可能从一个拥有6000万穆斯林和大量失业人口的国家涌入移民的景象。尤其重要的是，他们感到在文化上，土耳其不属于欧洲。</p>
+<p>欧洲官员赞同欧洲联盟是一个“基督徒的俱乐部”。反过来，这种态度导致了“土耳其人的一个共识”，即：“西方没有在欧洲为穆斯林的土耳其留下一席之地。”</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgS225mFp87MUVmnBYzaKy8K0h29sicMpWAs5cJIaSXmLckh7N44xBicbVA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>西方文明的精英们不接纳土耳其。当这一问题悬而不决时，土耳其的伊斯兰复兴运动在公众中激起了反西方的情绪，并开始损害土耳其精英的世俗的，亲西方的倾向。</p>
+<p>土耳其领导人常常把他们的国家描述为不同文化之间的一座“桥梁”。然而，联结两个牢固实体的桥梁只是一种人工的架设，而不是两者中任何一个的一部分。当土耳其的领导人把他们的国家说成是一座桥梁时，亦委婉地证实了它是无所适从的。</p>
+<p><strong>（2）俄罗斯：几百年来都没搞清楚自己是不是西方国家</strong></p>
+<p>20世纪90年代以来的几年中，墨西哥是一个无所适从的国家，土耳其几十年来就是这样一个国家。相比之下，俄罗斯几个世纪以来就是一个无所适从的国家，而且它与墨西哥和土耳其不同，它还是一种主要文明的核心国家。</p>
+<p>如果俄罗斯成为西方国家，东正教文明将不复存在。</p>
+<p>苏联的崩溃又在俄罗斯人中点燃了关于俄罗斯和西方这一中心问题的争论。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSic2tX76JjodYVwiaocUZCQTKreNS4pvJ5vic6QNv8yX10gZt7wrYzQlSQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>俄罗斯没有或很少经历过以下这些界定西方文明的历史现象：罗马天主教、封建主义、文艺复兴、宗教改革、海外扩张和殖民化、启蒙运动以及民族国家的出现。</p>
+<p>在其后的俄罗斯历史中，彼得大帝成了主张西方化者心目中的英雄和反对者的撒旦。</p>
+<p><strong>（3）澳大利亚：和亚洲人性格不和？</strong></p>
+<p>亚洲国家的精英对澳大利亚友好表示的接受程度甚至不及欧洲国家的精英对土耳其的接受程度。</p>
+<p>亚洲人一般是微妙的、间接的、调解的、迂回曲折的、非评判的、非道德的、非对抗的方式和其他人一起来追求他们的目标。而澳大利亚人是英语世界中最直截了当的、开门见山的、毫不隐讳的民族，有人可能会说他们是一个不敏感的民族。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgSXw6FnQg1Maw9FFhnbZxJMXOBiccf7E3RhQImWPTO94x7BMy4BOoLIgQ/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<h2 id="预言10：西方文明的价值在于其是独特的，而不是普世的"><a href="#预言10：西方文明的价值在于其是独特的，而不是普世的" class="headerlink" title="预言10：西方文明的价值在于其是独特的，而不是普世的"></a>预言10：西方文明的价值在于其是独特的，而不是普世的</h2><p>西方赢得世界不是通过其思想，价值观或宗教的优越（其他文明中机会没有多少人皈依它们），而是通过它运用有组织的暴力方面的优势。西方人常常忘记这一事实；非西方人却从未忘记。</p>
+<p>西方人眼中普世主义，对非西方来说就是帝国主义。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/3o5iaqhFSiafntkSiaDA1EjDa1FG0g47jgS57KNwpdD0G2UclevC0RhDuRebpL0N9HMk9Uibvuo0jCfu1HxbjAK2KA/640?wx_fmt=png&tp=wxpic&wxfrom=5&wx_lazy=1&wx_co=1" alt="图片"></p>
+<p>西方文明的价值不在于它是普遍的，而在于它是独特的。因此，西方领导人的主要责任，不是试图按照西方的形象重塑其他文明，这是西方正在衰弱的力量所不能及的，二是保存、维护和复兴西方文明独一无二的特性。</p>
+<p>由于美国是最强大的西方国家，这个责任就不可推卸地主要落在了美利坚合众国的肩上。</p>
+<h2 id="附：书中关于文明冲突的其他精彩论断："><a href="#附：书中关于文明冲突的其他精彩论断：" class="headerlink" title="附：书中关于文明冲突的其他精彩论断："></a>附：书中关于文明冲突的其他精彩论断：</h2><p>1.每个文明都把自己视为世界的中心，并把自己的历史当作人类历史主要的戏剧性场面来撰写。与其他文明比较，西方可能更是如此。</p>
+<p>2.历史上，语言在世界上的分布反映了世界权力的分配。使用得最广泛语言——英语，汉语普通话，西班牙语，法语，阿拉伯语和俄语，都是或曾是帝国的语言。</p>
+<p>3.强大的社会是普世的，弱小的社会是狭隘的。对于东亚人来说，经济繁荣是其道德优越的证明。如果未来某一天，印度取代东亚成为世界经济发展最迅速的地区，那么世界就应当准备对印度文化的优越性和种姓制度对经济的发展的贡献，进行广泛的专门研究。物质的成功带来了对文化的伸张，硬实力衍生出软实力。</p>
+<p>4.文明是终极的人类部落，文明的冲突则是世界范围内的部落冲突。</p>
+<p>5.欧洲和俄罗斯是人口出生率低，人口老龄化的成熟社会，这样的社会不具有可能成为扩张和进攻进取的年轻力量。</p>
+<p>6.文化共存，需要寻求大多数文明的共同点，而不是促进假设中的某个文明的普遍特征。在多文明的世界里，建设性的道路是摒弃普世主义，接受多样性和寻求共同性。</p>
+
+        </div>
+        <br />
+
+        <!-- 分享 -->
+        <div id="social-share" class="article-social-share"></div>
+
+        <!-- 评论系统 -->
+        
+            <section id="comments" class="comments">
+              <!-- 可以添加样式
+              <style>
+                .comments{margin:30px;padding:10px;background:#fff}
+                @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+              </style> -->
+              <!-- 评论系统。在post.ejs中引入 -->
+<div class="valine_comment"></div>
+<script type="module">
+  import { init } from '/js/waline.mjs';
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js'; // 在线url
+  init({
+    el: '.valine_comment',
+    serverURL: 'https://blog.comment.helloallen.cn',
+    // serverURL: 'https://allen-blog-vercel.vercel.app', // 未绑定域名的评论url，只能外网访问
+  });
+</script>
+            </section>
+        
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E4%BA%BA%E9%97%B4%E4%B8%96/"># 人间世</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <!-- 另一种的上一篇下一篇 -->
+        <!-- <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/73114c30/">对比Vue2总结Vue3新特性(2022年最全，2.5w字！)</a>
+            
+            
+            <a class="next" rel="next" href="/7f93adf/">中美之间真正的差距是什么？(吴国盛)</a>
+            
+        </section> -->
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/73114c30/"> &laquo; Prev </a>
+            
+            
+                <a class="next" rel="next" href="/7f93adf/"> Next &raquo; </a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <!-- 分享 -->
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" defer></script>
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+
+<footer id="footer" class="footer">
+    <div>
+        <span>
+            Allen © 
+                2015 - 
+                2024  
+        </span> |   <!-- 站点访问量统计。在footer.ejs中引入 -->
+<script async src="/js/busuanzi.pure.mini.js"></script>
+
+<span class="site-uv">
+    <i class="iconfont icon-peoplecopy3"></i>
+    <span id="busuanzi_value_site_uv"></span>
+</span>&nbsp;
+
+
+<span class="site-pv">
+    <i class="iconfont icon-view"></i>
+    <span id="busuanzi_value_site_pv"></span>
+</span>
+
+ 
+    </div>
+    <div>
+        <span>
+            Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & Theme by <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a> 
+        </span>
+    </div>
+
+    <!-- 上个版本的统计当前站点运行时间 -->
+    <!-- <div class="copyright">
+        <span>© Allen | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+        | <span id="timeDate">loading...</span>
+        <span id="times" style="text-align: center;font-size: 12px;">载入时分秒...</span>
+    </div> -->
+</footer>
+
+<!-- <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/06/2020 00:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "This site has been running for "+dnum+" days "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    }
+    setInterval("createtime()",250);
+</script> -->
+
+    </div>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+            s1.async=true;
+            s1.src='https://embed.tawk.to/66b239041601a2195ba16829/1i4k2tesf';
+            s1.charset='UTF-8';
+            s1.setAttribute('crossorigin','*');
+            s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+</html>
