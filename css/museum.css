@@ -1,0 +1,44 @@
+.post-content .museum-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 20px;
+  margin: 28px 0;
+}
+.post-content .museum-column { min-width: 0; }
+.post-content .museum-photo { margin: 24px 0; min-width: 0; }
+.post-content .museum-column .museum-photo { margin: 0 0 20px; }
+.post-content .museum-photo img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.post-content .museum-photo figcaption {
+  margin-top: 9px;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.65;
+  text-align: left;
+}
+.dark-theme .post-content .museum-photo figcaption { color: #aaa; }
+@media (max-width: 640px) {
+  .post-content .museum-columns {
+    display: flex;
+    overflow-x: auto;
+    gap: 14px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+  }
+  .post-content .museum-column { display: contents; }
+  .post-content .museum-columns .museum-photo {
+    flex: 0 0 92%;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+  .post-content .museum-columns .museum-photo img {
+    height: 110vw;
+    max-height: 520px;
+    object-fit: contain;
+    background: rgba(128,128,128,.05);
+  }
+}
