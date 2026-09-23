@@ -838,10 +838,30 @@ button {
 .post-content .weekly-visual-grid .weekly-visual:not(:first-child) img {
   aspect-ratio: 16 / 9;
 }
+.post-content .weekly-visual-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+  margin: 32px 0;
+}
+.post-content .weekly-visual-pair .weekly-visual {
+  margin: 0;
+  min-width: 0;
+}
+.post-content .weekly-visual-pair img {
+  display: block;
+  height: auto;
+}
 @media (max-width: 700px) {
   .post-content .weekly-visual,
-  .post-content .weekly-visual-grid {
+  .post-content .weekly-visual-grid,
+  .post-content .weekly-visual-pair {
     margin: 24px 0;
+  }
+  .post-content .weekly-visual-pair {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .post-content .weekly-visual-grid {
     grid-template-columns: 1fr;
